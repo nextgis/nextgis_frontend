@@ -4,7 +4,7 @@
 
 ## RasterRequestOptions.raster\_layer property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 raster_layer: RasterRequestLayerOptions;

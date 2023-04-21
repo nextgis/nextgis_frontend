@@ -6,7 +6,7 @@
 
 Array or WMS service layers. keyname, display\_name and resource\_id are mandatory.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 layers: WmsServerServiceLayer[];

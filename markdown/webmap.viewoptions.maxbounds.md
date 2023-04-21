@@ -4,7 +4,7 @@
 
 ## ViewOptions.maxBounds property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 maxBounds?: LngLatBoundsArray | null;

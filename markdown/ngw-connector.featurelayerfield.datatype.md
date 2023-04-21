@@ -4,7 +4,7 @@
 
 ## FeatureLayerField.datatype property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 datatype: VectorFieldDatatype;

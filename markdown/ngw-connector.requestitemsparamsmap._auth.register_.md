@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."auth.register" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'auth.register': null;

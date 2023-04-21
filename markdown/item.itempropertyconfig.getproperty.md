@@ -4,12 +4,12 @@
 
 ## ItemPropertyConfig.getProperty() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getProperty?(): ItemPropertyTypes[K];
 ```
-<b>Returns:</b>
+**Returns:**
 
 [ItemPropertyTypes](./item.itempropertytypes.md)<!-- -->\[K\]
 

@@ -6,7 +6,7 @@
 
 Is layer on the map
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 visible?: boolean;

@@ -4,12 +4,12 @@
 
 ## BaseProperty.getValue() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getValue(): V | undefined;
 ```
-<b>Returns:</b>
+**Returns:**
 
 V \| undefined
 

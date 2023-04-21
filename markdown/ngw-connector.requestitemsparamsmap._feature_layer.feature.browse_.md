@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."feature\_layer.feature.browse" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'feature_layer.feature.browse': {

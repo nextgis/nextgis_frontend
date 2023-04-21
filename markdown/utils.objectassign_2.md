@@ -6,7 +6,7 @@
 
 Copy the values of all of the enumerable own properties from one or more source objects to a target object. Returns the target object.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function objectAssign<T, U, V, W>(target: T, source1: U, source2: V, source3: W): T & U & V & W;
@@ -21,7 +21,7 @@ export declare function objectAssign<T, U, V, W>(target: T, source1: U, source2:
 |  source2 | V | The second source object from which to copy properties. |
 |  source3 | W | The third source object from which to copy properties. |
 
-<b>Returns:</b>
+**Returns:**
 
 T &amp; U &amp; V &amp; W
 

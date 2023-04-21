@@ -6,12 +6,12 @@
 
 Remove selection from any selected selectable layer
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 unSelectLayers(): void;
 ```
-<b>Returns:</b>
+**Returns:**
 
 void
 

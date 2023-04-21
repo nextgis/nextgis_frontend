@@ -4,7 +4,7 @@
 
 ## BasePaint.color property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 color?: string | Expression;

@@ -4,7 +4,7 @@
 
 ## OlMapAdapter.showLayer() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 showLayer(layer: Layer): void;
@@ -16,7 +16,7 @@ showLayer(layer: Layer): void;
 |  --- | --- | --- |
 |  layer | Layer |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

@@ -6,7 +6,7 @@
 
 Creating a universal map layout control element. Can be used with any map adapter.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 createControl(control: MapControl, options?: CreateControlOptions): Promise<C | undefined>;
@@ -17,9 +17,9 @@ createControl(control: MapControl, options?: CreateControlOptions): Promise<C | 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  control | [MapControl](./webmap.mapcontrol.md) |  |
-|  options | [CreateControlOptions](./webmap.createcontroloptions.md) | <i>(Optional)</i> |
+|  options | [CreateControlOptions](./webmap.createcontroloptions.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;C \| undefined&gt;
 

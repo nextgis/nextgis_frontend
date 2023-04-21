@@ -4,7 +4,7 @@
 
 ## addFeatureAttachment() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function addFeatureAttachment(options: GetNgwItemOptions & {
@@ -18,7 +18,7 @@ export declare function addFeatureAttachment(options: GetNgwItemOptions & {
 |  --- | --- | --- |
 |  options | [GetNgwItemOptions](./ngw-kit.getngwitemoptions.md) &amp; { fileMeta: [FileMeta](./ngw-connector.filemeta.md)<!-- -->; } |  |
 
-<b>Returns:</b>
+**Returns:**
 
 [IdOnly](./ngw-connector.idonly.md)
 

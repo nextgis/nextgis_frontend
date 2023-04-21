@@ -4,7 +4,7 @@
 
 ## PopupOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface PopupOptions<F extends Feature = Feature, L = any> 
@@ -14,12 +14,12 @@ export interface PopupOptions<F extends Feature = Feature, L = any>
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [autoPan?](./webmap.popupoptions.autopan.md) |  | boolean | <i>(Optional)</i> |
-|  [closeButton?](./webmap.popupoptions.closebutton.md) |  | boolean | <i>(Optional)</i> |
-|  [createPopupContent?](./webmap.popupoptions.createpopupcontent.md) |  | (props: [CreatePopupContentProps](./webmap.createpopupcontentprops.md)<!-- -->&lt;F, L&gt;) =&gt; HTMLElement \| string \| undefined \| Promise&lt;HTMLElement \| string \| undefined&gt; | <i>(Optional)</i> |
-|  [fromProperties?](./webmap.popupoptions.fromproperties.md) |  | boolean | <i>(Optional)</i> |
-|  [maxWidth?](./webmap.popupoptions.maxwidth.md) |  | number | <i>(Optional)</i> |
-|  [minWidth?](./webmap.popupoptions.minwidth.md) |  | number | <i>(Optional)</i> |
-|  [popupContent?](./webmap.popupoptions.popupcontent.md) |  | string \| HTMLElement | <i>(Optional)</i> |
-|  [unselectOnClose?](./webmap.popupoptions.unselectonclose.md) |  | boolean | <i>(Optional)</i> Unselect feature on popup close |
+|  [autoPan?](./webmap.popupoptions.autopan.md) |  | boolean | _(Optional)_ |
+|  [closeButton?](./webmap.popupoptions.closebutton.md) |  | boolean | _(Optional)_ |
+|  [createPopupContent?](./webmap.popupoptions.createpopupcontent.md) |  | [CreatePopupContent](./webmap.createpopupcontent.md)<!-- -->&lt;F, L&gt; | _(Optional)_ |
+|  [fromProperties?](./webmap.popupoptions.fromproperties.md) |  | boolean | _(Optional)_ |
+|  [maxWidth?](./webmap.popupoptions.maxwidth.md) |  | number | _(Optional)_ |
+|  [minWidth?](./webmap.popupoptions.minwidth.md) |  | number | _(Optional)_ |
+|  [popupContent?](./webmap.popupoptions.popupcontent.md) |  | string \| HTMLElement | _(Optional)_ |
+|  [unselectOnClose?](./webmap.popupoptions.unselectonclose.md) |  | boolean | _(Optional)_ Unselect feature on popup close |
 

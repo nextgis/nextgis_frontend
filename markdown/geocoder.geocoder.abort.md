@@ -4,12 +4,12 @@
 
 ## Geocoder.abort() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 abort(): void;
 ```
-<b>Returns:</b>
+**Returns:**
 
 void
 

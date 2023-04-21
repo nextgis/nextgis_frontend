@@ -6,7 +6,7 @@
 
 Constructs a new instance of the `QmsKit` class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 constructor(options?: QmsOptions);
@@ -16,5 +16,5 @@ constructor(options?: QmsOptions);
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | [QmsOptions](./qms-kit.qmsoptions.md) | <i>(Optional)</i> |
+|  options | [QmsOptions](./qms-kit.qmsoptions.md) | _(Optional)_ |
 

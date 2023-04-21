@@ -4,7 +4,7 @@
 
 ## FeatureRequestParams.order\_by property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 order_by?: string;

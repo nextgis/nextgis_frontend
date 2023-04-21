@@ -4,7 +4,7 @@
 
 ## QmsKit.utils property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static utils: {

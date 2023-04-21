@@ -6,7 +6,7 @@
 
 Constructs a new instance of the `ItemProperties` class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 constructor(item: Item, propertiesList?: ItemPropertyConfig<keyof ItemPropertyTypes>[]);
@@ -17,5 +17,5 @@ constructor(item: Item, propertiesList?: ItemPropertyConfig<keyof ItemPropertyTy
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  item | [Item](./item.item.md) |  |
-|  propertiesList | [ItemPropertyConfig](./item.itempropertyconfig.md)<!-- -->&lt;keyof [ItemPropertyTypes](./item.itempropertytypes.md)<!-- -->&gt;\[\] | <i>(Optional)</i> |
+|  propertiesList | [ItemPropertyConfig](./item.itempropertyconfig.md)<!-- -->&lt;keyof [ItemPropertyTypes](./item.itempropertytypes.md)<!-- -->&gt;\[\] | _(Optional)_ |
 

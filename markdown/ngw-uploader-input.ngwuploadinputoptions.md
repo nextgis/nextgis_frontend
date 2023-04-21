@@ -4,17 +4,17 @@
 
 ## NgwUploadInputOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface NgwUploadInputOptions extends NgwUploadOptions 
 ```
-<b>Extends:</b> [NgwUploadOptions](./ngw-uploader.ngwuploadoptions.md)
+**Extends:** NgwUploadOptions
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [inputOptions?](./ngw-uploader-input.ngwuploadinputoptions.inputoptions.md) |  | [UploadInputOptions](./ngw-uploader-input.uploadinputoptions.md) | <i>(Optional)</i> |
-|  [loginDialog?](./ngw-uploader-input.ngwuploadinputoptions.logindialog.md) |  | boolean | <i>(Optional)</i> |
+|  [inputOptions?](./ngw-uploader-input.ngwuploadinputoptions.inputoptions.md) |  | [UploadInputOptions](./ngw-uploader-input.uploadinputoptions.md) | _(Optional)_ |
+|  [loginDialog?](./ngw-uploader-input.ngwuploadinputoptions.logindialog.md) |  | boolean | _(Optional)_ |
 

@@ -6,7 +6,7 @@
 
 Additional css class string for `off` state only.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 addClassOff?: string;

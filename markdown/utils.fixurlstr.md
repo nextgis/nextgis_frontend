@@ -4,7 +4,7 @@
 
 ## fixUrlStr() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function fixUrlStr(url: string): string;
@@ -16,7 +16,7 @@ export declare function fixUrlStr(url: string): string;
 |  --- | --- | --- |
 |  url | string |  |
 
-<b>Returns:</b>
+**Returns:**
 
 string
 

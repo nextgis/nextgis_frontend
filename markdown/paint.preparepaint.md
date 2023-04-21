@@ -4,7 +4,7 @@
 
 ## preparePaint() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function preparePaint(paint: Paint, defaultPaint?: GeometryPaint, getPaintFunctions?: {
@@ -17,10 +17,10 @@ export declare function preparePaint(paint: Paint, defaultPaint?: GeometryPaint,
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  paint | [Paint](./paint.paint.md) |  |
-|  defaultPaint | [GeometryPaint](./paint.geometrypaint.md) | <i>(Optional)</i> |
-|  getPaintFunctions | { \[name: string\]: [GetPaintFunction](./paint.getpaintfunction.md)<!-- -->; } | <i>(Optional)</i> |
+|  defaultPaint | [GeometryPaint](./paint.geometrypaint.md) | _(Optional)_ |
+|  getPaintFunctions | { \[name: string\]: [GetPaintFunction](./paint.getpaintfunction.md)<!-- -->; } | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 [Paint](./paint.paint.md)
 

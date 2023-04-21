@@ -4,7 +4,7 @@
 
 ## VectorUploadOptions.paint property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 paint: GeometryPaint;

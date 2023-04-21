@@ -4,7 +4,7 @@
 
 ## NgwConnector.user property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 user?: UserInfo;

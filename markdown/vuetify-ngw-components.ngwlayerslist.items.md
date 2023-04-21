@@ -4,7 +4,7 @@
 
 ## NgwLayersList.items property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 items: VueTreeItem[];

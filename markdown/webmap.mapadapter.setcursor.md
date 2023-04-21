@@ -4,7 +4,7 @@
 
 ## MapAdapter.setCursor() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 setCursor?(cursor: string): void;
@@ -16,7 +16,7 @@ setCursor?(cursor: string): void;
 |  --- | --- | --- |
 |  cursor | string |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

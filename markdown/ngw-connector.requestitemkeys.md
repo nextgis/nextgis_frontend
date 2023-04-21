@@ -4,12 +4,12 @@
 
 ## RequestItemKeys type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type RequestItemKeys = {
     readonly [T in keyof RequestItemsParamsMap]?: any;
 };
 ```
-<b>References:</b> [RequestItemsParamsMap](./ngw-connector.requestitemsparamsmap.md)
+**References:** [RequestItemsParamsMap](./ngw-connector.requestitemsparamsmap.md)
 

@@ -4,7 +4,7 @@
 
 ## TreeItem interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface TreeItem 
@@ -14,9 +14,9 @@ export interface TreeItem
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [\_layer?](./ngw-connector.treeitem._layer.md) |  | any | <i>(Optional)</i> |
-|  [\_parent?](./ngw-connector.treeitem._parent.md) |  | [TreeGroup](./ngw-connector.treegroup.md) | <i>(Optional)</i> |
-|  [display\_name?](./ngw-connector.treeitem.display_name.md) |  | string | <i>(Optional)</i> |
-|  [id?](./ngw-connector.treeitem.id.md) |  | number | <i>(Optional)</i> |
+|  [\_layer?](./ngw-connector.treeitem._layer.md) |  | any | _(Optional)_ |
+|  [\_parent?](./ngw-connector.treeitem._parent.md) |  | [TreeGroup](./ngw-connector.treegroup.md) | _(Optional)_ |
+|  [display\_name?](./ngw-connector.treeitem.display_name.md) |  | string | _(Optional)_ |
+|  [id?](./ngw-connector.treeitem.id.md) |  | number | _(Optional)_ |
 |  [item\_type](./ngw-connector.treeitem.item_type.md) |  | 'root' \| 'group' \| 'layer' |  |
 

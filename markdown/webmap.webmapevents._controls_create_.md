@@ -5,7 +5,7 @@
 ## WebMapEvents."controls:create" property
 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'controls:create': any;

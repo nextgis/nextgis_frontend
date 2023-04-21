@@ -4,7 +4,7 @@
 
 ## CheckProperty.options property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static options: CheckOptions;

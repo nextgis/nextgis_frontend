@@ -4,7 +4,7 @@
 
 ## StarterKit.onMapClick() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onMapClick?(evt: MapClickEvent, webMap?: WebMap): void;
@@ -15,9 +15,9 @@ onMapClick?(evt: MapClickEvent, webMap?: WebMap): void;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  evt | [MapClickEvent](./webmap.mapclickevent.md) |  |
-|  webMap | [WebMap](./webmap.webmap.md) | <i>(Optional)</i> |
+|  webMap | [WebMap](./webmap.webmap.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

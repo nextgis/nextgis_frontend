@@ -4,7 +4,7 @@
 
 ## NgwLayersList.notOnlyNgwLayer property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 notOnlyNgwLayer: boolean;

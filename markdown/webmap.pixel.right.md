@@ -4,7 +4,7 @@
 
 ## Pixel.right property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 right?: number;

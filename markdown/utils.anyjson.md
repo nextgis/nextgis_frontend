@@ -4,10 +4,10 @@
 
 ## AnyJson type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type AnyJson = boolean | number | string | null | JsonArray | JsonMap;
 ```
-<b>References:</b> [JsonArray](./utils.jsonarray.md)<!-- -->, [JsonMap](./utils.jsonmap.md)
+**References:** [JsonArray](./utils.jsonarray.md)<!-- -->, [JsonMap](./utils.jsonmap.md)
 

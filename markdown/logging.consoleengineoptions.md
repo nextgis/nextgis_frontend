@@ -4,7 +4,7 @@
 
 ## ConsoleEngineOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface ConsoleEngineOptions 
@@ -14,5 +14,5 @@ export interface ConsoleEngineOptions
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [enabled?](./logging.consoleengineoptions.enabled.md) |  | boolean | <i>(Optional)</i> |
+|  [enabled?](./logging.consoleengineoptions.enabled.md) |  | boolean | _(Optional)_ |
 

@@ -4,7 +4,7 @@
 
 ## BaseResource.connection property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static connection?: Connection;

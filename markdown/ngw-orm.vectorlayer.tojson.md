@@ -4,12 +4,12 @@
 
 ## VectorLayer.toJSON() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 toJSON(): string;
 ```
-<b>Returns:</b>
+**Returns:**
 
 string
 

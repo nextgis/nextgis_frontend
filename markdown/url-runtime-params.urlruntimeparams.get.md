@@ -4,7 +4,7 @@
 
 ## UrlRuntimeParams.get() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 get(name: string): any;
@@ -16,7 +16,7 @@ get(name: string): any;
 |  --- | --- | --- |
 |  name | string |  |
 
-<b>Returns:</b>
+**Returns:**
 
 any
 

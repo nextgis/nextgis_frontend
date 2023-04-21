@@ -4,7 +4,7 @@
 
 ## ForeignResource interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface ForeignResource 
@@ -14,5 +14,5 @@ export interface ForeignResource
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [relationField?](./vuex-ngw.foreignresource.relationfield.md) |  | string | <i>(Optional)</i> |
+|  [relationField?](./vuex-ngw.foreignresource.relationfield.md) |  | string | _(Optional)_ |
 

@@ -4,7 +4,7 @@
 
 ## IconPaint.svg property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 svg?: HTMLElement;

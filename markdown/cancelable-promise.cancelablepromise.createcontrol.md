@@ -4,7 +4,7 @@
 
 ## CancelablePromise.createControl() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static createControl(opt?: PromiseControlOptions): PromiseControl;
@@ -14,9 +14,9 @@ static createControl(opt?: PromiseControlOptions): PromiseControl;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  opt | PromiseControlOptions | <i>(Optional)</i> |
+|  opt | PromiseControlOptions | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 PromiseControl
 

@@ -4,7 +4,7 @@
 
 ## GeoserviceInList interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface GeoserviceInList 

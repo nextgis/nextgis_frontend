@@ -4,7 +4,7 @@
 
 ## getNgwWebmapExtent() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function getNgwWebmapExtent(webmap: WebmapResource): LngLatBoundsArray | undefined;
@@ -16,7 +16,7 @@ export declare function getNgwWebmapExtent(webmap: WebmapResource): LngLatBounds
 |  --- | --- | --- |
 |  webmap | [WebmapResource](./ngw-connector.webmapresource.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 [LngLatBoundsArray](./utils.lnglatboundsarray.md) \| undefined
 

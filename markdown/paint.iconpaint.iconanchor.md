@@ -4,7 +4,7 @@
 
 ## IconPaint.iconAnchor property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 iconAnchor?: [number, number];

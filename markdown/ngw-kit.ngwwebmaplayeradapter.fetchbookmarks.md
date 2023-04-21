@@ -4,12 +4,12 @@
 
 ## NgwWebmapLayerAdapter.fetchBookmarks() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 fetchBookmarks(): CancelablePromise<BookmarkItem[]>;
 ```
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;BookmarkItem\[\]&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;BookmarkItem\[\]&gt;
 

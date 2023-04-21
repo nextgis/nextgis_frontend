@@ -4,7 +4,7 @@
 
 ## Model3DOptions.lon property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 lon: number;

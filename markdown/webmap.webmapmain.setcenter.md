@@ -6,7 +6,7 @@
 
 Set the center of the current view.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 setCenter(lngLat: LngLatArray): this;
@@ -18,7 +18,7 @@ setCenter(lngLat: LngLatArray): this;
 |  --- | --- | --- |
 |  lngLat | [LngLatArray](./utils.lnglatarray.md) | Array of two numbers representing longitude and latitude of the center of the map view. |
 
-<b>Returns:</b>
+**Returns:**
 
 this
 

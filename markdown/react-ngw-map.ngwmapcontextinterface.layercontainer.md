@@ -4,7 +4,7 @@
 
 ## NgwMapContextInterface.layerContainer property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 layerContainer?: ControlledLayer;

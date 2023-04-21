@@ -4,20 +4,20 @@
 
 ## PinPaint interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface PinPaint extends BasePaint 
 ```
-<b>Extends:</b> [BasePaint](./paint.basepaint.md)
+**Extends:** [BasePaint](./paint.basepaint.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [icon?](./paint.pinpaint.icon.md) |  | string \| [Expression](./paint.expression.md) \| [IconPaint](./paint.iconpaint.md) | <i>(Optional)</i> |
-|  [iconfont?](./paint.pinpaint.iconfont.md) |  | 'maki' \| 'mdi' \| 'md' \| 'fa' | <p><i>(Optional)</i> TODO: make a selection of fonts with icons Place font to assets and set ASSET\_PATH local or from cdn</p><p>https://github.com/CesiumGS/cesium/blob/master/Source/Core/PinBuilder.js</p> |
-|  [size?](./paint.pinpaint.size.md) |  | number \| [Expression](./paint.expression.md) | <i>(Optional)</i> |
-|  [symbol?](./paint.pinpaint.symbol.md) |  | string \| [Expression](./paint.expression.md) | <i>(Optional)</i> |
-|  [type?](./paint.pinpaint.type.md) |  | 'pin' | <i>(Optional)</i> |
+|  [icon?](./paint.pinpaint.icon.md) |  | string \| [Expression](./paint.expression.md) \| [IconPaint](./paint.iconpaint.md) | _(Optional)_ |
+|  [iconfont?](./paint.pinpaint.iconfont.md) |  | 'maki' \| 'mdi' \| 'md' \| 'fa' | <p>_(Optional)_ TODO: make a selection of fonts with icons Place font to assets and set ASSET\_PATH local or from cdn</p><p>https://github.com/CesiumGS/cesium/blob/master/Source/Core/PinBuilder.js</p> |
+|  [size?](./paint.pinpaint.size.md) |  | number \| [Expression](./paint.expression.md) | _(Optional)_ |
+|  [symbol?](./paint.pinpaint.symbol.md) |  | string \| [Expression](./paint.expression.md) | _(Optional)_ |
+|  [type?](./paint.pinpaint.type.md) |  | 'pin' | _(Optional)_ |
 

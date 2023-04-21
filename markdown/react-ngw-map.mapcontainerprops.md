@@ -4,21 +4,21 @@
 
 ## MapContainerProps interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export interface MapContainerProps<M = any, L = any, C = any, O extends NgwMapOptions<M, C> = NgwMapOptions<M, C>> extends NgwMapOptions 
+export interface MapContainerProps<M = any, L = any, C extends object = any, O extends NgwMapOptions<M, C> = NgwMapOptions<M, C>> extends NgwMapOptions 
 ```
-<b>Extends:</b> [NgwMapOptions](./ngw-map.ngwmapoptions.md)
+**Extends:** NgwMapOptions
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [children?](./react-ngw-map.mapcontainerprops.children.md) |  | ReactNode | <i>(Optional)</i> |
-|  [className?](./react-ngw-map.mapcontainerprops.classname.md) |  | string | <i>(Optional)</i> |
-|  [id?](./react-ngw-map.mapcontainerprops.id.md) |  | string | <i>(Optional)</i> |
-|  [placeholder?](./react-ngw-map.mapcontainerprops.placeholder.md) |  | ReactNode | <i>(Optional)</i> |
-|  [style?](./react-ngw-map.mapcontainerprops.style.md) |  | CSSProperties | <i>(Optional)</i> |
-|  [whenCreated?](./react-ngw-map.mapcontainerprops.whencreated.md) |  | (map: [NgwMap](./ngw-map.ngwmap.md)<!-- -->&lt;M, L, C, O&gt;) =&gt; void | <i>(Optional)</i> |
+|  [children?](./react-ngw-map.mapcontainerprops.children.md) |  | ReactNode | _(Optional)_ |
+|  [className?](./react-ngw-map.mapcontainerprops.classname.md) |  | string | _(Optional)_ |
+|  [id?](./react-ngw-map.mapcontainerprops.id.md) |  | string | _(Optional)_ |
+|  [placeholder?](./react-ngw-map.mapcontainerprops.placeholder.md) |  | ReactNode | _(Optional)_ |
+|  [style?](./react-ngw-map.mapcontainerprops.style.md) |  | CSSProperties | _(Optional)_ |
+|  [whenCreated?](./react-ngw-map.mapcontainerprops.whencreated.md) |  | (map: NgwMap&lt;M, L, C, O&gt;) =&gt; void | _(Optional)_ |
 

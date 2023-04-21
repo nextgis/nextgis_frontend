@@ -4,7 +4,7 @@
 
 ## PopupOptions.autoPan property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 autoPan?: boolean;

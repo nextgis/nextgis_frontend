@@ -9,7 +9,7 @@
 > - use [MapFeatureDisplayNameOptions.resource](./ngw-kit.mapfeaturedisplaynameoptions.resource.md) instead
 > 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 resourceId?: number;

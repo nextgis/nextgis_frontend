@@ -4,7 +4,7 @@
 
 ## NgwWebmapLayerAdapter.setOpacity() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 setOpacity(val: number): Promise<void>;
@@ -16,7 +16,7 @@ setOpacity(val: number): Promise<void>;
 |  --- | --- | --- |
 |  val | number |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;void&gt;
 

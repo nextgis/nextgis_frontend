@@ -4,7 +4,7 @@
 
 ## SrsItem.auth\_name property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 auth_name: string;

@@ -4,7 +4,7 @@
 
 ## FeatureRequestParams.extensions property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 extensions?: string;

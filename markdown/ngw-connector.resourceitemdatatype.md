@@ -9,10 +9,10 @@
 > - use [VectorFieldDatatype](./ngw-connector.vectorfielddatatype.md) instead
 > 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type ResourceItemDatatype = VectorFieldDatatype;
 ```
-<b>References:</b> [VectorFieldDatatype](./ngw-connector.vectorfielddatatype.md)
+**References:** [VectorFieldDatatype](./ngw-connector.vectorfielddatatype.md)
 

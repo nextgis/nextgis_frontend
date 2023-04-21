@@ -4,7 +4,7 @@
 
 ## AdapterOptions.adapter property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 adapter?: string;

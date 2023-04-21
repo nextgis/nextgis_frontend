@@ -4,12 +4,12 @@
 
 ## IdentifyItem class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export declare class IdentifyItem<F = FeatureProperties, G extends Geometry = Geometry> implements LayerFeature 
+export declare class IdentifyItem<F extends FeatureProperties = FeatureProperties, G extends Geometry = Geometry> implements LayerFeature 
 ```
-<b>Implements:</b> [LayerFeature](./ngw-connector.layerfeature.md)
+**Implements:** [LayerFeature](./ngw-connector.layerfeature.md)
 
 ## Constructors
 
@@ -21,9 +21,9 @@ export declare class IdentifyItem<F = FeatureProperties, G extends Geometry = Ge
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [extensions?](./ngw-kit.identifyitem.extensions.md) |  | [FeatureItemExtensions](./ngw-connector.featureitemextensions.md) | <i>(Optional)</i> |
+|  [extensions?](./ngw-kit.identifyitem.extensions.md) |  | [FeatureItemExtensions](./ngw-connector.featureitemextensions.md) | _(Optional)_ |
 |  [fields](./ngw-kit.identifyitem.fields.md) | <code>readonly</code> | [FeatureProperties](./utils.featureproperties.md) |  |
-|  [geom?](./ngw-kit.identifyitem.geom.md) |  | GeoJsonObject | <i>(Optional)</i> |
+|  [geom?](./ngw-kit.identifyitem.geom.md) |  | GeoJsonObject | _(Optional)_ |
 |  [id](./ngw-kit.identifyitem.id.md) | <code>readonly</code> | number |  |
 |  [label](./ngw-kit.identifyitem.label.md) | <code>readonly</code> | string |  |
 |  [layerId](./ngw-kit.identifyitem.layerid.md) | <code>readonly</code> | number |  |

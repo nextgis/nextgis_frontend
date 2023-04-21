@@ -4,12 +4,12 @@
 
 ## OlMapAdapter.getZoom() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getZoom(): number | undefined;
 ```
-<b>Returns:</b>
+**Returns:**
 
 number \| undefined
 

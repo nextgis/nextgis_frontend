@@ -4,7 +4,7 @@
 
 ## LineLayer.geometryType property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static geometryType: GeometryType;

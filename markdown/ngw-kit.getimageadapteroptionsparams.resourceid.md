@@ -4,7 +4,7 @@
 
 ## GetImageAdapterOptionsParams.resourceId property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 resourceId: number | number[];

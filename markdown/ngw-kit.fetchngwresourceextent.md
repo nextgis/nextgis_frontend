@@ -4,17 +4,17 @@
 
 ## FetchNgwResourceExtent interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface FetchNgwResourceExtent extends NgwRequestOptions 
 ```
-<b>Extends:</b> [NgwRequestOptions](./ngw-kit.ngwrequestoptions.md)
+**Extends:** [NgwRequestOptions](./ngw-kit.ngwrequestoptions.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [connector](./ngw-kit.fetchngwresourceextent.connector.md) |  | NgwConnector |  |
-|  [resource?](./ngw-kit.fetchngwresourceextent.resource.md) |  | [ResourceDefinition](./ngw-connector.resourcedefinition.md) \| [ResourceItem](./ngw-connector.resourceitem.md) | <i>(Optional)</i> |
+|  [connector](./ngw-kit.fetchngwresourceextent.connector.md) |  | [NgwConnector](./ngw-connector.ngwconnector.md) |  |
+|  [resource?](./ngw-kit.fetchngwresourceextent.resource.md) |  | [ResourceDefinition](./ngw-connector.resourcedefinition.md) \| [ResourceItem](./ngw-connector.resourceitem.md) | _(Optional)_ |
 

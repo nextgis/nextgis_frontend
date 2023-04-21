@@ -4,7 +4,7 @@
 
 ## FeaturePosition interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface FeaturePosition 

@@ -4,7 +4,7 @@
 
 ## LeafletMapAdapter.removeControl() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 removeControl(control: Control): void;
@@ -16,7 +16,7 @@ removeControl(control: Control): void;
 |  --- | --- | --- |
 |  control | Control |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

@@ -8,7 +8,7 @@ TODO: make a selection of fonts with icons Place font to assets and set ASSET\_P
 
 https://github.com/CesiumGS/cesium/blob/master/Source/Core/PinBuilder.js
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 iconfont?: 'maki' | 'mdi' | 'md' | 'fa';

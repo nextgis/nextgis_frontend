@@ -4,17 +4,17 @@
 
 ## VectorUploadOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface VectorUploadOptions extends FileUploadOptions 
 ```
-<b>Extends:</b> [FileUploadOptions](./ngw-uploader.fileuploadoptions.md)
+**Extends:** [FileUploadOptions](./ngw-uploader.fileuploadoptions.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [paint](./ngw-uploader.vectoruploadoptions.paint.md) |  | [GeometryPaint](./paint.geometrypaint.md) |  |
-|  [style?](./ngw-uploader.vectoruploadoptions.style.md) |  | [CreateStyleOptions](./ngw-uploader.createstyleoptions.md) | <i>(Optional)</i> |
+|  [style?](./ngw-uploader.vectoruploadoptions.style.md) |  | [CreateStyleOptions](./ngw-uploader.createstyleoptions.md) | _(Optional)_ |
 

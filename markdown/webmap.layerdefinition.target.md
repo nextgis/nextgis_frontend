@@ -6,7 +6,7 @@
 
 The adapter in which the layer is created.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 target: LayerAdapter;

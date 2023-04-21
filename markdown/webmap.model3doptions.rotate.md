@@ -4,7 +4,7 @@
 
 ## Model3DOptions.rotate property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 rotate?: number;

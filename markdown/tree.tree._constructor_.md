@@ -6,7 +6,7 @@
 
 Constructs a new instance of the `Tree` class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 constructor(item?: DefaultTreeItem, options?: TreeOptions<any>);
@@ -16,6 +16,6 @@ constructor(item?: DefaultTreeItem, options?: TreeOptions<any>);
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  item | DefaultTreeItem | <i>(Optional)</i> |
-|  options | TreeOptions&lt;any&gt; | <i>(Optional)</i> |
+|  item | DefaultTreeItem | _(Optional)_ |
+|  options | TreeOptions&lt;any&gt; | _(Optional)_ |
 

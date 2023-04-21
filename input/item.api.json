@@ -1,8 +1,8 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.28.6",
-    "schemaVersion": 1009,
+    "toolVersion": "7.34.4",
+    "schemaVersion": 1011,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
       "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
@@ -196,11 +196,11 @@
             },
             {
               "kind": "Content",
-              "text": "<V> "
+              "text": "<V>"
             },
             {
               "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -222,11 +222,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -238,6 +234,7 @@
               "text": "> "
             }
           ],
+          "fileUrlPath": "src/properties/BaseProperty.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -255,7 +252,7 @@
               "typeParameterName": "O",
               "constraintTokenRange": {
                 "startIndex": 3,
-                "endIndex": 4
+                "endIndex": 5
               },
               "defaultTypeTokenRange": {
                 "startIndex": 6,
@@ -269,11 +266,12 @@
                 "endIndex": 10
               },
               "defaultTypeTokenRange": {
-                "startIndex": 12,
-                "endIndex": 13
+                "startIndex": 11,
+                "endIndex": 12
               }
             }
           ],
+          "isAbstract": true,
           "name": "BaseProperty",
           "preserveMemberOrder": false,
           "members": [
@@ -304,7 +302,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": true
+              "isProtected": true,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -317,11 +316,11 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "V "
+                  "text": "V"
                 },
                 {
                   "kind": "Content",
-                  "text": "= "
+                  "text": " = "
                 },
                 {
                   "kind": "Content",
@@ -396,6 +395,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "_callOnSet"
             },
             {
@@ -426,7 +426,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": true
+              "isProtected": true,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -489,6 +490,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "_fireChangeEvent"
             },
             {
@@ -536,6 +538,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "_prepareValue"
             },
             {
@@ -565,7 +568,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": true
+              "isProtected": true,
+              "isAbstract": false
             },
             {
               "kind": "Constructor",
@@ -659,6 +663,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "destroy"
             },
             {
@@ -673,7 +678,7 @@
                 {
                   "kind": "Reference",
                   "text": "EventEmitter",
-                  "canonicalReference": "!EventEmitter:class"
+                  "canonicalReference": "!\"\\\"events\\\"\".EventEmitter:class"
                 },
                 {
                   "kind": "Content",
@@ -689,7 +694,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -719,6 +725,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "get"
             },
             {
@@ -763,6 +770,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getChildren"
             },
             {
@@ -798,6 +806,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getContainer"
             },
             {
@@ -842,6 +851,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getParent"
             },
             {
@@ -877,6 +887,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getParents"
             },
             {
@@ -907,6 +918,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getProperty"
             },
             {
@@ -937,6 +949,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getValue"
             },
             {
@@ -967,6 +980,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "isBlocked"
             },
             {
@@ -997,6 +1011,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "isGroup"
             },
             {
@@ -1026,7 +1041,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -1055,7 +1071,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -1084,7 +1101,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -1147,6 +1165,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "set"
             },
             {
@@ -1210,6 +1229,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "update"
             }
           ],
@@ -1239,11 +1259,11 @@
             },
             {
               "kind": "Content",
-              "text": "<V> "
+              "text": "<V>"
             },
             {
               "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -1259,6 +1279,7 @@
               "text": "> "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -1276,7 +1297,7 @@
               "typeParameterName": "O",
               "constraintTokenRange": {
                 "startIndex": 3,
-                "endIndex": 4
+                "endIndex": 5
               },
               "defaultTypeTokenRange": {
                 "startIndex": 6,
@@ -1368,9 +1389,14 @@
             },
             {
               "kind": "Content",
-              "text": "<V> "
+              "text": "<V>"
+            },
+            {
+              "kind": "Content",
+              "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -1491,7 +1517,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 3,
-              "endIndex": 4
+              "endIndex": 5
             }
           ]
         },
@@ -1511,11 +1537,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -1542,11 +1564,11 @@
             },
             {
               "kind": "Content",
-              "text": "> "
+              "text": ">"
             },
             {
               "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -1604,9 +1626,14 @@
             },
             {
               "kind": "Content",
-              "text": ">> "
+              "text": ">>"
+            },
+            {
+              "kind": "Content",
+              "text": " "
             }
           ],
+          "fileUrlPath": "src/properties/CheckProperty.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -1616,22 +1643,23 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             },
             {
               "typeParameterName": "O",
               "constraintTokenRange": {
-                "startIndex": 6,
+                "startIndex": 5,
                 "endIndex": 9
               },
               "defaultTypeTokenRange": {
-                "startIndex": 11,
-                "endIndex": 15
+                "startIndex": 10,
+                "endIndex": 14
               }
             }
           ],
+          "isAbstract": false,
           "name": "CheckProperty",
           "preserveMemberOrder": false,
           "members": [
@@ -1681,6 +1709,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "_prepareValue"
             },
             {
@@ -1793,6 +1822,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "block"
             },
             {
@@ -1840,6 +1870,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "blockChild"
             },
             {
@@ -1870,6 +1901,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getHierarchyValue"
             },
             {
@@ -1900,7 +1932,8 @@
                 "endIndex": 2
               },
               "isStatic": true,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -1947,6 +1980,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "unBlock"
             },
             {
@@ -1994,6 +2028,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "unblockChild"
             },
             {
@@ -2057,11 +2092,12 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "update"
             }
           ],
           "extendsTokenRange": {
-            "startIndex": 16,
+            "startIndex": 15,
             "endIndex": 23
           },
           "implementsTokenRanges": []
@@ -2082,11 +2118,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -2098,6 +2130,7 @@
               "text": "> "
             }
           ],
+          "fileUrlPath": "src/Item.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -2107,11 +2140,12 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             }
           ],
+          "isAbstract": false,
           "name": "Item",
           "preserveMemberOrder": false,
           "members": [
@@ -2174,7 +2208,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -2204,6 +2239,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "initProperties"
             },
             {
@@ -2233,7 +2269,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -2263,7 +2300,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -2277,7 +2315,7 @@
                 {
                   "kind": "Reference",
                   "text": "TreeHelper",
-                  "canonicalReference": "@nextgis/item!TreeHelper:class"
+                  "canonicalReference": "@nextgis/item!~TreeHelper:class"
                 },
                 {
                   "kind": "Content",
@@ -2293,7 +2331,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             }
           ],
           "implementsTokenRanges": []
@@ -2308,6 +2347,7 @@
               "text": "export interface ItemBasePropertyOptions<V> "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -2563,6 +2603,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "ItemOptions",
           "preserveMemberOrder": false,
@@ -2662,7 +2703,9 @@
               "text": "export declare class ItemProperties "
             }
           ],
+          "fileUrlPath": "src/properties/ItemProperties.ts",
           "releaseTag": "Public",
+          "isAbstract": false,
           "name": "ItemProperties",
           "preserveMemberOrder": false,
           "members": [
@@ -2725,6 +2768,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "_setPropertyHandler"
             },
             {
@@ -2849,6 +2893,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "add"
             },
             {
@@ -2879,6 +2924,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "destroy"
             },
             {
@@ -2926,6 +2972,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "get"
             },
             {
@@ -2973,7 +3020,8 @@
                 "endIndex": 6
               },
               "isStatic": true,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -3003,7 +3051,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -3047,6 +3096,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "list"
             },
             {
@@ -3076,7 +3126,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -3137,6 +3188,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "property"
             },
             {
@@ -3261,6 +3313,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "set"
             },
             {
@@ -3291,6 +3344,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "update"
             }
           ],
@@ -3316,11 +3370,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Content",
@@ -3331,6 +3381,7 @@
               "text": "> "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -3340,8 +3391,8 @@
                 "endIndex": 3
               },
               "defaultTypeTokenRange": {
-                "startIndex": 5,
-                "endIndex": 6
+                "startIndex": 4,
+                "endIndex": 5
               }
             }
           ],
@@ -3439,9 +3490,14 @@
             },
             {
               "kind": "Content",
-              "text": "<K> "
+              "text": "<K>"
+            },
+            {
+              "kind": "Content",
+              "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -3626,7 +3682,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 4,
-              "endIndex": 5
+              "endIndex": 6
             }
           ]
         },
@@ -3640,6 +3696,7 @@
               "text": "export interface ItemPropertyTypes "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "ItemPropertyTypes",
           "preserveMemberOrder": false,
@@ -3773,6 +3830,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "Type",
           "typeParameters": [

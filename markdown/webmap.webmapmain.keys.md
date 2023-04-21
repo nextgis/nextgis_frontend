@@ -4,7 +4,7 @@
 
 ## WebMapMain.keys property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static keys: Keys;

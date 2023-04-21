@@ -4,7 +4,7 @@
 
 ## ResourceItem.basemap\_layer property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 basemap_layer?: BasemapResource;

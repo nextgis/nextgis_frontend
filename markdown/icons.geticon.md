@@ -4,7 +4,7 @@
 
 ## getIcon() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function getIcon(opt?: IconOptions): IconPaint;
@@ -14,9 +14,9 @@ export declare function getIcon(opt?: IconOptions): IconPaint;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  opt | [IconOptions](./icons.iconoptions.md) | <i>(Optional)</i> |
+|  opt | [IconOptions](./icons.iconoptions.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 [IconPaint](./paint.iconpaint.md)
 

@@ -6,7 +6,7 @@
 
 Shortcut to add OSM baselayer.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 osm?: boolean;

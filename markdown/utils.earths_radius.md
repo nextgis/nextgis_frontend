@@ -6,7 +6,7 @@
 
 Radius of the earth in kilometers
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 EARTHS_RADIUS = 6371

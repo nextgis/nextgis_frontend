@@ -4,7 +4,7 @@
 
 ## createWebMap() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function createWebMap(options: MapOptions): Promise<WebMap>;
@@ -16,7 +16,7 @@ export declare function createWebMap(options: MapOptions): Promise<WebMap>;
 |  --- | --- | --- |
 |  options | [MapOptions](./webmap.mapoptions.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[WebMap](./webmap.webmap.md)<!-- -->&gt;
 

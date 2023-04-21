@@ -4,7 +4,7 @@
 
 ## ApplyMixinOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface ApplyMixinOptions 
@@ -14,5 +14,5 @@ export interface ApplyMixinOptions
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [replace?](./utils.applymixinoptions.replace.md) |  | boolean | <i>(Optional)</i> |
+|  [replace?](./utils.applymixinoptions.replace.md) |  | boolean | _(Optional)_ |
 

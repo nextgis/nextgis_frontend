@@ -4,7 +4,7 @@
 
 ## IconOptions.rotate property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 rotate?: number;

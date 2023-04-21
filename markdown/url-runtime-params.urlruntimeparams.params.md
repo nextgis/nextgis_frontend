@@ -4,12 +4,12 @@
 
 ## UrlRuntimeParams.params() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 params(): Record<string, string>;
 ```
-<b>Returns:</b>
+**Returns:**
 
 Record&lt;string, string&gt;
 

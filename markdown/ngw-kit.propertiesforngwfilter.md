@@ -4,12 +4,12 @@
 
 ## PropertiesForNgwFilter type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type PropertiesForNgwFilter<P extends FeatureProperties = FeatureProperties> = P & {
     id: number;
 };
 ```
-<b>References:</b> [FeatureProperties](./utils.featureproperties.md)
+**References:** [FeatureProperties](./utils.featureproperties.md)
 

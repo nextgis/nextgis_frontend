@@ -4,7 +4,7 @@
 
 ## NgwProvider.caseInsensitive property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 caseInsensitive: boolean;

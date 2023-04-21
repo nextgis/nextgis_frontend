@@ -4,7 +4,7 @@
 
 ## MapboxglMapAdapter.setLayerOrder() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 setLayerOrder(layerIds: string[], order: number, layers: {
@@ -20,7 +20,7 @@ setLayerOrder(layerIds: string[], order: number, layers: {
 |  order | number |  |
 |  layers | { \[x: string\]: TLayerAdapter; } |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

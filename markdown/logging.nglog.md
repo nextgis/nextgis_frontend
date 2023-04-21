@@ -4,16 +4,16 @@
 
 ## NgLog interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface NgLog<D = any> extends Log<D> 
 ```
-<b>Extends:</b> [Log](./logging.log.md)
+**Extends:** [Log](./logging.log.md)<!-- -->&lt;D&gt;
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [sessionId?](./logging.nglog.sessionid.md) |  | string | <i>(Optional)</i> |
+|  [sessionId?](./logging.nglog.sessionid.md) |  | string | _(Optional)_ |
 

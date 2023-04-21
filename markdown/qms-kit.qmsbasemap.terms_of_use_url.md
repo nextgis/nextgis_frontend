@@ -4,7 +4,7 @@
 
 ## QmsBasemap.terms\_of\_use\_url property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 terms_of_use_url: string;

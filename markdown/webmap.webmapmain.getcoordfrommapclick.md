@@ -4,12 +4,12 @@
 
 ## WebMapMain.getCoordFromMapClick() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getCoordFromMapClick(): CancelablePromise<LngLatArray>;
 ```
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;[LngLatArray](./utils.lnglatarray.md)<!-- -->&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;[LngLatArray](./utils.lnglatarray.md)<!-- -->&gt;
 

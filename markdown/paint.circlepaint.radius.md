@@ -4,7 +4,7 @@
 
 ## CirclePaint.radius property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 radius?: number | Expression;

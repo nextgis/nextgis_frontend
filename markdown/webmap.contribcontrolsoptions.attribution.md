@@ -4,7 +4,7 @@
 
 ## ContribControlsOptions.ATTRIBUTION property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 ATTRIBUTION: AttributionControlOptions;

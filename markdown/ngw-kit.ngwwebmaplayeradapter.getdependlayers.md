@@ -4,12 +4,12 @@
 
 ## NgwWebmapLayerAdapter.getDependLayers() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getDependLayers(): Array<NgwWebmapItem>;
 ```
-<b>Returns:</b>
+**Returns:**
 
 Array&lt;[NgwWebmapItem](./ngw-kit.ngwwebmapitem.md)<!-- -->&gt;
 

@@ -1,8 +1,8 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.28.6",
-    "schemaVersion": 1009,
+    "toolVersion": "7.34.4",
+    "schemaVersion": 1011,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
       "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
@@ -182,6 +182,7 @@
               "text": "export interface Params "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "Params",
           "preserveMemberOrder": false,
@@ -243,6 +244,7 @@
               "text": "export interface StateData "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "StateData",
           "preserveMemberOrder": false,
@@ -316,14 +318,16 @@
             {
               "kind": "Reference",
               "text": "RuntimeParams",
-              "canonicalReference": "@nextgis/webmap!RuntimeParams:interface"
+              "canonicalReference": "!unknown"
             },
             {
               "kind": "Content",
               "text": " "
             }
           ],
+          "fileUrlPath": "src/UrlRuntimeParams.ts",
           "releaseTag": "Public",
+          "isAbstract": false,
           "name": "UrlRuntimeParams",
           "preserveMemberOrder": false,
           "members": [
@@ -372,6 +376,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "get"
             },
             {
@@ -407,6 +412,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "params"
             },
             {
@@ -455,6 +461,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "remove"
             },
             {
@@ -519,6 +526,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "set"
             }
           ],

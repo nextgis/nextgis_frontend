@@ -5,7 +5,7 @@
 ## NgwConnector.getResourcesBy() method
 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getResourcesBy(resource: DeepPartial<Resource>, requestOptions?: RequestOptions): CancelablePromise<ResourceItem[]>;
@@ -16,9 +16,9 @@ getResourcesBy(resource: DeepPartial<Resource>, requestOptions?: RequestOptions)
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  resource | [DeepPartial](./utils.deeppartial.md)<!-- -->&lt;[Resource](./ngw-connector.resource.md)<!-- -->&gt; |  |
-|  requestOptions | [RequestOptions](./ngw-connector.requestoptions.md) | <i>(Optional)</i> |
+|  requestOptions | [RequestOptions](./ngw-connector.requestoptions.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;[ResourceItem](./ngw-connector.resourceitem.md)<!-- -->\[\]&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;[ResourceItem](./ngw-connector.resourceitem.md)<!-- -->\[\]&gt;
 

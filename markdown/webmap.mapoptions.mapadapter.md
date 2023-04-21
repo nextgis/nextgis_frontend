@@ -6,7 +6,7 @@
 
 The main initialization property of WebMap. Determines the way of interaction with the selected GIS framework. Available: \[Leaflet\](leaflet-map-adapter); \[Openlayers\](ol-map-adapter); \[MapboxGL\](mapboxgl-map-adapter)
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 mapAdapter?: MapAdapter<M>;

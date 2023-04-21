@@ -4,7 +4,7 @@
 
 ## Resource.scopes property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 scopes: string[];

@@ -4,12 +4,12 @@
 
 ## PointLayer class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class PointLayer extends VectorLayer<Point> 
 ```
-<b>Extends:</b> [VectorLayer](./ngw-orm.vectorlayer.md)<!-- -->&lt;Point
+**Extends:** [VectorLayer](./ngw-orm.vectorlayer.md)<!-- -->&lt;Point&gt;
 
 ## Properties
 

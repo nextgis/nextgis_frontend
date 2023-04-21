@@ -4,7 +4,7 @@
 
 ## VectorLayerResourceItem.feature\_layer property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 feature_layer: FeatureResource;

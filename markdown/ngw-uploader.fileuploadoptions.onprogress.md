@@ -4,7 +4,7 @@
 
 ## FileUploadOptions.onProgress property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onProgress?: (percentComplete: number) => void;

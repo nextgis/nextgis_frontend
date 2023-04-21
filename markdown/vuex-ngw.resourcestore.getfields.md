@@ -4,12 +4,12 @@
 
 ## ResourceStore.getFields() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getFields(): Promise<FeatureLayerField[] | undefined>;
 ```
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[FeatureLayerField](./ngw-connector.featurelayerfield.md)<!-- -->\[\] \| undefined&gt;
 

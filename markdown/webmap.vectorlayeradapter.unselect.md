@@ -6,7 +6,7 @@
 
 Deselect all objects in the vector layer.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 unselect?(findFeatureCb?: DataLayerFilter<F, L> | PropertiesFilter): void;
@@ -16,9 +16,9 @@ unselect?(findFeatureCb?: DataLayerFilter<F, L> | PropertiesFilter): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  findFeatureCb | [DataLayerFilter](./webmap.datalayerfilter.md)<!-- -->&lt;F, L&gt; \| [PropertiesFilter](./properties-filter.propertiesfilter.md) | <i>(Optional)</i> |
+|  findFeatureCb | [DataLayerFilter](./webmap.datalayerfilter.md)<!-- -->&lt;F, L&gt; \| [PropertiesFilter](./properties-filter.propertiesfilter.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

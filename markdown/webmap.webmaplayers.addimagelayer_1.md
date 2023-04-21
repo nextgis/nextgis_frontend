@@ -4,7 +4,7 @@
 
 ## WebMapLayers.addImageLayer() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 addImageLayer(options: ImageAdapterOptions): Promise<MainLayerAdapter<M, L, ImageAdapterOptions>>;
@@ -16,7 +16,7 @@ addImageLayer(options: ImageAdapterOptions): Promise<MainLayerAdapter<M, L, Imag
 |  --- | --- | --- |
 |  options | [ImageAdapterOptions](./webmap.imageadapteroptions.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[MainLayerAdapter](./webmap.mainlayeradapter.md)<!-- -->&lt;M, L, [ImageAdapterOptions](./webmap.imageadapteroptions.md)<!-- -->&gt;&gt;
 

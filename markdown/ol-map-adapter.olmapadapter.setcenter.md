@@ -4,7 +4,7 @@
 
 ## OlMapAdapter.setCenter() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 setCenter(lngLat: LngLatArray): void;
@@ -16,7 +16,7 @@ setCenter(lngLat: LngLatArray): void;
 |  --- | --- | --- |
 |  lngLat | [LngLatArray](./utils.lnglatarray.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

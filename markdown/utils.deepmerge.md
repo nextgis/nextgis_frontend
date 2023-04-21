@@ -4,7 +4,7 @@
 
 ## deepmerge() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function deepmerge<T>(x: Partial<T>, y: Partial<T>, mergeArray?: boolean): T;
@@ -16,9 +16,9 @@ export declare function deepmerge<T>(x: Partial<T>, y: Partial<T>, mergeArray?: 
 |  --- | --- | --- |
 |  x | Partial&lt;T&gt; |  |
 |  y | Partial&lt;T&gt; |  |
-|  mergeArray | boolean | <i>(Optional)</i> |
+|  mergeArray | boolean | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 T
 

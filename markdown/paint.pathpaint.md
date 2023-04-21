@@ -4,16 +4,16 @@
 
 ## PathPaint interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface PathPaint extends BasePaint 
 ```
-<b>Extends:</b> [BasePaint](./paint.basepaint.md)
+**Extends:** [BasePaint](./paint.basepaint.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [type?](./paint.pathpaint.type.md) |  | 'path' | <i>(Optional)</i> |
+|  [type?](./paint.pathpaint.type.md) |  | 'path' | _(Optional)_ |
 

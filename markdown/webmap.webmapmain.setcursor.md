@@ -6,7 +6,7 @@
 
 Set the cursor icon to be displayed when hover icon on the map container.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 setCursor(cursor: Cursor): void;
@@ -18,7 +18,7 @@ setCursor(cursor: Cursor): void;
 |  --- | --- | --- |
 |  cursor | [Cursor](./webmap.cursor.md) | Available cursor name from https://developer.mozilla.org/ru/docs/Web/CSS/cursor |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

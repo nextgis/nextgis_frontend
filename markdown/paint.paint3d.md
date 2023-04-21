@@ -4,10 +4,10 @@
 
 ## Paint3D type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type Paint3D<F extends Feature = Feature, P extends Properties | null = F['properties']> = VectorAdapterLayerPaint3D | GetPaintCallback<F> | PropertyPaint3D<P extends null ? Properties : P>;
 ```
-<b>References:</b> [VectorAdapterLayerPaint3D](./paint.vectoradapterlayerpaint3d.md)<!-- -->, [GetPaintCallback](./paint.getpaintcallback.md)<!-- -->, [PropertyPaint3D](./paint.propertypaint3d.md)
+**References:** [VectorAdapterLayerPaint3D](./paint.vectoradapterlayerpaint3d.md)<!-- -->, [GetPaintCallback](./paint.getpaintcallback.md)<!-- -->, [PropertyPaint3D](./paint.propertypaint3d.md)
 

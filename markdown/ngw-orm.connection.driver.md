@@ -6,7 +6,7 @@
 
 NGW driver used by this connection.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 readonly driver: NgwConnector;

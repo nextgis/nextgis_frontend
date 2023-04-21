@@ -4,12 +4,12 @@
 
 ## FetchNgwItemsOptions type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type FetchNgwItemsOptions<P extends FeatureProperties = FeatureProperties> = GetNgwItemsOptions<P> & NgwFeatureRequestOptions<P> & {
     clientFilterValidate?: boolean;
 };
 ```
-<b>References:</b> [FeatureProperties](./utils.featureproperties.md)<!-- -->, [GetNgwItemsOptions](./ngw-kit.getngwitemsoptions.md)<!-- -->, [NgwFeatureRequestOptions](./ngw-kit.ngwfeaturerequestoptions.md)
+**References:** [FeatureProperties](./utils.featureproperties.md)<!-- -->, [GetNgwItemsOptions](./ngw-kit.getngwitemsoptions.md)<!-- -->, [NgwFeatureRequestOptions](./ngw-kit.ngwfeaturerequestoptions.md)
 

@@ -6,7 +6,7 @@
 
 Hide added layer on the map by it definition.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 hideLayer(layerDef: LayerDef, options?: ToggleLayerOptions): Promise<void>;
@@ -17,9 +17,9 @@ hideLayer(layerDef: LayerDef, options?: ToggleLayerOptions): Promise<void>;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  layerDef | [LayerDef](./webmap.layerdef.md) |  |
-|  options | [ToggleLayerOptions](./webmap.togglelayeroptions.md) | <i>(Optional)</i> |
+|  options | [ToggleLayerOptions](./webmap.togglelayeroptions.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;void&gt;
 

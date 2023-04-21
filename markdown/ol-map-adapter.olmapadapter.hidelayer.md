@@ -4,7 +4,7 @@
 
 ## OlMapAdapter.hideLayer() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 hideLayer(layer: Layer): void;
@@ -16,7 +16,7 @@ hideLayer(layer: Layer): void;
 |  --- | --- | --- |
 |  layer | Layer |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

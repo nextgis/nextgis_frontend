@@ -4,7 +4,7 @@
 
 ## FeatureLayerIdentifyOptions.geom property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 geom: Feature<Polygon> | Polygon | Position[];

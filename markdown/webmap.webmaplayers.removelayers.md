@@ -6,7 +6,7 @@
 
 Remove all layer from map and memory.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 removeLayers(allowCb?: (layer: string, adapter: LayerAdapter) => boolean): void;
@@ -16,9 +16,9 @@ removeLayers(allowCb?: (layer: string, adapter: LayerAdapter) => boolean): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  allowCb | (layer: string, adapter: [LayerAdapter](./webmap.layeradapter.md)<!-- -->) =&gt; boolean | <i>(Optional)</i> |
+|  allowCb | (layer: string, adapter: [LayerAdapter](./webmap.layeradapter.md)<!-- -->) =&gt; boolean | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

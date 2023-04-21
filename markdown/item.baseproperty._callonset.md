@@ -4,7 +4,7 @@
 
 ## BaseProperty.\_callOnSet() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 protected _callOnSet<W extends V = V>(value?: W, options?: O): void;
@@ -14,10 +14,10 @@ protected _callOnSet<W extends V = V>(value?: W, options?: O): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  value | W | <i>(Optional)</i> |
-|  options | O | <i>(Optional)</i> |
+|  value | W | _(Optional)_ |
+|  options | O | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

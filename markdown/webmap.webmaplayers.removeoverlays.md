@@ -6,12 +6,12 @@
 
 Remove all layers but not remove basemap.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 removeOverlays(): void;
 ```
-<b>Returns:</b>
+**Returns:**
 
 void
 

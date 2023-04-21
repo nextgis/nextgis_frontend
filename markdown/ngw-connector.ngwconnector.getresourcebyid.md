@@ -9,7 +9,7 @@
 > - use [NgwConnector.getResource()](./ngw-connector.ngwconnector.getresource.md)
 > 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getResourceById(id: number): CancelablePromise<ResourceItem | undefined>;
@@ -21,7 +21,7 @@ getResourceById(id: number): CancelablePromise<ResourceItem | undefined>;
 |  --- | --- | --- |
 |  id | number |  |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;[ResourceItem](./ngw-connector.resourceitem.md) \| undefined&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;[ResourceItem](./ngw-connector.resourceitem.md) \| undefined&gt;
 

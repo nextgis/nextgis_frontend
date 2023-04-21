@@ -4,7 +4,7 @@
 
 ## NgwWebmapAdapterOptions.resourceId property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 resourceId: ResourceIdDef;

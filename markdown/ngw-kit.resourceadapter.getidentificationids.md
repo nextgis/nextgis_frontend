@@ -4,12 +4,12 @@
 
 ## ResourceAdapter.getIdentificationIds() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getIdentificationIds(): Promise<number[] | undefined>;
 ```
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;number\[\] \| undefined&gt;
 

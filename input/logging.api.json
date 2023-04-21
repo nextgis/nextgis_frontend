@@ -1,8 +1,8 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.28.6",
-    "schemaVersion": 1009,
+    "toolVersion": "7.34.4",
+    "schemaVersion": 1011,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
       "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
@@ -196,9 +196,14 @@
             },
             {
               "kind": "Content",
-              "text": "<D> "
+              "text": "<D>"
+            },
+            {
+              "kind": "Content",
+              "text": " "
             }
           ],
+          "fileUrlPath": "src/engines/ConsoleEngine.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -213,6 +218,7 @@
               }
             }
           ],
+          "isAbstract": false,
           "name": "ConsoleEngine",
           "preserveMemberOrder": false,
           "members": [
@@ -315,6 +321,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "critical"
             },
             {
@@ -383,6 +390,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "debug"
             },
             {
@@ -412,7 +420,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -480,6 +489,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "error"
             },
             {
@@ -548,6 +558,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "info"
             },
             {
@@ -616,6 +627,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "log"
             },
             {
@@ -684,13 +696,14 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "warning"
             }
           ],
           "implementsTokenRanges": [
             {
               "startIndex": 3,
-              "endIndex": 4
+              "endIndex": 5
             }
           ]
         },
@@ -704,6 +717,7 @@
               "text": "export interface ConsoleEngineOptions "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "ConsoleEngineOptions",
           "preserveMemberOrder": false,
@@ -805,6 +819,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "EachLog",
           "typeParameters": [
@@ -843,6 +858,7 @@
               "text": "> "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -1045,6 +1061,7 @@
               "text": "> "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -1300,9 +1317,14 @@
             },
             {
               "kind": "Content",
-              "text": "<D> "
+              "text": "<D>"
+            },
+            {
+              "kind": "Content",
+              "text": " "
             }
           ],
+          "fileUrlPath": "src/Logging.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -1317,6 +1339,7 @@
               }
             }
           ],
+          "isAbstract": false,
           "name": "Logging",
           "preserveMemberOrder": false,
           "members": [
@@ -1419,6 +1442,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "critical"
             },
             {
@@ -1487,6 +1511,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "debug"
             },
             {
@@ -1521,7 +1546,8 @@
                 "endIndex": 3
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -1550,7 +1576,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -1584,7 +1611,8 @@
                 "endIndex": 3
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -1652,6 +1680,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "error"
             },
             {
@@ -1720,6 +1749,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "info"
             },
             {
@@ -1788,6 +1818,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "log"
             },
             {
@@ -1856,13 +1887,14 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "warning"
             }
           ],
           "implementsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 2
+              "endIndex": 3
             }
           ]
         },
@@ -1884,6 +1916,7 @@
               "text": "> "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -2013,6 +2046,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "LogLevel",
           "typeTokenRange": {
@@ -2060,6 +2094,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "LogOptions",
           "typeParameters": [
@@ -2103,6 +2138,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "LogPostBulk",
           "typeTokenRange": {
@@ -2150,6 +2186,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "LogShortcutOptions",
           "typeParameters": [
@@ -2194,9 +2231,14 @@
             },
             {
               "kind": "Content",
-              "text": "<D> "
+              "text": "<D>"
+            },
+            {
+              "kind": "Content",
+              "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -2245,7 +2287,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 3,
-              "endIndex": 4
+              "endIndex": 5
             }
           ]
         },
@@ -2273,9 +2315,14 @@
             },
             {
               "kind": "Content",
-              "text": "<D> "
+              "text": "<D>"
+            },
+            {
+              "kind": "Content",
+              "text": " "
             }
           ],
+          "fileUrlPath": "lib/packages/logging/src/engines/NgLogEngine/NgLogEngine.d.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -2290,6 +2337,7 @@
               }
             }
           ],
+          "isAbstract": false,
           "name": "NgLogEngine",
           "preserveMemberOrder": false,
           "members": [
@@ -2353,7 +2401,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -2421,6 +2470,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "critical"
             },
             {
@@ -2489,6 +2539,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "debug"
             },
             {
@@ -2518,7 +2569,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -2548,6 +2600,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "destroy"
             },
             {
@@ -2577,7 +2630,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -2645,6 +2699,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "error"
             },
             {
@@ -2713,6 +2768,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "info"
             },
             {
@@ -2781,6 +2837,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "log"
             },
             {
@@ -2810,7 +2867,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -2824,7 +2882,7 @@
                 {
                   "kind": "Reference",
                   "text": "NgwConnector",
-                  "canonicalReference": "@nextgis/ngw-connector!~NgwConnector:class"
+                  "canonicalReference": "@nextgis/ngw-connector!NgwConnector:class"
                 },
                 {
                   "kind": "Content",
@@ -2840,7 +2898,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -2874,7 +2933,8 @@
                 "endIndex": 3
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -2903,7 +2963,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -2971,13 +3032,14 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "warning"
             }
           ],
           "implementsTokenRanges": [
             {
               "startIndex": 3,
-              "endIndex": 4
+              "endIndex": 5
             }
           ]
         },
@@ -2991,6 +3053,7 @@
               "text": "export interface NgLogEngineOptions "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "NgLogEngineOptions",
           "preserveMemberOrder": false,
@@ -3196,6 +3259,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "NgLogEngineSessionId",
           "typeParameters": [

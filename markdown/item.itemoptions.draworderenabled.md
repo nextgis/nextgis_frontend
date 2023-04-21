@@ -4,7 +4,7 @@
 
 ## ItemOptions.drawOrderEnabled property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 drawOrderEnabled?: boolean;

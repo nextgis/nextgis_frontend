@@ -4,7 +4,7 @@
 
 ## NgLogEngine.delay property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 delay: number;

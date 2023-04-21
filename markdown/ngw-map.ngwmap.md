@@ -6,12 +6,12 @@
 
 Base class containing the logic of interaction WebMap with NextGIS services.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export declare class NgwMap<M = unknown, L = unknown, C = unknown, O extends NgwMapOptions<M, C> = NgwMapOptions<M, C>> extends WebMap<M, L, C, NgwMapEvents, O> 
+export declare class NgwMap<M = unknown, L = unknown, C extends object = any, O extends NgwMapOptions<M, C> = NgwMapOptions<M, C>> extends WebMap<M, L, C, NgwMapEvents, O> 
 ```
-<b>Extends:</b> [WebMap](./webmap.webmap.md)<!-- -->&lt;M, L, C, [NgwMapEvents](./ngw-map.ngwmapevents.md)
+**Extends:** [WebMap](./webmap.webmap.md)<!-- -->&lt;M, L, C, [NgwMapEvents](./ngw-map.ngwmapevents.md)<!-- -->, O&gt;
 
 ## Example
 
@@ -42,7 +42,7 @@ const ngwMap = new NgwMap({
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [\_ngwLayers](./ngw-map.ngwmap._ngwlayers.md) | <code>protected</code> | [NgwLayers](./ngw-map.ngwlayers.md) |  |
-|  [connector](./ngw-map.ngwmap.connector.md) |  | NgwConnector |  |
+|  [connector](./ngw-map.ngwmap.connector.md) |  | [NgwConnector](./ngw-connector.ngwconnector.md) |  |
 |  [emitter](./ngw-map.ngwmap.emitter.md) | <code>readonly</code> | StrictEventEmitter&lt;EventEmitter, [NgwMapEvents](./ngw-map.ngwmapevents.md)<!-- -->&gt; |  |
 |  [getIcon](./ngw-map.ngwmap.geticon.md) | <code>static</code> | typeof getIcon |  |
 

@@ -6,7 +6,7 @@
 
 from https://github.com/CesiumGS/cesium/blob/master/Source/Core/defined.js
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function defined<T>(val: T): val is Exclude<T, null | undefined>;
@@ -18,7 +18,7 @@ export declare function defined<T>(val: T): val is Exclude<T, null | undefined>;
 |  --- | --- | --- |
 |  val | T | The object. |
 
-<b>Returns:</b>
+**Returns:**
 
 val is Exclude&lt;T, null \| undefined&gt;
 

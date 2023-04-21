@@ -4,7 +4,7 @@
 
 ## PinPaint.icon property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 icon?: string | Expression | IconPaint;

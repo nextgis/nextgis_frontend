@@ -6,7 +6,7 @@
 
 Helper method to return added layer object by any definition type.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getLayer<LA extends LayerAdapter = LayerAdapter>(layerDef: LayerDef): LA | undefined;
@@ -18,7 +18,7 @@ getLayer<LA extends LayerAdapter = LayerAdapter>(layerDef: LayerDef): LA | undef
 |  --- | --- | --- |
 |  layerDef | [LayerDef](./webmap.layerdef.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 LA \| undefined
 

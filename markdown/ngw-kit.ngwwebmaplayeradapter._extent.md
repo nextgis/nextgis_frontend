@@ -4,7 +4,7 @@
 
 ## NgwWebmapLayerAdapter.\_extent property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 protected _extent?: LngLatBoundsArray;

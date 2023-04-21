@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."spatial\_ref\_sys.geom\_transform" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'spatial_ref_sys.geom_transform': {

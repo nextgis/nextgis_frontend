@@ -4,7 +4,7 @@
 
 ## FeatureItem.fields property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 fields: F;

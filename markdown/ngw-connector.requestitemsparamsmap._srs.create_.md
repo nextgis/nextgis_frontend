@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."srs.create" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'srs.create': null;

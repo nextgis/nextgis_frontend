@@ -6,7 +6,7 @@
 
 Constructs a new instance of the `NominatimProvider` class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 constructor(options?: BaseProviderOptions);
@@ -16,5 +16,5 @@ constructor(options?: BaseProviderOptions);
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | [BaseProviderOptions](./geocoder.baseprovideroptions.md) | <i>(Optional)</i> |
+|  options | [BaseProviderOptions](./geocoder.baseprovideroptions.md) | _(Optional)_ |
 

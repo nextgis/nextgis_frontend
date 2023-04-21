@@ -6,7 +6,7 @@
 
 Wait until the layer data is fully loaded before allowing added to the map.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 waitFullLoad?: boolean;

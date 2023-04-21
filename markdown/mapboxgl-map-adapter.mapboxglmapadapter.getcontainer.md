@@ -4,12 +4,12 @@
 
 ## MapboxglMapAdapter.getContainer() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getContainer(): HTMLElement | undefined;
 ```
-<b>Returns:</b>
+**Returns:**
 
 HTMLElement \| undefined
 

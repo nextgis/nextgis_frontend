@@ -4,7 +4,7 @@
 
 ## IdentifyItem.label property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 readonly label: string;

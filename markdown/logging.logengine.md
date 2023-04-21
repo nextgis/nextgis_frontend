@@ -4,7 +4,7 @@
 
 ## LogEngine interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface LogEngine<D = unknown> 

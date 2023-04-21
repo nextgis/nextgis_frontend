@@ -6,7 +6,7 @@
 
 Radius for searching objects in pixels
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 pixelRadius: number;

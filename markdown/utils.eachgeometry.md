@@ -4,7 +4,7 @@
 
 ## eachGeometry() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function eachGeometry(geojson: GeoJSON, cb: (position: Geometry) => void): void;
@@ -17,7 +17,7 @@ export declare function eachGeometry(geojson: GeoJSON, cb: (position: Geometry) 
 |  geojson | GeoJSON |  |
 |  cb | (position: Geometry) =&gt; void |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

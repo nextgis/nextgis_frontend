@@ -4,7 +4,7 @@
 
 ## TreeLayer.layer\_min\_scale\_denom property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 layer_min_scale_denom?: number;

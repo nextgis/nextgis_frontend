@@ -4,7 +4,7 @@
 
 ## numberWithSpaces() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function numberWithSpaces(x: number): string;
@@ -16,7 +16,7 @@ export declare function numberWithSpaces(x: number): string;
 |  --- | --- | --- |
 |  x | number |  |
 
-<b>Returns:</b>
+**Returns:**
 
 string
 

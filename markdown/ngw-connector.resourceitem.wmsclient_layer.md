@@ -4,7 +4,7 @@
 
 ## ResourceItem.wmsclient\_layer property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 wmsclient_layer?: WmsClientLayer;

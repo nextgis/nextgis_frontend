@@ -4,7 +4,7 @@
 
 ## GetIdentifyGeoJsonOptions.multiple property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 multiple?: boolean;

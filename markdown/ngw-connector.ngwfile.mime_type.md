@@ -4,7 +4,7 @@
 
 ## NgwFile.mime\_type property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 mime_type: string;

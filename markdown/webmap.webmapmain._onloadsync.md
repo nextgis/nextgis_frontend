@@ -4,12 +4,12 @@
 
 ## WebMapMain.\_onLoadSync() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 protected _onLoadSync(): Promise<void>;
 ```
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;void&gt;
 

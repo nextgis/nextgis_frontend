@@ -4,7 +4,7 @@
 
 ## BaseProperty.\_container property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 protected _container?: HTMLElement;

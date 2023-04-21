@@ -4,7 +4,7 @@
 
 ## CancelablePromise.reject() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static reject<T>(value: T | PromiseLike<T>): CancelablePromise<T>;
@@ -16,7 +16,7 @@ static reject<T>(value: T | PromiseLike<T>): CancelablePromise<T>;
 |  --- | --- | --- |
 |  value | T \| PromiseLike&lt;T&gt; |  |
 
-<b>Returns:</b>
+**Returns:**
 
 [CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;T&gt;
 

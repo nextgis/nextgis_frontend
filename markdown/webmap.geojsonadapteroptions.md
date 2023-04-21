@@ -4,16 +4,16 @@
 
 ## GeoJsonAdapterOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export interface GeoJsonAdapterOptions<F extends Feature = Feature, L = any, A = Record<string, any>, N = Record<string, any>> extends VectorAdapterOptions<F, L, A, N> 
+export interface GeoJsonAdapterOptions<F extends Feature = Feature, L = any, A extends FeatureProperties = Record<string, any>, N extends FeatureProperties = Record<string, any>> extends VectorAdapterOptions<F, L, A, N> 
 ```
-<b>Extends:</b> [VectorAdapterOptions](./webmap.vectoradapteroptions.md)
+**Extends:** [VectorAdapterOptions](./webmap.vectoradapteroptions.md)<!-- -->&lt;F, L, A, N&gt;
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [data?](./webmap.geojsonadapteroptions.data.md) |  | GeoJsonObject | <i>(Optional)</i> Geojson data |
+|  [data?](./webmap.geojsonadapteroptions.data.md) |  | GeoJsonObject | _(Optional)_ Geojson data |
 

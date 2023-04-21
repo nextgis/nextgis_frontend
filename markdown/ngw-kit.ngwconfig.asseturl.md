@@ -4,7 +4,7 @@
 
 ## NgwConfig.assetUrl property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 assetUrl: string;

@@ -6,7 +6,7 @@
 
 String to be shown in the attribution control. It describes the layer data and is often a legal obligation towards copyright holders and tile providers.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 attribution?: string;

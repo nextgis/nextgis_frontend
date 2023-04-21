@@ -4,18 +4,18 @@
 
 ## GetCustomPaintOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface GetCustomPaintOptions extends BasePaintTypes 
 ```
-<b>Extends:</b> BasePaintTypes
+**Extends:** BasePaintTypes
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [from](./paint.getcustompaintoptions.from.md) |  | string \| [GetPaintFunction](./paint.getpaintfunction.md) |  |
-|  [options?](./paint.getcustompaintoptions.options.md) |  | any | <i>(Optional)</i> |
+|  [options?](./paint.getcustompaintoptions.options.md) |  | any | _(Optional)_ |
 |  [type](./paint.getcustompaintoptions.type.md) |  | 'get-paint' |  |
 

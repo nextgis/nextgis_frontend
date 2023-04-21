@@ -4,19 +4,19 @@
 
 ## IdentifyRequestOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface IdentifyRequestOptions extends NgwRequestOptions 
 ```
-<b>Extends:</b> [NgwRequestOptions](./ngw-kit.ngwrequestoptions.md)
+**Extends:** [NgwRequestOptions](./ngw-kit.ngwrequestoptions.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [connector](./ngw-kit.identifyrequestoptions.connector.md) |  | NgwConnector |  |
-|  [geom?](./ngw-kit.identifyrequestoptions.geom.md) |  | Feature&lt;Polygon&gt; \| Polygon | <i>(Optional)</i> |
+|  [connector](./ngw-kit.identifyrequestoptions.connector.md) |  | [NgwConnector](./ngw-connector.ngwconnector.md) |  |
+|  [geom?](./ngw-kit.identifyrequestoptions.geom.md) |  | Feature&lt;Polygon&gt; \| Polygon | _(Optional)_ |
 |  [layers](./ngw-kit.identifyrequestoptions.layers.md) |  | number\[\] |  |
-|  [radius?](./ngw-kit.identifyrequestoptions.radius.md) |  | number | <i>(Optional)</i> |
+|  [radius?](./ngw-kit.identifyrequestoptions.radius.md) |  | number | _(Optional)_ |
 

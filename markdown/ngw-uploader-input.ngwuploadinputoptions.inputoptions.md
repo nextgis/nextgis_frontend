@@ -4,7 +4,7 @@
 
 ## NgwUploadInputOptions.inputOptions property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 inputOptions?: UploadInputOptions;

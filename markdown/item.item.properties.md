@@ -4,7 +4,7 @@
 
 ## Item.properties property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 properties: ItemProperties;

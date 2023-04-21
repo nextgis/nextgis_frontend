@@ -4,7 +4,7 @@
 
 ## NgwMapOptions.pixelRadius property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 pixelRadius?: number;

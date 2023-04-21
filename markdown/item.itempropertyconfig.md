@@ -4,23 +4,23 @@
 
 ## ItemPropertyConfig interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface ItemPropertyConfig<K extends keyof ItemPropertyTypes> extends ItemPropertyBaseConfig<K> 
 ```
-<b>Extends:</b> [ItemPropertyBaseConfig](./item.itempropertybaseconfig.md)
+**Extends:** [ItemPropertyBaseConfig](./item.itempropertybaseconfig.md)<!-- -->&lt;K&gt;
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [handler?](./item.itempropertyconfig.handler.md) |  | [Type](./item.type.md)<!-- -->&lt;[BaseProperty](./item.baseproperty.md)<!-- -->&lt;[ItemPropertyTypes](./item.itempropertytypes.md)<!-- -->\[K\]&gt;&gt; | <i>(Optional)</i> |
+|  [handler?](./item.itempropertyconfig.handler.md) |  | [Type](./item.type.md)<!-- -->&lt;[BaseProperty](./item.baseproperty.md)<!-- -->&lt;[ItemPropertyTypes](./item.itempropertytypes.md)<!-- -->\[K\]&gt;&gt; | _(Optional)_ |
 
 ## Methods
 
 |  Method | Description |
 |  --- | --- |
-|  [getProperty()?](./item.itempropertyconfig.getproperty.md) | <i>(Optional)</i> |
-|  [onSet(value, options)?](./item.itempropertyconfig.onset.md) | <i>(Optional)</i> |
+|  [getProperty()?](./item.itempropertyconfig.getproperty.md) | _(Optional)_ |
+|  [onSet(value, options)?](./item.itempropertyconfig.onset.md) | _(Optional)_ |
 

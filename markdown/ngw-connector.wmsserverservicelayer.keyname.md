@@ -6,7 +6,7 @@
 
 Key name for WMS service item. Name may be only ASCII symbols without spaces.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 keyname: string;

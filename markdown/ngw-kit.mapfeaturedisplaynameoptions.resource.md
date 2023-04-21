@@ -4,7 +4,7 @@
 
 ## MapFeatureDisplayNameOptions.resource property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 resource?: ResourceDefinition;

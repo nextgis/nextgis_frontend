@@ -4,7 +4,7 @@
 
 ## Permission.identity property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 identity: string;

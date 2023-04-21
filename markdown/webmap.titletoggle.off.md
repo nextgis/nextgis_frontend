@@ -4,7 +4,7 @@
 
 ## TitleToggle.off property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 off: string;

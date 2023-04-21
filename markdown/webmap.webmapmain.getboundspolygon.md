@@ -4,12 +4,12 @@
 
 ## WebMapMain.getBoundsPolygon() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getBoundsPolygon(): Feature<Polygon> | undefined;
 ```
-<b>Returns:</b>
+**Returns:**
 
 Feature&lt;Polygon&gt; \| undefined
 

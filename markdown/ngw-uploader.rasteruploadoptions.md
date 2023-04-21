@@ -4,16 +4,16 @@
 
 ## RasterUploadOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface RasterUploadOptions extends FileUploadOptions 
 ```
-<b>Extends:</b> [FileUploadOptions](./ngw-uploader.fileuploadoptions.md)
+**Extends:** [FileUploadOptions](./ngw-uploader.fileuploadoptions.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [style?](./ngw-uploader.rasteruploadoptions.style.md) |  | [ResourceCreateOptions](./ngw-uploader.resourcecreateoptions.md) | <i>(Optional)</i> |
+|  [style?](./ngw-uploader.rasteruploadoptions.style.md) |  | [ResourceCreateOptions](./ngw-uploader.resourcecreateoptions.md) | _(Optional)_ |
 

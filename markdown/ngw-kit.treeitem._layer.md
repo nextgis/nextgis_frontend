@@ -4,7 +4,7 @@
 
 ## TreeItem.\_layer property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 _layer?: any;

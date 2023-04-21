@@ -4,7 +4,7 @@
 
 ## TileNoData type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type TileNoData = 200 | 404 | 204;

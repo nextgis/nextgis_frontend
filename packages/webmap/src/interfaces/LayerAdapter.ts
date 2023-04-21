@@ -535,7 +535,7 @@ export interface MainLayerAdapter<
 
   showLayer?(layer?: L): void;
   hideLayer?(layer?: L): void;
-  /** @deprecated use {@link MainLayerAdapter.getBounds} instead */
+  /** @deprecated use {@link getBounds} instead */
   getExtent?():
     | LngLatBoundsArray
     | Promise<LngLatBoundsArray | undefined>
@@ -683,6 +683,6 @@ export interface VectorLayerAdapter<
 
   updateTooltip?(layerDef?: LayerDefinition<F, L>): void;
 
-  hideLabel?(): void
-  showLabel?(): void
+  hideLabel?(): void;
+  showLabel?(): void;
 }

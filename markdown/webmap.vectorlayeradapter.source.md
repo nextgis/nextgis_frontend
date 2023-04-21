@@ -6,7 +6,7 @@
 
 Experimental option, only for MVT. Points to a data source instead of loading data into a layer.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 source?: unknown;

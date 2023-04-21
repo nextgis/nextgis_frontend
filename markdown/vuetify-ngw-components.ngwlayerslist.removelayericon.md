@@ -4,7 +4,7 @@
 
 ## NgwLayersList.removeLayerIcon property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 removeLayerIcon: string;

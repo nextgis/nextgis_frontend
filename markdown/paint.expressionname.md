@@ -4,7 +4,7 @@
 
 ## ExpressionName type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type ExpressionName = 'get' | 'match';

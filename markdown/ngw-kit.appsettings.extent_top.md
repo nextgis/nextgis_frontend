@@ -4,7 +4,7 @@
 
 ## AppSettings.extent\_top property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 extent_top?: number;

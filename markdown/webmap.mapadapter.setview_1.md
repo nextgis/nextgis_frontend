@@ -4,7 +4,7 @@
 
 ## MapAdapter.setView() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 setView?(viewOptions: ViewOptions): void;
@@ -16,7 +16,7 @@ setView?(viewOptions: ViewOptions): void;
 |  --- | --- | --- |
 |  viewOptions | ViewOptions |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

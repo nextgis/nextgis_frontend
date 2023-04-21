@@ -6,7 +6,7 @@
 
 special settings for the selected map adapter
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 mapAdapterOptions?: Record<string, any>;

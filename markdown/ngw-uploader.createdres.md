@@ -4,10 +4,10 @@
 
 ## CreatedRes type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type CreatedRes = CreatedResource;
 ```
-<b>References:</b> [CreatedResource](./ngw-connector.createdresource.md)
+**References:** [CreatedResource](./ngw-connector.createdresource.md)
 

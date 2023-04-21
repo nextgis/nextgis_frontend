@@ -4,7 +4,7 @@
 
 ## RequestHeaders.Accept property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 Accept?: string;

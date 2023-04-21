@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."feature\_layer.field" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'feature_layer.field': {

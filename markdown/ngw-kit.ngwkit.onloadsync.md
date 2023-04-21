@@ -4,7 +4,7 @@
 
 ## NgwKit.onLoadSync() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onLoadSync(webMap: WebMap): Promise<NgwWebmapLayerAdapter | undefined>;
@@ -16,7 +16,7 @@ onLoadSync(webMap: WebMap): Promise<NgwWebmapLayerAdapter | undefined>;
 |  --- | --- | --- |
 |  webMap | [WebMap](./webmap.webmap.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[NgwWebmapLayerAdapter](./ngw-kit.ngwwebmaplayeradapter.md) \| undefined&gt;
 

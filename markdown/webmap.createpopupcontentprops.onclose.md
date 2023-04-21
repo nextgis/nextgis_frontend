@@ -6,7 +6,7 @@
 
 The callback function that is called when the popup is closed
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onClose: (cb: PopupOnCloseFunction) => void;

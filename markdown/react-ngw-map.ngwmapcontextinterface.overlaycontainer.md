@@ -4,7 +4,7 @@
 
 ## NgwMapContextInterface.overlayContainer property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 overlayContainer?: LayerAdapter;

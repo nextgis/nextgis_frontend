@@ -6,7 +6,7 @@
 
 Connection options.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 readonly options: ConnectionOptions;

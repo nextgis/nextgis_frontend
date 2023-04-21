@@ -6,12 +6,12 @@
 
 Update the progress bar.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 update(): void;
 ```
-<b>Returns:</b>
+**Returns:**
 
 void
 

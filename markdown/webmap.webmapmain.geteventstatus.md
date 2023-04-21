@@ -6,7 +6,7 @@
 
 Checking the status of any asynchronous operation
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getEventStatus(event: keyof E): boolean;
@@ -18,7 +18,7 @@ getEventStatus(event: keyof E): boolean;
 |  --- | --- | --- |
 |  event | keyof E | The name of the event whose status is checked |
 
-<b>Returns:</b>
+**Returns:**
 
 boolean
 

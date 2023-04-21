@@ -4,7 +4,7 @@
 
 ## LeafletMapAdapter.locate() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 locate(opt: LocateOptions, events?: LocationEvents): Locate;
@@ -15,9 +15,9 @@ locate(opt: LocateOptions, events?: LocationEvents): Locate;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  opt | [LocateOptions](./webmap.locateoptions.md) |  |
-|  events | [LocationEvents](./webmap.locationevents.md) | <i>(Optional)</i> |
+|  events | [LocationEvents](./webmap.locationevents.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 [Locate](./webmap.locate.md)
 

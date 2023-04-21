@@ -4,17 +4,17 @@
 
 ## CirclePaint interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface CirclePaint extends BasePaint 
 ```
-<b>Extends:</b> [BasePaint](./paint.basepaint.md)
+**Extends:** [BasePaint](./paint.basepaint.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [radius?](./paint.circlepaint.radius.md) |  | number \| [Expression](./paint.expression.md) | <i>(Optional)</i> |
-|  [type?](./paint.circlepaint.type.md) |  | 'circle' | <i>(Optional)</i> |
+|  [radius?](./paint.circlepaint.radius.md) |  | number \| [Expression](./paint.expression.md) | _(Optional)_ |
+|  [type?](./paint.circlepaint.type.md) |  | 'circle' | _(Optional)_ |
 

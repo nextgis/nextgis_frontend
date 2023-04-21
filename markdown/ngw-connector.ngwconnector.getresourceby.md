@@ -9,7 +9,7 @@
 > - use [NgwConnector.getResource()](./ngw-connector.ngwconnector.getresource.md)
 > 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getResourceBy(resource: DeepPartial<Resource>): CancelablePromise<ResourceItem | undefined>;
@@ -21,7 +21,7 @@ getResourceBy(resource: DeepPartial<Resource>): CancelablePromise<ResourceItem |
 |  --- | --- | --- |
 |  resource | [DeepPartial](./utils.deeppartial.md)<!-- -->&lt;[Resource](./ngw-connector.resource.md)<!-- -->&gt; |  |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;[ResourceItem](./ngw-connector.resourceitem.md) \| undefined&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;[ResourceItem](./ngw-connector.resourceitem.md) \| undefined&gt;
 

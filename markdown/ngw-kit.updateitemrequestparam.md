@@ -4,7 +4,7 @@
 
 ## updateItemRequestParam() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function updateItemRequestParam<P extends FeatureProperties = FeatureProperties>(params: FeatureRequestParams, options: NgwFeatureRequestOptions<P>): void;
@@ -17,7 +17,7 @@ export declare function updateItemRequestParam<P extends FeatureProperties = Fea
 |  params | [FeatureRequestParams](./ngw-kit.featurerequestparams.md) |  |
 |  options | [NgwFeatureRequestOptions](./ngw-kit.ngwfeaturerequestoptions.md)<!-- -->&lt;P&gt; |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

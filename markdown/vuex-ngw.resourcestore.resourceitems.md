@@ -4,7 +4,7 @@
 
 ## ResourceStore.resourceItems property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 resourceItems: ResourceStoreItem<P>[];

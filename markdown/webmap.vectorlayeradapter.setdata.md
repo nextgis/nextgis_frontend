@@ -6,7 +6,7 @@
 
 Update layer with new geojson.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 setData?(geojson: GeoJsonObject): void | Promise<void>;
@@ -18,7 +18,7 @@ setData?(geojson: GeoJsonObject): void | Promise<void>;
 |  --- | --- | --- |
 |  geojson | GeoJsonObject | GeoJson object. |
 
-<b>Returns:</b>
+**Returns:**
 
 void \| Promise&lt;void&gt;
 

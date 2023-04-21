@@ -4,7 +4,7 @@
 
 ## NgwDateFormat.day property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 day: number;

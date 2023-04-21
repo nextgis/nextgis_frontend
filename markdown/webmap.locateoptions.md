@@ -4,7 +4,7 @@
 
 ## LocateOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface LocateOptions 
@@ -14,6 +14,6 @@ export interface LocateOptions
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [maxZoom?](./webmap.locateoptions.maxzoom.md) |  | [ZoomLevel](./utils.zoomlevel.md) | <i>(Optional)</i> |
-|  [setView?](./webmap.locateoptions.setview.md) |  | boolean | <i>(Optional)</i> |
+|  [maxZoom?](./webmap.locateoptions.maxzoom.md) |  | [ZoomLevel](./utils.zoomlevel.md) | _(Optional)_ |
+|  [setView?](./webmap.locateoptions.setview.md) |  | boolean | _(Optional)_ |
 

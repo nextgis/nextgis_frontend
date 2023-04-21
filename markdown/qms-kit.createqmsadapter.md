@@ -4,21 +4,19 @@
 
 ## createQmsAdapter() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export declare function createQmsAdapter(webMap: WebMap, url?: string, createOpt?: Partial<QmsAdapterOptions>): Type<MainLayerAdapter>;
+export declare function createQmsAdapter(options: CreateQmsAdapterOptions): Type<MainLayerAdapter>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  webMap | [WebMap](./webmap.webmap.md) |  |
-|  url | string | <i>(Optional)</i> |
-|  createOpt | Partial&lt;[QmsAdapterOptions](./qms-kit.qmsadapteroptions.md)<!-- -->&gt; | <i>(Optional)</i> |
+|  options | [CreateQmsAdapterOptions](./qms-kit.createqmsadapteroptions.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 [Type](./utils.type.md)<!-- -->&lt;[MainLayerAdapter](./webmap.mainlayeradapter.md)<!-- -->&gt;
 

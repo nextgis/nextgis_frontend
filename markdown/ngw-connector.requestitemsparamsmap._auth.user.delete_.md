@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."auth.user.delete" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'auth.user.delete': {

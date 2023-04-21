@@ -4,10 +4,10 @@
 
 ## GetClassAdapter type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type GetClassAdapter = GetClassAdapterCallback | GetClassAdapterByType;
 ```
-<b>References:</b> [GetClassAdapterCallback](./ngw-kit.getclassadaptercallback.md)<!-- -->, [GetClassAdapterByType](./ngw-kit.getclassadapterbytype.md)
+**References:** [GetClassAdapterCallback](./ngw-kit.getclassadaptercallback.md)<!-- -->, [GetClassAdapterByType](./ngw-kit.getclassadapterbytype.md)
 

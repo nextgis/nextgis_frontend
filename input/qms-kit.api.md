@@ -19,7 +19,18 @@ export const alias: {
 };
 
 // @public (undocumented)
+export function createQmsAdapter(options: CreateQmsAdapterOptions): Type<MainLayerAdapter>;
+
+// @public (undocumented)
 export function createQmsAdapter(webMap: WebMap, url?: string, createOpt?: Partial<QmsAdapterOptions>): Type<MainLayerAdapter>;
+
+// @public (undocumented)
+export interface CreateQmsAdapterOptions extends Partial<QmsAdapterOptions> {
+    // (undocumented)
+    url?: string;
+    // (undocumented)
+    webMap: WebMap;
+}
 
 // @public (undocumented)
 export interface GeoserviceInList {
@@ -143,7 +154,6 @@ export interface QmsOptions {
 export function updateQmsOptions(qms: QmsBasemap): AdapterOptions & {
     url: string;
 };
-
 
 // (No @packageDocumentation comment for this package)
 

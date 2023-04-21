@@ -6,7 +6,7 @@
 
 Parameters that control how the fit to object will be work.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface FitOptions 
@@ -16,8 +16,8 @@ export interface FitOptions
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [duration?](./webmap.fitoptions.duration.md) |  | number | <i>(Optional)</i> |
-|  [maxZoom?](./webmap.fitoptions.maxzoom.md) |  | number | <i>(Optional)</i> The maximum possible zoom to use. |
-|  [offset?](./webmap.fitoptions.offset.md) |  | \[number, number\] | <i>(Optional)</i> |
-|  [padding?](./webmap.fitoptions.padding.md) |  | number | <i>(Optional)</i> |
+|  [duration?](./webmap.fitoptions.duration.md) |  | number | _(Optional)_ |
+|  [maxZoom?](./webmap.fitoptions.maxzoom.md) |  | number | _(Optional)_ The maximum possible zoom to use. |
+|  [offset?](./webmap.fitoptions.offset.md) |  | \[number, number\] | _(Optional)_ |
+|  [padding?](./webmap.fitoptions.padding.md) |  | number | _(Optional)_ |
 

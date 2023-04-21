@@ -4,7 +4,7 @@
 
 ## BaselayerSelect.\_checkLayer() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 protected _checkLayer(e?: LayerAdapter): boolean;
@@ -14,9 +14,9 @@ protected _checkLayer(e?: LayerAdapter): boolean;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  e | LayerAdapter | <i>(Optional)</i> |
+|  e | LayerAdapter | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 boolean
 

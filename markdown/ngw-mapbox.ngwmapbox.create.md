@@ -4,7 +4,7 @@
 
 ## NgwMapbox.create() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static create(options: NgwMapOptions): Promise<NgwMapbox>;
@@ -16,7 +16,7 @@ static create(options: NgwMapOptions): Promise<NgwMapbox>;
 |  --- | --- | --- |
 |  options | [NgwMapOptions](./ngw-map.ngwmapoptions.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
-Promise&lt;NgwMapbox&gt;
+Promise&lt;[NgwMapbox](./ngw-mapbox.ngwmapbox.md)<!-- -->&gt;
 

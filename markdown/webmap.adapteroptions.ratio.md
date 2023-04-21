@@ -4,7 +4,7 @@
 
 ## AdapterOptions.ratio property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 ratio?: number;

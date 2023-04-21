@@ -6,14 +6,14 @@
 
 Establishing a connection with NextGIS Web to fulfill all other requests.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 connect(): CancelablePromise<PyramidRoute>;
 ```
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;[PyramidRoute](./ngw-connector.pyramidroute.md)<!-- -->&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;[PyramidRoute](./ngw-connector.pyramidroute.md)<!-- -->&gt;
 
 ## Remarks
 

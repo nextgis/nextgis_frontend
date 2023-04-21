@@ -6,12 +6,12 @@
 
 Increment the count of loaded tiles.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 addLoaded(): void;
 ```
-<b>Returns:</b>
+**Returns:**
 
 void
 

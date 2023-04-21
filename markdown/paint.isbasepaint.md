@@ -4,7 +4,7 @@
 
 ## isBasePaint() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function isBasePaint(paint: Paint): paint is GeometryPaint;
@@ -16,7 +16,7 @@ export declare function isBasePaint(paint: Paint): paint is GeometryPaint;
 |  --- | --- | --- |
 |  paint | [Paint](./paint.paint.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 paint is [GeometryPaint](./paint.geometrypaint.md)
 

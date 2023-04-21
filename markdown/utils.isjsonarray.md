@@ -4,7 +4,7 @@
 
 ## isJsonArray() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function isJsonArray(val: unknown): val is JsonArray;
@@ -16,7 +16,7 @@ export declare function isJsonArray(val: unknown): val is JsonArray;
 |  --- | --- | --- |
 |  val | unknown |  |
 
-<b>Returns:</b>
+**Returns:**
 
 val is [JsonArray](./utils.jsonarray.md)
 

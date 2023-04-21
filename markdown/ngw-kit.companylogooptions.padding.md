@@ -4,7 +4,7 @@
 
 ## CompanyLogoOptions.padding property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 padding?: string;

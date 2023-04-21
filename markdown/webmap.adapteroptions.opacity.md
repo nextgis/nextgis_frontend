@@ -6,7 +6,7 @@
 
 Layer transparency. From 0-transparent to 1-visible
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 opacity?: number;

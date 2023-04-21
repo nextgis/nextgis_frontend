@@ -4,10 +4,10 @@
 
 ## expressionCallback() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export declare function expressionCallback<P = Record<string, any>>(paint: P, defaultPaint?: P, getPaintFunctions?: Record<string, GetPaintFunction>): import("./interfaces").CirclePaint | import("./interfaces").PathPaint | import("./interfaces").PinPaint | {
+export declare function expressionCallback<P extends Record<string, any> = Record<string, any>>(paint: P, defaultPaint?: P, getPaintFunctions?: Record<string, GetPaintFunction>): import("./interfaces").CirclePaint | import("./interfaces").PathPaint | import("./interfaces").PinPaint | {
     (feature: Feature): VectorAdapterLayerPaint;
     paint: P;
 };
@@ -18,10 +18,10 @@ export declare function expressionCallback<P = Record<string, any>>(paint: P, de
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  paint | P |  |
-|  defaultPaint | P | <i>(Optional)</i> |
-|  getPaintFunctions | Record&lt;string, [GetPaintFunction](./paint.getpaintfunction.md)<!-- -->&gt; | <i>(Optional)</i> |
+|  defaultPaint | P | _(Optional)_ |
+|  getPaintFunctions | Record&lt;string, [GetPaintFunction](./paint.getpaintfunction.md)<!-- -->&gt; | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 import("./interfaces").[CirclePaint](./paint.circlepaint.md) \| import("./interfaces").[PathPaint](./paint.pathpaint.md) \| import("./interfaces").[PinPaint](./paint.pinpaint.md) \| { (feature: Feature): [VectorAdapterLayerPaint](./paint.vectoradapterlayerpaint.md)<!-- -->; paint: P; }
 

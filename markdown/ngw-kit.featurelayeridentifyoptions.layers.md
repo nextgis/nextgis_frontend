@@ -4,7 +4,7 @@
 
 ## FeatureLayerIdentifyOptions.layers property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 layers: number[];

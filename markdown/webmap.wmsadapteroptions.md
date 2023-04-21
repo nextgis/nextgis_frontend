@@ -4,20 +4,20 @@
 
 ## WmsAdapterOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface WmsAdapterOptions extends RasterAdapterOptions 
 ```
-<b>Extends:</b> [RasterAdapterOptions](./webmap.rasteradapteroptions.md)
+**Extends:** [RasterAdapterOptions](./webmap.rasteradapteroptions.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [format?](./webmap.wmsadapteroptions.format.md) |  | 'image/png' \| 'image/jpeg' \| string | <i>(Optional)</i> |
-|  [tileSize?](./webmap.wmsadapteroptions.tilesize.md) |  | number | <i>(Optional)</i> |
-|  [transparent?](./webmap.wmsadapteroptions.transparent.md) |  | boolean | <i>(Optional)</i> |
-|  [updateWmsParams?](./webmap.wmsadapteroptions.updatewmsparams.md) |  | (obj: { \[paramName: string\]: any; }) =&gt; Record&lt;string, unknown&gt; | <i>(Optional)</i> |
-|  [version?](./webmap.wmsadapteroptions.version.md) |  | string | <i>(Optional)</i> |
+|  [format?](./webmap.wmsadapteroptions.format.md) |  | 'image/png' \| 'image/jpeg' \| string | _(Optional)_ |
+|  [tileSize?](./webmap.wmsadapteroptions.tilesize.md) |  | number | _(Optional)_ |
+|  [transparent?](./webmap.wmsadapteroptions.transparent.md) |  | boolean | _(Optional)_ |
+|  [updateWmsParams?](./webmap.wmsadapteroptions.updatewmsparams.md) |  | (obj: { \[paramName: string\]: any; }) =&gt; Record&lt;string, unknown&gt; | _(Optional)_ |
+|  [version?](./webmap.wmsadapteroptions.version.md) |  | string | _(Optional)_ |
 

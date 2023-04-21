@@ -6,7 +6,7 @@
 
 Constructs a new instance of the `NgwWebmapLayerAdapter` class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 constructor(map: M, options: NgwWebmapAdapterOptions);

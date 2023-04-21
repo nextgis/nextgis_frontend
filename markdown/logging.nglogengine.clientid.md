@@ -4,7 +4,7 @@
 
 ## NgLogEngine.clientId property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 clientId: string;

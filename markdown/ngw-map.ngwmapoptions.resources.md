@@ -10,7 +10,7 @@ The resources list may include:
 
 - number - resource id; // also for resource - string - resource keyname; // also for resource - object - configuration of the layer to be added with the one required parameter `resource` (the comment "also for resource" above refers to it)
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 resources?: NgwResourceDefinition[];

@@ -4,7 +4,7 @@
 
 ## UploadInputOptions.success property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 success?: (newRes: ResourceCreateResp) => void;

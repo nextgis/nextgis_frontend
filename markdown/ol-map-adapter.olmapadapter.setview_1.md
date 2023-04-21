@@ -4,7 +4,7 @@
 
 ## OlMapAdapter.setView() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 setView(options: ViewOptions): void;
@@ -16,7 +16,7 @@ setView(options: ViewOptions): void;
 |  --- | --- | --- |
 |  options | [ViewOptions](./webmap.viewoptions.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

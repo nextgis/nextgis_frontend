@@ -4,7 +4,7 @@
 
 ## NgwMapEvents."ngw:preselect" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'ngw:preselect': void;

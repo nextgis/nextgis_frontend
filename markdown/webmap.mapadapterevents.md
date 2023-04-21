@@ -4,12 +4,12 @@
 
 ## MapAdapterEvents interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface MapAdapterEvents extends MainMapEvents 
 ```
-<b>Extends:</b> [MainMapEvents](./webmap.mainmapevents.md)
+**Extends:** [MainMapEvents](./webmap.mainmapevents.md)
 
 ## Events
 

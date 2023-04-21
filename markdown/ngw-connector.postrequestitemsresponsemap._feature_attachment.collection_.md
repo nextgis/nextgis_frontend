@@ -4,7 +4,7 @@
 
 ## PostRequestItemsResponseMap."feature\_attachment.collection" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'feature_attachment.collection': IdOnly;

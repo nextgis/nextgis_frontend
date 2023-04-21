@@ -5,7 +5,7 @@
 ## WebMapEvents."layer:updated" property
 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'layer:updated': LayerAdapter;

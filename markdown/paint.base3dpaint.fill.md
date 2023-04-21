@@ -4,7 +4,7 @@
 
 ## Base3DPaint.fill property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 fill?: boolean;

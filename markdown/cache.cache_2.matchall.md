@@ -4,7 +4,7 @@
 
 ## Cache\_2.matchAll() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 matchAll(key?: string, props?: CacheMatchProps<O>): CacheValue<V>[];
@@ -14,10 +14,10 @@ matchAll(key?: string, props?: CacheMatchProps<O>): CacheValue<V>[];
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  key | string | <i>(Optional)</i> |
-|  props | CacheMatchProps&lt;O&gt; | <i>(Optional)</i> |
+|  key | string | _(Optional)_ |
+|  props | CacheMatchProps&lt;O&gt; | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 CacheValue&lt;V&gt;\[\]
 

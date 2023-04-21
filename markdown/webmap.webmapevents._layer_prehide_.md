@@ -5,7 +5,7 @@
 ## WebMapEvents."layer:prehide" property
 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'layer:prehide': LayerAdapter;

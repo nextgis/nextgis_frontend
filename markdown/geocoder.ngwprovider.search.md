@@ -4,7 +4,7 @@
 
 ## NgwProvider.search() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 search(like: string): AsyncGenerator<NgwSearchItem, void, unknown>;
@@ -16,7 +16,7 @@ search(like: string): AsyncGenerator<NgwSearchItem, void, unknown>;
 |  --- | --- | --- |
 |  like | string |  |
 
-<b>Returns:</b>
+**Returns:**
 
 AsyncGenerator&lt;NgwSearchItem, void, unknown&gt;
 

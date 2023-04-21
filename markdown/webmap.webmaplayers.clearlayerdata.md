@@ -6,7 +6,7 @@
 
 Remove from vector layer all features. it is possible to remove only some objects if you specify a callback function.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 clearLayerData(layerDef: LayerDef, cb?: (feature: Feature) => boolean): void;
@@ -17,9 +17,9 @@ clearLayerData(layerDef: LayerDef, cb?: (feature: Feature) => boolean): void;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  layerDef | [LayerDef](./webmap.layerdef.md) |  |
-|  cb | (feature: Feature) =&gt; boolean | <i>(Optional)</i> |
+|  cb | (feature: Feature) =&gt; boolean | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

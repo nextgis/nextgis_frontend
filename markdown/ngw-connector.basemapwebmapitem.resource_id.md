@@ -4,7 +4,7 @@
 
 ## BasemapWebmapItem.resource\_id property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 resource_id: number;

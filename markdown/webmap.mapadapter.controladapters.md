@@ -6,7 +6,7 @@
 
 Named map controls specific for each framework.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 controlAdapters: {

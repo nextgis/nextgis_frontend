@@ -4,7 +4,7 @@
 
 ## GetRequestItemsResponseMap."pyramid.route" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'pyramid.route': PyramidRoute;

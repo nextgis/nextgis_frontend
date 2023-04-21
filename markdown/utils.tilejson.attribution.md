@@ -6,7 +6,7 @@
 
 Default: null. Contains an attribution to be displayed when the map is shown to a user. Implementations MAY decide to treat this as HTML or literal text. For security reasons, make absolutely sure that this field can't be abused as a vector for XSS or beacon tracking.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 attribution?: string;

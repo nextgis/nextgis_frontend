@@ -6,7 +6,7 @@
 
 Obtaining the required Headers for authentication of requests in the NGW.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getAuthorizationHeaders(credentials?: Credentials): RequestHeaders | undefined;
@@ -16,9 +16,9 @@ getAuthorizationHeaders(credentials?: Credentials): RequestHeaders | undefined;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  credentials | [Credentials](./ngw-connector.credentials.md) | <i>(Optional)</i> |
+|  credentials | [Credentials](./ngw-connector.credentials.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 [RequestHeaders](./ngw-connector.requestheaders.md) \| undefined
 

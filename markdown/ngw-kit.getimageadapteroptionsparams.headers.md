@@ -4,7 +4,7 @@
 
 ## GetImageAdapterOptionsParams.headers property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 headers: any;

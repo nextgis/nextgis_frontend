@@ -4,7 +4,7 @@
 
 ## NgwOl.create() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static create(options: NgwMapOptions): Promise<NgwOl>;
@@ -16,7 +16,7 @@ static create(options: NgwMapOptions): Promise<NgwOl>;
 |  --- | --- | --- |
 |  options | [NgwMapOptions](./ngw-map.ngwmapoptions.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
-Promise&lt;NgwOl&gt;
+Promise&lt;[NgwOl](./ngw-ol.ngwol.md)<!-- -->&gt;
 

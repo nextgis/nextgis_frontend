@@ -4,7 +4,7 @@
 
 ## ControlOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface ControlOptions 
@@ -14,6 +14,6 @@ export interface ControlOptions
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [control?](./webmap.controloptions.control.md) |  | string | <i>(Optional)</i> |
-|  [position?](./webmap.controloptions.position.md) |  | [ControlPosition](./webmap.controlposition.md) | <i>(Optional)</i> |
+|  [control?](./webmap.controloptions.control.md) |  | string | _(Optional)_ |
+|  [position?](./webmap.controloptions.position.md) |  | [ControlPosition](./webmap.controlposition.md) | _(Optional)_ |
 

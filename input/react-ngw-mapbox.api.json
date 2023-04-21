@@ -1,8 +1,8 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.28.6",
-    "schemaVersion": 1009,
+    "toolVersion": "7.34.4",
+    "schemaVersion": 1011,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
       "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
@@ -188,11 +188,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -231,7 +227,7 @@
             {
               "kind": "Reference",
               "text": "FunctionComponentElement",
-              "canonicalReference": "@types/react!~React.FunctionComponentElement:interface"
+              "canonicalReference": "@types/react!React.FunctionComponentElement:interface"
             },
             {
               "kind": "Content",
@@ -251,9 +247,10 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/ReactNgwMapbox.ts",
           "returnTypeTokenRange": {
-            "startIndex": 11,
-            "endIndex": 16
+            "startIndex": 10,
+            "endIndex": 15
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -261,8 +258,8 @@
             {
               "parameterName": "props",
               "parameterTypeTokenRange": {
-                "startIndex": 9,
-                "endIndex": 10
+                "startIndex": 8,
+                "endIndex": 9
               },
               "isOptional": false
             }
@@ -275,8 +272,8 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 8
+                "startIndex": 3,
+                "endIndex": 7
               }
             }
           ],

@@ -6,7 +6,7 @@
 
 Connection url.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 readonly baseUrl: string;

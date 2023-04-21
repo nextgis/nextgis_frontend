@@ -4,7 +4,7 @@
 
 ## RasterRequestOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface RasterRequestOptions 

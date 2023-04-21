@@ -4,7 +4,7 @@
 
 ## Permission.permission property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 permission: string;

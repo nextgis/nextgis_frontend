@@ -4,7 +4,7 @@
 
 ## VectorAdapterLayerType type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type VectorAdapterLayerType = 'polygon' | 'point' | 'line';

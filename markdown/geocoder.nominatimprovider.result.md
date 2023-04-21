@@ -4,7 +4,7 @@
 
 ## NominatimProvider.result() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 result(model: SearchItem): CancelablePromise<ResultItem>;
@@ -16,7 +16,7 @@ result(model: SearchItem): CancelablePromise<ResultItem>;
 |  --- | --- | --- |
 |  model | [SearchItem](./geocoder.searchitem.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;[ResultItem](./geocoder.resultitem.md)<!-- -->&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;[ResultItem](./geocoder.resultitem.md)<!-- -->&gt;
 

@@ -4,7 +4,7 @@
 
 ## WebMapLayers.updateLayerPaint() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 updateLayerPaint(layerDef: LayerDef, paint: Partial<Paint>): void;
@@ -17,7 +17,7 @@ updateLayerPaint(layerDef: LayerDef, paint: Partial<Paint>): void;
 |  layerDef | [LayerDef](./webmap.layerdef.md) |  |
 |  paint | Partial&lt;[Paint](./paint.paint.md)<!-- -->&gt; |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

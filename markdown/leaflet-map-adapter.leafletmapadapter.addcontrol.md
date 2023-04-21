@@ -4,7 +4,7 @@
 
 ## LeafletMapAdapter.addControl() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 addControl(control: Control, position: string): Control | undefined;
@@ -17,7 +17,7 @@ addControl(control: Control, position: string): Control | undefined;
 |  control | Control |  |
 |  position | string |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Control \| undefined
 

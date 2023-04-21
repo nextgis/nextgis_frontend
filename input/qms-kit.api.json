@@ -1,8 +1,8 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.28.6",
-    "schemaVersion": 1009,
+    "toolVersion": "7.34.4",
+    "schemaVersion": 1011,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
       "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
@@ -204,6 +204,7 @@
               "text": ";\n}"
             }
           ],
+          "fileUrlPath": "src/utils/updateQmsOptions.ts",
           "isReadonly": true,
           "releaseTag": "Public",
           "name": "alias",
@@ -215,6 +216,66 @@
         {
           "kind": "Function",
           "canonicalReference": "@nextgis/qms-kit!createQmsAdapter:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function createQmsAdapter(options: "
+            },
+            {
+              "kind": "Reference",
+              "text": "CreateQmsAdapterOptions",
+              "canonicalReference": "@nextgis/qms-kit!CreateQmsAdapterOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "Type",
+              "canonicalReference": "@nextgis/utils!Type:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "MainLayerAdapter",
+              "canonicalReference": "@nextgis/webmap!MainLayerAdapter:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "fileUrlPath": "src/utils/createQmsAdapter.ts",
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 7
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "options",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "createQmsAdapter"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@nextgis/qms-kit!createQmsAdapter:function(2)",
           "docComment": "",
           "excerptTokens": [
             {
@@ -283,12 +344,13 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/createQmsAdapter.ts",
           "returnTypeTokenRange": {
             "startIndex": 10,
             "endIndex": 14
           },
           "releaseTag": "Public",
-          "overloadIndex": 1,
+          "overloadIndex": 2,
           "parameters": [
             {
               "parameterName": "webMap",
@@ -319,6 +381,106 @@
         },
         {
           "kind": "Interface",
+          "canonicalReference": "@nextgis/qms-kit!CreateQmsAdapterOptions:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface CreateQmsAdapterOptions extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Partial",
+              "canonicalReference": "!Partial:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "QmsAdapterOptions",
+              "canonicalReference": "@nextgis/qms-kit!QmsAdapterOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "fileUrlPath": "src/interfaces.ts",
+          "releaseTag": "Public",
+          "name": "CreateQmsAdapterOptions",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/qms-kit!CreateQmsAdapterOptions#url:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "url?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "url",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/qms-kit!CreateQmsAdapterOptions#webMap:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "webMap: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "WebMap",
+                  "canonicalReference": "@nextgis/webmap!WebMap:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "webMap",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 5
+            }
+          ]
+        },
+        {
+          "kind": "Interface",
           "canonicalReference": "@nextgis/qms-kit!GeoserviceInList:interface",
           "docComment": "",
           "excerptTokens": [
@@ -327,6 +489,7 @@
               "text": "export interface GeoserviceInList "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "GeoserviceInList",
           "preserveMemberOrder": false,
@@ -515,6 +678,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "QmsAdapter",
           "preserveMemberOrder": false,
@@ -574,6 +738,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "QmsAdapterOptions",
           "preserveMemberOrder": false,
@@ -705,6 +870,7 @@
               "text": "export interface QmsBasemap "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "QmsBasemap",
           "preserveMemberOrder": false,
@@ -1490,7 +1656,9 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/QmsKit.ts",
           "releaseTag": "Public",
+          "isAbstract": false,
           "name": "QmsKit",
           "preserveMemberOrder": false,
           "members": [
@@ -1569,6 +1737,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getLayerAdapters"
             },
             {
@@ -1599,7 +1768,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -1628,7 +1798,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -1666,7 +1837,8 @@
                 "endIndex": 4
               },
               "isStatic": true,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             }
           ],
           "implementsTokenRanges": [
@@ -1694,6 +1866,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "QmsLayerType",
           "typeTokenRange": {
@@ -1711,6 +1884,7 @@
               "text": "export interface QmsOptions "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "QmsOptions",
           "preserveMemberOrder": false,
@@ -1777,6 +1951,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/updateQmsOptions.ts",
           "returnTypeTokenRange": {
             "startIndex": 3,
             "endIndex": 5

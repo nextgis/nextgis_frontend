@@ -4,7 +4,7 @@
 
 ## LogEngine.info property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 info: ShortcutLogFunc<D>;

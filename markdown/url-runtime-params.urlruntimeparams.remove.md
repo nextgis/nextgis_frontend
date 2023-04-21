@@ -4,7 +4,7 @@
 
 ## UrlRuntimeParams.remove() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 remove(name: string): StateData;
@@ -16,7 +16,7 @@ remove(name: string): StateData;
 |  --- | --- | --- |
 |  name | string |  |
 
-<b>Returns:</b>
+**Returns:**
 
 [StateData](./url-runtime-params.statedata.md)
 

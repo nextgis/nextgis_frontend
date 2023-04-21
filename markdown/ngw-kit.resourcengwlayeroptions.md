@@ -9,12 +9,12 @@
 > use [NgwLayerOptions](./ngw-kit.ngwlayeroptions.md) instead
 > 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type ResourceNgwLayerOptions<T extends NgwLayerAdapterType = NgwLayerAdapterType, P = {
     [name: string]: any;
 }> = NgwLayerOptions<T, P>;
 ```
-<b>References:</b> [NgwLayerAdapterType](./ngw-kit.ngwlayeradaptertype.md)<!-- -->, [NgwLayerOptions](./ngw-kit.ngwlayeroptions.md)
+**References:** [NgwLayerAdapterType](./ngw-kit.ngwlayeradaptertype.md)<!-- -->, [NgwLayerOptions](./ngw-kit.ngwlayeroptions.md)
 

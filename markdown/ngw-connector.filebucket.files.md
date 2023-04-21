@@ -4,7 +4,7 @@
 
 ## FileBucket.files property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 files: NgwFile[];

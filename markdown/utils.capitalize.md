@@ -4,7 +4,7 @@
 
 ## capitalize() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function capitalize(str: string): string;
@@ -16,7 +16,7 @@ export declare function capitalize(str: string): string;
 |  --- | --- | --- |
 |  str | string |  |
 
-<b>Returns:</b>
+**Returns:**
 
 string
 

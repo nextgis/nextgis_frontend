@@ -4,7 +4,7 @@
 
 ## IdentifyItem.fields property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 readonly fields: FeatureProperties;

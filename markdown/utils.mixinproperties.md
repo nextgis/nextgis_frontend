@@ -4,7 +4,7 @@
 
 ## mixinProperties() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function mixinProperties(derivedCtor: Ctor, baseCtor: Ctor, properties: string[]): void;
@@ -18,7 +18,7 @@ export declare function mixinProperties(derivedCtor: Ctor, baseCtor: Ctor, prope
 |  baseCtor | Ctor |  |
 |  properties | string\[\] |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

@@ -4,7 +4,7 @@
 
 ## FetchNgwLayerCountOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface FetchNgwLayerCountOptions 
@@ -14,7 +14,7 @@ export interface FetchNgwLayerCountOptions
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [cache?](./ngw-kit.fetchngwlayercountoptions.cache.md) |  | boolean | <i>(Optional)</i> |
-|  [connector](./ngw-kit.fetchngwlayercountoptions.connector.md) |  | NgwConnector |  |
+|  [cache?](./ngw-kit.fetchngwlayercountoptions.cache.md) |  | boolean | _(Optional)_ |
+|  [connector](./ngw-kit.fetchngwlayercountoptions.connector.md) |  | [NgwConnector](./ngw-connector.ngwconnector.md) |  |
 |  [resourceId](./ngw-kit.fetchngwlayercountoptions.resourceid.md) |  | number |  |
 

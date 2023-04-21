@@ -4,7 +4,7 @@
 
 ## NgLogEngineOptions.stopOnConnectionError property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 stopOnConnectionError?: boolean;

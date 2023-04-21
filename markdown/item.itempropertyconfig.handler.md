@@ -4,7 +4,7 @@
 
 ## ItemPropertyConfig.handler property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 handler?: Type<BaseProperty<ItemPropertyTypes[K]>>;

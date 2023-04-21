@@ -4,18 +4,18 @@
 
 ## TreeGroup interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface TreeGroup extends TreeItem 
 ```
-<b>Extends:</b> [TreeItem](./ngw-kit.treeitem.md)
+**Extends:** [TreeItem](./ngw-kit.treeitem.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [children](./ngw-kit.treegroup.children.md) |  | Array&lt;[TreeLayer](./ngw-kit.treelayer.md) \| [TreeGroup](./ngw-kit.treegroup.md)<!-- -->&gt; |  |
-|  [group\_expanded?](./ngw-kit.treegroup.group_expanded.md) |  | boolean | <i>(Optional)</i> |
+|  [group\_expanded?](./ngw-kit.treegroup.group_expanded.md) |  | boolean | _(Optional)_ |
 |  [item\_type](./ngw-kit.treegroup.item_type.md) |  | 'root' \| 'group' |  |
 

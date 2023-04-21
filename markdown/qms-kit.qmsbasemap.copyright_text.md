@@ -4,7 +4,7 @@
 
 ## QmsBasemap.copyright\_text property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 copyright_text: string;

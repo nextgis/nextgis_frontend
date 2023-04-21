@@ -8,10 +8,15 @@
 
 |  Class | Description |
 |  --- | --- |
-|  [BaseProperty](./item.baseproperty.md) |  |
 |  [CheckProperty](./item.checkproperty.md) |  |
 |  [Item](./item.item.md) |  |
 |  [ItemProperties](./item.itemproperties.md) |  |
+
+## Abstract Classes
+
+|  Abstract Class | Description |
+|  --- | --- |
+|  [BaseProperty](./item.baseproperty.md) |  |
 
 ## Interfaces
 

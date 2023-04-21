@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."resource.schema" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'resource.schema': null;

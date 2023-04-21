@@ -4,7 +4,7 @@
 
 ## NgwUploader.getResource() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getResource(id: number): CancelablePromise<ResourceItem | undefined> | undefined;
@@ -16,7 +16,7 @@ getResource(id: number): CancelablePromise<ResourceItem | undefined> | undefined
 |  --- | --- | --- |
 |  id | number |  |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;[ResourceItem](./ngw-connector.resourceitem.md) \| undefined&gt; \| undefined
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;[ResourceItem](./ngw-connector.resourceitem.md) \| undefined&gt; \| undefined
 

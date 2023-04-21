@@ -4,10 +4,10 @@
 
 ## DataLayerFilter type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type DataLayerFilter<F extends Feature = Feature, L = any> = CallbackFilter<F, L>;
 ```
-<b>References:</b> [CallbackFilter](./webmap.callbackfilter.md)
+**References:** [CallbackFilter](./webmap.callbackfilter.md)
 

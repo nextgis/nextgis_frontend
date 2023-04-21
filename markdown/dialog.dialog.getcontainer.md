@@ -4,12 +4,12 @@
 
 ## Dialog.getContainer() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getContainer(): HTMLDialogElement;
 ```
-<b>Returns:</b>
+**Returns:**
 
 HTMLDialogElement
 

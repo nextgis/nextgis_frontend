@@ -4,7 +4,7 @@
 
 ## SrsItem.display\_name property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 display_name: string;

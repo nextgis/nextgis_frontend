@@ -4,7 +4,7 @@
 
 ## MapAdapter.hideLayer() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 hideLayer(layer: L): void;
@@ -16,7 +16,7 @@ hideLayer(layer: L): void;
 |  --- | --- | --- |
 |  layer | L |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

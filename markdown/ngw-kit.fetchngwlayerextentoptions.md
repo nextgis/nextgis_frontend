@@ -4,17 +4,17 @@
 
 ## FetchNgwLayerExtentOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface FetchNgwLayerExtentOptions extends NgwRequestOptions 
 ```
-<b>Extends:</b> [NgwRequestOptions](./ngw-kit.ngwrequestoptions.md)
+**Extends:** [NgwRequestOptions](./ngw-kit.ngwrequestoptions.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [connector](./ngw-kit.fetchngwlayerextentoptions.connector.md) |  | NgwConnector |  |
-|  [resourceId](./ngw-kit.fetchngwlayerextentoptions.resourceid.md) |  | number |  |
+|  [connector](./ngw-kit.fetchngwlayerextentoptions.connector.md) |  | [NgwConnector](./ngw-connector.ngwconnector.md) |  |
+|  [resourceId](./ngw-kit.fetchngwlayerextentoptions.resourceid.md) |  | number \| string |  |
 

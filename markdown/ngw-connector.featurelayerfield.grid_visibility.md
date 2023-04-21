@@ -4,7 +4,7 @@
 
 ## FeatureLayerField.grid\_visibility property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 grid_visibility: boolean;

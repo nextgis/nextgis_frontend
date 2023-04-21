@@ -4,12 +4,12 @@
 
 ## NgwLayersList.mounted() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 mounted(): void;
 ```
-<b>Returns:</b>
+**Returns:**
 
 void
 

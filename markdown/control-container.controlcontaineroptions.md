@@ -4,7 +4,7 @@
 
 ## ControlContainerOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface ControlContainerOptions 
@@ -14,8 +14,8 @@ export interface ControlContainerOptions
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [addClass?](./control-container.controlcontaineroptions.addclass.md) |  | string | <i>(Optional)</i> |
-|  [classPrefix?](./control-container.controlcontaineroptions.classprefix.md) |  | string | <i>(Optional)</i> |
-|  [map?](./control-container.controlcontaineroptions.map.md) |  | [MapAdapter](./webmap.mapadapter.md) | <i>(Optional)</i> |
-|  [target?](./control-container.controlcontaineroptions.target.md) |  | string | <i>(Optional)</i> |
+|  [addClass?](./control-container.controlcontaineroptions.addclass.md) |  | string | _(Optional)_ |
+|  [classPrefix?](./control-container.controlcontaineroptions.classprefix.md) |  | string | _(Optional)_ |
+|  [map?](./control-container.controlcontaineroptions.map.md) |  | [MapAdapter](./webmap.mapadapter.md) | _(Optional)_ |
+|  [target?](./control-container.controlcontaineroptions.target.md) |  | string | _(Optional)_ |
 

@@ -4,7 +4,7 @@
 
 ## NgwResource() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function NgwResource(options: NgwResourceOptions): Function;
@@ -16,7 +16,7 @@ export declare function NgwResource(options: NgwResourceOptions): Function;
 |  --- | --- | --- |
 |  options | NgwResourceOptions |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Function
 

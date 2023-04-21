@@ -115,7 +115,7 @@ export function createIdentifyItem<F extends FeatureProperties = FeatureProperti
 // @public (undocumented)
 export function createNgwLayerAdapter(options: NgwLayerOptions, webMap: WebMap, connector: NgwConnector): Promise<Type<ResourceAdapter> | undefined>;
 
-// Warning: (ae-forgotten-export) The symbol "CreateOnFirstShowAdapterOptions" needs to be exported by the entry point index.d.ts
+// Warning: (ae-forgotten-export) The symbol "CreateOnFirstShowAdapterOptions_2" needs to be exported by the entry point index.d.ts
 // Warning: (ae-forgotten-export) The symbol "FirstShowAdapter" needs to be exported by the entry point index.d.ts
 //
 // @public (undocumented)

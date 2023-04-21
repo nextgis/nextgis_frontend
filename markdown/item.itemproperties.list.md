@@ -4,12 +4,12 @@
 
 ## ItemProperties.list() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 list(): BaseProperty<any, ItemBasePropertyOptions<any>>[];
 ```
-<b>Returns:</b>
+**Returns:**
 
 [BaseProperty](./item.baseproperty.md)<!-- -->&lt;any, [ItemBasePropertyOptions](./item.itembasepropertyoptions.md)<!-- -->&lt;any&gt;&gt;\[\]
 

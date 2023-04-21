@@ -4,7 +4,7 @@
 
 ## NgLogEngine.ngwConnector property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 ngwConnector: NgwConnector;

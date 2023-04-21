@@ -6,7 +6,7 @@
 
 Available cursor names from [https://developer.mozilla.org/ru/docs/Web/CSS/cursor](https://developer.mozilla.org/ru/docs/Web/CSS/cursor)
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type Cursor = '' | 'auto' | 'crosshair' | 'default' | 'e-resize' | 'grab' | 'help' | 'move' | 'n-resize' | 'ne-resize' | 'nw-resize' | 'pointer' | 'progress' | 's-resize' | 'se-resize' | 'sw-resize' | 'text' | 'w-resize' | 'wait' | 'inherit';

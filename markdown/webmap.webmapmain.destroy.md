@@ -6,12 +6,12 @@
 
 Destroys WebMap, MapAdapter, clears all layers and turn off all event listeners
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 destroy(): void;
 ```
-<b>Returns:</b>
+**Returns:**
 
 void
 

@@ -4,7 +4,7 @@
 
 ## OlMapAdapter.removeLayer() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 removeLayer(layer: Layer): void;
@@ -16,7 +16,7 @@ removeLayer(layer: Layer): void;
 |  --- | --- | --- |
 |  layer | Layer |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

@@ -6,7 +6,7 @@
 
 WKT polygon geometry
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 intersects?: string | LngLatArray[] | LngLatBoundsArray;

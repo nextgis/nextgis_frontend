@@ -4,7 +4,7 @@
 
 ## FileBucket.main\_tileset property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 main_tileset?: string;

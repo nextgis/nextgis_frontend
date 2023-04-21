@@ -4,17 +4,17 @@
 
 ## GetNgwItemsOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface GetNgwItemsOptions<P extends FeatureProperties = FeatureProperties> extends FetchNgwLayerExtentOptions 
 ```
-<b>Extends:</b> [FetchNgwLayerExtentOptions](./ngw-kit.fetchngwlayerextentoptions.md)
+**Extends:** [FetchNgwLayerExtentOptions](./ngw-kit.fetchngwlayerextentoptions.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [filters?](./ngw-kit.getngwitemsoptions.filters.md) |  | [PropertiesFilter](./properties-filter.propertiesfilter.md)<!-- -->&lt;[PropertiesForNgwFilter](./ngw-kit.propertiesforngwfilter.md)<!-- -->&lt;P&gt;&gt; | <i>(Optional)</i> |
-|  [paramList?](./ngw-kit.getngwitemsoptions.paramlist.md) |  | \[string, any\]\[\] | <i>(Optional)</i> |
+|  [filters?](./ngw-kit.getngwitemsoptions.filters.md) |  | [PropertiesFilter](./properties-filter.propertiesfilter.md)<!-- -->&lt;[PropertiesForNgwFilter](./ngw-kit.propertiesforngwfilter.md)<!-- -->&lt;P&gt;&gt; | _(Optional)_ |
+|  [paramList?](./ngw-kit.getngwitemsoptions.paramlist.md) |  | \[string, any\]\[\] | _(Optional)_ |
 

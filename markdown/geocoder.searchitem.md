@@ -4,7 +4,7 @@
 
 ## SearchItem interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface SearchItem 
@@ -14,11 +14,11 @@ export interface SearchItem
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [\_id?](./geocoder.searchitem._id.md) |  | number \| string | <i>(Optional)</i> |
-|  [extent?](./geocoder.searchitem.extent.md) |  | [LngLatBoundsArray](./utils.lnglatboundsarray.md) | <i>(Optional)</i> |
-|  [geom?](./geocoder.searchitem.geom.md) |  | GeoJsonObject | <i>(Optional)</i> |
-|  [provider?](./geocoder.searchitem.provider.md) |  | [BaseProvider](./geocoder.baseprovider.md) | <i>(Optional)</i> |
+|  [\_id?](./geocoder.searchitem._id.md) |  | number \| string | _(Optional)_ |
+|  [extent?](./geocoder.searchitem.extent.md) |  | [LngLatBoundsArray](./utils.lnglatboundsarray.md) | _(Optional)_ |
+|  [geom?](./geocoder.searchitem.geom.md) |  | GeoJsonObject | _(Optional)_ |
+|  [provider?](./geocoder.searchitem.provider.md) |  | [BaseProvider](./geocoder.baseprovider.md) | _(Optional)_ |
 |  [query](./geocoder.searchitem.query.md) |  | string |  |
-|  [result?](./geocoder.searchitem.result.md) |  | () =&gt; CancelablePromise&lt;[ResultItem](./geocoder.resultitem.md)<!-- -->&gt; | <i>(Optional)</i> |
+|  [result?](./geocoder.searchitem.result.md) |  | () =&gt; [CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;[ResultItem](./geocoder.resultitem.md)<!-- -->&gt; | _(Optional)_ |
 |  [text](./geocoder.searchitem.text.md) |  | string |  |
 

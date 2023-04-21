@@ -4,7 +4,7 @@
 
 ## GetRequestItemsResponseMap."pyramid.company\_logo" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'pyramid.company_logo': string;

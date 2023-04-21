@@ -4,7 +4,7 @@
 
 ## NgwUploader.createWmsConnection() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 createWmsConnection(opt: CreateWmsConnectionOptions, name?: string): CancelablePromise<CreatedResource> | undefined;
@@ -15,9 +15,9 @@ createWmsConnection(opt: CreateWmsConnectionOptions, name?: string): CancelableP
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  opt | [CreateWmsConnectionOptions](./ngw-uploader.createwmsconnectionoptions.md) |  |
-|  name | string | <i>(Optional)</i> |
+|  name | string | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;[CreatedResource](./ngw-connector.createdresource.md)<!-- -->&gt; \| undefined
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;[CreatedResource](./ngw-connector.createdresource.md)<!-- -->&gt; \| undefined
 

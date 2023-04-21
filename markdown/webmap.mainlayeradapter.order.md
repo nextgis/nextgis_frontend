@@ -4,7 +4,7 @@
 
 ## MainLayerAdapter.order property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 order?: number;

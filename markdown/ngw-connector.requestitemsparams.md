@@ -4,10 +4,10 @@
 
 ## RequestItemsParams type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type RequestItemsParams<K extends keyof RequestItemsParamsMap> = (RequestItemsParamsMap[K] | Record<string, unknown>) & RequestItemAdditionalParams;
 ```
-<b>References:</b> [RequestItemsParamsMap](./ngw-connector.requestitemsparamsmap.md)<!-- -->, [RequestItemAdditionalParams](./ngw-connector.requestitemadditionalparams.md)
+**References:** [RequestItemsParamsMap](./ngw-connector.requestitemsparamsmap.md)<!-- -->, [RequestItemAdditionalParams](./ngw-connector.requestitemadditionalparams.md)
 

@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."render.tile" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'render.tile': null;

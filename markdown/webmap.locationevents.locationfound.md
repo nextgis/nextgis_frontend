@@ -4,7 +4,7 @@
 
 ## LocationEvents.locationfound property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 locationfound: (e: LocationEvent) => void;

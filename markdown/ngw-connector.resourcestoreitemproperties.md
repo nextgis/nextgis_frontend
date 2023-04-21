@@ -4,7 +4,7 @@
 
 ## ResourceStoreItemProperties type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type ResourceStoreItemProperties = {

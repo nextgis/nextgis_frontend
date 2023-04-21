@@ -4,7 +4,7 @@
 
 ## NgwConfig.applicationUrl property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 applicationUrl: string;

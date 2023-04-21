@@ -6,7 +6,7 @@
 
 Screen coordinates in pixels.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface Pixel 
@@ -16,8 +16,8 @@ export interface Pixel
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [bottom?](./webmap.pixel.bottom.md) |  | number | <i>(Optional)</i> |
+|  [bottom?](./webmap.pixel.bottom.md) |  | number | _(Optional)_ |
 |  [left](./webmap.pixel.left.md) |  | number |  |
-|  [right?](./webmap.pixel.right.md) |  | number | <i>(Optional)</i> |
+|  [right?](./webmap.pixel.right.md) |  | number | _(Optional)_ |
 |  [top](./webmap.pixel.top.md) |  | number |  |
 

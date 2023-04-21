@@ -6,7 +6,7 @@
 
 Fired when the mouse leaves the layer.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onMouseOut?(opt: Omit<OnLayerMouseOptions<F, L>, keyof FeaturePosition>): void;
@@ -18,7 +18,7 @@ onMouseOut?(opt: Omit<OnLayerMouseOptions<F, L>, keyof FeaturePosition>): void;
 |  --- | --- | --- |
 |  opt | Omit&lt;[OnLayerMouseOptions](./webmap.onlayermouseoptions.md)<!-- -->&lt;F, L&gt;, keyof [FeaturePosition](./webmap.featureposition.md)<!-- -->&gt; |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

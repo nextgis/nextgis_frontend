@@ -9,7 +9,7 @@
 > use [NgwMap.fetchNgwLayerFeatures()](./ngw-map.ngwmap.fetchngwlayerfeatures.md) instead
 > 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getNgwLayerFeatures<G extends Geometry | null = Geometry, P extends JsonMap = JsonMap>(options: FetchNgwItemsOptions<P>): CancelablePromise<FeatureCollection<G, P>>;
@@ -19,9 +19,9 @@ getNgwLayerFeatures<G extends Geometry | null = Geometry, P extends JsonMap = Js
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | [FetchNgwItemsOptions](./ngw-kit.fetchngwitemsoptions.md)<!-- -->&lt;P&gt; |  |
+|  options | FetchNgwItemsOptions&lt;P&gt; |  |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;FeatureCollection&lt;G, P&gt;&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;FeatureCollection&lt;G, P&gt;&gt;
 

@@ -4,10 +4,10 @@
 
 ## PopupOnCloseFunction type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type PopupOnCloseFunction = (args: LayerDefinition) => void;
 ```
-<b>References:</b> [LayerDefinition](./webmap.layerdefinition.md)
+**References:** [LayerDefinition](./webmap.layerdefinition.md)
 

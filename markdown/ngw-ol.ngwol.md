@@ -4,12 +4,12 @@
 
 ## NgwOl class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 declare class NgwOl extends NgwMap<Map> 
 ```
-<b>Extends:</b> [NgwMap](./ngw-map.ngwmap.md)<!-- -->&lt;Map
+**Extends:** [NgwMap](./ngw-map.ngwmap.md)<!-- -->&lt;Map&gt;
 
 ## Constructors
 

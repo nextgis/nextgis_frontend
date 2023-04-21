@@ -4,20 +4,20 @@
 
 ## OnLayerMouseOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface OnLayerMouseOptions<F extends Feature = Feature, L = LayerAdapter> extends FeaturePosition 
 ```
-<b>Extends:</b> [FeaturePosition](./webmap.featureposition.md)
+**Extends:** [FeaturePosition](./webmap.featureposition.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [event](./webmap.onlayermouseoptions.event.md) |  | [MapClickEvent](./webmap.mapclickevent.md) |  |
-|  [feature?](./webmap.onlayermouseoptions.feature.md) |  | F | <i>(Optional)</i> |
+|  [feature?](./webmap.onlayermouseoptions.feature.md) |  | F | _(Optional)_ |
 |  [layer](./webmap.onlayermouseoptions.layer.md) |  | L |  |
-|  [selected?](./webmap.onlayermouseoptions.selected.md) |  | boolean | <i>(Optional)</i> |
+|  [selected?](./webmap.onlayermouseoptions.selected.md) |  | boolean | _(Optional)_ |
 |  [source](./webmap.onlayermouseoptions.source.md) |  | any |  |
 

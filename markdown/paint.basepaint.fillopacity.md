@@ -4,7 +4,7 @@
 
 ## BasePaint.fillOpacity property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 fillOpacity?: number | Expression;

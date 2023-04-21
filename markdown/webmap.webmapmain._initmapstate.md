@@ -6,7 +6,7 @@
 
 From runtime params
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 protected _initMapState: Record<string, any>;

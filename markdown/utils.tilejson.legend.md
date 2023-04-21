@@ -6,7 +6,7 @@
 
 Default: null. Contains a legend to be displayed with the map. Implementations MAY decide to treat this as HTML or literal text. For security reasons, make absolutely sure that this field can't be abused as a vector for XSS or beacon tracking.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 legend?: string;

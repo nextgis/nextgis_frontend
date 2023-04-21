@@ -9,12 +9,12 @@
 > use [NgwResource.getBounds()](./ngw-kit.ngwresource.getbounds.md) instead
 > 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getExtent(): Promise<LngLatBoundsArray | undefined>;
 ```
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[LngLatBoundsArray](./utils.lnglatboundsarray.md) \| undefined&gt;
 

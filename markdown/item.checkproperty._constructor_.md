@@ -6,7 +6,7 @@
 
 Constructs a new instance of the `CheckProperty` class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 constructor(name: string, item: Item, options: O);

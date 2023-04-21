@@ -4,7 +4,7 @@
 
 ## QmsBasemap.source\_url property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 source_url?: string;

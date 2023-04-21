@@ -4,7 +4,7 @@
 
 ## TreeLayer.layer\_enabled property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 layer_enabled: boolean;

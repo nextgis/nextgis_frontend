@@ -1,8 +1,8 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.28.6",
-    "schemaVersion": 1009,
+    "toolVersion": "7.34.4",
+    "schemaVersion": 1011,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
       "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
@@ -196,9 +196,14 @@
             },
             {
               "kind": "Content",
-              "text": "<T> "
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": " "
             }
           ],
+          "fileUrlPath": "src/CancelablePromise.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -213,6 +218,7 @@
               }
             }
           ],
+          "isAbstract": false,
           "name": "CancelablePromise",
           "preserveMemberOrder": false,
           "members": [
@@ -252,7 +258,8 @@
                 "endIndex": 4
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Constructor",
@@ -279,7 +286,7 @@
                 {
                   "kind": "Reference",
                   "text": "OnCancelFunction",
-                  "canonicalReference": "@nextgis/cancelable-promise!OnCancelFunction:type"
+                  "canonicalReference": "@nextgis/cancelable-promise!~OnCancelFunction:type"
                 },
                 {
                   "kind": "Content",
@@ -392,6 +399,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "all"
             },
             {
@@ -440,6 +448,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "attach"
             },
             {
@@ -470,6 +479,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "cancel"
             },
             {
@@ -504,7 +514,8 @@
                 "endIndex": 3
               },
               "isStatic": true,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -595,6 +606,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "catch"
             },
             {
@@ -609,7 +621,7 @@
                 {
                   "kind": "Reference",
                   "text": "PromiseControlOptions",
-                  "canonicalReference": "@nextgis/cancelable-promise!PromiseControlOptions:interface"
+                  "canonicalReference": "@nextgis/cancelable-promise!~PromiseControlOptions:interface"
                 },
                 {
                   "kind": "Content",
@@ -618,7 +630,7 @@
                 {
                   "kind": "Reference",
                   "text": "PromiseControl",
-                  "canonicalReference": "@nextgis/cancelable-promise!PromiseControl:class"
+                  "canonicalReference": "@nextgis/cancelable-promise!~PromiseControl:class"
                 },
                 {
                   "kind": "Content",
@@ -644,6 +656,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "createControl"
             },
             {
@@ -696,6 +709,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "finally"
             },
             {
@@ -725,7 +739,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -743,7 +758,7 @@
                 {
                   "kind": "Reference",
                   "text": "PromiseControl",
-                  "canonicalReference": "@nextgis/cancelable-promise!PromiseControl:class"
+                  "canonicalReference": "@nextgis/cancelable-promise!~PromiseControl:class"
                 },
                 {
                   "kind": "Content",
@@ -759,7 +774,8 @@
                 "endIndex": 3
               },
               "isStatic": true,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -833,6 +849,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "reject"
             },
             {
@@ -907,6 +924,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "resolve"
             },
             {
@@ -1033,6 +1051,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "then"
             },
             {
@@ -1051,7 +1070,7 @@
                 {
                   "kind": "Reference",
                   "text": "TimeoutError",
-                  "canonicalReference": "@nextgis/cancelable-promise!TimeoutError:class"
+                  "canonicalReference": "@nextgis/cancelable-promise!~TimeoutError:class"
                 },
                 {
                   "kind": "Content",
@@ -1067,13 +1086,14 @@
                 "endIndex": 3
               },
               "isStatic": true,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             }
           ],
           "implementsTokenRanges": [
             {
               "startIndex": 3,
-              "endIndex": 4
+              "endIndex": 5
             }
           ]
         },
@@ -1096,7 +1116,9 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/CancelError.ts",
           "releaseTag": "Public",
+          "isAbstract": false,
           "name": "CancelError",
           "preserveMemberOrder": false,
           "members": [
@@ -1142,7 +1164,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             }
           ],
           "extendsTokenRange": {

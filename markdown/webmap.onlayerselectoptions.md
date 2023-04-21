@@ -4,18 +4,18 @@
 
 ## OnLayerSelectOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface OnLayerSelectOptions<F extends Feature = Feature, L = LayerAdapter> extends FeaturePosition 
 ```
-<b>Extends:</b> [FeaturePosition](./webmap.featureposition.md)
+**Extends:** [FeaturePosition](./webmap.featureposition.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [features?](./webmap.onlayerselectoptions.features.md) |  | F\[\] \| undefined | <i>(Optional)</i> |
+|  [features?](./webmap.onlayerselectoptions.features.md) |  | F\[\] \| undefined | _(Optional)_ |
 |  [layer](./webmap.onlayerselectoptions.layer.md) |  | L |  |
 |  [type](./webmap.onlayerselectoptions.type.md) |  | [OnLayerSelectType](./webmap.onlayerselecttype.md) |  |
 

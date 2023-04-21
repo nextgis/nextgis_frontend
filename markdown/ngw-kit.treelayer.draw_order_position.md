@@ -4,7 +4,7 @@
 
 ## TreeLayer.draw\_order\_position property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 draw_order_position: number;

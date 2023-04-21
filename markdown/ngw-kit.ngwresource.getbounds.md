@@ -4,7 +4,7 @@
 
 ## NgwResource.getBounds() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getBounds(options?: FetchNgwLayerExtentOptions): Promise<LngLatBoundsArray | undefined>;
@@ -14,9 +14,9 @@ getBounds(options?: FetchNgwLayerExtentOptions): Promise<LngLatBoundsArray | und
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | [FetchNgwLayerExtentOptions](./ngw-kit.fetchngwlayerextentoptions.md) | <i>(Optional)</i> |
+|  options | [FetchNgwLayerExtentOptions](./ngw-kit.fetchngwlayerextentoptions.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[LngLatBoundsArray](./utils.lnglatboundsarray.md) \| undefined&gt;
 

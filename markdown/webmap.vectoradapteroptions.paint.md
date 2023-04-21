@@ -6,7 +6,7 @@
 
 Determine the appearance of the vector data geometries.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 paint?: Paint<F>;

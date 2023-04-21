@@ -4,7 +4,7 @@
 
 ## RasterUploadResp interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface RasterUploadResp 
@@ -14,5 +14,5 @@ export interface RasterUploadResp
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [status?](./ngw-uploader.rasteruploadresp.status.md) |  | number | <i>(Optional)</i> |
+|  [status?](./ngw-uploader.rasteruploadresp.status.md) |  | number | _(Optional)_ |
 

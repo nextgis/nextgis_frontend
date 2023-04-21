@@ -6,7 +6,7 @@
 
 The maximum possible zoom to use.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 maxZoom?: number;

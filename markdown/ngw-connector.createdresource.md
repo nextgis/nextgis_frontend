@@ -4,12 +4,12 @@
 
 ## CreatedResource interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface CreatedResource extends IdOnly 
 ```
-<b>Extends:</b> [IdOnly](./ngw-connector.idonly.md)
+**Extends:** [IdOnly](./ngw-connector.idonly.md)
 
 ## Properties
 

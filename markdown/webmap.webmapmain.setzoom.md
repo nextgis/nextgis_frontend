@@ -6,7 +6,7 @@
 
 Zoom to a specific zoom level.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 setZoom(zoom: number): this;
@@ -18,7 +18,7 @@ setZoom(zoom: number): this;
 |  --- | --- | --- |
 |  zoom | number | The zoom level to set (0-24). |
 
-<b>Returns:</b>
+**Returns:**
 
 this
 

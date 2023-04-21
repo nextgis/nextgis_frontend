@@ -4,7 +4,7 @@
 
 ## Locate.stop property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 stop: () => void;

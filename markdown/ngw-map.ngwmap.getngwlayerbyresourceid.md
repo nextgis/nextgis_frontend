@@ -4,7 +4,7 @@
 
 ## NgwMap.getNgwLayerByResourceId() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getNgwLayerByResourceId(id: number): Promise<LayerAdapter | undefined>;
@@ -16,7 +16,7 @@ getNgwLayerByResourceId(id: number): Promise<LayerAdapter | undefined>;
 |  --- | --- | --- |
 |  id | number |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[LayerAdapter](./webmap.layeradapter.md) \| undefined&gt;
 

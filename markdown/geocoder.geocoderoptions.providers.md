@@ -4,7 +4,7 @@
 
 ## GeocoderOptions.providers property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 providers: BaseProvider[];

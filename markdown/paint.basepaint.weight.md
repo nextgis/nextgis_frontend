@@ -6,7 +6,7 @@
 
 stroke width TODO: rename to width \*
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 weight?: number | Expression;

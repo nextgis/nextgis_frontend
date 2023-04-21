@@ -4,7 +4,7 @@
 
 ## NgwConnector.setRequestTransform() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 setRequestTransform(requestTransform: RequestTransformFunction | undefined | null): void;
@@ -16,7 +16,7 @@ setRequestTransform(requestTransform: RequestTransformFunction | undefined | nul
 |  --- | --- | --- |
 |  requestTransform | [RequestTransformFunction](./ngw-connector.requesttransformfunction.md) \| undefined \| null |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

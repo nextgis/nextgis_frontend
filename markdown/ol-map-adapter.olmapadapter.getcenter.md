@@ -4,12 +4,12 @@
 
 ## OlMapAdapter.getCenter() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getCenter(): LngLatArray | undefined;
 ```
-<b>Returns:</b>
+**Returns:**
 
 [LngLatArray](./utils.lnglatarray.md) \| undefined
 

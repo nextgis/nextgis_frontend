@@ -4,7 +4,7 @@
 
 ## NgwLayerOptions.fit property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 fit?: boolean;

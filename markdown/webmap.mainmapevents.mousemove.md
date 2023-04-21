@@ -6,7 +6,7 @@
 
 Fired while the mouse moves over the map.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 mousemove: MapAdapter;

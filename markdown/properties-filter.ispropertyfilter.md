@@ -4,7 +4,7 @@
 
 ## isPropertyFilter() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function isPropertyFilter(filter: PropertyFilter | PropertiesFilter | string): filter is PropertyFilter;
@@ -16,7 +16,7 @@ export declare function isPropertyFilter(filter: PropertyFilter | PropertiesFilt
 |  --- | --- | --- |
 |  filter | [PropertyFilter](./properties-filter.propertyfilter.md) \| [PropertiesFilter](./properties-filter.propertiesfilter.md) \| string |  |
 
-<b>Returns:</b>
+**Returns:**
 
 filter is [PropertyFilter](./properties-filter.propertyfilter.md)
 

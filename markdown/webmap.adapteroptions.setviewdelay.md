@@ -6,7 +6,7 @@
 
 Experimental option to set the map loading delay when changing position
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 setViewDelay?: number;

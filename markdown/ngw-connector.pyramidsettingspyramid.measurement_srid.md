@@ -4,7 +4,7 @@
 
 ## PyramidSettingsPyramid.measurement\_srid property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 measurement_srid: 4326;

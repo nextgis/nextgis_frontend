@@ -4,7 +4,7 @@
 
 ## QmsAdapterOptions.qmsId property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 qmsId?: number;

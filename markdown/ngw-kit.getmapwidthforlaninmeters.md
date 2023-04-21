@@ -4,7 +4,7 @@
 
 ## getMapWidthForLanInMeters() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function getMapWidthForLanInMeters(lat: number): number;
@@ -16,7 +16,7 @@ export declare function getMapWidthForLanInMeters(lat: number): number;
 |  --- | --- | --- |
 |  lat | number |  |
 
-<b>Returns:</b>
+**Returns:**
 
 number
 

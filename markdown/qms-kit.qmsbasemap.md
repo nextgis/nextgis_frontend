@@ -4,7 +4,7 @@
 
 ## QmsBasemap interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface QmsBasemap 
@@ -14,30 +14,30 @@ export interface QmsBasemap
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [alt\_urls?](./qms-kit.qmsbasemap.alt_urls.md) |  | string\[\] | <i>(Optional)</i> |
-|  [boundary\_area?](./qms-kit.qmsbasemap.boundary_area.md) |  | any | <i>(Optional)</i> |
-|  [boundary?](./qms-kit.qmsbasemap.boundary.md) |  | any | <i>(Optional)</i> |
+|  [alt\_urls?](./qms-kit.qmsbasemap.alt_urls.md) |  | string\[\] | _(Optional)_ |
+|  [boundary\_area?](./qms-kit.qmsbasemap.boundary_area.md) |  | any | _(Optional)_ |
+|  [boundary?](./qms-kit.qmsbasemap.boundary.md) |  | any | _(Optional)_ |
 |  [copyright\_text](./qms-kit.qmsbasemap.copyright_text.md) |  | string |  |
 |  [copyright\_url](./qms-kit.qmsbasemap.copyright_url.md) |  | string |  |
-|  [created\_at?](./qms-kit.qmsbasemap.created_at.md) |  | Date | <i>(Optional)</i> |
-|  [cumulative\_status?](./qms-kit.qmsbasemap.cumulative_status.md) |  | string | <i>(Optional)</i> |
+|  [created\_at?](./qms-kit.qmsbasemap.created_at.md) |  | Date | _(Optional)_ |
+|  [cumulative\_status?](./qms-kit.qmsbasemap.cumulative_status.md) |  | string | _(Optional)_ |
 |  [desc](./qms-kit.qmsbasemap.desc.md) |  | string |  |
 |  [epsg](./qms-kit.qmsbasemap.epsg.md) |  | number |  |
-|  [extent?](./qms-kit.qmsbasemap.extent.md) |  | number\[\] | <i>(Optional)</i> |
+|  [extent?](./qms-kit.qmsbasemap.extent.md) |  | number\[\] | _(Optional)_ |
 |  [guid](./qms-kit.qmsbasemap.guid.md) |  | string |  |
 |  [icon](./qms-kit.qmsbasemap.icon.md) |  | number |  |
 |  [id](./qms-kit.qmsbasemap.id.md) |  | number |  |
-|  [last\_status?](./qms-kit.qmsbasemap.last_status.md) |  | number | <i>(Optional)</i> |
+|  [last\_status?](./qms-kit.qmsbasemap.last_status.md) |  | number | _(Optional)_ |
 |  [license\_name](./qms-kit.qmsbasemap.license_name.md) |  | string |  |
 |  [license\_url](./qms-kit.qmsbasemap.license_url.md) |  | string |  |
 |  [name](./qms-kit.qmsbasemap.name.md) |  | string |  |
-|  [origin\_url?](./qms-kit.qmsbasemap.origin_url.md) |  | string | <i>(Optional)</i> |
-|  [source\_url?](./qms-kit.qmsbasemap.source_url.md) |  | string | <i>(Optional)</i> |
-|  [source?](./qms-kit.qmsbasemap.source.md) |  | string | <i>(Optional)</i> |
-|  [submitter?](./qms-kit.qmsbasemap.submitter.md) |  | string | <i>(Optional)</i> |
+|  [origin\_url?](./qms-kit.qmsbasemap.origin_url.md) |  | string | _(Optional)_ |
+|  [source\_url?](./qms-kit.qmsbasemap.source_url.md) |  | string | _(Optional)_ |
+|  [source?](./qms-kit.qmsbasemap.source.md) |  | string | _(Optional)_ |
+|  [submitter?](./qms-kit.qmsbasemap.submitter.md) |  | string | _(Optional)_ |
 |  [terms\_of\_use\_url](./qms-kit.qmsbasemap.terms_of_use_url.md) |  | string |  |
 |  [type](./qms-kit.qmsbasemap.type.md) |  | [QmsLayerType](./qms-kit.qmslayertype.md) |  |
-|  [updated\_at?](./qms-kit.qmsbasemap.updated_at.md) |  | Date | <i>(Optional)</i> |
+|  [updated\_at?](./qms-kit.qmsbasemap.updated_at.md) |  | Date | _(Optional)_ |
 |  [url](./qms-kit.qmsbasemap.url.md) |  | string |  |
 |  [y\_origin\_top](./qms-kit.qmsbasemap.y_origin_top.md) |  | boolean |  |
 |  [z\_max](./qms-kit.qmsbasemap.z_max.md) |  | any |  |

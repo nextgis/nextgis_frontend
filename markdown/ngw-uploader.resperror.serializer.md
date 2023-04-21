@@ -4,7 +4,7 @@
 
 ## RespError.serializer property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 serializer: string;

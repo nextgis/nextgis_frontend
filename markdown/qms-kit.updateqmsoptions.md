@@ -4,7 +4,7 @@
 
 ## updateQmsOptions() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function updateQmsOptions(qms: QmsBasemap): AdapterOptions & {
@@ -18,7 +18,7 @@ export declare function updateQmsOptions(qms: QmsBasemap): AdapterOptions & {
 |  --- | --- | --- |
 |  qms | [QmsBasemap](./qms-kit.qmsbasemap.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 [AdapterOptions](./webmap.adapteroptions.md) &amp; { url: string; }
 

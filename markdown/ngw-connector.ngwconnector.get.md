@@ -6,7 +6,7 @@
 
 Shortcut method for send GET request to NGW.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 get<K extends keyof RequestItemsParamsMap>(name: K, options?: RequestOptions | undefined | null, params?: RequestItemsParams<K>): CancelablePromise<GetRequestItemsResponseMap[K]>;
@@ -17,10 +17,10 @@ get<K extends keyof RequestItemsParamsMap>(name: K, options?: RequestOptions | u
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  name | K | NGW route name from [routes](https://docs.nextgis.com/docs_ngweb_dev/doc/developer/resource.html#routes) |
-|  options | [RequestOptions](./ngw-connector.requestoptions.md) \| undefined \| null | <i>(Optional)</i> Request options |
-|  params | [RequestItemsParams](./ngw-connector.requestitemsparams.md)<!-- -->&lt;K&gt; | <i>(Optional)</i> Request item params or query params |
+|  options | [RequestOptions](./ngw-connector.requestoptions.md) \| undefined \| null | _(Optional)_ Request options |
+|  params | [RequestItemsParams](./ngw-connector.requestitemsparams.md)<!-- -->&lt;K&gt; | _(Optional)_ Request item params or query params |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;[GetRequestItemsResponseMap](./ngw-connector.getrequestitemsresponsemap.md)<!-- -->\[K\]&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;[GetRequestItemsResponseMap](./ngw-connector.getrequestitemsresponsemap.md)<!-- -->\[K\]&gt;
 

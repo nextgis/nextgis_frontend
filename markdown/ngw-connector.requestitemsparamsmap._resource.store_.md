@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."resource.store" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'resource.store': {

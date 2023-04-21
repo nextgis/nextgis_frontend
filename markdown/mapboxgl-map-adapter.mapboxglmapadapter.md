@@ -4,12 +4,12 @@
 
 ## MapboxglMapAdapter class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> 
 ```
-<b>Implements:</b> [MapAdapter](./webmap.mapadapter.md)<!-- -->&lt;Map, TLayer, IControl
+**Implements:** [MapAdapter](./webmap.mapadapter.md)<!-- -->&lt;Map, TLayer, IControl&gt;
 
 ## Constructors
 

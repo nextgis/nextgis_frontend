@@ -4,12 +4,12 @@
 
 ## Dialog.close() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 close(): void;
 ```
-<b>Returns:</b>
+**Returns:**
 
 void
 

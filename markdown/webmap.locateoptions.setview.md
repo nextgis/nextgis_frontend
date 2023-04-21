@@ -4,7 +4,7 @@
 
 ## LocateOptions.setView property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 setView?: boolean;

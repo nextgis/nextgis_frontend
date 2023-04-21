@@ -4,7 +4,7 @@
 
 ## TreeGroup.group\_expanded property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 group_expanded?: boolean;

@@ -6,7 +6,7 @@
 
 A pre-initialized instance of the map
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 map?: M;

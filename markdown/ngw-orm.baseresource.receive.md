@@ -4,7 +4,7 @@
 
 ## BaseResource.receive() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static receive(item: ResourceItem, ResCls?: typeof BaseResource): typeof BaseResource;
@@ -15,9 +15,9 @@ static receive(item: ResourceItem, ResCls?: typeof BaseResource): typeof BaseRes
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  item | [ResourceItem](./ngw-connector.resourceitem.md) |  |
-|  ResCls | typeof [BaseResource](./ngw-orm.baseresource.md) | <i>(Optional)</i> |
+|  ResCls | typeof [BaseResource](./ngw-orm.baseresource.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 typeof [BaseResource](./ngw-orm.baseresource.md)
 

@@ -5,7 +5,7 @@
 ## NgwConnector.getResourceChildren() method
 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getResourceChildren(resource: ResourceDefinition, requestOptions?: GetChildrenOfOptions): CancelablePromise<ResourceItem[]>;
@@ -16,9 +16,9 @@ getResourceChildren(resource: ResourceDefinition, requestOptions?: GetChildrenOf
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  resource | [ResourceDefinition](./ngw-connector.resourcedefinition.md) |  |
-|  requestOptions | [GetChildrenOfOptions](./ngw-connector.getchildrenofoptions.md) | <i>(Optional)</i> |
+|  requestOptions | [GetChildrenOfOptions](./ngw-connector.getchildrenofoptions.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;[ResourceItem](./ngw-connector.resourceitem.md)<!-- -->\[\]&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;[ResourceItem](./ngw-connector.resourceitem.md)<!-- -->\[\]&gt;
 

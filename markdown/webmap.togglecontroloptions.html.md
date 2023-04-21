@@ -6,7 +6,7 @@
 
 Button content, can be set for each state (`on` or `off`<!-- -->).
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 html?: HtmlDef | HtmlToggle;

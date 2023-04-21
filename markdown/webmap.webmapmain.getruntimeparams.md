@@ -4,12 +4,12 @@
 
 ## WebMapMain.getRuntimeParams() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getRuntimeParams(): Record<string, any>;
 ```
-<b>Returns:</b>
+**Returns:**
 
 Record&lt;string, any&gt;
 

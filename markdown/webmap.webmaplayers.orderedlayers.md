@@ -4,12 +4,12 @@
 
 ## WebMapLayers.orderedLayers() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 orderedLayers<LA extends LayerAdapter<M, L> = LayerAdapter<M, L>>(): LA[];
 ```
-<b>Returns:</b>
+**Returns:**
 
 LA\[\]
 

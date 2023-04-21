@@ -6,7 +6,7 @@
 
 Fired before the map is clicked.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 preclick: MapClickEvent;

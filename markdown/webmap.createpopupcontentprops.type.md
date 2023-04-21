@@ -6,7 +6,7 @@
 
 The source of the event call. User `click`<!-- -->, `hover`<!-- -->, or programmatic `api` call
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 type: OnLayerSelectType;

@@ -4,7 +4,7 @@
 
 ## Pixel.top property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 top: number;

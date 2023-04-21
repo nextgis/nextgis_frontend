@@ -4,12 +4,12 @@
 
 ## ResourceStore.getResources() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getResources(): Promise<Record<ResourceDef, number>>;
 ```
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;Record&lt;ResourceDef, number&gt;&gt;
 

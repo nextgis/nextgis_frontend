@@ -4,7 +4,7 @@
 
 ## FeatureLayerCount.total\_count property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 total_count: number;

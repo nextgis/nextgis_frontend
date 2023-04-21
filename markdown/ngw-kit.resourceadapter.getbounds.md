@@ -4,12 +4,12 @@
 
 ## ResourceAdapter.getBounds() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getBounds?(): LngLatBoundsArray | Promise<LngLatBoundsArray | undefined> | undefined;
 ```
-<b>Returns:</b>
+**Returns:**
 
 [LngLatBoundsArray](./utils.lnglatboundsarray.md) \| Promise&lt;[LngLatBoundsArray](./utils.lnglatboundsarray.md) \| undefined&gt; \| undefined
 

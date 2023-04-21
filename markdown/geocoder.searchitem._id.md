@@ -4,7 +4,7 @@
 
 ## SearchItem.\_id property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 _id?: number | string;

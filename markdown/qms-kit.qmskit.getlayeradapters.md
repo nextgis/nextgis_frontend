@@ -4,12 +4,12 @@
 
 ## QmsKit.getLayerAdapters() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getLayerAdapters(): Promise<LayerAdapterCreators[]>;
 ```
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[LayerAdapterCreators](./webmap.layeradaptercreators.md)<!-- -->\[\]&gt;
 

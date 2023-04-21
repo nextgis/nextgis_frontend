@@ -5,7 +5,7 @@
 ## WebMapEvents."layer:mouseout" property
 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'layer:mouseout': OnLayerClickOptions;

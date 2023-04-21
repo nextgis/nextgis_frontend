@@ -4,7 +4,7 @@
 
 ## BaseResource.sync() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static sync(options: SyncOptions, connectionOrOptions: Connection | ConnectionOptions): void;
@@ -17,7 +17,7 @@ static sync(options: SyncOptions, connectionOrOptions: Connection | ConnectionOp
 |  options | SyncOptions |  |
 |  connectionOrOptions | [Connection](./ngw-orm.connection.md) \| ConnectionOptions |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

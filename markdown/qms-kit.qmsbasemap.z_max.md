@@ -4,7 +4,7 @@
 
 ## QmsBasemap.z\_max property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 z_max: any;

@@ -4,7 +4,7 @@
 
 ## SearchItem.result property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 result?: () => CancelablePromise<ResultItem>;

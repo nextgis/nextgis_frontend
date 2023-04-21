@@ -4,12 +4,12 @@
 
 ## Dialog.show() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 show(): void;
 ```
-<b>Returns:</b>
+**Returns:**
 
 void
 

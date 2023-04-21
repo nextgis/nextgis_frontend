@@ -4,10 +4,10 @@
 
 ## OnClick type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type OnClick = OnClickSync | onClickAsync;
 ```
-<b>References:</b> [OnClickSync](./webmap.onclicksync.md)<!-- -->, [onClickAsync](./webmap.onclickasync.md)
+**References:** [OnClickSync](./webmap.onclicksync.md)<!-- -->, [onClickAsync](./webmap.onclickasync.md)
 

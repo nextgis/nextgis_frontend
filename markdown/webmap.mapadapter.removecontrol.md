@@ -4,7 +4,7 @@
 
 ## MapAdapter.removeControl() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 removeControl(control: any): void;
@@ -16,7 +16,7 @@ removeControl(control: any): void;
 |  --- | --- | --- |
 |  control | any |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

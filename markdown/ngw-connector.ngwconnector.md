@@ -4,7 +4,7 @@
 
 ## NgwConnector class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class NgwConnector 
@@ -25,7 +25,7 @@ export declare class NgwConnector
 |  [id](./ngw-connector.ngwconnector.id.md) |  | number |  |
 |  [options](./ngw-connector.ngwconnector.options.md) |  | [NgwConnectorOptions](./ngw-connector.ngwconnectoroptions.md) |  |
 |  [resources](./ngw-connector.ngwconnector.resources.md) |  | ResourcesControl |  |
-|  [user?](./ngw-connector.ngwconnector.user.md) |  | [UserInfo](./ngw-connector.userinfo.md) | <i>(Optional)</i> |
+|  [user?](./ngw-connector.ngwconnector.user.md) |  | [UserInfo](./ngw-connector.userinfo.md) | _(Optional)_ |
 
 ## Methods
 

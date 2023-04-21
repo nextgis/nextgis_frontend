@@ -4,7 +4,7 @@
 
 ## Connection.deleteResource() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 deleteResource(resource: typeof BaseResource): Promise<void>;
@@ -16,7 +16,7 @@ deleteResource(resource: typeof BaseResource): Promise<void>;
 |  --- | --- | --- |
 |  resource | typeof [BaseResource](./ngw-orm.baseresource.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;void&gt;
 

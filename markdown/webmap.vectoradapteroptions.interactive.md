@@ -4,7 +4,7 @@
 
 ## VectorAdapterOptions.interactive property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 interactive?: boolean;

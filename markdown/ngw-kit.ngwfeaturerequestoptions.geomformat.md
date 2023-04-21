@@ -4,7 +4,7 @@
 
 ## NgwFeatureRequestOptions.geomFormat property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 geomFormat?: GeomFormat;

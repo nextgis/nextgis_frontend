@@ -6,7 +6,7 @@
 
 Constructs a new instance of the `Logging` class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 constructor(options: LoggingOptions);

@@ -4,7 +4,7 @@
 
 ## NgwMap.fetchIdentifyGeoJson() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 fetchIdentifyGeoJson(identify: NgwIdentify, multiple?: boolean): CancelablePromise<Feature | undefined>;
@@ -14,10 +14,10 @@ fetchIdentifyGeoJson(identify: NgwIdentify, multiple?: boolean): CancelablePromi
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  identify | [NgwIdentify](./ngw-kit.ngwidentify.md) |  |
-|  multiple | boolean | <i>(Optional)</i> |
+|  identify | NgwIdentify |  |
+|  multiple | boolean | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;Feature \| undefined&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;Feature \| undefined&gt;
 

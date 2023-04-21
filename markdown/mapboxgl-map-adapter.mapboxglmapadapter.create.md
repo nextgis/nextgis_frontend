@@ -4,7 +4,7 @@
 
 ## MapboxglMapAdapter.create() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 create(options: MapboxglMapAdapterOptions): Promise<unknown>;
@@ -16,7 +16,7 @@ create(options: MapboxglMapAdapterOptions): Promise<unknown>;
 |  --- | --- | --- |
 |  options | [MapboxglMapAdapterOptions](./mapboxgl-map-adapter.mapboxglmapadapteroptions.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;unknown&gt;
 

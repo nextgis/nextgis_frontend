@@ -1,8 +1,8 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.28.6",
-    "schemaVersion": 1009,
+    "toolVersion": "7.34.4",
+    "schemaVersion": 1011,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
       "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
@@ -203,6 +203,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/calculateArea.ts",
           "returnTypeTokenRange": {
             "startIndex": 4,
             "endIndex": 5
@@ -248,6 +249,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/calculateArea.ts",
           "returnTypeTokenRange": {
             "startIndex": 3,
             "endIndex": 4

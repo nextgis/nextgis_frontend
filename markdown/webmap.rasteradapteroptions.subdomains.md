@@ -4,7 +4,7 @@
 
 ## RasterAdapterOptions.subdomains property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 subdomains?: string | string[];

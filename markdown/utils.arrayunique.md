@@ -4,7 +4,7 @@
 
 ## arrayUnique() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function arrayUnique<T = any>(arr: T[]): T[];
@@ -16,7 +16,7 @@ export declare function arrayUnique<T = any>(arr: T[]): T[];
 |  --- | --- | --- |
 |  arr | T\[\] |  |
 
-<b>Returns:</b>
+**Returns:**
 
 T\[\]
 

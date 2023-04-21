@@ -4,7 +4,7 @@
 
 ## OlMapAdapter.createButtonControl() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 createButtonControl(options: ButtonControlOptions): Control;
@@ -16,7 +16,7 @@ createButtonControl(options: ButtonControlOptions): Control;
 |  --- | --- | --- |
 |  options | [ButtonControlOptions](./webmap.buttoncontroloptions.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Control
 

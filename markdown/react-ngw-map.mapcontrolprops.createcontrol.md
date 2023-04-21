@@ -4,7 +4,7 @@
 
 ## MapControlProps.createControl property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 createControl: (portal: MutableRefObject<HTMLDivElement>) => Promise<unknown>;

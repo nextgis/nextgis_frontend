@@ -4,7 +4,7 @@
 
 ## Resource.cls property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 cls: ResourceCls;

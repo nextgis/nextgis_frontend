@@ -4,7 +4,7 @@
 
 ## NgwLayerAdapterType type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type NgwLayerAdapterType = 'IMAGE' | 'TILE' | 'GEOJSON' | 'MVT' | 'WMS' | 'TERRAIN' | 'MODEL_3D' | 'NGW:WEBMAP';

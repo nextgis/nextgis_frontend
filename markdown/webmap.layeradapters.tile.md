@@ -4,7 +4,7 @@
 
 ## LayerAdapters.TILE property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 TILE: MainLayerAdapter<any, any, TileAdapterOptions>;

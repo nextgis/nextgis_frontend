@@ -6,7 +6,7 @@
 
 Fired repeatedly during any movement of the map.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 move: MapAdapter;

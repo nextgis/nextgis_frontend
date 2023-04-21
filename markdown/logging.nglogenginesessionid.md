@@ -4,10 +4,10 @@
 
 ## NgLogEngineSessionId type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type NgLogEngineSessionId<D = any> = null | number | ((log: Log<D>) => string);
 ```
-<b>References:</b> [Log](./logging.log.md)
+**References:** [Log](./logging.log.md)
 

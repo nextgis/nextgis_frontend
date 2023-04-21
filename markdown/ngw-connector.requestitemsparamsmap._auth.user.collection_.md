@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."auth.user.collection" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'auth.user.collection': null;

@@ -4,12 +4,12 @@
 
 ## BaselayerSelect.create() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 protected create(): void;
 ```
-<b>Returns:</b>
+**Returns:**
 
 void
 

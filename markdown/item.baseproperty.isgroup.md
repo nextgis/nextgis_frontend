@@ -4,12 +4,12 @@
 
 ## BaseProperty.isGroup() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 isGroup(): number;
 ```
-<b>Returns:</b>
+**Returns:**
 
 number
 

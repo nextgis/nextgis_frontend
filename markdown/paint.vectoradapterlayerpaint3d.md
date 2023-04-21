@@ -4,10 +4,10 @@
 
 ## VectorAdapterLayerPaint3D type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type VectorAdapterLayerPaint3D = Sphere3DPaint | Ellipsoid3DPaint;
 ```
-<b>References:</b> [Sphere3DPaint](./paint.sphere3dpaint.md)<!-- -->, [Ellipsoid3DPaint](./paint.ellipsoid3dpaint.md)
+**References:** [Sphere3DPaint](./paint.sphere3dpaint.md)<!-- -->, [Ellipsoid3DPaint](./paint.ellipsoid3dpaint.md)
 

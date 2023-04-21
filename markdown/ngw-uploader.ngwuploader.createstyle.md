@@ -4,7 +4,7 @@
 
 ## NgwUploader.createStyle() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 createStyle(opt: CreateStyleOptions, name?: string | number): CancelablePromise<CreatedRes>;
@@ -15,9 +15,9 @@ createStyle(opt: CreateStyleOptions, name?: string | number): CancelablePromise<
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  opt | [CreateStyleOptions](./ngw-uploader.createstyleoptions.md) |  |
-|  name | string \| number | <i>(Optional)</i> |
+|  name | string \| number | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;[CreatedRes](./ngw-uploader.createdres.md)<!-- -->&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;[CreatedRes](./ngw-uploader.createdres.md)<!-- -->&gt;
 

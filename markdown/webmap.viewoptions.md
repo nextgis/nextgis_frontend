@@ -4,7 +4,7 @@
 
 ## ViewOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface ViewOptions 
@@ -14,10 +14,10 @@ export interface ViewOptions
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [bounds?](./webmap.viewoptions.bounds.md) |  | [LngLatBoundsArray](./utils.lnglatboundsarray.md) | <i>(Optional)</i> Initial extent of the map, array of degrees in \[\_west\_, \_south\_, \_east\_, \_north\_\] order. |
-|  [center?](./webmap.viewoptions.center.md) |  | [LngLatArray](./utils.lnglatarray.md) | <i>(Optional)</i> Initial position of the map, array of two degrees \[longitude, latitude\]. \[LngLatArray\](webmap-api\#LngLatArray) |
-|  [maxBounds?](./webmap.viewoptions.maxbounds.md) |  | [LngLatBoundsArray](./utils.lnglatboundsarray.md) \| null | <i>(Optional)</i> |
-|  [maxZoom?](./webmap.viewoptions.maxzoom.md) |  | number | <i>(Optional)</i> The maximum zoom level of the map (0-24). |
-|  [minZoom?](./webmap.viewoptions.minzoom.md) |  | number | <i>(Optional)</i> The minimum zoom level of the map (0-24). |
-|  [zoom?](./webmap.viewoptions.zoom.md) |  | number | <i>(Optional)</i> The initial zoom level of the map (0-24). |
+|  [bounds?](./webmap.viewoptions.bounds.md) |  | [LngLatBoundsArray](./utils.lnglatboundsarray.md) | _(Optional)_ Initial extent of the map, array of degrees in \[\_west\_, \_south\_, \_east\_, \_north\_\] order. |
+|  [center?](./webmap.viewoptions.center.md) |  | [LngLatArray](./utils.lnglatarray.md) | _(Optional)_ Initial position of the map, array of two degrees \[longitude, latitude\]. \[LngLatArray\](webmap-api\#LngLatArray) |
+|  [maxBounds?](./webmap.viewoptions.maxbounds.md) |  | [LngLatBoundsArray](./utils.lnglatboundsarray.md) \| null | _(Optional)_ |
+|  [maxZoom?](./webmap.viewoptions.maxzoom.md) |  | number | _(Optional)_ The maximum zoom level of the map (0-24). |
+|  [minZoom?](./webmap.viewoptions.minzoom.md) |  | number | _(Optional)_ The minimum zoom level of the map (0-24). |
+|  [zoom?](./webmap.viewoptions.zoom.md) |  | number | _(Optional)_ The initial zoom level of the map (0-24). |
 

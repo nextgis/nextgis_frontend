@@ -4,7 +4,7 @@
 
 ## ItemBasePropertyOptions.silent property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 silent?: boolean;

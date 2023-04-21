@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."srs.delete" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'srs.delete': {

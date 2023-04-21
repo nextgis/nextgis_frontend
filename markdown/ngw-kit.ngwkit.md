@@ -4,12 +4,12 @@
 
 ## NgwKit class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class NgwKit implements StarterKit 
 ```
-<b>Implements:</b> [StarterKit](./webmap.starterkit.md)
+**Implements:** [StarterKit](./webmap.starterkit.md)
 
 ## Constructors
 
@@ -21,10 +21,10 @@ export declare class NgwKit implements StarterKit
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [connector](./ngw-kit.ngwkit.connector.md) |  | NgwConnector |  |
+|  [connector](./ngw-kit.ngwkit.connector.md) |  | [NgwConnector](./ngw-connector.ngwconnector.md) |  |
 |  [options](./ngw-kit.ngwkit.options.md) |  | [NgwKitOptions](./ngw-kit.ngwkitoptions.md) |  |
 |  [url](./ngw-kit.ngwkit.url.md) |  | string |  |
-|  [webMap?](./ngw-kit.ngwkit.webmap.md) |  | [WebMap](./webmap.webmap.md) | <i>(Optional)</i> |
+|  [webMap?](./ngw-kit.ngwkit.webmap.md) |  | [WebMap](./webmap.webmap.md) | _(Optional)_ |
 
 ## Methods
 

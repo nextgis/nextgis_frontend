@@ -11,7 +11,7 @@
 
 The geographical point where the mouse event occurred.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 latLng?: LatLng;

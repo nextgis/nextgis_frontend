@@ -4,7 +4,7 @@
 
 ## ItemProperties.add() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 add(propOpt: ItemPropertyConfig<keyof ItemPropertyTypes>): void;
@@ -16,7 +16,7 @@ add(propOpt: ItemPropertyConfig<keyof ItemPropertyTypes>): void;
 |  --- | --- | --- |
 |  propOpt | [ItemPropertyConfig](./item.itempropertyconfig.md)<!-- -->&lt;keyof [ItemPropertyTypes](./item.itempropertytypes.md)<!-- -->&gt; |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

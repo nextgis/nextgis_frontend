@@ -4,12 +4,12 @@
 
 ## Geocoder class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class Geocoder extends BaseGeocoder<GeocoderOptions> 
 ```
-<b>Extends:</b> BaseGeocoder&lt;[GeocoderOptions](./geocoder.geocoderoptions.md)
+**Extends:** BaseGeocoder&lt;[GeocoderOptions](./geocoder.geocoderoptions.md)<!-- -->&gt;
 
 ## Constructors
 

@@ -6,7 +6,7 @@
 
 Constructs a new instance of the `NgwWebmapItem` class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 constructor(webMap: WebMap, item: TreeGroup | TreeLayer, options?: ItemOptions, connector?: NgwConnector, parent?: NgwWebmapItem, noInit?: boolean);
@@ -18,8 +18,8 @@ constructor(webMap: WebMap, item: TreeGroup | TreeLayer, options?: ItemOptions, 
 |  --- | --- | --- |
 |  webMap | [WebMap](./webmap.webmap.md) |  |
 |  item | [TreeGroup](./ngw-kit.treegroup.md) \| [TreeLayer](./ngw-kit.treelayer.md) |  |
-|  options | [ItemOptions](./item.itemoptions.md) | <i>(Optional)</i> |
-|  connector | NgwConnector | <i>(Optional)</i> |
-|  parent | [NgwWebmapItem](./ngw-kit.ngwwebmapitem.md) | <i>(Optional)</i> |
-|  noInit | boolean | <i>(Optional)</i> |
+|  options | [ItemOptions](./item.itemoptions.md) | _(Optional)_ |
+|  connector | [NgwConnector](./ngw-connector.ngwconnector.md) | _(Optional)_ |
+|  parent | [NgwWebmapItem](./ngw-kit.ngwwebmapitem.md) | _(Optional)_ |
+|  noInit | boolean | _(Optional)_ |
 

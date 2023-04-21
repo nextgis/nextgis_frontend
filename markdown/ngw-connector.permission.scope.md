@@ -4,7 +4,7 @@
 
 ## Permission.scope property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 scope: string;

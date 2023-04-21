@@ -4,7 +4,7 @@
 
 ## LeafletMapAdapter.setLayerOpacity() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 setLayerOpacity(layer: GridLayer | Layer, value: number): void;
@@ -17,7 +17,7 @@ setLayerOpacity(layer: GridLayer | Layer, value: number): void;
 |  layer | GridLayer \| Layer |  |
 |  value | number |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

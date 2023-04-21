@@ -4,7 +4,7 @@
 
 ## NgLogEngineOptions.nglogUrl property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 nglogUrl?: string;

@@ -4,7 +4,7 @@
 
 ## VectorLayer.srs property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 srs: {

@@ -6,7 +6,7 @@
 
 Change added layer visibility on the map by given status or inverse current status.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 toggleLayer(layerDef: LayerDef, status?: boolean, options?: ToggleLayerOptions): Promise<void>;
@@ -17,10 +17,10 @@ toggleLayer(layerDef: LayerDef, status?: boolean, options?: ToggleLayerOptions):
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  layerDef | [LayerDef](./webmap.layerdef.md) |  |
-|  status | boolean | <i>(Optional)</i> |
-|  options | [ToggleLayerOptions](./webmap.togglelayeroptions.md) | <i>(Optional)</i> |
+|  status | boolean | _(Optional)_ |
+|  options | [ToggleLayerOptions](./webmap.togglelayeroptions.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;void&gt;
 

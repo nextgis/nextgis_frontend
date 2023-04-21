@@ -6,7 +6,7 @@
 
 Named adapters for map layers through a generic interface.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 layerAdapters: {

@@ -4,7 +4,7 @@
 
 ## WebMapMain.mapAdapter property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 readonly mapAdapter: MapAdapter<M>;

@@ -4,7 +4,7 @@
 
 ## CancelablePromise.PromiseControl property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static PromiseControl: typeof PromiseControl;

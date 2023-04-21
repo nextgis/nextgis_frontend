@@ -1,8 +1,8 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.28.6",
-    "schemaVersion": 1009,
+    "toolVersion": "7.34.4",
+    "schemaVersion": 1011,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
       "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
@@ -184,14 +184,16 @@
             {
               "kind": "Reference",
               "text": "DialogAdapter",
-              "canonicalReference": "@nextgis/dialog!DialogAdapter:interface"
+              "canonicalReference": "@nextgis/dialog!~DialogAdapter:interface"
             },
             {
               "kind": "Content",
               "text": " "
             }
           ],
+          "fileUrlPath": "src/dialog.ts",
           "releaseTag": "Public",
+          "isAbstract": false,
           "name": "Dialog",
           "preserveMemberOrder": false,
           "members": [
@@ -256,6 +258,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "clean"
             },
             {
@@ -286,6 +289,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "close"
             },
             {
@@ -316,6 +320,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "destroy"
             },
             {
@@ -350,7 +355,8 @@
                 "endIndex": 3
               },
               "isStatic": true,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -381,6 +387,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getContainer"
             },
             {
@@ -411,7 +418,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -441,6 +449,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "show"
             },
             {
@@ -493,6 +502,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "updateContent"
             }
           ],

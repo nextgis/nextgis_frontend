@@ -4,7 +4,7 @@
 
 ## OlMapAdapter.layerAdapters property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static layerAdapters: {

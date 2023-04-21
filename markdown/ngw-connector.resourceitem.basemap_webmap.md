@@ -4,7 +4,7 @@
 
 ## ResourceItem.basemap\_webmap property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 basemap_webmap?: BasemapWebmap;

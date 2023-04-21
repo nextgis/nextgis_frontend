@@ -4,16 +4,16 @@
 
 ## TileAdapterOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface TileAdapterOptions extends RasterAdapterOptions 
 ```
-<b>Extends:</b> [RasterAdapterOptions](./webmap.rasteradapteroptions.md)
+**Extends:** [RasterAdapterOptions](./webmap.rasteradapteroptions.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [tileSize?](./webmap.tileadapteroptions.tilesize.md) |  | number | <i>(Optional)</i> |
+|  [tileSize?](./webmap.tileadapteroptions.tilesize.md) |  | number | _(Optional)_ |
 

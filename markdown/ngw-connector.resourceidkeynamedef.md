@@ -4,7 +4,7 @@
 
 ## ResourceIdKeynameDef type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type ResourceIdKeynameDef = string | number;

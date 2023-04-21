@@ -6,7 +6,7 @@
 
 Method for selecting objects on the map. The `selectedPaint` option will be applied to the selected objects.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 select?(findFeatureCb?: DataLayerFilter<F, L> | PropertiesFilter): void;
@@ -16,9 +16,9 @@ select?(findFeatureCb?: DataLayerFilter<F, L> | PropertiesFilter): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  findFeatureCb | [DataLayerFilter](./webmap.datalayerfilter.md)<!-- -->&lt;F, L&gt; \| [PropertiesFilter](./properties-filter.propertiesfilter.md) | <i>(Optional)</i> |
+|  findFeatureCb | [DataLayerFilter](./webmap.datalayerfilter.md)<!-- -->&lt;F, L&gt; \| [PropertiesFilter](./properties-filter.propertiesfilter.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

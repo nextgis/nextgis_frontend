@@ -6,12 +6,12 @@
 
 Available argument types for methods with map layers identification.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type LayerDef = string | LayerAdapter;
 ```
-<b>References:</b> [LayerAdapter](./webmap.layeradapter.md)
+**References:** [LayerAdapter](./webmap.layeradapter.md)
 
 ## Example
 

@@ -4,7 +4,7 @@
 
 ## GetPaintCallback.paint property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 paint?: CirclePaint | PathPaint | PinPaint;

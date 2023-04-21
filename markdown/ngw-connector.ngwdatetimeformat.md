@@ -4,10 +4,10 @@
 
 ## NgwDateTimeFormat type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type NgwDateTimeFormat = NgwDateFormat & NgwTimeFormat;
 ```
-<b>References:</b> [NgwDateFormat](./ngw-connector.ngwdateformat.md)<!-- -->, [NgwTimeFormat](./ngw-connector.ngwtimeformat.md)
+**References:** [NgwDateFormat](./ngw-connector.ngwdateformat.md)<!-- -->, [NgwTimeFormat](./ngw-connector.ngwtimeformat.md)
 

@@ -4,7 +4,7 @@
 
 ## NgwWebmapLayerAdapter.addLayer() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 addLayer(options: NgwWebmapAdapterOptions): Promise<any>;
@@ -16,7 +16,7 @@ addLayer(options: NgwWebmapAdapterOptions): Promise<any>;
 |  --- | --- | --- |
 |  options | [NgwWebmapAdapterOptions](./ngw-kit.ngwwebmapadapteroptions.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;any&gt;
 

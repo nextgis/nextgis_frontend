@@ -4,7 +4,7 @@
 
 ## NgwMap.cancelPromises() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 cancelPromises(...args: PromiseGroup[]): void;
@@ -16,7 +16,7 @@ cancelPromises(...args: PromiseGroup[]): void;
 |  --- | --- | --- |
 |  args | PromiseGroup\[\] |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

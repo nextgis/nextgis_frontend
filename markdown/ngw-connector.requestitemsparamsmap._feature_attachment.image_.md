@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."feature\_attachment.image" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'feature_attachment.image': {

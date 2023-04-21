@@ -6,7 +6,7 @@
 
 Radius of each cluster when clustering points
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 clusterRadius?: number;

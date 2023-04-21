@@ -4,7 +4,7 @@
 
 ## NgwWebmapItem.initItem() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 initItem(item: TreeGroup | TreeLayer): Promise<void>;
@@ -16,7 +16,7 @@ initItem(item: TreeGroup | TreeLayer): Promise<void>;
 |  --- | --- | --- |
 |  item | [TreeGroup](./ngw-kit.treegroup.md) \| [TreeLayer](./ngw-kit.treelayer.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;void&gt;
 

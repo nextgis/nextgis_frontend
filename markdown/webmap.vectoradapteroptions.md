@@ -4,52 +4,53 @@
 
 ## VectorAdapterOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export interface VectorAdapterOptions<F extends Feature = Feature, L = any, A = Record<string, any>, N = Record<string, any>, P = F['properties']> extends _VectorAdapterOptionsToExtend<P, A, N> 
+export interface VectorAdapterOptions<F extends Feature = Feature, L = any, A extends FeatureProperties = Record<string, any>, N extends FeatureProperties = Record<string, any>, P extends FeatureProperties = ExtractFeatureProperties<F>> extends _VectorAdapterOptionsToExtend<P, A, N> 
 ```
-<b>Extends:</b> \_VectorAdapterOptionsToExtend
+**Extends:** \_VectorAdapterOptionsToExtend&lt;P, A, N&gt;
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [cluster?](./webmap.vectoradapteroptions.cluster.md) |  | boolean | <i>(Optional)</i> |
-|  [clusterMaxZoom?](./webmap.vectoradapteroptions.clustermaxzoom.md) |  | number | <i>(Optional)</i> Max zoom to cluster points on |
-|  [clusterRadius?](./webmap.vectoradapteroptions.clusterradius.md) |  | number | <i>(Optional)</i> Radius of each cluster when clustering points |
-|  [featureIdName?](./webmap.vectoradapteroptions.featureidname.md) |  | string | <i>(Optional)</i> |
-|  [filter?](./webmap.vectoradapteroptions.filter.md) |  | [DataLayerFilter](./webmap.datalayerfilter.md)<!-- -->&lt;F, L&gt; | <i>(Optional)</i> |
-|  [heightOffset?](./webmap.vectoradapteroptions.heightoffset.md) |  | number | <i>(Optional)</i> |
-|  [interactive?](./webmap.vectoradapteroptions.interactive.md) |  | boolean | <i>(Optional)</i> |
-|  [label?](./webmap.vectoradapteroptions.label.md) |  | (e: [LayerDefinition](./webmap.layerdefinition.md)<!-- -->&lt;F, L&gt;) =&gt; string | <i>(Optional)</i> |
-|  [labelField?](./webmap.vectoradapteroptions.labelfield.md) |  | keyof P extends null ? string : keyof P | <i>(Optional)</i> |
-|  [labelOnHover?](./webmap.vectoradapteroptions.labelonhover.md) |  | boolean | <i>(Optional)</i> |
-|  [layout?](./webmap.vectoradapteroptions.layout.md) |  | any | <i>(Optional)</i> |
-|  [multiselect?](./webmap.vectoradapteroptions.multiselect.md) |  | boolean | <i>(Optional)</i> Indicates whether several objects can be selected in one layer. |
-|  [nativeFilter?](./webmap.vectoradapteroptions.nativefilter.md) |  | unknown | <i>(Optional)</i> |
-|  [nativePaint?](./webmap.vectoradapteroptions.nativepaint.md) |  | boolean \| Record&lt;string, any&gt; | <i>(Optional)</i> |
-|  [paint?](./webmap.vectoradapteroptions.paint.md) |  | [Paint](./paint.paint.md)<!-- -->&lt;F&gt; | <i>(Optional)</i> Determine the appearance of the vector data geometries. |
-|  [popup?](./webmap.vectoradapteroptions.popup.md) |  | boolean | <i>(Optional)</i> |
-|  [popupOnSelect?](./webmap.vectoradapteroptions.popuponselect.md) |  | boolean | <i>(Optional)</i> |
-|  [popupOptions?](./webmap.vectoradapteroptions.popupoptions.md) |  | [PopupOptions](./webmap.popupoptions.md)<!-- -->&lt;F, L&gt; | <i>(Optional)</i> |
-|  [propertiesFilter?](./webmap.vectoradapteroptions.propertiesfilter.md) |  | [PropertiesFilter](./properties-filter.propertiesfilter.md)<!-- -->&lt;P&gt; | <i>(Optional)</i> |
-|  [selectable?](./webmap.vectoradapteroptions.selectable.md) |  | boolean | <i>(Optional)</i> Determines whether objects are selected by mouse click. |
-|  [selectedLayout?](./webmap.vectoradapteroptions.selectedlayout.md) |  | any | <i>(Optional)</i> |
-|  [selectedPaint?](./webmap.vectoradapteroptions.selectedpaint.md) |  | [Paint](./paint.paint.md)<!-- -->&lt;F&gt; | <i>(Optional)</i> The paint that applies to the features after it becomes selected. |
-|  [selectOnHover?](./webmap.vectoradapteroptions.selectonhover.md) |  | boolean | <i>(Optional)</i> Make the feature selected while mouseover. |
-|  [source?](./webmap.vectoradapteroptions.source.md) |  | unknown | <i>(Optional)</i> |
-|  [unselectOnClick?](./webmap.vectoradapteroptions.unselectonclick.md) |  | boolean | <i>(Optional)</i> If false, the selection will be reset when the user clicks the map. |
-|  [unselectOnSecondClick?](./webmap.vectoradapteroptions.unselectonsecondclick.md) |  | boolean | <i>(Optional)</i> Deselects layer feature by second click. |
+|  [cluster?](./webmap.vectoradapteroptions.cluster.md) |  | boolean | _(Optional)_ |
+|  [clusterMaxZoom?](./webmap.vectoradapteroptions.clustermaxzoom.md) |  | number | _(Optional)_ Max zoom to cluster points on |
+|  [clusterRadius?](./webmap.vectoradapteroptions.clusterradius.md) |  | number | _(Optional)_ Radius of each cluster when clustering points |
+|  [featureIdName?](./webmap.vectoradapteroptions.featureidname.md) |  | string | _(Optional)_ |
+|  [filter?](./webmap.vectoradapteroptions.filter.md) |  | [DataLayerFilter](./webmap.datalayerfilter.md)<!-- -->&lt;F, L&gt; | _(Optional)_ |
+|  [heightOffset?](./webmap.vectoradapteroptions.heightoffset.md) |  | number | _(Optional)_ |
+|  [interactive?](./webmap.vectoradapteroptions.interactive.md) |  | boolean | _(Optional)_ |
+|  [label?](./webmap.vectoradapteroptions.label.md) |  | (e: [LayerDefinition](./webmap.layerdefinition.md)<!-- -->&lt;F, L&gt;) =&gt; string | _(Optional)_ |
+|  [labelField?](./webmap.vectoradapteroptions.labelfield.md) |  | keyof P extends null ? string : keyof P | _(Optional)_ |
+|  [labelOnHover?](./webmap.vectoradapteroptions.labelonhover.md) |  | boolean | _(Optional)_ |
+|  [labelVisibility?](./webmap.vectoradapteroptions.labelvisibility.md) |  | boolean | _(Optional)_ Show set label immediately |
+|  [layout?](./webmap.vectoradapteroptions.layout.md) |  | any | _(Optional)_ |
+|  [multiselect?](./webmap.vectoradapteroptions.multiselect.md) |  | boolean | _(Optional)_ Indicates whether several objects can be selected in one layer. |
+|  [nativeFilter?](./webmap.vectoradapteroptions.nativefilter.md) |  | unknown | _(Optional)_ |
+|  [nativePaint?](./webmap.vectoradapteroptions.nativepaint.md) |  | boolean \| Record&lt;string, any&gt; | _(Optional)_ |
+|  [paint?](./webmap.vectoradapteroptions.paint.md) |  | [Paint](./paint.paint.md)<!-- -->&lt;F&gt; | _(Optional)_ Determine the appearance of the vector data geometries. |
+|  [popup?](./webmap.vectoradapteroptions.popup.md) |  | boolean | _(Optional)_ |
+|  [popupOnSelect?](./webmap.vectoradapteroptions.popuponselect.md) |  | boolean | _(Optional)_ |
+|  [popupOptions?](./webmap.vectoradapteroptions.popupoptions.md) |  | [PopupOptions](./webmap.popupoptions.md)<!-- -->&lt;F, L&gt; | _(Optional)_ |
+|  [propertiesFilter?](./webmap.vectoradapteroptions.propertiesfilter.md) |  | [PropertiesFilter](./properties-filter.propertiesfilter.md)<!-- -->&lt;P&gt; | _(Optional)_ |
+|  [selectable?](./webmap.vectoradapteroptions.selectable.md) |  | boolean | _(Optional)_ Determines whether objects are selected by mouse click. |
+|  [selectedLayout?](./webmap.vectoradapteroptions.selectedlayout.md) |  | any | _(Optional)_ |
+|  [selectedPaint?](./webmap.vectoradapteroptions.selectedpaint.md) |  | [Paint](./paint.paint.md)<!-- -->&lt;F&gt; | _(Optional)_ The paint that applies to the features after it becomes selected. |
+|  [selectOnHover?](./webmap.vectoradapteroptions.selectonhover.md) |  | boolean | _(Optional)_ Make the feature selected while mouseover. |
+|  [source?](./webmap.vectoradapteroptions.source.md) |  | unknown | _(Optional)_ |
+|  [unselectOnClick?](./webmap.vectoradapteroptions.unselectonclick.md) |  | boolean | _(Optional)_ If false, the selection will be reset when the user clicks the map. |
+|  [unselectOnSecondClick?](./webmap.vectoradapteroptions.unselectonsecondclick.md) |  | boolean | _(Optional)_ Deselects layer feature by second click. |
 
 ## Methods
 
 |  Method | Description |
 |  --- | --- |
-|  [onClick(opt)?](./webmap.vectoradapteroptions.onclick.md) | <i>(Optional)</i> |
-|  [onLayerClick(opt)?](./webmap.vectoradapteroptions.onlayerclick.md) | <i>(Optional)</i> |
-|  [onLayerSelect(opt)?](./webmap.vectoradapteroptions.onlayerselect.md) | <i>(Optional)</i> |
-|  [onMouseOut(opt)?](./webmap.vectoradapteroptions.onmouseout.md) | <i>(Optional)</i> Fired when the mouse leaves the layer. |
-|  [onMouseOver(opt)?](./webmap.vectoradapteroptions.onmouseover.md) | <i>(Optional)</i> Fired when the mouse enters the layer. |
-|  [onSelect(opt)?](./webmap.vectoradapteroptions.onselect.md) | <i>(Optional)</i> |
+|  [onClick(opt)?](./webmap.vectoradapteroptions.onclick.md) | _(Optional)_ |
+|  [onLayerClick(opt)?](./webmap.vectoradapteroptions.onlayerclick.md) | _(Optional)_ |
+|  [onLayerSelect(opt)?](./webmap.vectoradapteroptions.onlayerselect.md) | _(Optional)_ |
+|  [onMouseOut(opt)?](./webmap.vectoradapteroptions.onmouseout.md) | _(Optional)_ Fired when the mouse leaves the layer. |
+|  [onMouseOver(opt)?](./webmap.vectoradapteroptions.onmouseover.md) | _(Optional)_ Fired when the mouse enters the layer. |
+|  [onSelect(opt)?](./webmap.vectoradapteroptions.onselect.md) | _(Optional)_ |
 

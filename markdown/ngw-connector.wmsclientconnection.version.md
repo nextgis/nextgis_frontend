@@ -6,7 +6,7 @@
 
 WMS version
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 version?: string;

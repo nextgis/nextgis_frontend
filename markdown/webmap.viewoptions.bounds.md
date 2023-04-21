@@ -6,7 +6,7 @@
 
 Initial extent of the map, array of degrees in \[\_west\_, \_south\_, \_east\_, \_north\_\] order.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 bounds?: LngLatBoundsArray;

@@ -4,7 +4,7 @@
 
 ## MainLayerAdapter.showLayer() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 showLayer?(layer?: L): void;
@@ -14,9 +14,9 @@ showLayer?(layer?: L): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  layer | L | <i>(Optional)</i> |
+|  layer | L | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

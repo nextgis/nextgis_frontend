@@ -4,7 +4,7 @@
 
 ## Cache\_2.add() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 add(key: string, valueToSet: CacheValue<V> | (() => CacheValue<V>), props?: CacheMatchProps<O>, onlyFull?: boolean): CacheValue<V>;
@@ -16,10 +16,10 @@ add(key: string, valueToSet: CacheValue<V> | (() => CacheValue<V>), props?: Cach
 |  --- | --- | --- |
 |  key | string |  |
 |  valueToSet | CacheValue&lt;V&gt; \| (() =&gt; CacheValue&lt;V&gt;) |  |
-|  props | CacheMatchProps&lt;O&gt; | <i>(Optional)</i> |
-|  onlyFull | boolean | <i>(Optional)</i> |
+|  props | CacheMatchProps&lt;O&gt; | _(Optional)_ |
+|  onlyFull | boolean | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 CacheValue&lt;V&gt;
 

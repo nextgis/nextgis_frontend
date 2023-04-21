@@ -4,7 +4,7 @@
 
 ## Resource.interfaces property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 interfaces: any[];

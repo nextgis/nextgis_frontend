@@ -4,7 +4,7 @@
 
 ## NgwExtent interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface NgwExtent 

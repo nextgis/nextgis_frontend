@@ -4,7 +4,7 @@
 
 ## MapboxglMapAdapter.removeControl() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 removeControl(control: IControl): void;
@@ -16,7 +16,7 @@ removeControl(control: IControl): void;
 |  --- | --- | --- |
 |  control | IControl |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

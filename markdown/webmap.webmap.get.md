@@ -4,7 +4,7 @@
 
 ## WebMap.get() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static get<T extends WebMap = WebMap>(id: number): T;
@@ -16,7 +16,7 @@ static get<T extends WebMap = WebMap>(id: number): T;
 |  --- | --- | --- |
 |  id | number |  |
 
-<b>Returns:</b>
+**Returns:**
 
 T
 

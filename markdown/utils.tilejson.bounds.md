@@ -6,7 +6,7 @@
 
 Default: \[-180, -90, 180, 90\]. The maximum extent of available map tiles. Bounds MUST define an area covered by all zoom levels. The bounds are represented in WGS:84 latitude and longitude values, in the order left, bottom, right, top. Values may be integers or floating point numbers.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 bounds?: number[];

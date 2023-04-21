@@ -6,12 +6,12 @@
 
 Returns the map's current zoom level.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getZoom(): number | undefined;
 ```
-<b>Returns:</b>
+**Returns:**
 
 number \| undefined
 

@@ -4,7 +4,7 @@
 
 ## LeafletMapAdapter.onMapClick() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onMapClick(evt: LeafletMouseEvent): void;
@@ -16,7 +16,7 @@ onMapClick(evt: LeafletMouseEvent): void;
 |  --- | --- | --- |
 |  evt | LeafletMouseEvent |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

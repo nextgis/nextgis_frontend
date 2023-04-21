@@ -4,7 +4,7 @@
 
 ## CreateStyleOptions.style property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 style?: unknown;

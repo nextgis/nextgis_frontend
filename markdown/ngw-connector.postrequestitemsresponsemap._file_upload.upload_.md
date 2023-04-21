@@ -4,7 +4,7 @@
 
 ## PostRequestItemsResponseMap."file\_upload.upload" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'file_upload.upload': FileUploadResp;

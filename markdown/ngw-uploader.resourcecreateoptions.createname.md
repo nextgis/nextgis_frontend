@@ -4,7 +4,7 @@
 
 ## ResourceCreateOptions.createName property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 createName?: (name: string) => string;

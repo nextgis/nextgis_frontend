@@ -4,7 +4,7 @@
 
 ## BaselayerSelect.render() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 render(h: CreateElement): VNode;
@@ -16,7 +16,7 @@ render(h: CreateElement): VNode;
 |  --- | --- | --- |
 |  h | CreateElement |  |
 
-<b>Returns:</b>
+**Returns:**
 
 VNode
 

@@ -4,7 +4,7 @@
 
 ## NgwTimeFormat.hour property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 hour: number;

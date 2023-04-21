@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."wfsserver.wfs" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'wfsserver.wfs': {

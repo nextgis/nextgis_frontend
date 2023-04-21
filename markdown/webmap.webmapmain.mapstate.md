@@ -4,7 +4,7 @@
 
 ## WebMapMain.mapState property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 mapState: Type<StateItem>[];

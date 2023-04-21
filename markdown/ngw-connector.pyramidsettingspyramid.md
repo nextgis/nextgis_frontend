@@ -4,7 +4,7 @@
 
 ## PyramidSettingsPyramid interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface PyramidSettingsPyramid 
@@ -14,9 +14,9 @@ export interface PyramidSettingsPyramid
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [company\_logo?](./ngw-connector.pyramidsettingspyramid.company_logo.md) |  | [PyramidSettingsPyramidCompanyLogo](./ngw-connector.pyramidsettingspyramidcompanylogo.md) | <i>(Optional)</i> |
+|  [company\_logo?](./ngw-connector.pyramidsettingspyramid.company_logo.md) |  | [PyramidSettingsPyramidCompanyLogo](./ngw-connector.pyramidsettingspyramidcompanylogo.md) | _(Optional)_ |
 |  [degree\_format](./ngw-connector.pyramidsettingspyramid.degree_format.md) |  | 'dd' |  |
 |  [measurement\_srid](./ngw-connector.pyramidsettingspyramid.measurement_srid.md) |  | 4326 |  |
-|  [support\_url?](./ngw-connector.pyramidsettingspyramid.support_url.md) |  | string | <i>(Optional)</i> |
+|  [support\_url?](./ngw-connector.pyramidsettingspyramid.support_url.md) |  | string | _(Optional)_ |
 |  [units](./ngw-connector.pyramidsettingspyramid.units.md) |  | 'metric' |  |
 

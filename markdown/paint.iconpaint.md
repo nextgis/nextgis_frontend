@@ -4,21 +4,21 @@
 
 ## IconPaint interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface IconPaint extends BasePaintTypes 
 ```
-<b>Extends:</b> BasePaintTypes
+**Extends:** BasePaintTypes
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [className?](./paint.iconpaint.classname.md) |  | string | <i>(Optional)</i> |
-|  [html?](./paint.iconpaint.html.md) |  | string | <i>(Optional)</i> |
-|  [iconAnchor?](./paint.iconpaint.iconanchor.md) |  | \[number, number\] | <i>(Optional)</i> |
-|  [iconSize?](./paint.iconpaint.iconsize.md) |  | \[number, number\] | <i>(Optional)</i> |
-|  [svg?](./paint.iconpaint.svg.md) |  | HTMLElement | <i>(Optional)</i> |
+|  [className?](./paint.iconpaint.classname.md) |  | string | _(Optional)_ |
+|  [html?](./paint.iconpaint.html.md) |  | string | _(Optional)_ |
+|  [iconAnchor?](./paint.iconpaint.iconanchor.md) |  | \[number, number\] | _(Optional)_ |
+|  [iconSize?](./paint.iconpaint.iconsize.md) |  | \[number, number\] | _(Optional)_ |
+|  [svg?](./paint.iconpaint.svg.md) |  | HTMLElement | _(Optional)_ |
 |  [type](./paint.iconpaint.type.md) |  | 'icon' |  |
 

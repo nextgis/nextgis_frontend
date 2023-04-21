@@ -4,10 +4,10 @@
 
 ## LayerAdapter type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type LayerAdapter<M = any, L = any, O extends AdapterOptions = AdapterOptions> = MainLayerAdapter<M, L, O> | VectorLayerAdapter<M, L, O>;
 ```
-<b>References:</b> [AdapterOptions](./webmap.adapteroptions.md)<!-- -->, [MainLayerAdapter](./webmap.mainlayeradapter.md)<!-- -->, [VectorLayerAdapter](./webmap.vectorlayeradapter.md)
+**References:** [AdapterOptions](./webmap.adapteroptions.md)<!-- -->, [MainLayerAdapter](./webmap.mainlayeradapter.md)<!-- -->, [VectorLayerAdapter](./webmap.vectorlayeradapter.md)
 

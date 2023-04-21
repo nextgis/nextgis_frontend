@@ -4,7 +4,7 @@
 
 ## QmsBasemap.last\_status property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 last_status?: number;

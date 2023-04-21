@@ -4,7 +4,7 @@
 
 ## Connection.getOrCreateResource() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getOrCreateResource<P extends typeof BaseResource>(Resource: P, options: SyncOptions): Promise<[P, boolean]>;
@@ -17,7 +17,7 @@ getOrCreateResource<P extends typeof BaseResource>(Resource: P, options: SyncOpt
 |  Resource | P |  |
 |  options | SyncOptions |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;\[P, boolean\]&gt;
 

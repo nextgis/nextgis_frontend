@@ -4,12 +4,12 @@
 
 ## Item.initProperties() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 initProperties(): void;
 ```
-<b>Returns:</b>
+**Returns:**
 
 void
 

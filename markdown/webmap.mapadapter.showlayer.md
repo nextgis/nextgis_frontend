@@ -4,7 +4,7 @@
 
 ## MapAdapter.showLayer() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 showLayer(layer: L): void;
@@ -16,7 +16,7 @@ showLayer(layer: L): void;
 |  --- | --- | --- |
 |  layer | L |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

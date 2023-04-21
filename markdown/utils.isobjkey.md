@@ -4,7 +4,7 @@
 
 ## isObjKey() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function isObjKey<O extends Obj = Obj>(obj: O, key: unknown): key is keyof O;
@@ -17,7 +17,7 @@ export declare function isObjKey<O extends Obj = Obj>(obj: O, key: unknown): key
 |  obj | O |  |
 |  key | unknown |  |
 
-<b>Returns:</b>
+**Returns:**
 
 key is keyof O
 

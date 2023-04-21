@@ -4,7 +4,7 @@
 
 ## ExtendNgwWebmapLayerAdapterOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface ExtendNgwWebmapLayerAdapterOptions 
@@ -14,7 +14,7 @@ export interface ExtendNgwWebmapLayerAdapterOptions
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [baseUrl?](./ngw-kit.extendngwwebmaplayeradapteroptions.baseurl.md) |  | string | <i>(Optional)</i> |
-|  [connector](./ngw-kit.extendngwwebmaplayeradapteroptions.connector.md) |  | NgwConnector |  |
+|  [baseUrl?](./ngw-kit.extendngwwebmaplayeradapteroptions.baseurl.md) |  | string | _(Optional)_ |
+|  [connector](./ngw-kit.extendngwwebmaplayeradapteroptions.connector.md) |  | [NgwConnector](./ngw-connector.ngwconnector.md) |  |
 |  [webMap](./ngw-kit.extendngwwebmaplayeradapteroptions.webmap.md) |  | [WebMap](./webmap.webmap.md) |  |
 

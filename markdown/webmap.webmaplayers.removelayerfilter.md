@@ -4,7 +4,7 @@
 
 ## WebMapLayers.removeLayerFilter() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 removeLayerFilter(layerDef: LayerDef): void;
@@ -16,7 +16,7 @@ removeLayerFilter(layerDef: LayerDef): void;
 |  --- | --- | --- |
 |  layerDef | [LayerDef](./webmap.layerdef.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

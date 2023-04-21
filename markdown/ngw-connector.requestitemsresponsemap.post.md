@@ -4,7 +4,7 @@
 
 ## RequestItemsResponseMap.POST property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 POST: PostRequestItemsResponseMap;

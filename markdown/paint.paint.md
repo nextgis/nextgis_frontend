@@ -4,10 +4,10 @@
 
 ## Paint type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type Paint<F extends Feature = Feature, P extends Properties | null = F['properties']> = VectorAdapterLayerPaint | GetPaintCallback<F> | PropertiesPaint<P extends null ? Properties : P>;
 ```
-<b>References:</b> [VectorAdapterLayerPaint](./paint.vectoradapterlayerpaint.md)<!-- -->, [GetPaintCallback](./paint.getpaintcallback.md)<!-- -->, [PropertiesPaint](./paint.propertiespaint.md)
+**References:** [VectorAdapterLayerPaint](./paint.vectoradapterlayerpaint.md)<!-- -->, [GetPaintCallback](./paint.getpaintcallback.md)<!-- -->, [PropertiesPaint](./paint.propertiespaint.md)
 

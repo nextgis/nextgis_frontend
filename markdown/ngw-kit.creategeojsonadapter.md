@@ -4,7 +4,7 @@
 
 ## createGeoJsonAdapter() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function createGeoJsonAdapter(props: GetClassAdapterOptions): Promise<Type<VectorLayerAdapter>>;
@@ -16,7 +16,7 @@ export declare function createGeoJsonAdapter(props: GetClassAdapterOptions): Pro
 |  --- | --- | --- |
 |  props | [GetClassAdapterOptions](./ngw-kit.getclassadapteroptions.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[Type](./utils.type.md)<!-- -->&lt;[VectorLayerAdapter](./webmap.vectorlayeradapter.md)<!-- -->&gt;&gt;
 

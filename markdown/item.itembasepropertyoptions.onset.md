@@ -4,7 +4,7 @@
 
 ## ItemBasePropertyOptions.onSet property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onSet?: (value?: V, options?: ItemBasePropertyOptions<V>, item?: Item) => void;

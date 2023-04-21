@@ -4,7 +4,7 @@
 
 ## VectorAdapterOptions.labelOnHover property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 labelOnHover?: boolean;

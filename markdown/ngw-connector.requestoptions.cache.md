@@ -4,7 +4,7 @@
 
 ## RequestOptions.cache property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 cache?: boolean;

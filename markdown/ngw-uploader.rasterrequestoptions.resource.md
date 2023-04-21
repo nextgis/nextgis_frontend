@@ -4,7 +4,7 @@
 
 ## RasterRequestOptions.resource property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 resource: RasterRequestResourceOptions;

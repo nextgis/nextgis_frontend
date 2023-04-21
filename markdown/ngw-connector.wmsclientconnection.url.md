@@ -6,7 +6,7 @@
 
 WMS service url
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 url: string;

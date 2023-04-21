@@ -4,12 +4,12 @@
 
 ## Sphere3DPaint interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface Sphere3DPaint extends Base3DPaint 
 ```
-<b>Extends:</b> [Base3DPaint](./paint.base3dpaint.md)
+**Extends:** [Base3DPaint](./paint.base3dpaint.md)
 
 ## Properties
 

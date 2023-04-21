@@ -4,7 +4,7 @@
 
 ## LoadScriptOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface LoadScriptOptions 
@@ -14,9 +14,9 @@ export interface LoadScriptOptions
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [async?](./dom.loadscriptoptions.async.md) |  | boolean | <i>(Optional)</i> |
-|  [crossOrigin?](./dom.loadscriptoptions.crossorigin.md) |  | 'anonymous' \| string | <i>(Optional)</i> |
-|  [data?](./dom.loadscriptoptions.data.md) |  | Record&lt;string, string \| number \| boolean&gt; | <i>(Optional)</i> |
-|  [defer?](./dom.loadscriptoptions.defer.md) |  | boolean | <i>(Optional)</i> |
-|  [id?](./dom.loadscriptoptions.id.md) |  | string | <i>(Optional)</i> |
+|  [async?](./dom.loadscriptoptions.async.md) |  | boolean | _(Optional)_ |
+|  [crossOrigin?](./dom.loadscriptoptions.crossorigin.md) |  | 'anonymous' \| string | _(Optional)_ |
+|  [data?](./dom.loadscriptoptions.data.md) |  | Record&lt;string, string \| number \| boolean&gt; | _(Optional)_ |
+|  [defer?](./dom.loadscriptoptions.defer.md) |  | boolean | _(Optional)_ |
+|  [id?](./dom.loadscriptoptions.id.md) |  | string | _(Optional)_ |
 

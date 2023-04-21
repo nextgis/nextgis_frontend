@@ -4,7 +4,7 @@
 
 ## LoadScriptOptions.async property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 async?: boolean;

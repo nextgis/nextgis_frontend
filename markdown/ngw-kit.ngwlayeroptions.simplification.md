@@ -4,7 +4,7 @@
 
 ## NgwLayerOptions.simplification property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 simplification?: number;

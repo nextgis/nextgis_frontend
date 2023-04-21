@@ -6,7 +6,7 @@
 
 Longitude, measured in degrees.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 lng: number;

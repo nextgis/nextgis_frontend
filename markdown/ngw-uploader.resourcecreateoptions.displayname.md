@@ -4,7 +4,7 @@
 
 ## ResourceCreateOptions.displayName property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 displayName?: string;

@@ -4,12 +4,12 @@
 
 ## CheckProperty.getHierarchyValue() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getHierarchyValue(): boolean | undefined;
 ```
-<b>Returns:</b>
+**Returns:**
 
 boolean \| undefined
 

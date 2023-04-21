@@ -6,7 +6,7 @@
 
 State of readiness of the card for use.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 isLoaded?: boolean;

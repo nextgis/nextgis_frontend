@@ -6,7 +6,7 @@
 
 Callback function that will be called when clicking on a layer.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onLayerClick?(event: OnLayerMouseOptions): Promise<any>;
@@ -18,7 +18,7 @@ onLayerClick?(event: OnLayerMouseOptions): Promise<any>;
 |  --- | --- | --- |
 |  event | [OnLayerMouseOptions](./webmap.onlayermouseoptions.md) | Data that is transmitted when you click on a layer. |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;any&gt;
 

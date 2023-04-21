@@ -4,7 +4,7 @@
 
 ## RequestItemsResponseMap.GET property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 GET: GetRequestItemsResponseMap;

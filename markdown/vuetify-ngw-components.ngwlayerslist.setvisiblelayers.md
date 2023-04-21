@@ -4,7 +4,7 @@
 
 ## NgwLayersList.setVisibleLayers() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 setVisibleLayers(selection: string[], old: string[]): void;
@@ -17,7 +17,7 @@ setVisibleLayers(selection: string[], old: string[]): void;
 |  selection | string\[\] |  |
 |  old | string\[\] |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

@@ -4,7 +4,7 @@
 
 ## OlMapAdapter.create() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 create(options: MapOptions<Map>): void;
@@ -16,7 +16,7 @@ create(options: MapOptions<Map>): void;
 |  --- | --- | --- |
 |  options | [MapOptions](./webmap.mapoptions.md)<!-- -->&lt;Map&gt; |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

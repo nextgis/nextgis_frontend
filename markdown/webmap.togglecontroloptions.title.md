@@ -6,7 +6,7 @@
 
 Button HTMLElement title, can be set for each state (`on` or `off`<!-- -->).
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 title?: string | TitleToggle;

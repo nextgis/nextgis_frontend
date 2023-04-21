@@ -4,7 +4,7 @@
 
 ## FeatureRequestParams interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface FeatureRequestParams 
@@ -14,12 +14,12 @@ export interface FeatureRequestParams
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [extensions?](./ngw-kit.featurerequestparams.extensions.md) |  | string | <i>(Optional)</i> |
-|  [fields?](./ngw-kit.featurerequestparams.fields.md) |  | string | <i>(Optional)</i> |
-|  [geom\_format?](./ngw-kit.featurerequestparams.geom_format.md) |  | [GeomFormat](./ngw-kit.geomformat.md) | <i>(Optional)</i> |
-|  [geom?](./ngw-kit.featurerequestparams.geom.md) |  | 'yes' \| 'no' | <i>(Optional)</i> |
-|  [intersects?](./ngw-kit.featurerequestparams.intersects.md) |  | string | <i>(Optional)</i> |
-|  [limit?](./ngw-kit.featurerequestparams.limit.md) |  | number | <i>(Optional)</i> |
-|  [order\_by?](./ngw-kit.featurerequestparams.order_by.md) |  | string | <i>(Optional)</i> |
-|  [srs?](./ngw-kit.featurerequestparams.srs.md) |  | number | <i>(Optional)</i> |
+|  [extensions?](./ngw-kit.featurerequestparams.extensions.md) |  | string | _(Optional)_ |
+|  [fields?](./ngw-kit.featurerequestparams.fields.md) |  | string | _(Optional)_ |
+|  [geom\_format?](./ngw-kit.featurerequestparams.geom_format.md) |  | [GeomFormat](./ngw-kit.geomformat.md) | _(Optional)_ |
+|  [geom?](./ngw-kit.featurerequestparams.geom.md) |  | 'yes' \| 'no' | _(Optional)_ |
+|  [intersects?](./ngw-kit.featurerequestparams.intersects.md) |  | string | _(Optional)_ |
+|  [limit?](./ngw-kit.featurerequestparams.limit.md) |  | number | _(Optional)_ |
+|  [order\_by?](./ngw-kit.featurerequestparams.order_by.md) |  | string | _(Optional)_ |
+|  [srs?](./ngw-kit.featurerequestparams.srs.md) |  | number | _(Optional)_ |
 

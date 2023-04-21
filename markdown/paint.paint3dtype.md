@@ -4,7 +4,7 @@
 
 ## Paint3DType type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type Paint3DType = 'ellipsoid' | 'sphere';

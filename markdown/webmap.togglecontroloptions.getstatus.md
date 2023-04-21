@@ -6,7 +6,7 @@
 
 Get current control status.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getStatus?: () => boolean;

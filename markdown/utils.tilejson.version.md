@@ -6,7 +6,7 @@
 
 Default: "1.0.0". A semver.org style version number. When changes across tiles are introduced, the minor version MUST change. This may lead to cut off labels. Therefore, implementors can decide to clean their cache when the minor version changes. Changes to the patch level MUST only have changes to tiles that are contained within one tile. When tiles change significantly, the major version MUST be increased. Implementations MUST NOT use tiles with different major versions.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 version?: string;

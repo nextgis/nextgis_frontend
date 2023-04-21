@@ -4,7 +4,7 @@
 
 ## NgwMapContextInterface interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface NgwMapContextInterface 
@@ -14,8 +14,8 @@ export interface NgwMapContextInterface
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [layerContainer?](./react-ngw-map.ngwmapcontextinterface.layercontainer.md) |  | [ControlledLayer](./react-ngw-map.controlledlayer.md) | <i>(Optional)</i> |
-|  [ngwMap](./react-ngw-map.ngwmapcontextinterface.ngwmap.md) |  | [NgwMap](./ngw-map.ngwmap.md) |  |
-|  [overlayContainer?](./react-ngw-map.ngwmapcontextinterface.overlaycontainer.md) |  | [LayerAdapter](./webmap.layeradapter.md) | <i>(Optional)</i> |
-|  [pane?](./react-ngw-map.ngwmapcontextinterface.pane.md) |  | string | <i>(Optional)</i> |
+|  [layerContainer?](./react-ngw-map.ngwmapcontextinterface.layercontainer.md) |  | [ControlledLayer](./react-ngw-map.controlledlayer.md) | _(Optional)_ |
+|  [ngwMap](./react-ngw-map.ngwmapcontextinterface.ngwmap.md) |  | NgwMap |  |
+|  [overlayContainer?](./react-ngw-map.ngwmapcontextinterface.overlaycontainer.md) |  | LayerAdapter | _(Optional)_ |
+|  [pane?](./react-ngw-map.ngwmapcontextinterface.pane.md) |  | string | _(Optional)_ |
 

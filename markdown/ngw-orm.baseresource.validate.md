@@ -4,12 +4,12 @@
 
 ## BaseResource.validate() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static validate(): ValidateErrorType[];
 ```
-<b>Returns:</b>
+**Returns:**
 
 ValidateErrorType\[\]
 

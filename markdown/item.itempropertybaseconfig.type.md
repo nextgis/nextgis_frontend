@@ -4,7 +4,7 @@
 
 ## ItemPropertyBaseConfig.type property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 type?: ItemPropertyTypes[K];

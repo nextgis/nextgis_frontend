@@ -5,7 +5,7 @@
 ## WebMapEvents."layer:preshow" property
 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'layer:preshow': LayerAdapter;

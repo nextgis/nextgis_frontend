@@ -4,7 +4,7 @@
 
 ## SrsItem.wkt property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 wkt: string;

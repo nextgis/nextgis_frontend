@@ -9,7 +9,7 @@
 > use `params` option instead
 > 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 resourceId?: string | number;

@@ -4,7 +4,7 @@
 
 ## MapboxglMapAdapter.addControl() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 addControl(control: IControl, position: ControlPosition): IControl | undefined;
@@ -17,7 +17,7 @@ addControl(control: IControl, position: ControlPosition): IControl | undefined;
 |  control | IControl |  |
 |  position | [ControlPosition](./webmap.controlposition.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 IControl \| undefined
 

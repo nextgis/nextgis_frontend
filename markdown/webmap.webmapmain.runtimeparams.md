@@ -4,7 +4,7 @@
 
 ## WebMapMain.runtimeParams property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 readonly runtimeParams: RuntimeParams[];

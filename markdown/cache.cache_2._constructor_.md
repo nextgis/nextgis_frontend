@@ -6,7 +6,7 @@
 
 Constructs a new instance of the `Cache` class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 constructor(options?: CacheOptions);
@@ -16,5 +16,5 @@ constructor(options?: CacheOptions);
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | CacheOptions | <i>(Optional)</i> |
+|  options | CacheOptions | _(Optional)_ |
 

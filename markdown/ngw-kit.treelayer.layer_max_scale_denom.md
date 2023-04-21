@@ -4,7 +4,7 @@
 
 ## TreeLayer.layer\_max\_scale\_denom property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 layer_max_scale_denom?: number;

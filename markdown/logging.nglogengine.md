@@ -4,12 +4,12 @@
 
 ## NgLogEngine class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class NgLogEngine<D = null> implements LogEngine<D> 
 ```
-<b>Implements:</b> [LogEngine](./logging.logengine.md)
+**Implements:** [LogEngine](./logging.logengine.md)<!-- -->&lt;D&gt;
 
 ## Constructors
 
@@ -25,9 +25,9 @@ export declare class NgLogEngine<D = null> implements LogEngine<D>
 |  [delay](./logging.nglogengine.delay.md) |  | number |  |
 |  [enabled](./logging.nglogengine.enabled.md) |  | boolean |  |
 |  [nglogUrl](./logging.nglogengine.nglogurl.md) |  | string |  |
-|  [ngwConnector](./logging.nglogengine.ngwconnector.md) |  | NgwConnector |  |
+|  [ngwConnector](./logging.nglogengine.ngwconnector.md) |  | [NgwConnector](./ngw-connector.ngwconnector.md) |  |
 |  [sessionId](./logging.nglogengine.sessionid.md) |  | [NgLogEngineSessionId](./logging.nglogenginesessionid.md)<!-- -->&lt;D&gt; | Add <code>sessionId</code> to each log. Use number to set random generated string length |
-|  [stopOnConnectionError?](./logging.nglogengine.stoponconnectionerror.md) |  | false | <i>(Optional)</i> |
+|  [stopOnConnectionError?](./logging.nglogengine.stoponconnectionerror.md) |  | false | _(Optional)_ |
 
 ## Methods
 

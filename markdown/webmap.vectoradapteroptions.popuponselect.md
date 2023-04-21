@@ -4,7 +4,7 @@
 
 ## VectorAdapterOptions.popupOnSelect property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 popupOnSelect?: boolean;

@@ -4,7 +4,7 @@
 
 ## AdapterOptions.layers property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 layers?: string;

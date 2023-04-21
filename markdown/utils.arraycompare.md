@@ -6,7 +6,7 @@
 
 Comparison of the contents of two arrays. Position of elements is ignored.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function arrayCompare(array1: any[], array2: any[]): boolean;
@@ -19,7 +19,7 @@ export declare function arrayCompare(array1: any[], array2: any[]): boolean;
 |  array1 | any\[\] |  |
 |  array2 | any\[\] |  |
 
-<b>Returns:</b>
+**Returns:**
 
 boolean
 

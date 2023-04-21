@@ -4,7 +4,7 @@
 
 ## LoadingQueue.waiting property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 waiting: Array<{

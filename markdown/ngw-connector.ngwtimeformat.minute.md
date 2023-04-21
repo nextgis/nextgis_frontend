@@ -4,7 +4,7 @@
 
 ## NgwTimeFormat.minute property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 minute: number;

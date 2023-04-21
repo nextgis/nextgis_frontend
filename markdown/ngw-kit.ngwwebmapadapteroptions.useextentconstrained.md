@@ -6,7 +6,7 @@
 
 Set max extent from ngw webmap basemap settings
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 useExtentConstrained?: boolean;

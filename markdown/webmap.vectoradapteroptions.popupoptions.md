@@ -4,7 +4,7 @@
 
 ## VectorAdapterOptions.popupOptions property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 popupOptions?: PopupOptions<F, L>;

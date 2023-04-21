@@ -4,7 +4,7 @@
 
 ## AvailableStatus type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type AvailableStatus = 'upload' | 'create-vector' | 'create-raster' | 'create-style' | 'create-wms' | 'create-wms-connection' | 'create-wms-connected-layer' | 'create-group';

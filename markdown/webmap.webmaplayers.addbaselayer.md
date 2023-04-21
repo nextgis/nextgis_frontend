@@ -6,7 +6,7 @@
 
 Shortcut method to create base layer
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 addBaseLayer<K extends keyof LayerAdapters, O extends AdapterOptions = AdapterOptions>(adapter: K | Type<LayerAdapters[K]>, options?: O | LayerAdaptersOptions[K]): Promise<LayerAdapter>;
@@ -17,9 +17,9 @@ addBaseLayer<K extends keyof LayerAdapters, O extends AdapterOptions = AdapterOp
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  adapter | K \| [Type](./utils.type.md)<!-- -->&lt;[LayerAdapters](./webmap.layeradapters.md)<!-- -->\[K\]&gt; |  |
-|  options | O \| [LayerAdaptersOptions](./webmap.layeradaptersoptions.md)<!-- -->\[K\] | <i>(Optional)</i> |
+|  options | O \| [LayerAdaptersOptions](./webmap.layeradaptersoptions.md)<!-- -->\[K\] | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[LayerAdapter](./webmap.layeradapter.md)<!-- -->&gt;
 

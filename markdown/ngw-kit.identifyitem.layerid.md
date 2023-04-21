@@ -4,7 +4,7 @@
 
 ## IdentifyItem.layerId property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 readonly layerId: number;

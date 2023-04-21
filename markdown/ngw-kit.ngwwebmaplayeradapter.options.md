@@ -4,7 +4,7 @@
 
 ## NgwWebmapLayerAdapter.options property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 options: NgwWebmapAdapterOptions;

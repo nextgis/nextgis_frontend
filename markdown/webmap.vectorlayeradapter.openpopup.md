@@ -4,7 +4,7 @@
 
 ## VectorLayerAdapter.openPopup() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 openPopup?(findFeatureCb?: DataLayerFilter<F, L>, options?: PopupOptions): void;
@@ -14,10 +14,10 @@ openPopup?(findFeatureCb?: DataLayerFilter<F, L>, options?: PopupOptions): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  findFeatureCb | [DataLayerFilter](./webmap.datalayerfilter.md)<!-- -->&lt;F, L&gt; | <i>(Optional)</i> |
-|  options | [PopupOptions](./webmap.popupoptions.md) | <i>(Optional)</i> |
+|  findFeatureCb | [DataLayerFilter](./webmap.datalayerfilter.md)<!-- -->&lt;F, L&gt; | _(Optional)_ |
+|  options | [PopupOptions](./webmap.popupoptions.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

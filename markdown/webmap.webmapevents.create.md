@@ -5,7 +5,7 @@
 ## WebMapEvents.create property
 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 create: WebMap;

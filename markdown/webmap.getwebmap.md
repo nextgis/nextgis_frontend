@@ -4,7 +4,7 @@
 
 ## getWebMap() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function getWebMap<T extends WebMap = WebMap>(id: number): T;
@@ -16,7 +16,7 @@ export declare function getWebMap<T extends WebMap = WebMap>(id: number): T;
 |  --- | --- | --- |
 |  id | number |  |
 
-<b>Returns:</b>
+**Returns:**
 
 T
 

@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."webmap.display.tiny" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'webmap.display.tiny': {

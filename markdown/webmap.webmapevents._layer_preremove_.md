@@ -5,7 +5,7 @@
 ## WebMapEvents."layer:preremove" property
 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'layer:preremove': LayerAdapter;

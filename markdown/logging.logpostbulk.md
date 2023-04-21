@@ -4,10 +4,10 @@
 
 ## LogPostBulk type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type LogPostBulk = Log[];
 ```
-<b>References:</b> [Log](./logging.log.md)
+**References:** [Log](./logging.log.md)
 

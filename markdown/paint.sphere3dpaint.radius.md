@@ -4,7 +4,7 @@
 
 ## Sphere3DPaint.radius property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 radius: number;

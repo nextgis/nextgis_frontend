@@ -6,7 +6,7 @@
 
 Helper function for determining the HTML element through the transmitted parameters
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function getElement(el: HTMLElement | string): HTMLElement | undefined;
@@ -18,7 +18,7 @@ export declare function getElement(el: HTMLElement | string): HTMLElement | unde
 |  --- | --- | --- |
 |  el | HTMLElement \| string |  |
 
-<b>Returns:</b>
+**Returns:**
 
 HTMLElement \| undefined
 

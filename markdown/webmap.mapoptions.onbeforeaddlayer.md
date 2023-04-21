@@ -6,7 +6,7 @@
 
 The callback function is calling before adding each layer
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onBeforeAddLayer?: OnBeforeLayerAdd;

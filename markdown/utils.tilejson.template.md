@@ -6,7 +6,7 @@
 
 Default: null. Contains a mustache template to be used to format data from grids for interaction. See https://github.com/mapbox/utfgrid-spec/tree/master/1.2 for the interactivity specification.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 template?: string;

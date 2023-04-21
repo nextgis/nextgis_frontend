@@ -6,7 +6,7 @@
 
 Create any toggler control button
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 createToggleControl(options: ToggleControlOptions): Promise<(C & ToggleControl) | undefined>;
@@ -18,7 +18,7 @@ createToggleControl(options: ToggleControlOptions): Promise<(C & ToggleControl) 
 |  --- | --- | --- |
 |  options | [ToggleControlOptions](./webmap.togglecontroloptions.md) | Options for control layout customization and assigning a callback function |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;(C &amp; [ToggleControl](./webmap.togglecontrol.md)<!-- -->) \| undefined&gt;
 

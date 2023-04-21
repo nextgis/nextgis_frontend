@@ -4,7 +4,7 @@
 
 ## ItemPropertyTypes.any property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 any: any;

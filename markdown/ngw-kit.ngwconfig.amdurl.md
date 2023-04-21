@@ -4,7 +4,7 @@
 
 ## NgwConfig.amdUrl property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 amdUrl: string;

@@ -4,7 +4,7 @@
 
 ## ReactNgwOl() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function ReactNgwOl<Props extends MapContainerProps = MapContainerProps<Map>>(props: Props): import("react").FunctionComponentElement<import("@nextgis/react-ngw-map").ReactNgwMapProps>;
@@ -16,7 +16,7 @@ export declare function ReactNgwOl<Props extends MapContainerProps = MapContaine
 |  --- | --- | --- |
 |  props | Props |  |
 
-<b>Returns:</b>
+**Returns:**
 
 import("react").FunctionComponentElement&lt;import("@nextgis/react-ngw-map").[ReactNgwMapProps](./react-ngw-map.reactngwmapprops.md)<!-- -->&gt;
 

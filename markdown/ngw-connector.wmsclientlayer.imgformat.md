@@ -6,7 +6,7 @@
 
 Image format. Available values can fetched from WMS connection ('image/png').
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 imgformat: string;

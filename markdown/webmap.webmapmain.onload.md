@@ -6,7 +6,7 @@
 
 helper method to wait for events to load. By default, card creation is tracked
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onLoad(event?: keyof WebMapEvents): Promise<this>;
@@ -16,9 +16,9 @@ onLoad(event?: keyof WebMapEvents): Promise<this>;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  event | keyof [WebMapEvents](./webmap.webmapevents.md) | <i>(Optional)</i> The name of the event whose status is checked |
+|  event | keyof [WebMapEvents](./webmap.webmapevents.md) | _(Optional)_ The name of the event whose status is checked |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;this&gt;
 

@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."mapserver.qml\_transform" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'mapserver.qml_transform': null;

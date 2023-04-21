@@ -1,8 +1,8 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.28.6",
-    "schemaVersion": 1009,
+    "toolVersion": "7.34.4",
+    "schemaVersion": 1011,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
       "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
@@ -197,10 +197,16 @@
             },
             {
               "kind": "Content",
-              "text": "> "
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": " "
             }
           ],
+          "fileUrlPath": "src/index.ts",
           "releaseTag": "Public",
+          "isAbstract": false,
           "name": "NgwLeaflet",
           "preserveMemberOrder": false,
           "members": [
@@ -267,7 +273,7 @@
                 {
                   "kind": "Reference",
                   "text": "NgwLeaflet",
-                  "canonicalReference": "@nextgis/ngw-leaflet!~NgwLeaflet:class"
+                  "canonicalReference": "@nextgis/ngw-leaflet!NgwLeaflet:class"
                 },
                 {
                   "kind": "Content",
@@ -297,12 +303,13 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "create"
             }
           ],
           "extendsTokenRange": {
             "startIndex": 1,
-            "endIndex": 4
+            "endIndex": 5
           },
           "implementsTokenRanges": []
         }

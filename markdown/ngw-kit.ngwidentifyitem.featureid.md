@@ -4,7 +4,7 @@
 
 ## NgwIdentifyItem.featureId property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 featureId: number;

@@ -1,8 +1,8 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.28.6",
-    "schemaVersion": 1009,
+    "toolVersion": "7.34.4",
+    "schemaVersion": 1011,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
       "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
@@ -213,6 +213,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/uploadFeatureAttachment.ts",
           "returnTypeTokenRange": {
             "startIndex": 6,
             "endIndex": 7
@@ -261,7 +262,7 @@
             {
               "kind": "Reference",
               "text": "NgwConnector",
-              "canonicalReference": "@nextgis/ngw-connector!~NgwConnector:class"
+              "canonicalReference": "@nextgis/ngw-connector!NgwConnector:class"
             },
             {
               "kind": "Content",
@@ -299,6 +300,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/utils.ts",
           "returnTypeTokenRange": {
             "startIndex": 7,
             "endIndex": 13
@@ -343,6 +345,7 @@
               "text": "export interface AppSettings "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "AppSettings",
           "preserveMemberOrder": false,
@@ -581,6 +584,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "ClassAdapter",
           "typeTokenRange": {
@@ -598,6 +602,7 @@
               "text": "export interface CompanyLogoOptions "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "CompanyLogoOptions",
           "preserveMemberOrder": false,
@@ -675,11 +680,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -692,11 +693,11 @@
             },
             {
               "kind": "Content",
-              "text": "{\n    [field: string]: any;\n} "
+              "text": "{\n    [field: string]: any;\n}"
             },
             {
               "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Content",
@@ -749,7 +750,7 @@
             {
               "kind": "Reference",
               "text": "CancelablePromise",
-              "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+              "canonicalReference": "@nextgis/cancelable-promise!CancelablePromise:class"
             },
             {
               "kind": "Content",
@@ -769,9 +770,10 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/featureLayerUtils.ts",
           "returnTypeTokenRange": {
-            "startIndex": 19,
-            "endIndex": 23
+            "startIndex": 18,
+            "endIndex": 22
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -779,8 +781,8 @@
             {
               "parameterName": "opt",
               "parameterTypeTokenRange": {
-                "startIndex": 10,
-                "endIndex": 18
+                "startIndex": 9,
+                "endIndex": 17
               },
               "isOptional": false
             }
@@ -793,19 +795,19 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             },
             {
               "typeParameterName": "P",
               "constraintTokenRange": {
-                "startIndex": 6,
-                "endIndex": 7
+                "startIndex": 5,
+                "endIndex": 6
               },
               "defaultTypeTokenRange": {
-                "startIndex": 8,
-                "endIndex": 9
+                "startIndex": 7,
+                "endIndex": 8
               }
             }
           ],
@@ -861,6 +863,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/adapters/createGeoJsonAdapter.ts",
           "returnTypeTokenRange": {
             "startIndex": 3,
             "endIndex": 9
@@ -895,11 +898,11 @@
             },
             {
               "kind": "Content",
-              "text": " | null "
+              "text": " | null"
             },
             {
               "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -917,11 +920,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -968,9 +967,10 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/featureLayerUtils.ts",
           "returnTypeTokenRange": {
-            "startIndex": 16,
-            "endIndex": 18
+            "startIndex": 15,
+            "endIndex": 17
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -978,8 +978,8 @@
             {
               "parameterName": "item",
               "parameterTypeTokenRange": {
-                "startIndex": 11,
-                "endIndex": 15
+                "startIndex": 10,
+                "endIndex": 14
               },
               "isOptional": false
             }
@@ -989,7 +989,7 @@
               "typeParameterName": "G",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 2
+                "endIndex": 3
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -1003,8 +1003,8 @@
                 "endIndex": 7
               },
               "defaultTypeTokenRange": {
-                "startIndex": 9,
-                "endIndex": 10
+                "startIndex": 8,
+                "endIndex": 9
               }
             }
           ],
@@ -1026,11 +1026,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -1048,11 +1044,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -1086,9 +1078,10 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/identifyUtils.ts",
           "returnTypeTokenRange": {
-            "startIndex": 13,
-            "endIndex": 15
+            "startIndex": 11,
+            "endIndex": 13
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -1096,8 +1089,8 @@
             {
               "parameterName": "opt",
               "parameterTypeTokenRange": {
-                "startIndex": 11,
-                "endIndex": 12
+                "startIndex": 9,
+                "endIndex": 10
               },
               "isOptional": false
             }
@@ -1110,19 +1103,19 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             },
             {
               "typeParameterName": "G",
               "constraintTokenRange": {
-                "startIndex": 6,
-                "endIndex": 7
+                "startIndex": 5,
+                "endIndex": 6
               },
               "defaultTypeTokenRange": {
-                "startIndex": 9,
-                "endIndex": 10
+                "startIndex": 7,
+                "endIndex": 8
               }
             }
           ],
@@ -1158,7 +1151,7 @@
             {
               "kind": "Reference",
               "text": "NgwConnector",
-              "canonicalReference": "@nextgis/ngw-connector!~NgwConnector:class"
+              "canonicalReference": "@nextgis/ngw-connector!NgwConnector:class"
             },
             {
               "kind": "Content",
@@ -1196,6 +1189,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/utils.ts",
           "returnTypeTokenRange": {
             "startIndex": 7,
             "endIndex": 13
@@ -1242,7 +1236,7 @@
             {
               "kind": "Reference",
               "text": "CreateOnFirstShowAdapterOptions",
-              "canonicalReference": "@nextgis/ngw-kit!~CreateOnFirstShowAdapterOptions:interface"
+              "canonicalReference": "@nextgis/ngw-kit!~CreateOnFirstShowAdapterOptions_2:interface"
             },
             {
               "kind": "Content",
@@ -1280,6 +1274,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/adapters/createOnFirstShowAdapter.ts",
           "returnTypeTokenRange": {
             "startIndex": 3,
             "endIndex": 9
@@ -1348,6 +1343,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/adapters/createOnFirstShowNgwAdapter.ts",
           "returnTypeTokenRange": {
             "startIndex": 3,
             "endIndex": 9
@@ -1407,6 +1403,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/createPopupContent.ts",
           "returnTypeTokenRange": {
             "startIndex": 5,
             "endIndex": 7
@@ -1483,6 +1480,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/adapters/createRasterAdapter.ts",
           "returnTypeTokenRange": {
             "startIndex": 3,
             "endIndex": 9
@@ -1537,6 +1535,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/uploadFeatureAttachment.ts",
           "returnTypeTokenRange": {
             "startIndex": 4,
             "endIndex": 6
@@ -1596,6 +1595,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/utils.ts",
           "returnTypeTokenRange": {
             "startIndex": 3,
             "endIndex": 7
@@ -1624,6 +1624,7 @@
               "text": "export interface ExtendNgwWebmapLayerAdapterOptions "
             }
           ],
+          "fileUrlPath": "src/utils/utils.ts",
           "releaseTag": "Public",
           "name": "ExtendNgwWebmapLayerAdapterOptions",
           "preserveMemberOrder": false,
@@ -1667,7 +1668,7 @@
                 {
                   "kind": "Reference",
                   "text": "NgwConnector",
-                  "canonicalReference": "@nextgis/ngw-connector!~NgwConnector:class"
+                  "canonicalReference": "@nextgis/ngw-connector!NgwConnector:class"
                 },
                 {
                   "kind": "Content",
@@ -1729,6 +1730,7 @@
               "canonicalReference": "@nextgis/ngw-kit!FeatureRequestParams:interface"
             }
           ],
+          "fileUrlPath": "src/utils/featureLayerUtils.ts",
           "isReadonly": true,
           "releaseTag": "Public",
           "name": "FEATURE_REQUEST_PARAMS",
@@ -1747,6 +1749,7 @@
               "text": "export interface FeatureIdentifyRequestOptions "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "FeatureIdentifyRequestOptions",
           "preserveMemberOrder": false,
@@ -1856,7 +1859,7 @@
             {
               "kind": "Reference",
               "text": "CancelablePromise",
-              "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+              "canonicalReference": "@nextgis/cancelable-promise!CancelablePromise:class"
             },
             {
               "kind": "Content",
@@ -1876,6 +1879,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/identifyUtils.ts",
           "returnTypeTokenRange": {
             "startIndex": 3,
             "endIndex": 7
@@ -1913,6 +1917,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "FeatureLayerIdentifyOptions",
           "preserveMemberOrder": false,
@@ -1929,7 +1934,7 @@
                 {
                   "kind": "Reference",
                   "text": "NgwConnector",
-                  "canonicalReference": "@nextgis/ngw-connector!~NgwConnector:class"
+                  "canonicalReference": "@nextgis/ngw-connector!NgwConnector:class"
                 },
                 {
                   "kind": "Content",
@@ -2049,6 +2054,7 @@
               "text": "export interface FeatureRequestParams "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "FeatureRequestParams",
           "preserveMemberOrder": false,
@@ -2289,11 +2295,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -2311,11 +2313,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -2338,7 +2336,7 @@
             {
               "kind": "Reference",
               "text": "CancelablePromise",
-              "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+              "canonicalReference": "@nextgis/cancelable-promise!CancelablePromise:class"
             },
             {
               "kind": "Content",
@@ -2358,9 +2356,10 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/identifyUtils.ts",
           "returnTypeTokenRange": {
-            "startIndex": 13,
-            "endIndex": 17
+            "startIndex": 11,
+            "endIndex": 15
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -2368,8 +2367,8 @@
             {
               "parameterName": "options",
               "parameterTypeTokenRange": {
-                "startIndex": 11,
-                "endIndex": 12
+                "startIndex": 9,
+                "endIndex": 10
               },
               "isOptional": false
             }
@@ -2382,19 +2381,19 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             },
             {
               "typeParameterName": "P",
               "constraintTokenRange": {
-                "startIndex": 6,
-                "endIndex": 7
+                "startIndex": 5,
+                "endIndex": 6
               },
               "defaultTypeTokenRange": {
-                "startIndex": 9,
-                "endIndex": 10
+                "startIndex": 7,
+                "endIndex": 8
               }
             }
           ],
@@ -2416,11 +2415,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -2438,11 +2433,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -2469,7 +2460,7 @@
             {
               "kind": "Reference",
               "text": "CancelablePromise",
-              "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+              "canonicalReference": "@nextgis/cancelable-promise!CancelablePromise:class"
             },
             {
               "kind": "Content",
@@ -2489,9 +2480,10 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/identifyUtils.ts",
           "returnTypeTokenRange": {
-            "startIndex": 14,
-            "endIndex": 18
+            "startIndex": 12,
+            "endIndex": 16
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -2499,8 +2491,8 @@
             {
               "parameterName": "options",
               "parameterTypeTokenRange": {
-                "startIndex": 11,
-                "endIndex": 13
+                "startIndex": 9,
+                "endIndex": 11
               },
               "isOptional": false
             }
@@ -2513,19 +2505,19 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             },
             {
               "typeParameterName": "P",
               "constraintTokenRange": {
-                "startIndex": 6,
-                "endIndex": 7
+                "startIndex": 5,
+                "endIndex": 6
               },
               "defaultTypeTokenRange": {
-                "startIndex": 9,
-                "endIndex": 10
+                "startIndex": 7,
+                "endIndex": 8
               }
             }
           ],
@@ -2552,7 +2544,7 @@
             {
               "kind": "Reference",
               "text": "CancelablePromise",
-              "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+              "canonicalReference": "@nextgis/cancelable-promise!CancelablePromise:class"
             },
             {
               "kind": "Content",
@@ -2572,6 +2564,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/fetchNgwExtent.ts",
           "returnTypeTokenRange": {
             "startIndex": 3,
             "endIndex": 7
@@ -2606,11 +2599,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -2644,6 +2633,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "FetchNgwItemOptions",
           "typeParameters": [
@@ -2654,14 +2644,14 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             }
           ],
           "typeTokenRange": {
-            "startIndex": 6,
-            "endIndex": 10
+            "startIndex": 5,
+            "endIndex": 9
           }
         },
         {
@@ -2680,11 +2670,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -2718,6 +2704,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "FetchNgwItemsOptions",
           "typeParameters": [
@@ -2728,14 +2715,14 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             }
           ],
           "typeTokenRange": {
-            "startIndex": 6,
-            "endIndex": 10
+            "startIndex": 5,
+            "endIndex": 9
           }
         },
         {
@@ -2759,7 +2746,7 @@
             {
               "kind": "Reference",
               "text": "CancelablePromise",
-              "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+              "canonicalReference": "@nextgis/cancelable-promise!CancelablePromise:class"
             },
             {
               "kind": "Content",
@@ -2770,6 +2757,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/fetchNgwLayerCount.ts",
           "returnTypeTokenRange": {
             "startIndex": 3,
             "endIndex": 5
@@ -2798,6 +2786,7 @@
               "text": "export interface FetchNgwLayerCountOptions "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "FetchNgwLayerCountOptions",
           "preserveMemberOrder": false,
@@ -2841,7 +2830,7 @@
                 {
                   "kind": "Reference",
                   "text": "NgwConnector",
-                  "canonicalReference": "@nextgis/ngw-connector!~NgwConnector:class"
+                  "canonicalReference": "@nextgis/ngw-connector!NgwConnector:class"
                 },
                 {
                   "kind": "Content",
@@ -2908,7 +2897,7 @@
             {
               "kind": "Reference",
               "text": "CancelablePromise",
-              "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+              "canonicalReference": "@nextgis/cancelable-promise!CancelablePromise:class"
             },
             {
               "kind": "Content",
@@ -2928,6 +2917,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/fetchNgwExtent.ts",
           "returnTypeTokenRange": {
             "startIndex": 3,
             "endIndex": 7
@@ -2965,6 +2955,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "FetchNgwLayerExtentOptions",
           "preserveMemberOrder": false,
@@ -2981,7 +2972,7 @@
                 {
                   "kind": "Reference",
                   "text": "NgwConnector",
-                  "canonicalReference": "@nextgis/ngw-connector!~NgwConnector:class"
+                  "canonicalReference": "@nextgis/ngw-connector!NgwConnector:class"
                 },
                 {
                   "kind": "Content",
@@ -3048,11 +3039,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -3070,11 +3057,11 @@
             },
             {
               "kind": "Content",
-              "text": "<string, any> "
+              "text": "<string, any>"
             },
             {
               "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -3105,7 +3092,7 @@
             {
               "kind": "Reference",
               "text": "CancelablePromise",
-              "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+              "canonicalReference": "@nextgis/cancelable-promise!CancelablePromise:class"
             },
             {
               "kind": "Content",
@@ -3125,9 +3112,10 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/fetchNgwLayerFeature.ts",
           "returnTypeTokenRange": {
-            "startIndex": 15,
-            "endIndex": 19
+            "startIndex": 14,
+            "endIndex": 18
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -3135,8 +3123,8 @@
             {
               "parameterName": "options",
               "parameterTypeTokenRange": {
-                "startIndex": 12,
-                "endIndex": 14
+                "startIndex": 11,
+                "endIndex": 13
               },
               "isOptional": false
             }
@@ -3149,19 +3137,19 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             },
             {
               "typeParameterName": "P",
               "constraintTokenRange": {
-                "startIndex": 6,
+                "startIndex": 5,
                 "endIndex": 7
               },
               "defaultTypeTokenRange": {
-                "startIndex": 9,
-                "endIndex": 11
+                "startIndex": 8,
+                "endIndex": 10
               }
             }
           ],
@@ -3183,11 +3171,11 @@
             },
             {
               "kind": "Content",
-              "text": " | null "
+              "text": " | null"
             },
             {
               "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -3205,11 +3193,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -3236,7 +3220,7 @@
             {
               "kind": "Reference",
               "text": "CancelablePromise",
-              "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+              "canonicalReference": "@nextgis/cancelable-promise!CancelablePromise:class"
             },
             {
               "kind": "Content",
@@ -3256,9 +3240,10 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/fetchNgwLayerFeatureCollection.ts",
           "returnTypeTokenRange": {
-            "startIndex": 14,
-            "endIndex": 18
+            "startIndex": 13,
+            "endIndex": 17
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -3266,8 +3251,8 @@
             {
               "parameterName": "options",
               "parameterTypeTokenRange": {
-                "startIndex": 11,
-                "endIndex": 13
+                "startIndex": 10,
+                "endIndex": 12
               },
               "isOptional": false
             }
@@ -3277,7 +3262,7 @@
               "typeParameterName": "G",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 2
+                "endIndex": 3
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -3291,8 +3276,8 @@
                 "endIndex": 7
               },
               "defaultTypeTokenRange": {
-                "startIndex": 9,
-                "endIndex": 10
+                "startIndex": 8,
+                "endIndex": 9
               }
             }
           ],
@@ -3314,11 +3299,11 @@
             },
             {
               "kind": "Content",
-              "text": " | null "
+              "text": " | null"
             },
             {
               "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -3336,11 +3321,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -3367,7 +3348,7 @@
             {
               "kind": "Reference",
               "text": "CancelablePromise",
-              "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+              "canonicalReference": "@nextgis/cancelable-promise!CancelablePromise:class"
             },
             {
               "kind": "Content",
@@ -3387,9 +3368,10 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/fetchNgwLayerFeatures.ts",
           "returnTypeTokenRange": {
-            "startIndex": 14,
-            "endIndex": 18
+            "startIndex": 13,
+            "endIndex": 17
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -3397,8 +3379,8 @@
             {
               "parameterName": "options",
               "parameterTypeTokenRange": {
-                "startIndex": 11,
-                "endIndex": 13
+                "startIndex": 10,
+                "endIndex": 12
               },
               "isOptional": false
             }
@@ -3408,7 +3390,7 @@
               "typeParameterName": "G",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 2
+                "endIndex": 3
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -3422,8 +3404,8 @@
                 "endIndex": 7
               },
               "defaultTypeTokenRange": {
-                "startIndex": 9,
-                "endIndex": 10
+                "startIndex": 8,
+                "endIndex": 9
               }
             }
           ],
@@ -3445,11 +3427,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -3467,11 +3445,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -3498,7 +3472,7 @@
             {
               "kind": "Reference",
               "text": "CancelablePromise",
-              "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+              "canonicalReference": "@nextgis/cancelable-promise!CancelablePromise:class"
             },
             {
               "kind": "Content",
@@ -3518,9 +3492,10 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/fetchNgwLayerItem.ts",
           "returnTypeTokenRange": {
-            "startIndex": 14,
-            "endIndex": 18
+            "startIndex": 12,
+            "endIndex": 16
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -3528,8 +3503,8 @@
             {
               "parameterName": "options",
               "parameterTypeTokenRange": {
-                "startIndex": 11,
-                "endIndex": 13
+                "startIndex": 9,
+                "endIndex": 11
               },
               "isOptional": false
             }
@@ -3542,19 +3517,19 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             },
             {
               "typeParameterName": "P",
               "constraintTokenRange": {
-                "startIndex": 6,
-                "endIndex": 7
+                "startIndex": 5,
+                "endIndex": 6
               },
               "defaultTypeTokenRange": {
-                "startIndex": 9,
-                "endIndex": 10
+                "startIndex": 7,
+                "endIndex": 8
               }
             }
           ],
@@ -3581,7 +3556,7 @@
             {
               "kind": "Reference",
               "text": "CancelablePromise",
-              "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+              "canonicalReference": "@nextgis/cancelable-promise!CancelablePromise:class"
             },
             {
               "kind": "Content",
@@ -3601,6 +3576,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/fetchNgwExtent.ts",
           "returnTypeTokenRange": {
             "startIndex": 3,
             "endIndex": 7
@@ -3638,6 +3614,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "FetchNgwLayerItemExtentOptions",
           "preserveMemberOrder": false,
@@ -3693,11 +3670,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -3715,11 +3688,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -3746,7 +3715,7 @@
             {
               "kind": "Reference",
               "text": "CancelablePromise",
-              "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+              "canonicalReference": "@nextgis/cancelable-promise!CancelablePromise:class"
             },
             {
               "kind": "Content",
@@ -3766,9 +3735,10 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/fetchNgwLayerItems.ts",
           "returnTypeTokenRange": {
-            "startIndex": 14,
-            "endIndex": 18
+            "startIndex": 12,
+            "endIndex": 16
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -3776,8 +3746,8 @@
             {
               "parameterName": "options",
               "parameterTypeTokenRange": {
-                "startIndex": 11,
-                "endIndex": 13
+                "startIndex": 9,
+                "endIndex": 11
               },
               "isOptional": false
             }
@@ -3790,19 +3760,19 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             },
             {
               "typeParameterName": "P",
               "constraintTokenRange": {
-                "startIndex": 6,
-                "endIndex": 7
+                "startIndex": 5,
+                "endIndex": 6
               },
               "defaultTypeTokenRange": {
-                "startIndex": 9,
-                "endIndex": 10
+                "startIndex": 7,
+                "endIndex": 8
               }
             }
           ],
@@ -3824,11 +3794,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -3841,11 +3807,11 @@
             },
             {
               "kind": "Content",
-              "text": "{\n    [field: string]: any;\n} "
+              "text": "{\n    [field: string]: any;\n}"
             },
             {
               "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Content",
@@ -3871,7 +3837,7 @@
             {
               "kind": "Reference",
               "text": "CancelablePromise",
-              "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+              "canonicalReference": "@nextgis/cancelable-promise!CancelablePromise:class"
             },
             {
               "kind": "Content",
@@ -3891,9 +3857,10 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/featureLayerUtils.ts",
           "returnTypeTokenRange": {
-            "startIndex": 13,
-            "endIndex": 17
+            "startIndex": 12,
+            "endIndex": 16
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -3901,8 +3868,8 @@
             {
               "parameterName": "options",
               "parameterTypeTokenRange": {
-                "startIndex": 10,
-                "endIndex": 12
+                "startIndex": 9,
+                "endIndex": 11
               },
               "isOptional": false
             }
@@ -3915,19 +3882,19 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             },
             {
               "typeParameterName": "P",
               "constraintTokenRange": {
-                "startIndex": 6,
-                "endIndex": 7
+                "startIndex": 5,
+                "endIndex": 6
               },
               "defaultTypeTokenRange": {
-                "startIndex": 8,
-                "endIndex": 9
+                "startIndex": 7,
+                "endIndex": 8
               }
             }
           ],
@@ -3954,7 +3921,7 @@
             {
               "kind": "Reference",
               "text": "NgwConnector",
-              "canonicalReference": "@nextgis/ngw-connector!~NgwConnector:class"
+              "canonicalReference": "@nextgis/ngw-connector!NgwConnector:class"
             },
             {
               "kind": "Content",
@@ -3972,7 +3939,7 @@
             {
               "kind": "Reference",
               "text": "CancelablePromise",
-              "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+              "canonicalReference": "@nextgis/cancelable-promise!CancelablePromise:class"
             },
             {
               "kind": "Content",
@@ -3992,6 +3959,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/fetchNgwExtent.ts",
           "returnTypeTokenRange": {
             "startIndex": 7,
             "endIndex": 11
@@ -4045,6 +4013,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "FetchNgwResourceExtent",
           "preserveMemberOrder": false,
@@ -4061,7 +4030,7 @@
                 {
                   "kind": "Reference",
                   "text": "NgwConnector",
-                  "canonicalReference": "@nextgis/ngw-connector!~NgwConnector:class"
+                  "canonicalReference": "@nextgis/ngw-connector!NgwConnector:class"
                 },
                 {
                   "kind": "Content",
@@ -4140,6 +4109,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "GeomFormat",
           "typeTokenRange": {
@@ -4175,6 +4145,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "GetClassAdapter",
           "typeTokenRange": {
@@ -4209,6 +4180,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "GetClassAdapterByType",
           "typeTokenRange": {
@@ -4270,6 +4242,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "GetClassAdapterCallback",
           "typeTokenRange": {
@@ -4287,6 +4260,7 @@
               "text": "export interface GetClassAdapterOptions "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "GetClassAdapterOptions",
           "preserveMemberOrder": false,
@@ -4371,7 +4345,7 @@
                 {
                   "kind": "Reference",
                   "text": "NgwConnector",
-                  "canonicalReference": "@nextgis/ngw-connector!~NgwConnector:class"
+                  "canonicalReference": "@nextgis/ngw-connector!NgwConnector:class"
                 },
                 {
                   "kind": "Content",
@@ -4486,7 +4460,7 @@
             {
               "kind": "Reference",
               "text": "NgwConnector",
-              "canonicalReference": "@nextgis/ngw-connector!~NgwConnector:class"
+              "canonicalReference": "@nextgis/ngw-connector!NgwConnector:class"
             },
             {
               "kind": "Content",
@@ -4524,6 +4498,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/getCompanyLogo.ts",
           "returnTypeTokenRange": {
             "startIndex": 5,
             "endIndex": 9
@@ -4566,11 +4541,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -4588,11 +4559,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -4615,7 +4582,7 @@
             {
               "kind": "Reference",
               "text": "CancelablePromise",
-              "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+              "canonicalReference": "@nextgis/cancelable-promise!CancelablePromise:class"
             },
             {
               "kind": "Content",
@@ -4635,9 +4602,10 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/identifyUtils.ts",
           "returnTypeTokenRange": {
-            "startIndex": 13,
-            "endIndex": 17
+            "startIndex": 11,
+            "endIndex": 15
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -4645,8 +4613,8 @@
             {
               "parameterName": "options",
               "parameterTypeTokenRange": {
-                "startIndex": 11,
-                "endIndex": 12
+                "startIndex": 9,
+                "endIndex": 10
               },
               "isOptional": false
             }
@@ -4659,19 +4627,19 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             },
             {
               "typeParameterName": "P",
               "constraintTokenRange": {
-                "startIndex": 6,
-                "endIndex": 7
+                "startIndex": 5,
+                "endIndex": 6
               },
               "defaultTypeTokenRange": {
-                "startIndex": 9,
-                "endIndex": 10
+                "startIndex": 7,
+                "endIndex": 8
               }
             }
           ],
@@ -4693,11 +4661,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -4709,6 +4673,7 @@
               "text": "> "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -4718,8 +4683,8 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             }
           ],
@@ -4738,7 +4703,7 @@
                 {
                   "kind": "Reference",
                   "text": "NgwConnector",
-                  "canonicalReference": "@nextgis/ngw-connector!~NgwConnector:class"
+                  "canonicalReference": "@nextgis/ngw-connector!NgwConnector:class"
                 },
                 {
                   "kind": "Content",
@@ -4888,6 +4853,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/identifyUtils.ts",
           "returnTypeTokenRange": {
             "startIndex": 6,
             "endIndex": 8
@@ -4942,6 +4908,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/ngwApiToAdapterOptions.ts",
           "returnTypeTokenRange": {
             "startIndex": 3,
             "endIndex": 4
@@ -4970,6 +4937,7 @@
               "text": "export interface GetImageAdapterOptionsParams "
             }
           ],
+          "fileUrlPath": "src/utils/ngwApiToAdapterOptions.ts",
           "releaseTag": "Public",
           "name": "GetImageAdapterOptionsParams",
           "preserveMemberOrder": false,
@@ -5144,6 +5112,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/ngwApiToAdapterOptions.ts",
           "returnTypeTokenRange": {
             "startIndex": 7,
             "endIndex": 11
@@ -5188,6 +5157,7 @@
               "text": "export interface GetLayerAdapterOptions "
             }
           ],
+          "fileUrlPath": "src/utils/ngwApiToAdapterOptions.ts",
           "releaseTag": "Public",
           "name": "GetLayerAdapterOptions",
           "preserveMemberOrder": false,
@@ -5304,6 +5274,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/utils.ts",
           "returnTypeTokenRange": {
             "startIndex": 3,
             "endIndex": 4
@@ -5341,6 +5312,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "GetNgwItemOptions",
           "preserveMemberOrder": false,
@@ -5396,11 +5368,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -5421,6 +5389,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -5430,8 +5399,8 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             }
           ],
@@ -5509,8 +5478,8 @@
           ],
           "extendsTokenRanges": [
             {
-              "startIndex": 6,
-              "endIndex": 7
+              "startIndex": 5,
+              "endIndex": 6
             }
           ]
         },
@@ -5546,6 +5515,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/fetchNgwExtent.ts",
           "returnTypeTokenRange": {
             "startIndex": 3,
             "endIndex": 5
@@ -5590,6 +5560,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/utils.ts",
           "returnTypeTokenRange": {
             "startIndex": 3,
             "endIndex": 4
@@ -5618,6 +5589,7 @@
               "text": "export interface IdentifyEvent "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "IdentifyEvent",
           "preserveMemberOrder": false,
@@ -5697,11 +5669,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -5719,11 +5687,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -5744,6 +5708,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/IdentifyItem.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -5753,22 +5718,23 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             },
             {
               "typeParameterName": "G",
               "constraintTokenRange": {
-                "startIndex": 6,
-                "endIndex": 7
+                "startIndex": 5,
+                "endIndex": 6
               },
               "defaultTypeTokenRange": {
-                "startIndex": 9,
-                "endIndex": 10
+                "startIndex": 7,
+                "endIndex": 8
               }
             }
           ],
+          "isAbstract": false,
           "name": "IdentifyItem",
           "preserveMemberOrder": false,
           "members": [
@@ -5833,7 +5799,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -5863,7 +5830,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -5877,7 +5845,7 @@
                 {
                   "kind": "Reference",
                   "text": "CancelablePromise",
-                  "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+                  "canonicalReference": "@nextgis/cancelable-promise!CancelablePromise:class"
                 },
                 {
                   "kind": "Content",
@@ -5907,6 +5875,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "geojson"
             },
             {
@@ -5937,7 +5906,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -5951,7 +5921,7 @@
                 {
                   "kind": "Reference",
                   "text": "CancelablePromise",
-                  "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+                  "canonicalReference": "@nextgis/cancelable-promise!CancelablePromise:class"
                 },
                 {
                   "kind": "Content",
@@ -5981,6 +5951,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getBounds"
             },
             {
@@ -6010,7 +5981,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -6046,7 +6018,7 @@
                 {
                   "kind": "Reference",
                   "text": "CancelablePromise",
-                  "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+                  "canonicalReference": "@nextgis/cancelable-promise!CancelablePromise:class"
                 },
                 {
                   "kind": "Content",
@@ -6085,6 +6057,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "identify"
             },
             {
@@ -6114,7 +6087,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -6143,7 +6117,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -6172,7 +6147,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -6186,7 +6162,7 @@
                 {
                   "kind": "Reference",
                   "text": "CancelablePromise",
-                  "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+                  "canonicalReference": "@nextgis/cancelable-promise!CancelablePromise:class"
                 },
                 {
                   "kind": "Content",
@@ -6216,13 +6192,14 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "resource"
             }
           ],
           "implementsTokenRanges": [
             {
-              "startIndex": 11,
-              "endIndex": 12
+              "startIndex": 9,
+              "endIndex": 10
             }
           ]
         },
@@ -6236,6 +6213,7 @@
               "text": "export interface IdentifyItemOptions "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "IdentifyItemOptions",
           "preserveMemberOrder": false,
@@ -6252,7 +6230,7 @@
                 {
                   "kind": "Reference",
                   "text": "NgwConnector",
-                  "canonicalReference": "@nextgis/ngw-connector!~NgwConnector:class"
+                  "canonicalReference": "@nextgis/ngw-connector!NgwConnector:class"
                 },
                 {
                   "kind": "Content",
@@ -6318,6 +6296,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "IdentifyRequestOptions",
           "preserveMemberOrder": false,
@@ -6334,7 +6313,7 @@
                 {
                   "kind": "Reference",
                   "text": "NgwConnector",
-                  "canonicalReference": "@nextgis/ngw-connector!~NgwConnector:class"
+                  "canonicalReference": "@nextgis/ngw-connector!NgwConnector:class"
                 },
                 {
                   "kind": "Content",
@@ -6479,7 +6458,7 @@
             {
               "kind": "Reference",
               "text": "CancelablePromise",
-              "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+              "canonicalReference": "@nextgis/cancelable-promise!CancelablePromise:class"
             },
             {
               "kind": "Content",
@@ -6490,6 +6469,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/mapFeatureDisplayName.ts",
           "returnTypeTokenRange": {
             "startIndex": 3,
             "endIndex": 5
@@ -6518,6 +6498,7 @@
               "text": "export interface MapFeatureDisplayNameOptions "
             }
           ],
+          "fileUrlPath": "src/utils/mapFeatureDisplayName.ts",
           "releaseTag": "Public",
           "name": "MapFeatureDisplayNameOptions",
           "preserveMemberOrder": false,
@@ -6534,7 +6515,7 @@
                 {
                   "kind": "Reference",
                   "text": "NgwConnector",
-                  "canonicalReference": "@nextgis/ngw-connector!~NgwConnector:class"
+                  "canonicalReference": "@nextgis/ngw-connector!NgwConnector:class"
                 },
                 {
                   "kind": "Content",
@@ -6651,11 +6632,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -6673,9 +6650,14 @@
             },
             {
               "kind": "Content",
-              "text": "<P> "
+              "text": "<P>"
+            },
+            {
+              "kind": "Content",
+              "text": " "
             }
           ],
+          "fileUrlPath": "src/utils/selectNgwLayerDistinct.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -6685,8 +6667,8 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             }
           ],
@@ -6723,7 +6705,7 @@
           ],
           "extendsTokenRanges": [
             {
-              "startIndex": 6,
+              "startIndex": 5,
               "endIndex": 7
             }
           ]
@@ -6778,6 +6760,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/ngwApiToAdapterOptions.ts",
           "returnTypeTokenRange": {
             "startIndex": 3,
             "endIndex": 9
@@ -6806,6 +6789,7 @@
               "text": "export interface NgwConfig "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "NgwConfig",
           "preserveMemberOrder": false,
@@ -6946,11 +6930,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -6968,9 +6948,14 @@
             },
             {
               "kind": "Content",
-              "text": "<F, G> "
+              "text": "<F, G>"
+            },
+            {
+              "kind": "Content",
+              "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -6991,8 +6976,8 @@
                 "endIndex": 4
               },
               "defaultTypeTokenRange": {
-                "startIndex": 6,
-                "endIndex": 7
+                "startIndex": 5,
+                "endIndex": 6
               }
             }
           ],
@@ -7011,7 +6996,7 @@
                 {
                   "kind": "Reference",
                   "text": "CancelablePromise",
-                  "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+                  "canonicalReference": "@nextgis/cancelable-promise!CancelablePromise:class"
                 },
                 {
                   "kind": "Content",
@@ -7044,7 +7029,7 @@
           ],
           "extendsTokenRanges": [
             {
-              "startIndex": 8,
+              "startIndex": 7,
               "endIndex": 9
             }
           ]
@@ -7065,11 +7050,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -7087,9 +7068,14 @@
             },
             {
               "kind": "Content",
-              "text": "<P> "
+              "text": "<P>"
+            },
+            {
+              "kind": "Content",
+              "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -7099,8 +7085,8 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             }
           ],
@@ -7224,7 +7210,7 @@
           ],
           "extendsTokenRanges": [
             {
-              "startIndex": 6,
+              "startIndex": 5,
               "endIndex": 7
             }
           ]
@@ -7270,6 +7256,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "NgwIdentify",
           "typeTokenRange": {
@@ -7287,6 +7274,7 @@
               "text": "export interface NgwIdentifyItem "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "NgwIdentifyItem",
           "preserveMemberOrder": false,
@@ -7395,7 +7383,9 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/NgwKit.ts",
           "releaseTag": "Public",
+          "isAbstract": false,
           "name": "NgwKit",
           "preserveMemberOrder": false,
           "members": [
@@ -7494,6 +7484,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "addClassAdapters"
             },
             {
@@ -7508,7 +7499,7 @@
                 {
                   "kind": "Reference",
                   "text": "NgwConnector",
-                  "canonicalReference": "@nextgis/ngw-connector!~NgwConnector:class"
+                  "canonicalReference": "@nextgis/ngw-connector!NgwConnector:class"
                 },
                 {
                   "kind": "Content",
@@ -7524,7 +7515,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -7568,6 +7560,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getLayerAdapters"
             },
             {
@@ -7630,6 +7623,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "onLoadSync"
             },
             {
@@ -7660,7 +7654,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -7689,7 +7684,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -7719,7 +7715,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             }
           ],
           "implementsTokenRanges": [
@@ -7739,6 +7736,7 @@
               "text": "export interface NgwKitOptions "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "NgwKitOptions",
           "preserveMemberOrder": false,
@@ -7809,7 +7807,7 @@
                 {
                   "kind": "Reference",
                   "text": "NgwConnector",
-                  "canonicalReference": "@nextgis/ngw-connector!~NgwConnector:class"
+                  "canonicalReference": "@nextgis/ngw-connector!NgwConnector:class"
                 },
                 {
                   "kind": "Content",
@@ -7901,6 +7899,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "NgwLayerAdapterType",
           "typeTokenRange": {
@@ -7924,11 +7923,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -7955,11 +7950,11 @@
             },
             {
               "kind": "Content",
-              "text": "<string, any> "
+              "text": "<string, any>"
             },
             {
               "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -7975,6 +7970,7 @@
               "text": "> "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -7984,8 +7980,8 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             },
             {
@@ -7995,19 +7991,19 @@
                 "endIndex": 0
               },
               "defaultTypeTokenRange": {
-                "startIndex": 6,
-                "endIndex": 7
+                "startIndex": 5,
+                "endIndex": 6
               }
             },
             {
               "typeParameterName": "A",
               "constraintTokenRange": {
-                "startIndex": 8,
+                "startIndex": 7,
                 "endIndex": 9
               },
               "defaultTypeTokenRange": {
-                "startIndex": 11,
-                "endIndex": 13
+                "startIndex": 10,
+                "endIndex": 12
               }
             }
           ],
@@ -8062,7 +8058,7 @@
                 {
                   "kind": "Reference",
                   "text": "LayerAdaptersOptions",
-                  "canonicalReference": "@nextgis/webmap!~LayerAdaptersOptions:interface"
+                  "canonicalReference": "@nextgis/webmap!LayerAdaptersOptions:interface"
                 },
                 {
                   "kind": "Content",
@@ -8317,6 +8313,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "NgwRequestOptions",
           "typeTokenRange": {
@@ -8334,7 +8331,9 @@
               "text": "export declare class NgwResource "
             }
           ],
+          "fileUrlPath": "src/NgwResource.ts",
           "releaseTag": "Public",
+          "isAbstract": false,
           "name": "NgwResource",
           "preserveMemberOrder": false,
           "members": [
@@ -8366,7 +8365,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": true
+              "isProtected": true,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -8380,7 +8380,7 @@
                 {
                   "kind": "Reference",
                   "text": "NgwConnector",
-                  "canonicalReference": "@nextgis/ngw-connector!~NgwConnector:class"
+                  "canonicalReference": "@nextgis/ngw-connector!NgwConnector:class"
                 },
                 {
                   "kind": "Content",
@@ -8396,7 +8396,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -8458,6 +8459,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getBounds"
             },
             {
@@ -8502,6 +8504,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getExtent"
             },
             {
@@ -8532,7 +8535,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             }
           ],
           "implementsTokenRanges": []
@@ -8564,6 +8568,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -8593,7 +8598,7 @@
                 {
                   "kind": "Reference",
                   "text": "NgwConnector",
-                  "canonicalReference": "@nextgis/ngw-connector!~NgwConnector:class"
+                  "canonicalReference": "@nextgis/ngw-connector!NgwConnector:class"
                 },
                 {
                   "kind": "Content",
@@ -8865,10 +8870,16 @@
             },
             {
               "kind": "Content",
-              "text": "> "
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": " "
             }
           ],
+          "fileUrlPath": "src/NgwWebmapItem.ts",
           "releaseTag": "Public",
+          "isAbstract": false,
           "name": "NgwWebmapItem",
           "preserveMemberOrder": false,
           "members": [
@@ -8899,7 +8910,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": true
+              "isProtected": true,
+              "isAbstract": false
             },
             {
               "kind": "Constructor",
@@ -8949,7 +8961,7 @@
                 {
                   "kind": "Reference",
                   "text": "NgwConnector",
-                  "canonicalReference": "@nextgis/ngw-connector!~NgwConnector:class"
+                  "canonicalReference": "@nextgis/ngw-connector!NgwConnector:class"
                 },
                 {
                   "kind": "Content",
@@ -9055,6 +9067,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "bringToFront"
             },
             {
@@ -9069,7 +9082,7 @@
                 {
                   "kind": "Reference",
                   "text": "NgwConnector",
-                  "canonicalReference": "@nextgis/ngw-connector!~NgwConnector:class"
+                  "canonicalReference": "@nextgis/ngw-connector!NgwConnector:class"
                 },
                 {
                   "kind": "Content",
@@ -9085,7 +9098,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -9135,7 +9149,7 @@
                 {
                   "kind": "Reference",
                   "text": "NgwConnector",
-                  "canonicalReference": "@nextgis/ngw-connector!~NgwConnector:class"
+                  "canonicalReference": "@nextgis/ngw-connector!NgwConnector:class"
                 },
                 {
                   "kind": "Content",
@@ -9224,6 +9238,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "create"
             },
             {
@@ -9238,7 +9253,7 @@
                 {
                   "kind": "Reference",
                   "text": "EventEmitter",
-                  "canonicalReference": "!EventEmitter:class"
+                  "canonicalReference": "!\"\\\"events\\\"\".EventEmitter:class"
                 },
                 {
                   "kind": "Content",
@@ -9254,7 +9269,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -9284,6 +9300,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "fit"
             },
             {
@@ -9320,7 +9337,7 @@
                 {
                   "kind": "Reference",
                   "text": "NgwConnector",
-                  "canonicalReference": "@nextgis/ngw-connector!~NgwConnector:class"
+                  "canonicalReference": "@nextgis/ngw-connector!NgwConnector:class"
                 },
                 {
                   "kind": "Content",
@@ -9349,7 +9366,8 @@
                 "endIndex": 10
               },
               "isStatic": true,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -9415,6 +9433,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getChildren"
             },
             {
@@ -9477,6 +9496,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getItemOptions"
             },
             {
@@ -9539,6 +9559,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getLayer"
             },
             {
@@ -9601,6 +9622,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "initItem"
             },
             {
@@ -9640,7 +9662,8 @@
                 "endIndex": 4
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -9670,7 +9693,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -9700,7 +9724,8 @@
                 "endIndex": 2
               },
               "isStatic": true,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -9730,12 +9755,13 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             }
           ],
           "extendsTokenRange": {
             "startIndex": 1,
-            "endIndex": 4
+            "endIndex": 5
           },
           "implementsTokenRanges": []
         },
@@ -9763,9 +9789,14 @@
             },
             {
               "kind": "Content",
-              "text": "<M> "
+              "text": "<M>"
+            },
+            {
+              "kind": "Content",
+              "text": " "
             }
           ],
+          "fileUrlPath": "src/NgwWebmapLayerAdapter.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -9780,6 +9811,7 @@
               }
             }
           ],
+          "isAbstract": false,
           "name": "NgwWebmapLayerAdapter",
           "preserveMemberOrder": false,
           "members": [
@@ -9811,7 +9843,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": true
+              "isProtected": true,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -9855,6 +9888,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "_getWebMapLayerItem"
             },
             {
@@ -9957,6 +9991,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "addLayer"
             },
             {
@@ -9980,7 +10015,7 @@
                 {
                   "kind": "Reference",
                   "text": "EventEmitter",
-                  "canonicalReference": "!EventEmitter:class"
+                  "canonicalReference": "!\"\\\"events\\\"\".EventEmitter:class"
                 },
                 {
                   "kind": "Content",
@@ -10009,7 +10044,8 @@
                 "endIndex": 7
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -10023,7 +10059,7 @@
                 {
                   "kind": "Reference",
                   "text": "CancelablePromise",
-                  "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+                  "canonicalReference": "@nextgis/cancelable-promise!CancelablePromise:class"
                 },
                 {
                   "kind": "Content",
@@ -10032,7 +10068,7 @@
                 {
                   "kind": "Reference",
                   "text": "BookmarkItem",
-                  "canonicalReference": "@nextgis/ngw-kit!BookmarkItem:class"
+                  "canonicalReference": "@nextgis/ngw-kit!~BookmarkItem:class"
                 },
                 {
                   "kind": "Content",
@@ -10053,6 +10089,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "fetchBookmarks"
             },
             {
@@ -10083,6 +10120,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getBookmarksResourceId"
             },
             {
@@ -10118,6 +10156,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getBounds"
             },
             {
@@ -10162,6 +10201,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getDependLayers"
             },
             {
@@ -10197,6 +10237,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getExtent"
             },
             {
@@ -10232,6 +10273,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getIdentificationIds"
             },
             {
@@ -10267,6 +10309,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "hideLayer"
             },
             {
@@ -10297,7 +10340,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -10326,7 +10370,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -10369,7 +10414,8 @@
                 "endIndex": 5
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -10399,7 +10445,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -10428,7 +10475,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -10458,6 +10506,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "removeLayer"
             },
             {
@@ -10487,7 +10536,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -10539,6 +10589,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "setOpacity"
             },
             {
@@ -10574,6 +10625,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "showLayer"
             },
             {
@@ -10603,13 +10655,14 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             }
           ],
           "implementsTokenRanges": [
             {
               "startIndex": 3,
-              "endIndex": 4
+              "endIndex": 5
             }
           ]
         },
@@ -10632,6 +10685,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "NgwWebmapLayerAdapterEvents",
           "preserveMemberOrder": false,
@@ -10712,6 +10766,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/parseDateFromNgw.ts",
           "returnTypeTokenRange": {
             "startIndex": 6,
             "endIndex": 7
@@ -10757,6 +10812,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/parseDateFromNgw.ts",
           "returnTypeTokenRange": {
             "startIndex": 3,
             "endIndex": 4
@@ -10793,6 +10849,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/utils.ts",
           "returnTypeTokenRange": {
             "startIndex": 1,
             "endIndex": 2
@@ -10818,11 +10875,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -10877,9 +10930,10 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/prepareFieldsToNgw.ts",
           "returnTypeTokenRange": {
-            "startIndex": 13,
-            "endIndex": 15
+            "startIndex": 12,
+            "endIndex": 14
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -10887,16 +10941,16 @@
             {
               "parameterName": "item",
               "parameterTypeTokenRange": {
-                "startIndex": 6,
-                "endIndex": 7
+                "startIndex": 5,
+                "endIndex": 6
               },
               "isOptional": false
             },
             {
               "parameterName": "resourceFields",
               "parameterTypeTokenRange": {
-                "startIndex": 8,
-                "endIndex": 12
+                "startIndex": 7,
+                "endIndex": 11
               },
               "isOptional": false
             }
@@ -10909,8 +10963,8 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             }
           ],
@@ -10952,6 +11006,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/prepareNgwFieldsToPropertiesFilter.ts",
           "returnTypeTokenRange": {
             "startIndex": 4,
             "endIndex": 6
@@ -10986,11 +11041,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -11010,6 +11061,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "PropertiesForNgwFilter",
           "typeParameters": [
@@ -11020,14 +11072,14 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             }
           ],
           "typeTokenRange": {
-            "startIndex": 6,
-            "endIndex": 7
+            "startIndex": 5,
+            "endIndex": 6
           }
         },
         {
@@ -11062,11 +11114,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -11084,11 +11132,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -11106,9 +11150,14 @@
             },
             {
               "kind": "Content",
-              "text": "<M, L, O, F> "
+              "text": "<M, L, O, F>"
+            },
+            {
+              "kind": "Content",
+              "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -11140,19 +11189,19 @@
                 "endIndex": 6
               },
               "defaultTypeTokenRange": {
-                "startIndex": 8,
-                "endIndex": 9
+                "startIndex": 7,
+                "endIndex": 8
               }
             },
             {
               "typeParameterName": "F",
               "constraintTokenRange": {
-                "startIndex": 10,
-                "endIndex": 11
+                "startIndex": 9,
+                "endIndex": 10
               },
               "defaultTypeTokenRange": {
-                "startIndex": 13,
-                "endIndex": 14
+                "startIndex": 11,
+                "endIndex": 12
               }
             }
           ],
@@ -11379,8 +11428,8 @@
           ],
           "extendsTokenRanges": [
             {
-              "startIndex": 15,
-              "endIndex": 16
+              "startIndex": 13,
+              "endIndex": 15
             }
           ]
         },
@@ -11402,6 +11451,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "ResourceIdDef",
           "typeTokenRange": {
@@ -11430,7 +11480,7 @@
             {
               "kind": "Reference",
               "text": "NgwConnector",
-              "canonicalReference": "@nextgis/ngw-connector!~NgwConnector:class"
+              "canonicalReference": "@nextgis/ngw-connector!NgwConnector:class"
             },
             {
               "kind": "Content",
@@ -11450,6 +11500,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/resourceIdFromLayerOptions.ts",
           "returnTypeTokenRange": {
             "startIndex": 5,
             "endIndex": 7
@@ -11492,11 +11543,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -11529,6 +11576,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "ResourceNgwLayerOptions",
           "typeParameters": [
@@ -11539,8 +11587,8 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             },
             {
@@ -11550,14 +11598,14 @@
                 "endIndex": 0
               },
               "defaultTypeTokenRange": {
-                "startIndex": 6,
-                "endIndex": 7
+                "startIndex": 5,
+                "endIndex": 6
               }
             }
           ],
           "typeTokenRange": {
-            "startIndex": 8,
-            "endIndex": 10
+            "startIndex": 7,
+            "endIndex": 9
           }
         },
         {
@@ -11576,11 +11624,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -11607,7 +11651,7 @@
             {
               "kind": "Reference",
               "text": "CancelablePromise",
-              "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+              "canonicalReference": "@nextgis/cancelable-promise!CancelablePromise:class"
             },
             {
               "kind": "Content",
@@ -11627,9 +11671,10 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/selectNgwLayerDistinct.ts",
           "returnTypeTokenRange": {
-            "startIndex": 9,
-            "endIndex": 13
+            "startIndex": 8,
+            "endIndex": 12
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -11637,8 +11682,8 @@
             {
               "parameterName": "options",
               "parameterTypeTokenRange": {
-                "startIndex": 6,
-                "endIndex": 8
+                "startIndex": 5,
+                "endIndex": 7
               },
               "isOptional": false
             }
@@ -11651,8 +11696,8 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             }
           ],
@@ -11688,7 +11733,7 @@
             {
               "kind": "Reference",
               "text": "CancelablePromise",
-              "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+              "canonicalReference": "@nextgis/cancelable-promise!CancelablePromise:class"
             },
             {
               "kind": "Content",
@@ -11708,6 +11753,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/identifyUtils.ts",
           "returnTypeTokenRange": {
             "startIndex": 5,
             "endIndex": 9
@@ -11768,6 +11814,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/utils.ts",
           "returnTypeTokenRange": {
             "startIndex": 5,
             "endIndex": 6
@@ -11812,6 +11859,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "TileNoData",
           "typeTokenRange": {
@@ -11838,6 +11886,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "TreeGroup",
           "preserveMemberOrder": false,
@@ -11964,6 +12013,7 @@
               "text": "export interface TreeItem "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "TreeItem",
           "preserveMemberOrder": false,
@@ -12125,6 +12175,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "TreeLayer",
           "preserveMemberOrder": false,
@@ -12532,6 +12583,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/utils.ts",
           "returnTypeTokenRange": {
             "startIndex": 6,
             "endIndex": 8
@@ -12574,11 +12626,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -12620,9 +12668,10 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/featureLayerUtils.ts",
           "returnTypeTokenRange": {
-            "startIndex": 11,
-            "endIndex": 12
+            "startIndex": 10,
+            "endIndex": 11
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -12630,16 +12679,16 @@
             {
               "parameterName": "params",
               "parameterTypeTokenRange": {
-                "startIndex": 6,
-                "endIndex": 7
+                "startIndex": 5,
+                "endIndex": 6
               },
               "isOptional": false
             },
             {
               "parameterName": "options",
               "parameterTypeTokenRange": {
-                "startIndex": 8,
-                "endIndex": 10
+                "startIndex": 7,
+                "endIndex": 9
               },
               "isOptional": false
             }
@@ -12652,8 +12701,8 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             }
           ],
@@ -12696,6 +12745,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/utils/uploadFeatureAttachment.ts",
           "returnTypeTokenRange": {
             "startIndex": 5,
             "endIndex": 6
@@ -12724,6 +12774,7 @@
               "text": "export interface UploadFeatureAttachmentOptions "
             }
           ],
+          "fileUrlPath": "src/utils/uploadFeatureAttachment.ts",
           "releaseTag": "Public",
           "name": "UploadFeatureAttachmentOptions",
           "preserveMemberOrder": false,
@@ -12796,6 +12847,7 @@
               "text": ">"
             }
           ],
+          "fileUrlPath": "src/utils/utils.ts",
           "isReadonly": true,
           "releaseTag": "Public",
           "name": "vectorLayerGeomToPaintTypeAlias",
@@ -12836,11 +12888,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -12858,11 +12906,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -12896,6 +12940,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "VectorResourceAdapter",
           "typeParameters": [
@@ -12928,25 +12973,25 @@
                 "endIndex": 6
               },
               "defaultTypeTokenRange": {
-                "startIndex": 8,
-                "endIndex": 9
+                "startIndex": 7,
+                "endIndex": 8
               }
             },
             {
               "typeParameterName": "F",
               "constraintTokenRange": {
-                "startIndex": 10,
-                "endIndex": 11
+                "startIndex": 9,
+                "endIndex": 10
               },
               "defaultTypeTokenRange": {
-                "startIndex": 13,
-                "endIndex": 14
+                "startIndex": 11,
+                "endIndex": 12
               }
             }
           ],
           "typeTokenRange": {
-            "startIndex": 15,
-            "endIndex": 19
+            "startIndex": 13,
+            "endIndex": 17
           }
         },
         {
@@ -12963,6 +13008,7 @@
               "text": "\"webmap-baselayer\""
             }
           ],
+          "fileUrlPath": "src/constants.ts",
           "initializerTokenRange": {
             "startIndex": 1,
             "endIndex": 2

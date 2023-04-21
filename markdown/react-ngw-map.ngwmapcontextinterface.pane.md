@@ -4,7 +4,7 @@
 
 ## NgwMapContextInterface.pane property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 pane?: string;

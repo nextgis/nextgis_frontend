@@ -4,7 +4,7 @@
 
 ## FeatureLayerField interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface FeatureLayerField 
@@ -20,5 +20,5 @@ export interface FeatureLayerField
 |  [id](./ngw-connector.featurelayerfield.id.md) |  | number |  |
 |  [keyname](./ngw-connector.featurelayerfield.keyname.md) |  | string |  |
 |  [label\_field](./ngw-connector.featurelayerfield.label_field.md) |  | boolean |  |
-|  [typemod?](./ngw-connector.featurelayerfield.typemod.md) |  | unknown | <i>(Optional)</i> |
+|  [typemod?](./ngw-connector.featurelayerfield.typemod.md) |  | unknown | _(Optional)_ |
 

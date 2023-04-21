@@ -4,7 +4,7 @@
 
 ## FilterOptions.fields property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 fields?: (keyof P)[] | false | null;

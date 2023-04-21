@@ -4,7 +4,7 @@
 
 ## isPaint() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function isPaint(paint: Paint): paint is VectorAdapterLayerPaint;
@@ -16,7 +16,7 @@ export declare function isPaint(paint: Paint): paint is VectorAdapterLayerPaint;
 |  --- | --- | --- |
 |  paint | [Paint](./paint.paint.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 paint is [VectorAdapterLayerPaint](./paint.vectoradapterlayerpaint.md)
 

@@ -6,12 +6,12 @@
 
 Get the filtered objects of the vector layer.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getFiltered?(): LayerDefinition<Feature, L>[];
 ```
-<b>Returns:</b>
+**Returns:**
 
 [LayerDefinition](./webmap.layerdefinition.md)<!-- -->&lt;Feature, L&gt;\[\]
 

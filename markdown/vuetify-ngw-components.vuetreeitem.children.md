@@ -4,7 +4,7 @@
 
 ## VueTreeItem.children property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 children?: VueTreeItem[];

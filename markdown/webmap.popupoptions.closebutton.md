@@ -4,7 +4,7 @@
 
 ## PopupOptions.closeButton property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 closeButton?: boolean;

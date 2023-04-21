@@ -4,7 +4,7 @@
 
 ## LayerAdapters.IMAGE property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 IMAGE: MainLayerAdapter<any, any, ImageAdapterOptions>;

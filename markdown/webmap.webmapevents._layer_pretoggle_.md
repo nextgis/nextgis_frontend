@@ -5,7 +5,7 @@
 ## WebMapEvents."layer:pretoggle" property
 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'layer:pretoggle': LayerAdapter;

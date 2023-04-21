@@ -4,10 +4,10 @@
 
 ## Expression type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type Expression = [ExpressionName, ...any[]];
 ```
-<b>References:</b> [ExpressionName](./paint.expressionname.md)
+**References:** [ExpressionName](./paint.expressionname.md)
 

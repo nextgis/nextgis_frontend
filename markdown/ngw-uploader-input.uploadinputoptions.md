@@ -4,7 +4,7 @@
 
 ## UploadInputOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface UploadInputOptions 
@@ -14,14 +14,14 @@ export interface UploadInputOptions
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [addTimestampToName?](./ngw-uploader-input.uploadinputoptions.addtimestamptoname.md) |  | boolean | <i>(Optional)</i> |
-|  [createName?](./ngw-uploader-input.uploadinputoptions.createname.md) |  | (name: string) =&gt; string | <i>(Optional)</i> |
-|  [element?](./ngw-uploader-input.uploadinputoptions.element.md) |  | string \| HTMLElement | <i>(Optional)</i> |
-|  [error?](./ngw-uploader-input.uploadinputoptions.error.md) |  | (er: Error) =&gt; void | <i>(Optional)</i> |
-|  [html?](./ngw-uploader-input.uploadinputoptions.html.md) |  | string | <i>(Optional)</i> |
-|  [image?](./ngw-uploader-input.uploadinputoptions.image.md) |  | boolean | <i>(Optional)</i> |
-|  [name?](./ngw-uploader-input.uploadinputoptions.name.md) |  | string | <i>(Optional)</i> |
-|  [parentId?](./ngw-uploader-input.uploadinputoptions.parentid.md) |  | number | <i>(Optional)</i> |
-|  [success?](./ngw-uploader-input.uploadinputoptions.success.md) |  | (newRes: ResourceCreateResp) =&gt; void | <i>(Optional)</i> |
-|  [vector?](./ngw-uploader-input.uploadinputoptions.vector.md) |  | boolean | <i>(Optional)</i> |
+|  [addTimestampToName?](./ngw-uploader-input.uploadinputoptions.addtimestamptoname.md) |  | boolean | _(Optional)_ |
+|  [createName?](./ngw-uploader-input.uploadinputoptions.createname.md) |  | (name: string) =&gt; string | _(Optional)_ |
+|  [element?](./ngw-uploader-input.uploadinputoptions.element.md) |  | string \| HTMLElement | _(Optional)_ |
+|  [error?](./ngw-uploader-input.uploadinputoptions.error.md) |  | (er: Error) =&gt; void | _(Optional)_ |
+|  [html?](./ngw-uploader-input.uploadinputoptions.html.md) |  | string | _(Optional)_ |
+|  [image?](./ngw-uploader-input.uploadinputoptions.image.md) |  | boolean | _(Optional)_ |
+|  [name?](./ngw-uploader-input.uploadinputoptions.name.md) |  | string | _(Optional)_ |
+|  [parentId?](./ngw-uploader-input.uploadinputoptions.parentid.md) |  | number | _(Optional)_ |
+|  [success?](./ngw-uploader-input.uploadinputoptions.success.md) |  | (newRes: ResourceCreateResp) =&gt; void | _(Optional)_ |
+|  [vector?](./ngw-uploader-input.uploadinputoptions.vector.md) |  | boolean | _(Optional)_ |
 

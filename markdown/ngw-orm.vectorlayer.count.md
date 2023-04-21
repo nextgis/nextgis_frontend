@@ -6,7 +6,7 @@
 
 Counts entities that match given find options or conditions.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static count<T extends VectorLayer>(this: ObjectType<T>, optionsOrConditions?: FindManyOptions<T> | PropertiesFilter<T>): Promise<number>;
@@ -17,9 +17,9 @@ static count<T extends VectorLayer>(this: ObjectType<T>, optionsOrConditions?: F
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  this | ObjectType&lt;T&gt; |  |
-|  optionsOrConditions | FindManyOptions&lt;T&gt; \| [PropertiesFilter](./properties-filter.propertiesfilter.md)<!-- -->&lt;T&gt; | <i>(Optional)</i> |
+|  optionsOrConditions | FindManyOptions&lt;T&gt; \| [PropertiesFilter](./properties-filter.propertiesfilter.md)<!-- -->&lt;T&gt; | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;number&gt;
 

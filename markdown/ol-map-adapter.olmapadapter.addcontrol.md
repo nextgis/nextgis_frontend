@@ -4,7 +4,7 @@
 
 ## OlMapAdapter.addControl() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 addControl(control: Control, position: ControlPosition): Control | undefined;
@@ -17,7 +17,7 @@ addControl(control: Control, position: ControlPosition): Control | undefined;
 |  control | Control |  |
 |  position | [ControlPosition](./webmap.controlposition.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Control \| undefined
 

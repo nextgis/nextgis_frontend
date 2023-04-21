@@ -4,7 +4,7 @@
 
 ## GetRequestItemsResponseMap."pyramid.settings" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'pyramid.settings': PyramidSettings;

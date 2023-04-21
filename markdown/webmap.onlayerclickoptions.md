@@ -9,10 +9,10 @@
 > use [OnLayerMouseOptions](./webmap.onlayermouseoptions.md) instead
 > 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type OnLayerClickOptions<F extends Feature = Feature, L = LayerAdapter> = OnLayerMouseOptions<F, L>;
 ```
-<b>References:</b> [LayerAdapter](./webmap.layeradapter.md)<!-- -->, [OnLayerMouseOptions](./webmap.onlayermouseoptions.md)
+**References:** [LayerAdapter](./webmap.layeradapter.md)<!-- -->, [OnLayerMouseOptions](./webmap.onlayermouseoptions.md)
 

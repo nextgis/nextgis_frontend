@@ -4,7 +4,7 @@
 
 ## HtmlToggle.on property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 on: HtmlDef;

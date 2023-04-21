@@ -4,10 +4,10 @@
 
 ## ReactNgwMapProps type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type ReactNgwMapProps = MapContainerProps & Required<Pick<MapContainerProps, 'mapAdapter'>>;
 ```
-<b>References:</b> [MapContainerProps](./react-ngw-map.mapcontainerprops.md)
+**References:** [MapContainerProps](./react-ngw-map.mapcontainerprops.md)
 

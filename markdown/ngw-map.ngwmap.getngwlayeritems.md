@@ -9,7 +9,7 @@
 > use [NgwMap.fetchNgwLayerItems()](./ngw-map.ngwmap.fetchngwlayeritems.md) instead
 > 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getNgwLayerItems<F extends FeatureProperties = FeatureProperties, G extends Geometry = Geometry>(options: Omit<FetchNgwItemsOptions<F>, 'connector'>): CancelablePromise<FeatureItem<F, G>[]>;
@@ -19,9 +19,9 @@ getNgwLayerItems<F extends FeatureProperties = FeatureProperties, G extends Geom
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | Omit&lt;[FetchNgwItemsOptions](./ngw-kit.fetchngwitemsoptions.md)<!-- -->&lt;F&gt;, 'connector'&gt; |  |
+|  options | Omit&lt;FetchNgwItemsOptions&lt;F&gt;, 'connector'&gt; |  |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;[FeatureItem](./ngw-connector.featureitem.md)<!-- -->&lt;F, G&gt;\[\]&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;[FeatureItem](./ngw-connector.featureitem.md)<!-- -->&lt;F, G&gt;\[\]&gt;
 

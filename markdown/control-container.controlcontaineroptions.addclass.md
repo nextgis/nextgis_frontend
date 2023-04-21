@@ -4,7 +4,7 @@
 
 ## ControlContainerOptions.addClass property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 addClass?: string;

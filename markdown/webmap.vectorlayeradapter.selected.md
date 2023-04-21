@@ -6,7 +6,7 @@
 
 True if there are selected features in the layer
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 selected?: boolean;

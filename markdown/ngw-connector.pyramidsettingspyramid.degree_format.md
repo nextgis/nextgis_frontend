@@ -4,7 +4,7 @@
 
 ## PyramidSettingsPyramid.degree\_format property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 degree_format: 'dd';

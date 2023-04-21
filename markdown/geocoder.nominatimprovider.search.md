@@ -4,7 +4,7 @@
 
 ## NominatimProvider.search() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 search(val: string): AsyncGenerator<SearchItem, void, unknown>;
@@ -16,7 +16,7 @@ search(val: string): AsyncGenerator<SearchItem, void, unknown>;
 |  --- | --- | --- |
 |  val | string |  |
 
-<b>Returns:</b>
+**Returns:**
 
 AsyncGenerator&lt;[SearchItem](./geocoder.searchitem.md)<!-- -->, void, unknown&gt;
 

@@ -4,7 +4,7 @@
 
 ## IconOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface IconOptions 
@@ -14,10 +14,12 @@ export interface IconOptions
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [color?](./icons.iconoptions.color.md) |  | string | <i>(Optional)</i> |
-|  [rotate?](./icons.iconoptions.rotate.md) |  | number | <i>(Optional)</i> |
-|  [shape?](./icons.iconoptions.shape.md) |  | 'rect' \| 'star' \| 'plus' \| 'minus' \| 'brill' \| 'circle' \| 'marker' \| 'triangle' \| 'asterisk' | <i>(Optional)</i> |
-|  [size?](./icons.iconoptions.size.md) |  | number | <i>(Optional)</i> |
-|  [stroke?](./icons.iconoptions.stroke.md) |  | number | <i>(Optional)</i> |
-|  [strokeColor?](./icons.iconoptions.strokecolor.md) |  | string | <i>(Optional)</i> |
+|  [color?](./icons.iconoptions.color.md) |  | string | _(Optional)_ |
+|  [p?](./icons.iconoptions.p.md) |  | string | _(Optional)_ Svg path |
+|  [rotate?](./icons.iconoptions.rotate.md) |  | number | _(Optional)_ |
+|  [shape?](./icons.iconoptions.shape.md) |  | 'rect' \| 'star' \| 'plus' \| 'minus' \| 'brill' \| 'circle' \| 'marker' \| 'triangle' \| 'asterisk' | _(Optional)_ |
+|  [size?](./icons.iconoptions.size.md) |  | number | _(Optional)_ |
+|  [stroke?](./icons.iconoptions.stroke.md) |  | number | _(Optional)_ |
+|  [strokeColor?](./icons.iconoptions.strokecolor.md) |  | string | _(Optional)_ |
+|  [svg?](./icons.iconoptions.svg.md) |  | string | _(Optional)_ |
 

@@ -4,12 +4,12 @@
 
 ## NgwProvider class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class NgwProvider extends BaseProvider<NgwProviderOptions> 
 ```
-<b>Extends:</b> [BaseProvider](./geocoder.baseprovider.md)<!-- -->&lt;NgwProviderOptions
+**Extends:** [BaseProvider](./geocoder.baseprovider.md)<!-- -->&lt;NgwProviderOptions&gt;
 
 ## Constructors
 

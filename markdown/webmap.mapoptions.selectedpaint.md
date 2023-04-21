@@ -4,7 +4,7 @@
 
 ## MapOptions.selectedPaint property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 selectedPaint?: GeometryPaint;

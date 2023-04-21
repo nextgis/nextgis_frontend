@@ -6,7 +6,7 @@
 
 Constructs a new instance of the `WebMapLayers` class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 constructor(mapOptions: O);

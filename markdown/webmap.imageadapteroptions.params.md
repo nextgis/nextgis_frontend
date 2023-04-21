@@ -4,7 +4,7 @@
 
 ## ImageAdapterOptions.params property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 params: Record<string, any>;

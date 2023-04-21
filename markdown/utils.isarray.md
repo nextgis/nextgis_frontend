@@ -4,7 +4,7 @@
 
 ## isArray() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function isArray(val: unknown): val is [];
@@ -16,7 +16,7 @@ export declare function isArray(val: unknown): val is [];
 |  --- | --- | --- |
 |  val | unknown |  |
 
-<b>Returns:</b>
+**Returns:**
 
 val is \[\]
 

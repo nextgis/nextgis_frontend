@@ -6,12 +6,12 @@
 
 Promise that can be canceled
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class CancelablePromise<T = any> implements Promise<T> 
 ```
-<b>Implements:</b> Promise
+**Implements:** Promise&lt;T&gt;
 
 ## Example 1
 

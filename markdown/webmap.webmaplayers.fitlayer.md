@@ -6,7 +6,7 @@
 
 Try to fit map view by given layer bounds. But not all layers have borders
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 fitLayer(layerDef: LayerDef, options?: FitOptions): Promise<void>;
@@ -17,9 +17,9 @@ fitLayer(layerDef: LayerDef, options?: FitOptions): Promise<void>;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  layerDef | [LayerDef](./webmap.layerdef.md) |  |
-|  options | [FitOptions](./webmap.fitoptions.md) | <i>(Optional)</i> |
+|  options | [FitOptions](./webmap.fitoptions.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;void&gt;
 

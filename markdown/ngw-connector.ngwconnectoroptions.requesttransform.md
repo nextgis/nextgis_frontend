@@ -4,7 +4,7 @@
 
 ## NgwConnectorOptions.requestTransform property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 requestTransform?: RequestTransformFunction;

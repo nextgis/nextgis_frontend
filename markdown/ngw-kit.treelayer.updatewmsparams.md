@@ -4,7 +4,7 @@
 
 ## TreeLayer.updateWmsParams property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 updateWmsParams?: (parans: any) => any;

@@ -4,7 +4,7 @@
 
 ## createNgwMap() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function createNgwMap(options: NgwMapOptions): Promise<NgwMap>;
@@ -16,7 +16,7 @@ export declare function createNgwMap(options: NgwMapOptions): Promise<NgwMap>;
 |  --- | --- | --- |
 |  options | [NgwMapOptions](./ngw-map.ngwmapoptions.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[NgwMap](./ngw-map.ngwmap.md)<!-- -->&gt;
 

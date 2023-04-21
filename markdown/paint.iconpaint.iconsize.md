@@ -4,7 +4,7 @@
 
 ## IconPaint.iconSize property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 iconSize?: [number, number];

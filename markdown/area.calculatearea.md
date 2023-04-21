@@ -4,7 +4,7 @@
 
 ## calculateArea() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function calculateArea(points: Position[]): number;
@@ -16,7 +16,7 @@ export declare function calculateArea(points: Position[]): number;
 |  --- | --- | --- |
 |  points | Position\[\] |  |
 
-<b>Returns:</b>
+**Returns:**
 
 number
 

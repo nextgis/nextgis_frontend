@@ -4,7 +4,7 @@
 
 ## NgwWebmapAdapterOptions.popupOptions property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 popupOptions?: PopupOptions;

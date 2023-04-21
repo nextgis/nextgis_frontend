@@ -4,7 +4,7 @@
 
 ## parseDate() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function parseDate(date: string | NgwDateFormat | NgwDateTimeFormat): string | undefined;
@@ -16,7 +16,7 @@ export declare function parseDate(date: string | NgwDateFormat | NgwDateTimeForm
 |  --- | --- | --- |
 |  date | string \| [NgwDateFormat](./ngw-connector.ngwdateformat.md) \| [NgwDateTimeFormat](./ngw-connector.ngwdatetimeformat.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 string \| undefined
 

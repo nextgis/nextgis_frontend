@@ -4,12 +4,12 @@
 
 ## NgwMap.getNgwLayers() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getNgwLayers(): Promise<NgwLayers>;
 ```
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[NgwLayers](./ngw-map.ngwlayers.md)<!-- -->&gt;
 

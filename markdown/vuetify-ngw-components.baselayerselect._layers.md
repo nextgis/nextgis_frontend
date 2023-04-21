@@ -4,7 +4,7 @@
 
 ## BaselayerSelect.\_layers property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 protected _layers: Array<LayerAdapter | ResourceAdapter>;

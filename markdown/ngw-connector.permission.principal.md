@@ -4,7 +4,7 @@
 
 ## Permission.principal property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 principal: {

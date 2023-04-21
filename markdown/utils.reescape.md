@@ -4,7 +4,7 @@
 
 ## reEscape() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function reEscape(s: string): string;
@@ -16,7 +16,7 @@ export declare function reEscape(s: string): string;
 |  --- | --- | --- |
 |  s | string |  |
 
-<b>Returns:</b>
+**Returns:**
 
 string
 

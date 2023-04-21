@@ -4,7 +4,7 @@
 
 ## MapboxglMapAdapter.removeLayer() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 removeLayer(layerIds: string[]): void;
@@ -16,7 +16,7 @@ removeLayer(layerIds: string[]): void;
 |  --- | --- | --- |
 |  layerIds | string\[\] |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

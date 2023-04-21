@@ -4,7 +4,7 @@
 
 ## QmsBasemap.epsg property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 epsg: number;

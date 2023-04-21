@@ -6,7 +6,7 @@
 
 Constructs a new instance of the `Item` class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 constructor(options?: O);
@@ -16,5 +16,5 @@ constructor(options?: O);
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | O | <i>(Optional)</i> |
+|  options | O | _(Optional)_ |
 

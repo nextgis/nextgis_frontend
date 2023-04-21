@@ -4,7 +4,7 @@
 
 ## MainLayerAdapter.setPaint() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 setPaint?(paint: Paint): void;
@@ -16,7 +16,7 @@ setPaint?(paint: Paint): void;
 |  --- | --- | --- |
 |  paint | [Paint](./paint.paint.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

@@ -4,7 +4,7 @@
 
 ## ResourceItem.lookup\_table property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 lookup_table?: LookupTableResource;

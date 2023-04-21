@@ -4,7 +4,7 @@
 
 ## NgwWebmapLayerAdapter.webmapClassName property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 webmapClassName: string;

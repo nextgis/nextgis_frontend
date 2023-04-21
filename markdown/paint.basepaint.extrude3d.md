@@ -4,7 +4,7 @@
 
 ## BasePaint.extrude3d property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 extrude3d?: number | Expression;

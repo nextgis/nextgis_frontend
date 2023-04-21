@@ -6,8 +6,8 @@
 
 Array of coordinates, measured in degrees, in \[west, south, east, north\] order. [GeoJSON standard](https://tools.ietf.org/html/rfc7946#section-5)
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export declare type LngLatBoundsArray = [number, number, number, number] | number[];
+export declare type LngLatBoundsArray = [west: number, south: number, east: number, north: number] | number[];
 ```

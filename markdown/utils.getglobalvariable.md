@@ -4,12 +4,12 @@
 
 ## getGlobalVariable() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function getGlobalVariable(): any;
 ```
-<b>Returns:</b>
+**Returns:**
 
 any
 

@@ -4,7 +4,7 @@
 
 ## RuntimeParams.set() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 set(name: string, value: any): void;
@@ -17,7 +17,7 @@ set(name: string, value: any): void;
 |  name | string |  |
 |  value | any |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

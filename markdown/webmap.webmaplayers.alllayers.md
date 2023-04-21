@@ -4,12 +4,12 @@
 
 ## WebMapLayers.allLayers() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 allLayers(): AddedLayers<M, L>;
 ```
-<b>Returns:</b>
+**Returns:**
 
 AddedLayers&lt;M, L&gt;
 

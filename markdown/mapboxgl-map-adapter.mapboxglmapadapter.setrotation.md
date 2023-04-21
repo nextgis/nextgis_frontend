@@ -4,7 +4,7 @@
 
 ## MapboxglMapAdapter.setRotation() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 setRotation(angle: number): void;
@@ -16,7 +16,7 @@ setRotation(angle: number): void;
 |  --- | --- | --- |
 |  angle | number |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

@@ -4,12 +4,12 @@
 
 ## ResourceStore class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare abstract class ResourceStore<P extends FeatureProperties = FeatureProperties, G extends Geometry | null = Geometry> extends VuexModule 
 ```
-<b>Extends:</b> VuexModule
+**Extends:** VuexModule
 
 ## Properties
 

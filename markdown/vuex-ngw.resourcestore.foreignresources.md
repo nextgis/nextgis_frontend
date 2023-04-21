@@ -9,7 +9,7 @@
 > not used
 > 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 foreignResources: {

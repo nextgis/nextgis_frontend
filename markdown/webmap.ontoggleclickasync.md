@@ -4,7 +4,7 @@
 
 ## onToggleClickAsync type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type onToggleClickAsync = (status: boolean) => Promise<void>;

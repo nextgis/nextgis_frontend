@@ -4,7 +4,7 @@
 
 ## ConsoleEngineOptions.enabled property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 enabled?: boolean;

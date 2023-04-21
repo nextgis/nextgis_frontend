@@ -4,7 +4,7 @@
 
 ## NgwKitOptions.auth property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 auth?: {

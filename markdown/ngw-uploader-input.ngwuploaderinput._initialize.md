@@ -4,12 +4,12 @@
 
 ## NgwUploaderInput.\_initialize() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 protected _initialize(): Promise<void>;
 ```
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;void&gt;
 

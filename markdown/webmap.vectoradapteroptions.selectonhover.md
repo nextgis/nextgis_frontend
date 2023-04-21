@@ -6,7 +6,7 @@
 
 Make the feature selected while mouseover.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 selectOnHover?: boolean;

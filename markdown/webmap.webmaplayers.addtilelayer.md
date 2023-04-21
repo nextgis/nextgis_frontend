@@ -6,7 +6,7 @@
 
 Shortcut for [WebMapLayers.addLayer()](./webmap.webmaplayers.addlayer.md) to create TileLayer adapter
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 addTileLayer(url: string, options?: Omit<TileAdapterOptions, 'url'>): Promise<MainLayerAdapter<M, L, TileAdapterOptions>>;
@@ -17,9 +17,9 @@ addTileLayer(url: string, options?: Omit<TileAdapterOptions, 'url'>): Promise<Ma
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  url | string |  |
-|  options | Omit&lt;[TileAdapterOptions](./webmap.tileadapteroptions.md)<!-- -->, 'url'&gt; | <i>(Optional)</i> |
+|  options | Omit&lt;[TileAdapterOptions](./webmap.tileadapteroptions.md)<!-- -->, 'url'&gt; | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[MainLayerAdapter](./webmap.mainlayeradapter.md)<!-- -->&lt;M, L, [TileAdapterOptions](./webmap.tileadapteroptions.md)<!-- -->&gt;&gt;
 

@@ -4,7 +4,7 @@
 
 ## PyramidSettingsPyramidCompanyLogo interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface PyramidSettingsPyramidCompanyLogo 
@@ -15,5 +15,5 @@ export interface PyramidSettingsPyramidCompanyLogo
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [enabled](./ngw-connector.pyramidsettingspyramidcompanylogo.enabled.md) |  | boolean |  |
-|  [link?](./ngw-connector.pyramidsettingspyramidcompanylogo.link.md) |  | 'string' | <i>(Optional)</i> |
+|  [link?](./ngw-connector.pyramidsettingspyramidcompanylogo.link.md) |  | 'string' | _(Optional)_ |
 

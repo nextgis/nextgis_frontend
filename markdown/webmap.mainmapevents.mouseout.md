@@ -6,7 +6,7 @@
 
 Fired when the mouse leaves the map.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 mouseout: MapAdapter;

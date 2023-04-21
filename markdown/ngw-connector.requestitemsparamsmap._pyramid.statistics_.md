@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."pyramid.statistics" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'pyramid.statistics': null;

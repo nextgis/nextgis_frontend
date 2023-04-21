@@ -6,10 +6,10 @@
 
 Array of two numbers representing longitude and latitude.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type LngLatArray = Position | number[];
 ```
-<b>References:</b> [Position](./utils.position.md)
+**References:** [Position](./utils.position.md)
 

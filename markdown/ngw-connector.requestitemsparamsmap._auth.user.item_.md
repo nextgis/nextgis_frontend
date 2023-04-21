@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."auth.user.item" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'auth.user.item': {

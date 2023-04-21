@@ -4,7 +4,7 @@
 
 ## BaselayerSelect.internalUpdate property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 internalUpdate: boolean;

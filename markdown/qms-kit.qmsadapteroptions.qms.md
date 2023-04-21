@@ -4,7 +4,7 @@
 
 ## QmsAdapterOptions.qms property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 qms?: QmsBasemap;

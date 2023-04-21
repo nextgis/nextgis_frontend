@@ -9,7 +9,7 @@
 > use [fetchIdentifyGeoJson()](./ngw-kit.fetchidentifygeojson.md) instead
 > 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function getIdentifyGeoJson<G extends Geometry = Geometry, P extends JsonMap = JsonMap>(options: GetIdentifyGeoJsonOptions): CancelablePromise<Feature<G, P> | undefined>;
@@ -21,7 +21,7 @@ export declare function getIdentifyGeoJson<G extends Geometry = Geometry, P exte
 |  --- | --- | --- |
 |  options | [GetIdentifyGeoJsonOptions](./ngw-kit.getidentifygeojsonoptions.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;Feature&lt;G, P&gt; \| undefined&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;Feature&lt;G, P&gt; \| undefined&gt;
 

@@ -4,7 +4,7 @@
 
 ## LayerAdapters.MVT property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 MVT: VectorLayerAdapter;

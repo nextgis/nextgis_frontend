@@ -4,7 +4,7 @@
 
 ## FEATURE\_REQUEST\_PARAMS variable
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 FEATURE_REQUEST_PARAMS: FeatureRequestParams

@@ -4,7 +4,7 @@
 
 ## MapboxglMapAdapter.showLayer() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 showLayer(layerIds: string[]): void;
@@ -16,7 +16,7 @@ showLayer(layerIds: string[]): void;
 |  --- | --- | --- |
 |  layerIds | string\[\] |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

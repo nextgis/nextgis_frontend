@@ -4,12 +4,12 @@
 
 ## LeafletMapAdapter.getControlContainer() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getControlContainer(): HTMLElement;
 ```
-<b>Returns:</b>
+**Returns:**
 
 HTMLElement
 

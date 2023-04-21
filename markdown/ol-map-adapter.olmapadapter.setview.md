@@ -4,7 +4,7 @@
 
 ## OlMapAdapter.setView() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 setView(lngLat: LngLatArray, zoom?: number): void;
@@ -15,9 +15,9 @@ setView(lngLat: LngLatArray, zoom?: number): void;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  lngLat | [LngLatArray](./utils.lnglatarray.md) |  |
-|  zoom | number | <i>(Optional)</i> |
+|  zoom | number | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

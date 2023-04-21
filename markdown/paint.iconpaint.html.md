@@ -4,7 +4,7 @@
 
 ## IconPaint.html property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 html?: string;

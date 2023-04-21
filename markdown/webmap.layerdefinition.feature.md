@@ -6,7 +6,7 @@
 
 A vector layer object in geojson format.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 feature: F;

@@ -4,7 +4,7 @@
 
 ## MapFeatureDisplayNameOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface MapFeatureDisplayNameOptions 
@@ -14,8 +14,8 @@ export interface MapFeatureDisplayNameOptions
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [connector](./ngw-kit.mapfeaturedisplaynameoptions.connector.md) |  | NgwConnector |  |
+|  [connector](./ngw-kit.mapfeaturedisplaynameoptions.connector.md) |  | [NgwConnector](./ngw-connector.ngwconnector.md) |  |
 |  [fields](./ngw-kit.mapfeaturedisplaynameoptions.fields.md) |  | string\[\] |  |
-|  [resource?](./ngw-kit.mapfeaturedisplaynameoptions.resource.md) |  | [ResourceDefinition](./ngw-connector.resourcedefinition.md) | <i>(Optional)</i> |
-|  [resourceId?](./ngw-kit.mapfeaturedisplaynameoptions.resourceid.md) |  | number | <i>(Optional)</i> |
+|  [resource?](./ngw-kit.mapfeaturedisplaynameoptions.resource.md) |  | [ResourceDefinition](./ngw-connector.resourcedefinition.md) | _(Optional)_ |
+|  [resourceId?](./ngw-kit.mapfeaturedisplaynameoptions.resourceid.md) |  | number | _(Optional)_ |
 

@@ -4,7 +4,7 @@
 
 ## ResourceAdapter.item property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 item?: ResourceItem;

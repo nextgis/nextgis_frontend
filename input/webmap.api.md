@@ -750,6 +750,7 @@ export interface VectorAdapterOptions<F extends Feature = Feature, L = any, A ex
     labelField?: keyof P extends null ? string : keyof P;
     // (undocumented)
     labelOnHover?: boolean;
+    labelVisibility?: boolean;
     // @deprecated (undocumented)
     layout?: any;
     multiselect?: boolean;
@@ -797,6 +798,8 @@ export interface VectorLayerAdapter<M = any, L = any, O extends VectorAdapterOpt
     getFiltered?(): LayerDefinition<Feature, L>[];
     getLayers?(): LayerDefinition<F, L>[];
     getSelected?(): LayerDefinition<Feature, L>[];
+    // (undocumented)
+    hideLabel?(): void;
     onLayerClick?(event: OnLayerMouseOptions): Promise<any>;
     // (undocumented)
     openPopup?(findFeatureCb?: DataLayerFilter<F, L>, options?: PopupOptions): void;
@@ -805,6 +808,8 @@ export interface VectorLayerAdapter<M = any, L = any, O extends VectorAdapterOpt
     select?(findFeatureCb?: DataLayerFilter<F, L> | PropertiesFilter): void;
     selected?: boolean;
     setData?(geojson: GeoJsonObject): void | Promise<void>;
+    // (undocumented)
+    showLabel?(): void;
     source?: unknown;
     unselect?(findFeatureCb?: DataLayerFilter<F, L> | PropertiesFilter): void;
     // (undocumented)
@@ -933,6 +938,8 @@ export class WebMapLayers<M = any, L = any, E extends WebMapEvents = WebMapEvent
     getLayerId(layerDef: LayerDef): string | undefined;
     getLayers(): string[];
     hideLayer(layerDef: LayerDef, options?: ToggleLayerOptions): Promise<void>;
+    // (undocumented)
+    hideLayerLabel(layerDef: LayerDef): void;
     isBaseLayer(layerDef: LayerDef): boolean | undefined;
     isLayerVisible(layerDef: LayerDef): boolean;
     // (undocumented)
@@ -954,7 +961,11 @@ export class WebMapLayers<M = any, L = any, E extends WebMapEvents = WebMapEvent
     // (undocumented)
     setLayerSelectedPaint(layerDef: LayerDef, paint?: Paint | null): void;
     showLayer(layerDef: LayerDef, options?: ToggleLayerOptions): Promise<void>;
+    // (undocumented)
+    showLayerLabel(layerDef: LayerDef): void;
     toggleLayer(layerDef: LayerDef, status?: boolean, options?: ToggleLayerOptions): Promise<void>;
+    // (undocumented)
+    toggleLayerLabel(layerDef: LayerDef, status: boolean): void;
     unSelectLayer(layerDef: LayerDef, findFeatureFun?: DataLayerFilter): void;
     unSelectLayers(): void;
     // (undocumented)

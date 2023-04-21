@@ -9,7 +9,7 @@
 > use fitBounds instead
 > 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 fit?(extent: LngLatBoundsArray, options?: FitOptions): void;
@@ -20,9 +20,9 @@ fit?(extent: LngLatBoundsArray, options?: FitOptions): void;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  extent | [LngLatBoundsArray](./utils.lnglatboundsarray.md) |  |
-|  options | [FitOptions](./webmap.fitoptions.md) | <i>(Optional)</i> |
+|  options | [FitOptions](./webmap.fitoptions.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

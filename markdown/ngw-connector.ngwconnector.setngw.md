@@ -6,7 +6,7 @@
 
 Fast way to specify the connection address to NextGIS Web. The current connection will be severed.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 setNgw(baseUrl: string): void;
@@ -18,7 +18,7 @@ setNgw(baseUrl: string): void;
 |  --- | --- | --- |
 |  baseUrl | string | NGW url |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

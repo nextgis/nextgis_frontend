@@ -123,6 +123,7 @@ webMap.onLoad().then(() => {
 |  [ControlPosition](./webmap.controlposition.md) |  |
 |  [ControlPositions](./webmap.controlpositions.md) |  |
 |  [ControlsOptions](./webmap.controlsoptions.md) |  |
+|  [CreatePopupContent](./webmap.createpopupcontent.md) |  |
 |  [Cursor](./webmap.cursor.md) | Available cursor names from [https://developer.mozilla.org/ru/docs/Web/CSS/cursor](https://developer.mozilla.org/ru/docs/Web/CSS/cursor) |
 |  [DataLayerFilter](./webmap.datalayerfilter.md) |  |
 |  [FeatureLayerAdapter](./webmap.featurelayeradapter.md) | Generic shortcut to define VectorLayerAdapter from feature |

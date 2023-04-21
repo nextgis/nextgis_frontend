@@ -6,12 +6,12 @@
 
 Column decorator is used to mark a specific class property as a table column. Only properties decorated with this decorator will be persisted to the database when entity be saved.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function Column(): Function;
 ```
-<b>Returns:</b>
+**Returns:**
 
 Function
 

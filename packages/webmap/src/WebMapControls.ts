@@ -155,7 +155,7 @@ export class WebMapControls<
   /**
    *
    * @param control - Instance of WEB-GIS framework control.
-   *                  What is returned by the {@Link WebMapControls.createControl | create} method
+   *                  What is returned by the {@link createControl | create} method
    */
   removeControl(control: C): void {
     if ('remove' in control) {

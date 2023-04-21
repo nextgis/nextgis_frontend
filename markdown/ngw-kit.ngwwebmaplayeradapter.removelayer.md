@@ -4,12 +4,12 @@
 
 ## NgwWebmapLayerAdapter.removeLayer() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 removeLayer(): void;
 ```
-<b>Returns:</b>
+**Returns:**
 
 void
 

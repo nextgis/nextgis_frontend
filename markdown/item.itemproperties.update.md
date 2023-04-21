@@ -4,12 +4,12 @@
 
 ## ItemProperties.update() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 update(): void;
 ```
-<b>Returns:</b>
+**Returns:**
 
 void
 

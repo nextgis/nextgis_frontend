@@ -4,7 +4,7 @@
 
 ## AppSettings.draw\_order\_enabled property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 draw_order_enabled?: any;

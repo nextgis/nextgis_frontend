@@ -6,7 +6,7 @@
 
 WKT Polygon geometry
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 geom: string;

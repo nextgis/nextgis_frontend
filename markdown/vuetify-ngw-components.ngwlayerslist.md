@@ -4,12 +4,12 @@
 
 ## NgwLayersList class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class NgwLayersList extends Vue 
 ```
-<b>Extends:</b> Vue
+**Extends:** Vue
 
 ## Properties
 

@@ -4,7 +4,7 @@
 
 ## CheckProperty.unblockChild() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 unblockChild(options?: O): void;
@@ -14,9 +14,9 @@ unblockChild(options?: O): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | O | <i>(Optional)</i> |
+|  options | O | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

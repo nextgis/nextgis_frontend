@@ -4,7 +4,7 @@
 
 ## LayerFeature interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface LayerFeature 
@@ -15,7 +15,7 @@ export interface LayerFeature
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [fields](./ngw-connector.layerfeature.fields.md) |  | [FeatureProperties](./utils.featureproperties.md) |  |
-|  [geom?](./ngw-connector.layerfeature.geom.md) |  | GeoJsonObject | <i>(Optional)</i> |
+|  [geom?](./ngw-connector.layerfeature.geom.md) |  | GeoJsonObject | _(Optional)_ |
 |  [id](./ngw-connector.layerfeature.id.md) |  | number |  |
 |  [label](./ngw-connector.layerfeature.label.md) |  | string |  |
 |  [layerId](./ngw-connector.layerfeature.layerid.md) |  | number |  |

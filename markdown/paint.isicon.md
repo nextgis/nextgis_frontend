@@ -4,7 +4,7 @@
 
 ## isIcon() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function isIcon(paint: IconPaint): paint is IconPaint;
@@ -16,7 +16,7 @@ export declare function isIcon(paint: IconPaint): paint is IconPaint;
 |  --- | --- | --- |
 |  paint | [IconPaint](./paint.iconpaint.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 paint is [IconPaint](./paint.iconpaint.md)
 

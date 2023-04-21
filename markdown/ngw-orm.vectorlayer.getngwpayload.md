@@ -4,7 +4,7 @@
 
 ## VectorLayer.getNgwPayload() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static getNgwPayload(resource: typeof VectorLayer, parent: number, options: SyncOptions): DeepPartial<VectorResourceSyncItem | VectorResourceUpdateItem> | undefined;
@@ -18,7 +18,7 @@ static getNgwPayload(resource: typeof VectorLayer, parent: number, options: Sync
 |  parent | number |  |
 |  options | SyncOptions |  |
 
-<b>Returns:</b>
+**Returns:**
 
 [DeepPartial](./utils.deeppartial.md)<!-- -->&lt;VectorResourceSyncItem \| VectorResourceUpdateItem&gt; \| undefined
 

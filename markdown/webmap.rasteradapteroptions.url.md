@@ -4,7 +4,7 @@
 
 ## RasterAdapterOptions.url property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 url: string;

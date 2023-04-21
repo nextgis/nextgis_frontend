@@ -4,7 +4,7 @@
 
 ## Cache\_2.match() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 match(key: string, props?: CacheMatchProps<O>): CacheValue<V> | undefined;
@@ -15,9 +15,9 @@ match(key: string, props?: CacheMatchProps<O>): CacheValue<V> | undefined;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  key | string |  |
-|  props | CacheMatchProps&lt;O&gt; | <i>(Optional)</i> |
+|  props | CacheMatchProps&lt;O&gt; | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 CacheValue&lt;V&gt; \| undefined
 

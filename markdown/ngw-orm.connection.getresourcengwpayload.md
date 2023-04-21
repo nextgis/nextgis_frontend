@@ -4,7 +4,7 @@
 
 ## Connection.getResourceNgwPayload() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getResourceNgwPayload(resource: typeof BaseResource, parent: number, opt?: Partial<SyncOptions>): DeepPartial<ResourceSyncItem> | undefined;
@@ -16,9 +16,9 @@ getResourceNgwPayload(resource: typeof BaseResource, parent: number, opt?: Parti
 |  --- | --- | --- |
 |  resource | typeof [BaseResource](./ngw-orm.baseresource.md) |  |
 |  parent | number |  |
-|  opt | Partial&lt;SyncOptions&gt; | <i>(Optional)</i> |
+|  opt | Partial&lt;SyncOptions&gt; | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 DeepPartial&lt;ResourceSyncItem&gt; \| undefined
 

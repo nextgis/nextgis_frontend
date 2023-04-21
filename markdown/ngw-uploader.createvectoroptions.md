@@ -4,10 +4,10 @@
 
 ## CreateVectorOptions type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type CreateVectorOptions = CreateRasterOptions;
 ```
-<b>References:</b> [CreateRasterOptions](./ngw-uploader.createrasteroptions.md)
+**References:** [CreateRasterOptions](./ngw-uploader.createrasteroptions.md)
 

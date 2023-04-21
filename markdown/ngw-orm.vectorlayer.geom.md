@@ -4,7 +4,7 @@
 
 ## VectorLayer.geom property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 get geom(): G;

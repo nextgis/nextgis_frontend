@@ -9,10 +9,10 @@
 > use IconPaint instead
 > 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type IconOptions = IconPaint | PinPaint;
 ```
-<b>References:</b> [IconPaint](./paint.iconpaint.md)<!-- -->, [PinPaint](./paint.pinpaint.md)
+**References:** [IconPaint](./paint.iconpaint.md)<!-- -->, [PinPaint](./paint.pinpaint.md)
 

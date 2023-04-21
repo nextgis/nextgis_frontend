@@ -4,7 +4,7 @@
 
 ## NgLogEngine.info() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 info(message: string, options?: LogShortcutOptions<D>): void;
@@ -15,9 +15,9 @@ info(message: string, options?: LogShortcutOptions<D>): void;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  message | string |  |
-|  options | [LogShortcutOptions](./logging.logshortcutoptions.md)<!-- -->&lt;D&gt; | <i>(Optional)</i> |
+|  options | [LogShortcutOptions](./logging.logshortcutoptions.md)<!-- -->&lt;D&gt; | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

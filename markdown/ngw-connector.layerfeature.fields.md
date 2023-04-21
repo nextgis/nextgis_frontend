@@ -4,7 +4,7 @@
 
 ## LayerFeature.fields property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 fields: FeatureProperties;

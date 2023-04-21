@@ -4,7 +4,7 @@
 
 ## NgwConfig interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface NgwConfig 

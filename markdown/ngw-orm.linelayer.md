@@ -4,12 +4,12 @@
 
 ## LineLayer class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class LineLayer extends VectorLayer<LineString> 
 ```
-<b>Extends:</b> [VectorLayer](./ngw-orm.vectorlayer.md)<!-- -->&lt;LineString
+**Extends:** [VectorLayer](./ngw-orm.vectorlayer.md)<!-- -->&lt;LineString&gt;
 
 ## Properties
 

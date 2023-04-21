@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."pyramid.locdata" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'pyramid.locdata': {

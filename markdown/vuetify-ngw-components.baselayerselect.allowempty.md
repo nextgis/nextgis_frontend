@@ -4,7 +4,7 @@
 
 ## BaselayerSelect.allowEmpty property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 allowEmpty: boolean;

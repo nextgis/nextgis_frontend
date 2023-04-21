@@ -4,7 +4,7 @@
 
 ## ItemBasePropertyOptions.getProperty property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getProperty?: (item?: Item) => V;

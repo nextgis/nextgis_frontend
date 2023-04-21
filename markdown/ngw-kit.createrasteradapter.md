@@ -4,7 +4,7 @@
 
 ## createRasterAdapter() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function createRasterAdapter({ layerOptions, webMap, connector, item, }: GetClassAdapterOptions): Promise<Type<MainLayerAdapter> | undefined>;
@@ -16,7 +16,7 @@ export declare function createRasterAdapter({ layerOptions, webMap, connector, i
 |  --- | --- | --- |
 |  { layerOptions, webMap, connector, item, } | [GetClassAdapterOptions](./ngw-kit.getclassadapteroptions.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[Type](./utils.type.md)<!-- -->&lt;[MainLayerAdapter](./webmap.mainlayeradapter.md)<!-- -->&gt; \| undefined&gt;
 

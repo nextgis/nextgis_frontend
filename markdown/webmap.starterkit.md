@@ -4,7 +4,7 @@
 
 ## StarterKit interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface StarterKit 
@@ -14,8 +14,8 @@ export interface StarterKit
 
 |  Method | Description |
 |  --- | --- |
-|  [getLayerAdapters()?](./webmap.starterkit.getlayeradapters.md) | <i>(Optional)</i> |
-|  [getSettings(webMap)?](./webmap.starterkit.getsettings.md) | <i>(Optional)</i> |
-|  [onLoadSync(webMap)?](./webmap.starterkit.onloadsync.md) | <i>(Optional)</i> |
-|  [onMapClick(evt, webMap)?](./webmap.starterkit.onmapclick.md) | <i>(Optional)</i> |
+|  [getLayerAdapters()?](./webmap.starterkit.getlayeradapters.md) | _(Optional)_ |
+|  [getSettings(webMap)?](./webmap.starterkit.getsettings.md) | _(Optional)_ |
+|  [onLoadSync(webMap)?](./webmap.starterkit.onloadsync.md) | _(Optional)_ |
+|  [onMapClick(evt, webMap)?](./webmap.starterkit.onmapclick.md) | _(Optional)_ |
 

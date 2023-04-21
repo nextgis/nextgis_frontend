@@ -4,7 +4,7 @@
 
 ## IdentifyEvent.ev property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 ev: MapClickEvent;

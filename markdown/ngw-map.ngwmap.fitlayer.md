@@ -6,20 +6,20 @@
 
 Move map to layer. If the layer is NGW resource, extent will be received from the server
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-fitLayer(layerDef: LayerDef, options?: FitOptions): Promise<void>;
+fitLayer(layerDef: LayerDef | number, options?: FitOptions): Promise<void>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  layerDef | [LayerDef](./webmap.layerdef.md) |  |
-|  options | [FitOptions](./webmap.fitoptions.md) | <i>(Optional)</i> |
+|  layerDef | [LayerDef](./webmap.layerdef.md) \| number |  |
+|  options | [FitOptions](./webmap.fitoptions.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;void&gt;
 

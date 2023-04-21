@@ -4,19 +4,19 @@
 
 ## QmsAdapterOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface QmsAdapterOptions extends RasterAdapterOptions 
 ```
-<b>Extends:</b> [RasterAdapterOptions](./webmap.rasteradapteroptions.md)
+**Extends:** [RasterAdapterOptions](./webmap.rasteradapteroptions.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [name?](./qms-kit.qmsadapteroptions.name.md) |  | string | <i>(Optional)</i> |
-|  [qms?](./qms-kit.qmsadapteroptions.qms.md) |  | [QmsBasemap](./qms-kit.qmsbasemap.md) | <i>(Optional)</i> |
-|  [qmsId?](./qms-kit.qmsadapteroptions.qmsid.md) |  | number | <i>(Optional)</i> |
+|  [name?](./qms-kit.qmsadapteroptions.name.md) |  | string | _(Optional)_ |
+|  [qms?](./qms-kit.qmsadapteroptions.qms.md) |  | [QmsBasemap](./qms-kit.qmsbasemap.md) | _(Optional)_ |
+|  [qmsId?](./qms-kit.qmsadapteroptions.qmsid.md) |  | number | _(Optional)_ |
 |  [url](./qms-kit.qmsadapteroptions.url.md) |  | string |  |
 

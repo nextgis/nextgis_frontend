@@ -5,7 +5,7 @@
 ## NgwConnector.getResourceIdOrFail() method
 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getResourceIdOrFail(resource: ResourceDefinition, requestOptions?: RequestOptions): CancelablePromise<number>;
@@ -16,9 +16,9 @@ getResourceIdOrFail(resource: ResourceDefinition, requestOptions?: RequestOption
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  resource | [ResourceDefinition](./ngw-connector.resourcedefinition.md) |  |
-|  requestOptions | [RequestOptions](./ngw-connector.requestoptions.md) | <i>(Optional)</i> |
+|  requestOptions | [RequestOptions](./ngw-connector.requestoptions.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;number&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;number&gt;
 

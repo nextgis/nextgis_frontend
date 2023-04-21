@@ -4,7 +4,7 @@
 
 ## Tree.every() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 every(filter?: PropertyFilter | SelfFilter): boolean;
@@ -14,9 +14,9 @@ every(filter?: PropertyFilter | SelfFilter): boolean;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  filter | [PropertyFilter](./properties-filter.propertyfilter.md) \| SelfFilter | <i>(Optional)</i> |
+|  filter | [PropertyFilter](./properties-filter.propertyfilter.md) \| SelfFilter | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 boolean
 

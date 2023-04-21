@@ -6,7 +6,7 @@
 
 Hide features from a vector layer using a callback function.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 filterLayer(layerDef: LayerDef, filter: DataLayerFilter<Feature, L>): LayerDefinition<Feature, L>[];
@@ -19,7 +19,7 @@ filterLayer(layerDef: LayerDef, filter: DataLayerFilter<Feature, L>): LayerDefin
 |  layerDef | [LayerDef](./webmap.layerdef.md) |  |
 |  filter | [DataLayerFilter](./webmap.datalayerfilter.md)<!-- -->&lt;Feature, L&gt; |  |
 
-<b>Returns:</b>
+**Returns:**
 
 [LayerDefinition](./webmap.layerdefinition.md)<!-- -->&lt;Feature, L&gt;\[\]
 

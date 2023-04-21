@@ -1,8 +1,8 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.28.6",
-    "schemaVersion": 1009,
+    "toolVersion": "7.34.4",
+    "schemaVersion": 1011,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
       "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
@@ -217,6 +217,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces/LayerAdapter.ts",
           "releaseTag": "Public",
           "name": "AdapterConstructor",
           "typeTokenRange": {
@@ -240,11 +241,11 @@
             },
             {
               "kind": "Content",
-              "text": "<string, any> "
+              "text": "<string, any>"
             },
             {
               "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -266,11 +267,11 @@
             },
             {
               "kind": "Content",
-              "text": "<string, any> "
+              "text": "<string, any>"
             },
             {
               "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -286,13 +287,14 @@
               "text": "> "
             }
           ],
+          "fileUrlPath": "src/interfaces/LayerAdapter.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
               "typeParameterName": "ANYPROPS",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 2
+                "endIndex": 3
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -303,7 +305,7 @@
               "typeParameterName": "NATIVE",
               "constraintTokenRange": {
                 "startIndex": 7,
-                "endIndex": 8
+                "endIndex": 9
               },
               "defaultTypeTokenRange": {
                 "startIndex": 10,
@@ -990,6 +992,7 @@
               "text": "export interface AttributionControlOptions "
             }
           ],
+          "fileUrlPath": "src/interfaces/MapControl.ts",
           "releaseTag": "Public",
           "name": "AttributionControlOptions",
           "preserveMemberOrder": false,
@@ -1061,6 +1064,7 @@
               "text": "export interface ButtonControlOptions "
             }
           ],
+          "fileUrlPath": "src/interfaces/MapControl.ts",
           "releaseTag": "Public",
           "name": "ButtonControlOptions",
           "preserveMemberOrder": false,
@@ -1198,11 +1202,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -1239,6 +1239,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces/LayerAdapter.ts",
           "releaseTag": "Public",
           "name": "CallbackFilter",
           "typeParameters": [
@@ -1249,8 +1250,8 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             },
             {
@@ -1260,14 +1261,14 @@
                 "endIndex": 0
               },
               "defaultTypeTokenRange": {
-                "startIndex": 6,
-                "endIndex": 7
+                "startIndex": 5,
+                "endIndex": 6
               }
             }
           ],
           "typeTokenRange": {
-            "startIndex": 8,
-            "endIndex": 11
+            "startIndex": 7,
+            "endIndex": 10
           }
         },
         {
@@ -1280,6 +1281,7 @@
               "text": "export interface ContribControlsOptions "
             }
           ],
+          "fileUrlPath": "src/interfaces/MapControl.ts",
           "releaseTag": "Public",
           "name": "ContribControlsOptions",
           "preserveMemberOrder": false,
@@ -1353,6 +1355,7 @@
               "text": "export interface ControlOptions "
             }
           ],
+          "fileUrlPath": "src/interfaces/MapControl.ts",
           "releaseTag": "Public",
           "name": "ControlOptions",
           "preserveMemberOrder": false,
@@ -1433,6 +1436,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces/MapAdapter.ts",
           "releaseTag": "Public",
           "name": "ControlPosition",
           "typeTokenRange": {
@@ -1459,6 +1463,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces/MapAdapter.ts",
           "releaseTag": "Public",
           "name": "ControlPositions",
           "typeTokenRange": {
@@ -1482,11 +1487,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -1499,11 +1500,11 @@
             },
             {
               "kind": "Content",
-              "text": "keyof O "
+              "text": "keyof O"
             },
             {
               "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Content",
@@ -1522,6 +1523,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces/MapControl.ts",
           "releaseTag": "Public",
           "name": "ControlsOptions",
           "typeParameters": [
@@ -1532,25 +1534,25 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             },
             {
               "typeParameterName": "K",
               "constraintTokenRange": {
-                "startIndex": 6,
-                "endIndex": 7
+                "startIndex": 5,
+                "endIndex": 6
               },
               "defaultTypeTokenRange": {
-                "startIndex": 8,
-                "endIndex": 9
+                "startIndex": 7,
+                "endIndex": 8
               }
             }
           ],
           "typeTokenRange": {
-            "startIndex": 10,
-            "endIndex": 11
+            "startIndex": 9,
+            "endIndex": 10
           }
         },
         {
@@ -1563,6 +1565,7 @@
               "text": "export interface CreateControlOptions "
             }
           ],
+          "fileUrlPath": "src/interfaces/MapControl.ts",
           "releaseTag": "Public",
           "name": "CreateControlOptions",
           "preserveMemberOrder": false,
@@ -1667,11 +1670,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -1735,6 +1734,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces/LayerAdapter.ts",
           "releaseTag": "Public",
           "name": "CreatePopupContent",
           "typeParameters": [
@@ -1745,8 +1745,8 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             },
             {
@@ -1756,14 +1756,14 @@
                 "endIndex": 0
               },
               "defaultTypeTokenRange": {
-                "startIndex": 6,
-                "endIndex": 7
+                "startIndex": 5,
+                "endIndex": 6
               }
             }
           ],
           "typeTokenRange": {
-            "startIndex": 8,
-            "endIndex": 17
+            "startIndex": 7,
+            "endIndex": 16
           }
         },
         {
@@ -1782,11 +1782,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -1812,9 +1808,14 @@
             },
             {
               "kind": "Content",
-              "text": "<F, L> "
+              "text": "<F, L>"
+            },
+            {
+              "kind": "Content",
+              "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces/LayerAdapter.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -1824,8 +1825,8 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             },
             {
@@ -1835,8 +1836,8 @@
                 "endIndex": 0
               },
               "defaultTypeTokenRange": {
-                "startIndex": 6,
-                "endIndex": 7
+                "startIndex": 5,
+                "endIndex": 6
               }
             }
           ],
@@ -1937,7 +1938,7 @@
           ],
           "extendsTokenRanges": [
             {
-              "startIndex": 8,
+              "startIndex": 7,
               "endIndex": 9
             }
           ]
@@ -1983,6 +1984,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/index.ts",
           "returnTypeTokenRange": {
             "startIndex": 3,
             "endIndex": 7
@@ -2019,6 +2021,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces/BaseTypes.ts",
           "releaseTag": "Public",
           "name": "Cursor",
           "typeTokenRange": {
@@ -2042,11 +2045,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -2079,6 +2078,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces/LayerAdapter.ts",
           "releaseTag": "Public",
           "name": "DataLayerFilter",
           "typeParameters": [
@@ -2089,8 +2089,8 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             },
             {
@@ -2100,14 +2100,14 @@
                 "endIndex": 0
               },
               "defaultTypeTokenRange": {
-                "startIndex": 6,
-                "endIndex": 7
+                "startIndex": 5,
+                "endIndex": 6
               }
             }
           ],
           "typeTokenRange": {
-            "startIndex": 8,
-            "endIndex": 10
+            "startIndex": 7,
+            "endIndex": 9
           }
         },
         {
@@ -2120,6 +2120,7 @@
               "text": "export interface DataLoadError "
             }
           ],
+          "fileUrlPath": "src/interfaces/MapAdapter.ts",
           "releaseTag": "Public",
           "name": "DataLoadError",
           "preserveMemberOrder": false,
@@ -2170,11 +2171,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -2192,11 +2189,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -2214,11 +2207,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -2268,6 +2257,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces/LayerAdapter.ts",
           "releaseTag": "Public",
           "name": "FeatureLayerAdapter",
           "typeParameters": [
@@ -2278,30 +2268,30 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             },
             {
               "typeParameterName": "G",
               "constraintTokenRange": {
-                "startIndex": 6,
-                "endIndex": 7
+                "startIndex": 5,
+                "endIndex": 6
               },
               "defaultTypeTokenRange": {
-                "startIndex": 9,
-                "endIndex": 10
+                "startIndex": 7,
+                "endIndex": 8
               }
             },
             {
               "typeParameterName": "O",
               "constraintTokenRange": {
-                "startIndex": 11,
-                "endIndex": 12
+                "startIndex": 9,
+                "endIndex": 10
               },
               "defaultTypeTokenRange": {
-                "startIndex": 14,
-                "endIndex": 15
+                "startIndex": 11,
+                "endIndex": 12
               }
             },
             {
@@ -2311,8 +2301,8 @@
                 "endIndex": 0
               },
               "defaultTypeTokenRange": {
-                "startIndex": 16,
-                "endIndex": 17
+                "startIndex": 13,
+                "endIndex": 14
               }
             },
             {
@@ -2322,14 +2312,14 @@
                 "endIndex": 0
               },
               "defaultTypeTokenRange": {
-                "startIndex": 18,
-                "endIndex": 19
+                "startIndex": 15,
+                "endIndex": 16
               }
             }
           ],
           "typeTokenRange": {
-            "startIndex": 20,
-            "endIndex": 24
+            "startIndex": 17,
+            "endIndex": 21
           }
         },
         {
@@ -2342,6 +2332,7 @@
               "text": "export interface FeaturePosition "
             }
           ],
+          "fileUrlPath": "src/interfaces/LayerAdapter.ts",
           "releaseTag": "Public",
           "name": "FeaturePosition",
           "preserveMemberOrder": false,
@@ -2424,11 +2415,11 @@
             },
             {
               "kind": "Content",
-              "text": "{\n    [field: string]: any;\n} "
+              "text": "{\n    [field: string]: any;\n}"
             },
             {
               "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Content",
@@ -2439,6 +2430,7 @@
               "text": "> "
             }
           ],
+          "fileUrlPath": "src/interfaces/LayerAdapter.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -2689,6 +2681,7 @@
               "text": "export interface FitOptions "
             }
           ],
+          "fileUrlPath": "src/interfaces/MapAdapter.ts",
           "releaseTag": "Public",
           "name": "FitOptions",
           "preserveMemberOrder": false,
@@ -2820,11 +2813,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -2850,11 +2839,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -2876,11 +2861,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -2902,9 +2883,14 @@
             },
             {
               "kind": "Content",
-              "text": "<F, L, A, N> "
+              "text": "<F, L, A, N>"
+            },
+            {
+              "kind": "Content",
+              "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces/LayerAdapter.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -2914,8 +2900,8 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             },
             {
@@ -2925,30 +2911,30 @@
                 "endIndex": 0
               },
               "defaultTypeTokenRange": {
-                "startIndex": 6,
-                "endIndex": 7
+                "startIndex": 5,
+                "endIndex": 6
               }
             },
             {
               "typeParameterName": "A",
               "constraintTokenRange": {
-                "startIndex": 8,
-                "endIndex": 9
+                "startIndex": 7,
+                "endIndex": 8
               },
               "defaultTypeTokenRange": {
-                "startIndex": 11,
-                "endIndex": 13
+                "startIndex": 9,
+                "endIndex": 11
               }
             },
             {
               "typeParameterName": "N",
               "constraintTokenRange": {
-                "startIndex": 14,
-                "endIndex": 15
+                "startIndex": 12,
+                "endIndex": 13
               },
               "defaultTypeTokenRange": {
-                "startIndex": 17,
-                "endIndex": 19
+                "startIndex": 14,
+                "endIndex": 16
               }
             }
           ],
@@ -2986,8 +2972,8 @@
           ],
           "extendsTokenRanges": [
             {
-              "startIndex": 20,
-              "endIndex": 21
+              "startIndex": 17,
+              "endIndex": 19
             }
           ]
         },
@@ -3001,6 +2987,7 @@
               "text": "export interface GetAttributionsOptions "
             }
           ],
+          "fileUrlPath": "src/interfaces/MapOptions.ts",
           "releaseTag": "Public",
           "name": "GetAttributionsOptions",
           "preserveMemberOrder": false,
@@ -3078,11 +3065,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -3110,9 +3093,10 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/container.ts",
           "returnTypeTokenRange": {
-            "startIndex": 8,
-            "endIndex": 9
+            "startIndex": 7,
+            "endIndex": 8
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -3120,8 +3104,8 @@
             {
               "parameterName": "id",
               "parameterTypeTokenRange": {
-                "startIndex": 6,
-                "endIndex": 7
+                "startIndex": 5,
+                "endIndex": 6
               },
               "isOptional": false
             }
@@ -3134,8 +3118,8 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             }
           ],
@@ -3164,6 +3148,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces/MapControl.ts",
           "releaseTag": "Public",
           "name": "HtmlDef",
           "typeTokenRange": {
@@ -3181,6 +3166,7 @@
               "text": "export interface HtmlToggle "
             }
           ],
+          "fileUrlPath": "src/interfaces/MapControl.ts",
           "releaseTag": "Public",
           "name": "HtmlToggle",
           "preserveMemberOrder": false,
@@ -3263,6 +3249,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces/LayerAdapter.ts",
           "releaseTag": "Public",
           "name": "ImageAdapterOptions",
           "preserveMemberOrder": false,
@@ -3366,11 +3353,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -3404,6 +3387,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces/LayerAdapter.ts",
           "releaseTag": "Public",
           "name": "LayerAdapter",
           "typeParameters": [
@@ -3436,14 +3420,14 @@
                 "endIndex": 6
               },
               "defaultTypeTokenRange": {
-                "startIndex": 8,
-                "endIndex": 9
+                "startIndex": 7,
+                "endIndex": 8
               }
             }
           ],
           "typeTokenRange": {
-            "startIndex": 10,
-            "endIndex": 14
+            "startIndex": 9,
+            "endIndex": 13
           }
         },
         {
@@ -3456,6 +3440,7 @@
               "text": "export interface LayerAdapterCreators "
             }
           ],
+          "fileUrlPath": "src/interfaces/StarterKit.ts",
           "releaseTag": "Public",
           "name": "LayerAdapterCreators",
           "preserveMemberOrder": false,
@@ -3573,11 +3558,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Content",
@@ -3641,6 +3622,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces/LayerAdapter.ts",
           "releaseTag": "Public",
           "name": "LayerAdapterDefinition",
           "typeParameters": [
@@ -3651,14 +3633,14 @@
                 "endIndex": 3
               },
               "defaultTypeTokenRange": {
-                "startIndex": 5,
-                "endIndex": 6
+                "startIndex": 4,
+                "endIndex": 5
               }
             }
           ],
           "typeTokenRange": {
-            "startIndex": 7,
-            "endIndex": 18
+            "startIndex": 6,
+            "endIndex": 17
           }
         },
         {
@@ -3671,6 +3653,7 @@
               "text": "export interface LayerAdapters "
             }
           ],
+          "fileUrlPath": "src/interfaces/LayerAdapter.ts",
           "releaseTag": "Public",
           "name": "LayerAdapters",
           "preserveMemberOrder": false,
@@ -3994,6 +3977,7 @@
               "text": "export interface LayerAdaptersOptions "
             }
           ],
+          "fileUrlPath": "src/interfaces/LayerAdapter.ts",
           "releaseTag": "Public",
           "name": "LayerAdaptersOptions",
           "preserveMemberOrder": false,
@@ -4265,6 +4249,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces/BaseTypes.ts",
           "releaseTag": "Public",
           "name": "LayerDef",
           "typeTokenRange": {
@@ -4288,11 +4273,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -4321,6 +4302,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces/LayerAdapter.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -4330,8 +4312,8 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             },
             {
@@ -4341,8 +4323,8 @@
                 "endIndex": 0
               },
               "defaultTypeTokenRange": {
-                "startIndex": 6,
-                "endIndex": 7
+                "startIndex": 5,
+                "endIndex": 6
               }
             }
           ],
@@ -4461,8 +4443,8 @@
           ],
           "extendsTokenRanges": [
             {
-              "startIndex": 8,
-              "endIndex": 9
+              "startIndex": 7,
+              "endIndex": 8
             }
           ]
         },
@@ -4476,6 +4458,7 @@
               "text": "export interface Locate "
             }
           ],
+          "fileUrlPath": "src/interfaces/MapAdapter.ts",
           "releaseTag": "Public",
           "name": "Locate",
           "preserveMemberOrder": false,
@@ -4520,6 +4503,7 @@
               "text": "export interface LocateOptions "
             }
           ],
+          "fileUrlPath": "src/interfaces/MapAdapter.ts",
           "releaseTag": "Public",
           "name": "LocateOptions",
           "preserveMemberOrder": false,
@@ -4592,6 +4576,7 @@
               "text": "export interface LocationEvent "
             }
           ],
+          "fileUrlPath": "src/interfaces/MapAdapter.ts",
           "releaseTag": "Public",
           "name": "LocationEvent",
           "preserveMemberOrder": false,
@@ -4665,6 +4650,7 @@
               "text": "export interface LocationEvents "
             }
           ],
+          "fileUrlPath": "src/interfaces/MapAdapter.ts",
           "releaseTag": "Public",
           "name": "LocationEvents",
           "preserveMemberOrder": false,
@@ -4767,11 +4753,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -4783,6 +4765,7 @@
               "text": "> "
             }
           ],
+          "fileUrlPath": "src/interfaces/LayerAdapter.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -4814,8 +4797,8 @@
                 "endIndex": 6
               },
               "defaultTypeTokenRange": {
-                "startIndex": 8,
-                "endIndex": 9
+                "startIndex": 7,
+                "endIndex": 8
               }
             }
           ],
@@ -5610,6 +5593,7 @@
               "text": "export interface MainMapEvents "
             }
           ],
+          "fileUrlPath": "src/interfaces/Events.ts",
           "releaseTag": "Public",
           "name": "MainMapEvents",
           "preserveMemberOrder": false,
@@ -5959,6 +5943,7 @@
               "text": "> "
             }
           ],
+          "fileUrlPath": "src/interfaces/MapAdapter.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -6421,7 +6406,7 @@
                 {
                   "kind": "Reference",
                   "text": "EventEmitter",
-                  "canonicalReference": "!EventEmitter:class"
+                  "canonicalReference": "!\"\\\"events\\\"\".EventEmitter:class"
                 },
                 {
                   "kind": "Content",
@@ -7448,7 +7433,7 @@
                 {
                   "kind": "Reference",
                   "text": "ViewOptions",
-                  "canonicalReference": "@nextgis/webmap!ViewOptions:interface"
+                  "canonicalReference": "!unknown"
                 },
                 {
                   "kind": "Content",
@@ -7650,6 +7635,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces/Events.ts",
           "releaseTag": "Public",
           "name": "MapAdapterEvents",
           "preserveMemberOrder": false,
@@ -7756,6 +7742,7 @@
               "text": "export interface MapClickEvent "
             }
           ],
+          "fileUrlPath": "src/interfaces/MapAdapter.ts",
           "releaseTag": "Public",
           "name": "MapClickEvent",
           "preserveMemberOrder": false,
@@ -7892,6 +7879,7 @@
               "text": "> "
             }
           ],
+          "fileUrlPath": "src/interfaces/MapControl.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -8054,6 +8042,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces/MapControl.ts",
           "releaseTag": "Public",
           "name": "MapControls",
           "preserveMemberOrder": false,
@@ -8150,6 +8139,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces/MapOptions.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -8655,6 +8645,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces/LayerAdapter.ts",
           "releaseTag": "Public",
           "name": "Model3DOptions",
           "preserveMemberOrder": false,
@@ -8818,11 +8809,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -8840,9 +8827,14 @@
             },
             {
               "kind": "Content",
-              "text": "<F> "
+              "text": "<F>"
+            },
+            {
+              "kind": "Content",
+              "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces/LayerAdapter.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -8852,8 +8844,8 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             }
           ],
@@ -8917,7 +8909,7 @@
           ],
           "extendsTokenRanges": [
             {
-              "startIndex": 6,
+              "startIndex": 5,
               "endIndex": 7
             }
           ]
@@ -9003,6 +8995,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces/MapOptions.ts",
           "releaseTag": "Public",
           "name": "OnBeforeLayerAdd",
           "typeTokenRange": {
@@ -9038,6 +9031,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces/MapControl.ts",
           "releaseTag": "Public",
           "name": "OnClick",
           "typeTokenRange": {
@@ -9072,6 +9066,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces/MapControl.ts",
           "releaseTag": "Public",
           "name": "onClickAsync",
           "typeTokenRange": {
@@ -9097,6 +9092,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces/MapControl.ts",
           "releaseTag": "Public",
           "name": "OnClickSync",
           "typeTokenRange": {
@@ -9120,11 +9116,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -9158,6 +9150,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces/LayerAdapter.ts",
           "releaseTag": "Public",
           "name": "OnLayerClickOptions",
           "typeParameters": [
@@ -9168,8 +9161,8 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             },
             {
@@ -9179,14 +9172,14 @@
                 "endIndex": 0
               },
               "defaultTypeTokenRange": {
-                "startIndex": 6,
-                "endIndex": 7
+                "startIndex": 5,
+                "endIndex": 6
               }
             }
           ],
           "typeTokenRange": {
-            "startIndex": 8,
-            "endIndex": 10
+            "startIndex": 7,
+            "endIndex": 9
           }
         },
         {
@@ -9205,11 +9198,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -9239,6 +9228,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces/LayerAdapter.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -9248,8 +9238,8 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             },
             {
@@ -9259,8 +9249,8 @@
                 "endIndex": 0
               },
               "defaultTypeTokenRange": {
-                "startIndex": 6,
-                "endIndex": 7
+                "startIndex": 5,
+                "endIndex": 6
               }
             }
           ],
@@ -9406,8 +9396,8 @@
           ],
           "extendsTokenRanges": [
             {
-              "startIndex": 8,
-              "endIndex": 9
+              "startIndex": 7,
+              "endIndex": 8
             }
           ]
         },
@@ -9427,11 +9417,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -9461,6 +9447,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces/LayerAdapter.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -9470,8 +9457,8 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             },
             {
@@ -9481,8 +9468,8 @@
                 "endIndex": 0
               },
               "defaultTypeTokenRange": {
-                "startIndex": 6,
-                "endIndex": 7
+                "startIndex": 5,
+                "endIndex": 6
               }
             }
           ],
@@ -9574,8 +9561,8 @@
           ],
           "extendsTokenRanges": [
             {
-              "startIndex": 8,
-              "endIndex": 9
+              "startIndex": 7,
+              "endIndex": 8
             }
           ]
         },
@@ -9597,6 +9584,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces/LayerAdapter.ts",
           "releaseTag": "Public",
           "name": "OnLayerSelectType",
           "typeTokenRange": {
@@ -9632,6 +9620,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces/MapControl.ts",
           "releaseTag": "Public",
           "name": "OnToggleClick",
           "typeTokenRange": {
@@ -9666,6 +9655,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces/MapControl.ts",
           "releaseTag": "Public",
           "name": "onToggleClickAsync",
           "typeTokenRange": {
@@ -9691,6 +9681,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces/MapControl.ts",
           "releaseTag": "Public",
           "name": "OnToggleClickSync",
           "typeTokenRange": {
@@ -9708,6 +9699,7 @@
               "text": "export interface Pixel "
             }
           ],
+          "fileUrlPath": "src/interfaces/BaseTypes.ts",
           "releaseTag": "Public",
           "name": "Pixel",
           "preserveMemberOrder": false,
@@ -9850,6 +9842,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces/LayerAdapter.ts",
           "releaseTag": "Public",
           "name": "PopupOnCloseFunction",
           "typeTokenRange": {
@@ -9873,11 +9866,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -9897,6 +9886,7 @@
               "text": "> "
             }
           ],
+          "fileUrlPath": "src/interfaces/LayerAdapter.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -9906,8 +9896,8 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             },
             {
@@ -9917,8 +9907,8 @@
                 "endIndex": 0
               },
               "defaultTypeTokenRange": {
-                "startIndex": 6,
-                "endIndex": 7
+                "startIndex": 5,
+                "endIndex": 6
               }
             }
           ],
@@ -10173,6 +10163,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces/LayerAdapter.ts",
           "releaseTag": "Public",
           "name": "RasterAdapterOptions",
           "preserveMemberOrder": false,
@@ -10249,6 +10240,7 @@
               "text": "export interface RuntimeParams "
             }
           ],
+          "fileUrlPath": "src/interfaces/RuntimeParams.ts",
           "releaseTag": "Public",
           "name": "RuntimeParams",
           "preserveMemberOrder": false,
@@ -10445,6 +10437,7 @@
               "text": "export interface StarterKit "
             }
           ],
+          "fileUrlPath": "src/interfaces/StarterKit.ts",
           "releaseTag": "Public",
           "name": "StarterKit",
           "preserveMemberOrder": false,
@@ -10687,6 +10680,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces/LayerAdapter.ts",
           "releaseTag": "Public",
           "name": "TileAdapterOptions",
           "preserveMemberOrder": false,
@@ -10754,6 +10748,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces/LayerAdapter.ts",
           "releaseTag": "Public",
           "name": "Tileset3DAdapterOptions",
           "preserveMemberOrder": false,
@@ -10834,6 +10829,7 @@
               "text": "export interface TitleToggle "
             }
           ],
+          "fileUrlPath": "src/interfaces/MapControl.ts",
           "releaseTag": "Public",
           "name": "TitleToggle",
           "preserveMemberOrder": false,
@@ -10905,6 +10901,7 @@
               "text": "export interface ToggleControl "
             }
           ],
+          "fileUrlPath": "src/interfaces/MapControl.ts",
           "releaseTag": "Public",
           "name": "ToggleControl",
           "preserveMemberOrder": false,
@@ -10978,6 +10975,7 @@
               "text": "export interface ToggleControlOptions "
             }
           ],
+          "fileUrlPath": "src/interfaces/MapControl.ts",
           "releaseTag": "Public",
           "name": "ToggleControlOptions",
           "preserveMemberOrder": false,
@@ -11227,6 +11225,7 @@
               "text": "export interface ToggleLayerOptions "
             }
           ],
+          "fileUrlPath": "src/interfaces/MapOptions.ts",
           "releaseTag": "Public",
           "name": "ToggleLayerOptions",
           "preserveMemberOrder": false,
@@ -11279,6 +11278,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces/LayerAdapter.ts",
           "releaseTag": "Public",
           "name": "VectorAdapterLayerType",
           "typeTokenRange": {
@@ -11302,11 +11302,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -11332,11 +11328,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -11358,11 +11350,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -11384,11 +11372,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -11410,9 +11394,14 @@
             },
             {
               "kind": "Content",
-              "text": "<P, A, N> "
+              "text": "<P, A, N>"
+            },
+            {
+              "kind": "Content",
+              "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces/LayerAdapter.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -11422,8 +11411,8 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             },
             {
@@ -11433,41 +11422,41 @@
                 "endIndex": 0
               },
               "defaultTypeTokenRange": {
-                "startIndex": 6,
-                "endIndex": 7
+                "startIndex": 5,
+                "endIndex": 6
               }
             },
             {
               "typeParameterName": "A",
               "constraintTokenRange": {
-                "startIndex": 8,
-                "endIndex": 9
+                "startIndex": 7,
+                "endIndex": 8
               },
               "defaultTypeTokenRange": {
-                "startIndex": 11,
-                "endIndex": 13
+                "startIndex": 9,
+                "endIndex": 11
               }
             },
             {
               "typeParameterName": "N",
               "constraintTokenRange": {
-                "startIndex": 14,
-                "endIndex": 15
+                "startIndex": 12,
+                "endIndex": 13
               },
               "defaultTypeTokenRange": {
-                "startIndex": 17,
-                "endIndex": 19
+                "startIndex": 14,
+                "endIndex": 16
               }
             },
             {
               "typeParameterName": "P",
               "constraintTokenRange": {
-                "startIndex": 20,
-                "endIndex": 21
+                "startIndex": 17,
+                "endIndex": 18
               },
               "defaultTypeTokenRange": {
-                "startIndex": 23,
-                "endIndex": 25
+                "startIndex": 19,
+                "endIndex": 21
               }
             }
           ],
@@ -11753,6 +11742,33 @@
               "isOptional": true,
               "releaseTag": "Public",
               "name": "labelOnHover",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/webmap!VectorAdapterOptions#labelVisibility:member",
+              "docComment": "/**\n * Show set label immediately\n *\n * @defaultValue\n *\n * false\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "labelVisibility?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "labelVisibility",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -12550,8 +12566,8 @@
           ],
           "extendsTokenRanges": [
             {
-              "startIndex": 26,
-              "endIndex": 27
+              "startIndex": 22,
+              "endIndex": 24
             }
           ]
         },
@@ -12587,11 +12603,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -12609,11 +12621,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -12631,11 +12639,11 @@
             },
             {
               "kind": "Content",
-              "text": "<string, any> | null "
+              "text": "<string, any> | null"
             },
             {
               "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Content",
@@ -12670,11 +12678,11 @@
             },
             {
               "kind": "Content",
-              "text": "<string, any> "
+              "text": "<string, any>"
             },
             {
               "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Content",
@@ -12700,9 +12708,14 @@
             },
             {
               "kind": "Content",
-              "text": "<M, L, O> "
+              "text": "<M, L, O>"
+            },
+            {
+              "kind": "Content",
+              "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces/LayerAdapter.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -12734,41 +12747,41 @@
                 "endIndex": 6
               },
               "defaultTypeTokenRange": {
-                "startIndex": 8,
-                "endIndex": 9
+                "startIndex": 7,
+                "endIndex": 8
               }
             },
             {
               "typeParameterName": "F",
               "constraintTokenRange": {
-                "startIndex": 10,
-                "endIndex": 11
+                "startIndex": 9,
+                "endIndex": 10
               },
               "defaultTypeTokenRange": {
-                "startIndex": 13,
-                "endIndex": 14
+                "startIndex": 11,
+                "endIndex": 12
               }
             },
             {
               "typeParameterName": "PROP",
               "constraintTokenRange": {
-                "startIndex": 15,
-                "endIndex": 16
+                "startIndex": 13,
+                "endIndex": 15
               },
               "defaultTypeTokenRange": {
-                "startIndex": 18,
-                "endIndex": 23
+                "startIndex": 16,
+                "endIndex": 21
               }
             },
             {
               "typeParameterName": "P",
               "constraintTokenRange": {
-                "startIndex": 24,
-                "endIndex": 25
+                "startIndex": 22,
+                "endIndex": 24
               },
               "defaultTypeTokenRange": {
-                "startIndex": 27,
-                "endIndex": 30
+                "startIndex": 25,
+                "endIndex": 28
               }
             }
           ],
@@ -13123,6 +13136,34 @@
               "overloadIndex": 1,
               "parameters": [],
               "name": "getSelected"
+            },
+            {
+              "kind": "MethodSignature",
+              "canonicalReference": "@nextgis/webmap!VectorLayerAdapter#hideLabel:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "hideLabel?(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "hideLabel"
             },
             {
               "kind": "MethodSignature",
@@ -13484,6 +13525,34 @@
               "name": "setData"
             },
             {
+              "kind": "MethodSignature",
+              "canonicalReference": "@nextgis/webmap!VectorLayerAdapter#showLabel:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "showLabel?(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "showLabel"
+            },
+            {
               "kind": "PropertySignature",
               "canonicalReference": "@nextgis/webmap!VectorLayerAdapter#source:member",
               "docComment": "/**\n * Experimental option, only for MVT. Points to a data source instead of loading data into a layer.\n */\n",
@@ -13618,8 +13687,8 @@
           ],
           "extendsTokenRanges": [
             {
-              "startIndex": 31,
-              "endIndex": 32
+              "startIndex": 29,
+              "endIndex": 31
             }
           ]
         },
@@ -13633,6 +13702,7 @@
               "text": "export interface ViewOptions "
             }
           ],
+          "fileUrlPath": "src/interfaces/MapOptions.ts",
           "releaseTag": "Public",
           "name": "ViewOptions",
           "preserveMemberOrder": false,
@@ -13836,11 +13906,11 @@
             },
             {
               "kind": "Content",
-              "text": "object "
+              "text": "object"
             },
             {
               "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Content",
@@ -13857,11 +13927,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -13879,11 +13945,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -13901,11 +13963,11 @@
             },
             {
               "kind": "Content",
-              "text": "<M, L, C, E, O> "
+              "text": "<M, L, C, E, O>"
             },
             {
               "kind": "Content",
-              "text": "implements "
+              "text": " implements "
             },
             {
               "kind": "Reference",
@@ -13935,6 +13997,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/WebMap.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -13977,22 +14040,23 @@
                 "endIndex": 10
               },
               "defaultTypeTokenRange": {
-                "startIndex": 12,
-                "endIndex": 13
+                "startIndex": 11,
+                "endIndex": 12
               }
             },
             {
               "typeParameterName": "O",
               "constraintTokenRange": {
-                "startIndex": 14,
-                "endIndex": 15
+                "startIndex": 13,
+                "endIndex": 14
               },
               "defaultTypeTokenRange": {
-                "startIndex": 17,
-                "endIndex": 18
+                "startIndex": 15,
+                "endIndex": 16
               }
             }
           ],
+          "isAbstract": false,
           "name": "WebMap",
           "preserveMemberOrder": false,
           "members": [
@@ -14044,11 +14108,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": " "
-                },
-                {
-                  "kind": "Content",
-                  "text": "= "
+                  "text": " = "
                 },
                 {
                   "kind": "Reference",
@@ -14084,15 +14144,15 @@
                     "endIndex": 2
                   },
                   "defaultTypeTokenRange": {
-                    "startIndex": 4,
-                    "endIndex": 5
+                    "startIndex": 3,
+                    "endIndex": 4
                   }
                 }
               ],
               "isStatic": true,
               "returnTypeTokenRange": {
-                "startIndex": 8,
-                "endIndex": 9
+                "startIndex": 7,
+                "endIndex": 8
               },
               "releaseTag": "Public",
               "isProtected": false,
@@ -14101,21 +14161,26 @@
                 {
                   "parameterName": "id",
                   "parameterTypeTokenRange": {
-                    "startIndex": 6,
-                    "endIndex": 7
+                    "startIndex": 5,
+                    "endIndex": 6
                   },
                   "isOptional": false
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "get"
             }
           ],
           "extendsTokenRange": {
-            "startIndex": 19,
-            "endIndex": 20
+            "startIndex": 17,
+            "endIndex": 19
           },
           "implementsTokenRanges": [
+            {
+              "startIndex": 20,
+              "endIndex": 21
+            },
             {
               "startIndex": 22,
               "endIndex": 23
@@ -14123,10 +14188,6 @@
             {
               "startIndex": 24,
               "endIndex": 25
-            },
-            {
-              "startIndex": 26,
-              "endIndex": 27
             }
           ]
         },
@@ -14157,11 +14218,11 @@
             },
             {
               "kind": "Content",
-              "text": "object "
+              "text": "object"
             },
             {
               "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Content",
@@ -14178,11 +14239,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -14200,11 +14257,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -14222,11 +14275,11 @@
             },
             {
               "kind": "Content",
-              "text": "<M, L, E, O> "
+              "text": "<M, L, E, O>"
             },
             {
               "kind": "Content",
-              "text": "implements "
+              "text": " implements "
             },
             {
               "kind": "Reference",
@@ -14247,6 +14300,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/WebMapControls.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -14289,22 +14343,23 @@
                 "endIndex": 10
               },
               "defaultTypeTokenRange": {
-                "startIndex": 12,
-                "endIndex": 13
+                "startIndex": 11,
+                "endIndex": 12
               }
             },
             {
               "typeParameterName": "O",
               "constraintTokenRange": {
-                "startIndex": 14,
-                "endIndex": 15
+                "startIndex": 13,
+                "endIndex": 14
               },
               "defaultTypeTokenRange": {
-                "startIndex": 17,
-                "endIndex": 18
+                "startIndex": 15,
+                "endIndex": 16
               }
             }
           ],
+          "isAbstract": false,
           "name": "WebMapControls",
           "preserveMemberOrder": false,
           "members": [
@@ -14422,6 +14477,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "addControl"
             },
             {
@@ -14460,7 +14516,8 @@
                 "endIndex": 4
               },
               "isStatic": true,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -14513,6 +14570,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "createButtonControl"
             },
             {
@@ -14583,6 +14641,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "createControl"
             },
             {
@@ -14645,6 +14704,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "createToggleControl"
             },
             {
@@ -14739,6 +14799,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getControl"
             },
             {
@@ -14774,6 +14835,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getControlContainer"
             },
             {
@@ -14821,21 +14883,22 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "removeControl"
             }
           ],
           "extendsTokenRange": {
-            "startIndex": 19,
-            "endIndex": 20
+            "startIndex": 17,
+            "endIndex": 19
           },
           "implementsTokenRanges": [
             {
-              "startIndex": 22,
-              "endIndex": 23
+              "startIndex": 20,
+              "endIndex": 21
             },
             {
-              "startIndex": 24,
-              "endIndex": 25
+              "startIndex": 22,
+              "endIndex": 23
             }
           ]
         },
@@ -14858,6 +14921,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces/Events.ts",
           "releaseTag": "Public",
           "name": "WebMapEvents",
           "preserveMemberOrder": false,
@@ -15433,11 +15497,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -15455,11 +15515,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -15477,9 +15533,14 @@
             },
             {
               "kind": "Content",
-              "text": "<M, E, O> "
+              "text": "<M, E, O>"
+            },
+            {
+              "kind": "Content",
+              "text": " "
             }
           ],
+          "fileUrlPath": "src/WebMapLayers.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -15511,22 +15572,23 @@
                 "endIndex": 6
               },
               "defaultTypeTokenRange": {
-                "startIndex": 8,
-                "endIndex": 9
+                "startIndex": 7,
+                "endIndex": 8
               }
             },
             {
               "typeParameterName": "O",
               "constraintTokenRange": {
-                "startIndex": 10,
-                "endIndex": 11
+                "startIndex": 9,
+                "endIndex": 10
               },
               "defaultTypeTokenRange": {
-                "startIndex": 13,
-                "endIndex": 14
+                "startIndex": 11,
+                "endIndex": 12
               }
             }
           ],
+          "isAbstract": false,
           "name": "WebMapLayers",
           "preserveMemberOrder": false,
           "members": [
@@ -15591,11 +15653,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": " "
-                },
-                {
-                  "kind": "Content",
-                  "text": "= "
+                  "text": " = "
                 },
                 {
                   "kind": "Reference",
@@ -15691,15 +15749,15 @@
                     "endIndex": 5
                   },
                   "defaultTypeTokenRange": {
-                    "startIndex": 7,
-                    "endIndex": 8
+                    "startIndex": 6,
+                    "endIndex": 7
                   }
                 }
               ],
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 19,
-                "endIndex": 23
+                "startIndex": 18,
+                "endIndex": 22
               },
               "releaseTag": "Public",
               "isProtected": false,
@@ -15708,21 +15766,22 @@
                 {
                   "parameterName": "adapter",
                   "parameterTypeTokenRange": {
-                    "startIndex": 9,
-                    "endIndex": 14
+                    "startIndex": 8,
+                    "endIndex": 13
                   },
                   "isOptional": false
                 },
                 {
                   "parameterName": "options",
                   "parameterTypeTokenRange": {
-                    "startIndex": 15,
-                    "endIndex": 18
+                    "startIndex": 14,
+                    "endIndex": 17
                   },
                   "isOptional": true
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "addBaseLayer"
             },
             {
@@ -15741,11 +15800,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": " "
-                },
-                {
-                  "kind": "Content",
-                  "text": "= "
+                  "text": " = "
                 },
                 {
                   "kind": "Reference",
@@ -15763,11 +15818,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": " "
-                },
-                {
-                  "kind": "Content",
-                  "text": "= "
+                  "text": " = "
                 },
                 {
                   "kind": "Reference",
@@ -15794,11 +15845,11 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "<G, P>> "
+                  "text": "<G, P>>"
                 },
                 {
                   "kind": "Content",
-                  "text": "= "
+                  "text": " = "
                 },
                 {
                   "kind": "Reference",
@@ -15861,37 +15912,37 @@
                     "endIndex": 2
                   },
                   "defaultTypeTokenRange": {
-                    "startIndex": 4,
-                    "endIndex": 5
+                    "startIndex": 3,
+                    "endIndex": 4
                   }
                 },
                 {
                   "typeParameterName": "G",
                   "constraintTokenRange": {
-                    "startIndex": 6,
-                    "endIndex": 7
+                    "startIndex": 5,
+                    "endIndex": 6
                   },
                   "defaultTypeTokenRange": {
-                    "startIndex": 9,
-                    "endIndex": 10
+                    "startIndex": 7,
+                    "endIndex": 8
                   }
                 },
                 {
                   "typeParameterName": "O",
                   "constraintTokenRange": {
-                    "startIndex": 11,
-                    "endIndex": 14
+                    "startIndex": 9,
+                    "endIndex": 13
                   },
                   "defaultTypeTokenRange": {
-                    "startIndex": 16,
-                    "endIndex": 20
+                    "startIndex": 14,
+                    "endIndex": 18
                   }
                 }
               ],
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 23,
-                "endIndex": 27
+                "startIndex": 21,
+                "endIndex": 25
               },
               "releaseTag": "Public",
               "isProtected": false,
@@ -15900,13 +15951,14 @@
                 {
                   "parameterName": "options",
                   "parameterTypeTokenRange": {
-                    "startIndex": 21,
-                    "endIndex": 22
+                    "startIndex": 19,
+                    "endIndex": 20
                   },
                   "isOptional": true
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "addFeatureLayer"
             },
             {
@@ -15929,11 +15981,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": " "
-                },
-                {
-                  "kind": "Content",
-                  "text": "= "
+                  "text": " = "
                 },
                 {
                   "kind": "Content",
@@ -15955,11 +16003,11 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "<any, any> "
+                  "text": "<any, any>"
                 },
                 {
                   "kind": "Content",
-                  "text": "= "
+                  "text": " = "
                 },
                 {
                   "kind": "Reference",
@@ -16022,26 +16070,26 @@
                     "endIndex": 3
                   },
                   "defaultTypeTokenRange": {
-                    "startIndex": 5,
-                    "endIndex": 7
+                    "startIndex": 4,
+                    "endIndex": 6
                   }
                 },
                 {
                   "typeParameterName": "O",
                   "constraintTokenRange": {
-                    "startIndex": 8,
+                    "startIndex": 7,
                     "endIndex": 9
                   },
                   "defaultTypeTokenRange": {
-                    "startIndex": 11,
-                    "endIndex": 12
+                    "startIndex": 10,
+                    "endIndex": 11
                   }
                 }
               ],
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 18,
-                "endIndex": 22
+                "startIndex": 17,
+                "endIndex": 21
               },
               "releaseTag": "Public",
               "isProtected": false,
@@ -16050,21 +16098,22 @@
                 {
                   "parameterName": "opt",
                   "parameterTypeTokenRange": {
-                    "startIndex": 13,
-                    "endIndex": 14
+                    "startIndex": 12,
+                    "endIndex": 13
                   },
                   "isOptional": true
                 },
                 {
                   "parameterName": "adapter",
                   "parameterTypeTokenRange": {
-                    "startIndex": 15,
-                    "endIndex": 17
+                    "startIndex": 14,
+                    "endIndex": 16
                   },
                   "isOptional": true
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "addGeoJsonLayer"
             },
             {
@@ -16165,6 +16214,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "addImageLayer"
             },
             {
@@ -16236,6 +16286,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "addImageLayer"
             },
             {
@@ -16267,11 +16318,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": " "
-                },
-                {
-                  "kind": "Content",
-                  "text": "= "
+                  "text": " = "
                 },
                 {
                   "kind": "Reference",
@@ -16362,15 +16409,15 @@
                     "endIndex": 5
                   },
                   "defaultTypeTokenRange": {
-                    "startIndex": 7,
-                    "endIndex": 8
+                    "startIndex": 6,
+                    "endIndex": 7
                   }
                 }
               ],
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 18,
-                "endIndex": 22
+                "startIndex": 17,
+                "endIndex": 21
               },
               "releaseTag": "Public",
               "isProtected": false,
@@ -16379,29 +16426,30 @@
                 {
                   "parameterName": "adapter",
                   "parameterTypeTokenRange": {
-                    "startIndex": 9,
-                    "endIndex": 11
+                    "startIndex": 8,
+                    "endIndex": 10
                   },
                   "isOptional": false
                 },
                 {
                   "parameterName": "options",
                   "parameterTypeTokenRange": {
-                    "startIndex": 12,
-                    "endIndex": 15
+                    "startIndex": 11,
+                    "endIndex": 14
                   },
                   "isOptional": true
                 },
                 {
                   "parameterName": "order",
                   "parameterTypeTokenRange": {
-                    "startIndex": 16,
-                    "endIndex": 17
+                    "startIndex": 15,
+                    "endIndex": 16
                   },
                   "isOptional": true
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "addLayer"
             },
             {
@@ -16467,6 +16515,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "addLayerData"
             },
             {
@@ -16498,11 +16547,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": " "
-                },
-                {
-                  "kind": "Content",
-                  "text": "= "
+                  "text": " = "
                 },
                 {
                   "kind": "Reference",
@@ -16589,15 +16634,15 @@
                     "endIndex": 5
                   },
                   "defaultTypeTokenRange": {
-                    "startIndex": 7,
-                    "endIndex": 8
+                    "startIndex": 6,
+                    "endIndex": 7
                   }
                 }
               ],
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 17,
-                "endIndex": 21
+                "startIndex": 16,
+                "endIndex": 20
               },
               "releaseTag": "Public",
               "isProtected": false,
@@ -16606,29 +16651,30 @@
                 {
                   "parameterName": "adapter",
                   "parameterTypeTokenRange": {
-                    "startIndex": 9,
-                    "endIndex": 10
+                    "startIndex": 8,
+                    "endIndex": 9
                   },
                   "isOptional": false
                 },
                 {
                   "parameterName": "options",
                   "parameterTypeTokenRange": {
-                    "startIndex": 11,
-                    "endIndex": 14
+                    "startIndex": 10,
+                    "endIndex": 13
                   },
                   "isOptional": false
                 },
                 {
                   "parameterName": "order",
                   "parameterTypeTokenRange": {
-                    "startIndex": 15,
-                    "endIndex": 16
+                    "startIndex": 14,
+                    "endIndex": 15
                   },
                   "isOptional": true
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "addLayerFromAsyncAdapter"
             },
             {
@@ -16700,6 +16746,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "addTileJsonLayer"
             },
             {
@@ -16800,6 +16847,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "addTileLayer"
             },
             {
@@ -16835,6 +16883,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "allLayers"
             },
             {
@@ -16908,6 +16957,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "clearLayerData"
             },
             {
@@ -17000,6 +17050,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "filterLayer"
             },
             {
@@ -17018,11 +17069,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": " "
-                },
-                {
-                  "kind": "Content",
-                  "text": "= "
+                  "text": " = "
                 },
                 {
                   "kind": "Reference",
@@ -17058,15 +17105,15 @@
                     "endIndex": 2
                   },
                   "defaultTypeTokenRange": {
-                    "startIndex": 4,
-                    "endIndex": 5
+                    "startIndex": 3,
+                    "endIndex": 4
                   }
                 }
               ],
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 8,
-                "endIndex": 9
+                "startIndex": 7,
+                "endIndex": 8
               },
               "releaseTag": "Public",
               "isProtected": false,
@@ -17075,13 +17122,14 @@
                 {
                   "parameterName": "filter",
                   "parameterTypeTokenRange": {
-                    "startIndex": 6,
-                    "endIndex": 7
+                    "startIndex": 5,
+                    "endIndex": 6
                   },
                   "isOptional": false
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "findLayer"
             },
             {
@@ -17152,6 +17200,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "fitLayer"
             },
             {
@@ -17196,6 +17245,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getActiveBaseLayer"
             },
             {
@@ -17244,6 +17294,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getAttributions"
             },
             {
@@ -17279,6 +17330,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getBaseLayers"
             },
             {
@@ -17309,6 +17361,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getBaseLayersIds"
             },
             {
@@ -17327,11 +17380,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": " "
-                },
-                {
-                  "kind": "Content",
-                  "text": "= "
+                  "text": " = "
                 },
                 {
                   "kind": "Reference",
@@ -17368,15 +17417,15 @@
                     "endIndex": 2
                   },
                   "defaultTypeTokenRange": {
-                    "startIndex": 4,
-                    "endIndex": 5
+                    "startIndex": 3,
+                    "endIndex": 4
                   }
                 }
               ],
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 8,
-                "endIndex": 9
+                "startIndex": 7,
+                "endIndex": 8
               },
               "releaseTag": "Public",
               "isProtected": false,
@@ -17385,13 +17434,14 @@
                 {
                   "parameterName": "layerDef",
                   "parameterTypeTokenRange": {
-                    "startIndex": 6,
-                    "endIndex": 7
+                    "startIndex": 5,
+                    "endIndex": 6
                   },
                   "isOptional": false
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getLayer"
             },
             {
@@ -17440,6 +17490,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getLayerId"
             },
             {
@@ -17470,6 +17521,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getLayers"
             },
             {
@@ -17540,7 +17592,57 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "hideLayer"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/webmap!WebMapLayers#hideLayerLabel:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "hideLayerLabel(layerDef: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "LayerDef",
+                  "canonicalReference": "@nextgis/webmap!LayerDef:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "layerDef",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "hideLayerLabel"
             },
             {
               "kind": "Method",
@@ -17588,6 +17690,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "isBaseLayer"
             },
             {
@@ -17636,6 +17739,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "isLayerVisible"
             },
             {
@@ -17654,11 +17758,11 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "<M, L> "
+                  "text": "<M, L>"
                 },
                 {
                   "kind": "Content",
-                  "text": "= "
+                  "text": " = "
                 },
                 {
                   "kind": "Reference",
@@ -17687,7 +17791,7 @@
                   "typeParameterName": "LA",
                   "constraintTokenRange": {
                     "startIndex": 1,
-                    "endIndex": 2
+                    "endIndex": 3
                   },
                   "defaultTypeTokenRange": {
                     "startIndex": 4,
@@ -17705,6 +17809,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "orderedLayers"
             },
             {
@@ -17792,6 +17897,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "propertiesFilter"
             },
             {
@@ -17840,6 +17946,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "removeLayer"
             },
             {
@@ -17888,6 +17995,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "removeLayerFilter"
             },
             {
@@ -17944,6 +18052,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "removeLayers"
             },
             {
@@ -17974,6 +18083,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "removeOverlays"
             },
             {
@@ -18004,6 +18114,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "reserveOrder"
             },
             {
@@ -18069,6 +18180,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "selectLayer"
             },
             {
@@ -18143,6 +18255,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "setLayerData"
             },
             {
@@ -18207,6 +18320,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "setLayerOpacity"
             },
             {
@@ -18276,6 +18390,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "setLayerPaint"
             },
             {
@@ -18345,6 +18460,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "setLayerSelectedPaint"
             },
             {
@@ -18415,7 +18531,57 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "showLayer"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/webmap!WebMapLayers#showLayerLabel:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "showLayerLabel(layerDef: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "LayerDef",
+                  "canonicalReference": "@nextgis/webmap!LayerDef:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "layerDef",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "showLayerLabel"
             },
             {
               "kind": "Method",
@@ -18501,7 +18667,73 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "toggleLayer"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/webmap!WebMapLayers#toggleLayerLabel:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "toggleLayerLabel(layerDef: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "LayerDef",
+                  "canonicalReference": "@nextgis/webmap!LayerDef:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", status: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "layerDef",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "status",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "toggleLayerLabel"
             },
             {
               "kind": "Method",
@@ -18566,6 +18798,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "unSelectLayer"
             },
             {
@@ -18596,6 +18829,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "unSelectLayers"
             },
             {
@@ -18649,6 +18883,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "updateLayer"
             },
             {
@@ -18727,6 +18962,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "updateLayerPaint"
             },
             {
@@ -18805,12 +19041,13 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "updateLayerSelectedPaint"
             }
           ],
           "extendsTokenRange": {
-            "startIndex": 15,
-            "endIndex": 16
+            "startIndex": 13,
+            "endIndex": 15
           },
           "implementsTokenRanges": []
         },
@@ -18838,11 +19075,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -18860,11 +19093,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -18876,6 +19105,7 @@
               "text": "> "
             }
           ],
+          "fileUrlPath": "src/WebMapMain.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -18896,22 +19126,23 @@
                 "endIndex": 4
               },
               "defaultTypeTokenRange": {
-                "startIndex": 6,
-                "endIndex": 7
+                "startIndex": 5,
+                "endIndex": 6
               }
             },
             {
               "typeParameterName": "O",
               "constraintTokenRange": {
-                "startIndex": 8,
-                "endIndex": 9
+                "startIndex": 7,
+                "endIndex": 8
               },
               "defaultTypeTokenRange": {
-                "startIndex": 11,
-                "endIndex": 12
+                "startIndex": 9,
+                "endIndex": 10
               }
             }
           ],
+          "isAbstract": false,
           "name": "WebMapMain",
           "preserveMemberOrder": false,
           "members": [
@@ -18948,6 +19179,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "_addLayerProviders"
             },
             {
@@ -19012,6 +19244,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "_emitStatusEvent"
             },
             {
@@ -19046,7 +19279,8 @@
                 "endIndex": 3
               },
               "isStatic": false,
-              "isProtected": true
+              "isProtected": true,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -19081,6 +19315,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "_onLoadSync"
             },
             {
@@ -19115,7 +19350,8 @@
                 "endIndex": 3
               },
               "isStatic": false,
-              "isProtected": true
+              "isProtected": true,
+              "isAbstract": false
             },
             {
               "kind": "Constructor",
@@ -19182,6 +19418,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "create"
             },
             {
@@ -19212,6 +19449,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "destroy"
             },
             {
@@ -19235,7 +19473,7 @@
                 {
                   "kind": "Reference",
                   "text": "EventEmitter",
-                  "canonicalReference": "!EventEmitter:class"
+                  "canonicalReference": "!\"\\\"events\\\"\".EventEmitter:class"
                 },
                 {
                   "kind": "Content",
@@ -19264,7 +19502,8 @@
                 "endIndex": 7
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -19329,6 +19568,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "fitBounds"
             },
             {
@@ -19364,6 +19604,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getBounds"
             },
             {
@@ -19408,6 +19649,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getBoundsPolygon"
             },
             {
@@ -19443,6 +19685,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getCenter"
             },
             {
@@ -19478,6 +19721,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getContainer"
             },
             {
@@ -19492,7 +19736,7 @@
                 {
                   "kind": "Reference",
                   "text": "CancelablePromise",
-                  "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+                  "canonicalReference": "@nextgis/cancelable-promise!CancelablePromise:class"
                 },
                 {
                   "kind": "Content",
@@ -19522,6 +19766,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getCoordFromMapClick"
             },
             {
@@ -19557,6 +19802,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getCursor"
             },
             {
@@ -19604,6 +19850,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getEventStatus"
             },
             {
@@ -19634,6 +19881,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getId"
             },
             {
@@ -19695,6 +19943,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getLayerAdapter"
             },
             {
@@ -19743,6 +19992,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getLayerAdapters"
             },
             {
@@ -19781,7 +20031,8 @@
                 "endIndex": 4
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -19819,7 +20070,8 @@
                 "endIndex": 4
               },
               "isStatic": true,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -19854,6 +20106,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getRuntimeParams"
             },
             {
@@ -19889,6 +20142,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getState"
             },
             {
@@ -19919,6 +20173,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getZoom"
             },
             {
@@ -19948,7 +20203,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -19962,7 +20218,7 @@
                 {
                   "kind": "Reference",
                   "text": "Keys",
-                  "canonicalReference": "@nextgis/webmap!Keys:class"
+                  "canonicalReference": "@nextgis/webmap!~Keys:class"
                 },
                 {
                   "kind": "Content",
@@ -19978,7 +20234,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -19992,7 +20249,7 @@
                 {
                   "kind": "Reference",
                   "text": "Keys",
-                  "canonicalReference": "@nextgis/webmap!Keys:class"
+                  "canonicalReference": "@nextgis/webmap!~Keys:class"
                 },
                 {
                   "kind": "Content",
@@ -20008,7 +20265,8 @@
                 "endIndex": 2
               },
               "isStatic": true,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -20074,6 +20332,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "locate"
             },
             {
@@ -20108,7 +20367,8 @@
                 "endIndex": 3
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -20131,7 +20391,7 @@
                 {
                   "kind": "Reference",
                   "text": "StateItem",
-                  "canonicalReference": "@nextgis/webmap!StateItem:class"
+                  "canonicalReference": "@nextgis/webmap!~StateItem:class"
                 },
                 {
                   "kind": "Content",
@@ -20151,7 +20411,8 @@
                 "endIndex": 5
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -20208,6 +20469,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "onLoad"
             },
             {
@@ -20278,6 +20540,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "onMapLoad"
             },
             {
@@ -20307,7 +20570,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -20341,7 +20605,8 @@
                 "endIndex": 3
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -20389,6 +20654,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "setCenter"
             },
             {
@@ -20437,6 +20703,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "setCursor"
             },
             {
@@ -20485,6 +20752,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "setRuntimeParams"
             },
             {
@@ -20549,6 +20817,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "setView"
             },
             {
@@ -20597,6 +20866,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "setView"
             },
             {
@@ -20644,6 +20914,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "setZoom"
             },
             {
@@ -20674,6 +20945,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "stopGetCoordFromMapClick"
             },
             {
@@ -20704,6 +20976,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "zoomIn"
             },
             {
@@ -20734,6 +21007,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "zoomOut"
             }
           ],
@@ -20758,6 +21032,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces/LayerAdapter.ts",
           "releaseTag": "Public",
           "name": "WmsAdapterOptions",
           "preserveMemberOrder": false,
@@ -20924,6 +21199,7 @@
               "text": "export interface ZoomControlOptions "
             }
           ],
+          "fileUrlPath": "src/interfaces/MapControl.ts",
           "releaseTag": "Public",
           "name": "ZoomControlOptions",
           "preserveMemberOrder": false,

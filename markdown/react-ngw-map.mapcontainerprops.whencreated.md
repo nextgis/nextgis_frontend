@@ -4,7 +4,7 @@
 
 ## MapContainerProps.whenCreated property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 whenCreated?: (map: NgwMap<M, L, C, O>) => void;

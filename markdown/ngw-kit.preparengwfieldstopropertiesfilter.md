@@ -4,7 +4,7 @@
 
 ## prepareNgwFieldsToPropertiesFilter() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function prepareNgwFieldsToPropertiesFilter(fields: Record<string, any>): Record<string, any>;
@@ -16,7 +16,7 @@ export declare function prepareNgwFieldsToPropertiesFilter(fields: Record<string
 |  --- | --- | --- |
 |  fields | Record&lt;string, any&gt; |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Record&lt;string, any&gt;
 

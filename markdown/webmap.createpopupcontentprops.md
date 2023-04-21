@@ -4,12 +4,12 @@
 
 ## CreatePopupContentProps interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface CreatePopupContentProps<F extends Feature = Feature, L = any> extends LayerDefinition<F, L> 
 ```
-<b>Extends:</b> [LayerDefinition](./webmap.layerdefinition.md)
+**Extends:** [LayerDefinition](./webmap.layerdefinition.md)<!-- -->&lt;F, L&gt;
 
 ## Properties
 

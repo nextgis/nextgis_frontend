@@ -4,7 +4,7 @@
 
 ## OnLayerMouseOptions.selected property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 selected?: boolean;

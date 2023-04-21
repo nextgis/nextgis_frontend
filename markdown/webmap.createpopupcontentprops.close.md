@@ -6,7 +6,7 @@
 
 Close the pop-up programmatically
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 close: () => void;

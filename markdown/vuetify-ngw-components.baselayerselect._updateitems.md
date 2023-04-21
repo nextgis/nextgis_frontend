@@ -4,7 +4,7 @@
 
 ## BaselayerSelect.\_updateItems() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 protected _updateItems(e?: LayerAdapter): Promise<VueSelectItem[] | undefined>;
@@ -14,9 +14,9 @@ protected _updateItems(e?: LayerAdapter): Promise<VueSelectItem[] | undefined>;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  e | LayerAdapter | <i>(Optional)</i> |
+|  e | LayerAdapter | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[VueSelectItem](./vuetify-ngw-components.vueselectitem.md)<!-- -->\[\] \| undefined&gt;
 

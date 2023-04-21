@@ -4,7 +4,7 @@
 
 ## LayerAdaptersOptions.IMAGE property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 IMAGE: ImageAdapterOptions;

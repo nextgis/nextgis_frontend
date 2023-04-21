@@ -6,12 +6,12 @@
 
 Allows to get all vector objects of the layer. Does not work for vector tiles.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getLayers?(): LayerDefinition<F, L>[];
 ```
-<b>Returns:</b>
+**Returns:**
 
 [LayerDefinition](./webmap.layerdefinition.md)<!-- -->&lt;F, L&gt;\[\]
 

@@ -4,7 +4,7 @@
 
 ## GetAttributionsOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface GetAttributionsOptions 
@@ -14,6 +14,6 @@ export interface GetAttributionsOptions
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [onlyBaselayer?](./webmap.getattributionsoptions.onlybaselayer.md) |  | boolean | <i>(Optional)</i> |
-|  [onlyVisible?](./webmap.getattributionsoptions.onlyvisible.md) |  | boolean | <i>(Optional)</i> |
+|  [onlyBaselayer?](./webmap.getattributionsoptions.onlybaselayer.md) |  | boolean | _(Optional)_ |
+|  [onlyVisible?](./webmap.getattributionsoptions.onlyvisible.md) |  | boolean | _(Optional)_ |
 

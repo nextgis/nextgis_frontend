@@ -4,7 +4,7 @@
 
 ## LoggingOptions.engines property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 engines: LogEngine[];

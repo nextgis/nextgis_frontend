@@ -4,7 +4,7 @@
 
 ## BookmarkProperties.place property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 place: string;

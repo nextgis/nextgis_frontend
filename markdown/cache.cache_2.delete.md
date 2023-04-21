@@ -4,7 +4,7 @@
 
 ## Cache\_2.delete() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 delete(item: CacheItem): void;
@@ -16,7 +16,7 @@ delete(item: CacheItem): void;
 |  --- | --- | --- |
 |  item | CacheItem |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

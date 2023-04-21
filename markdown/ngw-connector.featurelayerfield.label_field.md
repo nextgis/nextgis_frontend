@@ -4,7 +4,7 @@
 
 ## FeatureLayerField.label\_field property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 label_field: boolean;

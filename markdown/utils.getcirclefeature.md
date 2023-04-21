@@ -4,7 +4,7 @@
 
 ## getCircleFeature() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function getCircleFeature(lng: number, lat: number, radius?: number, points?: number): Feature<Polygon>;
@@ -16,10 +16,10 @@ export declare function getCircleFeature(lng: number, lat: number, radius?: numb
 |  --- | --- | --- |
 |  lng | number |  |
 |  lat | number |  |
-|  radius | number | <i>(Optional)</i> |
-|  points | number | <i>(Optional)</i> |
+|  radius | number | _(Optional)_ |
+|  points | number | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 Feature&lt;Polygon&gt;
 

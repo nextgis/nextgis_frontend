@@ -4,7 +4,7 @@
 
 ## LoggingOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface LoggingOptions<D = any> 
@@ -14,7 +14,7 @@ export interface LoggingOptions<D = any>
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [eachLog?](./logging.loggingoptions.eachlog.md) |  | [EachLog](./logging.eachlog.md)<!-- -->&lt;D&gt; | <i>(Optional)</i> |
-|  [enabled?](./logging.loggingoptions.enabled.md) |  | boolean | <i>(Optional)</i> |
+|  [eachLog?](./logging.loggingoptions.eachlog.md) |  | [EachLog](./logging.eachlog.md)<!-- -->&lt;D&gt; | _(Optional)_ |
+|  [enabled?](./logging.loggingoptions.enabled.md) |  | boolean | _(Optional)_ |
 |  [engines](./logging.loggingoptions.engines.md) |  | [LogEngine](./logging.logengine.md)<!-- -->\[\] |  |
 

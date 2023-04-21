@@ -4,7 +4,7 @@
 
 ## PyramidSettingsPyramid.company\_logo property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 company_logo?: PyramidSettingsPyramidCompanyLogo;

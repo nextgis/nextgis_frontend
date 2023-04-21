@@ -4,12 +4,12 @@
 
 ## Dialog class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class Dialog implements DialogAdapter 
 ```
-<b>Implements:</b> DialogAdapter
+**Implements:** DialogAdapter
 
 ## Constructors
 

@@ -4,7 +4,7 @@
 
 ## objectDeepEqual() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function objectDeepEqual<T extends Record<string, any> = Record<string, any>>(o: T, p: T): boolean;
@@ -17,7 +17,7 @@ export declare function objectDeepEqual<T extends Record<string, any> = Record<s
 |  o | T |  |
 |  p | T |  |
 
-<b>Returns:</b>
+**Returns:**
 
 boolean
 

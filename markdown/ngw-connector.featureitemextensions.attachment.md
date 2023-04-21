@@ -4,7 +4,7 @@
 
 ## FeatureItemExtensions.attachment property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 attachment?: FeatureItemAttachment[];

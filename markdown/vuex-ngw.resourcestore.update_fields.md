@@ -4,7 +4,7 @@
 
 ## ResourceStore.UPDATE\_FIELDS() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 protected UPDATE_FIELDS(fields: FeatureLayerField[]): void;
@@ -16,7 +16,7 @@ protected UPDATE_FIELDS(fields: FeatureLayerField[]): void;
 |  --- | --- | --- |
 |  fields | [FeatureLayerField](./ngw-connector.featurelayerfield.md)<!-- -->\[\] |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

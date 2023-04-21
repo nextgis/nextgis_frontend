@@ -4,12 +4,12 @@
 
 ## BaseProperty.getParent() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getParent(): Item<ItemOptions> | undefined;
 ```
-<b>Returns:</b>
+**Returns:**
 
 [Item](./item.item.md)<!-- -->&lt;[ItemOptions](./item.itemoptions.md)<!-- -->&gt; \| undefined
 

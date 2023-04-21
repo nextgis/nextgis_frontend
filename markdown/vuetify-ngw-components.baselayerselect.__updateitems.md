@@ -4,7 +4,7 @@
 
 ## BaselayerSelect.\_\_updateItems property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 protected __updateItems?: (e?: LayerAdapter) => Promise<void>;

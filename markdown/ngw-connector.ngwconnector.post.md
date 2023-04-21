@@ -6,7 +6,7 @@
 
 Shortcut method for send POST request to NGW.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 post<K extends keyof RequestItemsParamsMap>(name: K, options?: RequestOptions<'POST'>, params?: RequestItemsParams<K>): CancelablePromise<PostRequestItemsResponseMap[K]>;
@@ -17,12 +17,12 @@ post<K extends keyof RequestItemsParamsMap>(name: K, options?: RequestOptions<'P
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  name | K | NGW route name from [routes](https://docs.nextgis.com/docs_ngweb_dev/doc/developer/resource.html#routes) |
-|  options | [RequestOptions](./ngw-connector.requestoptions.md)<!-- -->&lt;'POST'&gt; | <i>(Optional)</i> Request options |
-|  params | [RequestItemsParams](./ngw-connector.requestitemsparams.md)<!-- -->&lt;K&gt; | <i>(Optional)</i> Request item params or query params |
+|  options | [RequestOptions](./ngw-connector.requestoptions.md)<!-- -->&lt;'POST'&gt; | _(Optional)_ Request options |
+|  params | [RequestItemsParams](./ngw-connector.requestitemsparams.md)<!-- -->&lt;K&gt; | _(Optional)_ Request item params or query params |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;[PostRequestItemsResponseMap](./ngw-connector.postrequestitemsresponsemap.md)<!-- -->\[K\]&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;[PostRequestItemsResponseMap](./ngw-connector.postrequestitemsresponsemap.md)<!-- -->\[K\]&gt;
 
 ## Example
 

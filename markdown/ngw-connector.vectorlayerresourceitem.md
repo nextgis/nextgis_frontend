@@ -4,12 +4,12 @@
 
 ## VectorLayerResourceItem interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface VectorLayerResourceItem extends ResourceItemMain 
 ```
-<b>Extends:</b> [ResourceItemMain](./ngw-connector.resourceitemmain.md)
+**Extends:** [ResourceItemMain](./ngw-connector.resourceitemmain.md)
 
 ## Properties
 

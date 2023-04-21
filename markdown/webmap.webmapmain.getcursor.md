@@ -4,12 +4,12 @@
 
 ## WebMapMain.getCursor() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getCursor(): Cursor | undefined;
 ```
-<b>Returns:</b>
+**Returns:**
 
 [Cursor](./webmap.cursor.md) \| undefined
 

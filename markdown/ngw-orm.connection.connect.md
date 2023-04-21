@@ -4,7 +4,7 @@
 
 ## Connection.connect() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static connect(options: Connection | ConnectionOptions): Promise<Connection>;
@@ -16,7 +16,7 @@ static connect(options: Connection | ConnectionOptions): Promise<Connection>;
 |  --- | --- | --- |
 |  options | [Connection](./ngw-orm.connection.md) \| ConnectionOptions |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[Connection](./ngw-orm.connection.md)<!-- -->&gt;
 

@@ -4,10 +4,10 @@
 
 ## WebMapLayers.propertiesFilter() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-propertiesFilter(layerDef: LayerDef, filters: PropertiesFilter, options?: FilterOptions): void;
+propertiesFilter(layerDef: LayerDef, filters: PropertiesFilter, options?: FilterOptions): Promise<void>;
 ```
 
 ## Parameters
@@ -16,9 +16,9 @@ propertiesFilter(layerDef: LayerDef, filters: PropertiesFilter, options?: Filter
 |  --- | --- | --- |
 |  layerDef | [LayerDef](./webmap.layerdef.md) |  |
 |  filters | [PropertiesFilter](./properties-filter.propertiesfilter.md) |  |
-|  options | [FilterOptions](./webmap.filteroptions.md) | <i>(Optional)</i> |
+|  options | [FilterOptions](./webmap.filteroptions.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
-void
+Promise&lt;void&gt;
 

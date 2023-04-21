@@ -6,7 +6,7 @@
 
 String with layer identifiers separated with comma. Available layers can fetched from WMS connection.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 wmslayers: string;

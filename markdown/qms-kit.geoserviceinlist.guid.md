@@ -4,7 +4,7 @@
 
 ## GeoserviceInList.guid property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 guid: string;

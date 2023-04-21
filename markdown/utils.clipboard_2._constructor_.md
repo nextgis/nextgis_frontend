@@ -6,7 +6,7 @@
 
 Constructs a new instance of the `Clipboard` class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 constructor(text?: string);
@@ -16,5 +16,5 @@ constructor(text?: string);
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  text | string | <i>(Optional)</i> |
+|  text | string | _(Optional)_ |
 

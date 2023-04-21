@@ -4,7 +4,7 @@
 
 ## WebmapResource.extent\_right property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 extent_right: number;

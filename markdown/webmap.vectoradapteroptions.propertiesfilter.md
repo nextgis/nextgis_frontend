@@ -4,7 +4,7 @@
 
 ## VectorAdapterOptions.propertiesFilter property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 propertiesFilter?: PropertiesFilter<P>;

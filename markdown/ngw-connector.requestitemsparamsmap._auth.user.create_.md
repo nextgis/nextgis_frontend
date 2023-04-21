@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."auth.user.create" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'auth.user.create': null;

@@ -4,7 +4,7 @@
 
 ## TreeLayer.item\_type property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 item_type: 'layer';

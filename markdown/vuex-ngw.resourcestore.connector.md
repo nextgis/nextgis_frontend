@@ -4,7 +4,7 @@
 
 ## ResourceStore.connector property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 get connector(): NgwConnector;

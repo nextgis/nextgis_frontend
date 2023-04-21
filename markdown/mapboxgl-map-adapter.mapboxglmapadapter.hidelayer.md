@@ -4,7 +4,7 @@
 
 ## MapboxglMapAdapter.hideLayer() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 hideLayer(layerIds: string[]): void;
@@ -16,7 +16,7 @@ hideLayer(layerIds: string[]): void;
 |  --- | --- | --- |
 |  layerIds | string\[\] |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

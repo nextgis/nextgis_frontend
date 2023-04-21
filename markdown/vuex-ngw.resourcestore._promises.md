@@ -4,7 +4,7 @@
 
 ## ResourceStore.\_promises property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 _promises: Record<string, Promise<any>>;

@@ -4,10 +4,10 @@
 
 ## VectorAdapterLayerPaint type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type VectorAdapterLayerPaint = CirclePaint | PathPaint | IconPaint | PinPaint | GetCustomPaintOptions;
 ```
-<b>References:</b> [CirclePaint](./paint.circlepaint.md)<!-- -->, [PathPaint](./paint.pathpaint.md)<!-- -->, [IconPaint](./paint.iconpaint.md)<!-- -->, [PinPaint](./paint.pinpaint.md)<!-- -->, [GetCustomPaintOptions](./paint.getcustompaintoptions.md)
+**References:** [CirclePaint](./paint.circlepaint.md)<!-- -->, [PathPaint](./paint.pathpaint.md)<!-- -->, [IconPaint](./paint.iconpaint.md)<!-- -->, [PinPaint](./paint.pinpaint.md)<!-- -->, [GetCustomPaintOptions](./paint.getcustompaintoptions.md)
 

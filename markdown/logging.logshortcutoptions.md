@@ -4,10 +4,10 @@
 
 ## LogShortcutOptions type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type LogShortcutOptions<D = any> = Pick<Log<D>, 'data' | 'operationId' | 'duration'>;
 ```
-<b>References:</b> [Log](./logging.log.md)
+**References:** [Log](./logging.log.md)
 

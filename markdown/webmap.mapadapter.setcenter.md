@@ -4,7 +4,7 @@
 
 ## MapAdapter.setCenter() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 setCenter(latLng: LngLatArray): void;
@@ -16,7 +16,7 @@ setCenter(latLng: LngLatArray): void;
 |  --- | --- | --- |
 |  latLng | [LngLatArray](./utils.lnglatarray.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

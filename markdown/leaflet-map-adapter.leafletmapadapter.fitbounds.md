@@ -4,7 +4,7 @@
 
 ## LeafletMapAdapter.fitBounds() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 fitBounds(bounds: LngLatBoundsArray, options?: FitOptions): void;
@@ -15,9 +15,9 @@ fitBounds(bounds: LngLatBoundsArray, options?: FitOptions): void;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  bounds | [LngLatBoundsArray](./utils.lnglatboundsarray.md) |  |
-|  options | [FitOptions](./webmap.fitoptions.md) | <i>(Optional)</i> |
+|  options | [FitOptions](./webmap.fitoptions.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

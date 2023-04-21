@@ -4,7 +4,7 @@
 
 ## VectorAdapterOptions.heightOffset property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 heightOffset?: number;

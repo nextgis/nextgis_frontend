@@ -4,10 +4,10 @@
 
 ## EachLog type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type EachLog<D = any> = Partial<Log<D>> | ((message?: string, options?: LogOptions<D>) => Partial<Log<D>>);
 ```
-<b>References:</b> [Log](./logging.log.md)<!-- -->, [LogOptions](./logging.logoptions.md)
+**References:** [Log](./logging.log.md)<!-- -->, [LogOptions](./logging.logoptions.md)
 

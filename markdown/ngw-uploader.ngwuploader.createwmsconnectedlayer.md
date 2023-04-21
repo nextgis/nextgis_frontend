@@ -4,7 +4,7 @@
 
 ## NgwUploader.createWmsConnectedLayer() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 createWmsConnectedLayer(opt: CreateWmsConnectedLayerOptions, name?: string): CancelablePromise<CreatedResource> | undefined;
@@ -15,9 +15,9 @@ createWmsConnectedLayer(opt: CreateWmsConnectedLayerOptions, name?: string): Can
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  opt | [CreateWmsConnectedLayerOptions](./ngw-uploader.createwmsconnectedlayeroptions.md) |  |
-|  name | string | <i>(Optional)</i> |
+|  name | string | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;[CreatedResource](./ngw-connector.createdresource.md)<!-- -->&gt; \| undefined
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;[CreatedResource](./ngw-connector.createdresource.md)<!-- -->&gt; \| undefined
 

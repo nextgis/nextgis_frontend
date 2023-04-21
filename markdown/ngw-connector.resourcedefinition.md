@@ -4,10 +4,10 @@
 
 ## ResourceDefinition type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type ResourceDefinition = ResourceIdKeynameDef | DeepPartial<Resource>;
 ```
-<b>References:</b> [ResourceIdKeynameDef](./ngw-connector.resourceidkeynamedef.md)<!-- -->, [DeepPartial](./utils.deeppartial.md)<!-- -->, [Resource](./ngw-connector.resource.md)
+**References:** [ResourceIdKeynameDef](./ngw-connector.resourceidkeynamedef.md)<!-- -->, [DeepPartial](./utils.deeppartial.md)<!-- -->, [Resource](./ngw-connector.resource.md)
 

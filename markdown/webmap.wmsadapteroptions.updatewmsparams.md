@@ -4,7 +4,7 @@
 
 ## WmsAdapterOptions.updateWmsParams property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 updateWmsParams?: (obj: {

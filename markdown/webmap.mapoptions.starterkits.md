@@ -6,7 +6,7 @@
 
 One way to extend WebMap functionality with the help of kits.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 starterKits?: StarterKit[];

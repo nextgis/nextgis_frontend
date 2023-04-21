@@ -4,16 +4,16 @@
 
 ## QmsAdapter interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface QmsAdapter extends MainLayerAdapter 
 ```
-<b>Extends:</b> [MainLayerAdapter](./webmap.mainlayeradapter.md)
+**Extends:** [MainLayerAdapter](./webmap.mainlayeradapter.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [qms?](./qms-kit.qmsadapter.qms.md) |  | [QmsBasemap](./qms-kit.qmsbasemap.md) | <i>(Optional)</i> |
+|  [qms?](./qms-kit.qmsadapter.qms.md) |  | [QmsBasemap](./qms-kit.qmsbasemap.md) | _(Optional)_ |
 

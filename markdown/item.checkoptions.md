@@ -4,18 +4,18 @@
 
 ## CheckOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface CheckOptions<V = boolean> extends ItemBasePropertyOptions<V> 
 ```
-<b>Extends:</b> [ItemBasePropertyOptions](./item.itembasepropertyoptions.md)
+**Extends:** [ItemBasePropertyOptions](./item.itembasepropertyoptions.md)<!-- -->&lt;V&gt;
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [label?](./item.checkoptions.label.md) |  | string | <i>(Optional)</i> |
-|  [turnOff?](./item.checkoptions.turnoff.md) |  | &lt;O = [CheckOptions](./item.checkoptions.md)<!-- -->&gt;(options?: O) =&gt; void | <i>(Optional)</i> |
-|  [turnOn?](./item.checkoptions.turnon.md) |  | &lt;O = [CheckOptions](./item.checkoptions.md)<!-- -->&gt;(options?: O) =&gt; void | <i>(Optional)</i> |
+|  [label?](./item.checkoptions.label.md) |  | string | _(Optional)_ |
+|  [turnOff?](./item.checkoptions.turnoff.md) |  | &lt;O = [CheckOptions](./item.checkoptions.md)<!-- -->&gt;(options?: O) =&gt; void | _(Optional)_ |
+|  [turnOn?](./item.checkoptions.turnon.md) |  | &lt;O = [CheckOptions](./item.checkoptions.md)<!-- -->&gt;(options?: O) =&gt; void | _(Optional)_ |
 

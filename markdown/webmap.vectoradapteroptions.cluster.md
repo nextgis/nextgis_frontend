@@ -4,7 +4,7 @@
 
 ## VectorAdapterOptions.cluster property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 cluster?: boolean;

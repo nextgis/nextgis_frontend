@@ -4,7 +4,7 @@
 
 ## OnBeforeLayerAdd type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type OnBeforeLayerAdd = (e: {
@@ -15,5 +15,5 @@ export declare type OnBeforeLayerAdd = (e: {
     options?: AdapterOptions;
 } | undefined;
 ```
-<b>References:</b> [Type](./utils.type.md)<!-- -->, [LayerAdapter](./webmap.layeradapter.md)<!-- -->, [AdapterOptions](./webmap.adapteroptions.md)
+**References:** [Type](./utils.type.md)<!-- -->, [LayerAdapter](./webmap.layeradapter.md)<!-- -->, [AdapterOptions](./webmap.adapteroptions.md)
 

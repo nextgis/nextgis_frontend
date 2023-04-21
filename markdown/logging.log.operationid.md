@@ -4,7 +4,7 @@
 
 ## Log.operationId property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 operationId?: string;

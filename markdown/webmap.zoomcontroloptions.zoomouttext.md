@@ -6,7 +6,7 @@
 
 The text set on the 'zoom out' button.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 zoomOutText?: string;

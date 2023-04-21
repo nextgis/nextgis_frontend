@@ -4,7 +4,7 @@
 
 ## QmsBasemap.submitter property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 submitter?: string;

@@ -4,7 +4,7 @@
 
 ## MapboxglMapAdapter.isLoaded property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 isLoaded: boolean;

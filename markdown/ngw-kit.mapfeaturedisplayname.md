@@ -4,7 +4,7 @@
 
 ## mapFeatureDisplayName() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function mapFeatureDisplayName({ connector, resource, resourceId, fields, }: MapFeatureDisplayNameOptions): CancelablePromise<string[]>;
@@ -16,7 +16,7 @@ export declare function mapFeatureDisplayName({ connector, resource, resourceId,
 |  --- | --- | --- |
 |  { connector, resource, resourceId, fields, } | [MapFeatureDisplayNameOptions](./ngw-kit.mapfeaturedisplaynameoptions.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;string\[\]&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;string\[\]&gt;
 

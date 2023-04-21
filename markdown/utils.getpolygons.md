@@ -4,7 +4,7 @@
 
 ## getPolygons() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function getPolygons(geojson: GeoJSON): Position[][];
@@ -16,7 +16,7 @@ export declare function getPolygons(geojson: GeoJSON): Position[][];
 |  --- | --- | --- |
 |  geojson | GeoJSON |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Position\[\]\[\]
 

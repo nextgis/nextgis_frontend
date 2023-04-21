@@ -4,7 +4,7 @@
 
 ## NgwWebmapLayerAdapterEvents.identify property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 identify: IdentifyEvent;

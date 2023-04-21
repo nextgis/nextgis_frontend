@@ -4,7 +4,7 @@
 
 ## FilterOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface FilterOptions<P extends {
@@ -18,10 +18,10 @@ export interface FilterOptions<P extends {
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [fields?](./webmap.filteroptions.fields.md) |  | (keyof P)\[\] \| false \| null | <i>(Optional)</i> |
-|  [intersects?](./webmap.filteroptions.intersects.md) |  | string \| [LngLatArray](./utils.lnglatarray.md)<!-- -->\[\] \| [LngLatBoundsArray](./utils.lnglatboundsarray.md) | <i>(Optional)</i> WKT polygon geometry |
-|  [limit?](./webmap.filteroptions.limit.md) |  | number | <i>(Optional)</i> Limit (paginated) - max number of entities should be taken. |
-|  [offset?](./webmap.filteroptions.offset.md) |  | number | <i>(Optional)</i> Offset (paginated) where from entities should be taken. |
-|  [orderBy?](./webmap.filteroptions.orderby.md) |  | (keyof P \| string)\[\] | <i>(Optional)</i> set fields for order |
-|  [strategy?](./webmap.filteroptions.strategy.md) |  | 'BBOX' \| 'BBOX+' | <i>(Optional)</i> |
+|  [fields?](./webmap.filteroptions.fields.md) |  | (keyof P)\[\] \| false \| null | _(Optional)_ |
+|  [intersects?](./webmap.filteroptions.intersects.md) |  | string \| [LngLatArray](./utils.lnglatarray.md)<!-- -->\[\] \| [LngLatBoundsArray](./utils.lnglatboundsarray.md) | _(Optional)_ WKT polygon geometry |
+|  [limit?](./webmap.filteroptions.limit.md) |  | number | _(Optional)_ Limit (paginated) - max number of entities should be taken. |
+|  [offset?](./webmap.filteroptions.offset.md) |  | number | _(Optional)_ Offset (paginated) where from entities should be taken. |
+|  [orderBy?](./webmap.filteroptions.orderby.md) |  | (keyof P \| string)\[\] | _(Optional)_ set fields for order |
+|  [strategy?](./webmap.filteroptions.strategy.md) |  | 'BBOX' \| 'BBOX+' | _(Optional)_ |
 

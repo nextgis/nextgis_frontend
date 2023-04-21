@@ -4,7 +4,7 @@
 
 ## ToggleLayerOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface ToggleLayerOptions 
@@ -14,5 +14,5 @@ export interface ToggleLayerOptions
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [silent?](./webmap.togglelayeroptions.silent.md) |  | boolean | <i>(Optional)</i> |
+|  [silent?](./webmap.togglelayeroptions.silent.md) |  | boolean | _(Optional)_ |
 

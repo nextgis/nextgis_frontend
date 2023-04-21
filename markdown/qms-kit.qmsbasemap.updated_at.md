@@ -4,7 +4,7 @@
 
 ## QmsBasemap.updated\_at property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 updated_at?: Date;

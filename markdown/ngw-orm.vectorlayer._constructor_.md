@@ -6,7 +6,7 @@
 
 Constructs a new instance of the `VectorLayer` class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 constructor(opt?: {
@@ -19,5 +19,5 @@ constructor(opt?: {
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  opt | { properties?: P; coordinates?: G\['coordinates'\]; } | <i>(Optional)</i> |
+|  opt | { properties?: P; coordinates?: G\['coordinates'\]; } | _(Optional)_ |
 

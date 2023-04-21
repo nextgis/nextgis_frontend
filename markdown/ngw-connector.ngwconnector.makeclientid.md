@@ -4,7 +4,7 @@
 
 ## NgwConnector.makeClientId() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 makeClientId(credentials?: Credentials): string | undefined;
@@ -14,9 +14,9 @@ makeClientId(credentials?: Credentials): string | undefined;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  credentials | [Credentials](./ngw-connector.credentials.md) | <i>(Optional)</i> |
+|  credentials | [Credentials](./ngw-connector.credentials.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 string \| undefined
 

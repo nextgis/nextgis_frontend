@@ -4,17 +4,17 @@
 
 ## Tileset3DAdapterOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface Tileset3DAdapterOptions extends RasterAdapterOptions, VectorAdapterOptions 
 ```
-<b>Extends:</b> [RasterAdapterOptions](./webmap.rasteradapteroptions.md)<!-- -->, [VectorAdapterOptions](./webmap.vectoradapteroptions.md)
+**Extends:** [RasterAdapterOptions](./webmap.rasteradapteroptions.md)<!-- -->, [VectorAdapterOptions](./webmap.vectoradapteroptions.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [heightOffset?](./webmap.tileset3dadapteroptions.heightoffset.md) |  | number | <i>(Optional)</i> |
-|  [useTerrainHeight?](./webmap.tileset3dadapteroptions.useterrainheight.md) |  | boolean | <i>(Optional)</i> |
+|  [heightOffset?](./webmap.tileset3dadapteroptions.heightoffset.md) |  | number | _(Optional)_ |
+|  [useTerrainHeight?](./webmap.tileset3dadapteroptions.useterrainheight.md) |  | boolean | _(Optional)_ |
 

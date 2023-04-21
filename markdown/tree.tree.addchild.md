@@ -4,19 +4,19 @@
 
 ## Tree.addChild() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-addChild(treeItem: TREE_ITEM): void;
+addChild(treeItem: T): void;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  treeItem | TREE\_ITEM |  |
+|  treeItem | T |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

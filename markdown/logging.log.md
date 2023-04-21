@@ -4,7 +4,7 @@
 
 ## Log interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface Log<D = any> 
@@ -14,10 +14,10 @@ export interface Log<D = any>
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [data?](./logging.log.data.md) |  | D | <i>(Optional)</i> |
-|  [duration?](./logging.log.duration.md) |  | number | <i>(Optional)</i> |
+|  [data?](./logging.log.data.md) |  | D | _(Optional)_ |
+|  [duration?](./logging.log.duration.md) |  | number | _(Optional)_ |
 |  [logLevel](./logging.log.loglevel.md) |  | [LogLevel](./logging.loglevel.md) |  |
 |  [message](./logging.log.message.md) |  | string |  |
-|  [operationId?](./logging.log.operationid.md) |  | string | <i>(Optional)</i> |
+|  [operationId?](./logging.log.operationid.md) |  | string | _(Optional)_ |
 |  [timestamp](./logging.log.timestamp.md) |  | Date |  |
 

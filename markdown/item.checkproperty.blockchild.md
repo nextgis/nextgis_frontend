@@ -4,7 +4,7 @@
 
 ## CheckProperty.blockChild() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 blockChild(options?: O): void;
@@ -14,9 +14,9 @@ blockChild(options?: O): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | O | <i>(Optional)</i> |
+|  options | O | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

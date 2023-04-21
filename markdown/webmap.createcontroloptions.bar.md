@@ -4,7 +4,7 @@
 
 ## CreateControlOptions.bar property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 bar?: boolean;

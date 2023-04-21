@@ -6,7 +6,7 @@
 
 Аutomatic creation of a map from the constructor
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 create?: boolean;

@@ -4,7 +4,7 @@
 
 ## ResourceStore.SET\_STORE() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 protected SET_STORE(store: ResourceStoreItem<P>[]): void;
@@ -16,7 +16,7 @@ protected SET_STORE(store: ResourceStoreItem<P>[]): void;
 |  --- | --- | --- |
 |  store | [ResourceStoreItem](./ngw-connector.resourcestoreitem.md)<!-- -->&lt;P&gt;\[\] |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

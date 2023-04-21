@@ -4,12 +4,12 @@
 
 ## NgwWebmapLayerAdapter.hideLayer() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 hideLayer(): Promise<void>;
 ```
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;void&gt;
 

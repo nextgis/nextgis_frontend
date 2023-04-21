@@ -4,7 +4,7 @@
 
 ## NgwMap.\_ngwLayers property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 protected _ngwLayers: NgwLayers;

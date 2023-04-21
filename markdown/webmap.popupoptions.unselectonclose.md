@@ -6,7 +6,7 @@
 
 Unselect feature on popup close
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 unselectOnClose?: boolean;

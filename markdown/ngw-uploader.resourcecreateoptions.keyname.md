@@ -4,7 +4,7 @@
 
 ## ResourceCreateOptions.keyname property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 keyname?: string;

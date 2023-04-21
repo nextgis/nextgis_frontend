@@ -4,7 +4,7 @@
 
 ## degrees2meters() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function degrees2meters(lng: number, lat: number): [number, number];
@@ -17,7 +17,7 @@ export declare function degrees2meters(lng: number, lat: number): [number, numbe
 |  lng | number |  |
 |  lat | number |  |
 
-<b>Returns:</b>
+**Returns:**
 
 \[number, number\]
 

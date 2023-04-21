@@ -4,7 +4,7 @@
 
 ## allProperties() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function allProperties(obj: Record<string, unknown>): string[];
@@ -16,7 +16,7 @@ export declare function allProperties(obj: Record<string, unknown>): string[];
 |  --- | --- | --- |
 |  obj | Record&lt;string, unknown&gt; |  |
 
-<b>Returns:</b>
+**Returns:**
 
 string\[\]
 

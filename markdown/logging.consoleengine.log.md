@@ -4,7 +4,7 @@
 
 ## ConsoleEngine.log() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 log(message: string, options?: LogOptions<D>): void;
@@ -15,9 +15,9 @@ log(message: string, options?: LogOptions<D>): void;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  message | string |  |
-|  options | [LogOptions](./logging.logoptions.md)<!-- -->&lt;D&gt; | <i>(Optional)</i> |
+|  options | [LogOptions](./logging.logoptions.md)<!-- -->&lt;D&gt; | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

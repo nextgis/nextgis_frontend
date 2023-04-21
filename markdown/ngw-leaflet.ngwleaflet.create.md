@@ -4,7 +4,7 @@
 
 ## NgwLeaflet.create() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static create(options: NgwMapOptions): Promise<NgwLeaflet>;
@@ -14,9 +14,9 @@ static create(options: NgwMapOptions): Promise<NgwLeaflet>;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | NgwMapOptions |  |
+|  options | [NgwMapOptions](./ngw-map.ngwmapoptions.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
-Promise&lt;NgwLeaflet&gt;
+Promise&lt;[NgwLeaflet](./ngw-leaflet.ngwleaflet.md)<!-- -->&gt;
 

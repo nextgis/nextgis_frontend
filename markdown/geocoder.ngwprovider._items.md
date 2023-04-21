@@ -4,7 +4,7 @@
 
 ## NgwProvider.\_items() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 _items(entries: ResourceStoreItem[]): NgwSearchItem[];
@@ -16,7 +16,7 @@ _items(entries: ResourceStoreItem[]): NgwSearchItem[];
 |  --- | --- | --- |
 |  entries | [ResourceStoreItem](./ngw-connector.resourcestoreitem.md)<!-- -->\[\] |  |
 
-<b>Returns:</b>
+**Returns:**
 
 NgwSearchItem\[\]
 

@@ -4,7 +4,7 @@
 
 ## Log.message property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 message: string;

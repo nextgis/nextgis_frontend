@@ -4,7 +4,7 @@
 
 ## StarterKit.onLoadSync() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onLoadSync?(webMap: WebMap): Promise<any>;
@@ -16,7 +16,7 @@ onLoadSync?(webMap: WebMap): Promise<any>;
 |  --- | --- | --- |
 |  webMap | [WebMap](./webmap.webmap.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;any&gt;
 

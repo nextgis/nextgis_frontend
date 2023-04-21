@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."resource.tree" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'resource.tree': {

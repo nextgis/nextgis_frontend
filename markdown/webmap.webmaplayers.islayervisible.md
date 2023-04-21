@@ -6,7 +6,7 @@
 
 Check if the given layer on the map
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 isLayerVisible(layerDef: LayerDef): boolean;
@@ -18,7 +18,7 @@ isLayerVisible(layerDef: LayerDef): boolean;
 |  --- | --- | --- |
 |  layerDef | [LayerDef](./webmap.layerdef.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 boolean
 

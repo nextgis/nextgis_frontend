@@ -4,12 +4,12 @@
 
 ## MainLayerAdapter.updateLayer() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 updateLayer?(): void;
 ```
-<b>Returns:</b>
+**Returns:**
 
 void
 

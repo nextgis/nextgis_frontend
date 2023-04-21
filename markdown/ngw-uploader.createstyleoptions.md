@@ -4,17 +4,17 @@
 
 ## CreateStyleOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface CreateStyleOptions extends ResourceCreateOptions 
 ```
-<b>Extends:</b> [ResourceCreateOptions](./ngw-uploader.resourcecreateoptions.md)
+**Extends:** [ResourceCreateOptions](./ngw-uploader.resourcecreateoptions.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [cls?](./ngw-uploader.createstyleoptions.cls.md) |  | [ResourceCls](./ngw-connector.resourcecls.md) | <i>(Optional)</i> |
-|  [style?](./ngw-uploader.createstyleoptions.style.md) |  | unknown | <i>(Optional)</i> |
+|  [cls?](./ngw-uploader.createstyleoptions.cls.md) |  | [ResourceCls](./ngw-connector.resourcecls.md) | _(Optional)_ |
+|  [style?](./ngw-uploader.createstyleoptions.style.md) |  | unknown | _(Optional)_ |
 

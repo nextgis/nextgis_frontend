@@ -4,7 +4,7 @@
 
 ## NgwLayersList.webMapId property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 webMapId: number;

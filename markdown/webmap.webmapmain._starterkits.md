@@ -4,7 +4,7 @@
 
 ## WebMapMain.\_starterKits property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 protected readonly _starterKits: StarterKit[];

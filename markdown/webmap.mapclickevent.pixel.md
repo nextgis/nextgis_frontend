@@ -6,7 +6,7 @@
 
 Pixel coordinates of the point where the mouse event occurred relative to the map container.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 pixel: Pixel;

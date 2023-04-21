@@ -4,7 +4,7 @@
 
 ## VectorLayerAdapter.updateTooltip() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 updateTooltip?(layerDef?: LayerDefinition<F, L>): void;
@@ -14,9 +14,9 @@ updateTooltip?(layerDef?: LayerDefinition<F, L>): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  layerDef | [LayerDefinition](./webmap.layerdefinition.md)<!-- -->&lt;F, L&gt; | <i>(Optional)</i> |
+|  layerDef | [LayerDefinition](./webmap.layerdefinition.md)<!-- -->&lt;F, L&gt; | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

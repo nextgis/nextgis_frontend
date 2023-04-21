@@ -4,7 +4,7 @@
 
 ## Geocoder.search() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 search(query: string): AsyncGenerator<SearchItem, void, unknown>;
@@ -16,7 +16,7 @@ search(query: string): AsyncGenerator<SearchItem, void, unknown>;
 |  --- | --- | --- |
 |  query | string |  |
 
-<b>Returns:</b>
+**Returns:**
 
 AsyncGenerator&lt;[SearchItem](./geocoder.searchitem.md)<!-- -->, void, unknown&gt;
 

@@ -4,7 +4,7 @@
 
 ## Base3DPaint interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface Base3DPaint 
@@ -14,11 +14,11 @@ export interface Base3DPaint
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [color?](./paint.base3dpaint.color.md) |  | string \| [Expression](./paint.expression.md) | <i>(Optional)</i> |
-|  [fill?](./paint.base3dpaint.fill.md) |  | boolean | <i>(Optional)</i> |
-|  [fillColor?](./paint.base3dpaint.fillcolor.md) |  | string \| [Expression](./paint.expression.md) | <i>(Optional)</i> |
-|  [stroke?](./paint.base3dpaint.stroke.md) |  | boolean | <i>(Optional)</i> |
-|  [strokeColor?](./paint.base3dpaint.strokecolor.md) |  | string \| [Expression](./paint.expression.md) | <i>(Optional)</i> |
-|  [strokeWidth?](./paint.base3dpaint.strokewidth.md) |  | number \| [Expression](./paint.expression.md) | <i>(Optional)</i> |
-|  [type?](./paint.base3dpaint.type.md) |  | [Paint3DType](./paint.paint3dtype.md) | <i>(Optional)</i> |
+|  [color?](./paint.base3dpaint.color.md) |  | string \| [Expression](./paint.expression.md) | _(Optional)_ |
+|  [fill?](./paint.base3dpaint.fill.md) |  | boolean | _(Optional)_ |
+|  [fillColor?](./paint.base3dpaint.fillcolor.md) |  | string \| [Expression](./paint.expression.md) | _(Optional)_ |
+|  [stroke?](./paint.base3dpaint.stroke.md) |  | boolean | _(Optional)_ |
+|  [strokeColor?](./paint.base3dpaint.strokecolor.md) |  | string \| [Expression](./paint.expression.md) | _(Optional)_ |
+|  [strokeWidth?](./paint.base3dpaint.strokewidth.md) |  | number \| [Expression](./paint.expression.md) | _(Optional)_ |
+|  [type?](./paint.base3dpaint.type.md) |  | [Paint3DType](./paint.paint3dtype.md) | _(Optional)_ |
 

@@ -4,7 +4,7 @@
 
 ## BaseProperty.\_prepareValue() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 protected _prepareValue(value?: V): V | undefined;
@@ -14,9 +14,9 @@ protected _prepareValue(value?: V): V | undefined;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  value | V | <i>(Optional)</i> |
+|  value | V | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 V \| undefined
 

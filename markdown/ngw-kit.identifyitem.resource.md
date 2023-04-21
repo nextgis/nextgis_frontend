@@ -4,12 +4,12 @@
 
 ## IdentifyItem.resource() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 resource(): CancelablePromise<FeatureResource>;
 ```
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;[FeatureResource](./ngw-connector.featureresource.md)<!-- -->&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;[FeatureResource](./ngw-connector.featureresource.md)<!-- -->&gt;
 

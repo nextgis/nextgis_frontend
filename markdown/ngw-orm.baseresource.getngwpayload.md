@@ -4,7 +4,7 @@
 
 ## BaseResource.getNgwPayload() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static getNgwPayload(resource: Type<BaseResource>, parent: number, options: SyncOptions): Record<string, any> | undefined;
@@ -18,7 +18,7 @@ static getNgwPayload(resource: Type<BaseResource>, parent: number, options: Sync
 |  parent | number |  |
 |  options | SyncOptions |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Record&lt;string, any&gt; \| undefined
 

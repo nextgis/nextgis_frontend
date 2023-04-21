@@ -4,7 +4,7 @@
 
 ## VectorAdapterOptions.filter property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 filter?: DataLayerFilter<F, L>;

@@ -4,7 +4,7 @@
 
 ## fetchNgwLayerItems() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function fetchNgwLayerItems<G extends Geometry = Geometry, P extends FeatureProperties = FeatureProperties>(options: FetchNgwItemsOptions<P>): CancelablePromise<FeatureItem<P, G>[]>;
@@ -16,7 +16,7 @@ export declare function fetchNgwLayerItems<G extends Geometry = Geometry, P exte
 |  --- | --- | --- |
 |  options | [FetchNgwItemsOptions](./ngw-kit.fetchngwitemsoptions.md)<!-- -->&lt;P&gt; |  |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;[FeatureItem](./ngw-connector.featureitem.md)<!-- -->&lt;P, G&gt;\[\]&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;[FeatureItem](./ngw-connector.featureitem.md)<!-- -->&lt;P, G&gt;\[\]&gt;
 

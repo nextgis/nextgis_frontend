@@ -4,7 +4,7 @@
 
 ## type variable
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 type: 'browser' | 'node'

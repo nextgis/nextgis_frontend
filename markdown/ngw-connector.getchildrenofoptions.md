@@ -4,16 +4,16 @@
 
 ## GetChildrenOfOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface GetChildrenOfOptions extends Pick<RequestOptions, 'cache'> 
 ```
-<b>Extends:</b> Pick&lt;[RequestOptions](./ngw-connector.requestoptions.md)
+**Extends:** Pick&lt;[RequestOptions](./ngw-connector.requestoptions.md)<!-- -->, 'cache'&gt;
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [recursive?](./ngw-connector.getchildrenofoptions.recursive.md) |  | boolean | <i>(Optional)</i> |
+|  [recursive?](./ngw-connector.getchildrenofoptions.recursive.md) |  | boolean | _(Optional)_ |
 

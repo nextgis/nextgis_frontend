@@ -6,7 +6,7 @@
 
 Base abstract resource for all resources.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class BaseResource 
@@ -16,8 +16,8 @@ export declare class BaseResource
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [connection?](./ngw-orm.baseresource.connection.md) | <code>static</code> | [Connection](./ngw-orm.connection.md) | <i>(Optional)</i> |
-|  [item?](./ngw-orm.baseresource.item.md) | <code>static</code> | [ResourceItem](./ngw-connector.resourceitem.md) | <i>(Optional)</i> |
+|  [connection?](./ngw-orm.baseresource.connection.md) | <code>static</code> | [Connection](./ngw-orm.connection.md) | _(Optional)_ |
+|  [item?](./ngw-orm.baseresource.item.md) | <code>static</code> | [ResourceItem](./ngw-connector.resourceitem.md) | _(Optional)_ |
 
 ## Methods
 

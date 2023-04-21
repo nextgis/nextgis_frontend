@@ -6,7 +6,7 @@
 
 Values to be in the button content in accordance with the status of the toggle control
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface HtmlToggle 

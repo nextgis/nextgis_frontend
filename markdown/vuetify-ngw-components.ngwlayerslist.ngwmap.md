@@ -9,7 +9,7 @@
 > for backward compatibility
 > 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 ngwMap: NgwMap;

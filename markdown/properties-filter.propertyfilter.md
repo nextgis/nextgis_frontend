@@ -6,14 +6,14 @@
 
 field, operation, value \['foo', 'eq', 'bar'\] \['count', 'ge', 20\]
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type PropertyFilter<T extends Properties = Properties> = [
     T extends null ? string : keyof T | `%${string & keyof T}` | `%${string & keyof T}%` | `${string & keyof T}%`,
-    Operations,
+    Operation,
     any
 ];
 ```
-<b>References:</b> [Operations](./properties-filter.operations.md)
+**References:** [Operation](./properties-filter.operation.md)
 

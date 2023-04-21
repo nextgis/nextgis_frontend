@@ -4,7 +4,7 @@
 
 ## getIdentifyItems() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function getIdentifyItems(identify: FeatureLayersIdentify & {
@@ -17,9 +17,9 @@ export declare function getIdentifyItems(identify: FeatureLayersIdentify & {
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  identify | [FeatureLayersIdentify](./ngw-connector.featurelayersidentify.md) &amp; { resources?: number\[\]; } |  |
-|  multiple | boolean | <i>(Optional)</i> |
+|  multiple | boolean | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 [NgwIdentifyItem](./ngw-kit.ngwidentifyitem.md)<!-- -->\[\]
 

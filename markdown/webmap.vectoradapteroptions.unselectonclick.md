@@ -6,7 +6,7 @@
 
 If false, the selection will be reset when the user clicks the map.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 unselectOnClick?: boolean;

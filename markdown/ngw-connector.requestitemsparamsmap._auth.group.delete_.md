@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."auth.group.delete" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'auth.group.delete': {

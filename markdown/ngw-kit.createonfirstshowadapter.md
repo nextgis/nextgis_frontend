@@ -4,7 +4,7 @@
 
 ## createOnFirstShowAdapter() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function createOnFirstShowAdapter({ webMap, adapterOptions, onLayerAdded, createAdapter, }: CreateOnFirstShowAdapterOptions): Promise<Type<FirstShowAdapter>>;
@@ -16,7 +16,7 @@ export declare function createOnFirstShowAdapter({ webMap, adapterOptions, onLay
 |  --- | --- | --- |
 |  { webMap, adapterOptions, onLayerAdded, createAdapter, } | CreateOnFirstShowAdapterOptions |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[Type](./utils.type.md)<!-- -->&lt;FirstShowAdapter&gt;&gt;
 

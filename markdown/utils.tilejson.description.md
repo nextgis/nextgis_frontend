@@ -6,7 +6,7 @@
 
 Default: null. A text description of the tileset. The description can contain any legal character. Implementations SHOULD NOT interpret the description as HTML.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 description?: string;

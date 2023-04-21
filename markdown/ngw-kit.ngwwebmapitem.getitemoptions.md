@@ -4,7 +4,7 @@
 
 ## NgwWebmapItem.getItemOptions() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 protected getItemOptions(item: TreeGroup | TreeLayer): Record<string, any>;
@@ -16,7 +16,7 @@ protected getItemOptions(item: TreeGroup | TreeLayer): Record<string, any>;
 |  --- | --- | --- |
 |  item | [TreeGroup](./ngw-kit.treegroup.md) \| [TreeLayer](./ngw-kit.treelayer.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Record&lt;string, any&gt;
 

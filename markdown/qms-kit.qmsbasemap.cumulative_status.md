@@ -4,7 +4,7 @@
 
 ## QmsBasemap.cumulative\_status property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 cumulative_status?: string;

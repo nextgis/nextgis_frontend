@@ -4,12 +4,12 @@
 
 ## NgwIdentifyEvent type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export declare type NgwIdentifyEvent<F = FeatureProperties, G extends Geometry = Geometry> = NgwIdentify & {
+export declare type NgwIdentifyEvent<F extends FeatureProperties = FeatureProperties, G extends Geometry = Geometry> = NgwIdentify & {
     getIdentifyItems: () => IdentifyItem<F, G>[];
 };
 ```
-<b>References:</b> [FeatureProperties](./utils.featureproperties.md)<!-- -->, [NgwIdentify](./ngw-kit.ngwidentify.md)<!-- -->, [IdentifyItem](./ngw-kit.identifyitem.md)
+**References:** [FeatureProperties](./utils.featureproperties.md)
 

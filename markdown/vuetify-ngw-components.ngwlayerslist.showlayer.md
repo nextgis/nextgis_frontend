@@ -4,7 +4,7 @@
 
 ## NgwLayersList.showLayer property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 showLayer: (layer: NgwWebmapItem) => boolean;

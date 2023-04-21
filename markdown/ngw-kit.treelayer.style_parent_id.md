@@ -4,7 +4,7 @@
 
 ## TreeLayer.style\_parent\_id property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 style_parent_id: number;

@@ -4,7 +4,7 @@
 
 ## VectorAdapterOptions.labelField property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 labelField?: keyof P extends null ? string : keyof P;

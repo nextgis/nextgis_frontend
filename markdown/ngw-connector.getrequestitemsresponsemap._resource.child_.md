@@ -4,7 +4,7 @@
 
 ## GetRequestItemsResponseMap."resource.child" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'resource.child': any;

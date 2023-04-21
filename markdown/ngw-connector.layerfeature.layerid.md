@@ -4,7 +4,7 @@
 
 ## LayerFeature.layerId property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 layerId: number;

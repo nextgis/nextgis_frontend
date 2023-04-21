@@ -4,10 +4,10 @@
 
 ## MapControls interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface MapControls extends ContribControlsOptions 
 ```
-<b>Extends:</b> [ContribControlsOptions](./webmap.contribcontrolsoptions.md)
+**Extends:** [ContribControlsOptions](./webmap.contribcontrolsoptions.md)
 

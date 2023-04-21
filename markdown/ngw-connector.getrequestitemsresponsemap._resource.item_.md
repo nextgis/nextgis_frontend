@@ -4,7 +4,7 @@
 
 ## GetRequestItemsResponseMap."resource.item" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'resource.item': ResourceItem;

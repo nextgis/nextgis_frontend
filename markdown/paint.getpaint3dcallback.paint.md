@@ -4,7 +4,7 @@
 
 ## GetPaint3DCallback.paint property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 paint?: VectorAdapterLayerPaint3D;

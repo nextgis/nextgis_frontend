@@ -6,7 +6,7 @@
 
 Constructs a new instance of the `Dialog` class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 constructor(options?: DialogAdapterOptions);
@@ -16,5 +16,5 @@ constructor(options?: DialogAdapterOptions);
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | DialogAdapterOptions | <i>(Optional)</i> |
+|  options | DialogAdapterOptions | _(Optional)_ |
 

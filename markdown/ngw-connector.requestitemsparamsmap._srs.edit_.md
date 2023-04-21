@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."srs.edit" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'srs.edit': {

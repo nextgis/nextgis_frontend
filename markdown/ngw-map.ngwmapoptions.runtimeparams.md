@@ -4,7 +4,7 @@
 
 ## NgwMapOptions.runtimeParams property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 runtimeParams?: RuntimeParams[];

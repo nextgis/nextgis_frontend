@@ -6,7 +6,7 @@
 
 Additional css class string
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 addClass?: string;

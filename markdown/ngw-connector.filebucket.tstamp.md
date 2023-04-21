@@ -4,7 +4,7 @@
 
 ## FileBucket.tstamp property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 tstamp?: any;

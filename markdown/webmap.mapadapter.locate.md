@@ -6,7 +6,7 @@
 
 Tries to locate the user using the Geolocation API, firing a locationfound event with location data on success or a locationerror event on failure, and optionally sets the map view to the user's location with respect to detection accuracy (or to the world view if geolocation failed). Note that, if your page doesn't use HTTPS, this method will fail in modern browsers (Chrome 50 and newer) See Locate options for more details.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 locate?(opt: LocateOptions, events?: LocationEvents): Locate;
@@ -17,9 +17,9 @@ locate?(opt: LocateOptions, events?: LocationEvents): Locate;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  opt | [LocateOptions](./webmap.locateoptions.md) |  |
-|  events | [LocationEvents](./webmap.locationevents.md) | <i>(Optional)</i> |
+|  events | [LocationEvents](./webmap.locationevents.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 [Locate](./webmap.locate.md)
 

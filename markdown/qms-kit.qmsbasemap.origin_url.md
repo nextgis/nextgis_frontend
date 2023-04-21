@@ -4,7 +4,7 @@
 
 ## QmsBasemap.origin\_url property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 origin_url?: string;

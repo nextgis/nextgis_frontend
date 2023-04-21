@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."resource.quota" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'resource.quota': null;

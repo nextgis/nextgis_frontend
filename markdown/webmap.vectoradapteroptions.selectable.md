@@ -6,7 +6,7 @@
 
 Determines whether objects are selected by mouse click.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 selectable?: boolean;

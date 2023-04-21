@@ -4,12 +4,12 @@
 
 ## NgwWebmapItem.getLayer() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getLayer(): LayerAdapter<any, any, import("@nextgis/webmap").AdapterOptions<Record<string, any>, Record<string, any>>> | undefined;
 ```
-<b>Returns:</b>
+**Returns:**
 
 [LayerAdapter](./webmap.layeradapter.md)<!-- -->&lt;any, any, import("@nextgis/webmap").[AdapterOptions](./webmap.adapteroptions.md)<!-- -->&lt;Record&lt;string, any&gt;, Record&lt;string, any&gt;&gt;&gt; \| undefined
 

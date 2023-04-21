@@ -4,7 +4,7 @@
 
 ## createOnFirstShowNgwAdapter() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function createOnFirstShowNgwAdapter({ webMap, connector, item, adapterOptions, idPrefix, }: CreateOnFirstShowAdapterOptions): Promise<Type<MainLayerAdapter>>;
@@ -16,7 +16,7 @@ export declare function createOnFirstShowNgwAdapter({ webMap, connector, item, a
 |  --- | --- | --- |
 |  { webMap, connector, item, adapterOptions, idPrefix, } | CreateOnFirstShowAdapterOptions |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[Type](./utils.type.md)<!-- -->&lt;[MainLayerAdapter](./webmap.mainlayeradapter.md)<!-- -->&gt;&gt;
 

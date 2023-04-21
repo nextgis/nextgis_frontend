@@ -6,12 +6,12 @@
 
 Pans and zooms the map to the initial position specified in the options
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 fit(): void;
 ```
-<b>Returns:</b>
+**Returns:**
 
 void
 

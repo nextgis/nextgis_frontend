@@ -4,12 +4,12 @@
 
 ## VectorLayer.getConstructor() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getConstructor(): typeof VectorLayer;
 ```
-<b>Returns:</b>
+**Returns:**
 
 typeof [VectorLayer](./ngw-orm.vectorlayer.md)
 

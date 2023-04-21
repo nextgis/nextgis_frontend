@@ -4,7 +4,7 @@
 
 ## ResourceStore.delete() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 delete(fid: number): Promise<ResourceStoreItem<P>[]>;
@@ -16,7 +16,7 @@ delete(fid: number): Promise<ResourceStoreItem<P>[]>;
 |  --- | --- | --- |
 |  fid | number |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[ResourceStoreItem](./ngw-connector.resourcestoreitem.md)<!-- -->&lt;P&gt;\[\]&gt;
 

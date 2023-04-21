@@ -4,10 +4,10 @@
 
 ## GetPaintFunction type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type GetPaintFunction = (opt?: any) => VectorAdapterLayerPaint;
 ```
-<b>References:</b> [VectorAdapterLayerPaint](./paint.vectoradapterlayerpaint.md)
+**References:** [VectorAdapterLayerPaint](./paint.vectoradapterlayerpaint.md)
 

@@ -4,7 +4,7 @@
 
 ## round() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function round(val: number, toFixed?: number): number;
@@ -15,9 +15,9 @@ export declare function round(val: number, toFixed?: number): number;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  val | number |  |
-|  toFixed | number | <i>(Optional)</i> |
+|  toFixed | number | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 number
 

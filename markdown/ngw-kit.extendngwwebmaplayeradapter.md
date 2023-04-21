@@ -4,7 +4,7 @@
 
 ## extendNgwWebmapLayerAdapter() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function extendNgwWebmapLayerAdapter(opt: ExtendNgwWebmapLayerAdapterOptions): Type<NgwWebmapLayerAdapter>;
@@ -16,7 +16,7 @@ export declare function extendNgwWebmapLayerAdapter(opt: ExtendNgwWebmapLayerAda
 |  --- | --- | --- |
 |  opt | [ExtendNgwWebmapLayerAdapterOptions](./ngw-kit.extendngwwebmaplayeradapteroptions.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 [Type](./utils.type.md)<!-- -->&lt;[NgwWebmapLayerAdapter](./ngw-kit.ngwwebmaplayeradapter.md)<!-- -->&gt;
 

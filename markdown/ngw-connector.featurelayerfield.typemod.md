@@ -4,7 +4,7 @@
 
 ## FeatureLayerField.typemod property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 typemod?: unknown;

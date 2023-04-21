@@ -4,7 +4,7 @@
 
 ## NgwUploader.uploadVector() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 uploadVector<F extends FileType = FileType>(file: F, options: VectorUploadOptions): Promise<CreatedResource>;
@@ -17,7 +17,7 @@ uploadVector<F extends FileType = FileType>(file: F, options: VectorUploadOption
 |  file | F |  |
 |  options | [VectorUploadOptions](./ngw-uploader.vectoruploadoptions.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[CreatedResource](./ngw-connector.createdresource.md)<!-- -->&gt;
 

@@ -4,7 +4,7 @@
 
 ## FeatureItemAttachment.is\_image property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 is_image: boolean;

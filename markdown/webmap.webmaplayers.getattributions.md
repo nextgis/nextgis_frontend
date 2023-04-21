@@ -4,7 +4,7 @@
 
 ## WebMapLayers.getAttributions() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getAttributions(options: GetAttributionsOptions): string[];
@@ -16,7 +16,7 @@ getAttributions(options: GetAttributionsOptions): string[];
 |  --- | --- | --- |
 |  options | [GetAttributionsOptions](./webmap.getattributionsoptions.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 string\[\]
 

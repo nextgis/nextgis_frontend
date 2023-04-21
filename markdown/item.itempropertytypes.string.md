@@ -4,7 +4,7 @@
 
 ## ItemPropertyTypes.string property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 string: string;

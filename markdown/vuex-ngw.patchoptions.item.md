@@ -4,7 +4,7 @@
 
 ## PatchOptions.item property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 item: Feature<G, P>;

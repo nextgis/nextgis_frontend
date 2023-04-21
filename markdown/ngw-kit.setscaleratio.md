@@ -4,7 +4,7 @@
 
 ## setScaleRatio() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function setScaleRatio(scale: number, lat?: number): number;
@@ -15,9 +15,9 @@ export declare function setScaleRatio(scale: number, lat?: number): number;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  scale | number |  |
-|  lat | number | <i>(Optional)</i> |
+|  lat | number | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 number
 

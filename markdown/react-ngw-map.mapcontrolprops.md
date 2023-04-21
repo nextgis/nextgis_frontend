@@ -4,18 +4,18 @@
 
 ## MapControlProps interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface MapControlProps extends ControlOptions 
 ```
-<b>Extends:</b> [ControlOptions](./webmap.controloptions.md)
+**Extends:** ControlOptions
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [children?](./react-ngw-map.mapcontrolprops.children.md) |  | ReactNode | <i>(Optional)</i> |
+|  [children?](./react-ngw-map.mapcontrolprops.children.md) |  | ReactNode | _(Optional)_ |
 |  [context](./react-ngw-map.mapcontrolprops.context.md) |  | [NgwMapContextInterface](./react-ngw-map.ngwmapcontextinterface.md) |  |
 |  [createControl](./react-ngw-map.mapcontrolprops.createcontrol.md) |  | (portal: MutableRefObject&lt;HTMLDivElement&gt;) =&gt; Promise&lt;unknown&gt; |  |
 

@@ -6,7 +6,7 @@
 
 Indicate on a cartographic base layer.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 baselayer?: boolean;

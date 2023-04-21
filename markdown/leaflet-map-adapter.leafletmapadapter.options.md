@@ -4,7 +4,7 @@
 
 ## LeafletMapAdapter.options property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 options: MapOptions<Map>;

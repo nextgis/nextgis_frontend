@@ -6,7 +6,7 @@
 
 The paint that applies to the features after it becomes selected.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 selectedPaint?: Paint<F>;

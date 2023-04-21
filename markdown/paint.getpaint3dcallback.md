@@ -4,7 +4,7 @@
 
 ## GetPaint3DCallback interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface GetPaint3DCallback<F extends Feature = Feature> 
@@ -14,6 +14,6 @@ export interface GetPaint3DCallback<F extends Feature = Feature>
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [paint?](./paint.getpaint3dcallback.paint.md) |  | [VectorAdapterLayerPaint3D](./paint.vectoradapterlayerpaint3d.md) | <i>(Optional)</i> |
-|  [type?](./paint.getpaint3dcallback.type.md) |  | [Paint3DType](./paint.paint3dtype.md) | <i>(Optional)</i> |
+|  [paint?](./paint.getpaint3dcallback.paint.md) |  | [VectorAdapterLayerPaint3D](./paint.vectoradapterlayerpaint3d.md) | _(Optional)_ |
+|  [type?](./paint.getpaint3dcallback.type.md) |  | [Paint3DType](./paint.paint3dtype.md) | _(Optional)_ |
 

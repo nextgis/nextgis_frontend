@@ -11,7 +11,7 @@
 
 TODO: replace by minZoom
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 minScale?: number;

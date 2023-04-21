@@ -6,7 +6,7 @@
 
 Default: "xyz". Either "xyz" or "tms". Influences the y direction of the tile coordinates. The global-mercator (aka Spherical Mercator) profile is assumed.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 scheme?: string;

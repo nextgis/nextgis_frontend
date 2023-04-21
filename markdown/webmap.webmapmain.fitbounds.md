@@ -6,7 +6,7 @@
 
 Sets a map view that contains the given geographical bounds.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 fitBounds(bounds: LngLatBoundsArray, options?: FitOptions): this;
@@ -17,9 +17,9 @@ fitBounds(bounds: LngLatBoundsArray, options?: FitOptions): this;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  bounds | [LngLatBoundsArray](./utils.lnglatboundsarray.md) | Array of coordinates, measured in degrees, in \[west, south, east, north\] order. |
-|  options | [FitOptions](./webmap.fitoptions.md) | <i>(Optional)</i> |
+|  options | [FitOptions](./webmap.fitoptions.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 this
 

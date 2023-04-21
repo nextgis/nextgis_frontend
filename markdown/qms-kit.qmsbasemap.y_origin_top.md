@@ -4,7 +4,7 @@
 
 ## QmsBasemap.y\_origin\_top property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 y_origin_top: boolean;

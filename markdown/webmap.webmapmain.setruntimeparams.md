@@ -4,7 +4,7 @@
 
 ## WebMapMain.setRuntimeParams() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 setRuntimeParams(params: RuntimeParams): void;
@@ -16,7 +16,7 @@ setRuntimeParams(params: RuntimeParams): void;
 |  --- | --- | --- |
 |  params | [RuntimeParams](./webmap.runtimeparams.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

@@ -4,12 +4,12 @@
 
 ## WebMapMain.\_addLayerProviders() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 protected _addLayerProviders(): Promise<void>;
 ```
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;void&gt;
 

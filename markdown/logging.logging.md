@@ -4,12 +4,12 @@
 
 ## Logging class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class Logging<D> implements LogEngine<D> 
 ```
-<b>Implements:</b> [LogEngine](./logging.logengine.md)
+**Implements:** [LogEngine](./logging.logengine.md)<!-- -->&lt;D&gt;
 
 ## Constructors
 
@@ -21,7 +21,7 @@ export declare class Logging<D> implements LogEngine<D>
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [eachLog?](./logging.logging.eachlog.md) |  | [EachLog](./logging.eachlog.md)<!-- -->&lt;D&gt; | <i>(Optional)</i> |
+|  [eachLog?](./logging.logging.eachlog.md) |  | [EachLog](./logging.eachlog.md)<!-- -->&lt;D&gt; | _(Optional)_ |
 |  [enabled](./logging.logging.enabled.md) |  | boolean |  |
 |  [engines](./logging.logging.engines.md) |  | [LogEngine](./logging.logengine.md)<!-- -->&lt;D&gt;\[\] |  |
 

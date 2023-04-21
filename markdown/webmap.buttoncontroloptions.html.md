@@ -6,7 +6,7 @@
 
 Button content.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 html?: string | HTMLElement;

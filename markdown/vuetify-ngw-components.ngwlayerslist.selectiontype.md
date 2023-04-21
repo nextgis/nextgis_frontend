@@ -4,7 +4,7 @@
 
 ## NgwLayersList.selectionType property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 selectionType: 'independent' | 'leaf';

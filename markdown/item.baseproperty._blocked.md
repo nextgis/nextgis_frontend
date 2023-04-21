@@ -4,7 +4,7 @@
 
 ## BaseProperty.\_blocked property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 protected _blocked: boolean;

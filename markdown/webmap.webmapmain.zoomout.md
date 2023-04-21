@@ -4,12 +4,12 @@
 
 ## WebMapMain.zoomOut() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 zoomOut(): void;
 ```
-<b>Returns:</b>
+**Returns:**
 
 void
 

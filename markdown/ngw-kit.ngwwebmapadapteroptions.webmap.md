@@ -4,7 +4,7 @@
 
 ## NgwWebmapAdapterOptions.webMap property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 webMap: WebMap<M>;

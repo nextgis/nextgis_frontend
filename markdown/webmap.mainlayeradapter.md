@@ -4,7 +4,7 @@
 
 ## MainLayerAdapter interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface MainLayerAdapter<M = any, L = any, O extends AdapterOptions = AdapterOptions> 
@@ -14,29 +14,29 @@ export interface MainLayerAdapter<M = any, L = any, O extends AdapterOptions = A
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [id?](./webmap.mainlayeradapter.id.md) |  | string | <i>(Optional)</i> |
-|  [layer?](./webmap.mainlayeradapter.layer.md) |  | L | <i>(Optional)</i> |
-|  [map?](./webmap.mainlayeradapter.map.md) |  | M | <i>(Optional)</i> |
-|  [name?](./webmap.mainlayeradapter.name.md) |  | string | <i>(Optional)</i> |
+|  [id?](./webmap.mainlayeradapter.id.md) |  | string | _(Optional)_ |
+|  [layer?](./webmap.mainlayeradapter.layer.md) |  | L | _(Optional)_ |
+|  [map?](./webmap.mainlayeradapter.map.md) |  | M | _(Optional)_ |
+|  [name?](./webmap.mainlayeradapter.name.md) |  | string | _(Optional)_ |
 |  [options](./webmap.mainlayeradapter.options.md) |  | O |  |
-|  [order?](./webmap.mainlayeradapter.order.md) |  | number | <i>(Optional)</i> |
+|  [order?](./webmap.mainlayeradapter.order.md) |  | number | _(Optional)_ |
 
 ## Methods
 
 |  Method | Description |
 |  --- | --- |
 |  [addLayer(options)](./webmap.mainlayeradapter.addlayer.md) |  |
-|  [beforeRemove()?](./webmap.mainlayeradapter.beforeremove.md) | <i>(Optional)</i> |
-|  [getBounds()?](./webmap.mainlayeradapter.getbounds.md) | <i>(Optional)</i> |
-|  [getDependLayers()?](./webmap.mainlayeradapter.getdependlayers.md) | <i>(Optional)</i> |
-|  [getExtent()?](./webmap.mainlayeradapter.getextent.md) | <i>(Optional)</i> |
-|  [hideLayer(layer)?](./webmap.mainlayeradapter.hidelayer.md) | <i>(Optional)</i> |
-|  [removeLayer()?](./webmap.mainlayeradapter.removelayer.md) | <i>(Optional)</i> |
-|  [setOpacity(val)?](./webmap.mainlayeradapter.setopacity.md) | <i>(Optional)</i> |
-|  [setPaint(paint)?](./webmap.mainlayeradapter.setpaint.md) | <i>(Optional)</i> |
-|  [setSelectedPaint(paint)?](./webmap.mainlayeradapter.setselectedpaint.md) | <i>(Optional)</i> |
-|  [showLayer(layer)?](./webmap.mainlayeradapter.showlayer.md) | <i>(Optional)</i> |
-|  [updateLayer()?](./webmap.mainlayeradapter.updatelayer.md) | <i>(Optional)</i> |
-|  [updatePaint(paint)?](./webmap.mainlayeradapter.updatepaint.md) | <i>(Optional)</i> |
-|  [updateSelectedPaint(paint)?](./webmap.mainlayeradapter.updateselectedpaint.md) | <i>(Optional)</i> |
+|  [beforeRemove()?](./webmap.mainlayeradapter.beforeremove.md) | _(Optional)_ |
+|  [getBounds()?](./webmap.mainlayeradapter.getbounds.md) | _(Optional)_ |
+|  [getDependLayers()?](./webmap.mainlayeradapter.getdependlayers.md) | _(Optional)_ |
+|  [getExtent()?](./webmap.mainlayeradapter.getextent.md) | _(Optional)_ |
+|  [hideLayer(layer)?](./webmap.mainlayeradapter.hidelayer.md) | _(Optional)_ |
+|  [removeLayer()?](./webmap.mainlayeradapter.removelayer.md) | _(Optional)_ |
+|  [setOpacity(val)?](./webmap.mainlayeradapter.setopacity.md) | _(Optional)_ |
+|  [setPaint(paint)?](./webmap.mainlayeradapter.setpaint.md) | _(Optional)_ |
+|  [setSelectedPaint(paint)?](./webmap.mainlayeradapter.setselectedpaint.md) | _(Optional)_ |
+|  [showLayer(layer)?](./webmap.mainlayeradapter.showlayer.md) | _(Optional)_ |
+|  [updateLayer()?](./webmap.mainlayeradapter.updatelayer.md) | _(Optional)_ |
+|  [updatePaint(paint)?](./webmap.mainlayeradapter.updatepaint.md) | _(Optional)_ |
+|  [updateSelectedPaint(paint)?](./webmap.mainlayeradapter.updateselectedpaint.md) | _(Optional)_ |
 

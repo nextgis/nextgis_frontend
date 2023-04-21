@@ -6,7 +6,7 @@
 
 Map adapter original click event
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 source?: unknown;

@@ -4,7 +4,7 @@
 
 ## Events.onLoad() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onLoad(event: keyof E | (keyof E)[]): Promise<this>;
@@ -16,7 +16,7 @@ onLoad(event: keyof E | (keyof E)[]): Promise<this>;
 |  --- | --- | --- |
 |  event | keyof E \| (keyof E)\[\] |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;this&gt;
 

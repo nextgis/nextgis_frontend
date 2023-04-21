@@ -6,7 +6,7 @@
 
 The title set on the 'zoom in' button.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 zoomInTitle?: string;

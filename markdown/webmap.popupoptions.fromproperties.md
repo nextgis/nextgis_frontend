@@ -4,7 +4,7 @@
 
 ## PopupOptions.fromProperties property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 fromProperties?: boolean;

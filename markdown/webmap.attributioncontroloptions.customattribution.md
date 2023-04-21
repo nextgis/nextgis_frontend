@@ -6,7 +6,7 @@
 
 String or strings to show in addition to any other attributions.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 customAttribution?: string | string[];

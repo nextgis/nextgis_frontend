@@ -4,7 +4,7 @@
 
 ## IdentifyItemOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface IdentifyItemOptions 
@@ -14,6 +14,6 @@ export interface IdentifyItemOptions
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [connector](./ngw-kit.identifyitemoptions.connector.md) |  | NgwConnector |  |
+|  [connector](./ngw-kit.identifyitemoptions.connector.md) |  | [NgwConnector](./ngw-connector.ngwconnector.md) |  |
 |  [feature](./ngw-kit.identifyitemoptions.feature.md) |  | [LayerFeature](./ngw-connector.layerfeature.md) |  |
 

@@ -4,7 +4,7 @@
 
 ## NgwKitOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface NgwKitOptions 
@@ -14,9 +14,9 @@ export interface NgwKitOptions
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [auth?](./ngw-kit.ngwkitoptions.auth.md) |  | { login: string; password: string; } | <i>(Optional)</i> |
-|  [baseUrl?](./ngw-kit.ngwkitoptions.baseurl.md) |  | string | <i>(Optional)</i> |
-|  [connector?](./ngw-kit.ngwkitoptions.connector.md) |  | NgwConnector | <i>(Optional)</i> |
-|  [pixelRadius?](./ngw-kit.ngwkitoptions.pixelradius.md) |  | number | <i>(Optional)</i> Radius for searching objects in pixels |
-|  [resourceId?](./ngw-kit.ngwkitoptions.resourceid.md) |  | [ResourceIdDef](./ngw-kit.resourceiddef.md) | <i>(Optional)</i> |
+|  [auth?](./ngw-kit.ngwkitoptions.auth.md) |  | { login: string; password: string; } | _(Optional)_ |
+|  [baseUrl?](./ngw-kit.ngwkitoptions.baseurl.md) |  | string | _(Optional)_ |
+|  [connector?](./ngw-kit.ngwkitoptions.connector.md) |  | [NgwConnector](./ngw-connector.ngwconnector.md) | _(Optional)_ |
+|  [pixelRadius?](./ngw-kit.ngwkitoptions.pixelradius.md) |  | number | _(Optional)_ Radius for searching objects in pixels |
+|  [resourceId?](./ngw-kit.ngwkitoptions.resourceid.md) |  | [ResourceIdDef](./ngw-kit.resourceiddef.md) | _(Optional)_ |
 

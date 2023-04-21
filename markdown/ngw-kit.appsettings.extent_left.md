@@ -4,7 +4,7 @@
 
 ## AppSettings.extent\_left property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 extent_left?: number;

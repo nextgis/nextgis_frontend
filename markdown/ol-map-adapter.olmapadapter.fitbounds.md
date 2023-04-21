@@ -4,7 +4,7 @@
 
 ## OlMapAdapter.fitBounds() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 fitBounds(e: LngLatBoundsArray, options?: FitOptions): void;
@@ -15,9 +15,9 @@ fitBounds(e: LngLatBoundsArray, options?: FitOptions): void;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  e | [LngLatBoundsArray](./utils.lnglatboundsarray.md) |  |
-|  options | [FitOptions](./webmap.fitoptions.md) | <i>(Optional)</i> |
+|  options | [FitOptions](./webmap.fitoptions.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

@@ -4,12 +4,12 @@
 
 ## NgwMapEvents interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface NgwMapEvents extends WebMapEvents 
 ```
-<b>Extends:</b> [WebMapEvents](./webmap.webmapevents.md)
+**Extends:** [WebMapEvents](./webmap.webmapevents.md)
 
 ## Properties
 

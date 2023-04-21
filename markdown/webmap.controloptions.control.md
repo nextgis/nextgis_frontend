@@ -4,7 +4,7 @@
 
 ## ControlOptions.control property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 control?: string;

@@ -6,7 +6,7 @@
 
 Map zoom level. From 0 to 22
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type ZoomLevel = number;

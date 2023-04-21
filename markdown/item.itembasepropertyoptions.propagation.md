@@ -4,7 +4,7 @@
 
 ## ItemBasePropertyOptions.propagation property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 propagation?: boolean;

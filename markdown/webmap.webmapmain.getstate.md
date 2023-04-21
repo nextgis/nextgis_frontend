@@ -4,12 +4,12 @@
 
 ## WebMapMain.getState() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getState(): Record<string, any>;
 ```
-<b>Returns:</b>
+**Returns:**
 
 Record&lt;string, any&gt;
 

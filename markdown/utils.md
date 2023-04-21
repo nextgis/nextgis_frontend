@@ -92,6 +92,8 @@
 |  --- | --- |
 |  [AnyJson](./utils.anyjson.md) |  |
 |  [DeepPartial](./utils.deeppartial.md) | Same as Partial<T> but goes deeper and makes Partial<T> all its properties and sub-properties. |
+|  [ExtractFeatureProperties](./utils.extractfeatureproperties.md) |  |
+|  [FeatureProperties\_](./utils.featureproperties_.md) |  |
 |  [FeatureProperties](./utils.featureproperties.md) |  |
 |  [JsonArray](./utils.jsonarray.md) |  |
 |  [LngLatArray](./utils.lnglatarray.md) | Array of two numbers representing longitude and latitude. |

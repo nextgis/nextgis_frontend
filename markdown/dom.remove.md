@@ -4,7 +4,7 @@
 
 ## remove() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function remove(element: ElementDef): void;
@@ -16,7 +16,7 @@ export declare function remove(element: ElementDef): void;
 |  --- | --- | --- |
 |  element | [ElementDef](./dom.elementdef.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

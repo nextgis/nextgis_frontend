@@ -4,7 +4,7 @@
 
 ## create() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function create(options: GeocoderOptions): Geocoder;
@@ -16,7 +16,7 @@ export declare function create(options: GeocoderOptions): Geocoder;
 |  --- | --- | --- |
 |  options | [GeocoderOptions](./geocoder.geocoderoptions.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 [Geocoder](./geocoder.geocoder.md)
 

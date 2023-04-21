@@ -4,12 +4,12 @@
 
 ## NominatimProvider class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class NominatimProvider extends BaseProvider 
 ```
-<b>Extends:</b> [BaseProvider](./geocoder.baseprovider.md)
+**Extends:** [BaseProvider](./geocoder.baseprovider.md)
 
 ## Constructors
 

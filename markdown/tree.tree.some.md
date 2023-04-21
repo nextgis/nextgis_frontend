@@ -4,7 +4,7 @@
 
 ## Tree.some() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 some(filter?: PropertyFilter | SelfFilter): boolean;
@@ -14,9 +14,9 @@ some(filter?: PropertyFilter | SelfFilter): boolean;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  filter | [PropertyFilter](./properties-filter.propertyfilter.md) \| SelfFilter | <i>(Optional)</i> |
+|  filter | [PropertyFilter](./properties-filter.propertyfilter.md) \| SelfFilter | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 boolean
 

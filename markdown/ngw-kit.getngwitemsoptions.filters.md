@@ -4,7 +4,7 @@
 
 ## GetNgwItemsOptions.filters property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 filters?: PropertiesFilter<PropertiesForNgwFilter<P>>;

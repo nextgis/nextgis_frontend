@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."file\_upload.item" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'file_upload.item': {

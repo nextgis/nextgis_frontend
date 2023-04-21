@@ -4,7 +4,7 @@
 
 ## LeafletMapAdapter.getLayerAdapter() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getLayerAdapter(name: string): Type<LayerAdapter<Map, any, any>>;
@@ -16,7 +16,7 @@ getLayerAdapter(name: string): Type<LayerAdapter<Map, any, any>>;
 |  --- | --- | --- |
 |  name | string |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Type&lt;[LayerAdapter](./webmap.layeradapter.md)<!-- -->&lt;Map, any, any&gt;&gt;
 

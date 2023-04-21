@@ -6,7 +6,7 @@
 
 Add any (style, vector, webmap) NGW layer by resource definition.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 addNgwLayer(options: NgwLayerOptions): Promise<ResourceAdapter | undefined>;
@@ -16,11 +16,11 @@ addNgwLayer(options: NgwLayerOptions): Promise<ResourceAdapter | undefined>;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | [NgwLayerOptions](./ngw-kit.ngwlayeroptions.md) | set layer identification parameters and render method. |
+|  options | NgwLayerOptions | set layer identification parameters and render method. |
 
-<b>Returns:</b>
+**Returns:**
 
-Promise&lt;[ResourceAdapter](./ngw-kit.resourceadapter.md) \| undefined&gt;
+Promise&lt;ResourceAdapter \| undefined&gt;
 
 ## Example
 

@@ -9,7 +9,7 @@
 > use mapAdapterOptions.style instead
 > 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 style?: Partial<StyleSpecification> | string;

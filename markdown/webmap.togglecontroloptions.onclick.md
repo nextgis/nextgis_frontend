@@ -6,7 +6,7 @@
 
 Set an action to execute when button clicked.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onClick?: OnToggleClick;

@@ -4,7 +4,7 @@
 
 ## MapboxglMapAdapter.createControl() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 createControl(control: MapControl, options?: CreateControlOptions): IControl;
@@ -15,9 +15,9 @@ createControl(control: MapControl, options?: CreateControlOptions): IControl;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  control | [MapControl](./webmap.mapcontrol.md) |  |
-|  options | [CreateControlOptions](./webmap.createcontroloptions.md) | <i>(Optional)</i> |
+|  options | [CreateControlOptions](./webmap.createcontroloptions.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 IControl
 

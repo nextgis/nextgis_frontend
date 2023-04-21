@@ -4,7 +4,7 @@
 
 ## isAnyJson() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function isAnyJson(val: unknown): val is AnyJson;
@@ -16,7 +16,7 @@ export declare function isAnyJson(val: unknown): val is AnyJson;
 |  --- | --- | --- |
 |  val | unknown |  |
 
-<b>Returns:</b>
+**Returns:**
 
 val is [AnyJson](./utils.anyjson.md)
 

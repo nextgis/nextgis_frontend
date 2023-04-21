@@ -4,7 +4,7 @@
 
 ## ControlledLayer.removeLayer() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 removeLayer(layer: LayerAdapter): void;
@@ -14,9 +14,9 @@ removeLayer(layer: LayerAdapter): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  layer | [LayerAdapter](./webmap.layeradapter.md) |  |
+|  layer | LayerAdapter |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

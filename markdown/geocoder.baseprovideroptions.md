@@ -4,7 +4,7 @@
 
 ## BaseProviderOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface BaseProviderOptions 
@@ -14,6 +14,6 @@ export interface BaseProviderOptions
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [label?](./geocoder.baseprovideroptions.label.md) |  | string | <i>(Optional)</i> |
-|  [searchUrl?](./geocoder.baseprovideroptions.searchurl.md) |  | string | <i>(Optional)</i> |
+|  [label?](./geocoder.baseprovideroptions.label.md) |  | string | _(Optional)_ |
+|  [searchUrl?](./geocoder.baseprovideroptions.searchurl.md) |  | string | _(Optional)_ |
 

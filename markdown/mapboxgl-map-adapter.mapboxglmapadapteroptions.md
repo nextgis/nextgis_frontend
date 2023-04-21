@@ -4,16 +4,16 @@
 
 ## MapboxglMapAdapterOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface MapboxglMapAdapterOptions extends MapOptions<Map> 
 ```
-<b>Extends:</b> [MapOptions](./webmap.mapoptions.md)<!-- -->&lt;Map
+**Extends:** [MapOptions](./webmap.mapoptions.md)<!-- -->&lt;Map&gt;
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [style?](./mapboxgl-map-adapter.mapboxglmapadapteroptions.style.md) |  | Partial&lt;StyleSpecification&gt; \| string | <i>(Optional)</i> |
+|  [style?](./mapboxgl-map-adapter.mapboxglmapadapteroptions.style.md) |  | Partial&lt;StyleSpecification&gt; \| string | _(Optional)_ |
 

@@ -4,7 +4,7 @@
 
 ## VectorAdapterOptions.onClick() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onClick?(opt: OnLayerMouseOptions<F, L>): void;
@@ -16,7 +16,7 @@ onClick?(opt: OnLayerMouseOptions<F, L>): void;
 |  --- | --- | --- |
 |  opt | [OnLayerMouseOptions](./webmap.onlayermouseoptions.md)<!-- -->&lt;F, L&gt; |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

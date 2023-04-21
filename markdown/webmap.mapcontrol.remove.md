@@ -4,12 +4,12 @@
 
 ## MapControl.remove() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 remove?(): void;
 ```
-<b>Returns:</b>
+**Returns:**
 
 void
 

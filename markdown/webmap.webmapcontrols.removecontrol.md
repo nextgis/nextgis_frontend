@@ -4,7 +4,7 @@
 
 ## WebMapControls.removeControl() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 removeControl(control: C): void;
@@ -16,7 +16,7 @@ removeControl(control: C): void;
 |  --- | --- | --- |
 |  control | C | Instance of WEB-GIS framework control. What is returned by the [create](./webmap.webmapcontrols.createcontrol.md) method |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

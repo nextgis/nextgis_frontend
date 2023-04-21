@@ -6,7 +6,7 @@
 
 Check if given layer is baselayer
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 isBaseLayer(layerDef: LayerDef): boolean | undefined;
@@ -18,7 +18,7 @@ isBaseLayer(layerDef: LayerDef): boolean | undefined;
 |  --- | --- | --- |
 |  layerDef | [LayerDef](./webmap.layerdef.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 boolean \| undefined
 

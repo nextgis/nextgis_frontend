@@ -6,12 +6,12 @@
 
 Displaying the \[NgwMap\](ngw-map-api) using the \[LeafletMapAdapter\](leaflet-map-adapter-api)
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 declare class NgwLeaflet extends NgwMap<Map> 
 ```
-<b>Extends:</b> NgwMap&lt;Map
+**Extends:** [NgwMap](./ngw-map.ngwmap.md)<!-- -->&lt;Map&gt;
 
 ## Example
 

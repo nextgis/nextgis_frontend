@@ -4,7 +4,7 @@
 
 ## FeatureItem.geom property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 geom: G;

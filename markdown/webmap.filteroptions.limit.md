@@ -6,7 +6,7 @@
 
 Limit (paginated) - max number of entities should be taken.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 limit?: number;

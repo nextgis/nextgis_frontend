@@ -4,7 +4,7 @@
 
 ## LocationEvent.lngLat property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 lngLat: LngLatArray;

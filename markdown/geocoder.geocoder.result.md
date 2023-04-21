@@ -4,7 +4,7 @@
 
 ## Geocoder.result() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 result(item: SearchItem): CancelablePromise<any>;
@@ -16,7 +16,7 @@ result(item: SearchItem): CancelablePromise<any>;
 |  --- | --- | --- |
 |  item | [SearchItem](./geocoder.searchitem.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;any&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;any&gt;
 

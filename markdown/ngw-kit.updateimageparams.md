@@ -4,7 +4,7 @@
 
 ## updateImageParams() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function updateImageParams(params: Record<string, any>, resourceId: number | number[]): Record<string, any>;
@@ -17,7 +17,7 @@ export declare function updateImageParams(params: Record<string, any>, resourceI
 |  params | Record&lt;string, any&gt; |  |
 |  resourceId | number \| number\[\] |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Record&lt;string, any&gt;
 

@@ -4,12 +4,12 @@
 
 ## ResourceStore.getStore() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getStore(): Promise<ResourceStoreItem<P>[] | undefined>;
 ```
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[ResourceStoreItem](./ngw-connector.resourcestoreitem.md)<!-- -->&lt;P&gt;\[\] \| undefined&gt;
 

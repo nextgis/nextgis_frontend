@@ -4,7 +4,7 @@
 
 ## NgwUploader.createRaster() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 createRaster(options: CreateRasterOptions): CancelablePromise<CreatedResource>;
@@ -16,7 +16,7 @@ createRaster(options: CreateRasterOptions): CancelablePromise<CreatedResource>;
 |  --- | --- | --- |
 |  options | [CreateRasterOptions](./ngw-uploader.createrasteroptions.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;[CreatedResource](./ngw-connector.createdresource.md)<!-- -->&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;[CreatedResource](./ngw-connector.createdresource.md)<!-- -->&gt;
 

@@ -4,7 +4,7 @@
 
 ## NgwLayersList.include property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 include: Array<ResourceAdapter | string>;

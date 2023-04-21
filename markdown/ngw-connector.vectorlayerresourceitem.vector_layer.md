@@ -4,7 +4,7 @@
 
 ## VectorLayerResourceItem.vector\_layer property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 vector_layer: VectorLayer;

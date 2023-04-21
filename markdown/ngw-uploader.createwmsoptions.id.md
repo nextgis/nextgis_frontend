@@ -9,7 +9,7 @@
 > use [CreateWmsOptions.resourceId](./ngw-uploader.createwmsoptions.resourceid.md) instead
 > 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 id?: number;

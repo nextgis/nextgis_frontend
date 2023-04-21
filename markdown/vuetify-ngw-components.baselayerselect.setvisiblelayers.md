@@ -4,7 +4,7 @@
 
 ## BaselayerSelect.setVisibleLayers() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 setVisibleLayers(active: string, old: string): void;
@@ -17,7 +17,7 @@ setVisibleLayers(active: string, old: string): void;
 |  active | string |  |
 |  old | string |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

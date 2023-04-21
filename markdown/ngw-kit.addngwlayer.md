@@ -9,7 +9,7 @@
 > use [createNgwLayerAdapter()](./ngw-kit.createngwlayeradapter.md) instead
 > 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function addNgwLayer(options: NgwLayerOptions, webMap: WebMap, connector: NgwConnector): Promise<Type<ResourceAdapter> | undefined>;
@@ -21,9 +21,9 @@ export declare function addNgwLayer(options: NgwLayerOptions, webMap: WebMap, co
 |  --- | --- | --- |
 |  options | [NgwLayerOptions](./ngw-kit.ngwlayeroptions.md) |  |
 |  webMap | [WebMap](./webmap.webmap.md) |  |
-|  connector | NgwConnector |  |
+|  connector | [NgwConnector](./ngw-connector.ngwconnector.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[Type](./utils.type.md)<!-- -->&lt;[ResourceAdapter](./ngw-kit.resourceadapter.md)<!-- -->&gt; \| undefined&gt;
 

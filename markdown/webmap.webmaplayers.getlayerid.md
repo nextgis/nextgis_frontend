@@ -6,7 +6,7 @@
 
 Helper method to return added layer identificator by any definition type.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getLayerId(layerDef: LayerDef): string | undefined;
@@ -18,7 +18,7 @@ getLayerId(layerDef: LayerDef): string | undefined;
 |  --- | --- | --- |
 |  layerDef | [LayerDef](./webmap.layerdef.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 string \| undefined
 

@@ -6,7 +6,7 @@
 
 Max zoom to cluster points on
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 clusterMaxZoom?: number;

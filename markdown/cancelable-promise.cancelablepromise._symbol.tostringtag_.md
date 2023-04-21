@@ -4,7 +4,7 @@
 
 ## CancelablePromise.\[Symbol.toStringTag\] property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 readonly [Symbol.toStringTag]: string;

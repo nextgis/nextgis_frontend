@@ -4,7 +4,7 @@
 
 ## WmsAdapterOptions.format property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 format?: 'image/png' | 'image/jpeg' | string;

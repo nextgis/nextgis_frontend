@@ -4,7 +4,7 @@
 
 ## isPaintCallback() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function isPaintCallback(paint: Paint): paint is GetPaintCallback;
@@ -16,7 +16,7 @@ export declare function isPaintCallback(paint: Paint): paint is GetPaintCallback
 |  --- | --- | --- |
 |  paint | [Paint](./paint.paint.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 paint is [GetPaintCallback](./paint.getpaintcallback.md)
 

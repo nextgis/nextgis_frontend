@@ -4,7 +4,7 @@
 
 ## OnLayerMouseOptions.event property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 event: MapClickEvent;

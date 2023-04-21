@@ -4,7 +4,7 @@
 
 ## NgwKit.addClassAdapters() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static addClassAdapters(cls: string, adapter: GetClassAdapter): void;
@@ -17,7 +17,7 @@ static addClassAdapters(cls: string, adapter: GetClassAdapter): void;
 |  cls | string |  |
 |  adapter | [GetClassAdapter](./ngw-kit.getclassadapter.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

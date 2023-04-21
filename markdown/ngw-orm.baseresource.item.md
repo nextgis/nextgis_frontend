@@ -4,7 +4,7 @@
 
 ## BaseResource.item property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static item?: ResourceItem;

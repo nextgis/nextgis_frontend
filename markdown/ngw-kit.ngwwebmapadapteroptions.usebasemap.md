@@ -6,7 +6,7 @@
 
 Add baselayers from ngw webmap basemap settings
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 useBasemap?: boolean;

@@ -4,7 +4,7 @@
 
 ## PaintType type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type PaintType = 'circle' | 'path' | 'pin' | 'icon' | 'get-paint';

@@ -6,12 +6,12 @@
 
 Gets metadata args storage.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function getMetadataArgsStorage(): MetadataArgsStorage;
 ```
-<b>Returns:</b>
+**Returns:**
 
 MetadataArgsStorage
 

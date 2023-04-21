@@ -4,7 +4,7 @@
 
 ## NgwWebmapItem.emitter property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 readonly emitter: EventEmitter;

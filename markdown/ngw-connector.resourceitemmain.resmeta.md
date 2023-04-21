@@ -4,7 +4,7 @@
 
 ## ResourceItemMain.resmeta property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 resmeta: Resmeta;

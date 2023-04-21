@@ -4,7 +4,7 @@
 
 ## VectorLayer.coordinates property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 get coordinates(): G['coordinates'];

@@ -4,7 +4,7 @@
 
 ## MapboxglMapAdapter.emitter property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 emitter: EventEmitter;

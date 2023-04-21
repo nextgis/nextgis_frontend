@@ -4,7 +4,7 @@
 
 ## TitleToggle.on property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 on: string;

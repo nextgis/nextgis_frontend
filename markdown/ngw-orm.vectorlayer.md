@@ -4,12 +4,12 @@
 
 ## VectorLayer class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class VectorLayer<G extends Geometry = Geometry, P extends GeoJsonProperties = GeoJsonProperties> extends BaseResource 
 ```
-<b>Extends:</b> [BaseResource](./ngw-orm.baseresource.md)
+**Extends:** [BaseResource](./ngw-orm.baseresource.md)
 
 ## Constructors
 
@@ -24,7 +24,7 @@ export declare class VectorLayer<G extends Geometry = Geometry, P extends GeoJso
 |  [coordinates](./ngw-orm.vectorlayer.coordinates.md) |  | G\['coordinates'\] |  |
 |  [geom](./ngw-orm.vectorlayer.geom.md) |  | G |  |
 |  [geometryType](./ngw-orm.vectorlayer.geometrytype.md) | <code>static</code> | [GeometryType](./ngw-connector.geometrytype.md) |  |
-|  [id?](./ngw-orm.vectorlayer.id.md) |  | number | <i>(Optional)</i> |
+|  [id?](./ngw-orm.vectorlayer.id.md) |  | number | _(Optional)_ |
 
 ## Methods
 

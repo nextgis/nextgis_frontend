@@ -4,7 +4,7 @@
 
 ## Events.setEventStatus() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 setEventStatus(event: keyof E, status: boolean): void;
@@ -17,7 +17,7 @@ setEventStatus(event: keyof E, status: boolean): void;
 |  event | keyof E |  |
 |  status | boolean |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

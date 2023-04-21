@@ -9,7 +9,7 @@
 > - use [NgwUploader.createRaster()](./ngw-uploader.ngwuploader.createraster.md) instead
 > 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 createResource(meta: FileMeta, name: string, options: RasterUploadOptions): CancelablePromise<CreatedResource> | undefined;
@@ -23,7 +23,7 @@ createResource(meta: FileMeta, name: string, options: RasterUploadOptions): Canc
 |  name | string |  |
 |  options | [RasterUploadOptions](./ngw-uploader.rasteruploadoptions.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;[CreatedResource](./ngw-connector.createdresource.md)<!-- -->&gt; \| undefined
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;[CreatedResource](./ngw-connector.createdresource.md)<!-- -->&gt; \| undefined
 

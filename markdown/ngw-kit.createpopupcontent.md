@@ -4,7 +4,7 @@
 
 ## createPopupContent() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function createPopupContent(feature: Feature, item?: ResourceItem): HTMLElement | string;
@@ -15,9 +15,9 @@ export declare function createPopupContent(feature: Feature, item?: ResourceItem
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  feature | Feature |  |
-|  item | [ResourceItem](./ngw-connector.resourceitem.md) | <i>(Optional)</i> |
+|  item | [ResourceItem](./ngw-connector.resourceitem.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 HTMLElement \| string
 

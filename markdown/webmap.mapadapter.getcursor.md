@@ -4,12 +4,12 @@
 
 ## MapAdapter.getCursor() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getCursor?(): string | undefined;
 ```
-<b>Returns:</b>
+**Returns:**
 
 string \| undefined
 

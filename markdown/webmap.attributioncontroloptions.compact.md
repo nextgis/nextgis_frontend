@@ -6,7 +6,7 @@
 
 If true force a compact attribution that shows the full attribution on mouse hover, or if false force the full attribution control.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 compact?: boolean;

@@ -4,7 +4,7 @@
 
 ## CancelablePromise.CancelError property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static CancelError: typeof CancelError;

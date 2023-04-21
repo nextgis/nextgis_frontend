@@ -4,7 +4,7 @@
 
 ## WmsAdapterOptions.tileSize property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 tileSize?: number;

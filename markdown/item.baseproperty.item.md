@@ -4,7 +4,7 @@
 
 ## BaseProperty.item property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 item: I;

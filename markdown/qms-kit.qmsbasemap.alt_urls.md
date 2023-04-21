@@ -4,7 +4,7 @@
 
 ## QmsBasemap.alt\_urls property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 alt_urls?: string[];

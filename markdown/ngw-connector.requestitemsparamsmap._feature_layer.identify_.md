@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."feature\_layer.identify" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'feature_layer.identify': null;

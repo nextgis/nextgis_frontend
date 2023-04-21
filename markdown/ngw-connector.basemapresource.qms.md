@@ -6,7 +6,7 @@
 
 Parse to qms-kit.BasemapQms
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 qms: string;

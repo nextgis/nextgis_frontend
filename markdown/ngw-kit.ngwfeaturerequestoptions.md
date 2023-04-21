@@ -4,19 +4,19 @@
 
 ## NgwFeatureRequestOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface NgwFeatureRequestOptions<P extends FeatureProperties = FeatureProperties> extends FilterOptions<P> 
 ```
-<b>Extends:</b> [FilterOptions](./webmap.filteroptions.md)
+**Extends:** [FilterOptions](./webmap.filteroptions.md)<!-- -->&lt;P&gt;
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [extensions?](./ngw-kit.ngwfeaturerequestoptions.extensions.md) |  | Extensions\[\] \| string\[\] \| null \| false | <i>(Optional)</i> |
-|  [geom?](./ngw-kit.ngwfeaturerequestoptions.geom.md) |  | boolean | <i>(Optional)</i> |
-|  [geomFormat?](./ngw-kit.ngwfeaturerequestoptions.geomformat.md) |  | [GeomFormat](./ngw-kit.geomformat.md) | <i>(Optional)</i> |
-|  [srs?](./ngw-kit.ngwfeaturerequestoptions.srs.md) |  | number | <i>(Optional)</i> |
+|  [extensions?](./ngw-kit.ngwfeaturerequestoptions.extensions.md) |  | Extensions\[\] \| string\[\] \| null \| false | _(Optional)_ |
+|  [geom?](./ngw-kit.ngwfeaturerequestoptions.geom.md) |  | boolean | _(Optional)_ |
+|  [geomFormat?](./ngw-kit.ngwfeaturerequestoptions.geomformat.md) |  | [GeomFormat](./ngw-kit.geomformat.md) | _(Optional)_ |
+|  [srs?](./ngw-kit.ngwfeaturerequestoptions.srs.md) |  | number | _(Optional)_ |
 

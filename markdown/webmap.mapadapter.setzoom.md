@@ -4,7 +4,7 @@
 
 ## MapAdapter.setZoom() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 setZoom(zoom: number): void;
@@ -16,7 +16,7 @@ setZoom(zoom: number): void;
 |  --- | --- | --- |
 |  zoom | number |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

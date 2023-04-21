@@ -6,7 +6,7 @@
 
 The initial zoom level of the map (0-24).
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 zoom?: number;

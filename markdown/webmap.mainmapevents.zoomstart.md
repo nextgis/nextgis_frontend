@@ -6,7 +6,7 @@
 
 Fired when the map zoom is about to change.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 zoomstart: MapAdapter;

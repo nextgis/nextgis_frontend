@@ -4,7 +4,7 @@
 
 ## TreeLayer.layer\_transparency property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 layer_transparency: number;

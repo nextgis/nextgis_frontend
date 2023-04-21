@@ -4,7 +4,7 @@
 
 ## MapAdapter.createToggleControl() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 createToggleControl?(options: ToggleControlOptions): C;
@@ -16,7 +16,7 @@ createToggleControl?(options: ToggleControlOptions): C;
 |  --- | --- | --- |
 |  options | [ToggleControlOptions](./webmap.togglecontroloptions.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 C
 

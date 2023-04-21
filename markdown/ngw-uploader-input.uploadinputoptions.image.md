@@ -4,7 +4,7 @@
 
 ## UploadInputOptions.image property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 image?: boolean;

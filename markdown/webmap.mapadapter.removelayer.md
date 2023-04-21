@@ -6,7 +6,7 @@
 
 Remove layer from Map
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 removeLayer(layer: L): any;
@@ -18,7 +18,7 @@ removeLayer(layer: L): any;
 |  --- | --- | --- |
 |  layer | L |  |
 
-<b>Returns:</b>
+**Returns:**
 
 any
 

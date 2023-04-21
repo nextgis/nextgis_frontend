@@ -4,7 +4,7 @@
 
 ## EmitterStatus.state property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 state: 'begin' | 'end' | 'progress' | 'error';

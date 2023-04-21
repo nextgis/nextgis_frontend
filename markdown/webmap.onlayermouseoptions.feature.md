@@ -4,7 +4,7 @@
 
 ## OnLayerMouseOptions.feature property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 feature?: F;

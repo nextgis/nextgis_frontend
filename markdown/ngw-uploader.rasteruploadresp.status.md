@@ -4,7 +4,7 @@
 
 ## RasterUploadResp.status property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 status?: number;

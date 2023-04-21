@@ -4,7 +4,7 @@
 
 ## NgwMap.fetchNgwLayerFeatures() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 fetchNgwLayerFeatures<G extends Geometry | null = Geometry, P extends FeatureProperties = FeatureProperties>(options: Omit<FetchNgwItemsOptions<P>, 'connector'>): CancelablePromise<FeatureCollection<G, P>>;
@@ -14,9 +14,9 @@ fetchNgwLayerFeatures<G extends Geometry | null = Geometry, P extends FeaturePro
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | Omit&lt;[FetchNgwItemsOptions](./ngw-kit.fetchngwitemsoptions.md)<!-- -->&lt;P&gt;, 'connector'&gt; |  |
+|  options | Omit&lt;FetchNgwItemsOptions&lt;P&gt;, 'connector'&gt; |  |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;FeatureCollection&lt;G, P&gt;&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;FeatureCollection&lt;G, P&gt;&gt;
 

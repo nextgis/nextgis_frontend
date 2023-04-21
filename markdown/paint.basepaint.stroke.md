@@ -4,7 +4,7 @@
 
 ## BasePaint.stroke property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 stroke?: boolean;

@@ -4,7 +4,7 @@
 
 ## PopupOptions.popupContent property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 popupContent?: string | HTMLElement;

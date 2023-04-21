@@ -5,7 +5,7 @@
 ## ProgressEvents.start property
 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 start: any;

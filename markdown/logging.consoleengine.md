@@ -4,12 +4,12 @@
 
 ## ConsoleEngine class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class ConsoleEngine<D = null> implements LogEngine<D> 
 ```
-<b>Implements:</b> [LogEngine](./logging.logengine.md)
+**Implements:** [LogEngine](./logging.logengine.md)<!-- -->&lt;D&gt;
 
 ## Constructors
 

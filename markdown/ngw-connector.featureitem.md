@@ -4,7 +4,7 @@
 
 ## FeatureItem interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface FeatureItem<F = FeatureProperties, G extends Geometry | string = Geometry> 

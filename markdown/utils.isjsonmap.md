@@ -4,7 +4,7 @@
 
 ## isJsonMap() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function isJsonMap(val: unknown): val is JsonMap;
@@ -16,7 +16,7 @@ export declare function isJsonMap(val: unknown): val is JsonMap;
 |  --- | --- | --- |
 |  val | unknown |  |
 
-<b>Returns:</b>
+**Returns:**
 
 val is [JsonMap](./utils.jsonmap.md)
 

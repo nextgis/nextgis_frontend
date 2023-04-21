@@ -4,7 +4,7 @@
 
 ## WmsClientConnection interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface WmsClientConnection 
@@ -14,9 +14,9 @@ export interface WmsClientConnection
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [capcache?](./ngw-connector.wmsclientconnection.capcache.md) |  | string | <i>(Optional)</i> If equal query - query capabilities from service |
-|  [password?](./ngw-connector.wmsclientconnection.password.md) |  | string | <i>(Optional)</i> Password to connect to service |
+|  [capcache?](./ngw-connector.wmsclientconnection.capcache.md) |  | string | _(Optional)_ If equal query - query capabilities from service |
+|  [password?](./ngw-connector.wmsclientconnection.password.md) |  | string | _(Optional)_ Password to connect to service |
 |  [url](./ngw-connector.wmsclientconnection.url.md) |  | string | WMS service url |
-|  [username?](./ngw-connector.wmsclientconnection.username.md) |  | string | <i>(Optional)</i> User name to connect to service |
-|  [version?](./ngw-connector.wmsclientconnection.version.md) |  | string | <i>(Optional)</i> WMS version |
+|  [username?](./ngw-connector.wmsclientconnection.username.md) |  | string | _(Optional)_ User name to connect to service |
+|  [version?](./ngw-connector.wmsclientconnection.version.md) |  | string | _(Optional)_ WMS version |
 

@@ -5,7 +5,7 @@
 ## WebMapEvents."layer:select" property
 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'layer:select': OnLayerSelectOptions;

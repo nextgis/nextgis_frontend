@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."pyramid.cors" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'pyramid.cors': null;

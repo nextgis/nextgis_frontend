@@ -6,7 +6,7 @@
 
 Parameter added when forming a request for layer data. This is needed if you want to access tile pixel data. Refer to [CORS Settings](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin) for valid String values.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 crossOrigin?: 'anonymous';

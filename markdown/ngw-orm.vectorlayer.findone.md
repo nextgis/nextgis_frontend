@@ -6,7 +6,7 @@
 
 Finds first entity that matches given conditions.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static findOne<T extends VectorLayer>(this: ObjectType<T>, optionsOrConditions?: number | FindOneOptions<T> | FindConditions<T>, maybeOptions?: FindOneOptions<T>): Promise<T | undefined>;
@@ -17,10 +17,10 @@ static findOne<T extends VectorLayer>(this: ObjectType<T>, optionsOrConditions?:
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  this | ObjectType&lt;T&gt; |  |
-|  optionsOrConditions | number \| FindOneOptions&lt;T&gt; \| FindConditions&lt;T&gt; | <i>(Optional)</i> |
-|  maybeOptions | FindOneOptions&lt;T&gt; | <i>(Optional)</i> |
+|  optionsOrConditions | number \| FindOneOptions&lt;T&gt; \| FindConditions&lt;T&gt; | _(Optional)_ |
+|  maybeOptions | FindOneOptions&lt;T&gt; | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;T \| undefined&gt;
 

@@ -6,7 +6,7 @@
 
 Resource identifier which will be WMS layer datasource. Supported types are: vector layer style, raster style, WMS layer.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 resource_id: number;

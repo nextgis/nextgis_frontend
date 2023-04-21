@@ -4,7 +4,7 @@
 
 ## getImageAdapterOptions() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function getImageAdapterOptions({ resourceId, baseUrl, nd, headers, }: GetImageAdapterOptionsParams): ImageAdapterOptions;
@@ -16,7 +16,7 @@ export declare function getImageAdapterOptions({ resourceId, baseUrl, nd, header
 |  --- | --- | --- |
 |  { resourceId, baseUrl, nd, headers, } | [GetImageAdapterOptionsParams](./ngw-kit.getimageadapteroptionsparams.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 [ImageAdapterOptions](./webmap.imageadapteroptions.md)
 

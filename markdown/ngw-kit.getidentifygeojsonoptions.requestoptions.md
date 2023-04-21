@@ -4,7 +4,7 @@
 
 ## GetIdentifyGeoJsonOptions.requestOptions property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 requestOptions?: NgwFeatureRequestOptions<P>;

@@ -4,12 +4,12 @@
 
 ## NgwWebmapItem.bringToFront() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 bringToFront(): void;
 ```
-<b>Returns:</b>
+**Returns:**
 
 void
 

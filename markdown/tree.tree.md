@@ -4,10 +4,10 @@
 
 ## Tree class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export declare class Tree<TREE_ITEM = any> 
+export declare class Tree<T extends DefaultTreeItem | undefined = any> 
 ```
 
 ## Constructors
@@ -20,8 +20,8 @@ export declare class Tree<TREE_ITEM = any>
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [\_parent?](./tree.tree._parent.md) | <code>protected</code> | [Tree](./tree.tree.md)<!-- -->&lt;TREE\_ITEM&gt; | <i>(Optional)</i> |
-|  [children](./tree.tree.children.md) |  | [Tree](./tree.tree.md)<!-- -->&lt;TREE\_ITEM&gt;\[\] |  |
+|  [\_parent?](./tree.tree._parent.md) | <code>protected</code> | [Tree](./tree.tree.md)<!-- -->&lt;T&gt; | _(Optional)_ |
+|  [children](./tree.tree.children.md) |  | [Tree](./tree.tree.md)<!-- -->&lt;T&gt;\[\] |  |
 |  [item](./tree.tree.item.md) |  | DefaultTreeItem |  |
 |  [relation](./tree.tree.relation.md) |  | TreeRelation |  |
 

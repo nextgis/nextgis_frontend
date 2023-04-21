@@ -6,12 +6,12 @@
 
 zoom out the map by one quantile of the current adapter
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 zoomOut?(): void;
 ```
-<b>Returns:</b>
+**Returns:**
 
 void
 

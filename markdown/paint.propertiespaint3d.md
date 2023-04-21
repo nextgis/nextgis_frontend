@@ -4,7 +4,7 @@
 
 ## PropertiesPaint3D type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type PropertiesPaint3D<P extends Properties = Properties> = [
@@ -12,5 +12,5 @@ export declare type PropertiesPaint3D<P extends Properties = Properties> = [
     ...PropertyPaint<P>[]
 ];
 ```
-<b>References:</b> [VectorAdapterLayerPaint3D](./paint.vectoradapterlayerpaint3d.md)<!-- -->, [PropertyPaint](./paint.propertypaint.md)
+**References:** [VectorAdapterLayerPaint3D](./paint.vectoradapterlayerpaint3d.md)<!-- -->, [PropertyPaint](./paint.propertypaint.md)
 

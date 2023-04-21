@@ -4,12 +4,12 @@
 
 ## Cache\_2.clean() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 clean(): void;
 ```
-<b>Returns:</b>
+**Returns:**
 
 void
 

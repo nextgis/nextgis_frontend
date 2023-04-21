@@ -6,7 +6,7 @@
 
 List of controls that will be initialized when creating a map instance. It can be defined as a string, then points to the corresponding entry in the \[controlAdapters\](webmap-api\#MapAdapter).
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 controls?: Array<keyof MapControls | C>;

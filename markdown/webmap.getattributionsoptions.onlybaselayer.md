@@ -4,7 +4,7 @@
 
 ## GetAttributionsOptions.onlyBaselayer property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onlyBaselayer?: boolean;

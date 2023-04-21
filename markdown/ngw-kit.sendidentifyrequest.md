@@ -4,7 +4,7 @@
 
 ## sendIdentifyRequest() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function sendIdentifyRequest(ev: MapClickEvent, options: IdentifyRequestOptions): CancelablePromise<FeatureLayersIdentify>;
@@ -17,7 +17,7 @@ export declare function sendIdentifyRequest(ev: MapClickEvent, options: Identify
 |  ev | [MapClickEvent](./webmap.mapclickevent.md) |  |
 |  options | [IdentifyRequestOptions](./ngw-kit.identifyrequestoptions.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;[FeatureLayersIdentify](./ngw-connector.featurelayersidentify.md)<!-- -->&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;[FeatureLayersIdentify](./ngw-connector.featurelayersidentify.md)<!-- -->&gt;
 

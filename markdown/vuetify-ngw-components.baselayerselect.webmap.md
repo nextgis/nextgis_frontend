@@ -4,7 +4,7 @@
 
 ## BaselayerSelect.webMap property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 get webMap(): WebMap;

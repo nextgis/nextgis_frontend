@@ -4,7 +4,7 @@
 
 ## VectorLayer.geometry\_type property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 geometry_type: GeometryType;

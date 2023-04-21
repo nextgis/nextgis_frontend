@@ -4,7 +4,7 @@
 
 ## NgwConnector.getUserInfo() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getUserInfo(credentials?: Credentials, options?: RequestOptions): CancelablePromise<UserInfo>;
@@ -14,10 +14,10 @@ getUserInfo(credentials?: Credentials, options?: RequestOptions): CancelableProm
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  credentials | [Credentials](./ngw-connector.credentials.md) | <i>(Optional)</i> |
-|  options | [RequestOptions](./ngw-connector.requestoptions.md) | <i>(Optional)</i> |
+|  credentials | [Credentials](./ngw-connector.credentials.md) | _(Optional)_ |
+|  options | [RequestOptions](./ngw-connector.requestoptions.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;[UserInfo](./ngw-connector.userinfo.md)<!-- -->&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;[UserInfo](./ngw-connector.userinfo.md)<!-- -->&gt;
 

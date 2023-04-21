@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."qgis.vector\_style\_qml" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'qgis.vector_style_qml': {

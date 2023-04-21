@@ -4,7 +4,7 @@
 
 ## GetNgwItemsOptions.paramList property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 paramList?: [string, any][];

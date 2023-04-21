@@ -4,7 +4,7 @@
 
 ## DeleteRequestItemsResponseMap."feature\_layer.feature.item" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'feature_layer.feature.item': any;

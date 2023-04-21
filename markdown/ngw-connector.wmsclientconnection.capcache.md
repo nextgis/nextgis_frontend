@@ -6,7 +6,7 @@
 
 If equal query - query capabilities from service
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 capcache?: string;

@@ -4,7 +4,7 @@
 
 ## CompanyLogoOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface CompanyLogoOptions 
@@ -14,6 +14,6 @@ export interface CompanyLogoOptions
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [cssClass?](./ngw-kit.companylogooptions.cssclass.md) |  | string | <i>(Optional)</i> |
-|  [padding?](./ngw-kit.companylogooptions.padding.md) |  | string | <i>(Optional)</i> |
+|  [cssClass?](./ngw-kit.companylogooptions.cssclass.md) |  | string | _(Optional)_ |
+|  [padding?](./ngw-kit.companylogooptions.padding.md) |  | string | _(Optional)_ |
 

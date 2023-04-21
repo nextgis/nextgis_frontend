@@ -6,7 +6,7 @@
 
 Add baselayer from OsmLayerAdapter if no \[webmap\_resource\].basemap\_webmap has been set.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 defaultBasemap?: boolean;

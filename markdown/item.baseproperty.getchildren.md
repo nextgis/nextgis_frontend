@@ -4,12 +4,12 @@
 
 ## BaseProperty.getChildren() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getChildren(): Item<ItemOptions>[];
 ```
-<b>Returns:</b>
+**Returns:**
 
 [Item](./item.item.md)<!-- -->&lt;[ItemOptions](./item.itemoptions.md)<!-- -->&gt;\[\]
 

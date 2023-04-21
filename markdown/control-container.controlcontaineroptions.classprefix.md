@@ -4,7 +4,7 @@
 
 ## ControlContainerOptions.classPrefix property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 classPrefix?: string;

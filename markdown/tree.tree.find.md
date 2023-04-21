@@ -4,19 +4,19 @@
 
 ## Tree.find() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-find(filter?: PropertyFilter | SelfFilter<TREE_ITEM>): Tree;
+find(filter?: PropertyFilter | SelfFilter<T>): Tree;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  filter | [PropertyFilter](./properties-filter.propertyfilter.md) \| SelfFilter&lt;TREE\_ITEM&gt; | <i>(Optional)</i> |
+|  filter | [PropertyFilter](./properties-filter.propertyfilter.md) \| SelfFilter&lt;T&gt; | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 [Tree](./tree.tree.md)
 

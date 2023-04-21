@@ -4,7 +4,7 @@
 
 ## LayerAdapters.COG property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 COG: MainLayerAdapter<any, any, RasterAdapterOptions>;

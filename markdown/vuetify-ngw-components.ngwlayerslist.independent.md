@@ -4,7 +4,7 @@
 
 ## NgwLayersList.independent property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 get independent(): boolean;

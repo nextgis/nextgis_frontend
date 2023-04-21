@@ -4,7 +4,7 @@
 
 ## BaselayerSelect.emptyValue property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 emptyValue: string;

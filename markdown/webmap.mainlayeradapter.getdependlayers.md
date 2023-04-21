@@ -4,12 +4,12 @@
 
 ## MainLayerAdapter.getDependLayers() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getDependLayers?(): L[];
 ```
-<b>Returns:</b>
+**Returns:**
 
 L\[\]
 

@@ -4,7 +4,7 @@
 
 ## NgwMapContextInterface.ngwMap property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 ngwMap: NgwMap;

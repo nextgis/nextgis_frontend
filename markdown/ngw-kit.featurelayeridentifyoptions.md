@@ -4,18 +4,18 @@
 
 ## FeatureLayerIdentifyOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface FeatureLayerIdentifyOptions extends NgwRequestOptions 
 ```
-<b>Extends:</b> [NgwRequestOptions](./ngw-kit.ngwrequestoptions.md)
+**Extends:** [NgwRequestOptions](./ngw-kit.ngwrequestoptions.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [connector](./ngw-kit.featurelayeridentifyoptions.connector.md) |  | NgwConnector |  |
+|  [connector](./ngw-kit.featurelayeridentifyoptions.connector.md) |  | [NgwConnector](./ngw-connector.ngwconnector.md) |  |
 |  [geom](./ngw-kit.featurelayeridentifyoptions.geom.md) |  | Feature&lt;Polygon&gt; \| Polygon \| Position\[\] |  |
 |  [layers](./ngw-kit.featurelayeridentifyoptions.layers.md) |  | number\[\] |  |
 

@@ -4,7 +4,7 @@
 
 ## ChangeEvent interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface ChangeEvent<V = any, O extends ItemBasePropertyOptions<V> = ItemBasePropertyOptions<V>> 

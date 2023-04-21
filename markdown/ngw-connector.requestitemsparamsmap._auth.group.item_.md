@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."auth.group.item" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'auth.group.item': {

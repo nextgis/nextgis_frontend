@@ -4,7 +4,7 @@
 
 ## MapControl interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface MapControl<M = any> 
@@ -16,5 +16,5 @@ export interface MapControl<M = any>
 |  --- | --- |
 |  [onAdd(map)](./webmap.mapcontrol.onadd.md) |  |
 |  [onRemove(map)](./webmap.mapcontrol.onremove.md) |  |
-|  [remove()?](./webmap.mapcontrol.remove.md) | <i>(Optional)</i> |
+|  [remove()?](./webmap.mapcontrol.remove.md) | _(Optional)_ |
 

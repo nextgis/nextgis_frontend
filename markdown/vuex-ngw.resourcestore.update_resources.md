@@ -4,7 +4,7 @@
 
 ## ResourceStore.UPDATE\_RESOURCES() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 protected UPDATE_RESOURCES(resources?: Record<ResourceDef, number>): void;
@@ -14,9 +14,9 @@ protected UPDATE_RESOURCES(resources?: Record<ResourceDef, number>): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  resources | Record&lt;ResourceDef, number&gt; | <i>(Optional)</i> |
+|  resources | Record&lt;ResourceDef, number&gt; | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

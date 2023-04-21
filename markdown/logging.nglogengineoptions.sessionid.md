@@ -6,7 +6,7 @@
 
 Add `sessionId` to each log. Use number to set random generated string length
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 sessionId?: NgLogEngineSessionId;

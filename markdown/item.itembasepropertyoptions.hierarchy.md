@@ -4,7 +4,7 @@
 
 ## ItemBasePropertyOptions.hierarchy property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 hierarchy?: boolean;

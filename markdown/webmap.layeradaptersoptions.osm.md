@@ -4,7 +4,7 @@
 
 ## LayerAdaptersOptions.OSM property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 OSM: RasterAdapterOptions;

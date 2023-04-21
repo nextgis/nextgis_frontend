@@ -4,7 +4,7 @@
 
 ## NgwMapOptions.whitlabel property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 whitlabel?: boolean;

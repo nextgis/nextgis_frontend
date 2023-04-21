@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."pyramid.pkg\_version" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'pyramid.pkg_version': null;

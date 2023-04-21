@@ -4,7 +4,7 @@
 
 ## Cache\_2 class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class Cache<V = any, O extends Record<string, unknown> = Record<string, unknown>> 

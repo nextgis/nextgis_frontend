@@ -4,20 +4,20 @@
 
 ## Model3DOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface Model3DOptions extends RasterAdapterOptions 
 ```
-<b>Extends:</b> [RasterAdapterOptions](./webmap.rasteradapteroptions.md)
+**Extends:** [RasterAdapterOptions](./webmap.rasteradapteroptions.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [height?](./webmap.model3doptions.height.md) |  | number | <i>(Optional)</i> |
+|  [height?](./webmap.model3doptions.height.md) |  | number | _(Optional)_ |
 |  [lat](./webmap.model3doptions.lat.md) |  | number |  |
 |  [lon](./webmap.model3doptions.lon.md) |  | number |  |
-|  [rotate?](./webmap.model3doptions.rotate.md) |  | number | <i>(Optional)</i> |
-|  [scale?](./webmap.model3doptions.scale.md) |  | number | <i>(Optional)</i> |
+|  [rotate?](./webmap.model3doptions.rotate.md) |  | number | _(Optional)_ |
+|  [scale?](./webmap.model3doptions.scale.md) |  | number | _(Optional)_ |
 

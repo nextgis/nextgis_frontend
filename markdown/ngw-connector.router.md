@@ -4,10 +4,10 @@
 
 ## Router type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type Router = PyramidRoute;
 ```
-<b>References:</b> [PyramidRoute](./ngw-connector.pyramidroute.md)
+**References:** [PyramidRoute](./ngw-connector.pyramidroute.md)
 

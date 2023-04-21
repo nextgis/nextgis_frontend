@@ -4,7 +4,7 @@
 
 ## MapAdapter.addControl() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 addControl<K extends keyof MapControls>(controlName: K | any, position: ControlPosition, options?: MapControls[K]): any;
@@ -16,9 +16,9 @@ addControl<K extends keyof MapControls>(controlName: K | any, position: ControlP
 |  --- | --- | --- |
 |  controlName | K \| any |  |
 |  position | [ControlPosition](./webmap.controlposition.md) |  |
-|  options | [MapControls](./webmap.mapcontrols.md)<!-- -->\[K\] | <i>(Optional)</i> |
+|  options | [MapControls](./webmap.mapcontrols.md)<!-- -->\[K\] | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 any
 

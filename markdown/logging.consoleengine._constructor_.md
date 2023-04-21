@@ -6,7 +6,7 @@
 
 Constructs a new instance of the `ConsoleEngine` class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 constructor(options?: ConsoleEngineOptions);
@@ -16,5 +16,5 @@ constructor(options?: ConsoleEngineOptions);
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | [ConsoleEngineOptions](./logging.consoleengineoptions.md) | <i>(Optional)</i> |
+|  options | [ConsoleEngineOptions](./logging.consoleengineoptions.md) | _(Optional)_ |
 

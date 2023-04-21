@@ -4,7 +4,7 @@
 
 ## treeSome() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function treeSome<F extends D = D>(item: F | F[], filter?: PropertyFilter | SelfFilter<F>, relation?: TreeRelation<F>, itemPrepare?: ItemPrepareFunction<F>): boolean;
@@ -15,11 +15,11 @@ export declare function treeSome<F extends D = D>(item: F | F[], filter?: Proper
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  item | F \| F\[\] |  |
-|  filter | [PropertyFilter](./properties-filter.propertyfilter.md) \| SelfFilter&lt;F&gt; | <i>(Optional)</i> |
-|  relation | TreeRelation&lt;F&gt; | <i>(Optional)</i> |
-|  itemPrepare | ItemPrepareFunction&lt;F&gt; | <i>(Optional)</i> |
+|  filter | [PropertyFilter](./properties-filter.propertyfilter.md) \| SelfFilter&lt;F&gt; | _(Optional)_ |
+|  relation | TreeRelation&lt;F&gt; | _(Optional)_ |
+|  itemPrepare | ItemPrepareFunction&lt;F&gt; | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 boolean
 

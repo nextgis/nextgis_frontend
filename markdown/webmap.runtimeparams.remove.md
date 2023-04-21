@@ -4,7 +4,7 @@
 
 ## RuntimeParams.remove() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 remove(name: string): void;
@@ -16,7 +16,7 @@ remove(name: string): void;
 |  --- | --- | --- |
 |  name | string |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

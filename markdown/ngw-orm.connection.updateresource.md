@@ -4,7 +4,7 @@
 
 ## Connection.updateResource() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 updateResource(Resource: typeof BaseResource): Promise<void>;
@@ -16,7 +16,7 @@ updateResource(Resource: typeof BaseResource): Promise<void>;
 |  --- | --- | --- |
 |  Resource | typeof [BaseResource](./ngw-orm.baseresource.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;void&gt;
 

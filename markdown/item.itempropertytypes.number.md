@@ -4,7 +4,7 @@
 
 ## ItemPropertyTypes.number property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 number: number;

@@ -5,7 +5,7 @@
 ## ProgressEvents.remove property
 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 remove: any;

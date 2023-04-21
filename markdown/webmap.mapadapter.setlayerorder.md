@@ -4,7 +4,7 @@
 
 ## MapAdapter.setLayerOrder() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 setLayerOrder(layer: L, order: number, layers?: {
@@ -18,9 +18,9 @@ setLayerOrder(layer: L, order: number, layers?: {
 |  --- | --- | --- |
 |  layer | L |  |
 |  order | number |  |
-|  layers | { \[name: string\]: [LayerAdapter](./webmap.layeradapter.md)<!-- -->; } | <i>(Optional)</i> |
+|  layers | { \[name: string\]: [LayerAdapter](./webmap.layeradapter.md)<!-- -->; } | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

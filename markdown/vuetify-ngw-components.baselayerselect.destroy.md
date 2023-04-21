@@ -4,12 +4,12 @@
 
 ## BaselayerSelect.destroy() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 protected destroy(): void;
 ```
-<b>Returns:</b>
+**Returns:**
 
 void
 

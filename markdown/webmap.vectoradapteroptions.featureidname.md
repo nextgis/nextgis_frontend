@@ -4,7 +4,7 @@
 
 ## VectorAdapterOptions.featureIdName property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 featureIdName?: string;

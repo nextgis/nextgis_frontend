@@ -4,12 +4,12 @@
 
 ## MapboxglMapAdapter.destroy() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 destroy(): void;
 ```
-<b>Returns:</b>
+**Returns:**
 
 void
 

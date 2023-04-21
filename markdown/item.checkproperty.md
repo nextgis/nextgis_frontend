@@ -4,12 +4,12 @@
 
 ## CheckProperty class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class CheckProperty<V extends VAL = VAL, O extends CheckOptions<VAL> = CheckOptions<VAL>> extends BaseProperty<VAL, CheckOptions<VAL>> 
 ```
-<b>Extends:</b> [BaseProperty](./item.baseproperty.md)<!-- -->&lt;VAL, [CheckOptions](./item.checkoptions.md)<!-- -->&lt;VAL
+**Extends:** [BaseProperty](./item.baseproperty.md)<!-- -->&lt;VAL, [CheckOptions](./item.checkoptions.md)<!-- -->&lt;VAL&gt;&gt;
 
 ## Constructors
 

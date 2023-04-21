@@ -6,7 +6,7 @@
 
 Remove layer data.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 clearLayer?(cb?: (feature: F) => boolean): void | Promise<void>;
@@ -16,9 +16,9 @@ clearLayer?(cb?: (feature: F) => boolean): void | Promise<void>;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  cb | (feature: F) =&gt; boolean | <i>(Optional)</i> Delete only those objects that match the filter. |
+|  cb | (feature: F) =&gt; boolean | _(Optional)_ Delete only those objects that match the filter. |
 
-<b>Returns:</b>
+**Returns:**
 
 void \| Promise&lt;void&gt;
 

@@ -4,7 +4,7 @@
 
 ## PopupOptions.minWidth property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 minWidth?: number;

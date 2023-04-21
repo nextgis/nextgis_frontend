@@ -4,7 +4,7 @@
 
 ## WebMapMain class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class WebMapMain<M = any, E extends WebMapEvents = WebMapEvents, O extends MapOptions = MapOptions> 

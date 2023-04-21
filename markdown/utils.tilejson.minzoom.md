@@ -6,7 +6,7 @@
 
 Default: 0.`>= 0, <= 30.` An integer specifying the minimum zoom level.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 minzoom?: number;

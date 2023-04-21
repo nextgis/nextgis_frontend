@@ -4,17 +4,17 @@
 
 ## CreateRasterOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface CreateRasterOptions extends ResourceCreateOptions 
 ```
-<b>Extends:</b> [ResourceCreateOptions](./ngw-uploader.resourcecreateoptions.md)
+**Extends:** [ResourceCreateOptions](./ngw-uploader.resourcecreateoptions.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [source](./ngw-uploader.createrasteroptions.source.md) |  | [FileMeta](./ngw-connector.filemeta.md) |  |
-|  [srs?](./ngw-uploader.createrasteroptions.srs.md) |  | { id: number; } | <i>(Optional)</i> |
+|  [srs?](./ngw-uploader.createrasteroptions.srs.md) |  | { id: number; } | _(Optional)_ |
 

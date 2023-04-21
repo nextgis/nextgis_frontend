@@ -4,12 +4,12 @@
 
 ## MainLayerAdapter.beforeRemove() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 beforeRemove?(): void;
 ```
-<b>Returns:</b>
+**Returns:**
 
 void
 

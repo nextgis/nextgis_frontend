@@ -4,7 +4,7 @@
 
 ## Resource.owner\_user property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 owner_user: {

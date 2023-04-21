@@ -4,7 +4,7 @@
 
 ## FilterOptions.strategy property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 strategy?: 'BBOX' | 'BBOX+';

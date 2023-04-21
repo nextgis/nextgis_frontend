@@ -4,12 +4,12 @@
 
 ## ResourceStoreItem type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type ResourceStoreItem<P extends ResourceStoreItemProperties = ResourceStoreItemProperties> = ResourceStoreItemDefault & {
     data?: string;
 } & P;
 ```
-<b>References:</b> [ResourceStoreItemProperties](./ngw-connector.resourcestoreitemproperties.md)<!-- -->, [ResourceStoreItemDefault](./ngw-connector.resourcestoreitemdefault.md)
+**References:** [ResourceStoreItemProperties](./ngw-connector.resourcestoreitemproperties.md)<!-- -->, [ResourceStoreItemDefault](./ngw-connector.resourcestoreitemdefault.md)
 

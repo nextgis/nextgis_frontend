@@ -4,7 +4,7 @@
 
 ## NgwUploader.createGroup() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 createGroup(nameOrOptions: string | GroupOptions, opt?: GroupOptions): CancelablePromise<CreatedResource>;
@@ -15,9 +15,9 @@ createGroup(nameOrOptions: string | GroupOptions, opt?: GroupOptions): Cancelabl
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  nameOrOptions | string \| [GroupOptions](./ngw-uploader.groupoptions.md) |  |
-|  opt | [GroupOptions](./ngw-uploader.groupoptions.md) | <i>(Optional)</i> |
+|  opt | [GroupOptions](./ngw-uploader.groupoptions.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;[CreatedResource](./ngw-connector.createdresource.md)<!-- -->&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;[CreatedResource](./ngw-connector.createdresource.md)<!-- -->&gt;
 

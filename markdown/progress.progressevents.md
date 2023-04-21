@@ -4,7 +4,7 @@
 
 ## ProgressEvents interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface ProgressEvents 

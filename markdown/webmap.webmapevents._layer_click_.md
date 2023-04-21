@@ -5,7 +5,7 @@
 ## WebMapEvents."layer:click" property
 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'layer:click': OnLayerClickOptions;

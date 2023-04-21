@@ -4,7 +4,7 @@
 
 ## WebMapMain.onMapLoad() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onMapLoad(cb?: (mapAdapter: MapAdapter) => void): Promise<MapAdapter>;
@@ -14,9 +14,9 @@ onMapLoad(cb?: (mapAdapter: MapAdapter) => void): Promise<MapAdapter>;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  cb | (mapAdapter: [MapAdapter](./webmap.mapadapter.md)<!-- -->) =&gt; void | <i>(Optional)</i> |
+|  cb | (mapAdapter: [MapAdapter](./webmap.mapadapter.md)<!-- -->) =&gt; void | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[MapAdapter](./webmap.mapadapter.md)<!-- -->&gt;
 

@@ -4,7 +4,7 @@
 
 ## ResultItem interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface ResultItem 
@@ -15,6 +15,6 @@ export interface ResultItem
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [extent](./geocoder.resultitem.extent.md) |  | [LngLatBoundsArray](./utils.lnglatboundsarray.md) |  |
-|  [geom?](./geocoder.resultitem.geom.md) |  | GeoJsonObject | <i>(Optional)</i> |
+|  [geom?](./geocoder.resultitem.geom.md) |  | GeoJsonObject | _(Optional)_ |
 |  [text](./geocoder.resultitem.text.md) |  | string |  |
 

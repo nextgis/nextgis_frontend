@@ -6,7 +6,7 @@
 
 Type for geometries painting, for each layer may be only one of: `point`<!-- -->, `polygon` or `line`<!-- -->.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 type?: VectorAdapterLayerType;

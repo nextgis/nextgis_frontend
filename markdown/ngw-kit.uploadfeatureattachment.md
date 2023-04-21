@@ -4,7 +4,7 @@
 
 ## uploadFeatureAttachment() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function uploadFeatureAttachment(options: GetNgwItemOptions & UploadFeatureAttachmentOptions): IdOnly;
@@ -16,7 +16,7 @@ export declare function uploadFeatureAttachment(options: GetNgwItemOptions & Upl
 |  --- | --- | --- |
 |  options | [GetNgwItemOptions](./ngw-kit.getngwitemoptions.md) &amp; [UploadFeatureAttachmentOptions](./ngw-kit.uploadfeatureattachmentoptions.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 [IdOnly](./ngw-connector.idonly.md)
 

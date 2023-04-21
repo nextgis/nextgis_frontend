@@ -4,7 +4,7 @@
 
 ## IdentifyRequestOptions.radius property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 radius?: number;

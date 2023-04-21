@@ -4,10 +4,10 @@
 
 ## AdapterConstructor type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type AdapterConstructor = () => Promise<Type<LayerAdapter> | any>;
 ```
-<b>References:</b> [Type](./utils.type.md)<!-- -->, [LayerAdapter](./webmap.layeradapter.md)
+**References:** [Type](./utils.type.md)<!-- -->, [LayerAdapter](./webmap.layeradapter.md)
 

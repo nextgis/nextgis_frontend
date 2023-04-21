@@ -4,7 +4,7 @@
 
 ## GetImageAdapterOptionsParams.nd property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 nd?: TileNoData;

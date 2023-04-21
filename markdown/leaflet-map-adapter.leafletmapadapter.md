@@ -4,12 +4,12 @@
 
 ## LeafletMapAdapter class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class LeafletMapAdapter implements MapAdapter<Map, any, Control> 
 ```
-<b>Implements:</b> [MapAdapter](./webmap.mapadapter.md)<!-- -->&lt;Map, any, Control
+**Implements:** [MapAdapter](./webmap.mapadapter.md)<!-- -->&lt;Map, any, Control&gt;
 
 ## Properties
 
@@ -20,7 +20,7 @@ export declare class LeafletMapAdapter implements MapAdapter<Map, any, Control>
 |  [emitter](./leaflet-map-adapter.leafletmapadapter.emitter.md) |  | EventEmitter |  |
 |  [layerAdapters](./leaflet-map-adapter.leafletmapadapter.layeradapters.md) |  | { \[name: string\]: Type&lt;[LayerAdapter](./webmap.layeradapter.md)<!-- -->&lt;Map, any, any&gt;&gt;; } |  |
 |  [layerAdapters](./leaflet-map-adapter.leafletmapadapter.layeradapters.md) | <code>static</code> | { \[name: string\]: Type&lt;[LayerAdapter](./webmap.layeradapter.md)<!-- -->&lt;Map, any, any&gt;&gt;; } |  |
-|  [map?](./leaflet-map-adapter.leafletmapadapter.map.md) |  | Map | <i>(Optional)</i> |
+|  [map?](./leaflet-map-adapter.leafletmapadapter.map.md) |  | Map | _(Optional)_ |
 |  [Map](./leaflet-map-adapter.leafletmapadapter.map.md) | <code>static</code> | typeof Map |  |
 |  [options](./leaflet-map-adapter.leafletmapadapter.options.md) |  | [MapOptions](./webmap.mapoptions.md)<!-- -->&lt;Map&gt; |  |
 

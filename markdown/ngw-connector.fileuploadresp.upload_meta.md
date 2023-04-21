@@ -4,7 +4,7 @@
 
 ## FileUploadResp.upload\_meta property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 upload_meta: FileMeta[];

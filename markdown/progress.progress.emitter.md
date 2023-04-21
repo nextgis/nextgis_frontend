@@ -4,7 +4,7 @@
 
 ## Progress.emitter property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 readonly emitter: StrictEventEmitter<EventEmitter, ProgressEvents>;

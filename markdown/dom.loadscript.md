@@ -4,7 +4,7 @@
 
 ## loadScript() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function loadScript(src: string, options?: LoadScriptOptions): Promise<unknown>;
@@ -15,9 +15,9 @@ export declare function loadScript(src: string, options?: LoadScriptOptions): Pr
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  src | string |  |
-|  options | [LoadScriptOptions](./dom.loadscriptoptions.md) | <i>(Optional)</i> |
+|  options | [LoadScriptOptions](./dom.loadscriptoptions.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;unknown&gt;
 

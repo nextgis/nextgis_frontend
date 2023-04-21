@@ -4,12 +4,12 @@
 
 ## IdentifyItem.getBounds() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getBounds(): CancelablePromise<LngLatBoundsArray | undefined>;
 ```
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;[LngLatBoundsArray](./utils.lnglatboundsarray.md) \| undefined&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;[LngLatBoundsArray](./utils.lnglatboundsarray.md) \| undefined&gt;
 

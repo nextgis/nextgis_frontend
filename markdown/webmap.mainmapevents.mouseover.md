@@ -6,7 +6,7 @@
 
 Fired when the mouse enters the map.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 mouseover: MapAdapter;

@@ -4,7 +4,7 @@
 
 ## CancelablePromise.catch() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 catch<TResult = never>(onrejected?: ((reason: Error) => TResult | PromiseLike<TResult>) | undefined | null): CancelablePromise<T | TResult>;
@@ -14,9 +14,9 @@ catch<TResult = never>(onrejected?: ((reason: Error) => TResult | PromiseLike<TR
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  onrejected | ((reason: Error) =&gt; TResult \| PromiseLike&lt;TResult&gt;) \| undefined \| null | <i>(Optional)</i> |
+|  onrejected | ((reason: Error) =&gt; TResult \| PromiseLike&lt;TResult&gt;) \| undefined \| null | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 [CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;T \| TResult&gt;
 

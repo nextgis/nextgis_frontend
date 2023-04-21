@@ -6,7 +6,7 @@
 
 Ability to filter a layer with a callback function. It is necessary for the adapter to provide access to the layer objects before output to the map. It is not possible to apply such a filter to vector tiles and data on the remote server. So, where possible, use the [VectorLayerAdapter.propertiesFilter()](./webmap.vectorlayeradapter.propertiesfilter.md)<!-- -->.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 filter?(cb: DataLayerFilter<F, L>): Array<LayerDefinition<Feature, L>>;
@@ -18,7 +18,7 @@ filter?(cb: DataLayerFilter<F, L>): Array<LayerDefinition<Feature, L>>;
 |  --- | --- | --- |
 |  cb | [DataLayerFilter](./webmap.datalayerfilter.md)<!-- -->&lt;F, L&gt; |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Array&lt;[LayerDefinition](./webmap.layerdefinition.md)<!-- -->&lt;Feature, L&gt;&gt;
 

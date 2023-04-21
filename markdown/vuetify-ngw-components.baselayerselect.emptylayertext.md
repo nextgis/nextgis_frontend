@@ -4,7 +4,7 @@
 
 ## BaselayerSelect.emptyLayerText property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 emptyLayerText: string;

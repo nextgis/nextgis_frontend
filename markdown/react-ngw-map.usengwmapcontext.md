@@ -4,12 +4,12 @@
 
 ## useNgwMapContext() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function useNgwMapContext(): NgwMapContextInterface;
 ```
-<b>Returns:</b>
+**Returns:**
 
 [NgwMapContextInterface](./react-ngw-map.ngwmapcontextinterface.md)
 

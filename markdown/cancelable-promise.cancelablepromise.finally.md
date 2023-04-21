@@ -4,7 +4,7 @@
 
 ## CancelablePromise.finally() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 finally(onfinally?: (() => void) | undefined | null): Promise<T>;
@@ -14,9 +14,9 @@ finally(onfinally?: (() => void) | undefined | null): Promise<T>;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  onfinally | (() =&gt; void) \| undefined \| null | <i>(Optional)</i> |
+|  onfinally | (() =&gt; void) \| undefined \| null | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;T&gt;
 

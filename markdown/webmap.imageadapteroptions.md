@@ -4,17 +4,17 @@
 
 ## ImageAdapterOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface ImageAdapterOptions extends WmsAdapterOptions 
 ```
-<b>Extends:</b> [WmsAdapterOptions](./webmap.wmsadapteroptions.md)
+**Extends:** [WmsAdapterOptions](./webmap.wmsadapteroptions.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [params](./webmap.imageadapteroptions.params.md) |  | Record&lt;string, any&gt; |  |
-|  [resourceId?](./webmap.imageadapteroptions.resourceid.md) |  | string \| number | <i>(Optional)</i> |
+|  [resourceId?](./webmap.imageadapteroptions.resourceid.md) |  | string \| number | _(Optional)_ |
 

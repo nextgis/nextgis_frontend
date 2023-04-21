@@ -4,7 +4,7 @@
 
 ## WebMapLayers.updateLayer() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 updateLayer(layerDef: LayerDef): Promise<void>;
@@ -16,7 +16,7 @@ updateLayer(layerDef: LayerDef): Promise<void>;
 |  --- | --- | --- |
 |  layerDef | [LayerDef](./webmap.layerdef.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;void&gt;
 

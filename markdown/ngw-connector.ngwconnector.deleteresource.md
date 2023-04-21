@@ -5,7 +5,7 @@
 ## NgwConnector.deleteResource() method
 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 deleteResource(resource: ResourceIdKeynameDef): CancelablePromise<void>;
@@ -17,7 +17,7 @@ deleteResource(resource: ResourceIdKeynameDef): CancelablePromise<void>;
 |  --- | --- | --- |
 |  resource | [ResourceIdKeynameDef](./ngw-connector.resourceidkeynamedef.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;void&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;void&gt;
 

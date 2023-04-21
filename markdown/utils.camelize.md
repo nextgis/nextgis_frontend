@@ -6,7 +6,7 @@
 
 Camelize a string, cutting the string by separator character.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function camelize(text: string, separator?: RegExp): string;
@@ -17,9 +17,9 @@ export declare function camelize(text: string, separator?: RegExp): string;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  text | string | to camelize |
-|  separator | RegExp | <i>(Optional)</i> Word separator (string or regexp)  string Camelized text |
+|  separator | RegExp | _(Optional)_ Word separator (string or regexp)  string Camelized text |
 
-<b>Returns:</b>
+**Returns:**
 
 string
 

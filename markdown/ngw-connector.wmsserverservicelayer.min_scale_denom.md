@@ -6,7 +6,7 @@
 
 Minimum scale to show WMS layer. String in form of `1 : 100000`<!-- -->.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 min_scale_denom?: string | null;

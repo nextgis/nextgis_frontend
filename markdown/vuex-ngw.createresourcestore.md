@@ -4,7 +4,7 @@
 
 ## createResourceStore() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function createResourceStore<P extends FeatureProperties = FeatureProperties, G extends Geometry | null = Geometry>(options: {
@@ -20,7 +20,7 @@ export declare function createResourceStore<P extends FeatureProperties = Featur
 |  --- | --- | --- |
 |  options | { connector: NgwConnector; keyname: string; store: Store&lt;any&gt;; } |  |
 
-<b>Returns:</b>
+**Returns:**
 
 [Type](./utils.type.md)<!-- -->&lt;[ResourceStore](./vuex-ngw.resourcestore.md)<!-- -->&lt;P, G&gt;&gt;
 

@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."resource.create" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'resource.create': {

@@ -4,7 +4,7 @@
 
 ## IconOptions.shape property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 shape?: 'rect' | 'star' | 'plus' | 'minus' | 'brill' | 'circle' | 'marker' | 'triangle' | 'asterisk';

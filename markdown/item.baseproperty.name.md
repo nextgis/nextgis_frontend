@@ -4,7 +4,7 @@
 
 ## BaseProperty.name property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 name: string;

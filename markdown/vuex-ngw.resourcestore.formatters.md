@@ -4,7 +4,7 @@
 
 ## ResourceStore.formatters property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 formatters: {

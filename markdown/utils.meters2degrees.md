@@ -4,7 +4,7 @@
 
 ## meters2degrees() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function meters2degrees(x: number, y: number): LngLatArray;
@@ -17,7 +17,7 @@ export declare function meters2degrees(x: number, y: number): LngLatArray;
 |  x | number |  |
 |  y | number |  |
 
-<b>Returns:</b>
+**Returns:**
 
 [LngLatArray](./utils.lnglatarray.md)
 

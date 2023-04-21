@@ -4,7 +4,7 @@
 
 ## GetRequestItemsResponseMap."spatial\_ref\_sys.collection" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'spatial_ref_sys.collection': SrsItem[];

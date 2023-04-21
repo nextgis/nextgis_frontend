@@ -4,7 +4,7 @@
 
 ## coordinatesCount() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function coordinatesCount(geojson: GeoJSON): number;
@@ -16,7 +16,7 @@ export declare function coordinatesCount(geojson: GeoJSON): number;
 |  --- | --- | --- |
 |  geojson | GeoJSON |  |
 
-<b>Returns:</b>
+**Returns:**
 
 number
 

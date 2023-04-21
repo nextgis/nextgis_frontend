@@ -4,7 +4,7 @@
 
 ## VueTreeItem.removable property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 removable?: boolean;

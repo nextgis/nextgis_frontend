@@ -6,7 +6,7 @@
 
 User credentials for authorization in NGW. Provides the ability to display protected resources
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 auth?: Credentials;

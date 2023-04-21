@@ -4,7 +4,7 @@
 
 ## LayerAdapters.WMS property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 WMS: MainLayerAdapter<any, any, WmsAdapterOptions>;

@@ -4,7 +4,7 @@
 
 ## NgwLayersList.selection property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 selection: string[];

@@ -4,7 +4,7 @@
 
 ## PatchOptions.fid property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 fid?: number;

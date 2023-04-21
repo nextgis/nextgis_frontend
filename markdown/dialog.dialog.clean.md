@@ -4,12 +4,12 @@
 
 ## Dialog.clean() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static clean(): void;
 ```
-<b>Returns:</b>
+**Returns:**
 
 void
 

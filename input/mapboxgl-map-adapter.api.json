@@ -1,8 +1,8 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.28.6",
-    "schemaVersion": 1009,
+    "toolVersion": "7.34.4",
+    "schemaVersion": 1011,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
       "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
@@ -202,7 +202,7 @@
             {
               "kind": "Reference",
               "text": "TLayer",
-              "canonicalReference": "@nextgis/mapboxgl-map-adapter!TLayer:type"
+              "canonicalReference": "@nextgis/mapboxgl-map-adapter!~TLayer:type"
             },
             {
               "kind": "Content",
@@ -215,10 +215,16 @@
             },
             {
               "kind": "Content",
-              "text": "> "
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": " "
             }
           ],
+          "fileUrlPath": "src/MapboxglMapAdapter.ts",
           "releaseTag": "Public",
+          "isAbstract": false,
           "name": "MapboxglMapAdapter",
           "preserveMemberOrder": false,
           "members": [
@@ -305,6 +311,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "addControl"
             },
             {
@@ -334,7 +341,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -363,7 +371,8 @@
                 "endIndex": 2
               },
               "isStatic": true,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -416,6 +425,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "create"
             },
             {
@@ -465,6 +475,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "createButtonControl"
             },
             {
@@ -531,6 +542,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "createControl"
             },
             {
@@ -561,6 +573,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "destroy"
             },
             {
@@ -575,7 +588,7 @@
                 {
                   "kind": "Reference",
                   "text": "EventEmitter",
-                  "canonicalReference": "!EventEmitter:class"
+                  "canonicalReference": "!\"\\\"events\\\"\".EventEmitter:class"
                 },
                 {
                   "kind": "Content",
@@ -591,7 +604,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -656,6 +670,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "fitBounds"
             },
             {
@@ -691,6 +706,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getBounds"
             },
             {
@@ -726,6 +742,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getCenter"
             },
             {
@@ -761,6 +778,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getContainer"
             },
             {
@@ -791,6 +809,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getZoom"
             },
             {
@@ -838,6 +857,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "hideLayer"
             },
             {
@@ -867,7 +887,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -885,7 +906,7 @@
                 {
                   "kind": "Reference",
                   "text": "TileAdapter",
-                  "canonicalReference": "@nextgis/mapboxgl-map-adapter!TileAdapter:class"
+                  "canonicalReference": "@nextgis/mapboxgl-map-adapter!~TileAdapter:class"
                 },
                 {
                   "kind": "Content",
@@ -894,7 +915,7 @@
                 {
                   "kind": "Reference",
                   "text": "WmsAdapter",
-                  "canonicalReference": "@nextgis/mapboxgl-map-adapter!WmsAdapter:class"
+                  "canonicalReference": "@nextgis/mapboxgl-map-adapter!~WmsAdapter:class"
                 },
                 {
                   "kind": "Content",
@@ -903,7 +924,7 @@
                 {
                   "kind": "Reference",
                   "text": "MvtAdapter",
-                  "canonicalReference": "@nextgis/mapboxgl-map-adapter!MvtAdapter:class"
+                  "canonicalReference": "@nextgis/mapboxgl-map-adapter!~MvtAdapter:class"
                 },
                 {
                   "kind": "Content",
@@ -912,7 +933,7 @@
                 {
                   "kind": "Reference",
                   "text": "OsmAdapter",
-                  "canonicalReference": "@nextgis/mapboxgl-map-adapter!OsmAdapter:class"
+                  "canonicalReference": "@nextgis/mapboxgl-map-adapter!~OsmAdapter:class"
                 },
                 {
                   "kind": "Content",
@@ -921,7 +942,7 @@
                 {
                   "kind": "Reference",
                   "text": "GeoJsonAdapter",
-                  "canonicalReference": "@nextgis/mapboxgl-map-adapter!GeoJsonAdapter:class"
+                  "canonicalReference": "@nextgis/mapboxgl-map-adapter!~GeoJsonAdapter:class"
                 },
                 {
                   "kind": "Content",
@@ -941,7 +962,8 @@
                 "endIndex": 12
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -959,7 +981,7 @@
                 {
                   "kind": "Reference",
                   "text": "TileAdapter",
-                  "canonicalReference": "@nextgis/mapboxgl-map-adapter!TileAdapter:class"
+                  "canonicalReference": "@nextgis/mapboxgl-map-adapter!~TileAdapter:class"
                 },
                 {
                   "kind": "Content",
@@ -968,7 +990,7 @@
                 {
                   "kind": "Reference",
                   "text": "WmsAdapter",
-                  "canonicalReference": "@nextgis/mapboxgl-map-adapter!WmsAdapter:class"
+                  "canonicalReference": "@nextgis/mapboxgl-map-adapter!~WmsAdapter:class"
                 },
                 {
                   "kind": "Content",
@@ -977,7 +999,7 @@
                 {
                   "kind": "Reference",
                   "text": "MvtAdapter",
-                  "canonicalReference": "@nextgis/mapboxgl-map-adapter!MvtAdapter:class"
+                  "canonicalReference": "@nextgis/mapboxgl-map-adapter!~MvtAdapter:class"
                 },
                 {
                   "kind": "Content",
@@ -986,7 +1008,7 @@
                 {
                   "kind": "Reference",
                   "text": "OsmAdapter",
-                  "canonicalReference": "@nextgis/mapboxgl-map-adapter!OsmAdapter:class"
+                  "canonicalReference": "@nextgis/mapboxgl-map-adapter!~OsmAdapter:class"
                 },
                 {
                   "kind": "Content",
@@ -995,7 +1017,7 @@
                 {
                   "kind": "Reference",
                   "text": "GeoJsonAdapter",
-                  "canonicalReference": "@nextgis/mapboxgl-map-adapter!GeoJsonAdapter:class"
+                  "canonicalReference": "@nextgis/mapboxgl-map-adapter!~GeoJsonAdapter:class"
                 },
                 {
                   "kind": "Content",
@@ -1015,7 +1037,8 @@
                 "endIndex": 12
               },
               "isStatic": true,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -1045,7 +1068,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -1102,6 +1126,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "onMapClick"
             },
             {
@@ -1132,7 +1157,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -1180,6 +1206,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "removeControl"
             },
             {
@@ -1227,6 +1254,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "removeLayer"
             },
             {
@@ -1275,6 +1303,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "setCenter"
             },
             {
@@ -1338,6 +1367,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "setLayerOpacity"
             },
             {
@@ -1426,6 +1456,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "setLayerOrder"
             },
             {
@@ -1473,6 +1504,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "setRotation"
             },
             {
@@ -1537,6 +1569,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "setView"
             },
             {
@@ -1585,6 +1618,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "setView"
             },
             {
@@ -1632,6 +1666,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "setZoom"
             },
             {
@@ -1679,13 +1714,14 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "showLayer"
             }
           ],
           "implementsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 8
+              "endIndex": 9
             }
           ]
         },
@@ -1714,9 +1750,14 @@
             },
             {
               "kind": "Content",
-              "text": "> "
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": " "
             }
           ],
+          "fileUrlPath": "src/MapboxglMapAdapter.ts",
           "releaseTag": "Public",
           "name": "MapboxglMapAdapterOptions",
           "preserveMemberOrder": false,
@@ -1766,7 +1807,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 4
+              "endIndex": 5
             }
           ]
         }

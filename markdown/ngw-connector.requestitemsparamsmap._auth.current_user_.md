@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."auth.current\_user" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'auth.current_user': null;

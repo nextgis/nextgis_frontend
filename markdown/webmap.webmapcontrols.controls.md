@@ -4,7 +4,7 @@
 
 ## WebMapControls.controls property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static controls: {

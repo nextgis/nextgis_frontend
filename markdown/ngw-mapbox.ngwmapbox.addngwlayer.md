@@ -4,7 +4,7 @@
 
 ## NgwMapbox.addNgwLayer() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 addNgwLayer(options: NgwLayerOptions): Promise<ResourceAdapter | undefined>;
@@ -16,7 +16,7 @@ addNgwLayer(options: NgwLayerOptions): Promise<ResourceAdapter | undefined>;
 |  --- | --- | --- |
 |  options | [NgwLayerOptions](./ngw-kit.ngwlayeroptions.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[ResourceAdapter](./ngw-kit.resourceadapter.md) \| undefined&gt;
 

@@ -5,7 +5,7 @@
 ## WebMapEvents."build-map" property
 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'build-map': MapAdapter;

@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."pyramid.custom\_css" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'pyramid.custom_css': null;

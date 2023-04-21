@@ -4,7 +4,7 @@
 
 ## OlMapAdapter.createControl() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 createControl(control: MapControl, options: CreateControlOptions): Control;
@@ -17,7 +17,7 @@ createControl(control: MapControl, options: CreateControlOptions): Control;
 |  control | [MapControl](./webmap.mapcontrol.md) |  |
 |  options | [CreateControlOptions](./webmap.createcontroloptions.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Control
 

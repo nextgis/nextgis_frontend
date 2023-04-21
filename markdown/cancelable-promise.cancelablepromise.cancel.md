@@ -4,12 +4,12 @@
 
 ## CancelablePromise.cancel() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 cancel(): this;
 ```
-<b>Returns:</b>
+**Returns:**
 
 this
 

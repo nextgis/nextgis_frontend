@@ -4,17 +4,17 @@
 
 ## RasterAdapterOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface RasterAdapterOptions extends AdapterOptions 
 ```
-<b>Extends:</b> [AdapterOptions](./webmap.adapteroptions.md)
+**Extends:** [AdapterOptions](./webmap.adapteroptions.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [subdomains?](./webmap.rasteradapteroptions.subdomains.md) |  | string \| string\[\] | <i>(Optional)</i> |
+|  [subdomains?](./webmap.rasteradapteroptions.subdomains.md) |  | string \| string\[\] | _(Optional)_ |
 |  [url](./webmap.rasteradapteroptions.url.md) |  | string |  |
 

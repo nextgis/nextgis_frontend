@@ -4,7 +4,7 @@
 
 ## RequestOptions.responseType property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 responseType?: 'json' | 'blob';

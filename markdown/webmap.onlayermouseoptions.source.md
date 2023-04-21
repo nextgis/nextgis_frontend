@@ -4,7 +4,7 @@
 
 ## OnLayerMouseOptions.source property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 source: any;

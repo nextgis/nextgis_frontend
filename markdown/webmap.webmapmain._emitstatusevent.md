@@ -4,7 +4,7 @@
 
 ## WebMapMain.\_emitStatusEvent() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 protected _emitStatusEvent(eventName: keyof E, data?: EmitStatusEventData): void;
@@ -15,9 +15,9 @@ protected _emitStatusEvent(eventName: keyof E, data?: EmitStatusEventData): void
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  eventName | keyof E |  |
-|  data | EmitStatusEventData | <i>(Optional)</i> |
+|  data | EmitStatusEventData | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

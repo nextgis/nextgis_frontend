@@ -4,7 +4,7 @@
 
 ## RasterRequestResourceOptions.cls property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 cls: 'raster_layer';

@@ -9,7 +9,7 @@
 > use getResourceItem instead
 > 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getResource(resource: ResourceIdKeynameDef | DeepPartial<Resource>): Promise<ResourceItem | undefined>;
@@ -21,7 +21,7 @@ getResource(resource: ResourceIdKeynameDef | DeepPartial<Resource>): Promise<Res
 |  --- | --- | --- |
 |  resource | [ResourceIdKeynameDef](./ngw-connector.resourceidkeynamedef.md) \| DeepPartial&lt;[Resource](./ngw-connector.resource.md)<!-- -->&gt; |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[ResourceItem](./ngw-connector.resourceitem.md) \| undefined&gt;
 

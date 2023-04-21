@@ -4,7 +4,7 @@
 
 ## NgwWebmapItem.getChildren() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 protected getChildren(item: TreeGroup): (TreeGroup | TreeLayer)[];
@@ -16,7 +16,7 @@ protected getChildren(item: TreeGroup): (TreeGroup | TreeLayer)[];
 |  --- | --- | --- |
 |  item | [TreeGroup](./ngw-kit.treegroup.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 ([TreeGroup](./ngw-kit.treegroup.md) \| [TreeLayer](./ngw-kit.treelayer.md)<!-- -->)\[\]
 

@@ -6,7 +6,7 @@
 
 Indicates the map layers display sequence. A layer with a larger order value overlaps smaller ones. Zero value used to indicate baselayer. If the value is not specified explicitly, it will be assigned automatically with an increase of one for each new layer.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 order?: number;

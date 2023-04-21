@@ -4,7 +4,7 @@
 
 ## Base3DPaint.strokeColor property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 strokeColor?: string | Expression;

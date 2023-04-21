@@ -4,7 +4,7 @@
 
 ## ResourceIdDef type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type ResourceIdDef = number | [resourceId: number, layerId: string];

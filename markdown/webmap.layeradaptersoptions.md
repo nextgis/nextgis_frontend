@@ -4,7 +4,7 @@
 
 ## LayerAdaptersOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface LayerAdaptersOptions 

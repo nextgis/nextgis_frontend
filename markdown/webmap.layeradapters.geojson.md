@@ -4,7 +4,7 @@
 
 ## LayerAdapters.GEOJSON property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 GEOJSON: VectorLayerAdapter<any, any, GeoJsonAdapterOptions>;

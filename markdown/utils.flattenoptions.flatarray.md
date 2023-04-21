@@ -4,7 +4,7 @@
 
 ## FlattenOptions.flatArray property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 flatArray?: boolean;

@@ -4,7 +4,7 @@
 
 ## GetRequestItemsResponseMap."feature\_layer.feature.item\_extent" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'feature_layer.feature.item_extent': NgwExtent;

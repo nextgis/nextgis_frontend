@@ -4,7 +4,7 @@
 
 ## ContribControlsOptions.ZOOM property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 ZOOM: ZoomControlOptions;

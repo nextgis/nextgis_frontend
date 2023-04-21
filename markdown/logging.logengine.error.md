@@ -4,7 +4,7 @@
 
 ## LogEngine.error property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 error: ShortcutLogFunc<D>;

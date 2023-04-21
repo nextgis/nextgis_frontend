@@ -1,8 +1,8 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.28.6",
-    "schemaVersion": 1009,
+    "toolVersion": "7.34.4",
+    "schemaVersion": 1011,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
       "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
@@ -182,7 +182,9 @@
               "text": "export declare class Progress "
             }
           ],
+          "fileUrlPath": "src/Progress.ts",
           "releaseTag": "Public",
+          "isAbstract": false,
           "name": "Progress",
           "preserveMemberOrder": false,
           "members": [
@@ -214,6 +216,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "addLoaded"
             },
             {
@@ -244,6 +247,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "addLoading"
             },
             {
@@ -267,7 +271,7 @@
                 {
                   "kind": "Reference",
                   "text": "EventEmitter",
-                  "canonicalReference": "!EventEmitter:class"
+                  "canonicalReference": "!\"\\\"events\\\"\".EventEmitter:class"
                 },
                 {
                   "kind": "Content",
@@ -296,7 +300,8 @@
                 "endIndex": 7
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -325,7 +330,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -355,6 +361,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "update"
             }
           ],
@@ -370,6 +377,7 @@
               "text": "export interface ProgressEvents "
             }
           ],
+          "fileUrlPath": "src/ProgressEvents.ts",
           "releaseTag": "Public",
           "name": "ProgressEvents",
           "preserveMemberOrder": false,

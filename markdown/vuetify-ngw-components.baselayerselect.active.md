@@ -4,7 +4,7 @@
 
 ## BaselayerSelect.active property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 active: string | false;

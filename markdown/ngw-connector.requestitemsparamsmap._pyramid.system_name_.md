@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."pyramid.system\_name" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'pyramid.system_name': null;

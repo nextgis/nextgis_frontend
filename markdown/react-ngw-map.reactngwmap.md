@@ -4,7 +4,7 @@
 
 ## ReactNgwMap() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function ReactNgwMap<Props extends ReactNgwMapProps = ReactNgwMapProps>({ whenCreated, placeholder, className, children, style, id, ...options }: Props): import("react").DetailedReactHTMLElement<{
@@ -21,7 +21,7 @@ export declare function ReactNgwMap<Props extends ReactNgwMapProps = ReactNgwMap
 |  --- | --- | --- |
 |  { whenCreated, placeholder, className, children, style, id, ...options } | Props |  |
 
-<b>Returns:</b>
+**Returns:**
 
 import("react").DetailedReactHTMLElement&lt;{ ref: import("react").RefObject&lt;HTMLDivElement&gt;; className: string \| undefined; id: string \| undefined; style: import("react").CSSProperties \| undefined; }, HTMLDivElement&gt;
 

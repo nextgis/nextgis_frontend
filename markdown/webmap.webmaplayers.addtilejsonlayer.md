@@ -4,7 +4,7 @@
 
 ## WebMapLayers.addTileJsonLayer() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 addTileJsonLayer(tileJson: TileJson): Promise<MainLayerAdapter<M, any, TileAdapterOptions>>;
@@ -16,7 +16,7 @@ addTileJsonLayer(tileJson: TileJson): Promise<MainLayerAdapter<M, any, TileAdapt
 |  --- | --- | --- |
 |  tileJson | [TileJson](./utils.tilejson.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[MainLayerAdapter](./webmap.mainlayeradapter.md)<!-- -->&lt;M, any, [TileAdapterOptions](./webmap.tileadapteroptions.md)<!-- -->&gt;&gt;
 

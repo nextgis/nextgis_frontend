@@ -4,7 +4,7 @@
 
 ## objectAssign() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function objectAssign<T, U>(target: T, source: U): T & U;
@@ -17,7 +17,7 @@ export declare function objectAssign<T, U>(target: T, source: U): T & U;
 |  target | T |  |
 |  source | U |  |
 
-<b>Returns:</b>
+**Returns:**
 
 T &amp; U
 

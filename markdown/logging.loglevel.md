@@ -4,7 +4,7 @@
 
 ## LogLevel type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type LogLevel = 'CRITICAL' | 'ERROR' | 'WARNING' | 'INFO' | 'DEBUG' | 'NOTSET';

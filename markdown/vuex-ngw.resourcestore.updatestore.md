@@ -4,7 +4,7 @@
 
 ## ResourceStore.updateStore() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 updateStore(opt: {
@@ -18,7 +18,7 @@ updateStore(opt: {
 |  --- | --- | --- |
 |  opt | { item: [FeatureItem](./ngw-connector.featureitem.md)<!-- -->&lt;P&gt;; } |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[ResourceStoreItem](./ngw-connector.resourcestoreitem.md)<!-- -->&lt;P&gt;\[\] \| undefined&gt;
 

@@ -6,7 +6,7 @@
 
 Fired every time a map is clicked.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 click: MapClickEvent;

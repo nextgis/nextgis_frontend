@@ -4,7 +4,7 @@
 
 ## VueTreeItem interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface VueTreeItem 
@@ -14,9 +14,9 @@ export interface VueTreeItem
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [children?](./vuetify-ngw-components.vuetreeitem.children.md) |  | [VueTreeItem](./vuetify-ngw-components.vuetreeitem.md)<!-- -->\[\] | <i>(Optional)</i> |
+|  [children?](./vuetify-ngw-components.vuetreeitem.children.md) |  | [VueTreeItem](./vuetify-ngw-components.vuetreeitem.md)<!-- -->\[\] | _(Optional)_ |
 |  [id](./vuetify-ngw-components.vuetreeitem.id.md) |  | string |  |
-|  [layer?](./vuetify-ngw-components.vuetreeitem.layer.md) |  | string | <i>(Optional)</i> |
+|  [layer?](./vuetify-ngw-components.vuetreeitem.layer.md) |  | string | _(Optional)_ |
 |  [name](./vuetify-ngw-components.vuetreeitem.name.md) |  | string |  |
-|  [removable?](./vuetify-ngw-components.vuetreeitem.removable.md) |  | boolean | <i>(Optional)</i> |
+|  [removable?](./vuetify-ngw-components.vuetreeitem.removable.md) |  | boolean | _(Optional)_ |
 

@@ -4,7 +4,7 @@
 
 ## ForeignResource.relationField property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 relationField?: string;

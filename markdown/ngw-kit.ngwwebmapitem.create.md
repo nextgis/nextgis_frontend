@@ -4,7 +4,7 @@
 
 ## NgwWebmapItem.create() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static create(webMap: WebMap, item: TreeGroup | TreeLayer, options?: ItemOptions, connector?: NgwConnector, parent?: NgwWebmapItem): Promise<NgwWebmapItem>;
@@ -16,11 +16,11 @@ static create(webMap: WebMap, item: TreeGroup | TreeLayer, options?: ItemOptions
 |  --- | --- | --- |
 |  webMap | [WebMap](./webmap.webmap.md) |  |
 |  item | [TreeGroup](./ngw-kit.treegroup.md) \| [TreeLayer](./ngw-kit.treelayer.md) |  |
-|  options | [ItemOptions](./item.itemoptions.md) | <i>(Optional)</i> |
-|  connector | NgwConnector | <i>(Optional)</i> |
-|  parent | [NgwWebmapItem](./ngw-kit.ngwwebmapitem.md) | <i>(Optional)</i> |
+|  options | [ItemOptions](./item.itemoptions.md) | _(Optional)_ |
+|  connector | [NgwConnector](./ngw-connector.ngwconnector.md) | _(Optional)_ |
+|  parent | [NgwWebmapItem](./ngw-kit.ngwwebmapitem.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[NgwWebmapItem](./ngw-kit.ngwwebmapitem.md)<!-- -->&gt;
 

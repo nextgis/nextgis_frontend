@@ -4,12 +4,12 @@
 
 ## QmsKit class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class QmsKit implements StarterKit 
 ```
-<b>Implements:</b> [StarterKit](./webmap.starterkit.md)
+**Implements:** [StarterKit](./webmap.starterkit.md)
 
 ## Constructors
 

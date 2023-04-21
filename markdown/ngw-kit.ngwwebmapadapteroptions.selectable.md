@@ -4,7 +4,7 @@
 
 ## NgwWebmapAdapterOptions.selectable property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 selectable?: boolean;

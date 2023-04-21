@@ -4,12 +4,12 @@
 
 ## PolygonLayer class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class PolygonLayer extends VectorLayer<Polygon> 
 ```
-<b>Extends:</b> [VectorLayer](./ngw-orm.vectorlayer.md)<!-- -->&lt;Polygon
+**Extends:** [VectorLayer](./ngw-orm.vectorlayer.md)<!-- -->&lt;Polygon&gt;
 
 ## Properties
 

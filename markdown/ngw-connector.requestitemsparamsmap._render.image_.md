@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."render.image" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'render.image': null;

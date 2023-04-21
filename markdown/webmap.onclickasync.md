@@ -4,7 +4,7 @@
 
 ## onClickAsync type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type onClickAsync = () => Promise<void>;

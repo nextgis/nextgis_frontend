@@ -4,12 +4,12 @@
 
 ## LogOptions type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type LogOptions<D = any> = LogShortcutOptions<D> & {
     logLevel?: LogLevel;
 };
 ```
-<b>References:</b> [LogShortcutOptions](./logging.logshortcutoptions.md)<!-- -->, [LogLevel](./logging.loglevel.md)
+**References:** [LogShortcutOptions](./logging.logshortcutoptions.md)<!-- -->, [LogLevel](./logging.loglevel.md)
 

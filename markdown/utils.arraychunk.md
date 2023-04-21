@@ -4,7 +4,7 @@
 
 ## arrayChunk() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function arrayChunk<T>(arr: T[], size: number): T[][];
@@ -17,7 +17,7 @@ export declare function arrayChunk<T>(arr: T[], size: number): T[][];
 |  arr | T\[\] |  |
 |  size | number |  |
 
-<b>Returns:</b>
+**Returns:**
 
 T\[\]\[\]
 

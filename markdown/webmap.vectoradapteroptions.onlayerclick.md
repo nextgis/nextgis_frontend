@@ -9,7 +9,7 @@
 > use [VectorAdapterOptions.onClick()](./webmap.vectoradapteroptions.onclick.md) instead
 > 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onLayerClick?(opt: OnLayerMouseOptions<F, L>): Promise<any>;
@@ -21,7 +21,7 @@ onLayerClick?(opt: OnLayerMouseOptions<F, L>): Promise<any>;
 |  --- | --- | --- |
 |  opt | [OnLayerMouseOptions](./webmap.onlayermouseoptions.md)<!-- -->&lt;F, L&gt; |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;any&gt;
 

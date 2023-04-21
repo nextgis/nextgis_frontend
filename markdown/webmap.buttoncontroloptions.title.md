@@ -6,7 +6,7 @@
 
 Button HTMLElement title
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 title?: string;

@@ -4,7 +4,7 @@
 
 ## LoadScriptOptions.data property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 data?: Record<string, string | number | boolean>;

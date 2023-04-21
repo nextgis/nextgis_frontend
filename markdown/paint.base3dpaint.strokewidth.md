@@ -4,7 +4,7 @@
 
 ## Base3DPaint.strokeWidth property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 strokeWidth?: number | Expression;

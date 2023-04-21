@@ -9,7 +9,7 @@
 > - use [ResourceCreateOptions.displayName](./ngw-uploader.resourcecreateoptions.displayname.md) instead
 > 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 display_name?: string;

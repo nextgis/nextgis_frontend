@@ -4,7 +4,7 @@
 
 ## ResourceItem.wmsclient\_connection property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 wmsclient_connection?: WmsClientConnection;

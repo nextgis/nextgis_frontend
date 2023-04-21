@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."feature\_layer.geojson" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'feature_layer.geojson': {

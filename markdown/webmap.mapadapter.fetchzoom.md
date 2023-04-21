@@ -6,12 +6,12 @@
 
 Temporal async method.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 fetchZoom?(): Promise<number | undefined>;
 ```
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;number \| undefined&gt;
 

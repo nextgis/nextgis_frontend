@@ -14,13 +14,15 @@
 
 |  Function | Description |
 |  --- | --- |
-|  [createQmsAdapter(webMap, url, createOpt)](./qms-kit.createqmsadapter.md) |  |
+|  [createQmsAdapter(options)](./qms-kit.createqmsadapter.md) |  |
+|  [createQmsAdapter(webMap, url, createOpt)](./qms-kit.createqmsadapter_1.md) |  |
 |  [updateQmsOptions(qms)](./qms-kit.updateqmsoptions.md) |  |
 
 ## Interfaces
 
 |  Interface | Description |
 |  --- | --- |
+|  [CreateQmsAdapterOptions](./qms-kit.createqmsadapteroptions.md) |  |
 |  [GeoserviceInList](./qms-kit.geoserviceinlist.md) |  |
 |  [QmsAdapter](./qms-kit.qmsadapter.md) |  |
 |  [QmsAdapterOptions](./qms-kit.qmsadapteroptions.md) |  |

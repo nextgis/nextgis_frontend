@@ -4,7 +4,7 @@
 
 ## LoggingOptions.eachLog property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 eachLog?: EachLog<D>;

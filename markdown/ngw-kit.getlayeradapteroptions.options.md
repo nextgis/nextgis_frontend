@@ -4,7 +4,7 @@
 
 ## GetLayerAdapterOptions.options property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 options: NgwLayerOptions;

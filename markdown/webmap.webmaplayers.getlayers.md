@@ -6,12 +6,12 @@
 
 Return array of all added layer identifications.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getLayers(): string[];
 ```
-<b>Returns:</b>
+**Returns:**
 
 string\[\]
 

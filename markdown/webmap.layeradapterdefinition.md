@@ -4,10 +4,10 @@
 
 ## LayerAdapterDefinition type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type LayerAdapterDefinition<K extends keyof LayerAdapters = string> = K | Type<LayerAdapters[K]> | Promise<Type<LayerAdapters[K]> | undefined>;
 ```
-<b>References:</b> [LayerAdapters](./webmap.layeradapters.md)<!-- -->, [Type](./utils.type.md)
+**References:** [LayerAdapters](./webmap.layeradapters.md)<!-- -->, [Type](./utils.type.md)
 

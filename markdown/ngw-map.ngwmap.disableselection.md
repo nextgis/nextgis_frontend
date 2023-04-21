@@ -4,12 +4,12 @@
 
 ## NgwMap.disableSelection() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 disableSelection(): void;
 ```
-<b>Returns:</b>
+**Returns:**
 
 void
 

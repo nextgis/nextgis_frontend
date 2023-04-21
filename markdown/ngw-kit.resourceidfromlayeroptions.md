@@ -4,7 +4,7 @@
 
 ## resourceIdFromLayerOptions() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function resourceIdFromLayerOptions(options: NgwLayerOptions, connector: NgwConnector): Promise<number>;
@@ -15,9 +15,9 @@ export declare function resourceIdFromLayerOptions(options: NgwLayerOptions, con
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  options | [NgwLayerOptions](./ngw-kit.ngwlayeroptions.md) |  |
-|  connector | NgwConnector |  |
+|  connector | [NgwConnector](./ngw-connector.ngwconnector.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;number&gt;
 

@@ -4,7 +4,7 @@
 
 ## CancelablePromise.attach() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 attach(p: CancelablePromise): void;
@@ -16,7 +16,7 @@ attach(p: CancelablePromise): void;
 |  --- | --- | --- |
 |  p | [CancelablePromise](./cancelable-promise.cancelablepromise.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

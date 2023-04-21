@@ -4,7 +4,7 @@
 
 ## Item.tree property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 tree: TreeHelper;

@@ -6,7 +6,7 @@
 
 Delay before sending collected logs
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 delay?: number;

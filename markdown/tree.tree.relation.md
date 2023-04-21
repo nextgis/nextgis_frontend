@@ -4,7 +4,7 @@
 
 ## Tree.relation property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 relation: TreeRelation;

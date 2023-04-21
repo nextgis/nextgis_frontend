@@ -6,7 +6,7 @@
 
 Options for creating a [button control](./webmap.webmapcontrols.createbuttoncontrol.md)<!-- -->.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface ButtonControlOptions 
@@ -16,8 +16,8 @@ export interface ButtonControlOptions
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [addClass?](./webmap.buttoncontroloptions.addclass.md) |  | string | <i>(Optional)</i> Additional css class string |
-|  [html?](./webmap.buttoncontroloptions.html.md) |  | string \| HTMLElement | <i>(Optional)</i> Button content. |
+|  [addClass?](./webmap.buttoncontroloptions.addclass.md) |  | string | _(Optional)_ Additional css class string |
+|  [html?](./webmap.buttoncontroloptions.html.md) |  | string \| HTMLElement | _(Optional)_ Button content. |
 |  [onClick](./webmap.buttoncontroloptions.onclick.md) |  | [OnClick](./webmap.onclick.md) | Set an action to execute when button clicked. |
-|  [title?](./webmap.buttoncontroloptions.title.md) |  | string | <i>(Optional)</i> Button HTMLElement title |
+|  [title?](./webmap.buttoncontroloptions.title.md) |  | string | _(Optional)_ Button HTMLElement title |
 

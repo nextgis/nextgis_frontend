@@ -4,7 +4,7 @@
 
 ## BaseResource.clone() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static clone<T extends typeof BaseResource = typeof BaseResource>(options?: Partial<NgwResourceOptions>): T;
@@ -14,9 +14,9 @@ static clone<T extends typeof BaseResource = typeof BaseResource>(options?: Part
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | Partial&lt;NgwResourceOptions&gt; | <i>(Optional)</i> |
+|  options | Partial&lt;NgwResourceOptions&gt; | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 T
 

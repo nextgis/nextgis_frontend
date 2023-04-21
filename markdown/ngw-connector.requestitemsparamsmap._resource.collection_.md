@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."resource.collection" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'resource.collection': {

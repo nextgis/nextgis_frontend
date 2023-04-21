@@ -4,12 +4,12 @@
 
 ## BaselayerSelect.updateWebMap() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 updateWebMap(): void;
 ```
-<b>Returns:</b>
+**Returns:**
 
 void
 

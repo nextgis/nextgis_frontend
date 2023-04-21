@@ -4,7 +4,7 @@
 
 ## ApplyMixinOptions.replace property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 replace?: boolean;

@@ -4,7 +4,7 @@
 
 ## isObject() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function isObject(val: unknown): val is Record<string | number, any>;
@@ -16,7 +16,7 @@ export declare function isObject(val: unknown): val is Record<string | number, a
 |  --- | --- | --- |
 |  val | unknown |  |
 
-<b>Returns:</b>
+**Returns:**
 
 val is Record&lt;string \| number, any&gt;
 

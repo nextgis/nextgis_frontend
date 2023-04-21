@@ -4,7 +4,7 @@
 
 ## RequestOptions.onProgress property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onProgress?: (percentComplete: number, event: ProgressEvent) => void;

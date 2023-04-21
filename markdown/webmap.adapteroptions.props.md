@@ -6,7 +6,7 @@
 
 Any properties to save in layer. May be useful to get additional info from layer event.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 props?: ANYPROPS;

@@ -4,14 +4,14 @@
 
 ## WebMapMain.getLayerAdapters() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getLayerAdapters(): {
         [name: string]: Type<LayerAdapter>;
     };
 ```
-<b>Returns:</b>
+**Returns:**
 
 { \[name: string\]: [Type](./utils.type.md)<!-- -->&lt;[LayerAdapter](./webmap.layeradapter.md)<!-- -->&gt;; }
 

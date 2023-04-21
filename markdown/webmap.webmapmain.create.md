@@ -6,12 +6,12 @@
 
 Manual way to create a map (If [MapOptions.create](./webmap.mapoptions.create.md) is `false`<!-- -->).
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 create(): Promise<this>;
 ```
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;this&gt;
 

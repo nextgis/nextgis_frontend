@@ -4,7 +4,7 @@
 
 ## MapControl.onRemove() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onRemove(map?: M): unknown;
@@ -14,9 +14,9 @@ onRemove(map?: M): unknown;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  map | M | <i>(Optional)</i> |
+|  map | M | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 unknown
 

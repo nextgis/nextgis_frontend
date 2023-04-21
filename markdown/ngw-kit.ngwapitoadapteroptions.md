@@ -4,7 +4,7 @@
 
 ## ngwApiToAdapterOptions() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function ngwApiToAdapterOptions({ options, webMap, baseUrl, }: GetLayerAdapterOptions): MvtAdapterOptions | RasterAdapterOptions | ImageAdapterOptions | undefined;
@@ -16,7 +16,7 @@ export declare function ngwApiToAdapterOptions({ options, webMap, baseUrl, }: Ge
 |  --- | --- | --- |
 |  { options, webMap, baseUrl, } | [GetLayerAdapterOptions](./ngw-kit.getlayeradapteroptions.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 [MvtAdapterOptions](./webmap.mvtadapteroptions.md) \| [RasterAdapterOptions](./webmap.rasteradapteroptions.md) \| [ImageAdapterOptions](./webmap.imageadapteroptions.md) \| undefined
 

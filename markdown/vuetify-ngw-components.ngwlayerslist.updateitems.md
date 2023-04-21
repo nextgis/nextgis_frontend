@@ -4,12 +4,12 @@
 
 ## NgwLayersList.updateItems() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 updateItems(): Promise<void>;
 ```
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;void&gt;
 

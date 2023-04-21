@@ -5,7 +5,7 @@
 ## MapAdapterEvents.create property
 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 create: MapAdapter;

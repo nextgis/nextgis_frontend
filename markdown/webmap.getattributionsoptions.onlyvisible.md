@@ -4,7 +4,7 @@
 
 ## GetAttributionsOptions.onlyVisible property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onlyVisible?: boolean;

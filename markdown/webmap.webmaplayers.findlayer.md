@@ -4,7 +4,7 @@
 
 ## WebMapLayers.findLayer() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 findLayer<T extends LayerAdapter = LayerAdapter>(filter: (adapter: T) => boolean): T | undefined;
@@ -16,7 +16,7 @@ findLayer<T extends LayerAdapter = LayerAdapter>(filter: (adapter: T) => boolean
 |  --- | --- | --- |
 |  filter | (adapter: T) =&gt; boolean |  |
 
-<b>Returns:</b>
+**Returns:**
 
 T \| undefined
 

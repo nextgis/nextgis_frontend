@@ -4,7 +4,7 @@
 
 ## MapControl.onAdd() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onAdd(map?: M): HTMLElement | undefined;
@@ -14,9 +14,9 @@ onAdd(map?: M): HTMLElement | undefined;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  map | M | <i>(Optional)</i> |
+|  map | M | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 HTMLElement \| undefined
 

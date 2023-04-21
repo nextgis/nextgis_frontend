@@ -4,7 +4,7 @@
 
 ## PopupOptions.maxWidth property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 maxWidth?: number;

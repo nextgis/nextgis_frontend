@@ -4,7 +4,7 @@
 
 ## getCompanyLogo() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function getCompanyLogo(connector: NgwConnector, options?: CompanyLogoOptions): Promise<HTMLElement | undefined>;
@@ -14,10 +14,10 @@ export declare function getCompanyLogo(connector: NgwConnector, options?: Compan
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  connector | NgwConnector |  |
-|  options | [CompanyLogoOptions](./ngw-kit.companylogooptions.md) | <i>(Optional)</i> |
+|  connector | [NgwConnector](./ngw-connector.ngwconnector.md) |  |
+|  options | [CompanyLogoOptions](./ngw-kit.companylogooptions.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;HTMLElement \| undefined&gt;
 

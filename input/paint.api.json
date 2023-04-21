@@ -1,8 +1,8 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.28.6",
-    "schemaVersion": 1009,
+    "toolVersion": "7.34.4",
+    "schemaVersion": 1011,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
       "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
@@ -182,6 +182,7 @@
               "text": "export interface Base3DPaint "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "Base3DPaint",
           "preserveMemberOrder": false,
@@ -418,6 +419,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "BasePaint",
           "preserveMemberOrder": false,
@@ -759,6 +761,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "CirclePaint",
           "preserveMemberOrder": false,
@@ -866,6 +869,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/fromPaintExpression.ts",
           "returnTypeTokenRange": {
             "startIndex": 4,
             "endIndex": 6
@@ -903,6 +907,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "Ellipsoid3DPaint",
           "preserveMemberOrder": false,
@@ -1050,6 +1055,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "Expression",
           "typeTokenRange": {
@@ -1073,11 +1079,11 @@
             },
             {
               "kind": "Content",
-              "text": "<string, any> "
+              "text": "<string, any>"
             },
             {
               "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -1184,6 +1190,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/preparePaint.ts",
           "returnTypeTokenRange": {
             "startIndex": 16,
             "endIndex": 27
@@ -1221,7 +1228,7 @@
               "typeParameterName": "P",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 2
+                "endIndex": 3
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -1249,6 +1256,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "ExpressionName",
           "typeTokenRange": {
@@ -1293,6 +1301,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "GeometryPaint",
           "typeTokenRange": {
@@ -1319,6 +1328,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "GetCustomPaintOptions",
           "preserveMemberOrder": false,
@@ -1433,11 +1443,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -1449,6 +1455,7 @@
               "text": "> "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -1458,8 +1465,8 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             }
           ],
@@ -1585,11 +1592,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -1601,6 +1604,7 @@
               "text": "> "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -1610,8 +1614,8 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             }
           ],
@@ -1762,6 +1766,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "GetPaintFunction",
           "typeTokenRange": {
@@ -1797,6 +1802,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "IconOptions",
           "typeTokenRange": {
@@ -1823,6 +1829,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "IconPaint",
           "preserveMemberOrder": false,
@@ -2035,6 +2042,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/typeHelpers.ts",
           "returnTypeTokenRange": {
             "startIndex": 3,
             "endIndex": 6
@@ -2089,6 +2097,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/typeHelpers.ts",
           "returnTypeTokenRange": {
             "startIndex": 3,
             "endIndex": 6
@@ -2144,6 +2153,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/typeHelpers.ts",
           "returnTypeTokenRange": {
             "startIndex": 3,
             "endIndex": 6
@@ -2199,6 +2209,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/typeHelpers.ts",
           "returnTypeTokenRange": {
             "startIndex": 3,
             "endIndex": 6
@@ -2254,6 +2265,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/typeHelpers.ts",
           "returnTypeTokenRange": {
             "startIndex": 3,
             "endIndex": 6
@@ -2309,6 +2321,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/typeHelpers.ts",
           "returnTypeTokenRange": {
             "startIndex": 3,
             "endIndex": 6
@@ -2343,11 +2356,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -2365,11 +2374,11 @@
             },
             {
               "kind": "Content",
-              "text": " | null "
+              "text": " | null"
             },
             {
               "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Content",
@@ -2420,6 +2429,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "Paint",
           "typeParameters": [
@@ -2430,25 +2440,25 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             },
             {
               "typeParameterName": "P",
               "constraintTokenRange": {
-                "startIndex": 6,
+                "startIndex": 5,
                 "endIndex": 7
               },
               "defaultTypeTokenRange": {
-                "startIndex": 9,
-                "endIndex": 10
+                "startIndex": 8,
+                "endIndex": 9
               }
             }
           ],
           "typeTokenRange": {
-            "startIndex": 11,
-            "endIndex": 19
+            "startIndex": 10,
+            "endIndex": 18
           }
         },
         {
@@ -2467,11 +2477,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -2489,11 +2495,11 @@
             },
             {
               "kind": "Content",
-              "text": " | null "
+              "text": " | null"
             },
             {
               "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Content",
@@ -2544,6 +2550,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "Paint3D",
           "typeParameters": [
@@ -2554,25 +2561,25 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             },
             {
               "typeParameterName": "P",
               "constraintTokenRange": {
-                "startIndex": 6,
+                "startIndex": 5,
                 "endIndex": 7
               },
               "defaultTypeTokenRange": {
-                "startIndex": 9,
-                "endIndex": 10
+                "startIndex": 8,
+                "endIndex": 9
               }
             }
           ],
           "typeTokenRange": {
-            "startIndex": 11,
-            "endIndex": 19
+            "startIndex": 10,
+            "endIndex": 18
           }
         },
         {
@@ -2593,6 +2600,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "Paint3DType",
           "typeTokenRange": {
@@ -2618,6 +2626,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "PaintType",
           "typeTokenRange": {
@@ -2644,6 +2653,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "PathPaint",
           "preserveMemberOrder": false,
@@ -2702,6 +2712,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "PinPaint",
           "preserveMemberOrder": false,
@@ -2927,6 +2938,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/preparePaint.ts",
           "returnTypeTokenRange": {
             "startIndex": 9,
             "endIndex": 10
@@ -2977,11 +2989,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -3019,6 +3027,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "PropertiesPaint",
           "typeParameters": [
@@ -3029,14 +3038,14 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             }
           ],
           "typeTokenRange": {
-            "startIndex": 6,
-            "endIndex": 11
+            "startIndex": 5,
+            "endIndex": 10
           }
         },
         {
@@ -3055,11 +3064,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -3097,6 +3102,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "PropertiesPaint3D",
           "typeParameters": [
@@ -3107,14 +3113,14 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             }
           ],
           "typeTokenRange": {
-            "startIndex": 6,
-            "endIndex": 11
+            "startIndex": 5,
+            "endIndex": 10
           }
         },
         {
@@ -3133,11 +3139,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -3175,6 +3177,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "PropertyPaint",
           "typeParameters": [
@@ -3185,14 +3188,14 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             }
           ],
           "typeTokenRange": {
-            "startIndex": 6,
-            "endIndex": 11
+            "startIndex": 5,
+            "endIndex": 10
           }
         },
         {
@@ -3211,11 +3214,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -3253,6 +3252,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "PropertyPaint3D",
           "typeParameters": [
@@ -3263,14 +3263,14 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             }
           ],
           "typeTokenRange": {
-            "startIndex": 6,
-            "endIndex": 11
+            "startIndex": 5,
+            "endIndex": 10
           }
         },
         {
@@ -3292,6 +3292,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "Sphere3DPaint",
           "preserveMemberOrder": false,
@@ -3413,6 +3414,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "VectorAdapterLayerPaint",
           "typeTokenRange": {
@@ -3448,6 +3450,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/interfaces.ts",
           "releaseTag": "Public",
           "name": "VectorAdapterLayerPaint3D",
           "typeTokenRange": {

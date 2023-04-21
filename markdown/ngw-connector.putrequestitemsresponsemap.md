@@ -4,12 +4,12 @@
 
 ## PutRequestItemsResponseMap interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface PutRequestItemsResponseMap extends RequestItemKeys 
 ```
-<b>Extends:</b> [RequestItemKeys](./ngw-connector.requestitemkeys.md)
+**Extends:** [RequestItemKeys](./ngw-connector.requestitemkeys.md)
 
 ## Properties
 

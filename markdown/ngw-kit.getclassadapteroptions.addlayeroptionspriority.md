@@ -6,7 +6,7 @@
 
 This is some kind of dirty hack. Get rid of
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 addLayerOptionsPriority?: false;

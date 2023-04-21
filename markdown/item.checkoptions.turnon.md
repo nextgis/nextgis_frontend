@@ -4,7 +4,7 @@
 
 ## CheckOptions.turnOn property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 turnOn?: <O = CheckOptions>(options?: O) => void;

@@ -4,7 +4,7 @@
 
 ## GetPaintCallback interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface GetPaintCallback<F extends Feature = Feature> 
@@ -14,6 +14,6 @@ export interface GetPaintCallback<F extends Feature = Feature>
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [paint?](./paint.getpaintcallback.paint.md) |  | [CirclePaint](./paint.circlepaint.md) \| [PathPaint](./paint.pathpaint.md) \| [PinPaint](./paint.pinpaint.md) | <i>(Optional)</i> |
-|  [type?](./paint.getpaintcallback.type.md) |  | [PaintType](./paint.painttype.md) | <i>(Optional)</i> |
+|  [paint?](./paint.getpaintcallback.paint.md) |  | [CirclePaint](./paint.circlepaint.md) \| [PathPaint](./paint.pathpaint.md) \| [PinPaint](./paint.pinpaint.md) | _(Optional)_ |
+|  [type?](./paint.getpaintcallback.type.md) |  | [PaintType](./paint.painttype.md) | _(Optional)_ |
 

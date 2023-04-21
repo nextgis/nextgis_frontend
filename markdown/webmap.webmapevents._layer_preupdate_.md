@@ -5,7 +5,7 @@
 ## WebMapEvents."layer:preupdate" property
 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'layer:preupdate': LayerAdapter;

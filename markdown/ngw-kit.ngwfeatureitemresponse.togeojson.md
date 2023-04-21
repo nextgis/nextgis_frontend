@@ -6,14 +6,14 @@
 
 To get GeoJson from ngw item
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 toGeojson(): CancelablePromise<Feature<G, F>>;
 ```
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;Feature&lt;G, F&gt;&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;Feature&lt;G, F&gt;&gt;
 
 ## Remarks
 

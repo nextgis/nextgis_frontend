@@ -4,12 +4,12 @@
 
 ## NgwWebmapLayerAdapter.getIdentificationIds() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getIdentificationIds(): Promise<number[]>;
 ```
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;number\[\]&gt;
 

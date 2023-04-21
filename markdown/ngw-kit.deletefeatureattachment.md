@@ -4,7 +4,7 @@
 
 ## deleteFeatureAttachment() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function deleteFeatureAttachment(options: GetNgwItemOptions & {
@@ -18,7 +18,7 @@ export declare function deleteFeatureAttachment(options: GetNgwItemOptions & {
 |  --- | --- | --- |
 |  options | [GetNgwItemOptions](./ngw-kit.getngwitemoptions.md) &amp; { attachmentId: number; } |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;void&gt;
 

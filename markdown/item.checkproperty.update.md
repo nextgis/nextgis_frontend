@@ -4,7 +4,7 @@
 
 ## CheckProperty.update() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 update(value?: V, options?: O): void;
@@ -14,10 +14,10 @@ update(value?: V, options?: O): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  value | V | <i>(Optional)</i> |
-|  options | O | <i>(Optional)</i> |
+|  value | V | _(Optional)_ |
+|  options | O | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

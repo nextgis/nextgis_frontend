@@ -4,7 +4,7 @@
 
 ## fetchNgwLayerCount() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function fetchNgwLayerCount({ connector, resourceId, cache, }: FetchNgwLayerCountOptions): CancelablePromise<number>;
@@ -16,7 +16,7 @@ export declare function fetchNgwLayerCount({ connector, resourceId, cache, }: Fe
 |  --- | --- | --- |
 |  { connector, resourceId, cache, } | [FetchNgwLayerCountOptions](./ngw-kit.fetchngwlayercountoptions.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;number&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;number&gt;
 

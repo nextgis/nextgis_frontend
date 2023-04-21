@@ -4,17 +4,17 @@
 
 ## CreateMapserverStyleOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface CreateMapserverStyleOptions extends ResourceCreateOptions 
 ```
-<b>Extends:</b> [ResourceCreateOptions](./ngw-uploader.resourcecreateoptions.md)
+**Extends:** [ResourceCreateOptions](./ngw-uploader.resourcecreateoptions.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [geometryType](./ngw-uploader.createmapserverstyleoptions.geometrytype.md) |  | [GeometryType](./ngw-connector.geometrytype.md) |  |
-|  [paint?](./ngw-uploader.createmapserverstyleoptions.paint.md) |  | [GeometryPaint](./paint.geometrypaint.md) | <i>(Optional)</i> |
+|  [paint?](./ngw-uploader.createmapserverstyleoptions.paint.md) |  | [GeometryPaint](./paint.geometrypaint.md) | _(Optional)_ |
 

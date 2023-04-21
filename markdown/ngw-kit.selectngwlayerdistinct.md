@@ -4,7 +4,7 @@
 
 ## selectNgwLayerDistinct() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function selectNgwLayerDistinct<P extends FeatureProperties = FeatureProperties>(options: MapSelectNgwLayerDistinctOptions<P>): CancelablePromise<Record<keyof P, unknown[]>>;
@@ -16,7 +16,7 @@ export declare function selectNgwLayerDistinct<P extends FeatureProperties = Fea
 |  --- | --- | --- |
 |  options | [MapSelectNgwLayerDistinctOptions](./ngw-kit.mapselectngwlayerdistinctoptions.md)<!-- -->&lt;P&gt; |  |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;Record&lt;keyof P, unknown\[\]&gt;&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;Record&lt;keyof P, unknown\[\]&gt;&gt;
 

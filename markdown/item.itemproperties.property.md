@@ -4,7 +4,7 @@
 
 ## ItemProperties.property() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 property(name: string): BaseProperty<any, ItemBasePropertyOptions<any>>;
@@ -16,7 +16,7 @@ property(name: string): BaseProperty<any, ItemBasePropertyOptions<any>>;
 |  --- | --- | --- |
 |  name | string |  |
 
-<b>Returns:</b>
+**Returns:**
 
 [BaseProperty](./item.baseproperty.md)<!-- -->&lt;any, [ItemBasePropertyOptions](./item.itembasepropertyoptions.md)<!-- -->&lt;any&gt;&gt;
 

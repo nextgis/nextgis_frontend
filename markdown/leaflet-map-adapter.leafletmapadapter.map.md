@@ -4,7 +4,7 @@
 
 ## LeafletMapAdapter.Map property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static Map: typeof Map;

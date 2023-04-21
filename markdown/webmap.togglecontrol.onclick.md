@@ -4,7 +4,7 @@
 
 ## ToggleControl.onClick property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onClick: OnClick;

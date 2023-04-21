@@ -1,4 +1,8 @@
-import type { MainLayerAdapter, RasterAdapterOptions } from '@nextgis/webmap';
+import type {
+  MainLayerAdapter,
+  RasterAdapterOptions,
+  WebMap,
+} from '@nextgis/webmap';
 export interface QmsOptions {
   url: string;
 }
@@ -61,4 +65,9 @@ export interface QmsBasemap {
   submitter?: string;
 
   updated_at?: Date;
+}
+
+export interface CreateQmsAdapterOptions extends Partial<QmsAdapterOptions> {
+  webMap: WebMap;
+  url?: string;
 }

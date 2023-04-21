@@ -4,7 +4,7 @@
 
 ## NgwMap.fetchIdentifyItem() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 fetchIdentifyItem<G extends Geometry = Geometry, P extends FeatureProperties = FeatureProperties>(identify: NgwIdentify, requestOptions?: NgwFeatureRequestOptions): CancelablePromise<NgwFeatureItemResponse<P, G> | undefined>;
@@ -14,10 +14,10 @@ fetchIdentifyItem<G extends Geometry = Geometry, P extends FeatureProperties = F
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  identify | [NgwIdentify](./ngw-kit.ngwidentify.md) |  |
-|  requestOptions | [NgwFeatureRequestOptions](./ngw-kit.ngwfeaturerequestoptions.md) | <i>(Optional)</i> |
+|  identify | NgwIdentify |  |
+|  requestOptions | NgwFeatureRequestOptions | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;[NgwFeatureItemResponse](./ngw-kit.ngwfeatureitemresponse.md)<!-- -->&lt;P, G&gt; \| undefined&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;NgwFeatureItemResponse&lt;P, G&gt; \| undefined&gt;
 

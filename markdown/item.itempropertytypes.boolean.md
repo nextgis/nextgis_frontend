@@ -4,7 +4,7 @@
 
 ## ItemPropertyTypes.boolean property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 boolean: boolean;

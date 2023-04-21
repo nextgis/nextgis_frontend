@@ -4,7 +4,7 @@
 
 ## ButtonControl() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function ButtonControl<P extends MapControlProps = MapControlProps>(props: P): null;
@@ -16,7 +16,7 @@ export declare function ButtonControl<P extends MapControlProps = MapControlProp
 |  --- | --- | --- |
 |  props | P |  |
 
-<b>Returns:</b>
+**Returns:**
 
 null
 

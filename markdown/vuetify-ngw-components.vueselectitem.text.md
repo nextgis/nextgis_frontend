@@ -4,7 +4,7 @@
 
 ## VueSelectItem.text property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 text: string;

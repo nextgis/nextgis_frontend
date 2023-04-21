@@ -4,7 +4,7 @@
 
 ## GetIdentifyGeoJsonOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface GetIdentifyGeoJsonOptions<P extends FeatureProperties = FeatureProperties> 
@@ -14,8 +14,8 @@ export interface GetIdentifyGeoJsonOptions<P extends FeatureProperties = Feature
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [connector](./ngw-kit.getidentifygeojsonoptions.connector.md) |  | NgwConnector |  |
+|  [connector](./ngw-kit.getidentifygeojsonoptions.connector.md) |  | [NgwConnector](./ngw-connector.ngwconnector.md) |  |
 |  [identify](./ngw-kit.getidentifygeojsonoptions.identify.md) |  | [NgwIdentify](./ngw-kit.ngwidentify.md) |  |
-|  [multiple?](./ngw-kit.getidentifygeojsonoptions.multiple.md) |  | boolean | <i>(Optional)</i> |
-|  [requestOptions?](./ngw-kit.getidentifygeojsonoptions.requestoptions.md) |  | [NgwFeatureRequestOptions](./ngw-kit.ngwfeaturerequestoptions.md)<!-- -->&lt;P&gt; | <i>(Optional)</i> |
+|  [multiple?](./ngw-kit.getidentifygeojsonoptions.multiple.md) |  | boolean | _(Optional)_ |
+|  [requestOptions?](./ngw-kit.getidentifygeojsonoptions.requestoptions.md) |  | [NgwFeatureRequestOptions](./ngw-kit.ngwfeaturerequestoptions.md)<!-- -->&lt;P&gt; | _(Optional)_ |
 

@@ -4,7 +4,7 @@
 
 ## NgwMap.onLoad() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onLoad(event?: keyof NgwMapEvents): Promise<this>;
@@ -14,9 +14,9 @@ onLoad(event?: keyof NgwMapEvents): Promise<this>;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  event | keyof [NgwMapEvents](./ngw-map.ngwmapevents.md) | <i>(Optional)</i> |
+|  event | keyof [NgwMapEvents](./ngw-map.ngwmapevents.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;this&gt;
 

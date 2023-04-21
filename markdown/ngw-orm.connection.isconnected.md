@@ -6,7 +6,7 @@
 
 Indicates if connection is initialized or not.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 readonly isConnected: boolean;

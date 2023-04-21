@@ -4,10 +4,10 @@
 
 ## RequestTransformFunction type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type RequestTransformFunction = (url: string, options: RequestOptions) => [url: string, options: RequestOptions];
 ```
-<b>References:</b> [RequestOptions](./ngw-connector.requestoptions.md)
+**References:** [RequestOptions](./ngw-connector.requestoptions.md)
 

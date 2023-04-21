@@ -4,7 +4,7 @@
 
 ## NgwUploader.uploadRaster() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 uploadRaster<F extends FileType = FileType>(file: F, options: RasterUploadOptions): Promise<CreatedRes>;
@@ -17,7 +17,7 @@ uploadRaster<F extends FileType = FileType>(file: F, options: RasterUploadOption
 |  file | F |  |
 |  options | [RasterUploadOptions](./ngw-uploader.rasteruploadoptions.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[CreatedRes](./ngw-uploader.createdres.md)<!-- -->&gt;
 

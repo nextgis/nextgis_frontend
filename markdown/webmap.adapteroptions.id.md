@@ -6,7 +6,7 @@
 
 Unique Layer ID. If not specified, will be added automatically.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 id?: string;

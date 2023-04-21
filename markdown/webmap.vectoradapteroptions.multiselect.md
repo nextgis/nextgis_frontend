@@ -6,7 +6,7 @@
 
 Indicates whether several objects can be selected in one layer.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 multiselect?: boolean;

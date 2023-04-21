@@ -6,7 +6,7 @@
 
 Get instance of registered control
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getControl<K extends keyof MapControls>(control: K, options?: MapControls[K]): C | undefined;
@@ -17,9 +17,9 @@ getControl<K extends keyof MapControls>(control: K, options?: MapControls[K]): C
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  control | K | Any registered control string name |
-|  options | [MapControls](./webmap.mapcontrols.md)<!-- -->\[K\] | <i>(Optional)</i> Custom control options |
+|  options | [MapControls](./webmap.mapcontrols.md)<!-- -->\[K\] | _(Optional)_ Custom control options |
 
-<b>Returns:</b>
+**Returns:**
 
 C \| undefined
 

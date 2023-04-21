@@ -6,7 +6,7 @@
 
 Set transparency for a given layer by number from 0 to 1
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 setLayerOpacity(layerDef: LayerDef, value: number): void;
@@ -19,7 +19,7 @@ setLayerOpacity(layerDef: LayerDef, value: number): void;
 |  layerDef | [LayerDef](./webmap.layerdef.md) |  |
 |  value | number |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

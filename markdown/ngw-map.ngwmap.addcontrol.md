@@ -6,7 +6,7 @@
 
 Organized addition to the map design and controls elements, calling `control.onAdd(this.webMap.mapAdapter)`
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 addControl<K extends keyof MapControls>(controlDef: K | C, position: ControlPosition, options?: MapControls[K]): Promise<any>;
@@ -18,9 +18,9 @@ addControl<K extends keyof MapControls>(controlDef: K | C, position: ControlPosi
 |  --- | --- | --- |
 |  controlDef | K \| C |  |
 |  position | [ControlPosition](./webmap.controlposition.md) | position relative to the map angles |
-|  options | [MapControls](./webmap.mapcontrols.md)<!-- -->\[K\] | <i>(Optional)</i> initialization parameters if the control is set as a string value |
+|  options | [MapControls](./webmap.mapcontrols.md)<!-- -->\[K\] | _(Optional)_ initialization parameters if the control is set as a string value |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;any&gt;
 

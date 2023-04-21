@@ -4,10 +4,10 @@
 
 ## JsonArray type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type JsonArray = Array<AnyJson>;
 ```
-<b>References:</b> [AnyJson](./utils.anyjson.md)
+**References:** [AnyJson](./utils.anyjson.md)
 

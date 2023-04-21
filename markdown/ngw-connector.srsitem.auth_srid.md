@@ -4,7 +4,7 @@
 
 ## SrsItem.auth\_srid property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 auth_srid: number;

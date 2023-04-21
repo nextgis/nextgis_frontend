@@ -4,17 +4,17 @@
 
 ## BaseProvider class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare abstract class BaseProvider<O extends BaseProviderOptions = BaseProviderOptions> extends BaseGeocoder<O> 
 ```
-<b>Extends:</b> BaseGeocoder
+**Extends:** BaseGeocoder&lt;O&gt;
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [label?](./geocoder.baseprovider.label.md) |  | string | <i>(Optional)</i> |
-|  [searchUrl?](./geocoder.baseprovider.searchurl.md) |  | string | <i>(Optional)</i> |
+|  [label?](./geocoder.baseprovider.label.md) |  | string | _(Optional)_ |
+|  [searchUrl?](./geocoder.baseprovider.searchurl.md) |  | string | _(Optional)_ |
 

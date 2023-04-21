@@ -4,7 +4,7 @@
 
 ## LeafletMapAdapter.controlAdapters property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static controlAdapters: {

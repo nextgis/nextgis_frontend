@@ -11,7 +11,7 @@
 
 TODO: replace by maxZoom
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 maxScale?: number;

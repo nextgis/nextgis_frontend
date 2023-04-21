@@ -4,7 +4,7 @@
 
 ## HtmlToggle.off property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 off: HtmlDef;

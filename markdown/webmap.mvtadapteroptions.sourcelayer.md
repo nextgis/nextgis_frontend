@@ -4,7 +4,7 @@
 
 ## MvtAdapterOptions.sourceLayer property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 sourceLayer?: string;

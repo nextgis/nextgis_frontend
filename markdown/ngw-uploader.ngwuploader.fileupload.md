@@ -4,7 +4,7 @@
 
 ## NgwUploader.fileUpload() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 fileUpload(file: FileType, options?: FileUploadOptions): CancelablePromise<FileMeta>;
@@ -15,9 +15,9 @@ fileUpload(file: FileType, options?: FileUploadOptions): CancelablePromise<FileM
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  file | FileType |  |
-|  options | [FileUploadOptions](./ngw-uploader.fileuploadoptions.md) | <i>(Optional)</i> |
+|  options | [FileUploadOptions](./ngw-uploader.fileuploadoptions.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;[FileMeta](./ngw-connector.filemeta.md)<!-- -->&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;[FileMeta](./ngw-connector.filemeta.md)<!-- -->&gt;
 

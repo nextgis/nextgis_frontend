@@ -4,7 +4,7 @@
 
 ## sleep() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function sleep(delay?: number): Promise<void>;
@@ -14,9 +14,9 @@ export declare function sleep(delay?: number): Promise<void>;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  delay | number | <i>(Optional)</i> |
+|  delay | number | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;void&gt;
 

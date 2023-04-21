@@ -6,7 +6,7 @@
 
 Set the transparency of given layer.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 setLayerOpacity(layer: L, opacity: number): void;
@@ -19,7 +19,7 @@ setLayerOpacity(layer: L, opacity: number): void;
 |  layer | L |  |
 |  opacity | number |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

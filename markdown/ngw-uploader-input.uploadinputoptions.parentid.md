@@ -4,7 +4,7 @@
 
 ## UploadInputOptions.parentId property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 parentId?: number;

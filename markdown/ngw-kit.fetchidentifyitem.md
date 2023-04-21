@@ -4,7 +4,7 @@
 
 ## fetchIdentifyItem() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function fetchIdentifyItem<G extends Geometry = Geometry, P extends FeatureProperties = FeatureProperties>(options: GetIdentifyGeoJsonOptions<P>): CancelablePromise<NgwFeatureItemResponse<P, G> | undefined>;
@@ -16,7 +16,7 @@ export declare function fetchIdentifyItem<G extends Geometry = Geometry, P exten
 |  --- | --- | --- |
 |  options | [GetIdentifyGeoJsonOptions](./ngw-kit.getidentifygeojsonoptions.md)<!-- -->&lt;P&gt; |  |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;[NgwFeatureItemResponse](./ngw-kit.ngwfeatureitemresponse.md)<!-- -->&lt;P, G&gt; \| undefined&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;[NgwFeatureItemResponse](./ngw-kit.ngwfeatureitemresponse.md)<!-- -->&lt;P, G&gt; \| undefined&gt;
 

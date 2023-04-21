@@ -4,12 +4,12 @@
 
 ## NgwWebmapLayerAdapter class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> 
 ```
-<b>Implements:</b> [ResourceAdapter](./ngw-kit.resourceadapter.md)
+**Implements:** [ResourceAdapter](./ngw-kit.resourceadapter.md)<!-- -->&lt;M&gt;
 
 ## Constructors
 
@@ -21,9 +21,9 @@ export declare class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [\_extent?](./ngw-kit.ngwwebmaplayeradapter._extent.md) | <code>protected</code> | [LngLatBoundsArray](./utils.lnglatboundsarray.md) | <i>(Optional)</i> |
+|  [\_extent?](./ngw-kit.ngwwebmaplayeradapter._extent.md) | <code>protected</code> | [LngLatBoundsArray](./utils.lnglatboundsarray.md) | _(Optional)_ |
 |  [emitter](./ngw-kit.ngwwebmaplayeradapter.emitter.md) | <code>readonly</code> | StrictEventEmitter&lt;EventEmitter, [NgwWebmapLayerAdapterEvents](./ngw-kit.ngwwebmaplayeradapterevents.md)<!-- -->&gt; |  |
-|  [layer?](./ngw-kit.ngwwebmaplayeradapter.layer.md) |  | [NgwWebmapItem](./ngw-kit.ngwwebmapitem.md) | <i>(Optional)</i> |
+|  [layer?](./ngw-kit.ngwwebmaplayeradapter.layer.md) |  | [NgwWebmapItem](./ngw-kit.ngwwebmapitem.md) | _(Optional)_ |
 |  [map](./ngw-kit.ngwwebmaplayeradapter.map.md) |  | M |  |
 |  [NgwWebmapItem](./ngw-kit.ngwwebmaplayeradapter.ngwwebmapitem.md) |  | [Type](./utils.type.md)<!-- -->&lt;[NgwWebmapItem](./ngw-kit.ngwwebmapitem.md)<!-- -->&gt; |  |
 |  [options](./ngw-kit.ngwwebmaplayeradapter.options.md) |  | [NgwWebmapAdapterOptions](./ngw-kit.ngwwebmapadapteroptions.md) |  |

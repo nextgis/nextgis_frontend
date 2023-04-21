@@ -4,7 +4,7 @@
 
 ## NgwProvider.searchResources property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 searchResources: SearchResource[];

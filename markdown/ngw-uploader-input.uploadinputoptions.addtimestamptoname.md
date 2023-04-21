@@ -4,7 +4,7 @@
 
 ## UploadInputOptions.addTimestampToName property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 addTimestampToName?: boolean;

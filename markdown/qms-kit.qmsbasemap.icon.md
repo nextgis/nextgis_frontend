@@ -4,7 +4,7 @@
 
 ## QmsBasemap.icon property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 icon: number;

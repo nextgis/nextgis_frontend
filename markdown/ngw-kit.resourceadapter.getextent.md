@@ -9,12 +9,12 @@
 > use [ResourceAdapter.getBounds()](./ngw-kit.resourceadapter.getbounds.md)
 > 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getExtent?(): LngLatBoundsArray | Promise<LngLatBoundsArray | undefined> | undefined;
 ```
-<b>Returns:</b>
+**Returns:**
 
 [LngLatBoundsArray](./utils.lnglatboundsarray.md) \| Promise&lt;[LngLatBoundsArray](./utils.lnglatboundsarray.md) \| undefined&gt; \| undefined
 

@@ -4,7 +4,7 @@
 
 ## WmsAdapterOptions.transparent property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 transparent?: boolean;

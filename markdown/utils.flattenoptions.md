@@ -4,7 +4,7 @@
 
 ## FlattenOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface FlattenOptions 
@@ -14,5 +14,5 @@ export interface FlattenOptions
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [flatArray?](./utils.flattenoptions.flatarray.md) |  | boolean | <i>(Optional)</i> |
+|  [flatArray?](./utils.flattenoptions.flatarray.md) |  | boolean | _(Optional)_ |
 

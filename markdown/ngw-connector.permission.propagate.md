@@ -4,7 +4,7 @@
 
 ## Permission.propagate property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 propagate: boolean;

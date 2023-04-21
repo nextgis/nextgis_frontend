@@ -9,7 +9,7 @@
 > use [NgwMap.fitLayer()](./ngw-map.ngwmap.fitlayer.md) instead
 > 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 zoomToLayer(layerDef: string | ResourceAdapter): Promise<void>;
@@ -19,9 +19,9 @@ zoomToLayer(layerDef: string | ResourceAdapter): Promise<void>;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  layerDef | string \| [ResourceAdapter](./ngw-kit.resourceadapter.md) |  |
+|  layerDef | string \| ResourceAdapter |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;void&gt;
 

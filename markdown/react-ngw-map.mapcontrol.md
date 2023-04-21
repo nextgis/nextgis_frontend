@@ -4,7 +4,7 @@
 
 ## MapControl() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function MapControl<P extends MapControlProps = MapControlProps>(props: P): import("react").ReactPortal;
@@ -16,7 +16,7 @@ export declare function MapControl<P extends MapControlProps = MapControlProps>(
 |  --- | --- | --- |
 |  props | P |  |
 
-<b>Returns:</b>
+**Returns:**
 
 import("react").ReactPortal
 

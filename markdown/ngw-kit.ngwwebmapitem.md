@@ -4,12 +4,12 @@
 
 ## NgwWebmapItem class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class NgwWebmapItem extends Item<ItemOptions> 
 ```
-<b>Extends:</b> [Item](./item.item.md)<!-- -->&lt;[ItemOptions](./item.itemoptions.md)
+**Extends:** [Item](./item.item.md)<!-- -->&lt;[ItemOptions](./item.itemoptions.md)<!-- -->&gt;
 
 ## Constructors
 
@@ -22,11 +22,11 @@ export declare class NgwWebmapItem extends Item<ItemOptions>
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [\_rootDescendantsCount](./ngw-kit.ngwwebmapitem._rootdescendantscount.md) | <code>protected</code> | number |  |
-|  [connector?](./ngw-kit.ngwwebmapitem.connector.md) |  | NgwConnector | <i>(Optional)</i> |
+|  [connector?](./ngw-kit.ngwwebmapitem.connector.md) |  | [NgwConnector](./ngw-connector.ngwconnector.md) | _(Optional)_ |
 |  [emitter](./ngw-kit.ngwwebmapitem.emitter.md) | <code>readonly</code> | EventEmitter |  |
-|  [GetAdapterFromLayerType](./ngw-kit.ngwwebmapitem.getadapterfromlayertype.md) | <code>static</code> | { \[layerType: string\]: (item: [TreeItem](./ngw-kit.treeitem.md)<!-- -->, options: any, webMap: [WebMap](./webmap.webmap.md)<!-- -->, connector?: NgwConnector) =&gt; [LayerAdapterDefinition](./webmap.layeradapterdefinition.md)<!-- -->; } |  |
+|  [GetAdapterFromLayerType](./ngw-kit.ngwwebmapitem.getadapterfromlayertype.md) | <code>static</code> | { \[layerType: string\]: (item: [TreeItem](./ngw-kit.treeitem.md)<!-- -->, options: any, webMap: [WebMap](./webmap.webmap.md)<!-- -->, connector?: [NgwConnector](./ngw-connector.ngwconnector.md)<!-- -->) =&gt; [LayerAdapterDefinition](./webmap.layeradapterdefinition.md)<!-- -->; } |  |
 |  [item](./ngw-kit.ngwwebmapitem.item.md) |  | [TreeGroup](./ngw-kit.treegroup.md) \| [TreeLayer](./ngw-kit.treelayer.md) |  |
-|  [layer?](./ngw-kit.ngwwebmapitem.layer.md) |  | [LayerAdapter](./webmap.layeradapter.md) | <i>(Optional)</i> |
+|  [layer?](./ngw-kit.ngwwebmapitem.layer.md) |  | [LayerAdapter](./webmap.layeradapter.md) | _(Optional)_ |
 |  [options](./ngw-kit.ngwwebmapitem.options.md) | <code>static</code> | [ItemOptions](./item.itemoptions.md) |  |
 |  [webMap](./ngw-kit.ngwwebmapitem.webmap.md) |  | [WebMap](./webmap.webmap.md) |  |
 

@@ -4,7 +4,7 @@
 
 ## MapContainerProps.children property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 children?: ReactNode;

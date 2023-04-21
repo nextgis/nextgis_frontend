@@ -4,7 +4,7 @@
 
 ## AdapterOptions.onAdded property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onAdded?: (layer: LayerAdapter) => void;

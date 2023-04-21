@@ -4,7 +4,7 @@
 
 ## geojsonArea() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function geojsonArea(geojson: GeoJSON): number;
@@ -16,7 +16,7 @@ export declare function geojsonArea(geojson: GeoJSON): number;
 |  --- | --- | --- |
 |  geojson | GeoJSON |  |
 
-<b>Returns:</b>
+**Returns:**
 
 number
 

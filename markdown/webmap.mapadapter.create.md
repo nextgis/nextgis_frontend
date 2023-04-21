@@ -4,7 +4,7 @@
 
 ## MapAdapter.create() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 create(options?: MapOptions): void;
@@ -14,9 +14,9 @@ create(options?: MapOptions): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | [MapOptions](./webmap.mapoptions.md) | <i>(Optional)</i> |
+|  options | [MapOptions](./webmap.mapoptions.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

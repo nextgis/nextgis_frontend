@@ -4,12 +4,12 @@
 
 ## NgwWebmapLayerAdapter.getBookmarksResourceId() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getBookmarksResourceId(): number | undefined;
 ```
-<b>Returns:</b>
+**Returns:**
 
 number \| undefined
 

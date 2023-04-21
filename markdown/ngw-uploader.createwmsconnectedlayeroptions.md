@@ -4,10 +4,10 @@
 
 ## CreateWmsConnectedLayerOptions type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type CreateWmsConnectedLayerOptions = ResourceCreateOptions & WmsClientLayer;
 ```
-<b>References:</b> [ResourceCreateOptions](./ngw-uploader.resourcecreateoptions.md)<!-- -->, [WmsClientLayer](./ngw-connector.wmsclientlayer.md)
+**References:** [ResourceCreateOptions](./ngw-uploader.resourcecreateoptions.md)<!-- -->, [WmsClientLayer](./ngw-connector.wmsclientlayer.md)
 

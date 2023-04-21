@@ -4,7 +4,7 @@
 
 ## StarterKit.getSettings() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getSettings?(webMap?: WebMap): Promise<MapOptions>;
@@ -14,9 +14,9 @@ getSettings?(webMap?: WebMap): Promise<MapOptions>;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  webMap | [WebMap](./webmap.webmap.md) | <i>(Optional)</i> |
+|  webMap | [WebMap](./webmap.webmap.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[MapOptions](./webmap.mapoptions.md)<!-- -->&gt;
 

@@ -4,7 +4,7 @@
 
 ## AppSettings interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface AppSettings 
@@ -14,11 +14,11 @@ export interface AppSettings
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [bookmark\_resource?](./ngw-kit.appsettings.bookmark_resource.md) |  | any | <i>(Optional)</i> |
-|  [draw\_order\_enabled?](./ngw-kit.appsettings.draw_order_enabled.md) |  | any | <i>(Optional)</i> |
-|  [extent\_bottom?](./ngw-kit.appsettings.extent_bottom.md) |  | number | <i>(Optional)</i> |
-|  [extent\_left?](./ngw-kit.appsettings.extent_left.md) |  | number | <i>(Optional)</i> |
-|  [extent\_right?](./ngw-kit.appsettings.extent_right.md) |  | number | <i>(Optional)</i> |
-|  [extent\_top?](./ngw-kit.appsettings.extent_top.md) |  | number | <i>(Optional)</i> |
-|  [root\_item?](./ngw-kit.appsettings.root_item.md) |  | [TreeGroup](./ngw-kit.treegroup.md) | <i>(Optional)</i> |
+|  [bookmark\_resource?](./ngw-kit.appsettings.bookmark_resource.md) |  | any | _(Optional)_ |
+|  [draw\_order\_enabled?](./ngw-kit.appsettings.draw_order_enabled.md) |  | any | _(Optional)_ |
+|  [extent\_bottom?](./ngw-kit.appsettings.extent_bottom.md) |  | number | _(Optional)_ |
+|  [extent\_left?](./ngw-kit.appsettings.extent_left.md) |  | number | _(Optional)_ |
+|  [extent\_right?](./ngw-kit.appsettings.extent_right.md) |  | number | _(Optional)_ |
+|  [extent\_top?](./ngw-kit.appsettings.extent_top.md) |  | number | _(Optional)_ |
+|  [root\_item?](./ngw-kit.appsettings.root_item.md) |  | [TreeGroup](./ngw-kit.treegroup.md) | _(Optional)_ |
 

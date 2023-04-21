@@ -4,12 +4,12 @@
 
 ## Cache\_2.all() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 all(): CacheItem<V, O>[];
 ```
-<b>Returns:</b>
+**Returns:**
 
 CacheItem&lt;V, O&gt;\[\]
 

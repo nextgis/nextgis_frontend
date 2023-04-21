@@ -4,7 +4,7 @@
 
 ## Model3DOptions.scale property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 scale?: number;

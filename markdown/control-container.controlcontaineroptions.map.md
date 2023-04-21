@@ -4,7 +4,7 @@
 
 ## ControlContainerOptions.map property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 map?: MapAdapter;

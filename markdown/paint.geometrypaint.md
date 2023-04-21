@@ -4,10 +4,10 @@
 
 ## GeometryPaint type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type GeometryPaint = PathPaint & CirclePaint & PinPaint;
 ```
-<b>References:</b> [PathPaint](./paint.pathpaint.md)<!-- -->, [CirclePaint](./paint.circlepaint.md)<!-- -->, [PinPaint](./paint.pinpaint.md)
+**References:** [PathPaint](./paint.pathpaint.md)<!-- -->, [CirclePaint](./paint.circlepaint.md)<!-- -->, [PinPaint](./paint.pinpaint.md)
 

@@ -4,7 +4,7 @@
 
 ## ImageTypes type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type ImageTypes = 'image/tif' | 'image/tiff' | '.tif';

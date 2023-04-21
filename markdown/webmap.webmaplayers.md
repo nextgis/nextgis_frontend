@@ -4,12 +4,12 @@
 
 ## WebMapLayers class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class WebMapLayers<M = any, L = any, E extends WebMapEvents = WebMapEvents, O extends MapOptions = MapOptions> extends WebMapMain<M, E, O> 
 ```
-<b>Extends:</b> [WebMapMain](./webmap.webmapmain.md)
+**Extends:** [WebMapMain](./webmap.webmapmain.md)<!-- -->&lt;M, E, O&gt;
 
 ## Constructors
 
@@ -44,6 +44,7 @@ export declare class WebMapLayers<M = any, L = any, E extends WebMapEvents = Web
 |  [getLayerId(layerDef)](./webmap.webmaplayers.getlayerid.md) |  | Helper method to return added layer identificator by any definition type. |
 |  [getLayers()](./webmap.webmaplayers.getlayers.md) |  | Return array of all added layer identifications. |
 |  [hideLayer(layerDef, options)](./webmap.webmaplayers.hidelayer.md) |  | Hide added layer on the map by it definition. |
+|  [hideLayerLabel(layerDef)](./webmap.webmaplayers.hidelayerlabel.md) |  |  |
 |  [isBaseLayer(layerDef)](./webmap.webmaplayers.isbaselayer.md) |  | Check if given layer is baselayer |
 |  [isLayerVisible(layerDef)](./webmap.webmaplayers.islayervisible.md) |  | Check if the given layer on the map |
 |  [orderedLayers()](./webmap.webmaplayers.orderedlayers.md) |  |  |
@@ -59,7 +60,9 @@ export declare class WebMapLayers<M = any, L = any, E extends WebMapEvents = Web
 |  [setLayerPaint(layerDef, paint)](./webmap.webmaplayers.setlayerpaint.md) |  |  |
 |  [setLayerSelectedPaint(layerDef, paint)](./webmap.webmaplayers.setlayerselectedpaint.md) |  |  |
 |  [showLayer(layerDef, options)](./webmap.webmaplayers.showlayer.md) |  | Show added layer on the map by it definition. |
+|  [showLayerLabel(layerDef)](./webmap.webmaplayers.showlayerlabel.md) |  |  |
 |  [toggleLayer(layerDef, status, options)](./webmap.webmaplayers.togglelayer.md) |  | Change added layer visibility on the map by given status or inverse current status. |
+|  [toggleLayerLabel(layerDef, status)](./webmap.webmaplayers.togglelayerlabel.md) |  |  |
 |  [unSelectLayer(layerDef, findFeatureFun)](./webmap.webmaplayers.unselectlayer.md) |  | Unselect the given layer. If the adapter is a vector layer and supports data selection, you can pass a callback function to specify which data will be unselected. |
 |  [unSelectLayers()](./webmap.webmaplayers.unselectlayers.md) |  | Remove selection from any selected selectable layer |
 |  [updateLayer(layerDef)](./webmap.webmaplayers.updatelayer.md) |  |  |

@@ -4,7 +4,7 @@
 
 ## IdentifyItem.parent property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 readonly parent: string;

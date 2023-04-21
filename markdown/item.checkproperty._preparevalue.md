@@ -4,7 +4,7 @@
 
 ## CheckProperty.\_prepareValue() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 protected _prepareValue(value?: PreparedValue): V | undefined;
@@ -14,9 +14,9 @@ protected _prepareValue(value?: PreparedValue): V | undefined;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  value | PreparedValue | <i>(Optional)</i> |
+|  value | PreparedValue | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 V \| undefined
 

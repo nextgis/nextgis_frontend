@@ -4,7 +4,7 @@
 
 ## FeatureItemExtensions.description property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 description?: string;

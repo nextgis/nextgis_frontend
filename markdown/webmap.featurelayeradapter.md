@@ -6,10 +6,10 @@
 
 Generic shortcut to define VectorLayerAdapter from feature
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type FeatureLayerAdapter<P extends FeatureProperties = FeatureProperties, G extends Geometry = Geometry, O extends VectorAdapterOptions = VectorAdapterOptions, M = any, L = any> = VectorLayerAdapter<M, L, O, Feature<G, P>>;
 ```
-<b>References:</b> [FeatureProperties](./utils.featureproperties.md)<!-- -->, [VectorAdapterOptions](./webmap.vectoradapteroptions.md)<!-- -->, [VectorLayerAdapter](./webmap.vectorlayeradapter.md)
+**References:** [FeatureProperties](./utils.featureproperties.md)<!-- -->, [VectorAdapterOptions](./webmap.vectoradapteroptions.md)<!-- -->, [VectorLayerAdapter](./webmap.vectorlayeradapter.md)
 

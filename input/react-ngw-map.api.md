@@ -19,7 +19,7 @@ import { ReactPortal } from 'react';
 import { RefObject } from 'react';
 import type { ToggleControlOptions } from '@nextgis/webmap';
 
-// Warning: (ae-forgotten-export) The symbol "MapControlProps" needs to be exported by the entry point index.d.ts
+// Warning: (ae-forgotten-export) The symbol "MapControlProps_3" needs to be exported by the entry point index.d.ts
 //
 // @public (undocumented)
 export function ButtonControl<P extends MapControlProps_3 = MapControlProps_3>(props: P): null;
@@ -48,7 +48,7 @@ export interface MapContainerProps<M = any, L = any, C extends object = any, O e
     whenCreated?: (map: NgwMap<M, L, C, O>) => void;
 }
 
-// Warning: (ae-forgotten-export) The symbol "MapControlProps" needs to be exported by the entry point index.d.ts
+// Warning: (ae-forgotten-export) The symbol "MapControlProps_2" needs to be exported by the entry point index.d.ts
 //
 // @public (undocumented)
 export function MapControl<P extends MapControlProps_2 = MapControlProps_2>(props: P): ReactPortal;
@@ -86,7 +86,7 @@ style: CSSProperties | undefined;
 // @public (undocumented)
 export type ReactNgwMapProps = MapContainerProps & Required<Pick<MapContainerProps, 'mapAdapter'>>;
 
-// Warning: (ae-forgotten-export) The symbol "MapControlProps" needs to be exported by the entry point index.d.ts
+// Warning: (ae-forgotten-export) The symbol "MapControlProps_4" needs to be exported by the entry point index.d.ts
 //
 // @public (undocumented)
 export function ToggleControl<P extends MapControlProps_4 = MapControlProps_4>(props: P): null;

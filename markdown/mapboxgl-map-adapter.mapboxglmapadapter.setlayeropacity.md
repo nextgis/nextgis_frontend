@@ -4,7 +4,7 @@
 
 ## MapboxglMapAdapter.setLayerOpacity() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 setLayerOpacity(layerIds: string[], opacity: number): void;
@@ -17,7 +17,7 @@ setLayerOpacity(layerIds: string[], opacity: number): void;
 |  layerIds | string\[\] |  |
 |  opacity | number |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

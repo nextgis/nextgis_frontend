@@ -4,7 +4,7 @@
 
 ## NgwMapOptions.companyLogoOptions property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 companyLogoOptions?: CompanyLogoOptions;

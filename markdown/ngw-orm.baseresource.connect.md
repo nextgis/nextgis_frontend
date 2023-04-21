@@ -4,7 +4,7 @@
 
 ## BaseResource.connect() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static connect<T extends typeof BaseResource = typeof BaseResource>(resourceOptions: ResourceIdKeynameDef, connectionOrOptions: Connection | ConnectionOptions): Promise<T>;
@@ -17,7 +17,7 @@ static connect<T extends typeof BaseResource = typeof BaseResource>(resourceOpti
 |  resourceOptions | [ResourceIdKeynameDef](./ngw-connector.resourceidkeynamedef.md) |  |
 |  connectionOrOptions | [Connection](./ngw-orm.connection.md) \| ConnectionOptions |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;T&gt;
 

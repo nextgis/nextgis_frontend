@@ -4,12 +4,12 @@
 
 ## CancelError class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class CancelError extends Error 
 ```
-<b>Extends:</b> Error
+**Extends:** Error
 
 ## Constructors
 

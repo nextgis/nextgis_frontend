@@ -4,7 +4,7 @@
 
 ## RequestOptions.withCredentials property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 withCredentials?: boolean;

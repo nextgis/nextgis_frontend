@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."feature\_layer.feature.collection" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'feature_layer.feature.collection': {

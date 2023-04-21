@@ -4,7 +4,7 @@
 
 ## ResourceItem.wmsserver\_service property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 wmsserver_service?: WmsServerService;

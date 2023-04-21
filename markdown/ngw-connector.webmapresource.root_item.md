@@ -4,7 +4,7 @@
 
 ## WebmapResource.root\_item property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 root_item: TreeGroup;

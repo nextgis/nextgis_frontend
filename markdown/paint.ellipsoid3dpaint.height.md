@@ -4,7 +4,7 @@
 
 ## Ellipsoid3DPaint.height property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 height: number;

@@ -4,7 +4,7 @@
 
 ## WebmapResource.extent\_constrained property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 extent_constrained: boolean;

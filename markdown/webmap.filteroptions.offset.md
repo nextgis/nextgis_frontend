@@ -6,7 +6,7 @@
 
 Offset (paginated) where from entities should be taken.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 offset?: number;

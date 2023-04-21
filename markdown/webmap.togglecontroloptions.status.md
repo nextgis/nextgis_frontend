@@ -6,7 +6,7 @@
 
 Boolean state of control.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 status?: boolean;

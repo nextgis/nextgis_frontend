@@ -6,7 +6,7 @@
 
 Fired repeatedly during any change in zoom level
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 zoom: MapAdapter;

@@ -4,7 +4,7 @@
 
 ## TreeItem.\_parent property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 _parent?: TreeGroup;

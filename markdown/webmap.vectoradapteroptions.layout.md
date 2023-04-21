@@ -9,7 +9,7 @@
 > - TODO: move to nativeOptions
 > 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 layout?: any;

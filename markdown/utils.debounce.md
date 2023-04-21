@@ -4,7 +4,7 @@
 
 ## debounce() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function debounce<T extends (...args: any[]) => void>(cb: T, wait?: number): T & {
@@ -17,9 +17,9 @@ export declare function debounce<T extends (...args: any[]) => void>(cb: T, wait
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  cb | T |  |
-|  wait | number | <i>(Optional)</i> |
+|  wait | number | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 T &amp; { clear: () =&gt; void; }
 

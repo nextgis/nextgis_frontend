@@ -6,7 +6,7 @@
 
 Original map object of GIS framework (Leaflet.Map, Openlayers.Map, Mapboxgl.Map or other)
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 map?: M;

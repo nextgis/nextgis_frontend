@@ -6,7 +6,7 @@
 
 Sets the view of the map geographical center and zoom
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 setView(lngLatOr: LngLatArray, zoom?: number): void;
@@ -17,9 +17,9 @@ setView(lngLatOr: LngLatArray, zoom?: number): void;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  lngLatOr | [LngLatArray](./utils.lnglatarray.md) |  |
-|  zoom | number | <i>(Optional)</i> The zoom level to set (0-24). |
+|  zoom | number | _(Optional)_ The zoom level to set (0-24). |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

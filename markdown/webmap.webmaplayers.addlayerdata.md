@@ -6,7 +6,7 @@
 
 Push new the GeoJSON features into given vector layer.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 addLayerData(layerDef: LayerDef, data: GeoJsonObject): void;
@@ -19,7 +19,7 @@ addLayerData(layerDef: LayerDef, data: GeoJsonObject): void;
 |  layerDef | [LayerDef](./webmap.layerdef.md) |  |
 |  data | GeoJsonObject |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

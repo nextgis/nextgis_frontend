@@ -4,12 +4,12 @@
 
 ## GetNgwItemOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface GetNgwItemOptions extends FetchNgwLayerExtentOptions 
 ```
-<b>Extends:</b> [FetchNgwLayerExtentOptions](./ngw-kit.fetchngwlayerextentoptions.md)
+**Extends:** [FetchNgwLayerExtentOptions](./ngw-kit.fetchngwlayerextentoptions.md)
 
 ## Properties
 

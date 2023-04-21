@@ -4,7 +4,7 @@
 
 ## ItemProperties.\_setPropertyHandler() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 _setPropertyHandler(propOpt: ItemPropertyConfig<keyof ItemPropertyTypes>): void;
@@ -16,7 +16,7 @@ _setPropertyHandler(propOpt: ItemPropertyConfig<keyof ItemPropertyTypes>): void;
 |  --- | --- | --- |
 |  propOpt | [ItemPropertyConfig](./item.itempropertyconfig.md)<!-- -->&lt;keyof [ItemPropertyTypes](./item.itempropertytypes.md)<!-- -->&gt; |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

@@ -4,23 +4,23 @@
 
 ## NgwLayerOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export interface NgwLayerOptions<T extends NgwLayerAdapterType = NgwLayerAdapterType, P = FeatureProperties, A = Record<string, any>> 
+export interface NgwLayerOptions<T extends NgwLayerAdapterType = NgwLayerAdapterType, P = FeatureProperties, A extends Record<string, any> = Record<string, any>> 
 ```
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [adapter?](./ngw-kit.ngwlayeroptions.adapter.md) |  | T | <i>(Optional)</i> |
-|  [adapterOptions?](./ngw-kit.ngwlayeroptions.adapteroptions.md) |  | Partial&lt;LayerAdaptersOptions\[T\] &amp; [AdapterOptions](./webmap.adapteroptions.md)<!-- -->&lt;A&gt;&gt; | <i>(Optional)</i> |
-|  [fit?](./ngw-kit.ngwlayeroptions.fit.md) |  | boolean | <i>(Optional)</i> |
-|  [headers?](./ngw-kit.ngwlayeroptions.headers.md) |  | any | <i>(Optional)</i> |
-|  [id?](./ngw-kit.ngwlayeroptions.id.md) |  | string | <i>(Optional)</i> |
-|  [meta?](./ngw-kit.ngwlayeroptions.meta.md) |  | P | <i>(Optional)</i> |
+|  [adapter?](./ngw-kit.ngwlayeroptions.adapter.md) |  | T | _(Optional)_ |
+|  [adapterOptions?](./ngw-kit.ngwlayeroptions.adapteroptions.md) |  | Partial&lt;[LayerAdaptersOptions](./webmap.layeradaptersoptions.md)<!-- -->\[T\] &amp; [AdapterOptions](./webmap.adapteroptions.md)<!-- -->&lt;A&gt;&gt; | _(Optional)_ |
+|  [fit?](./ngw-kit.ngwlayeroptions.fit.md) |  | boolean | _(Optional)_ |
+|  [headers?](./ngw-kit.ngwlayeroptions.headers.md) |  | any | _(Optional)_ |
+|  [id?](./ngw-kit.ngwlayeroptions.id.md) |  | string | _(Optional)_ |
+|  [meta?](./ngw-kit.ngwlayeroptions.meta.md) |  | P | _(Optional)_ |
 |  [resource](./ngw-kit.ngwlayeroptions.resource.md) |  | [ResourceDefinition](./ngw-connector.resourcedefinition.md) |  |
-|  [simplification?](./ngw-kit.ngwlayeroptions.simplification.md) |  | number | <i>(Optional)</i> |
-|  [tileNoData?](./ngw-kit.ngwlayeroptions.tilenodata.md) |  | [TileNoData](./ngw-kit.tilenodata.md) | <i>(Optional)</i> Parameter for <code>TILE</code> and <code>IMAGE</code> adapters to say NGW what will be returned if there is no data to render. |
+|  [simplification?](./ngw-kit.ngwlayeroptions.simplification.md) |  | number | _(Optional)_ |
+|  [tileNoData?](./ngw-kit.ngwlayeroptions.tilenodata.md) |  | [TileNoData](./ngw-kit.tilenodata.md) | _(Optional)_ Parameter for <code>TILE</code> and <code>IMAGE</code> adapters to say NGW what will be returned if there is no data to render. |
 

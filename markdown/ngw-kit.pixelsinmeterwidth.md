@@ -4,12 +4,12 @@
 
 ## pixelsInMeterWidth() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function pixelsInMeterWidth(): number;
 ```
-<b>Returns:</b>
+**Returns:**
 
 number
 

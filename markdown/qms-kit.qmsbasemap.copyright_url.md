@@ -4,7 +4,7 @@
 
 ## QmsBasemap.copyright\_url property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 copyright_url: string;

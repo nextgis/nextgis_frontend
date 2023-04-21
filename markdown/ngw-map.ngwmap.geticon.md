@@ -4,7 +4,7 @@
 
 ## NgwMap.getIcon property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static getIcon: typeof getIcon;

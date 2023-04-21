@@ -4,7 +4,7 @@
 
 ## Events.getEventStatus() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getEventStatus(event: keyof E): boolean;
@@ -16,7 +16,7 @@ getEventStatus(event: keyof E): boolean;
 |  --- | --- | --- |
 |  event | keyof E |  |
 
-<b>Returns:</b>
+**Returns:**
 
 boolean
 

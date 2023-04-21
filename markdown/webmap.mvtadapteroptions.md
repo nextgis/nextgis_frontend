@@ -4,17 +4,17 @@
 
 ## MvtAdapterOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface MvtAdapterOptions<F extends Feature = Feature> extends VectorAdapterOptions<F> 
 ```
-<b>Extends:</b> [VectorAdapterOptions](./webmap.vectoradapteroptions.md)
+**Extends:** [VectorAdapterOptions](./webmap.vectoradapteroptions.md)<!-- -->&lt;F&gt;
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [sourceLayer?](./webmap.mvtadapteroptions.sourcelayer.md) |  | string | <i>(Optional)</i> |
+|  [sourceLayer?](./webmap.mvtadapteroptions.sourcelayer.md) |  | string | _(Optional)_ |
 |  [url](./webmap.mvtadapteroptions.url.md) |  | string |  |
 

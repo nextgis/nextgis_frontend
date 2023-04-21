@@ -4,7 +4,7 @@
 
 ## prepareFieldsToNgw() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function prepareFieldsToNgw<T extends FeatureProperties = FeatureProperties>(item: T, resourceFields: Pick<FeatureProperties, 'keyname' | 'datatype'>[]): Record<keyof T, any>;
@@ -17,7 +17,7 @@ export declare function prepareFieldsToNgw<T extends FeatureProperties = Feature
 |  item | T |  |
 |  resourceFields | Pick&lt;[FeatureProperties](./utils.featureproperties.md)<!-- -->, 'keyname' \| 'datatype'&gt;\[\] |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Record&lt;keyof T, any&gt;
 

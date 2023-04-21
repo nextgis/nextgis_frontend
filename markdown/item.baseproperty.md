@@ -4,7 +4,7 @@
 
 ## BaseProperty class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare abstract class BaseProperty<V = any, O extends ItemBasePropertyOptions<V> = ItemBasePropertyOptions<V>, I extends Item = Item> 
@@ -21,8 +21,8 @@ export declare abstract class BaseProperty<V = any, O extends ItemBasePropertyOp
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [\_blocked](./item.baseproperty._blocked.md) | <code>protected</code> | boolean |  |
-|  [\_container?](./item.baseproperty._container.md) | <code>protected</code> | HTMLElement | <i>(Optional)</i> |
-|  [\_value?](./item.baseproperty._value.md) | <code>protected</code> | V | <i>(Optional)</i> |
+|  [\_container?](./item.baseproperty._container.md) | <code>protected</code> | HTMLElement | _(Optional)_ |
+|  [\_value?](./item.baseproperty._value.md) | <code>protected</code> | V | _(Optional)_ |
 |  [emitter](./item.baseproperty.emitter.md) |  | EventEmitter |  |
 |  [item](./item.baseproperty.item.md) |  | I |  |
 |  [name](./item.baseproperty.name.md) |  | string |  |

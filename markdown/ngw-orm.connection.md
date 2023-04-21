@@ -6,7 +6,7 @@
 
 Connection is a single NGW connection. You can have multiple connections to multiple NGW in your application.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class Connection 
@@ -24,7 +24,7 @@ export declare class Connection
 |  --- | --- | --- | --- |
 |  [baseUrl](./ngw-orm.connection.baseurl.md) | <code>readonly</code> | string | Connection url. |
 |  [connections](./ngw-orm.connection.connections.md) | <code>static</code> | [Connection](./ngw-orm.connection.md)<!-- -->\[\] |  |
-|  [driver](./ngw-orm.connection.driver.md) | <code>readonly</code> | NgwConnector | NGW driver used by this connection. |
+|  [driver](./ngw-orm.connection.driver.md) | <code>readonly</code> | [NgwConnector](./ngw-connector.ngwconnector.md) | NGW driver used by this connection. |
 |  [isConnected](./ngw-orm.connection.isconnected.md) | <code>readonly</code> | boolean | Indicates if connection is initialized or not. |
 |  [options](./ngw-orm.connection.options.md) | <code>readonly</code> | ConnectionOptions | Connection options. |
 

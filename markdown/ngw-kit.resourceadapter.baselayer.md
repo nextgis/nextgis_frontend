@@ -4,7 +4,7 @@
 
 ## ResourceAdapter.baselayer property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 baselayer?: boolean;

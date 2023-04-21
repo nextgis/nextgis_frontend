@@ -4,7 +4,7 @@
 
 ## alias variable
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 alias: {

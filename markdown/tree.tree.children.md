@@ -4,8 +4,8 @@
 
 ## Tree.children property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-children: Tree<TREE_ITEM>[];
+children: Tree<T>[];
 ```

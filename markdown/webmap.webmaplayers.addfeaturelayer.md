@@ -6,7 +6,7 @@
 
 Shortcut for [WebMapLayers.addGeoJsonLayer()](./webmap.webmaplayers.addgeojsonlayer.md) to create GeoJson adapter with generic types for working in typescript
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 addFeatureLayer<P extends FeatureProperties = FeatureProperties, G extends Geometry = Geometry, O extends GeoJsonAdapterOptions<Feature<G, P>> = GeoJsonAdapterOptions<Feature<G, P>>>(options?: O): Promise<FeatureLayerAdapter<P, G>>;
@@ -16,9 +16,9 @@ addFeatureLayer<P extends FeatureProperties = FeatureProperties, G extends Geome
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | O | <i>(Optional)</i> |
+|  options | O | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[FeatureLayerAdapter](./webmap.featurelayeradapter.md)<!-- -->&lt;P, G&gt;&gt;
 

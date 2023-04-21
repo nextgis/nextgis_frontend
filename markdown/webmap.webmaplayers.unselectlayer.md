@@ -6,7 +6,7 @@
 
 Unselect the given layer. If the adapter is a vector layer and supports data selection, you can pass a callback function to specify which data will be unselected.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 unSelectLayer(layerDef: LayerDef, findFeatureFun?: DataLayerFilter): void;
@@ -17,9 +17,9 @@ unSelectLayer(layerDef: LayerDef, findFeatureFun?: DataLayerFilter): void;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  layerDef | [LayerDef](./webmap.layerdef.md) |  |
-|  findFeatureFun | [DataLayerFilter](./webmap.datalayerfilter.md) | <i>(Optional)</i> |
+|  findFeatureFun | [DataLayerFilter](./webmap.datalayerfilter.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

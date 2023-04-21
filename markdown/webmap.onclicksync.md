@@ -4,7 +4,7 @@
 
 ## OnClickSync type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type OnClickSync = () => void;

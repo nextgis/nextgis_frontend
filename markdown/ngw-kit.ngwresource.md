@@ -4,7 +4,7 @@
 
 ## NgwResource class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class NgwResource 
@@ -14,8 +14,8 @@ export declare class NgwResource
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [\_extent?](./ngw-kit.ngwresource._extent.md) | <code>protected</code> | [LngLatBoundsArray](./utils.lnglatboundsarray.md) | <i>(Optional)</i> |
-|  [connector](./ngw-kit.ngwresource.connector.md) |  | NgwConnector |  |
+|  [\_extent?](./ngw-kit.ngwresource._extent.md) | <code>protected</code> | [LngLatBoundsArray](./utils.lnglatboundsarray.md) | _(Optional)_ |
+|  [connector](./ngw-kit.ngwresource.connector.md) |  | [NgwConnector](./ngw-connector.ngwconnector.md) |  |
 |  [item](./ngw-kit.ngwresource.item.md) |  | [ResourceItem](./ngw-connector.resourceitem.md) |  |
 
 ## Methods

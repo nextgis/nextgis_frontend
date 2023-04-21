@@ -9,7 +9,7 @@
 > use [VectorAdapterOptions.onSelect()](./webmap.vectoradapteroptions.onselect.md) instead
 > 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onLayerSelect?(opt: OnLayerSelectOptions<F, L>): Promise<any>;
@@ -21,7 +21,7 @@ onLayerSelect?(opt: OnLayerSelectOptions<F, L>): Promise<any>;
 |  --- | --- | --- |
 |  opt | [OnLayerSelectOptions](./webmap.onlayerselectoptions.md)<!-- -->&lt;F, L&gt; |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;any&gt;
 

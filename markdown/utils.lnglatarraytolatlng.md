@@ -4,7 +4,7 @@
 
 ## lngLatArrayToLatLng() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function lngLatArrayToLatLng(coord: LngLatArray): LatLng;
@@ -16,7 +16,7 @@ export declare function lngLatArrayToLatLng(coord: LngLatArray): LatLng;
 |  --- | --- | --- |
 |  coord | [LngLatArray](./utils.lnglatarray.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 [LatLng](./utils.latlng.md)
 

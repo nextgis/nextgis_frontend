@@ -4,7 +4,7 @@
 
 ## NgwMap.selectFromNgwRaster() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 selectFromNgwRaster(ev: MapClickEvent): Promise<NgwIdentifyEvent | undefined>;
@@ -16,7 +16,7 @@ selectFromNgwRaster(ev: MapClickEvent): Promise<NgwIdentifyEvent | undefined>;
 |  --- | --- | --- |
 |  ev | [MapClickEvent](./webmap.mapclickevent.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[NgwIdentifyEvent](./ngw-map.ngwidentifyevent.md) \| undefined&gt;
 

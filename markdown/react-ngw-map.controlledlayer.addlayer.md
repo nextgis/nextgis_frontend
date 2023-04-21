@@ -4,7 +4,7 @@
 
 ## ControlledLayer.addLayer() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 addLayer(layer: LayerAdapter): void;
@@ -14,9 +14,9 @@ addLayer(layer: LayerAdapter): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  layer | [LayerAdapter](./webmap.layeradapter.md) |  |
+|  layer | LayerAdapter |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

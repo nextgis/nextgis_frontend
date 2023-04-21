@@ -4,7 +4,7 @@
 
 ## OlMapAdapter.setLayerOrder() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 setLayerOrder(layer: Layer, order: number): void;
@@ -17,7 +17,7 @@ setLayerOrder(layer: Layer, order: number): void;
 |  layer | Layer |  |
 |  order | number |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

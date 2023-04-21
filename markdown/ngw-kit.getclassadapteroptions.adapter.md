@@ -4,7 +4,7 @@
 
 ## GetClassAdapterOptions.Adapter property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 Adapter?: Type<MainLayerAdapter>;

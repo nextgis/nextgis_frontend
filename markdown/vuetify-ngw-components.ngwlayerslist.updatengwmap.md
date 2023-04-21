@@ -4,12 +4,12 @@
 
 ## NgwLayersList.updateNgwMap() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 updateNgwMap(): void;
 ```
-<b>Returns:</b>
+**Returns:**
 
 void
 

@@ -411,7 +411,7 @@ export class NgwMap<
     }
   }
 
-  /** @deprecated use {@link NgwMap.fitLayer} instead */
+  /** @deprecated use {@link fitLayer} instead */
   async zoomToLayer(layerDef: string | ResourceAdapter): Promise<void> {
     return this.fitLayer(layerDef);
   }
@@ -463,7 +463,7 @@ export class NgwMap<
   }
 
   /**
-   * @deprecated use {@link NgwMap.fetchNgwLayerItem} instead
+   * @deprecated use {@link fetchNgwLayerItem} instead
    */
   getNgwLayerItem<
     G extends Geometry = Geometry,
@@ -475,7 +475,7 @@ export class NgwMap<
   }
 
   /**
-   * @deprecated use {@link NgwMap.fetchNgwLayerItems} instead
+   * @deprecated use {@link fetchNgwLayerItems} instead
    */
   getNgwLayerItems<
     F extends FeatureProperties = FeatureProperties,
@@ -487,7 +487,7 @@ export class NgwMap<
   }
 
   /**
-   * @deprecated use {@link NgwMap.fetchNgwLayerFeature} instead
+   * @deprecated use {@link fetchNgwLayerFeature} instead
    */
   getNgwLayerFeature<
     G extends Geometry = Geometry,
@@ -499,7 +499,7 @@ export class NgwMap<
   }
 
   /**
-   * @deprecated use {@link NgwMap.fetchNgwLayerFeatures} instead
+   * @deprecated use {@link fetchNgwLayerFeatures} instead
    */
   getNgwLayerFeatures<
     G extends Geometry | null = Geometry,
@@ -510,7 +510,7 @@ export class NgwMap<
     return this.fetchNgwLayerFeatures(options);
   }
 
-  /** @deprecated use {@link NgwMap.cancelPromises} instead */
+  /** @deprecated use {@link cancelPromises} instead */
   cancelPromise(...args: PromiseGroup[]): void {
     this.cancelPromises(...args);
   }

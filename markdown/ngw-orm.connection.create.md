@@ -4,7 +4,7 @@
 
 ## Connection.create() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static create(options: Connection | ConnectionOptions): Connection;
@@ -16,7 +16,7 @@ static create(options: Connection | ConnectionOptions): Connection;
 |  --- | --- | --- |
 |  options | [Connection](./ngw-orm.connection.md) \| ConnectionOptions |  |
 
-<b>Returns:</b>
+**Returns:**
 
 [Connection](./ngw-orm.connection.md)
 

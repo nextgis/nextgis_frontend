@@ -4,18 +4,18 @@
 
 ## CreateWmsOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface CreateWmsOptions extends ResourceCreateOptions 
 ```
-<b>Extends:</b> [ResourceCreateOptions](./ngw-uploader.resourcecreateoptions.md)
+**Extends:** [ResourceCreateOptions](./ngw-uploader.resourcecreateoptions.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [id?](./ngw-uploader.createwmsoptions.id.md) |  | number | <i>(Optional)</i> |
+|  [id?](./ngw-uploader.createwmsoptions.id.md) |  | number | _(Optional)_ |
 |  [layers](./ngw-uploader.createwmsoptions.layers.md) |  | [WmsServerServiceLayer](./ngw-connector.wmsserverservicelayer.md)<!-- -->\[\] |  |
-|  [resourceId?](./ngw-uploader.createwmsoptions.resourceid.md) |  | number | <i>(Optional)</i> |
+|  [resourceId?](./ngw-uploader.createwmsoptions.resourceid.md) |  | number | _(Optional)_ |
 

@@ -6,7 +6,7 @@
 
 An instance of the EventEmitter class for listen and emit events
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 readonly emitter: StrictEventEmitter<EventEmitter, MapAdapterEvents>;

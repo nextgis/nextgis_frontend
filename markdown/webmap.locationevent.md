@@ -4,7 +4,7 @@
 
 ## LocationEvent interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface LocationEvent 
@@ -14,6 +14,6 @@ export interface LocationEvent
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [bounds?](./webmap.locationevent.bounds.md) |  | [LngLatBoundsArray](./utils.lnglatboundsarray.md) | <i>(Optional)</i> |
+|  [bounds?](./webmap.locationevent.bounds.md) |  | [LngLatBoundsArray](./utils.lnglatboundsarray.md) | _(Optional)_ |
 |  [lngLat](./webmap.locationevent.lnglat.md) |  | [LngLatArray](./utils.lnglatarray.md) |  |
 

@@ -4,7 +4,7 @@
 
 ## ResourceHierarchy.parent property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 parent: {

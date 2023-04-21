@@ -4,7 +4,7 @@
 
 ## isPropertiesPaint() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function isPropertiesPaint(paint: Paint): paint is PropertiesPaint;
@@ -16,7 +16,7 @@ export declare function isPropertiesPaint(paint: Paint): paint is PropertiesPain
 |  --- | --- | --- |
 |  paint | [Paint](./paint.paint.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 paint is [PropertiesPaint](./paint.propertiespaint.md)
 

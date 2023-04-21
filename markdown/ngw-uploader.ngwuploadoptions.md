@@ -4,16 +4,16 @@
 
 ## NgwUploadOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface NgwUploadOptions extends NgwConnectorOptions 
 ```
-<b>Extends:</b> [NgwConnectorOptions](./ngw-connector.ngwconnectoroptions.md)
+**Extends:** [NgwConnectorOptions](./ngw-connector.ngwconnectoroptions.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [connector?](./ngw-uploader.ngwuploadoptions.connector.md) |  | NgwConnector | <i>(Optional)</i> |
+|  [connector?](./ngw-uploader.ngwuploadoptions.connector.md) |  | [NgwConnector](./ngw-connector.ngwconnector.md) | _(Optional)_ |
 

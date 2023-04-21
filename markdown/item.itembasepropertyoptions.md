@@ -4,7 +4,7 @@
 
 ## ItemBasePropertyOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface ItemBasePropertyOptions<V> 
@@ -14,11 +14,11 @@ export interface ItemBasePropertyOptions<V>
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [bubble?](./item.itembasepropertyoptions.bubble.md) |  | boolean | <i>(Optional)</i> |
-|  [getProperty?](./item.itembasepropertyoptions.getproperty.md) |  | (item?: [Item](./item.item.md)<!-- -->) =&gt; V | <i>(Optional)</i> |
-|  [hierarchy?](./item.itembasepropertyoptions.hierarchy.md) |  | boolean | <i>(Optional)</i> |
-|  [onSet?](./item.itembasepropertyoptions.onset.md) |  | (value?: V, options?: [ItemBasePropertyOptions](./item.itembasepropertyoptions.md)<!-- -->&lt;V&gt;, item?: [Item](./item.item.md)<!-- -->) =&gt; void | <i>(Optional)</i> |
-|  [propagation?](./item.itembasepropertyoptions.propagation.md) |  | boolean | <i>(Optional)</i> |
-|  [silent?](./item.itembasepropertyoptions.silent.md) |  | boolean | <i>(Optional)</i> |
-|  [value?](./item.itembasepropertyoptions.value.md) |  | V | <i>(Optional)</i> |
+|  [bubble?](./item.itembasepropertyoptions.bubble.md) |  | boolean | _(Optional)_ |
+|  [getProperty?](./item.itembasepropertyoptions.getproperty.md) |  | (item?: [Item](./item.item.md)<!-- -->) =&gt; V | _(Optional)_ |
+|  [hierarchy?](./item.itembasepropertyoptions.hierarchy.md) |  | boolean | _(Optional)_ |
+|  [onSet?](./item.itembasepropertyoptions.onset.md) |  | (value?: V, options?: [ItemBasePropertyOptions](./item.itembasepropertyoptions.md)<!-- -->&lt;V&gt;, item?: [Item](./item.item.md)<!-- -->) =&gt; void | _(Optional)_ |
+|  [propagation?](./item.itembasepropertyoptions.propagation.md) |  | boolean | _(Optional)_ |
+|  [silent?](./item.itembasepropertyoptions.silent.md) |  | boolean | _(Optional)_ |
+|  [value?](./item.itembasepropertyoptions.value.md) |  | V | _(Optional)_ |
 

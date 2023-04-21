@@ -4,7 +4,7 @@
 
 ## RequestOptions.signal property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 signal?: AbortSignal;

@@ -4,7 +4,7 @@
 
 ## TreeItem.item\_type property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 item_type: 'root' | 'group' | 'layer';

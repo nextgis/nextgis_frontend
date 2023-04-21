@@ -4,7 +4,7 @@
 
 ## ToggleControl.changeStatus property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 changeStatus: OnClickSync;

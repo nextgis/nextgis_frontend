@@ -6,7 +6,7 @@
 
 Constructs a new instance of the `NgwProvider` class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 constructor(options: NgwProviderOptions);

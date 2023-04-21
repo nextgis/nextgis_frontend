@@ -4,7 +4,7 @@
 
 ## MainLayerAdapter.addLayer() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 addLayer(options: O): L | Promise<L> | undefined;
@@ -16,7 +16,7 @@ addLayer(options: O): L | Promise<L> | undefined;
 |  --- | --- | --- |
 |  options | O |  |
 
-<b>Returns:</b>
+**Returns:**
 
 L \| Promise&lt;L&gt; \| undefined
 

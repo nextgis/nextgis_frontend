@@ -4,7 +4,7 @@
 
 ## IconOptions.stroke property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 stroke?: number;

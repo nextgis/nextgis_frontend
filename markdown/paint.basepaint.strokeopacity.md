@@ -4,7 +4,7 @@
 
 ## BasePaint.strokeOpacity property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 strokeOpacity?: number | Expression;

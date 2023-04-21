@@ -5,7 +5,7 @@
 ## NgwConnector.updateResource() method
 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 updateResource(resource: ResourceIdKeynameDef, data: DeepPartial<ResourceItem>): CancelablePromise<ResourceItem | undefined>;
@@ -18,7 +18,7 @@ updateResource(resource: ResourceIdKeynameDef, data: DeepPartial<ResourceItem>):
 |  resource | [ResourceIdKeynameDef](./ngw-connector.resourceidkeynamedef.md) |  |
 |  data | [DeepPartial](./utils.deeppartial.md)<!-- -->&lt;[ResourceItem](./ngw-connector.resourceitem.md)<!-- -->&gt; |  |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;[ResourceItem](./ngw-connector.resourceitem.md) \| undefined&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;[ResourceItem](./ngw-connector.resourceitem.md) \| undefined&gt;
 

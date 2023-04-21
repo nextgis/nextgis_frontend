@@ -4,7 +4,7 @@
 
 ## PatchOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface PatchOptions<G extends Geometry | null = Geometry, P extends GeoJsonProperties = GeoJsonProperties> 
@@ -14,6 +14,6 @@ export interface PatchOptions<G extends Geometry | null = Geometry, P extends Ge
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [fid?](./vuex-ngw.patchoptions.fid.md) |  | number | <i>(Optional)</i> |
+|  [fid?](./vuex-ngw.patchoptions.fid.md) |  | number | _(Optional)_ |
 |  [item](./vuex-ngw.patchoptions.item.md) |  | Feature&lt;G, P&gt; |  |
 

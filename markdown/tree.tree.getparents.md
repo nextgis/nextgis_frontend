@@ -4,12 +4,12 @@
 
 ## Tree.getParents() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getParents(): Tree[];
 ```
-<b>Returns:</b>
+**Returns:**
 
 [Tree](./tree.tree.md)<!-- -->\[\]
 

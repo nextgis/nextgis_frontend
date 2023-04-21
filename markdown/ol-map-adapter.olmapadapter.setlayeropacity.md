@@ -4,7 +4,7 @@
 
 ## OlMapAdapter.setLayerOpacity() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 setLayerOpacity(layer: Layer, val: number): void;
@@ -17,7 +17,7 @@ setLayerOpacity(layer: Layer, val: number): void;
 |  layer | Layer |  |
 |  val | number |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

@@ -4,12 +4,12 @@
 
 ## OlMapAdapter class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class OlMapAdapter implements MapAdapter<Map, Layer> 
 ```
-<b>Implements:</b> [MapAdapter](./webmap.mapadapter.md)<!-- -->&lt;Map, Layer
+**Implements:** [MapAdapter](./webmap.mapadapter.md)<!-- -->&lt;Map, Layer&gt;
 
 ## Properties
 
@@ -20,7 +20,7 @@ export declare class OlMapAdapter implements MapAdapter<Map, Layer>
 |  [emitter](./ol-map-adapter.olmapadapter.emitter.md) |  | EventEmitter |  |
 |  [layerAdapters](./ol-map-adapter.olmapadapter.layeradapters.md) |  | { IMAGE: typeof ImageAdapter; TILE: typeof TileAdapter; WMS: typeof WmsAdapter; OSM: typeof OsmAdapter; GEOJSON: typeof GeoJsonAdapter; } |  |
 |  [layerAdapters](./ol-map-adapter.olmapadapter.layeradapters.md) | <code>static</code> | { IMAGE: typeof ImageAdapter; TILE: typeof TileAdapter; WMS: typeof WmsAdapter; OSM: typeof OsmAdapter; GEOJSON: typeof GeoJsonAdapter; } |  |
-|  [map?](./ol-map-adapter.olmapadapter.map.md) |  | Map | <i>(Optional)</i> |
+|  [map?](./ol-map-adapter.olmapadapter.map.md) |  | Map | _(Optional)_ |
 |  [options](./ol-map-adapter.olmapadapter.options.md) |  | [MapOptions](./webmap.mapoptions.md)<!-- -->&lt;Map&gt; |  |
 
 ## Methods

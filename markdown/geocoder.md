@@ -12,10 +12,15 @@ Modern geocoder on async generators. May use different data providers.
 
 |  Class | Description |
 |  --- | --- |
-|  [BaseProvider](./geocoder.baseprovider.md) |  |
 |  [Geocoder](./geocoder.geocoder.md) |  |
 |  [NgwProvider](./geocoder.ngwprovider.md) |  |
 |  [NominatimProvider](./geocoder.nominatimprovider.md) |  |
+
+## Abstract Classes
+
+|  Abstract Class | Description |
+|  --- | --- |
+|  [BaseProvider](./geocoder.baseprovider.md) |  |
 
 ## Functions
 

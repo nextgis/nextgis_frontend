@@ -4,7 +4,7 @@
 
 ## FeatureItem.extensions property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 extensions: FeatureItemExtensions;

@@ -4,7 +4,7 @@
 
 ## vectorLayerGeomToPaintTypeAlias variable
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 vectorLayerGeomToPaintTypeAlias: Record<GeometryType, VectorAdapterLayerType>

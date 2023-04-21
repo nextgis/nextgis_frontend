@@ -4,7 +4,7 @@
 
 ## NgwConnectorOptions.route property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 route?: string;

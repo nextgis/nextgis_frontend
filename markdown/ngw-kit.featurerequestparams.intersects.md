@@ -4,7 +4,7 @@
 
 ## FeatureRequestParams.intersects property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 intersects?: string;

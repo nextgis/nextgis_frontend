@@ -4,7 +4,7 @@
 
 ## BaseProperty.options property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 options: O;

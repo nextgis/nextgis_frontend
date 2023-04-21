@@ -4,12 +4,12 @@
 
 ## NgwUploaderInput class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class NgwUploaderInput extends NgwUploader 
 ```
-<b>Extends:</b> NgwUploader
+**Extends:** NgwUploader
 
 ## Constructors
 

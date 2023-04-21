@@ -4,7 +4,7 @@
 
 ## NgLogEngineOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface NgLogEngineOptions 
@@ -15,9 +15,9 @@ export interface NgLogEngineOptions
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [clientId](./logging.nglogengineoptions.clientid.md) |  | string |  |
-|  [delay?](./logging.nglogengineoptions.delay.md) |  | number | <i>(Optional)</i> Delay before sending collected logs |
-|  [enabled?](./logging.nglogengineoptions.enabled.md) |  | boolean | <i>(Optional)</i> |
-|  [nglogUrl?](./logging.nglogengineoptions.nglogurl.md) |  | string | <i>(Optional)</i> |
-|  [sessionId?](./logging.nglogengineoptions.sessionid.md) |  | [NgLogEngineSessionId](./logging.nglogenginesessionid.md) | <i>(Optional)</i> Add <code>sessionId</code> to each log. Use number to set random generated string length |
-|  [stopOnConnectionError?](./logging.nglogengineoptions.stoponconnectionerror.md) |  | boolean | <i>(Optional)</i> |
+|  [delay?](./logging.nglogengineoptions.delay.md) |  | number | _(Optional)_ Delay before sending collected logs |
+|  [enabled?](./logging.nglogengineoptions.enabled.md) |  | boolean | _(Optional)_ |
+|  [nglogUrl?](./logging.nglogengineoptions.nglogurl.md) |  | string | _(Optional)_ |
+|  [sessionId?](./logging.nglogengineoptions.sessionid.md) |  | [NgLogEngineSessionId](./logging.nglogenginesessionid.md) | _(Optional)_ Add <code>sessionId</code> to each log. Use number to set random generated string length |
+|  [stopOnConnectionError?](./logging.nglogengineoptions.stoponconnectionerror.md) |  | boolean | _(Optional)_ |
 

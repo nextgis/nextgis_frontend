@@ -4,7 +4,7 @@
 
 ## featureLayerIdentify() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function featureLayerIdentify(options: FeatureLayerIdentifyOptions): CancelablePromise<FeatureLayersIdentify>;
@@ -16,7 +16,7 @@ export declare function featureLayerIdentify(options: FeatureLayerIdentifyOption
 |  --- | --- | --- |
 |  options | [FeatureLayerIdentifyOptions](./ngw-kit.featurelayeridentifyoptions.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;[FeatureLayersIdentify](./ngw-connector.featurelayersidentify.md)<!-- -->&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;[FeatureLayersIdentify](./ngw-connector.featurelayersidentify.md)<!-- -->&gt;
 

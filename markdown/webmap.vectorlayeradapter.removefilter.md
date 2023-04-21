@@ -6,12 +6,12 @@
 
 Cancel the filter, return all objects to the map.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 removeFilter?(): void;
 ```
-<b>Returns:</b>
+**Returns:**
 
 void
 

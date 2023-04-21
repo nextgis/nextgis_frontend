@@ -4,7 +4,7 @@
 
 ## NgwWebmapItem.\_rootDescendantsCount property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 protected _rootDescendantsCount: number;

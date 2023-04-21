@@ -5,7 +5,7 @@
 ## WebMapEvents."layer:toggle" property
 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'layer:toggle': LayerAdapter;

@@ -4,7 +4,7 @@
 
 ## TreeLayer.layer\_url property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 layer_url?: string;

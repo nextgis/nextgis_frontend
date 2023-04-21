@@ -6,7 +6,7 @@
 
 Create layer from GeoJson data. Set style and behavior for selection.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 addGeoJsonLayer<K extends keyof LayerAdapters = keyof LayerAdapters, O extends GeoJsonAdapterOptions<any, any> = GeoJsonAdapterOptions>(opt?: O, adapter?: LayerAdapterDefinition<K>): Promise<VectorLayerAdapter<any, any, any>>;
@@ -16,10 +16,10 @@ addGeoJsonLayer<K extends keyof LayerAdapters = keyof LayerAdapters, O extends G
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  opt | O | <i>(Optional)</i> |
-|  adapter | [LayerAdapterDefinition](./webmap.layeradapterdefinition.md)<!-- -->&lt;K&gt; | <i>(Optional)</i> |
+|  opt | O | _(Optional)_ |
+|  adapter | [LayerAdapterDefinition](./webmap.layeradapterdefinition.md)<!-- -->&lt;K&gt; | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[VectorLayerAdapter](./webmap.vectorlayeradapter.md)<!-- -->&lt;any, any, any&gt;&gt;
 

@@ -4,7 +4,7 @@
 
 ## VectorFieldDatatype type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type VectorFieldDatatype = 'STRING' | 'REAL' | 'DATE' | 'TIME' | 'DATETIME' | 'BIGINT' | 'INTEGER' | 'BOOLEAN';

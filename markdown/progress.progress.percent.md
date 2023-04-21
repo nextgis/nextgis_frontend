@@ -4,7 +4,7 @@
 
 ## Progress.percent property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 get percent(): number;

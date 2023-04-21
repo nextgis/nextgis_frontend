@@ -4,7 +4,7 @@
 
 ## featureFilter() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function featureFilter(feature: Feature, filters: PropertiesFilter): boolean;
@@ -17,7 +17,7 @@ export declare function featureFilter(feature: Feature, filters: PropertiesFilte
 |  feature | Feature |  |
 |  filters | [PropertiesFilter](./properties-filter.propertiesfilter.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 boolean
 

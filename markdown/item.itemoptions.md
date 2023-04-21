@@ -4,17 +4,17 @@
 
 ## ItemOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface ItemOptions extends ItemOptionsToExtend 
 ```
-<b>Extends:</b> ItemOptionsToExtend
+**Extends:** ItemOptionsToExtend
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [drawOrderEnabled?](./item.itemoptions.draworderenabled.md) |  | boolean | <i>(Optional)</i> |
-|  [properties?](./item.itemoptions.properties.md) |  | Array&lt;[ItemPropertyConfig](./item.itempropertyconfig.md)<!-- -->&lt;keyof [ItemPropertyTypes](./item.itempropertytypes.md)<!-- -->&gt;&gt; | <i>(Optional)</i> |
+|  [drawOrderEnabled?](./item.itemoptions.draworderenabled.md) |  | boolean | _(Optional)_ |
+|  [properties?](./item.itemoptions.properties.md) |  | Array&lt;[ItemPropertyConfig](./item.itempropertyconfig.md)<!-- -->&lt;keyof [ItemPropertyTypes](./item.itempropertytypes.md)<!-- -->&gt;&gt; | _(Optional)_ |
 

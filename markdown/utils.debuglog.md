@@ -4,7 +4,7 @@
 
 ## debugLog() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function debugLog(message?: string): boolean;
@@ -14,9 +14,9 @@ export declare function debugLog(message?: string): boolean;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  message | string | <i>(Optional)</i> |
+|  message | string | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 boolean
 

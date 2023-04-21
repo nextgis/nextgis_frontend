@@ -4,7 +4,7 @@
 
 ## LoadScriptOptions.crossOrigin property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 crossOrigin?: 'anonymous' | string;

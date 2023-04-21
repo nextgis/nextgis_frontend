@@ -4,12 +4,12 @@
 
 ## WebMapControls.getControlContainer() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getControlContainer(): HTMLElement | undefined;
 ```
-<b>Returns:</b>
+**Returns:**
 
 HTMLElement \| undefined
 

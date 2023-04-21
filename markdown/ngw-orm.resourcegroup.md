@@ -4,10 +4,10 @@
 
 ## ResourceGroup class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class ResourceGroup extends BaseResource 
 ```
-<b>Extends:</b> [BaseResource](./ngw-orm.baseresource.md)
+**Extends:** [BaseResource](./ngw-orm.baseresource.md)
 

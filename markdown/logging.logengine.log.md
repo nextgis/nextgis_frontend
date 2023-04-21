@@ -4,7 +4,7 @@
 
 ## LogEngine.log property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 log: LogFunc<D>;

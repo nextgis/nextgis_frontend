@@ -6,7 +6,7 @@
 
 Maximum scale to show WMS layer. String in form of `1 : 100000`<!-- -->.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 max_scale_denom?: string | null;

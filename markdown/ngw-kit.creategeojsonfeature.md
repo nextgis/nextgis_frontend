@@ -4,7 +4,7 @@
 
 ## createGeoJsonFeature() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function createGeoJsonFeature<G extends Geometry | null = Geometry, P extends FeatureProperties = FeatureProperties>(item: Pick<FeatureItem, 'id' | 'geom' | 'fields'>): Feature<G, P>;
@@ -16,7 +16,7 @@ export declare function createGeoJsonFeature<G extends Geometry | null = Geometr
 |  --- | --- | --- |
 |  item | Pick&lt;[FeatureItem](./ngw-connector.featureitem.md)<!-- -->, 'id' \| 'geom' \| 'fields'&gt; |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Feature&lt;G, P&gt;
 

@@ -4,7 +4,7 @@
 
 ## isExpression() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function isExpression(value: unknown): value is Expression;
@@ -16,7 +16,7 @@ export declare function isExpression(value: unknown): value is Expression;
 |  --- | --- | --- |
 |  value | unknown |  |
 
-<b>Returns:</b>
+**Returns:**
 
 value is [Expression](./paint.expression.md)
 

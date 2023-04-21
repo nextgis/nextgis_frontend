@@ -4,12 +4,12 @@
 
 ## NgwConnector.getActiveApiRequests() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getActiveApiRequests(): CancelablePromise<any>[];
 ```
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;any&gt;\[\]
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;any&gt;\[\]
 

@@ -4,7 +4,7 @@
 
 ## BaseResource.toTypescript() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static toTypescript(opt?: ToTypescriptOptions): ToTypescript;
@@ -14,9 +14,9 @@ static toTypescript(opt?: ToTypescriptOptions): ToTypescript;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  opt | ToTypescriptOptions | <i>(Optional)</i> |
+|  opt | ToTypescriptOptions | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 ToTypescript
 

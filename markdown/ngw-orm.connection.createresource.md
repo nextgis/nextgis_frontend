@@ -4,7 +4,7 @@
 
 ## Connection.createResource() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 createResource(Resource: typeof BaseResource, options: SyncOptions): Promise<typeof BaseResource>;
@@ -17,7 +17,7 @@ createResource(Resource: typeof BaseResource, options: SyncOptions): Promise<typ
 |  Resource | typeof [BaseResource](./ngw-orm.baseresource.md) |  |
 |  options | SyncOptions |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;typeof [BaseResource](./ngw-orm.baseresource.md)<!-- -->&gt;
 

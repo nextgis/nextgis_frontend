@@ -4,7 +4,7 @@
 
 ## CreateControlOptions.margin property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 margin?: boolean;

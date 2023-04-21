@@ -4,7 +4,7 @@
 
 ## WEBMAP\_BASELAYER\_ID\_PREFIX variable
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 WEBMAP_BASELAYER_ID_PREFIX = "webmap-baselayer"

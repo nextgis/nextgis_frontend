@@ -6,7 +6,7 @@
 
 Additional css class string for `on` state only.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 addClassOn?: string;

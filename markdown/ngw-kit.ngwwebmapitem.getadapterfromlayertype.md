@@ -4,7 +4,7 @@
 
 ## NgwWebmapItem.GetAdapterFromLayerType property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static GetAdapterFromLayerType: {

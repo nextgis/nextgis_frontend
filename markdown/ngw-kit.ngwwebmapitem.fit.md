@@ -4,12 +4,12 @@
 
 ## NgwWebmapItem.fit() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 fit(): void;
 ```
-<b>Returns:</b>
+**Returns:**
 
 void
 

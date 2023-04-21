@@ -4,7 +4,7 @@
 
 ## GeomFormat type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type GeomFormat = 'wkt' | 'geojson';

@@ -6,7 +6,7 @@
 
 Comparing content and position of elements of two arrays.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function arrayCompareStrict(array1: any[], array2: any[]): boolean;
@@ -19,7 +19,7 @@ export declare function arrayCompareStrict(array1: any[], array2: any[]): boolea
 |  array1 | any\[\] |  |
 |  array2 | any\[\] |  |
 
-<b>Returns:</b>
+**Returns:**
 
 boolean
 

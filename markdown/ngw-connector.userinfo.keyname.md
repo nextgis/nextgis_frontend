@@ -4,7 +4,7 @@
 
 ## UserInfo.keyname property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 keyname: 'guest' | string;

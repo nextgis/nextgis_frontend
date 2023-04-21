@@ -4,7 +4,7 @@
 
 ## ItemPropertyBaseConfig interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface ItemPropertyBaseConfig<K extends keyof ItemPropertyTypes = any> 
@@ -14,6 +14,6 @@ export interface ItemPropertyBaseConfig<K extends keyof ItemPropertyTypes = any>
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [name?](./item.itempropertybaseconfig.name.md) |  | string | <i>(Optional)</i> |
-|  [type?](./item.itempropertybaseconfig.type.md) |  | [ItemPropertyTypes](./item.itempropertytypes.md)<!-- -->\[K\] | <i>(Optional)</i> |
+|  [name?](./item.itempropertybaseconfig.name.md) |  | string | _(Optional)_ |
+|  [type?](./item.itempropertybaseconfig.type.md) |  | [ItemPropertyTypes](./item.itempropertytypes.md)<!-- -->\[K\] | _(Optional)_ |
 

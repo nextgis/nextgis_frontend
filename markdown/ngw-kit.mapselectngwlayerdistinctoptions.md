@@ -4,12 +4,12 @@
 
 ## MapSelectNgwLayerDistinctOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface MapSelectNgwLayerDistinctOptions<P extends FeatureProperties = FeatureProperties> extends FetchNgwItemsOptions<P> 
 ```
-<b>Extends:</b> [FetchNgwItemsOptions](./ngw-kit.fetchngwitemsoptions.md)
+**Extends:** [FetchNgwItemsOptions](./ngw-kit.fetchngwitemsoptions.md)<!-- -->&lt;P&gt;
 
 ## Properties
 

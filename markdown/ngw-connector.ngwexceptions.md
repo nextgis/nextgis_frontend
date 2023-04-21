@@ -4,7 +4,7 @@
 
 ## NgwExceptions type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type NgwExceptions = 'nextgisweb.resource.exception.ResourceNotFound' | 'nextgisweb.core.exception.InsufficientPermissions';

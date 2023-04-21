@@ -4,7 +4,7 @@
 
 ## ControlPosition type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type ControlPosition = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';

@@ -4,7 +4,7 @@
 
 ## UrlRuntimeParams.set() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 set(name: string, value: string): StateData;
@@ -17,7 +17,7 @@ set(name: string, value: string): StateData;
 |  name | string |  |
 |  value | string |  |
 
-<b>Returns:</b>
+**Returns:**
 
 [StateData](./url-runtime-params.statedata.md)
 

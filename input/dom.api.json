@@ -1,8 +1,8 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.28.6",
-    "schemaVersion": 1009,
+    "toolVersion": "7.34.4",
+    "schemaVersion": 1011,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
       "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
@@ -233,6 +233,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/dom.ts",
           "returnTypeTokenRange": {
             "startIndex": 10,
             "endIndex": 12
@@ -303,6 +304,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/dom.ts",
           "releaseTag": "Public",
           "name": "ElementDef",
           "typeTokenRange": {
@@ -346,6 +348,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/dom.ts",
           "returnTypeTokenRange": {
             "startIndex": 4,
             "endIndex": 6
@@ -404,6 +407,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/loadScript.ts",
           "returnTypeTokenRange": {
             "startIndex": 5,
             "endIndex": 7
@@ -440,6 +444,7 @@
               "text": "export interface LoadScriptOptions "
             }
           ],
+          "fileUrlPath": "src/loadScript.ts",
           "releaseTag": "Public",
           "name": "LoadScriptOptions",
           "preserveMemberOrder": false,
@@ -614,6 +619,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/dom.ts",
           "returnTypeTokenRange": {
             "startIndex": 3,
             "endIndex": 4

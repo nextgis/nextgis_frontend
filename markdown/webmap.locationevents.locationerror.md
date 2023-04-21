@@ -4,7 +4,7 @@
 
 ## LocationEvents.locationerror property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 locationerror?: () => void;

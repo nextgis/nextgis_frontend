@@ -4,7 +4,7 @@
 
 ## MapOptions.view property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 view?: '2D' | '3D' | '2.5D';

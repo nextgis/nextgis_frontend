@@ -4,7 +4,7 @@
 
 ## LogEngine.critical property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 critical: ShortcutLogFunc<D>;

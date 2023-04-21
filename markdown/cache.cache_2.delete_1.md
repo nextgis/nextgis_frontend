@@ -4,7 +4,7 @@
 
 ## Cache\_2.delete() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 delete(key: string, props?: CacheMatchProps<O>): void;
@@ -15,9 +15,9 @@ delete(key: string, props?: CacheMatchProps<O>): void;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  key | string |  |
-|  props | CacheMatchProps&lt;O&gt; | <i>(Optional)</i> |
+|  props | CacheMatchProps&lt;O&gt; | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

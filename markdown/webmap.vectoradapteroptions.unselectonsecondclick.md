@@ -6,7 +6,7 @@
 
 Deselects layer feature by second click.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 unselectOnSecondClick?: boolean;

@@ -4,12 +4,12 @@
 
 ## WebMapLayers.getActiveBaseLayer() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getActiveBaseLayer(): MainLayerAdapter<M, any, AdapterOptions> | undefined;
 ```
-<b>Returns:</b>
+**Returns:**
 
 [MainLayerAdapter](./webmap.mainlayeradapter.md)<!-- -->&lt;M, any, [AdapterOptions](./webmap.adapteroptions.md)<!-- -->&gt; \| undefined
 

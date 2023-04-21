@@ -4,7 +4,7 @@
 
 ## VectorLayer.receive() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static receive(item: VectorLayerResourceItem): typeof VectorLayer;
@@ -16,7 +16,7 @@ static receive(item: VectorLayerResourceItem): typeof VectorLayer;
 |  --- | --- | --- |
 |  item | [VectorLayerResourceItem](./ngw-connector.vectorlayerresourceitem.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 typeof [VectorLayer](./ngw-orm.vectorlayer.md)
 

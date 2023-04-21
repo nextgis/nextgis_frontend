@@ -4,7 +4,7 @@
 
 ## Clipboard\_2.copy() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static copy(text: string): boolean;
@@ -16,7 +16,7 @@ static copy(text: string): boolean;
 |  --- | --- | --- |
 |  text | string |  |
 
-<b>Returns:</b>
+**Returns:**
 
 boolean
 

@@ -4,8 +4,8 @@
 
 ## Tree.\_parent property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-protected _parent?: Tree<TREE_ITEM>;
+protected _parent?: Tree<T>;
 ```

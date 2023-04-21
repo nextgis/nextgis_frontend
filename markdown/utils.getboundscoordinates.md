@@ -4,7 +4,7 @@
 
 ## getBoundsCoordinates() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function getBoundsCoordinates(b: LngLatBoundsArray): number[][];
@@ -16,7 +16,7 @@ export declare function getBoundsCoordinates(b: LngLatBoundsArray): number[][];
 |  --- | --- | --- |
 |  b | [LngLatBoundsArray](./utils.lnglatboundsarray.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 number\[\]\[\]
 

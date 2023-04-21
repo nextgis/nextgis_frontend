@@ -4,7 +4,7 @@
 
 ## NgwUploaderInput.loginDialog property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 loginDialog: boolean;

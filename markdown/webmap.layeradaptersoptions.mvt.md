@@ -4,7 +4,7 @@
 
 ## LayerAdaptersOptions.MVT property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 MVT: MvtAdapterOptions;

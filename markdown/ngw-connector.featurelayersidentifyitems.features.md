@@ -4,7 +4,7 @@
 
 ## FeatureLayersIdentifyItems.features property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 features: LayerFeature[];

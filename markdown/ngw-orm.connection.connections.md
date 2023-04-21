@@ -4,7 +4,7 @@
 
 ## Connection.connections property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static connections: Connection[];

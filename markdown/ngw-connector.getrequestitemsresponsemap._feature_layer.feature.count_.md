@@ -4,7 +4,7 @@
 
 ## GetRequestItemsResponseMap."feature\_layer.feature.count" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'feature_layer.feature.count': FeatureLayerCount;

@@ -4,7 +4,7 @@
 
 ## NgwLayersList.hideWebmapRoot property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 hideWebmapRoot: boolean;

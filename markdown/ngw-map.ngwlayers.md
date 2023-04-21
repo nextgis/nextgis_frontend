@@ -4,7 +4,7 @@
 
 ## NgwLayers interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface NgwLayers 

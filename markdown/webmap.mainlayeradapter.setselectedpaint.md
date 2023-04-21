@@ -4,7 +4,7 @@
 
 ## MainLayerAdapter.setSelectedPaint() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 setSelectedPaint?(paint: Paint): void;
@@ -16,7 +16,7 @@ setSelectedPaint?(paint: Paint): void;
 |  --- | --- | --- |
 |  paint | [Paint](./paint.paint.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

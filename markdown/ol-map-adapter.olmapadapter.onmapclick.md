@@ -4,7 +4,7 @@
 
 ## OlMapAdapter.onMapClick() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onMapClick(evt: MapBrowserPointerEvent): void;
@@ -16,7 +16,7 @@ onMapClick(evt: MapBrowserPointerEvent): void;
 |  --- | --- | --- |
 |  evt | MapBrowserPointerEvent |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

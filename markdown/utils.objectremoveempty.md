@@ -4,7 +4,7 @@
 
 ## objectRemoveEmpty() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function objectRemoveEmpty<T extends Record<any, any>>(obj: T): T;
@@ -16,7 +16,7 @@ export declare function objectRemoveEmpty<T extends Record<any, any>>(obj: T): T
 |  --- | --- | --- |
 |  obj | T |  |
 
-<b>Returns:</b>
+**Returns:**
 
 T
 

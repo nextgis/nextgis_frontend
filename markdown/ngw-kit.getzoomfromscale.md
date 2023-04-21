@@ -4,7 +4,7 @@
 
 ## getZoomFromScale() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function getZoomFromScale(scale: number): number;
@@ -16,7 +16,7 @@ export declare function getZoomFromScale(scale: number): number;
 |  --- | --- | --- |
 |  scale | number |  |
 
-<b>Returns:</b>
+**Returns:**
 
 number
 

@@ -4,18 +4,18 @@
 
 ## BaselayerSelect class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class BaselayerSelect extends Vue 
 ```
-<b>Extends:</b> Vue
+**Extends:** Vue
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [\_\_updateItems?](./vuetify-ngw-components.baselayerselect.__updateitems.md) | <code>protected</code> | (e?: LayerAdapter) =&gt; Promise&lt;void&gt; | <i>(Optional)</i> |
+|  [\_\_updateItems?](./vuetify-ngw-components.baselayerselect.__updateitems.md) | <code>protected</code> | (e?: LayerAdapter) =&gt; Promise&lt;void&gt; | _(Optional)_ |
 |  [\_layers](./vuetify-ngw-components.baselayerselect._layers.md) | <code>protected</code> | Array&lt;LayerAdapter \| [ResourceAdapter](./ngw-kit.resourceadapter.md)<!-- -->&gt; |  |
 |  [active](./vuetify-ngw-components.baselayerselect.active.md) |  | string \| false |  |
 |  [allowEmpty](./vuetify-ngw-components.baselayerselect.allowempty.md) |  | boolean |  |

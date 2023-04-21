@@ -4,27 +4,27 @@
 
 ## NgwMapOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface NgwMapOptions<M = any, C = any> extends MapOptions<M, C> 
 ```
-<b>Extends:</b> [MapOptions](./webmap.mapoptions.md)
+**Extends:** [MapOptions](./webmap.mapoptions.md)<!-- -->&lt;M, C&gt;
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [auth?](./ngw-map.ngwmapoptions.auth.md) |  | [Credentials](./ngw-connector.credentials.md) | <i>(Optional)</i> User credentials for authorization in NGW. Provides the ability to display protected resources |
-|  [baseUrl?](./ngw-map.ngwmapoptions.baseurl.md) |  | string | <i>(Optional)</i> Url of NGW server like this https://demo.nextgis.com |
-|  [companyLogoOptions?](./ngw-map.ngwmapoptions.companylogooptions.md) |  | [CompanyLogoOptions](./ngw-kit.companylogooptions.md) | <i>(Optional)</i> |
-|  [connector?](./ngw-map.ngwmapoptions.connector.md) |  | NgwConnector | <i>(Optional)</i> |
-|  [osm?](./ngw-map.ngwmapoptions.osm.md) |  | boolean | <i>(Optional)</i> Shortcut to add OSM baselayer. |
-|  [pixelRadius?](./ngw-map.ngwmapoptions.pixelradius.md) |  | number | <i>(Optional)</i> |
-|  [qmsId?](./ngw-map.ngwmapoptions.qmsid.md) |  | number \| \[number, string\] | <i>(Optional)</i> Id number of resource from \[QMS\](https://qms.nextgis.com/). If specified through an array, the first element will be the resource identifier, and the second will be the name for identification in the application. |
-|  [resources?](./ngw-map.ngwmapoptions.resources.md) |  | [NgwResourceDefinition](./ngw-map.ngwresourcedefinition.md)<!-- -->\[\] | <p><i>(Optional)</i> List of NGW resources to be displayed on the map.</p><p>The resources list may include:</p><p>- number - resource id; // also for resource - string - resource keyname; // also for resource - object - configuration of the layer to be added with the one required parameter <code>resource</code> (the comment "also for resource" above refers to it)</p> |
-|  [runtimeParams?](./ngw-map.ngwmapoptions.runtimeparams.md) |  | [RuntimeParams](./webmap.runtimeparams.md)<!-- -->\[\] | <i>(Optional)</i> |
-|  [setViewDelay?](./ngw-map.ngwmapoptions.setviewdelay.md) |  | number | <i>(Optional)</i> |
-|  [webmapId?](./ngw-map.ngwmapoptions.webmapid.md) |  | [NgwResourceDefinition](./ngw-map.ngwresourcedefinition.md) | <i>(Optional)</i> Id number of webmap resource from NGW cloud. If specified through an array, the first element will be the webmapId from NGW, and the second will be the name for identification in the application. |
-|  [whitlabel?](./ngw-map.ngwmapoptions.whitlabel.md) |  | boolean | <i>(Optional)</i> |
+|  [auth?](./ngw-map.ngwmapoptions.auth.md) |  | [Credentials](./ngw-connector.credentials.md) | _(Optional)_ User credentials for authorization in NGW. Provides the ability to display protected resources |
+|  [baseUrl?](./ngw-map.ngwmapoptions.baseurl.md) |  | string | _(Optional)_ Url of NGW server like this https://demo.nextgis.com |
+|  [companyLogoOptions?](./ngw-map.ngwmapoptions.companylogooptions.md) |  | CompanyLogoOptions | _(Optional)_ |
+|  [connector?](./ngw-map.ngwmapoptions.connector.md) |  | [NgwConnector](./ngw-connector.ngwconnector.md) | _(Optional)_ |
+|  [osm?](./ngw-map.ngwmapoptions.osm.md) |  | boolean | _(Optional)_ Shortcut to add OSM baselayer. |
+|  [pixelRadius?](./ngw-map.ngwmapoptions.pixelradius.md) |  | number | _(Optional)_ |
+|  [qmsId?](./ngw-map.ngwmapoptions.qmsid.md) |  | number \| \[number, string\] | _(Optional)_ Id number of resource from \[QMS\](https://qms.nextgis.com/). If specified through an array, the first element will be the resource identifier, and the second will be the name for identification in the application. |
+|  [resources?](./ngw-map.ngwmapoptions.resources.md) |  | [NgwResourceDefinition](./ngw-map.ngwresourcedefinition.md)<!-- -->\[\] | <p>_(Optional)_ List of NGW resources to be displayed on the map.</p><p>The resources list may include:</p><p>- number - resource id; // also for resource - string - resource keyname; // also for resource - object - configuration of the layer to be added with the one required parameter <code>resource</code> (the comment "also for resource" above refers to it)</p> |
+|  [runtimeParams?](./ngw-map.ngwmapoptions.runtimeparams.md) |  | [RuntimeParams](./webmap.runtimeparams.md)<!-- -->\[\] | _(Optional)_ |
+|  [setViewDelay?](./ngw-map.ngwmapoptions.setviewdelay.md) |  | number | _(Optional)_ |
+|  [webmapId?](./ngw-map.ngwmapoptions.webmapid.md) |  | [NgwResourceDefinition](./ngw-map.ngwresourcedefinition.md) | _(Optional)_ Id number of webmap resource from NGW cloud. If specified through an array, the first element will be the webmapId from NGW, and the second will be the name for identification in the application. |
+|  [whitlabel?](./ngw-map.ngwmapoptions.whitlabel.md) |  | boolean | _(Optional)_ |
 

@@ -6,7 +6,7 @@
 
 A way to save the state of a map to external services
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 runtimeParams?: RuntimeParams[];

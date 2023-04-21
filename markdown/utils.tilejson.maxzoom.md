@@ -6,7 +6,7 @@
 
 Default: 30. `>= 0, <= 30.` An integer specifying the maximum zoom level. MUST be `>= minzoom`<!-- -->.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 maxzoom?: number;

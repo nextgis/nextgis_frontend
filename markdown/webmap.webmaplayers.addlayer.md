@@ -6,7 +6,7 @@
 
 Registration of map layer.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 addLayer<K extends keyof LayerAdapters, LO extends AdapterOptions = AdapterOptions>(adapter: LayerAdapterDefinition<K>, options?: LO | LayerAdaptersOptions[K], order?: number): Promise<LayerAdapter>;
@@ -17,10 +17,10 @@ addLayer<K extends keyof LayerAdapters, LO extends AdapterOptions = AdapterOptio
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  adapter | [LayerAdapterDefinition](./webmap.layeradapterdefinition.md)<!-- -->&lt;K&gt; | The name of layer adapter from \[MapAdapter.layerAdapters\](webmap\#MapAdapter.layerAdapters). May be custom object or class implemented by \[MainLayerAdapter\](webmap\#MainLayerAdapter). |
-|  options | LO \| [LayerAdaptersOptions](./webmap.layeradaptersoptions.md)<!-- -->\[K\] | <i>(Optional)</i> Specific options for given adapter |
-|  order | number | <i>(Optional)</i> |
+|  options | LO \| [LayerAdaptersOptions](./webmap.layeradaptersoptions.md)<!-- -->\[K\] | _(Optional)_ Specific options for given adapter |
+|  order | number | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[LayerAdapter](./webmap.layeradapter.md)<!-- -->&gt;
 

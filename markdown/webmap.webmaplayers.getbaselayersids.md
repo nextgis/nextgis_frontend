@@ -4,12 +4,12 @@
 
 ## WebMapLayers.getBaseLayersIds() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getBaseLayersIds(): string[];
 ```
-<b>Returns:</b>
+**Returns:**
 
 string\[\]
 

@@ -6,7 +6,7 @@
 
 Constructs a new instance of the `NgwLeaflet` class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 constructor(options: NgwMapOptions);
@@ -16,5 +16,5 @@ constructor(options: NgwMapOptions);
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | NgwMapOptions |  |
+|  options | [NgwMapOptions](./ngw-map.ngwmapoptions.md) |  |
 

@@ -4,7 +4,7 @@
 
 ## WebMapMain.getPaintFunctions property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static getPaintFunctions: {

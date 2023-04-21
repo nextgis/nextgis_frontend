@@ -6,7 +6,7 @@
 
 Longitude and latitude coordinate, measured in degrees.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface LatLng 

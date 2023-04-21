@@ -4,7 +4,7 @@
 
 ## createFeatureFieldFilterQueries() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function createFeatureFieldFilterQueries<G extends Geometry = Geometry, P extends {
@@ -20,7 +20,7 @@ export declare function createFeatureFieldFilterQueries<G extends Geometry = Geo
 |  --- | --- | --- |
 |  opt | [FetchNgwItemsOptions](./ngw-kit.fetchngwitemsoptions.md)<!-- -->&lt;P&gt; &amp; Required&lt;Pick&lt;[FetchNgwItemsOptions](./ngw-kit.fetchngwitemsoptions.md)<!-- -->, 'filters'&gt;&gt; |  |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;[FeatureItem](./ngw-connector.featureitem.md)<!-- -->&lt;P, G&gt;\[\]&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;[FeatureItem](./ngw-connector.featureitem.md)<!-- -->&lt;P, G&gt;\[\]&gt;
 

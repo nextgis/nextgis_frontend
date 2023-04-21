@@ -4,7 +4,7 @@
 
 ## QmsBasemap.license\_url property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 license_url: string;

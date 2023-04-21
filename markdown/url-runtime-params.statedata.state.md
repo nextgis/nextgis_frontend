@@ -4,7 +4,7 @@
 
 ## StateData.state property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 state: {

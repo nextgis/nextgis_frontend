@@ -4,7 +4,7 @@
 
 ## Dialog.dialogs property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static dialogs: Dialog[];

@@ -6,7 +6,7 @@
 
 Constructs a new instance of the `BaseProperty` class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 constructor(name: string, item: I, options: O);

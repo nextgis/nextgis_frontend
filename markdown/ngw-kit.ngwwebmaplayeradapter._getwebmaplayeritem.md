@@ -4,12 +4,12 @@
 
 ## NgwWebmapLayerAdapter.\_getWebMapLayerItem() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 protected _getWebMapLayerItem(): Promise<NgwWebmapItem | undefined>;
 ```
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[NgwWebmapItem](./ngw-kit.ngwwebmapitem.md) \| undefined&gt;
 

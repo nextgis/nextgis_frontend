@@ -4,10 +4,10 @@
 
 ## OnToggleClick type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type OnToggleClick = OnToggleClickSync | onToggleClickAsync;
 ```
-<b>References:</b> [OnToggleClickSync](./webmap.ontoggleclicksync.md)<!-- -->, [onToggleClickAsync](./webmap.ontoggleclickasync.md)
+**References:** [OnToggleClickSync](./webmap.ontoggleclicksync.md)<!-- -->, [onToggleClickAsync](./webmap.ontoggleclickasync.md)
 

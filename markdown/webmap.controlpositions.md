@@ -9,10 +9,10 @@
 > use ControlPosition instead
 > 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type ControlPositions = ControlPosition;
 ```
-<b>References:</b> [ControlPosition](./webmap.controlposition.md)
+**References:** [ControlPosition](./webmap.controlposition.md)
 

@@ -4,7 +4,7 @@
 
 ## QmsBasemap.boundary property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 boundary?: any;

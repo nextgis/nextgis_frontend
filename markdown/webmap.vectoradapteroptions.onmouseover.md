@@ -6,7 +6,7 @@
 
 Fired when the mouse enters the layer.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onMouseOver?(opt: OnLayerMouseOptions<F, L>): void;
@@ -18,7 +18,7 @@ onMouseOver?(opt: OnLayerMouseOptions<F, L>): void;
 |  --- | --- | --- |
 |  opt | [OnLayerMouseOptions](./webmap.onlayermouseoptions.md)<!-- -->&lt;F, L&gt; |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

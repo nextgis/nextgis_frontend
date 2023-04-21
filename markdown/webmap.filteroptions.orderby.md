@@ -6,7 +6,7 @@
 
 set fields for order
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 orderBy?: (keyof P | string)[];

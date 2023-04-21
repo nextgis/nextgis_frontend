@@ -6,7 +6,7 @@
 
 A semver.org style version number. Describes the version of the TileJSON spec that is implemented by this JSON object.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 tilejson: string;

@@ -5,7 +5,7 @@
 ## MapAdapterEvents."data-loaded" property
 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'data-loaded': DataLoadError;

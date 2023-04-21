@@ -6,7 +6,7 @@
 
 options to specify the initial position of the map
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 fitOptions?: FitOptions;

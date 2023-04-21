@@ -4,7 +4,7 @@
 
 ## unflatten() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function unflatten(data: Record<string, any> | any[]): Record<string, any>;
@@ -16,7 +16,7 @@ export declare function unflatten(data: Record<string, any> | any[]): Record<str
 |  --- | --- | --- |
 |  data | Record&lt;string, any&gt; \| any\[\] |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Record&lt;string, any&gt;
 

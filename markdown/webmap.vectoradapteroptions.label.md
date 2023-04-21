@@ -4,7 +4,7 @@
 
 ## VectorAdapterOptions.label property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 label?: (e: LayerDefinition<F, L>) => string;

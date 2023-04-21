@@ -4,12 +4,12 @@
 
 ## UrlRuntimeParams class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class UrlRuntimeParams implements RuntimeParams 
 ```
-<b>Implements:</b> [RuntimeParams](./webmap.runtimeparams.md)
+**Implements:** RuntimeParams
 
 ## Methods
 

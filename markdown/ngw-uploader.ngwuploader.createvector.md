@@ -4,7 +4,7 @@
 
 ## NgwUploader.createVector() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 createVector(options: CreateVectorOptions): CancelablePromise<CreatedResource>;
@@ -16,7 +16,7 @@ createVector(options: CreateVectorOptions): CancelablePromise<CreatedResource>;
 |  --- | --- | --- |
 |  options | [CreateVectorOptions](./ngw-uploader.createvectoroptions.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;[CreatedResource](./ngw-connector.createdresource.md)<!-- -->&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;[CreatedResource](./ngw-connector.createdresource.md)<!-- -->&gt;
 

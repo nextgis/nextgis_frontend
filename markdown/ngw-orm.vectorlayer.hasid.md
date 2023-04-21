@@ -6,12 +6,12 @@
 
 Checks if entity has an id.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 hasId(): boolean;
 ```
-<b>Returns:</b>
+**Returns:**
 
 boolean
 

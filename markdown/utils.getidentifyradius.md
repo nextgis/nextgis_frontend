@@ -4,7 +4,7 @@
 
 ## getIdentifyRadius() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function getIdentifyRadius(center: LngLatArray, zoom: number, pixelRadius: number): number;
@@ -18,7 +18,7 @@ export declare function getIdentifyRadius(center: LngLatArray, zoom: number, pix
 |  zoom | number |  |
 |  pixelRadius | number |  |
 
-<b>Returns:</b>
+**Returns:**
 
 number
 

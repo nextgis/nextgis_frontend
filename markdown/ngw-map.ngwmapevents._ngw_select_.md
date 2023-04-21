@@ -4,7 +4,7 @@
 
 ## NgwMapEvents."ngw:select" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'ngw:select': NgwIdentifyEvent | null;

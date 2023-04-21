@@ -6,7 +6,7 @@
 
 Initial position of the map, array of two degrees \[longitude, latitude\]. \[LngLatArray\](webmap-api\#LngLatArray)
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 center?: LngLatArray;

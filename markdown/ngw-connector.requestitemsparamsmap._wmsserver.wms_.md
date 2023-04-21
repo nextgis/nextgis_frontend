@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."wmsserver.wms" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'wmsserver.wms': {

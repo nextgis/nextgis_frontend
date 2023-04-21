@@ -4,7 +4,7 @@
 
 ## RequestOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface RequestOptions<M = RequestMethods> 
@@ -14,13 +14,13 @@ export interface RequestOptions<M = RequestMethods>
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [cache?](./ngw-connector.requestoptions.cache.md) |  | boolean | <i>(Optional)</i> |
-|  [data?](./ngw-connector.requestoptions.data.md) |  | any | <i>(Optional)</i> |
-|  [file?](./ngw-connector.requestoptions.file.md) |  | File | <i>(Optional)</i> |
-|  [headers?](./ngw-connector.requestoptions.headers.md) |  | [RequestHeaders](./ngw-connector.requestheaders.md) | <i>(Optional)</i> |
-|  [method?](./ngw-connector.requestoptions.method.md) |  | M | <i>(Optional)</i> |
-|  [onProgress?](./ngw-connector.requestoptions.onprogress.md) |  | (percentComplete: number, event: ProgressEvent) =&gt; void | <i>(Optional)</i> |
-|  [responseType?](./ngw-connector.requestoptions.responsetype.md) |  | 'json' \| 'blob' | <i>(Optional)</i> |
-|  [signal?](./ngw-connector.requestoptions.signal.md) |  | AbortSignal | <i>(Optional)</i> |
-|  [withCredentials?](./ngw-connector.requestoptions.withcredentials.md) |  | boolean | <i>(Optional)</i> |
+|  [cache?](./ngw-connector.requestoptions.cache.md) |  | boolean | _(Optional)_ |
+|  [data?](./ngw-connector.requestoptions.data.md) |  | any | _(Optional)_ |
+|  [file?](./ngw-connector.requestoptions.file.md) |  | File | _(Optional)_ |
+|  [headers?](./ngw-connector.requestoptions.headers.md) |  | [RequestHeaders](./ngw-connector.requestheaders.md) | _(Optional)_ |
+|  [method?](./ngw-connector.requestoptions.method.md) |  | M | _(Optional)_ |
+|  [onProgress?](./ngw-connector.requestoptions.onprogress.md) |  | (percentComplete: number, event: ProgressEvent) =&gt; void | _(Optional)_ |
+|  [responseType?](./ngw-connector.requestoptions.responsetype.md) |  | 'json' \| 'blob' | _(Optional)_ |
+|  [signal?](./ngw-connector.requestoptions.signal.md) |  | AbortSignal | _(Optional)_ |
+|  [withCredentials?](./ngw-connector.requestoptions.withcredentials.md) |  | boolean | _(Optional)_ |
 

@@ -4,7 +4,7 @@
 
 ## NgwConnector.create() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static create(options: NgwConnectorOptions): NgwConnector;
@@ -16,7 +16,7 @@ static create(options: NgwConnectorOptions): NgwConnector;
 |  --- | --- | --- |
 |  options | [NgwConnectorOptions](./ngw-connector.ngwconnectoroptions.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 [NgwConnector](./ngw-connector.ngwconnector.md)
 

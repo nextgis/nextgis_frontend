@@ -4,12 +4,12 @@
 
 ## TreeLayer interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface TreeLayer extends TreeItem 
 ```
-<b>Extends:</b> [TreeItem](./ngw-connector.treeitem.md)
+**Extends:** [TreeItem](./ngw-connector.treeitem.md)
 
 ## Properties
 
@@ -19,8 +19,8 @@ export interface TreeLayer extends TreeItem
 |  [item\_type](./ngw-connector.treelayer.item_type.md) |  | 'layer' |  |
 |  [layer\_adapter](./ngw-connector.treelayer.layer_adapter.md) |  | string |  |
 |  [layer\_enabled](./ngw-connector.treelayer.layer_enabled.md) |  | boolean |  |
-|  [layer\_max\_scale\_denom?](./ngw-connector.treelayer.layer_max_scale_denom.md) |  | number | <i>(Optional)</i> |
-|  [layer\_min\_scale\_denom?](./ngw-connector.treelayer.layer_min_scale_denom.md) |  | number | <i>(Optional)</i> |
+|  [layer\_max\_scale\_denom?](./ngw-connector.treelayer.layer_max_scale_denom.md) |  | number | _(Optional)_ |
+|  [layer\_min\_scale\_denom?](./ngw-connector.treelayer.layer_min_scale_denom.md) |  | number | _(Optional)_ |
 |  [layer\_style\_id](./ngw-connector.treelayer.layer_style_id.md) |  | number |  |
 |  [layer\_transparency](./ngw-connector.treelayer.layer_transparency.md) |  | number |  |
 |  [style\_parent\_id](./ngw-connector.treelayer.style_parent_id.md) |  | number |  |

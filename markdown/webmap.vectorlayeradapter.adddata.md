@@ -6,7 +6,7 @@
 
 Add GeoJson data to layer.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 addData?(geojson: GeoJsonObject): void | Promise<void>;
@@ -18,7 +18,7 @@ addData?(geojson: GeoJsonObject): void | Promise<void>;
 |  --- | --- | --- |
 |  geojson | GeoJsonObject | GeoJson object. |
 
-<b>Returns:</b>
+**Returns:**
 
 void \| Promise&lt;void&gt;
 

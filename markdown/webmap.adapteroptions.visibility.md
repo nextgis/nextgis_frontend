@@ -6,7 +6,7 @@
 
 Show layer on the map immediately after adding. Such layers are always under others. Only one base layer can be displayed on the map at a time.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 visibility?: boolean;

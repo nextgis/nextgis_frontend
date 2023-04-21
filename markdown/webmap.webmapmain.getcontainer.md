@@ -6,12 +6,12 @@
 
 Returns the HTML element that contains the map.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getContainer(): HTMLElement | undefined;
 ```
-<b>Returns:</b>
+**Returns:**
 
 HTMLElement \| undefined
 

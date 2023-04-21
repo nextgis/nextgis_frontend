@@ -4,10 +4,10 @@
 
 ## FeatureItemToNgw type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type FeatureItemToNgw<F = FeatureProperties, G extends Geometry | string = Geometry> = FeatureItem<F, G>;
 ```
-<b>References:</b> [FeatureProperties](./utils.featureproperties.md)<!-- -->, [FeatureItem](./ngw-connector.featureitem.md)
+**References:** [FeatureProperties](./utils.featureproperties.md)<!-- -->, [FeatureItem](./ngw-connector.featureitem.md)
 

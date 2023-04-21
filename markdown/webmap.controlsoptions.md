@@ -4,12 +4,12 @@
 
 ## ControlsOptions type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type ControlsOptions<O extends MapControls = MapControls, K extends keyof O = keyof O> = {
     [control in K]: O[K];
 };
 ```
-<b>References:</b> [MapControls](./webmap.mapcontrols.md)
+**References:** [MapControls](./webmap.mapcontrols.md)
 

@@ -4,12 +4,12 @@
 
 ## WebMapMain.stopGetCoordFromMapClick() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 stopGetCoordFromMapClick(): void;
 ```
-<b>Returns:</b>
+**Returns:**
 
 void
 

@@ -8,7 +8,7 @@ Caching only a non-empty value.
 
 Useful for get or create strategy
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 addFull(key: string, valueToSet: CacheValue<V> | (() => CacheValue<V>), props?: CacheMatchProps<O>): CacheValue<V>;
@@ -20,9 +20,9 @@ addFull(key: string, valueToSet: CacheValue<V> | (() => CacheValue<V>), props?: 
 |  --- | --- | --- |
 |  key | string |  |
 |  valueToSet | CacheValue&lt;V&gt; \| (() =&gt; CacheValue&lt;V&gt;) |  |
-|  props | CacheMatchProps&lt;O&gt; | <i>(Optional)</i> |
+|  props | CacheMatchProps&lt;O&gt; | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 CacheValue&lt;V&gt;
 

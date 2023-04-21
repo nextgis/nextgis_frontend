@@ -4,7 +4,7 @@
 
 ## CreatedResource.parent property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 parent: IdOnly;

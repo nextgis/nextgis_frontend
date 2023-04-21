@@ -4,7 +4,7 @@
 
 ## Connection.getResourceItem() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getResourceItem(resource: ResourceIdKeynameDef | DeepPartial<Resource>): Promise<ResourceItem | undefined>;
@@ -16,7 +16,7 @@ getResourceItem(resource: ResourceIdKeynameDef | DeepPartial<Resource>): Promise
 |  --- | --- | --- |
 |  resource | [ResourceIdKeynameDef](./ngw-connector.resourceidkeynamedef.md) \| DeepPartial&lt;[Resource](./ngw-connector.resource.md)<!-- -->&gt; |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[ResourceItem](./ngw-connector.resourceitem.md) \| undefined&gt;
 

@@ -6,7 +6,7 @@
 
 Constructs a new instance of the `NgLogEngine` class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 constructor(options: NgLogEngineOptions);

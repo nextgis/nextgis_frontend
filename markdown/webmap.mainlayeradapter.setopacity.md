@@ -4,7 +4,7 @@
 
 ## MainLayerAdapter.setOpacity() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 setOpacity?(val: number): void;
@@ -16,7 +16,7 @@ setOpacity?(val: number): void;
 |  --- | --- | --- |
 |  val | number |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

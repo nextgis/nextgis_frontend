@@ -4,7 +4,7 @@
 
 ## RequestHeaders."Access-Control-Allow-Headers" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'Access-Control-Allow-Headers'?: string;

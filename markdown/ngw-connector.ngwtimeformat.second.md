@@ -4,7 +4,7 @@
 
 ## NgwTimeFormat.second property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 second: number;

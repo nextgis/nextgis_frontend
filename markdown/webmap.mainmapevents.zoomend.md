@@ -6,7 +6,7 @@
 
 Fired when the map has changed.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 zoomend: MapAdapter;

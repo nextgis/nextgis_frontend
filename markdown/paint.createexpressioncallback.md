@@ -4,7 +4,7 @@
 
 ## createExpressionCallback() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function createExpressionCallback(paint: Record<string, any>): GetPaintCallback | undefined;
@@ -16,7 +16,7 @@ export declare function createExpressionCallback(paint: Record<string, any>): Ge
 |  --- | --- | --- |
 |  paint | Record&lt;string, any&gt; |  |
 
-<b>Returns:</b>
+**Returns:**
 
 [GetPaintCallback](./paint.getpaintcallback.md) \| undefined
 

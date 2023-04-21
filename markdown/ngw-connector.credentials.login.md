@@ -4,7 +4,7 @@
 
 ## Credentials.login property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 login: string;

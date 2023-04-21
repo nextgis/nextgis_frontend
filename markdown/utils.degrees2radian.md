@@ -4,7 +4,7 @@
 
 ## degrees2Radian() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function degrees2Radian(deg: number): number;
@@ -16,7 +16,7 @@ export declare function degrees2Radian(deg: number): number;
 |  --- | --- | --- |
 |  deg | number |  |
 
-<b>Returns:</b>
+**Returns:**
 
 number
 

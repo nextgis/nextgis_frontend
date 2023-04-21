@@ -4,7 +4,7 @@
 
 ## WebMapLayers.setLayerPaint() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 setLayerPaint(layerDef: LayerDef, paint?: Paint | null): void;
@@ -15,9 +15,9 @@ setLayerPaint(layerDef: LayerDef, paint?: Paint | null): void;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  layerDef | [LayerDef](./webmap.layerdef.md) |  |
-|  paint | [Paint](./paint.paint.md) \| null | <i>(Optional)</i> |
+|  paint | [Paint](./paint.paint.md) \| null | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

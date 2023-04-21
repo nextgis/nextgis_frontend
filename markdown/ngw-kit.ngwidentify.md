@@ -4,10 +4,10 @@
 
 ## NgwIdentify type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type NgwIdentify = FeatureLayersIdentify & (NgwVectorIdentify | NgwRasterIdentify);
 ```
-<b>References:</b> [FeatureLayersIdentify](./ngw-connector.featurelayersidentify.md)
+**References:** [FeatureLayersIdentify](./ngw-connector.featurelayersidentify.md)
 

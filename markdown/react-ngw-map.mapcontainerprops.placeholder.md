@@ -4,7 +4,7 @@
 
 ## MapContainerProps.placeholder property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 placeholder?: ReactNode;

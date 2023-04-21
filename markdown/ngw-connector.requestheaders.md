@@ -4,7 +4,7 @@
 
 ## RequestHeaders interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface RequestHeaders 
@@ -14,8 +14,8 @@ export interface RequestHeaders
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  ["Access-Control-Allow-Headers"?](./ngw-connector.requestheaders._access-control-allow-headers_.md) |  | string | <i>(Optional)</i> |
-|  ["Access-Control-Allow-Origin"?](./ngw-connector.requestheaders._access-control-allow-origin_.md) |  | string | <i>(Optional)</i> |
-|  [Accept?](./ngw-connector.requestheaders.accept.md) |  | string | <i>(Optional)</i> |
-|  [Authorization?](./ngw-connector.requestheaders.authorization.md) |  | string | <i>(Optional)</i> |
+|  ["Access-Control-Allow-Headers"?](./ngw-connector.requestheaders._access-control-allow-headers_.md) |  | string | _(Optional)_ |
+|  ["Access-Control-Allow-Origin"?](./ngw-connector.requestheaders._access-control-allow-origin_.md) |  | string | _(Optional)_ |
+|  [Accept?](./ngw-connector.requestheaders.accept.md) |  | string | _(Optional)_ |
+|  [Authorization?](./ngw-connector.requestheaders.authorization.md) |  | string | _(Optional)_ |
 

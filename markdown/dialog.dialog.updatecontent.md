@@ -4,7 +4,7 @@
 
 ## Dialog.updateContent() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 updateContent(content?: string | Node): void;
@@ -14,9 +14,9 @@ updateContent(content?: string | Node): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  content | string \| Node | <i>(Optional)</i> |
+|  content | string \| Node | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

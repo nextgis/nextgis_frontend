@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."resource.update" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'resource.update': {

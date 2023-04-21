@@ -4,12 +4,12 @@
 
 ## WebMapLayers.getBaseLayers() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getBaseLayers(): LayerAdapter[];
 ```
-<b>Returns:</b>
+**Returns:**
 
 [LayerAdapter](./webmap.layeradapter.md)<!-- -->\[\]
 

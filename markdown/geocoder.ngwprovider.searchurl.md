@@ -4,7 +4,7 @@
 
 ## NgwProvider.searchUrl property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 searchUrl: string;

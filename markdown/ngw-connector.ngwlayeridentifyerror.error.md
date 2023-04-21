@@ -4,7 +4,7 @@
 
 ## NgwLayerIdentifyError.error property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 error: 'Not implemented';

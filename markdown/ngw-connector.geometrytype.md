@@ -4,7 +4,7 @@
 
 ## GeometryType type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type GeometryType = 'POINT' | 'LINESTRING' | 'POLYGON' | 'MULTIPOINT' | 'MULTILINESTRING' | 'MULTIPOLYGON' | 'POINTZ' | 'LINESTRINGZ' | 'POLYGONZ' | 'MULTIPOINTZ' | 'MULTILINESTRINGZ' | 'MULTIPOLYGONZ';

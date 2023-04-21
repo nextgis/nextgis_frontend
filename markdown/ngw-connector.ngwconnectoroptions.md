@@ -4,7 +4,7 @@
 
 ## NgwConnectorOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface NgwConnectorOptions 
@@ -14,8 +14,8 @@ export interface NgwConnectorOptions
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [auth?](./ngw-connector.ngwconnectoroptions.auth.md) |  | [Credentials](./ngw-connector.credentials.md) | <i>(Optional)</i> |
-|  [baseUrl?](./ngw-connector.ngwconnectoroptions.baseurl.md) |  | string | <i>(Optional)</i> |
-|  [requestTransform?](./ngw-connector.ngwconnectoroptions.requesttransform.md) |  | [RequestTransformFunction](./ngw-connector.requesttransformfunction.md) | <i>(Optional)</i> |
-|  [route?](./ngw-connector.ngwconnectoroptions.route.md) |  | string | <i>(Optional)</i> |
+|  [auth?](./ngw-connector.ngwconnectoroptions.auth.md) |  | [Credentials](./ngw-connector.credentials.md) | _(Optional)_ |
+|  [baseUrl?](./ngw-connector.ngwconnectoroptions.baseurl.md) |  | string | _(Optional)_ |
+|  [requestTransform?](./ngw-connector.ngwconnectoroptions.requesttransform.md) |  | [RequestTransformFunction](./ngw-connector.requesttransformfunction.md) | _(Optional)_ |
+|  [route?](./ngw-connector.ngwconnectoroptions.route.md) |  | string | _(Optional)_ |
 

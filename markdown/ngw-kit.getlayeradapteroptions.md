@@ -4,7 +4,7 @@
 
 ## GetLayerAdapterOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface GetLayerAdapterOptions 
@@ -14,7 +14,7 @@ export interface GetLayerAdapterOptions
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [baseUrl?](./ngw-kit.getlayeradapteroptions.baseurl.md) |  | string | <i>(Optional)</i> |
+|  [baseUrl?](./ngw-kit.getlayeradapteroptions.baseurl.md) |  | string | _(Optional)_ |
 |  [options](./ngw-kit.getlayeradapteroptions.options.md) |  | [NgwLayerOptions](./ngw-kit.ngwlayeroptions.md) |  |
-|  [webMap?](./ngw-kit.getlayeradapteroptions.webmap.md) |  | [WebMap](./webmap.webmap.md) | <i>(Optional)</i> |
+|  [webMap?](./ngw-kit.getlayeradapteroptions.webmap.md) |  | [WebMap](./webmap.webmap.md) | _(Optional)_ |
 

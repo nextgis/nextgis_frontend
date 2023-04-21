@@ -4,7 +4,7 @@
 
 ## NgwMapEvents."ngw-map:create" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'ngw-map:create': NgwMap;

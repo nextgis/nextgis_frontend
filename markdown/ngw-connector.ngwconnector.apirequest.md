@@ -6,7 +6,7 @@
 
 Send request to NGW api router.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 apiRequest<K extends keyof RequestItemsParamsMap, P extends RequestItemKeys = RequestItemKeys>(name: K, params_?: RequestItemsParams<K>, requestOptions?: RequestOptions): CancelablePromise<P[K]>;
@@ -17,12 +17,12 @@ apiRequest<K extends keyof RequestItemsParamsMap, P extends RequestItemKeys = Re
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  name | K | NGW route name from [routes](https://docs.nextgis.com/docs_ngweb_dev/doc/developer/resource.html#routes) |
-|  params\_ | [RequestItemsParams](./ngw-connector.requestitemsparams.md)<!-- -->&lt;K&gt; | <i>(Optional)</i> |
-|  requestOptions | [RequestOptions](./ngw-connector.requestoptions.md) | <i>(Optional)</i> Request options |
+|  params\_ | [RequestItemsParams](./ngw-connector.requestitemsparams.md)<!-- -->&lt;K&gt; | _(Optional)_ |
+|  requestOptions | [RequestOptions](./ngw-connector.requestoptions.md) | _(Optional)_ Request options |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;P\[K\]&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;P\[K\]&gt;
 
 ## Example
 

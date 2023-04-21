@@ -4,7 +4,7 @@
 
 ## RequestHeaders."Access-Control-Allow-Origin" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'Access-Control-Allow-Origin'?: string;

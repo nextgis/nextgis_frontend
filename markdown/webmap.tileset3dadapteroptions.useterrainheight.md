@@ -4,7 +4,7 @@
 
 ## Tileset3DAdapterOptions.useTerrainHeight property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 useTerrainHeight?: boolean;

@@ -4,7 +4,7 @@
 
 ## ResourceStore.prepareFeatureToNgw() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 prepareFeatureToNgw<G extends Geometry | null = Geometry, P extends FeatureProperties = FeatureProperties>(opt: {
@@ -18,7 +18,7 @@ prepareFeatureToNgw<G extends Geometry | null = Geometry, P extends FeaturePrope
 |  --- | --- | --- |
 |  opt | { item: Feature&lt;G, P&gt;; } |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;Partial&lt;[FeatureItem](./ngw-connector.featureitem.md)<!-- -->&lt;P&gt;&gt;&gt;
 

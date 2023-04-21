@@ -4,25 +4,25 @@
 
 ## ResourceItem interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface ResourceItem extends ResourceItemMain 
 ```
-<b>Extends:</b> [ResourceItemMain](./ngw-connector.resourceitemmain.md)
+**Extends:** [ResourceItemMain](./ngw-connector.resourceitemmain.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [basemap\_layer?](./ngw-connector.resourceitem.basemap_layer.md) |  | [BasemapResource](./ngw-connector.basemapresource.md) | <i>(Optional)</i> |
-|  [basemap\_webmap?](./ngw-connector.resourceitem.basemap_webmap.md) |  | [BasemapWebmap](./ngw-connector.basemapwebmap.md) | <i>(Optional)</i> |
-|  [feature\_layer?](./ngw-connector.resourceitem.feature_layer.md) |  | [FeatureResource](./ngw-connector.featureresource.md) | <i>(Optional)</i> |
-|  [file\_bucket?](./ngw-connector.resourceitem.file_bucket.md) |  | [FileBucket](./ngw-connector.filebucket.md) | <i>(Optional)</i> |
-|  [lookup\_table?](./ngw-connector.resourceitem.lookup_table.md) |  | [LookupTableResource](./ngw-connector.lookuptableresource.md) | <i>(Optional)</i> |
-|  [vector\_layer?](./ngw-connector.resourceitem.vector_layer.md) |  | [VectorLayer](./ngw-connector.vectorlayer.md) | <i>(Optional)</i> |
-|  [webmap?](./ngw-connector.resourceitem.webmap.md) |  | [WebmapResource](./ngw-connector.webmapresource.md) | <i>(Optional)</i> |
-|  [wmsclient\_connection?](./ngw-connector.resourceitem.wmsclient_connection.md) |  | [WmsClientConnection](./ngw-connector.wmsclientconnection.md) | <i>(Optional)</i> |
-|  [wmsclient\_layer?](./ngw-connector.resourceitem.wmsclient_layer.md) |  | [WmsClientLayer](./ngw-connector.wmsclientlayer.md) | <i>(Optional)</i> |
-|  [wmsserver\_service?](./ngw-connector.resourceitem.wmsserver_service.md) |  | [WmsServerService](./ngw-connector.wmsserverservice.md) | <i>(Optional)</i> |
+|  [basemap\_layer?](./ngw-connector.resourceitem.basemap_layer.md) |  | [BasemapResource](./ngw-connector.basemapresource.md) | _(Optional)_ |
+|  [basemap\_webmap?](./ngw-connector.resourceitem.basemap_webmap.md) |  | [BasemapWebmap](./ngw-connector.basemapwebmap.md) | _(Optional)_ |
+|  [feature\_layer?](./ngw-connector.resourceitem.feature_layer.md) |  | [FeatureResource](./ngw-connector.featureresource.md) | _(Optional)_ |
+|  [file\_bucket?](./ngw-connector.resourceitem.file_bucket.md) |  | [FileBucket](./ngw-connector.filebucket.md) | _(Optional)_ |
+|  [lookup\_table?](./ngw-connector.resourceitem.lookup_table.md) |  | [LookupTableResource](./ngw-connector.lookuptableresource.md) | _(Optional)_ |
+|  [vector\_layer?](./ngw-connector.resourceitem.vector_layer.md) |  | [VectorLayer](./ngw-connector.vectorlayer.md) | _(Optional)_ |
+|  [webmap?](./ngw-connector.resourceitem.webmap.md) |  | [WebmapResource](./ngw-connector.webmapresource.md) | _(Optional)_ |
+|  [wmsclient\_connection?](./ngw-connector.resourceitem.wmsclient_connection.md) |  | [WmsClientConnection](./ngw-connector.wmsclientconnection.md) | _(Optional)_ |
+|  [wmsclient\_layer?](./ngw-connector.resourceitem.wmsclient_layer.md) |  | [WmsClientLayer](./ngw-connector.wmsclientlayer.md) | _(Optional)_ |
+|  [wmsserver\_service?](./ngw-connector.resourceitem.wmsserver_service.md) |  | [WmsServerService](./ngw-connector.wmsserverservice.md) | _(Optional)_ |
 

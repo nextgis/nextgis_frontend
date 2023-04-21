@@ -4,7 +4,7 @@
 
 ## MapboxglMapAdapter.onMapClick() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onMapClick(evt: MapEventType['click'] & MapMouseEvent): void;
@@ -16,7 +16,7 @@ onMapClick(evt: MapEventType['click'] & MapMouseEvent): void;
 |  --- | --- | --- |
 |  evt | MapEventType\['click'\] &amp; MapMouseEvent |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

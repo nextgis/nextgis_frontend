@@ -4,7 +4,7 @@
 
 ## WebmapResource.bookmark\_resource property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 bookmark_resource: ResourceHierarchy;

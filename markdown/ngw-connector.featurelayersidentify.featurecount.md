@@ -4,7 +4,7 @@
 
 ## FeatureLayersIdentify.featureCount property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 featureCount: number;

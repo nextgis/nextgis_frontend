@@ -4,7 +4,7 @@
 
 ## MapOptions.tileJson property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 tileJson?: TileJson;

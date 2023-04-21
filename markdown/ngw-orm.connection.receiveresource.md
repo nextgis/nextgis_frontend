@@ -4,7 +4,7 @@
 
 ## Connection.receiveResource() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 receiveResource<P extends Record<string, any> = any>(resource: ResourceIdKeynameDef): Promise<typeof BaseResource & P>;
@@ -16,7 +16,7 @@ receiveResource<P extends Record<string, any> = any>(resource: ResourceIdKeyname
 |  --- | --- | --- |
 |  resource | [ResourceIdKeynameDef](./ngw-connector.resourceidkeynamedef.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;typeof [BaseResource](./ngw-orm.baseresource.md) &amp; P&gt;
 

@@ -4,17 +4,17 @@
 
 ## FileUploadOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface FileUploadOptions extends ResourceCreateOptions 
 ```
-<b>Extends:</b> [ResourceCreateOptions](./ngw-uploader.resourcecreateoptions.md)
+**Extends:** [ResourceCreateOptions](./ngw-uploader.resourcecreateoptions.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [onProgress?](./ngw-uploader.fileuploadoptions.onprogress.md) |  | (percentComplete: number) =&gt; void | <i>(Optional)</i> |
-|  [put?](./ngw-uploader.fileuploadoptions.put.md) |  | boolean | <i>(Optional)</i> |
+|  [onProgress?](./ngw-uploader.fileuploadoptions.onprogress.md) |  | (percentComplete: number) =&gt; void | _(Optional)_ |
+|  [put?](./ngw-uploader.fileuploadoptions.put.md) |  | boolean | _(Optional)_ |
 

@@ -4,7 +4,7 @@
 
 ## LocationEvent.bounds property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 bounds?: LngLatBoundsArray;

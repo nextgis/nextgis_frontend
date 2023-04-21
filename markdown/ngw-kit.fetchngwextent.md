@@ -4,7 +4,7 @@
 
 ## fetchNgwExtent() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function fetchNgwExtent(options: FetchNgwLayerExtentOptions): CancelablePromise<LngLatBoundsArray | undefined>;
@@ -16,7 +16,7 @@ export declare function fetchNgwExtent(options: FetchNgwLayerExtentOptions): Can
 |  --- | --- | --- |
 |  options | [FetchNgwLayerExtentOptions](./ngw-kit.fetchngwlayerextentoptions.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;[LngLatBoundsArray](./utils.lnglatboundsarray.md) \| undefined&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;[LngLatBoundsArray](./utils.lnglatboundsarray.md) \| undefined&gt;
 

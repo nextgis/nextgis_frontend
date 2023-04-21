@@ -4,7 +4,7 @@
 
 ## ResourceStore.resource property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 resource: string;

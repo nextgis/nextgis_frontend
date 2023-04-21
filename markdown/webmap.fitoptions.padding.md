@@ -4,7 +4,7 @@
 
 ## FitOptions.padding property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 padding?: number;

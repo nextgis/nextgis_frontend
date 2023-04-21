@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."pyramid.miscellaneous" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'pyramid.miscellaneous': null;

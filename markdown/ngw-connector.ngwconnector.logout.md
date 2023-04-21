@@ -6,12 +6,12 @@
 
 Disconnecting a user. Aborting all current requests
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 logout(): void;
 ```
-<b>Returns:</b>
+**Returns:**
 
 void
 

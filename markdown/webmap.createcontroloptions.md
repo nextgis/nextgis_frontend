@@ -4,7 +4,7 @@
 
 ## CreateControlOptions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface CreateControlOptions 
@@ -14,7 +14,7 @@ export interface CreateControlOptions
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [addClass?](./webmap.createcontroloptions.addclass.md) |  | string | <i>(Optional)</i> |
-|  [bar?](./webmap.createcontroloptions.bar.md) |  | boolean | <i>(Optional)</i> |
-|  [margin?](./webmap.createcontroloptions.margin.md) |  | boolean | <i>(Optional)</i> |
+|  [addClass?](./webmap.createcontroloptions.addclass.md) |  | string | _(Optional)_ |
+|  [bar?](./webmap.createcontroloptions.bar.md) |  | boolean | _(Optional)_ |
+|  [margin?](./webmap.createcontroloptions.margin.md) |  | boolean | _(Optional)_ |
 

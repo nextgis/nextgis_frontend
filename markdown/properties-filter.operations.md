@@ -4,10 +4,15 @@
 
 ## Operations type
 
-gt - greater (<!-- -->&gt;<!-- -->) lt - lower (<!-- -->&lt;<!-- -->) ge - greater or equal (<!-- -->&gt;<!-- -->=) le - lower or equal (<!-- -->&lt;<!-- -->=) eq - equal (=) ne - not equal (!=) like - LIKE SQL statement (for strings compare) ilike - ILIKE SQL statement (for strings compare)
+> Warning: This API is now obsolete.
+> 
+> use [Operation](./properties-filter.operation.md) instead
+> 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export declare type Operations = 'gt' | 'lt' | 'ge' | 'le' | 'eq' | 'ne' | 'in' | 'notin' | 'like' | 'ilike';
+export declare type Operations = Operation;
 ```
+**References:** [Operation](./properties-filter.operation.md)
+

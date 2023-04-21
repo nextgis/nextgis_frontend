@@ -4,12 +4,12 @@
 
 ## WebMapEvents interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface WebMapEvents extends MainMapEvents 
 ```
-<b>Extends:</b> [MainMapEvents](./webmap.mainmapevents.md)
+**Extends:** [MainMapEvents](./webmap.mainmapevents.md)
 
 ## Events
 

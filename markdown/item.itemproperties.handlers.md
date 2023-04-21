@@ -4,7 +4,7 @@
 
 ## ItemProperties.handlers property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static handlers: {

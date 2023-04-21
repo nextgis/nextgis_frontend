@@ -6,7 +6,7 @@
 
 The HTML element in which NgwMap will render the map, or the element's string id. The specified element must have no children.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 target?: string | HTMLElement;

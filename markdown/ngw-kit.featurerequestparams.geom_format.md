@@ -4,7 +4,7 @@
 
 ## FeatureRequestParams.geom\_format property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 geom_format?: GeomFormat;

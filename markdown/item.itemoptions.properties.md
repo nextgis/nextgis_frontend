@@ -4,7 +4,7 @@
 
 ## ItemOptions.properties property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 properties?: Array<ItemPropertyConfig<keyof ItemPropertyTypes>>;

@@ -5,7 +5,7 @@
 ## NgwConnector.getResource() method
 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getResource(resource: ResourceDefinition, requestOptions?: RequestOptions): CancelablePromise<ResourceItem | undefined>;
@@ -16,9 +16,9 @@ getResource(resource: ResourceDefinition, requestOptions?: RequestOptions): Canc
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  resource | [ResourceDefinition](./ngw-connector.resourcedefinition.md) |  |
-|  requestOptions | [RequestOptions](./ngw-connector.requestoptions.md) | <i>(Optional)</i> |
+|  requestOptions | [RequestOptions](./ngw-connector.requestoptions.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;[ResourceItem](./ngw-connector.resourceitem.md) \| undefined&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;[ResourceItem](./ngw-connector.resourceitem.md) \| undefined&gt;
 

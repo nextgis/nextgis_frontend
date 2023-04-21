@@ -6,7 +6,7 @@
 
 Latitude, measured in degrees.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 lat: number;

@@ -6,7 +6,7 @@
 
 The title set on the 'zoom out' button.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 zoomOutTitle?: string;

@@ -4,12 +4,12 @@
 
 ## BaselayerSelect.beforeDestroy() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 beforeDestroy(): void;
 ```
-<b>Returns:</b>
+**Returns:**
 
 void
 

@@ -4,7 +4,7 @@
 
 ## GetImageAdapterOptionsParams interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface GetImageAdapterOptionsParams 
@@ -14,8 +14,8 @@ export interface GetImageAdapterOptionsParams
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [baseUrl?](./ngw-kit.getimageadapteroptionsparams.baseurl.md) |  | string | <i>(Optional)</i> |
+|  [baseUrl?](./ngw-kit.getimageadapteroptionsparams.baseurl.md) |  | string | _(Optional)_ |
 |  [headers](./ngw-kit.getimageadapteroptionsparams.headers.md) |  | any |  |
-|  [nd?](./ngw-kit.getimageadapteroptionsparams.nd.md) |  | [TileNoData](./ngw-kit.tilenodata.md) | <i>(Optional)</i> |
+|  [nd?](./ngw-kit.getimageadapteroptionsparams.nd.md) |  | [TileNoData](./ngw-kit.tilenodata.md) | _(Optional)_ |
 |  [resourceId](./ngw-kit.getimageadapteroptionsparams.resourceid.md) |  | number \| number\[\] |  |
 

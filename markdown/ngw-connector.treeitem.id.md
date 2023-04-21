@@ -4,7 +4,7 @@
 
 ## TreeItem.id property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 id?: number;

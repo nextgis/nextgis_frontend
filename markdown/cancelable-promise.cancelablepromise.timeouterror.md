@@ -4,7 +4,7 @@
 
 ## CancelablePromise.TimeoutError property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static TimeoutError: typeof TimeoutError;

@@ -4,7 +4,7 @@
 
 ## BasemapWebmap.basemaps property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 basemaps: BasemapWebmapItem[];

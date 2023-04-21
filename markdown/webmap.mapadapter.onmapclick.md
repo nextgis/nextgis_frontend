@@ -4,7 +4,7 @@
 
 ## MapAdapter.onMapClick() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onMapClick(evt: any): void;
@@ -16,7 +16,7 @@ onMapClick(evt: any): void;
 |  --- | --- | --- |
 |  evt | any |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

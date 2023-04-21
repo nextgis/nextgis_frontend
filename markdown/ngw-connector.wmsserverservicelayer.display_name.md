@@ -6,7 +6,7 @@
 
 Service item name.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 display_name: string;

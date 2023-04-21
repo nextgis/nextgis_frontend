@@ -4,7 +4,7 @@
 
 ## FeatureRequestParams.geom property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 geom?: 'yes' | 'no';

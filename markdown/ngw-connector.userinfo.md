@@ -4,7 +4,7 @@
 
 ## UserInfo interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface UserInfo 
@@ -14,7 +14,7 @@ export interface UserInfo
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [clientId?](./ngw-connector.userinfo.clientid.md) |  | string | <i>(Optional)</i> |
+|  [clientId?](./ngw-connector.userinfo.clientid.md) |  | string | _(Optional)_ |
 |  [display\_name](./ngw-connector.userinfo.display_name.md) |  | string |  |
 |  [id](./ngw-connector.userinfo.id.md) |  | number |  |
 |  [keyname](./ngw-connector.userinfo.keyname.md) |  | 'guest' \| string |  |

@@ -4,7 +4,7 @@
 
 ## IdentifyItem.identify() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 identify(options?: Partial<FetchNgwItemOptions<F>>): CancelablePromise<NgwFeatureItemResponse<F, G>>;
@@ -14,9 +14,9 @@ identify(options?: Partial<FetchNgwItemOptions<F>>): CancelablePromise<NgwFeatur
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | Partial&lt;[FetchNgwItemOptions](./ngw-kit.fetchngwitemoptions.md)<!-- -->&lt;F&gt;&gt; | <i>(Optional)</i> |
+|  options | Partial&lt;[FetchNgwItemOptions](./ngw-kit.fetchngwitemoptions.md)<!-- -->&lt;F&gt;&gt; | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;[NgwFeatureItemResponse](./ngw-kit.ngwfeatureitemresponse.md)<!-- -->&lt;F, G&gt;&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;[NgwFeatureItemResponse](./ngw-kit.ngwfeatureitemresponse.md)<!-- -->&lt;F, G&gt;&gt;
 

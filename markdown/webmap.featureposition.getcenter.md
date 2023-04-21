@@ -6,7 +6,7 @@
 
 Get the center for the geometry on which the action was executed.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getCenter: () => LngLatArray;

@@ -4,7 +4,7 @@
 
 ## FileUploadOptions.put property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 put?: boolean;

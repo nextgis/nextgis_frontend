@@ -4,7 +4,7 @@
 
 ## PyramidSettingsPyramid.support\_url property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 support_url?: string;

@@ -4,7 +4,7 @@
 
 ## OnLayerSelectType type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type OnLayerSelectType = 'api' | 'click' | 'hover';

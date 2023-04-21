@@ -4,7 +4,7 @@
 
 ## FeatureItemExtensions interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface FeatureItemExtensions 
@@ -14,6 +14,6 @@ export interface FeatureItemExtensions
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [attachment?](./ngw-connector.featureitemextensions.attachment.md) |  | [FeatureItemAttachment](./ngw-connector.featureitemattachment.md)<!-- -->\[\] | <i>(Optional)</i> |
-|  [description?](./ngw-connector.featureitemextensions.description.md) |  | string | <i>(Optional)</i> |
+|  [attachment?](./ngw-connector.featureitemextensions.attachment.md) |  | [FeatureItemAttachment](./ngw-connector.featureitemattachment.md)<!-- -->\[\] | _(Optional)_ |
+|  [description?](./ngw-connector.featureitemextensions.description.md) |  | string | _(Optional)_ |
 

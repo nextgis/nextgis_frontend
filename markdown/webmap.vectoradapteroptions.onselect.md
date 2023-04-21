@@ -4,7 +4,7 @@
 
 ## VectorAdapterOptions.onSelect() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onSelect?(opt: OnLayerSelectOptions<F, L>): void;
@@ -16,7 +16,7 @@ onSelect?(opt: OnLayerSelectOptions<F, L>): void;
 |  --- | --- | --- |
 |  opt | [OnLayerSelectOptions](./webmap.onlayerselectoptions.md)<!-- -->&lt;F, L&gt; |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

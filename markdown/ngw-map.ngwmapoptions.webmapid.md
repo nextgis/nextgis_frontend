@@ -6,7 +6,7 @@
 
 Id number of webmap resource from NGW cloud. If specified through an array, the first element will be the webmapId from NGW, and the second will be the name for identification in the application.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 webmapId?: NgwResourceDefinition;

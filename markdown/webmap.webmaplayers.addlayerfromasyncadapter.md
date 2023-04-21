@@ -4,7 +4,7 @@
 
 ## WebMapLayers.addLayerFromAsyncAdapter() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 addLayerFromAsyncAdapter<K extends keyof LayerAdapters, O extends AdapterOptions = AdapterOptions>(adapter: AdapterConstructor, options: O | LayerAdaptersOptions[K], order?: number): Promise<LayerAdapter>;
@@ -16,9 +16,9 @@ addLayerFromAsyncAdapter<K extends keyof LayerAdapters, O extends AdapterOptions
 |  --- | --- | --- |
 |  adapter | [AdapterConstructor](./webmap.adapterconstructor.md) |  |
 |  options | O \| [LayerAdaptersOptions](./webmap.layeradaptersoptions.md)<!-- -->\[K\] |  |
-|  order | number | <i>(Optional)</i> |
+|  order | number | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[LayerAdapter](./webmap.layeradapter.md)<!-- -->&gt;
 

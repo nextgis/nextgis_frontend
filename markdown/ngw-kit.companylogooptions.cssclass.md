@@ -4,7 +4,7 @@
 
 ## CompanyLogoOptions.cssClass property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 cssClass?: string;

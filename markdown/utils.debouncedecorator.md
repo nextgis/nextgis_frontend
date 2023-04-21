@@ -4,7 +4,7 @@
 
 ## DebounceDecorator() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function DebounceDecorator(wait?: number): (target: unknown, key: string, descriptor: PropertyDescriptor) => PropertyDescriptor;
@@ -14,9 +14,9 @@ export declare function DebounceDecorator(wait?: number): (target: unknown, key:
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  wait | number | <i>(Optional)</i> |
+|  wait | number | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 (target: unknown, key: string, descriptor: PropertyDescriptor) =&gt; PropertyDescriptor
 

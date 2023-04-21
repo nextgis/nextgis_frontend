@@ -6,7 +6,7 @@
 
 Parameter for `TILE` and `IMAGE` adapters to say NGW what will be returned if there is no data to render.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 tileNoData?: TileNoData;

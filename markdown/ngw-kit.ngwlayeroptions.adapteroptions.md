@@ -4,7 +4,7 @@
 
 ## NgwLayerOptions.adapterOptions property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 adapterOptions?: Partial<LayerAdaptersOptions[T] & AdapterOptions<A>>;

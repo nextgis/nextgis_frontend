@@ -4,7 +4,7 @@
 
 ## RequestMethods type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type RequestMethods = 'POST' | 'GET' | 'PATCH' | 'DELETE' | 'PUT';

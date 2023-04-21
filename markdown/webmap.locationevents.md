@@ -4,7 +4,7 @@
 
 ## LocationEvents interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface LocationEvents 
@@ -14,6 +14,6 @@ export interface LocationEvents
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [locationerror?](./webmap.locationevents.locationerror.md) |  | () =&gt; void | <i>(Optional)</i> |
+|  [locationerror?](./webmap.locationevents.locationerror.md) |  | () =&gt; void | _(Optional)_ |
 |  [locationfound](./webmap.locationevents.locationfound.md) |  | (e: [LocationEvent](./webmap.locationevent.md)<!-- -->) =&gt; void |  |
 

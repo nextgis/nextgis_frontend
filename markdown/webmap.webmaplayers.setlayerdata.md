@@ -6,7 +6,7 @@
 
 Sets the GeoJSON data for given vector layer.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 setLayerData(layerDef: LayerDef, data: GeoJsonObject): void | Promise<void>;
@@ -19,7 +19,7 @@ setLayerData(layerDef: LayerDef, data: GeoJsonObject): void | Promise<void>;
 |  layerDef | [LayerDef](./webmap.layerdef.md) |  |
 |  data | GeoJsonObject |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void \| Promise&lt;void&gt;
 

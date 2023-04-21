@@ -4,7 +4,7 @@
 
 ## Ellipsoid3DPaint.type property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 type: 'ellipsoid';

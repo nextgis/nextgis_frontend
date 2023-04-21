@@ -4,7 +4,7 @@
 
 ## MainLayerAdapter.updatePaint() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 updatePaint?(paint: Partial<Paint>): void;
@@ -16,7 +16,7 @@ updatePaint?(paint: Partial<Paint>): void;
 |  --- | --- | --- |
 |  paint | Partial&lt;[Paint](./paint.paint.md)<!-- -->&gt; |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

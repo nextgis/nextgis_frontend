@@ -4,7 +4,7 @@
 
 ## Resource.permissions property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 permissions: Permission[];

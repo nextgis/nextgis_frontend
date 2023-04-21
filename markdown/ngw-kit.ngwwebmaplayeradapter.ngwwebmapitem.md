@@ -4,7 +4,7 @@
 
 ## NgwWebmapLayerAdapter.NgwWebmapItem property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 NgwWebmapItem: Type<NgwWebmapItem>;

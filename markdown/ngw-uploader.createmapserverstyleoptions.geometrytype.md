@@ -4,7 +4,7 @@
 
 ## CreateMapserverStyleOptions.geometryType property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 geometryType: GeometryType;

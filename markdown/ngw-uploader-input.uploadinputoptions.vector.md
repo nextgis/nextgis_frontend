@@ -4,7 +4,7 @@
 
 ## UploadInputOptions.vector property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 vector?: boolean;

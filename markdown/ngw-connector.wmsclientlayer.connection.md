@@ -6,7 +6,7 @@
 
 WMS connection.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 connection: {

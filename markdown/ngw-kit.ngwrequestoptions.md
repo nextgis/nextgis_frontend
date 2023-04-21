@@ -4,10 +4,10 @@
 
 ## NgwRequestOptions type
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare type NgwRequestOptions = Pick<RequestOptions, 'cache' | 'signal'>;
 ```
-<b>References:</b> [RequestOptions](./ngw-connector.requestoptions.md)
+**References:** [RequestOptions](./ngw-connector.requestoptions.md)
 

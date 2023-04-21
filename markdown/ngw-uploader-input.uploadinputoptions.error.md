@@ -4,7 +4,7 @@
 
 ## UploadInputOptions.error property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 error?: (er: Error) => void;

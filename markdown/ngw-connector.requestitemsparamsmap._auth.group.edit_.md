@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."auth.group.edit" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'auth.group.edit': {

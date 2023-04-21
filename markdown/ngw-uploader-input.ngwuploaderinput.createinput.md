@@ -4,7 +4,7 @@
 
 ## NgwUploaderInput.createInput() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 createInput(opt?: UploadInputOptions): HTMLElement;
@@ -14,9 +14,9 @@ createInput(opt?: UploadInputOptions): HTMLElement;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  opt | [UploadInputOptions](./ngw-uploader-input.uploadinputoptions.md) | <i>(Optional)</i> |
+|  opt | [UploadInputOptions](./ngw-uploader-input.uploadinputoptions.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 HTMLElement
 

@@ -4,7 +4,7 @@
 
 ## QmsBasemap.z\_min property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 z_min: any;

@@ -4,7 +4,7 @@
 
 ## OnLayerSelectOptions.layer property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 layer: L;

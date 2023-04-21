@@ -4,7 +4,7 @@
 
 ## OnLayerSelectOptions.features property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 features?: F[] | undefined;

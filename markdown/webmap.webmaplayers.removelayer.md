@@ -6,7 +6,7 @@
 
 Remove specific layer from map and memory by its definition.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 removeLayer(layerDef: LayerDef): void;
@@ -18,7 +18,7 @@ removeLayer(layerDef: LayerDef): void;
 |  --- | --- | --- |
 |  layerDef | [LayerDef](./webmap.layerdef.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

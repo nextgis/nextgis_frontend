@@ -9,12 +9,12 @@
 > use [NgwWebmapLayerAdapter.getBounds()](./ngw-kit.ngwwebmaplayeradapter.getbounds.md) instead
 > 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getExtent(): LngLatBoundsArray | undefined;
 ```
-<b>Returns:</b>
+**Returns:**
 
 [LngLatBoundsArray](./utils.lnglatboundsarray.md) \| undefined
 

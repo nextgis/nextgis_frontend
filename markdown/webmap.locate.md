@@ -4,7 +4,7 @@
 
 ## Locate interface
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface Locate 

@@ -4,7 +4,7 @@
 
 ## TreeLayer.layer\_adapter property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 layer_adapter: string;

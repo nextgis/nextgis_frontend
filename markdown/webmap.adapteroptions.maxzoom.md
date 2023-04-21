@@ -6,7 +6,7 @@
 
 Maximum zoom level of the map.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 maxZoom?: number;

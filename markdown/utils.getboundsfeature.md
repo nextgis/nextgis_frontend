@@ -4,7 +4,7 @@
 
 ## getBoundsFeature() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function getBoundsFeature(b: LngLatBoundsArray): Feature<Polygon>;
@@ -16,7 +16,7 @@ export declare function getBoundsFeature(b: LngLatBoundsArray): Feature<Polygon>
 |  --- | --- | --- |
 |  b | [LngLatBoundsArray](./utils.lnglatboundsarray.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Feature&lt;Polygon&gt;
 

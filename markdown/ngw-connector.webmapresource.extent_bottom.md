@@ -4,7 +4,7 @@
 
 ## WebmapResource.extent\_bottom property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 extent_bottom: number;

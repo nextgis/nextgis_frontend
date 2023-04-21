@@ -4,7 +4,7 @@
 
 ## LayerAdapters.OSM property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 OSM: MainLayerAdapter;

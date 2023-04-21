@@ -9,7 +9,7 @@
 > use [isPropertyFilter()](./properties-filter.ispropertyfilter.md) instead
 > 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function checkIfPropertyFilter(filter: PropertyFilter | PropertiesFilter | string): filter is PropertyFilter;
@@ -21,7 +21,7 @@ export declare function checkIfPropertyFilter(filter: PropertyFilter | Propertie
 |  --- | --- | --- |
 |  filter | [PropertyFilter](./properties-filter.propertyfilter.md) \| [PropertiesFilter](./properties-filter.propertiesfilter.md) \| string |  |
 
-<b>Returns:</b>
+**Returns:**
 
 filter is [PropertyFilter](./properties-filter.propertyfilter.md)
 

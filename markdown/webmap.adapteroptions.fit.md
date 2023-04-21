@@ -6,7 +6,7 @@
 
 Fit map to layer extent
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 fit?: boolean;

@@ -4,7 +4,7 @@
 
 ## MapAdapter.createButtonControl() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 createButtonControl?(options: ButtonControlOptions): C;
@@ -16,7 +16,7 @@ createButtonControl?(options: ButtonControlOptions): C;
 |  --- | --- | --- |
 |  options | [ButtonControlOptions](./webmap.buttoncontroloptions.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 C
 

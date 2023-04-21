@@ -6,7 +6,7 @@
 
 Additional parameters added to each request. This is key and value list.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 vendor_params: Record<string, string>;

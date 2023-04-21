@@ -4,7 +4,7 @@
 
 ## NgwLayersList.showResourceAdapter property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 showResourceAdapter: (adapter: LayerAdapter | ResourceAdapter) => boolean;

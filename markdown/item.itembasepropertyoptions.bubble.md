@@ -4,7 +4,7 @@
 
 ## ItemBasePropertyOptions.bubble property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 bubble?: boolean;

@@ -4,7 +4,7 @@
 
 ## NgwUploader.createWms() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 createWms(opt: CreateWmsOptions, name?: string): CancelablePromise<CreatedResource> | undefined;
@@ -15,9 +15,9 @@ createWms(opt: CreateWmsOptions, name?: string): CancelablePromise<CreatedResour
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  opt | [CreateWmsOptions](./ngw-uploader.createwmsoptions.md) |  |
-|  name | string | <i>(Optional)</i> |
+|  name | string | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
-CancelablePromise&lt;[CreatedResource](./ngw-connector.createdresource.md)<!-- -->&gt; \| undefined
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;[CreatedResource](./ngw-connector.createdresource.md)<!-- -->&gt; \| undefined
 

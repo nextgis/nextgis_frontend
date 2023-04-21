@@ -6,7 +6,7 @@
 
 Password to connect to service
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 password?: string;

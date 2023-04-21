@@ -4,7 +4,7 @@
 
 ## isLngLatBoundsArray() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function isLngLatBoundsArray(array: unknown): array is LngLatBoundsArray;
@@ -16,7 +16,7 @@ export declare function isLngLatBoundsArray(array: unknown): array is LngLatBoun
 |  --- | --- | --- |
 |  array | unknown |  |
 
-<b>Returns:</b>
+**Returns:**
 
 array is LngLatBoundsArray
 

@@ -4,12 +4,12 @@
 
 ## WebMapMain.getBounds() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getBounds(): LngLatBoundsArray | undefined;
 ```
-<b>Returns:</b>
+**Returns:**
 
 [LngLatBoundsArray](./utils.lnglatboundsarray.md) \| undefined
 

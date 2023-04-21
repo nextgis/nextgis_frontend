@@ -6,7 +6,7 @@
 
 Saves one or many given entities.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static save<T extends VectorLayer>(this: ObjectType<T>, entityOrEntities: T | T[], options?: UpdateOptions): Promise<T[]>;
@@ -18,9 +18,9 @@ static save<T extends VectorLayer>(this: ObjectType<T>, entityOrEntities: T | T[
 |  --- | --- | --- |
 |  this | ObjectType&lt;T&gt; |  |
 |  entityOrEntities | T \| T\[\] |  |
-|  options | UpdateOptions | <i>(Optional)</i> |
+|  options | UpdateOptions | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;T\[\]&gt;
 

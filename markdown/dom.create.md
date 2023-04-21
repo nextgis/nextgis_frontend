@@ -4,7 +4,7 @@
 
 ## create() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function create<K extends keyof HTMLElementTagNameMap>(tagName: K, className?: string | null, container?: HTMLElement): HTMLElementTagNameMap[K];
@@ -15,10 +15,10 @@ export declare function create<K extends keyof HTMLElementTagNameMap>(tagName: K
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  tagName | K |  |
-|  className | string \| null | <i>(Optional)</i> |
-|  container | HTMLElement | <i>(Optional)</i> |
+|  className | string \| null | _(Optional)_ |
+|  container | HTMLElement | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 HTMLElementTagNameMap\[K\]
 

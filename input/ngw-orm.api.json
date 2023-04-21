@@ -1,8 +1,8 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.28.6",
-    "schemaVersion": 1009,
+    "toolVersion": "7.34.4",
+    "schemaVersion": 1011,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
       "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
@@ -182,7 +182,9 @@
               "text": "export declare class BaseResource "
             }
           ],
+          "fileUrlPath": "src/repository/BaseResource.ts",
           "releaseTag": "Public",
+          "isAbstract": false,
           "name": "BaseResource",
           "preserveMemberOrder": false,
           "members": [
@@ -206,11 +208,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": " "
-                },
-                {
-                  "kind": "Content",
-                  "text": "= "
+                  "text": " = "
                 },
                 {
                   "kind": "Content",
@@ -237,7 +235,7 @@
                 {
                   "kind": "Reference",
                   "text": "NgwResourceOptions",
-                  "canonicalReference": "@nextgis/ngw-orm!NgwResourceOptions:interface"
+                  "canonicalReference": "@nextgis/ngw-orm!~NgwResourceOptions:interface"
                 },
                 {
                   "kind": "Content",
@@ -264,15 +262,15 @@
                     "endIndex": 3
                   },
                   "defaultTypeTokenRange": {
-                    "startIndex": 5,
-                    "endIndex": 7
+                    "startIndex": 4,
+                    "endIndex": 6
                   }
                 }
               ],
               "isStatic": true,
               "returnTypeTokenRange": {
-                "startIndex": 13,
-                "endIndex": 14
+                "startIndex": 12,
+                "endIndex": 13
               },
               "releaseTag": "Public",
               "isProtected": false,
@@ -281,13 +279,14 @@
                 {
                   "parameterName": "options",
                   "parameterTypeTokenRange": {
-                    "startIndex": 8,
-                    "endIndex": 12
+                    "startIndex": 7,
+                    "endIndex": 11
                   },
                   "isOptional": true
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "clone"
             },
             {
@@ -310,11 +309,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": " "
-                },
-                {
-                  "kind": "Content",
-                  "text": "= "
+                  "text": " = "
                 },
                 {
                   "kind": "Content",
@@ -350,7 +345,7 @@
                 {
                   "kind": "Reference",
                   "text": "ConnectionOptions",
-                  "canonicalReference": "@nextgis/ngw-orm!ConnectionOptions:interface"
+                  "canonicalReference": "@nextgis/ngw-orm!~ConnectionOptions:interface"
                 },
                 {
                   "kind": "Content",
@@ -378,15 +373,15 @@
                     "endIndex": 3
                   },
                   "defaultTypeTokenRange": {
-                    "startIndex": 5,
-                    "endIndex": 7
+                    "startIndex": 4,
+                    "endIndex": 6
                   }
                 }
               ],
               "isStatic": true,
               "returnTypeTokenRange": {
-                "startIndex": 14,
-                "endIndex": 16
+                "startIndex": 13,
+                "endIndex": 15
               },
               "releaseTag": "Public",
               "isProtected": false,
@@ -395,21 +390,22 @@
                 {
                   "parameterName": "resourceOptions",
                   "parameterTypeTokenRange": {
-                    "startIndex": 8,
-                    "endIndex": 9
+                    "startIndex": 7,
+                    "endIndex": 8
                   },
                   "isOptional": false
                 },
                 {
                   "parameterName": "connectionOrOptions",
                   "parameterTypeTokenRange": {
-                    "startIndex": 10,
-                    "endIndex": 13
+                    "startIndex": 9,
+                    "endIndex": 12
                   },
                   "isOptional": false
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "connect"
             },
             {
@@ -440,7 +436,8 @@
                 "endIndex": 2
               },
               "isStatic": true,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -484,7 +481,7 @@
                 {
                   "kind": "Reference",
                   "text": "SyncOptions",
-                  "canonicalReference": "@nextgis/ngw-orm!SyncOptions:interface"
+                  "canonicalReference": "@nextgis/ngw-orm!~SyncOptions:interface"
                 },
                 {
                   "kind": "Content",
@@ -539,6 +536,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getNgwPayload"
             },
             {
@@ -569,7 +567,8 @@
                 "endIndex": 2
               },
               "isStatic": true,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -643,6 +642,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "receive"
             },
             {
@@ -657,7 +657,7 @@
                 {
                   "kind": "Reference",
                   "text": "SyncOptions",
-                  "canonicalReference": "@nextgis/ngw-orm!SyncOptions:interface"
+                  "canonicalReference": "@nextgis/ngw-orm!~SyncOptions:interface"
                 },
                 {
                   "kind": "Content",
@@ -675,7 +675,7 @@
                 {
                   "kind": "Reference",
                   "text": "ConnectionOptions",
-                  "canonicalReference": "@nextgis/ngw-orm!ConnectionOptions:interface"
+                  "canonicalReference": "@nextgis/ngw-orm!~ConnectionOptions:interface"
                 },
                 {
                   "kind": "Content",
@@ -717,6 +717,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "sync"
             },
             {
@@ -731,7 +732,7 @@
                 {
                   "kind": "Reference",
                   "text": "ToTypescriptOptions",
-                  "canonicalReference": "@nextgis/ngw-orm!ToTypescriptOptions:interface"
+                  "canonicalReference": "@nextgis/ngw-orm!~ToTypescriptOptions:interface"
                 },
                 {
                   "kind": "Content",
@@ -740,7 +741,7 @@
                 {
                   "kind": "Reference",
                   "text": "ToTypescript",
-                  "canonicalReference": "@nextgis/ngw-orm!ToTypescript:interface"
+                  "canonicalReference": "@nextgis/ngw-orm!~ToTypescript:interface"
                 },
                 {
                   "kind": "Content",
@@ -766,6 +767,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "toTypescript"
             },
             {
@@ -780,7 +782,7 @@
                 {
                   "kind": "Reference",
                   "text": "ValidateErrorType",
-                  "canonicalReference": "@nextgis/ngw-orm!ValidateErrorType:interface"
+                  "canonicalReference": "@nextgis/ngw-orm!~ValidateErrorType:interface"
                 },
                 {
                   "kind": "Content",
@@ -801,6 +803,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "validate"
             }
           ],
@@ -825,6 +828,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/decorator/Column.ts",
           "returnTypeTokenRange": {
             "startIndex": 1,
             "endIndex": 2
@@ -846,7 +850,7 @@
             {
               "kind": "Reference",
               "text": "ColumnType",
-              "canonicalReference": "@nextgis/ngw-orm!ColumnType:type"
+              "canonicalReference": "@nextgis/ngw-orm!~ColumnType:type"
             },
             {
               "kind": "Content",
@@ -862,6 +866,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/decorator/Column.ts",
           "returnTypeTokenRange": {
             "startIndex": 3,
             "endIndex": 4
@@ -892,7 +897,7 @@
             {
               "kind": "Reference",
               "text": "ColumnOptions",
-              "canonicalReference": "@nextgis/ngw-orm!ColumnOptions:interface"
+              "canonicalReference": "@nextgis/ngw-orm!~ColumnOptions:interface"
             },
             {
               "kind": "Content",
@@ -908,6 +913,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/decorator/Column.ts",
           "returnTypeTokenRange": {
             "startIndex": 3,
             "endIndex": 4
@@ -936,7 +942,9 @@
               "text": "export declare class Connection "
             }
           ],
+          "fileUrlPath": "src/connection/Connection.ts",
           "releaseTag": "Public",
+          "isAbstract": false,
           "name": "Connection",
           "preserveMemberOrder": false,
           "members": [
@@ -952,7 +960,7 @@
                 {
                   "kind": "Reference",
                   "text": "ConnectionOptions",
-                  "canonicalReference": "@nextgis/ngw-orm!ConnectionOptions:interface"
+                  "canonicalReference": "@nextgis/ngw-orm!~ConnectionOptions:interface"
                 },
                 {
                   "kind": "Content",
@@ -1000,7 +1008,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -1035,6 +1044,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "connect"
             },
             {
@@ -1058,7 +1068,7 @@
                 {
                   "kind": "Reference",
                   "text": "ConnectionOptions",
-                  "canonicalReference": "@nextgis/ngw-orm!ConnectionOptions:interface"
+                  "canonicalReference": "@nextgis/ngw-orm!~ConnectionOptions:interface"
                 },
                 {
                   "kind": "Content",
@@ -1106,6 +1116,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "connect"
             },
             {
@@ -1140,7 +1151,8 @@
                 "endIndex": 3
               },
               "isStatic": true,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -1163,7 +1175,7 @@
                 {
                   "kind": "Reference",
                   "text": "ConnectionOptions",
-                  "canonicalReference": "@nextgis/ngw-orm!ConnectionOptions:interface"
+                  "canonicalReference": "@nextgis/ngw-orm!~ConnectionOptions:interface"
                 },
                 {
                   "kind": "Content",
@@ -1198,6 +1210,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "create"
             },
             {
@@ -1225,7 +1238,7 @@
                 {
                   "kind": "Reference",
                   "text": "SyncOptions",
-                  "canonicalReference": "@nextgis/ngw-orm!SyncOptions:interface"
+                  "canonicalReference": "@nextgis/ngw-orm!~SyncOptions:interface"
                 },
                 {
                   "kind": "Content",
@@ -1281,6 +1294,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "createResource"
             },
             {
@@ -1338,6 +1352,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "deleteResource"
             },
             {
@@ -1352,7 +1367,7 @@
                 {
                   "kind": "Reference",
                   "text": "NgwConnector",
-                  "canonicalReference": "@nextgis/ngw-connector!~NgwConnector:class"
+                  "canonicalReference": "@nextgis/ngw-connector!NgwConnector:class"
                 },
                 {
                   "kind": "Content",
@@ -1368,7 +1383,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -1403,7 +1419,7 @@
                 {
                   "kind": "Reference",
                   "text": "SyncOptions",
-                  "canonicalReference": "@nextgis/ngw-orm!SyncOptions:interface"
+                  "canonicalReference": "@nextgis/ngw-orm!~SyncOptions:interface"
                 },
                 {
                   "kind": "Content",
@@ -1463,6 +1479,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getOrCreateResource"
             },
             {
@@ -1486,7 +1503,7 @@
                 {
                   "kind": "Reference",
                   "text": "DeepPartial",
-                  "canonicalReference": "@nextgis/ngw-orm!DeepPartial:type"
+                  "canonicalReference": "@nextgis/ngw-orm!~DeepPartial:type"
                 },
                 {
                   "kind": "Content",
@@ -1547,6 +1564,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getResource"
             },
             {
@@ -1570,7 +1588,7 @@
                 {
                   "kind": "Reference",
                   "text": "DeepPartial",
-                  "canonicalReference": "@nextgis/ngw-orm!DeepPartial:type"
+                  "canonicalReference": "@nextgis/ngw-orm!~DeepPartial:type"
                 },
                 {
                   "kind": "Content",
@@ -1631,6 +1649,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getResourceItem"
             },
             {
@@ -1675,7 +1694,7 @@
                 {
                   "kind": "Reference",
                   "text": "SyncOptions",
-                  "canonicalReference": "@nextgis/ngw-orm!SyncOptions:interface"
+                  "canonicalReference": "@nextgis/ngw-orm!~SyncOptions:interface"
                 },
                 {
                   "kind": "Content",
@@ -1688,7 +1707,7 @@
                 {
                   "kind": "Reference",
                   "text": "DeepPartial",
-                  "canonicalReference": "@nextgis/ngw-orm!DeepPartial:type"
+                  "canonicalReference": "@nextgis/ngw-orm!~DeepPartial:type"
                 },
                 {
                   "kind": "Content",
@@ -1697,7 +1716,7 @@
                 {
                   "kind": "Reference",
                   "text": "ResourceSyncItem",
-                  "canonicalReference": "@nextgis/ngw-orm!ResourceSyncItem:type"
+                  "canonicalReference": "@nextgis/ngw-orm!~ResourceSyncItem:type"
                 },
                 {
                   "kind": "Content",
@@ -1743,6 +1762,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getResourceNgwPayload"
             },
             {
@@ -1772,7 +1792,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -1786,7 +1807,7 @@
                 {
                   "kind": "Reference",
                   "text": "ConnectionOptions",
-                  "canonicalReference": "@nextgis/ngw-orm!ConnectionOptions:interface"
+                  "canonicalReference": "@nextgis/ngw-orm!~ConnectionOptions:interface"
                 },
                 {
                   "kind": "Content",
@@ -1802,7 +1823,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -1820,11 +1842,11 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "<string, any> "
+                  "text": "<string, any>"
                 },
                 {
                   "kind": "Content",
-                  "text": "= "
+                  "text": " = "
                 },
                 {
                   "kind": "Content",
@@ -1871,7 +1893,7 @@
                   "typeParameterName": "P",
                   "constraintTokenRange": {
                     "startIndex": 1,
-                    "endIndex": 2
+                    "endIndex": 3
                   },
                   "defaultTypeTokenRange": {
                     "startIndex": 4,
@@ -1898,6 +1920,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "receiveResource"
             },
             {
@@ -1955,6 +1978,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "updateResource"
             }
           ],
@@ -1972,13 +1996,14 @@
             {
               "kind": "Reference",
               "text": "MetadataArgsStorage",
-              "canonicalReference": "@nextgis/ngw-orm!MetadataArgsStorage:class"
+              "canonicalReference": "@nextgis/ngw-orm!~MetadataArgsStorage:class"
             },
             {
               "kind": "Content",
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/index.ts",
           "returnTypeTokenRange": {
             "startIndex": 1,
             "endIndex": 2
@@ -2013,10 +2038,16 @@
             },
             {
               "kind": "Content",
-              "text": "> "
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": " "
             }
           ],
+          "fileUrlPath": "src/repository/LineLayer.ts",
           "releaseTag": "Public",
+          "isAbstract": false,
           "name": "LineLayer",
           "preserveMemberOrder": false,
           "members": [
@@ -2048,12 +2079,13 @@
                 "endIndex": 2
               },
               "isStatic": true,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             }
           ],
           "extendsTokenRange": {
             "startIndex": 1,
-            "endIndex": 4
+            "endIndex": 5
           },
           "implementsTokenRanges": []
         },
@@ -2069,7 +2101,7 @@
             {
               "kind": "Reference",
               "text": "NgwResourceOptions",
-              "canonicalReference": "@nextgis/ngw-orm!NgwResourceOptions:interface"
+              "canonicalReference": "@nextgis/ngw-orm!~NgwResourceOptions:interface"
             },
             {
               "kind": "Content",
@@ -2085,6 +2117,7 @@
               "text": ";"
             }
           ],
+          "fileUrlPath": "src/decorator/NgwResource.ts",
           "returnTypeTokenRange": {
             "startIndex": 3,
             "endIndex": 4
@@ -2128,10 +2161,16 @@
             },
             {
               "kind": "Content",
-              "text": "> "
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": " "
             }
           ],
+          "fileUrlPath": "src/repository/PointLayer.ts",
           "releaseTag": "Public",
+          "isAbstract": false,
           "name": "PointLayer",
           "preserveMemberOrder": false,
           "members": [
@@ -2163,12 +2202,13 @@
                 "endIndex": 2
               },
               "isStatic": true,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             }
           ],
           "extendsTokenRange": {
             "startIndex": 1,
-            "endIndex": 4
+            "endIndex": 5
           },
           "implementsTokenRanges": []
         },
@@ -2197,10 +2237,16 @@
             },
             {
               "kind": "Content",
-              "text": "> "
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": " "
             }
           ],
+          "fileUrlPath": "src/repository/PolygonLayer.ts",
           "releaseTag": "Public",
+          "isAbstract": false,
           "name": "PolygonLayer",
           "preserveMemberOrder": false,
           "members": [
@@ -2232,12 +2278,13 @@
                 "endIndex": 2
               },
               "isStatic": true,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             }
           ],
           "extendsTokenRange": {
             "startIndex": 1,
-            "endIndex": 4
+            "endIndex": 5
           },
           "implementsTokenRanges": []
         },
@@ -2260,7 +2307,9 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/repository/ResourceGroup.ts",
           "releaseTag": "Public",
+          "isAbstract": false,
           "name": "ResourceGroup",
           "preserveMemberOrder": false,
           "members": [],
@@ -2286,11 +2335,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -2308,11 +2353,7 @@
             },
             {
               "kind": "Content",
-              "text": " "
-            },
-            {
-              "kind": "Content",
-              "text": "= "
+              "text": " = "
             },
             {
               "kind": "Reference",
@@ -2333,6 +2374,7 @@
               "text": " "
             }
           ],
+          "fileUrlPath": "src/repository/VectorLayer.ts",
           "releaseTag": "Public",
           "typeParameters": [
             {
@@ -2342,22 +2384,23 @@
                 "endIndex": 2
               },
               "defaultTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               }
             },
             {
               "typeParameterName": "P",
               "constraintTokenRange": {
-                "startIndex": 6,
-                "endIndex": 7
+                "startIndex": 5,
+                "endIndex": 6
               },
               "defaultTypeTokenRange": {
-                "startIndex": 9,
-                "endIndex": 10
+                "startIndex": 7,
+                "endIndex": 8
               }
             }
           ],
+          "isAbstract": false,
           "name": "VectorLayer",
           "preserveMemberOrder": false,
           "members": [
@@ -2408,11 +2451,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": ";"
-                },
-                {
-                  "kind": "Content",
-                  "text": "\n\nset coordinates(coordinates: G['coordinates']);"
+                  "text": ";\n\nset coordinates(coordinates: G['coordinates']);"
                 }
               ],
               "isReadonly": false,
@@ -2424,7 +2463,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -2447,7 +2487,7 @@
                 {
                   "kind": "Reference",
                   "text": "ObjectType",
-                  "canonicalReference": "@nextgis/ngw-orm!ObjectType:type"
+                  "canonicalReference": "@nextgis/ngw-orm!~ObjectType:type"
                 },
                 {
                   "kind": "Content",
@@ -2460,7 +2500,7 @@
                 {
                   "kind": "Reference",
                   "text": "FindManyOptions",
-                  "canonicalReference": "@nextgis/ngw-orm!FindManyOptions:interface"
+                  "canonicalReference": "@nextgis/ngw-orm!~FindManyOptions:interface"
                 },
                 {
                   "kind": "Content",
@@ -2533,6 +2573,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "count"
             },
             {
@@ -2556,7 +2597,7 @@
                 {
                   "kind": "Reference",
                   "text": "ObjectType",
-                  "canonicalReference": "@nextgis/ngw-orm!ObjectType:type"
+                  "canonicalReference": "@nextgis/ngw-orm!~ObjectType:type"
                 },
                 {
                   "kind": "Content",
@@ -2569,7 +2610,7 @@
                 {
                   "kind": "Reference",
                   "text": "FindManyOptions",
-                  "canonicalReference": "@nextgis/ngw-orm!FindManyOptions:interface"
+                  "canonicalReference": "@nextgis/ngw-orm!~FindManyOptions:interface"
                 },
                 {
                   "kind": "Content",
@@ -2642,6 +2683,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "find"
             },
             {
@@ -2665,7 +2707,7 @@
                 {
                   "kind": "Reference",
                   "text": "ObjectType",
-                  "canonicalReference": "@nextgis/ngw-orm!ObjectType:type"
+                  "canonicalReference": "@nextgis/ngw-orm!~ObjectType:type"
                 },
                 {
                   "kind": "Content",
@@ -2682,7 +2724,7 @@
                 {
                   "kind": "Reference",
                   "text": "FindOneOptions",
-                  "canonicalReference": "@nextgis/ngw-orm!FindOneOptions:interface"
+                  "canonicalReference": "@nextgis/ngw-orm!~FindOneOptions:interface"
                 },
                 {
                   "kind": "Content",
@@ -2691,7 +2733,7 @@
                 {
                   "kind": "Reference",
                   "text": "FindConditions",
-                  "canonicalReference": "@nextgis/ngw-orm!FindConditions:type"
+                  "canonicalReference": "@nextgis/ngw-orm!~FindConditions:type"
                 },
                 {
                   "kind": "Content",
@@ -2704,7 +2746,7 @@
                 {
                   "kind": "Reference",
                   "text": "FindOneOptions",
-                  "canonicalReference": "@nextgis/ngw-orm!FindOneOptions:interface"
+                  "canonicalReference": "@nextgis/ngw-orm!~FindOneOptions:interface"
                 },
                 {
                   "kind": "Content",
@@ -2776,6 +2818,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "findOne"
             },
             {
@@ -2799,7 +2842,7 @@
                 {
                   "kind": "Reference",
                   "text": "ObjectType",
-                  "canonicalReference": "@nextgis/ngw-orm!ObjectType:type"
+                  "canonicalReference": "@nextgis/ngw-orm!~ObjectType:type"
                 },
                 {
                   "kind": "Content",
@@ -2816,7 +2859,7 @@
                 {
                   "kind": "Reference",
                   "text": "FindOneOptions",
-                  "canonicalReference": "@nextgis/ngw-orm!FindOneOptions:interface"
+                  "canonicalReference": "@nextgis/ngw-orm!~FindOneOptions:interface"
                 },
                 {
                   "kind": "Content",
@@ -2825,7 +2868,7 @@
                 {
                   "kind": "Reference",
                   "text": "FindConditions",
-                  "canonicalReference": "@nextgis/ngw-orm!FindConditions:type"
+                  "canonicalReference": "@nextgis/ngw-orm!~FindConditions:type"
                 },
                 {
                   "kind": "Content",
@@ -2838,7 +2881,7 @@
                 {
                   "kind": "Reference",
                   "text": "FindOneOptions",
-                  "canonicalReference": "@nextgis/ngw-orm!FindOneOptions:interface"
+                  "canonicalReference": "@nextgis/ngw-orm!~FindOneOptions:interface"
                 },
                 {
                   "kind": "Content",
@@ -2910,6 +2953,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "findOneOrFail"
             },
             {
@@ -2927,11 +2971,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": ";"
-                },
-                {
-                  "kind": "Content",
-                  "text": "\n\nset geom(geom: G);"
+                  "text": ";\n\nset geom(geom: G);"
                 }
               ],
               "isReadonly": false,
@@ -2943,7 +2983,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -2973,7 +3014,8 @@
                 "endIndex": 2
               },
               "isStatic": true,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -3008,6 +3050,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getConstructor"
             },
             {
@@ -3043,7 +3086,7 @@
                 {
                   "kind": "Reference",
                   "text": "SyncOptions",
-                  "canonicalReference": "@nextgis/ngw-orm!SyncOptions:interface"
+                  "canonicalReference": "@nextgis/ngw-orm!~SyncOptions:interface"
                 },
                 {
                   "kind": "Content",
@@ -3061,7 +3104,7 @@
                 {
                   "kind": "Reference",
                   "text": "VectorResourceSyncItem",
-                  "canonicalReference": "@nextgis/ngw-orm!VectorResourceSyncItem:interface"
+                  "canonicalReference": "@nextgis/ngw-orm!~VectorResourceSyncItem:interface"
                 },
                 {
                   "kind": "Content",
@@ -3070,7 +3113,7 @@
                 {
                   "kind": "Reference",
                   "text": "VectorResourceUpdateItem",
-                  "canonicalReference": "@nextgis/ngw-orm!VectorResourceUpdateItem:interface"
+                  "canonicalReference": "@nextgis/ngw-orm!~VectorResourceUpdateItem:interface"
                 },
                 {
                   "kind": "Content",
@@ -3116,6 +3159,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "getNgwPayload"
             },
             {
@@ -3146,6 +3190,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "hasId"
             },
             {
@@ -3175,7 +3220,8 @@
                 "endIndex": 2
               },
               "isStatic": false,
-              "isProtected": false
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -3228,6 +3274,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "receive"
             },
             {
@@ -3263,6 +3310,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "save"
             },
             {
@@ -3286,7 +3334,7 @@
                 {
                   "kind": "Reference",
                   "text": "ObjectType",
-                  "canonicalReference": "@nextgis/ngw-orm!ObjectType:type"
+                  "canonicalReference": "@nextgis/ngw-orm!~ObjectType:type"
                 },
                 {
                   "kind": "Content",
@@ -3307,7 +3355,7 @@
                 {
                   "kind": "Reference",
                   "text": "UpdateOptions",
-                  "canonicalReference": "@nextgis/ngw-orm!UpdateOptions:interface"
+                  "canonicalReference": "@nextgis/ngw-orm!~UpdateOptions:interface"
                 },
                 {
                   "kind": "Content",
@@ -3375,6 +3423,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "save"
             },
             {
@@ -3410,6 +3459,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "toGeoJson"
             },
             {
@@ -3440,6 +3490,7 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "toJSON"
             },
             {
@@ -3454,7 +3505,7 @@
                 {
                   "kind": "Reference",
                   "text": "ToTypescriptOptions",
-                  "canonicalReference": "@nextgis/ngw-orm!ToTypescriptOptions:interface"
+                  "canonicalReference": "@nextgis/ngw-orm!~ToTypescriptOptions:interface"
                 },
                 {
                   "kind": "Content",
@@ -3463,7 +3514,7 @@
                 {
                   "kind": "Reference",
                   "text": "ToTypescript",
-                  "canonicalReference": "@nextgis/ngw-orm!ToTypescript:interface"
+                  "canonicalReference": "@nextgis/ngw-orm!~ToTypescript:interface"
                 },
                 {
                   "kind": "Content",
@@ -3489,6 +3540,7 @@
                 }
               ],
               "isOptional": false,
+              "isAbstract": false,
               "name": "toTypescript"
             },
             {
@@ -3503,7 +3555,7 @@
                 {
                   "kind": "Reference",
                   "text": "ValidateErrorType",
-                  "canonicalReference": "@nextgis/ngw-orm!ValidateErrorType:interface"
+                  "canonicalReference": "@nextgis/ngw-orm!~ValidateErrorType:interface"
                 },
                 {
                   "kind": "Content",
@@ -3524,12 +3576,13 @@
               "overloadIndex": 1,
               "parameters": [],
               "isOptional": false,
+              "isAbstract": false,
               "name": "validate"
             }
           ],
           "extendsTokenRange": {
-            "startIndex": 11,
-            "endIndex": 12
+            "startIndex": 9,
+            "endIndex": 10
           },
           "implementsTokenRanges": []
         }

@@ -6,7 +6,7 @@
 
 Set options for those controls that are specified by name.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 controlsOptions?: ControlsOptions;

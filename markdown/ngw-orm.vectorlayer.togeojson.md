@@ -4,12 +4,12 @@
 
 ## VectorLayer.toGeoJson() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 toGeoJson(): Feature<G, this>;
 ```
-<b>Returns:</b>
+**Returns:**
 
 Feature&lt;G, this&gt;
 

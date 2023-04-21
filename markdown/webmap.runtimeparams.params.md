@@ -4,14 +4,14 @@
 
 ## RuntimeParams.params() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 params(): {
         [paramName: string]: any;
     };
 ```
-<b>Returns:</b>
+**Returns:**
 
 { \[paramName: string\]: any; }
 

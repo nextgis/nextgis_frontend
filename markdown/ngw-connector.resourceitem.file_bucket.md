@@ -4,7 +4,7 @@
 
 ## ResourceItem.file\_bucket property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 file_bucket?: FileBucket;

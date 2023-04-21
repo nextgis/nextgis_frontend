@@ -4,7 +4,7 @@
 
 ## ResourceStore.patch() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 patch(opt: PatchOptions<G, P>): Promise<FeatureItem<P> | undefined>;
@@ -16,7 +16,7 @@ patch(opt: PatchOptions<G, P>): Promise<FeatureItem<P> | undefined>;
 |  --- | --- | --- |
 |  opt | [PatchOptions](./vuex-ngw.patchoptions.md)<!-- -->&lt;G, P&gt; |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[FeatureItem](./ngw-connector.featureitem.md)<!-- -->&lt;P&gt; \| undefined&gt;
 

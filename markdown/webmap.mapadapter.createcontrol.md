@@ -4,7 +4,7 @@
 
 ## MapAdapter.createControl() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 createControl?(control: MapControl, options?: CreateControlOptions): C;
@@ -15,9 +15,9 @@ createControl?(control: MapControl, options?: CreateControlOptions): C;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  control | [MapControl](./webmap.mapcontrol.md) |  |
-|  options | [CreateControlOptions](./webmap.createcontroloptions.md) | <i>(Optional)</i> |
+|  options | [CreateControlOptions](./webmap.createcontroloptions.md) | _(Optional)_ |
 
-<b>Returns:</b>
+**Returns:**
 
 C
 

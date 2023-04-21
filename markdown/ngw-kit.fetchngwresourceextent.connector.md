@@ -4,7 +4,7 @@
 
 ## FetchNgwResourceExtent.connector property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 connector: NgwConnector;

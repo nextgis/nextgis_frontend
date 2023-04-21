@@ -9,7 +9,7 @@
 > use [NgwMap.cancelPromises()](./ngw-map.ngwmap.cancelpromises.md) instead
 > 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 cancelPromise(...args: PromiseGroup[]): void;
@@ -21,7 +21,7 @@ cancelPromise(...args: PromiseGroup[]): void;
 |  --- | --- | --- |
 |  args | PromiseGroup\[\] |  |
 
-<b>Returns:</b>
+**Returns:**
 
 void
 

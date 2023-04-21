@@ -4,7 +4,7 @@
 
 ## LoadScriptOptions.defer property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 defer?: boolean;

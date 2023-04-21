@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."auth.group.create" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'auth.group.create': null;

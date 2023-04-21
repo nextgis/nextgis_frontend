@@ -4,12 +4,12 @@
 
 ## BaseProperty.isBlocked() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 isBlocked(): boolean;
 ```
-<b>Returns:</b>
+**Returns:**
 
 boolean
 

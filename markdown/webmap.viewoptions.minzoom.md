@@ -6,7 +6,7 @@
 
 The minimum zoom level of the map (0-24).
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 minZoom?: number;

@@ -5,7 +5,7 @@
 ## WebMapEvents."layer:remove" property
 
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'layer:remove': LayerAdapter;

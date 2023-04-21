@@ -4,7 +4,7 @@
 
 ## isBrowser variable
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 isBrowser: boolean

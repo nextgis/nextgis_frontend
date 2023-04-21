@@ -6,7 +6,7 @@
 
 Url of NGW server like this https://demo.nextgis.com
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 baseUrl?: string;

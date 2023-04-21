@@ -4,7 +4,7 @@
 
 ## Log.logLevel property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 logLevel: LogLevel;

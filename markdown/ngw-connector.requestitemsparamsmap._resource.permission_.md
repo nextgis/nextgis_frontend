@@ -4,7 +4,7 @@
 
 ## RequestItemsParamsMap."resource.permission" property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 'resource.permission': {

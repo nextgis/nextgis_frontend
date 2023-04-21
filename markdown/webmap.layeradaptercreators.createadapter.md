@@ -4,7 +4,7 @@
 
 ## LayerAdapterCreators.createAdapter property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 createAdapter: (webMap: WebMap) => Promise<Type<LayerAdapter>>;

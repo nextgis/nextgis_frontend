@@ -4,7 +4,7 @@
 
 ## Pixel.bottom property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 bottom?: number;

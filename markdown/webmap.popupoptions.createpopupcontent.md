@@ -4,8 +4,8 @@
 
 ## PopupOptions.createPopupContent property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-createPopupContent?: (props: CreatePopupContentProps<F, L>) => HTMLElement | string | undefined | Promise<HTMLElement | string | undefined>;
+createPopupContent?: CreatePopupContent<F, L>;
 ```

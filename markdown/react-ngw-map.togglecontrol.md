@@ -4,7 +4,7 @@
 
 ## ToggleControl() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare function ToggleControl<P extends MapControlProps = MapControlProps>(props: P): null;
@@ -16,7 +16,7 @@ export declare function ToggleControl<P extends MapControlProps = MapControlProp
 |  --- | --- | --- |
 |  props | P |  |
 
-<b>Returns:</b>
+**Returns:**
 
 null
 

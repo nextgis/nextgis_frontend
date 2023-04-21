@@ -4,7 +4,7 @@
 
 ## ResourceItem.webmap property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 webmap?: WebmapResource;

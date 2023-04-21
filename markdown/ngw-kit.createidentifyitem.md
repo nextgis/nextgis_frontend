@@ -4,10 +4,10 @@
 
 ## createIdentifyItem() function
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
-export declare function createIdentifyItem<F = FeatureProperties, G extends Geometry = Geometry>(opt: IdentifyItemOptions): IdentifyItem<F, G>;
+export declare function createIdentifyItem<F extends FeatureProperties = FeatureProperties, G extends Geometry = Geometry>(opt: IdentifyItemOptions): IdentifyItem<F, G>;
 ```
 
 ## Parameters
@@ -16,7 +16,7 @@ export declare function createIdentifyItem<F = FeatureProperties, G extends Geom
 |  --- | --- | --- |
 |  opt | [IdentifyItemOptions](./ngw-kit.identifyitemoptions.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 [IdentifyItem](./ngw-kit.identifyitem.md)<!-- -->&lt;F, G&gt;
 

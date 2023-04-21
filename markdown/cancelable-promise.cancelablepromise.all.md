@@ -4,7 +4,7 @@
 
 ## CancelablePromise.all() method
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static all<T>(values: (T | PromiseLike<T>)[]): CancelablePromise<T[]>;
@@ -16,7 +16,7 @@ static all<T>(values: (T | PromiseLike<T>)[]): CancelablePromise<T[]>;
 |  --- | --- | --- |
 |  values | (T \| PromiseLike&lt;T&gt;)\[\] |  |
 
-<b>Returns:</b>
+**Returns:**
 
 [CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;T\[\]&gt;
 
