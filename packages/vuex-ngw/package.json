@@ -4,7 +4,7 @@
   "description": "Vuex store for NGW feature layers",
   "main": "index.js",
   "module": "lib/vuex-ngw.esm-bundler.js",
-  "types": "lib/index.d.ts",
+  "#types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/ngw-connector": "^1.16.6",
     "@nextgis/webmap": "^1.16.6",
