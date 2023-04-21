@@ -410,7 +410,7 @@ export class NgwUploader {
     }
   }
 
-  /**@deprecated - use {@link NgwUploader.createRaster} instead */
+  /**@deprecated - use {@link createRaster} instead */
   createResource(
     meta: FileMeta,
     name: string,

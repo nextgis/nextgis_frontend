@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Webmap basic</title>
+    <title>Webmap QMS starter kit</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
       * {
@@ -19,9 +19,9 @@
       }
     </style>
 
-    <script src="../../lib/webmap.global.js"></script>
+    <script src="https://unpkg.com/@nextgis/webmap"></script>
     <script src="https://unpkg.com/@nextgis/leaflet-map-adapter"></script>
-    <script src="https://unpkg.com/@nextgis/qms-kit"></script>
+    <script src="../../lib/qms-kit.global.js"></script>
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
@@ -36,10 +36,9 @@
        WebMap.createWebMap({
         mapAdapter: new LeafletMapAdapter(),
         target: 'map',
-        controls: ['ZOOM', 'ATTRIBUTIONS'],
-        starterKits: [new QmsKit.QmsKit()],
+        zoom: 6,
         center: [104, 52],
-        zoom: 6
+        starterKits: [new QmsKit.QmsKit()],
       }).then(function (map) {
         map.addBaseLayer('QMS', {qmsId: 3335})
       });

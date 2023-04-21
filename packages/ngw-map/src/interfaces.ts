@@ -115,7 +115,6 @@ export interface NgwMapOptions<M = any, C = any> extends MapOptions<M, C> {
 
   runtimeParams?: RuntimeParams[];
 
-  /** {@inheritDoc AdapterOptions.setViewDelay} */
   setViewDelay?: number;
 }
 

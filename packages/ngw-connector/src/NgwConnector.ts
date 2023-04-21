@@ -99,7 +99,7 @@ export class NgwConnector {
   /**
    * Establishing a connection with NextGIS Web to fulfill all other requests.
    * @remarks
-   * This method need not be called manually as it is used when forming a request in {@link NgwConnector.apiRequest | apiRequest}.
+   * This method need not be called manually as it is used when forming a request in {@link apiRequest | apiRequest}.
    * Can be used to check connection.
    * @example
    * ```javascript
@@ -423,7 +423,7 @@ export class NgwConnector {
   // -------------------------------------------------------------------------
 
   /**
-   * {@inheritDoc ResourcesControl.getOne}
+   * {@link ResourcesControl.getOne}
    */
   getResource(
     resource: ResourceDefinition,
@@ -433,7 +433,7 @@ export class NgwConnector {
   }
 
   /**
-   * {@inheritDoc ResourcesControl.getOneOrFail}
+   * {@link ResourcesControl.getOneOrFail}
    */
   getResourceOrFail(
     resource: ResourceDefinition,
@@ -443,7 +443,7 @@ export class NgwConnector {
   }
 
   /**
-   * @deprecated - use {@link NgwConnector.getResource}
+   * @deprecated - use {@link getResource}
    */
   getResourceBy(
     resource: DeepPartial<Resource>,
@@ -452,7 +452,7 @@ export class NgwConnector {
   }
 
   /**
-   * @deprecated - use {@link NgwConnector.getResource}
+   * @deprecated - use {@link getResource}
    */
   getResourceByKeyname(
     keyname: string,
@@ -461,14 +461,14 @@ export class NgwConnector {
   }
 
   /**
-   * @deprecated - use {@link NgwConnector.getResource}
+   * @deprecated - use {@link getResource}
    */
   getResourceById(id: number): CancelablePromise<ResourceItem | undefined> {
     return this.resources.getOne(id);
   }
 
   /**
-   * {@inheritDoc ResourcesControl.getId}
+   * {@link ResourcesControl.getId}
    */
   getResourceId(
     resource: ResourceDefinition,
@@ -478,7 +478,7 @@ export class NgwConnector {
   }
 
   /**
-   * {@inheritDoc ResourcesControl.getIdOrFail}
+   * {@link ResourcesControl.getIdOrFail}
    */
   getResourceIdOrFail(
     resource: ResourceDefinition,
@@ -488,7 +488,7 @@ export class NgwConnector {
   }
 
   /**
-   * {@inheritDoc ResourcesControl.getMany}
+   * {@link ResourcesControl.getMany}
    */
   getResourcesBy(
     resource: DeepPartial<Resource>,
@@ -498,7 +498,7 @@ export class NgwConnector {
   }
 
   /**
-   * {@inheritDoc ResourcesControl.getParent}
+   * {@link ResourcesControl.getParent}
    */
   getResourceParent(
     resource: ResourceDefinition,
@@ -508,7 +508,7 @@ export class NgwConnector {
   }
 
   /**
-   * {@inheritDoc ResourcesControl.getChildrenOf}
+   * {@link ResourcesControl.getChildrenOf}
    */
   getResourceChildren(
     resource: ResourceDefinition,
@@ -518,7 +518,7 @@ export class NgwConnector {
   }
 
   /**
-   * {@inheritDoc ResourcesControl.update}
+   * {@link ResourcesControl.update}
    */
   updateResource(
     resource: ResourceIdKeynameDef,
@@ -528,7 +528,7 @@ export class NgwConnector {
   }
 
   /**
-   * {@inheritDoc ResourcesControl.delete}
+   * {@link ResourcesControl.delete}
    */
   deleteResource(resource: ResourceIdKeynameDef): CancelablePromise<void> {
     return this.resources.delete(resource);

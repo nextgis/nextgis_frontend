@@ -9,15 +9,36 @@ import type {
   QmsAdapterOptions,
   QmsBasemap,
   QmsAdapter as QA,
+  CreateQmsAdapterOptions,
 } from '../interfaces';
 
 const URL = 'https://qms.nextgis.com';
 
 export function createQmsAdapter(
+  options: CreateQmsAdapterOptions,
+): Type<MainLayerAdapter>;
+export function createQmsAdapter(
   webMap: WebMap,
+  url?: string,
+  createOpt?: Partial<QmsAdapterOptions>,
+): Type<MainLayerAdapter>;
+export function createQmsAdapter(
+  webMapOrOptions: WebMap | CreateQmsAdapterOptions,
   url = URL,
   createOpt: Partial<QmsAdapterOptions> = {},
 ): Type<MainLayerAdapter> {
+  let webMap: WebMap;
+  if ('webMap' in webMapOrOptions) {
+    const { webMap: webMap_, url: url_, ...adapterOptions } = webMapOrOptions;
+    webMap = webMap_;
+    if (url_) {
+      url = url_;
+    }
+    if (adapterOptions) {
+      createOpt = adapterOptions;
+    }
+  }
+
   if (!url) {
     url = URL;
   }

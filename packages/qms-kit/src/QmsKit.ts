@@ -36,6 +36,6 @@ export class QmsKit implements StarterKit {
   }
 
   private _createAdapter(webMap: WebMap): Type<MainLayerAdapter> {
-    return createQmsAdapter(webMap, this.url);
+    return createQmsAdapter({ webMap, url: this.url });
   }
 }
