@@ -22,6 +22,7 @@ import { BaseAdapter } from './BaseAdapter';
 import type { Feature, GeoJsonObject } from 'geojson';
 import type MapBrowserEvent from 'ol/MapBrowserEvent';
 import type OlFeature from 'ol/Feature';
+import type { FeatureLike } from 'ol/Feature';
 import type { Options as OverlayOptions } from 'ol/Overlay';
 import type { Pixel } from 'ol/pixel';
 import type { Style } from 'ol/style';
@@ -37,6 +38,7 @@ import type {
   VectorLayerAdapter,
   PopupOnCloseFunction,
   GeoJsonAdapterOptions,
+  VectorAdapterLayerType,
 } from '@nextgis/webmap';
 import type {
   ForEachFeatureAtPixelOrderedCallback,
@@ -73,9 +75,11 @@ export class GeoJsonAdapter
   private _forEachFeatureAtPixel: ForEachFeatureAtPixelOrderedCallback[] = [];
   private _mapClickEvents: MapClickEvent[] = [];
   private _styleCache: Record<string | number, Style[]> = {};
+  private _labelVisibility = true;
 
   constructor(public map: Map, public options: GeoJsonAdapterOptions) {
     super(map, options);
+    this._labelVisibility = options.labelVisibility ?? this._labelVisibility;
     this.displayProjection = map.getView().getProjection().getCode();
   }
 
@@ -103,40 +107,7 @@ export class GeoJsonAdapter
     }
     this.layer = new VectorLayer({
       source: this.vectorSource,
-      style: (f) => {
-        const style = [];
-        const id = f.getId();
-        const fromCache = id !== undefined && this._styleCache[id];
-        if (fromCache) {
-          return fromCache;
-        }
-        const vectorStyle = styleFunction(f as OlFeature<any>, options.paint);
-        if (vectorStyle) {
-          style.push(vectorStyle);
-        }
-        const { labelField, label } = this.options;
-        let labelStr = '';
-        if (typeof labelField === 'string') {
-          labelStr = f.get(labelField);
-        } else if (label) {
-          labelStr = label(this._createLayerDefOpts(getFeature(f)));
-        }
-        labelStr = String(labelStr);
-        if (labelStr) {
-          const text = defined(labelStr) ? labelStr : '';
-          if (text) {
-            const labelStyle = labelStyleFunction(options.type || 'polygon', {
-              // ratio: this.options.ratio,
-            });
-            labelStyle.getText().setText(text);
-            style.push(labelStyle);
-          }
-        }
-        if (id !== undefined) {
-          this._styleCache[id] = style;
-        }
-        return style;
-      },
+      style: (f) => this._getFeatureStyle(f, options.paint || {}, options.type),
       ...resolutionOptions(this.map, options),
       ...options.nativeOptions,
     });
@@ -323,6 +294,18 @@ export class GeoJsonAdapter
     this._setPaintEachLayer(this.selectedPaint);
   }
 
+  hideLabel() {
+    this._toggleLabel(false);
+  }
+  showLabel() {
+    this._toggleLabel(true);
+  }
+
+  private _toggleLabel(status: boolean) {
+    this._labelVisibility = status;
+    this.updatePaint({});
+  }
+
   private _createLayerDefOpts(feature: Feature): LayerDefinition {
     return {
       target: this,
@@ -335,17 +318,59 @@ export class GeoJsonAdapter
     };
   }
 
-  private _setPaintEachLayer(paint: Paint) {
+  private _getFeatureStyle(
+    f: FeatureLike,
+    paint: Paint,
+    type: VectorAdapterLayerType = 'polygon',
+  ) {
+    const style = [];
+    const id = f.getId();
+    const fromCache = id !== undefined && this._styleCache[id];
+    if (fromCache) {
+      return fromCache;
+    }
+    const vectorStyle = styleFunction(f as OlFeature<any>, paint);
+    if (vectorStyle) {
+      style.push(vectorStyle);
+    }
+    if (this._labelVisibility) {
+      const { labelField, label } = this.options;
+      let labelStr = '';
+      if (typeof labelField === 'string') {
+        labelStr = f.get(labelField);
+      } else if (label) {
+        labelStr = label(this._createLayerDefOpts(getFeature(f)));
+      }
+      labelStr = String(labelStr);
+      if (labelStr) {
+        const text = defined(labelStr) ? labelStr : '';
+        if (text) {
+          const labelStyle = labelStyleFunction(type, {
+            // ratio: this.options.ratio,
+          });
+          labelStyle.getText().setText(text);
+          style.push(labelStyle);
+        }
+      }
+    }
+    if (id !== undefined) {
+      this._styleCache[id] = style;
+    }
+    return style;
+  }
+
+  private _setPaintEachLayer(paint: Paint): void {
+    this._styleCache = {};
     if (this.layer) {
       const source = this.layer.getSource();
       if (source) {
         const features = source.getFeatures();
-        features.forEach((f) => {
-          const style = styleFunction(f, paint);
+        for (const f of features) {
+          const style = this._getFeatureStyle(f, paint, this.options.type)
           if (style) {
             f.setStyle(style);
           }
-        });
+        }
       }
     }
   }
