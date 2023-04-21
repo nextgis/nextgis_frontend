@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.16.7](https://github.com/nextgis/nextgisweb_frontend/compare/v1.16.6...v1.16.7) (2023-04-21)
+
+
+### Features
+
+* **ol-map-adapter:** hide and show label dynamic ([65f30c0](https://github.com/nextgis/nextgisweb_frontend/commit/65f30c05d0cc4e40ca0272f34b55b0481b97d448))
+* **qms-kit:** update createAdapter options interface ([f1e83e7](https://github.com/nextgis/nextgisweb_frontend/commit/f1e83e7f2cba2af1942c80c100344d130f9d0067))
+* **webmap:** add labelVisibility layer adapter option ([298a697](https://github.com/nextgis/nextgisweb_frontend/commit/298a697f65bc5e53f6cf0ea82e688e2f3311f01d))
+
+
+
+
+
 ## [1.16.6](https://github.com/nextgis/nextgisweb_frontend/compare/v1.16.5...v1.16.6) (2023-02-09)
 
 ### Bug Fixes

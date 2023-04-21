@@ -1,12 +1,12 @@
 {
   "name": "@nextgis/react-ngw-map",
-  "version": "1.16.6",
+  "version": "1.16.7",
   "description": "Development tools",
   "main": "index.js",
   "module": "lib/react-ngw-map.esm-bundler.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/ngw-map": "^1.16.6",
+    "@nextgis/ngw-map": "^1.16.7",
     "@nextgis/utils": "^1.16.6"
   },
   "peerDependencies": {
