@@ -1236,7 +1236,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@nextgis/ngw-uploader!NgwUploader#createResource:member(1)",
-              "docComment": "/**\n * @deprecated\n *\n * - use {@link NgwUploader.createRaster} instead\n */\n",
+              "docComment": "/**\n * @deprecated\n *\n * - use {@link createRaster} instead\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",

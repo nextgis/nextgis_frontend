@@ -184,7 +184,7 @@
             {
               "kind": "Reference",
               "text": "MapContainerProps",
-              "canonicalReference": "@nextgis/react-ngw-map!MapContainerProps:interface"
+              "canonicalReference": "!unknown"
             },
             {
               "kind": "Content",
@@ -193,7 +193,7 @@
             {
               "kind": "Reference",
               "text": "MapContainerProps",
-              "canonicalReference": "@nextgis/react-ngw-map!MapContainerProps:interface"
+              "canonicalReference": "!unknown"
             },
             {
               "kind": "Content",
@@ -231,16 +231,7 @@
             },
             {
               "kind": "Content",
-              "text": "<import(\"@nextgis/react-ngw-map\")."
-            },
-            {
-              "kind": "Reference",
-              "text": "ReactNgwMapProps",
-              "canonicalReference": "@nextgis/react-ngw-map!ReactNgwMapProps:type"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
+              "text": "<import(\"@nextgis/react-ngw-map\").ReactNgwMapProps>"
             },
             {
               "kind": "Content",
@@ -250,7 +241,7 @@
           "fileUrlPath": "src/ReactNgwMapbox.ts",
           "returnTypeTokenRange": {
             "startIndex": 10,
-            "endIndex": 15
+            "endIndex": 13
           },
           "releaseTag": "Public",
           "overloadIndex": 1,

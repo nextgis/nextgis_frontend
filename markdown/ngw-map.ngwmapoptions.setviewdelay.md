@@ -4,7 +4,6 @@
 
 ## NgwMapOptions.setViewDelay property
 
-
 **Signature:**
 
 ```typescript

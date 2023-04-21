@@ -107,7 +107,7 @@ class NgwUploader {
     createGroup(nameOrOptions: string | GroupOptions, opt?: GroupOptions): CancelablePromise<CreatedResource>;
     // (undocumented)
     createRaster(options: CreateRasterOptions): CancelablePromise<CreatedResource>;
-    // Warning: (ae-unresolved-link) The @link reference could not be resolved: The package "@nextgis/ngw-uploader" does not have an export "NgwUploader"
+    // Warning: (ae-unresolved-link) The @link reference could not be resolved: The package "@nextgis/ngw-uploader" does not have an export "createRaster"
     //
     // @deprecated (undocumented)
     createResource(meta: FileMeta, name: string, options: RasterUploadOptions): CancelablePromise<CreatedResource> | undefined;

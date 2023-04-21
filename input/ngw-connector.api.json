@@ -3213,7 +3213,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@nextgis/ngw-connector!NgwConnector#connect:member(1)",
-              "docComment": "/**\n * Establishing a connection with NextGIS Web to fulfill all other requests.\n *\n * @remarks\n *\n * This method need not be called manually as it is used when forming a request in {@link NgwConnector.apiRequest | apiRequest}. Can be used to check connection.\n *\n * @example\n * ```javascript\n * const connector = new NgwConnector({baseUrl: 'https://demo.nextgis.com'});\n * connector.connect()\n *   .then(() => console.log('Ok'))\n *   .catch((er) => console.log('Connection problem', er));\n * ```\n *\n */\n",
+              "docComment": "/**\n * Establishing a connection with NextGIS Web to fulfill all other requests.\n *\n * @remarks\n *\n * This method need not be called manually as it is used when forming a request in {@link apiRequest | apiRequest}. Can be used to check connection.\n *\n * @example\n * ```javascript\n * const connector = new NgwConnector({baseUrl: 'https://demo.nextgis.com'});\n * connector.connect()\n *   .then(() => console.log('Ok'))\n *   .catch((er) => console.log('Connection problem', er));\n * ```\n *\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -3438,7 +3438,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@nextgis/ngw-connector!NgwConnector#deleteResource:member(1)",
-              "docComment": "/**\n * {@inheritDoc ResourcesControl.delete}\n */\n",
+              "docComment": "/**\n * {@link ResourcesControl.delete}\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -3791,7 +3791,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@nextgis/ngw-connector!NgwConnector#getResource:member(1)",
-              "docComment": "/**\n * {@inheritDoc ResourcesControl.getOne}\n */\n",
+              "docComment": "/**\n * {@link ResourcesControl.getOne}\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -3871,7 +3871,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@nextgis/ngw-connector!NgwConnector#getResourceBy:member(1)",
-              "docComment": "/**\n * @deprecated\n *\n * - use {@link NgwConnector.getResource}\n */\n",
+              "docComment": "/**\n * @deprecated\n *\n * - use {@link getResource}\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -3947,7 +3947,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@nextgis/ngw-connector!NgwConnector#getResourceById:member(1)",
-              "docComment": "/**\n * @deprecated\n *\n * - use {@link NgwConnector.getResource}\n */\n",
+              "docComment": "/**\n * @deprecated\n *\n * - use {@link getResource}\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4009,7 +4009,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@nextgis/ngw-connector!NgwConnector#getResourceByKeyname:member(1)",
-              "docComment": "/**\n * @deprecated\n *\n * - use {@link NgwConnector.getResource}\n */\n",
+              "docComment": "/**\n * @deprecated\n *\n * - use {@link getResource}\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4071,7 +4071,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@nextgis/ngw-connector!NgwConnector#getResourceChildren:member(1)",
-              "docComment": "/**\n * {@inheritDoc ResourcesControl.getChildrenOf}\n */\n",
+              "docComment": "/**\n * {@link ResourcesControl.getChildrenOf}\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4151,7 +4151,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@nextgis/ngw-connector!NgwConnector#getResourceId:member(1)",
-              "docComment": "/**\n * {@inheritDoc ResourcesControl.getId}\n */\n",
+              "docComment": "/**\n * {@link ResourcesControl.getId}\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4222,7 +4222,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@nextgis/ngw-connector!NgwConnector#getResourceIdOrFail:member(1)",
-              "docComment": "/**\n * {@inheritDoc ResourcesControl.getIdOrFail}\n */\n",
+              "docComment": "/**\n * {@link ResourcesControl.getIdOrFail}\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4293,7 +4293,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@nextgis/ngw-connector!NgwConnector#getResourceOrFail:member(1)",
-              "docComment": "/**\n * {@inheritDoc ResourcesControl.getOneOrFail}\n */\n",
+              "docComment": "/**\n * {@link ResourcesControl.getOneOrFail}\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4373,7 +4373,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@nextgis/ngw-connector!NgwConnector#getResourceParent:member(1)",
-              "docComment": "/**\n * {@inheritDoc ResourcesControl.getParent}\n */\n",
+              "docComment": "/**\n * {@link ResourcesControl.getParent}\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4453,7 +4453,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@nextgis/ngw-connector!NgwConnector#getResourcesBy:member(1)",
-              "docComment": "/**\n * {@inheritDoc ResourcesControl.getMany}\n */\n",
+              "docComment": "/**\n * {@link ResourcesControl.getMany}\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -5473,7 +5473,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@nextgis/ngw-connector!NgwConnector#updateResource:member(1)",
-              "docComment": "/**\n * {@inheritDoc ResourcesControl.update}\n */\n",
+              "docComment": "/**\n * {@link ResourcesControl.update}\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",

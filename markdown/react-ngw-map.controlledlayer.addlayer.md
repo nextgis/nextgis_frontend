@@ -14,7 +14,7 @@ addLayer(layer: LayerAdapter): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  layer | LayerAdapter |  |
+|  layer | [LayerAdapter](./webmap.layeradapter.md) |  |
 
 **Returns:**
 

@@ -66,6 +66,7 @@ export class NgwMap<M = unknown, L = unknown, C extends object = any, O extends 
     addControl<K extends keyof MapControls>(controlDef: K | C, position: ControlPosition, options?: MapControls[K]): Promise<any>;
     addNgwLayer(options: NgwLayerOptions): Promise<ResourceAdapter | undefined>;
     // Warning: (ae-forgotten-export) The symbol "PromiseGroup" needs to be exported by the entry point index.d.ts
+    // Warning: (ae-unresolved-link) The @link reference could not be resolved: The package "@nextgis/ngw-map" does not have an export "cancelPromises"
     //
     // @deprecated (undocumented)
     cancelPromise(...args: PromiseGroup[]): void;
@@ -101,12 +102,20 @@ export class NgwMap<M = unknown, L = unknown, C extends object = any, O extends 
     getIdentifyGeoJson(identify: NgwIdentify, multiple?: boolean): CancelablePromise<Feature | undefined>;
     // (undocumented)
     getNgwLayerByResourceId(id: number): Promise<LayerAdapter | undefined>;
+    // Warning: (ae-unresolved-link) The @link reference could not be resolved: The package "@nextgis/ngw-map" does not have an export "fetchNgwLayerFeature"
+    //
     // @deprecated (undocumented)
     getNgwLayerFeature<G extends Geometry = Geometry, P extends FeatureProperties = FeatureProperties>(options: Omit<FetchNgwItemOptions<P>, 'connector'>): CancelablePromise<Feature<G, P>>;
+    // Warning: (ae-unresolved-link) The @link reference could not be resolved: The package "@nextgis/ngw-map" does not have an export "fetchNgwLayerFeatures"
+    //
     // @deprecated (undocumented)
     getNgwLayerFeatures<G extends Geometry | null = Geometry, P extends JsonMap = JsonMap>(options: FetchNgwItemsOptions<P>): CancelablePromise<FeatureCollection<G, P>>;
+    // Warning: (ae-unresolved-link) The @link reference could not be resolved: The package "@nextgis/ngw-map" does not have an export "fetchNgwLayerItem"
+    //
     // @deprecated (undocumented)
     getNgwLayerItem<G extends Geometry = Geometry, P extends FeatureProperties = FeatureProperties>(options: Omit<FetchNgwItemOptions<P>, 'connector'>): CancelablePromise<FeatureItem>;
+    // Warning: (ae-unresolved-link) The @link reference could not be resolved: The package "@nextgis/ngw-map" does not have an export "fetchNgwLayerItems"
+    //
     // @deprecated (undocumented)
     getNgwLayerItems<F extends FeatureProperties = FeatureProperties, G extends Geometry = Geometry>(options: Omit<FetchNgwItemsOptions<F>, 'connector'>): CancelablePromise<FeatureItem<F, G>[]>;
     // (undocumented)
@@ -119,6 +128,8 @@ export class NgwMap<M = unknown, L = unknown, C extends object = any, O extends 
     removeLayer(layerDef: LayerDef): void;
     // (undocumented)
     selectFromNgwRaster(ev: MapClickEvent): Promise<NgwIdentifyEvent | undefined>;
+    // Warning: (ae-unresolved-link) The @link reference could not be resolved: The package "@nextgis/ngw-map" does not have an export "fitLayer"
+    //
     // @deprecated (undocumented)
     zoomToLayer(layerDef: string | ResourceAdapter): Promise<void>;
 }
@@ -150,8 +161,6 @@ export interface NgwMapOptions<M = any, C = any> extends MapOptions<M, C> {
     resources?: NgwResourceDefinition[];
     // (undocumented)
     runtimeParams?: RuntimeParams[];
-    // Warning: (ae-unresolved-inheritdoc-reference) The @inheritDoc reference could not be resolved: This type of declaration is not supported yet by the resolver
-    //
     // (undocumented)
     setViewDelay?: number;
     webmapId?: NgwResourceDefinition;

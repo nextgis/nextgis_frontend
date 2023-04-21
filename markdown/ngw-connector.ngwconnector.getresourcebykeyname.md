@@ -6,7 +6,7 @@
 
 > Warning: This API is now obsolete.
 > 
-> - use [NgwConnector.getResource()](./ngw-connector.ngwconnector.getresource.md)
+> - use 
 > 
 
 **Signature:**

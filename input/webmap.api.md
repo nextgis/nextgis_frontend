@@ -336,6 +336,8 @@ export interface MainLayerAdapter<M = any, L = any, O extends AdapterOptions = A
     getBounds?(): LngLatBoundsArray | Promise<LngLatBoundsArray | undefined> | undefined;
     // (undocumented)
     getDependLayers?(): L[];
+    // Warning: (ae-unresolved-link) The @link reference could not be resolved: The package "@nextgis/webmap" does not have an export "getBounds"
+    //
     // @deprecated (undocumented)
     getExtent?(): LngLatBoundsArray | Promise<LngLatBoundsArray | undefined> | undefined;
     // (undocumented)
@@ -853,6 +855,8 @@ export class WebMapControls<M = any, L = any, C extends object = any, E extends 
     getControl<K extends keyof MapControls>(control: K, options?: MapControls[K]): C | undefined;
     // (undocumented)
     getControlContainer(): HTMLElement | undefined;
+    // Warning: (ae-unresolved-link) The @link reference could not be resolved: The package "@nextgis/webmap" does not have an export "createControl"
+    //
     // (undocumented)
     removeControl(control: C): void;
 }

@@ -17,7 +17,7 @@ connect(): CancelablePromise<PyramidRoute>;
 
 ## Remarks
 
-This method need not be called manually as it is used when forming a request in [apiRequest](./ngw-connector.ngwconnector.apirequest.md)<!-- -->. Can be used to check connection.
+This method need not be called manually as it is used when forming a request in . Can be used to check connection.
 
 ## Example
 

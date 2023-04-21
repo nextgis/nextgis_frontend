@@ -6,7 +6,7 @@
 
 > Warning: This API is now obsolete.
 > 
-> use [NgwMap.fitLayer()](./ngw-map.ngwmap.fitlayer.md) instead
+> use  instead
 > 
 
 **Signature:**

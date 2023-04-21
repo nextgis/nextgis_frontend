@@ -6,7 +6,7 @@
 
 > Warning: This API is now obsolete.
 > 
-> - use [NgwUploader.createRaster()](./ngw-uploader.ngwuploader.createraster.md) instead
+> - use  instead
 > 
 
 **Signature:**

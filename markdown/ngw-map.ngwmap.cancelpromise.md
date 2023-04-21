@@ -6,7 +6,7 @@
 
 > Warning: This API is now obsolete.
 > 
-> use [NgwMap.cancelPromises()](./ngw-map.ngwmap.cancelpromises.md) instead
+> use  instead
 > 
 
 **Signature:**

@@ -272,12 +272,12 @@ class NgwConnector {
     constructor(options: NgwConnectorOptions);
     abort(): void;
     apiRequest<K extends keyof RequestItemsParamsMap, P extends RequestItemKeys = RequestItemKeys>(name: K, params_?: RequestItemsParams<K>, requestOptions?: RequestOptions): CancelablePromise<P[K]>;
-    // Warning: (ae-unresolved-link) The @link reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "NgwConnector"
+    // Warning: (ae-unresolved-link) The @link reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "apiRequest"
     connect(): CancelablePromise<PyramidRoute>;
     // (undocumented)
     static create(options: NgwConnectorOptions): NgwConnector;
     delete<K extends keyof RequestItemsParamsMap>(name: K, options?: RequestOptions | undefined | null, params?: RequestItemsParams<K>): CancelablePromise<DeleteRequestItemsResponseMap[K]>;
-    // Warning: (ae-unresolved-inheritdoc-reference) The @inheritDoc reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "ResourcesControl"
+    // Warning: (ae-unresolved-link) The @link reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "ResourcesControl"
     //
     // (undocumented)
     deleteResource(resource: ResourceIdKeynameDef): CancelablePromise<void>;
@@ -292,43 +292,43 @@ class NgwConnector {
     // (undocumented)
     getActiveApiRequests(): CancelablePromise<any>[];
     getAuthorizationHeaders(credentials?: Credentials): RequestHeaders | undefined;
-    // Warning: (ae-unresolved-inheritdoc-reference) The @inheritDoc reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "ResourcesControl"
+    // Warning: (ae-unresolved-link) The @link reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "ResourcesControl"
     //
     // (undocumented)
     getResource(resource: ResourceDefinition, requestOptions?: RequestOptions): CancelablePromise<ResourceItem | undefined>;
-    // Warning: (ae-unresolved-link) The @link reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "NgwConnector"
+    // Warning: (ae-unresolved-link) The @link reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "getResource"
     //
     // @deprecated (undocumented)
     getResourceBy(resource: DeepPartial<Resource>): CancelablePromise<ResourceItem | undefined>;
-    // Warning: (ae-unresolved-link) The @link reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "NgwConnector"
+    // Warning: (ae-unresolved-link) The @link reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "getResource"
     //
     // @deprecated (undocumented)
     getResourceById(id: number): CancelablePromise<ResourceItem | undefined>;
-    // Warning: (ae-unresolved-link) The @link reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "NgwConnector"
+    // Warning: (ae-unresolved-link) The @link reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "getResource"
     //
     // @deprecated (undocumented)
     getResourceByKeyname(keyname: string): CancelablePromise<ResourceItem | undefined>;
-    // Warning: (ae-unresolved-inheritdoc-reference) The @inheritDoc reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "ResourcesControl"
+    // Warning: (ae-unresolved-link) The @link reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "ResourcesControl"
     //
     // (undocumented)
     getResourceChildren(resource: ResourceDefinition, requestOptions?: GetChildrenOfOptions): CancelablePromise<ResourceItem[]>;
-    // Warning: (ae-unresolved-inheritdoc-reference) The @inheritDoc reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "ResourcesControl"
+    // Warning: (ae-unresolved-link) The @link reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "ResourcesControl"
     //
     // (undocumented)
     getResourceId(resource: ResourceDefinition, requestOptions?: RequestOptions): CancelablePromise<number | undefined>;
-    // Warning: (ae-unresolved-inheritdoc-reference) The @inheritDoc reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "ResourcesControl"
+    // Warning: (ae-unresolved-link) The @link reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "ResourcesControl"
     //
     // (undocumented)
     getResourceIdOrFail(resource: ResourceDefinition, requestOptions?: RequestOptions): CancelablePromise<number>;
-    // Warning: (ae-unresolved-inheritdoc-reference) The @inheritDoc reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "ResourcesControl"
+    // Warning: (ae-unresolved-link) The @link reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "ResourcesControl"
     //
     // (undocumented)
     getResourceOrFail(resource: ResourceDefinition, requestOptions?: RequestOptions): CancelablePromise<ResourceItem>;
-    // Warning: (ae-unresolved-inheritdoc-reference) The @inheritDoc reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "ResourcesControl"
+    // Warning: (ae-unresolved-link) The @link reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "ResourcesControl"
     //
     // (undocumented)
     getResourceParent(resource: ResourceDefinition, requestOptions?: RequestOptions): CancelablePromise<ResourceItem | undefined>;
-    // Warning: (ae-unresolved-inheritdoc-reference) The @inheritDoc reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "ResourcesControl"
+    // Warning: (ae-unresolved-link) The @link reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "ResourcesControl"
     //
     // (undocumented)
     getResourcesBy(resource: DeepPartial<Resource>, requestOptions?: RequestOptions): CancelablePromise<ResourceItem[]>;
@@ -355,7 +355,7 @@ class NgwConnector {
     setNgw(baseUrl: string): void;
     // (undocumented)
     setRequestTransform(requestTransform: RequestTransformFunction | undefined | null): void;
-    // Warning: (ae-unresolved-inheritdoc-reference) The @inheritDoc reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "ResourcesControl"
+    // Warning: (ae-unresolved-link) The @link reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "ResourcesControl"
     //
     // (undocumented)
     updateResource(resource: ResourceIdKeynameDef, data: DeepPartial<ResourceItem>): CancelablePromise<ResourceItem | undefined>;

@@ -856,7 +856,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@nextgis/ngw-map!NgwMap#cancelPromise:member(1)",
-              "docComment": "/**\n * @deprecated\n *\n * use {@link NgwMap.cancelPromises} instead\n */\n",
+              "docComment": "/**\n * @deprecated\n *\n * use {@link cancelPromises} instead\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -2157,7 +2157,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@nextgis/ngw-map!NgwMap#getNgwLayerFeature:member(1)",
-              "docComment": "/**\n * @deprecated\n *\n * use {@link NgwMap.fetchNgwLayerFeature} instead\n */\n",
+              "docComment": "/**\n * @deprecated\n *\n * use {@link fetchNgwLayerFeature} instead\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -2293,7 +2293,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@nextgis/ngw-map!NgwMap#getNgwLayerFeatures:member(1)",
-              "docComment": "/**\n * @deprecated\n *\n * use {@link NgwMap.fetchNgwLayerFeatures} instead\n */\n",
+              "docComment": "/**\n * @deprecated\n *\n * use {@link fetchNgwLayerFeatures} instead\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -2424,7 +2424,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@nextgis/ngw-map!NgwMap#getNgwLayerItem:member(1)",
-              "docComment": "/**\n * @deprecated\n *\n * use {@link NgwMap.fetchNgwLayerItem} instead\n */\n",
+              "docComment": "/**\n * @deprecated\n *\n * use {@link fetchNgwLayerItem} instead\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -2560,7 +2560,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@nextgis/ngw-map!NgwMap#getNgwLayerItems:member(1)",
-              "docComment": "/**\n * @deprecated\n *\n * use {@link NgwMap.fetchNgwLayerItems} instead\n */\n",
+              "docComment": "/**\n * @deprecated\n *\n * use {@link fetchNgwLayerItems} instead\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -2911,7 +2911,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@nextgis/ngw-map!NgwMap#zoomToLayer:member(1)",
-              "docComment": "/**\n * @deprecated\n *\n * use {@link NgwMap.fitLayer} instead\n */\n",
+              "docComment": "/**\n * @deprecated\n *\n * use {@link fitLayer} instead\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -3419,7 +3419,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@nextgis/ngw-map!NgwMapOptions#setViewDelay:member",
-              "docComment": "/**\n * {@inheritDoc AdapterOptions.setViewDelay}\n */\n",
+              "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",

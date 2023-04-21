@@ -6,7 +6,7 @@
 
 > Warning: This API is now obsolete.
 > 
-> use [NgwMap.fetchNgwLayerItems()](./ngw-map.ngwmap.fetchngwlayeritems.md) instead
+> use  instead
 > 
 
 **Signature:**

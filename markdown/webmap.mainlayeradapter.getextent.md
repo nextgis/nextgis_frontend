@@ -6,7 +6,7 @@
 
 > Warning: This API is now obsolete.
 > 
-> use [MainLayerAdapter.getBounds()](./webmap.mainlayeradapter.getbounds.md) instead
+> use  instead
 > 
 
 **Signature:**

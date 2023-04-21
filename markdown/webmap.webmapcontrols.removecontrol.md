@@ -14,7 +14,7 @@ removeControl(control: C): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  control | C | Instance of WEB-GIS framework control. What is returned by the [create](./webmap.webmapcontrols.createcontrol.md) method |
+|  control | C | Instance of WEB-GIS framework control. What is returned by the  method |
 
 **Returns:**
 

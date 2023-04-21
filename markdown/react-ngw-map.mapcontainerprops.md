@@ -9,7 +9,7 @@
 ```typescript
 export interface MapContainerProps<M = any, L = any, C extends object = any, O extends NgwMapOptions<M, C> = NgwMapOptions<M, C>> extends NgwMapOptions 
 ```
-**Extends:** NgwMapOptions
+**Extends:** [NgwMapOptions](./ngw-map.ngwmapoptions.md)
 
 ## Properties
 
@@ -20,5 +20,5 @@ export interface MapContainerProps<M = any, L = any, C extends object = any, O e
 |  [id?](./react-ngw-map.mapcontainerprops.id.md) |  | string | _(Optional)_ |
 |  [placeholder?](./react-ngw-map.mapcontainerprops.placeholder.md) |  | ReactNode | _(Optional)_ |
 |  [style?](./react-ngw-map.mapcontainerprops.style.md) |  | CSSProperties | _(Optional)_ |
-|  [whenCreated?](./react-ngw-map.mapcontainerprops.whencreated.md) |  | (map: NgwMap&lt;M, L, C, O&gt;) =&gt; void | _(Optional)_ |
+|  [whenCreated?](./react-ngw-map.mapcontainerprops.whencreated.md) |  | (map: [NgwMap](./ngw-map.ngwmap.md)<!-- -->&lt;M, L, C, O&gt;) =&gt; void | _(Optional)_ |
 
