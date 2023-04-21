@@ -334,9 +334,15 @@ export interface VectorAdapterOptions<
    * @defaultValue 50
    */
   clusterRadius?: number;
-  labelOnHover?: boolean;
-  labelField?: keyof P extends null ? string : keyof P;
+
   label?: (e: LayerDefinition<F, L>) => string;
+  labelField?: keyof P extends null ? string : keyof P;
+  labelOnHover?: boolean;
+  /**
+   * Show set label immediately
+   * @defaultValue false
+   */
+  labelVisibility?: boolean;
 
   source?: unknown;
   /**
@@ -676,4 +682,7 @@ export interface VectorLayerAdapter<
   closePopup?(findFeatureCb?: DataLayerFilter<F, L>): void;
 
   updateTooltip?(layerDef?: LayerDefinition<F, L>): void;
+
+  hideLabel?(): void
+  showLabel?(): void
 }

@@ -635,11 +635,28 @@ export class WebMapLayers<
     }
   }
 
-  // requestGeomString(pixel: Pixel, pixelRadius: number) {
-  //   if (this.mapAdapter.requestGeomString) {
-  //     return this.mapAdapter.requestGeomString(pixel, pixelRadius);
-  //   }
-  // }
+  showLayerLabel(layerDef: LayerDef): void {
+    this.toggleLayerLabel(layerDef, true);
+  }
+
+  hideLayerLabel(layerDef: LayerDef): void {
+    this.toggleLayerLabel(layerDef, false);
+  }
+
+  toggleLayerLabel(layerDef: LayerDef, status: boolean): void {
+    const layer = this.getLayer(layerDef) as VectorLayerAdapter;
+    if (layer) {
+      if (status) {
+        if (layer.showLabel) {
+          layer.showLabel();
+        }
+      } else {
+        if (layer.hideLabel) {
+          layer.hideLabel();
+        }
+      }
+    }
+  }
 
   /**
    * Mark the layer as selected.
