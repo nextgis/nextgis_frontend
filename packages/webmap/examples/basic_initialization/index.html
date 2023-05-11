@@ -36,7 +36,7 @@
        WebMap.createWebMap({
         mapAdapter: new LeafletMapAdapter(),
         target: 'map',
-        controls: ['ZOOM', 'ATTRIBUTIONS'],
+        controls: webMap.getDefaultControls(),
         starterKits: [new QmsKit.QmsKit()],
         center: [104, 52],
         zoom: 6
