@@ -1,3 +1,4 @@
+import { getDefaultControls } from '@nextgis/webmap';
 import { deepmerge } from '@nextgis/utils';
 import { StarterKit, MapOptions } from '@nextgis/webmap';
 import NgwConnector from '@nextgis/ngw-connector';
@@ -10,7 +11,7 @@ export const OPTIONS: NgwMapOptions = {
   target: 'map',
   baseUrl: '',
   whitlabel: false,
-  controls: ['ZOOM', 'ATTRIBUTION'],
+  controls: getDefaultControls(),
   controlsOptions: {
     ZOOM: { position: 'top-left' },
     ATTRIBUTION: {
