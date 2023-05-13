@@ -1,9 +1,11 @@
 import { FindConditions } from './FindConditions';
 
+import type { Properties } from '@nextgis/properties-filter';
+
 /**
  * Defines a special criteria to find specific entity.
  */
-export interface FindOneOptions<P = { [field: string]: any }> {
+export interface FindOneOptions<P extends Properties = Properties> {
   /**
    * Specifies what columns should be retrieved.
    */

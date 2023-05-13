@@ -1,9 +1,9 @@
 import { PropertiesFilter, Properties } from '@nextgis/properties-filter';
 
-export type FindConditions<T extends Properties = Properties> =
-  | PropertiesFilter<T>
-  | ObjectEqualConditions<T>;
+export type FindConditions<P extends Properties = Properties> =
+  | PropertiesFilter<P>
+  | ObjectEqualConditions<P>;
 
-export type ObjectEqualConditions<T extends Properties = Properties> = {
-  [P in keyof T]?: any;
+export type ObjectEqualConditions<P extends Properties = Properties> = {
+  [K in keyof P]?: any;
 };
