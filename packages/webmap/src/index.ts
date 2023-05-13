@@ -57,14 +57,14 @@ export * from './WebMapLayers';
 export * from './WebMapControls';
 export * from './WebMapMain';
 
-export type * from './interfaces/Events';
-export type * from './interfaces/BaseTypes';
-export type * from './interfaces/MapOptions';
-export type * from './interfaces/MapAdapter';
-export type * from './interfaces/MapControl';
-export type * from './interfaces/StarterKit';
-export type * from './interfaces/LayerAdapter';
-export type * from './interfaces/RuntimeParams';
+export * from './interfaces/Events';
+export * from './interfaces/BaseTypes';
+export * from './interfaces/MapOptions';
+export * from './interfaces/MapAdapter';
+export * from './interfaces/MapControl';
+export * from './interfaces/StarterKit';
+export * from './interfaces/LayerAdapter';
+export * from './interfaces/RuntimeParams';
 
 export { WebMap };
 
