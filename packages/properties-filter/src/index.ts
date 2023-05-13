@@ -11,6 +11,7 @@ export {
 export type {
   Operation,
   Operations,
+  Properties,
   PropertyFilter,
   PropertiesFilter,
 } from './interfaces';
