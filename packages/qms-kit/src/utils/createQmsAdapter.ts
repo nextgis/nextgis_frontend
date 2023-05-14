@@ -37,6 +37,8 @@ export function createQmsAdapter(
     if (adapterOptions) {
       createOpt = adapterOptions;
     }
+  } else {
+    webMap = webMapOrOptions;
   }
 
   if (!url) {
