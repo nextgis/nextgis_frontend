@@ -3,6 +3,55 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.16.8 (2023-05-14)
+
+
+### Bug Fixes
+
+* **build:** control-container extract css ([a02d24b](https://github.com/nextgis/nextgis_frontend/commit/a02d24bf2dbe246420803d5d1be9348e4b647c6d))
+* **ngw-connector:** fixes to apiRequest cancel work ([e4451d8](https://github.com/nextgis/nextgis_frontend/commit/e4451d8a7ad349ba17692a3f906677f1a29bf691)), closes [#6](https://github.com/nextgis/nextgis_frontend/issues/6)
+* **ngw-map:** not block when error on add qms layer ([f8035e2](https://github.com/nextgis/nextgis_frontend/commit/f8035e2f2cc63a471cfa5b57a9c841e8beabadad))
+* **qms-kit:** createQmsAdapter options ([04ccae9](https://github.com/nextgis/nextgis_frontend/commit/04ccae96a14796db00314a369f36c6f7ae40813c))
+* **qms-kit:** mix layerAdapter class property ([502cdcf](https://github.com/nextgis/nextgis_frontend/commit/502cdcf87e40c09e8cbc31a322ab40872a813a98))
+* **qms:** add createQmsAdapter options ([52e6ae1](https://github.com/nextgis/nextgis_frontend/commit/52e6ae182d8e8d4f8195b5f0ada15d8d258a1d55))
+
+
+### Build System
+
+* qms-kit to rollup ([6cf124f](https://github.com/nextgis/nextgis_frontend/commit/6cf124fde63bedac45ac679a44d920050bbb724b))
+
+
+### chore
+
+* build; eslint ([ee1e03d](https://github.com/nextgis/nextgis_frontend/commit/ee1e03d85625b02a09c2ee1e4d66007fbf57d626))
+
+
+### Code Refactoring
+
+* rename layerAdapter baseLayer option to baselayer ([e5c595d](https://github.com/nextgis/nextgis_frontend/commit/e5c595d6df24b1b22906ad1e06eb60bf0327e9c0))
+
+
+### Features
+
+* **cesium:** update layer and map adapter ([c942b1a](https://github.com/nextgis/nextgis_frontend/commit/c942b1a741618e6e3d57737dc91257a7dde6aa83))
+* **qms-kit:** add subdomains support from origin_url ([977fb6d](https://github.com/nextgis/nextgis_frontend/commit/977fb6d9433fd9f6511b546018996b8ddf437ed9))
+* **qms-kit:** update createAdapter options interface ([e349073](https://github.com/nextgis/nextgis_frontend/commit/e3490730a55e69d8df396da70ec5afbfa5393657))
+* **qms-kit:** use y_origin_top option ([ac9f4cb](https://github.com/nextgis/nextgis_frontend/commit/ac9f4cb9d252a842f11b31e3c7eccbd6e34d1387))
+* **vue:** split vue-ngw-map for leaflet, ol an mapbox adapters ([bcea6c3](https://github.com/nextgis/nextgis_frontend/commit/bcea6c35e61f6ba2aab0b25eb30da9f5f719c92e))
+* **webmap:** implement WebmapLayers get Attributions onlyBaselayer option ([928d351](https://github.com/nextgis/nextgis_frontend/commit/928d351fea9a321c178ecbb4e03a70bd9a64fc90))
+
+
+### BREAKING CHANGES
+
+* No more default export from `qms-kit`. You should replace `import QmsKit from "@nextgis/qms-kit"` to `import { QmsKit } from "@nextgis/qms-kit"` everywhere
+* LayerAdapter option baseLayer was renamed to baselayer;
+* webMap.getBaseLayers() method now return LayerAdapter, not string array of ids
+* code formatting rules changed to prettier 2.0 compatibility
+
+
+
+
+
 ## [1.16.7](https://github.com/nextgis/nextgis_frontend/compare/v1.16.6...v1.16.7) (2023-04-21)
 
 

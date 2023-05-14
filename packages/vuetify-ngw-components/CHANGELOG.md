@@ -3,6 +3,105 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.16.8 (2023-05-14)
+
+
+### Bug Fixes
+
+* **build:** control-container extract css ([a02d24b](https://github.com/nextgis/nextgis_frontend/commit/a02d24bf2dbe246420803d5d1be9348e4b647c6d))
+* **cesium-map-adapter:** set layer adapters request headers ([38074ba](https://github.com/nextgis/nextgis_frontend/commit/38074ba672e67a635f6c1ea7e30f7de5489a0af3))
+* **ngw-connector:** fixes to apiRequest cancel work ([e4451d8](https://github.com/nextgis/nextgis_frontend/commit/e4451d8a7ad349ba17692a3f906677f1a29bf691)), closes [#6](https://github.com/nextgis/nextgis_frontend/issues/6)
+* **ngw-kit:** create async adapter from parent resource ([5ce6394](https://github.com/nextgis/nextgis_frontend/commit/5ce6394c4d9313c79f6d540df0b1683648a6af83))
+* **ngw-kit:** make async onFirstShowAdapter hide and show methods ([502b261](https://github.com/nextgis/nextgis_frontend/commit/502b261b478872aed0bed0657b961481c22ce109))
+* **ngw-kit:** ngw webmap item childrensafe reverse ([b790e3a](https://github.com/nextgis/nextgis_frontend/commit/b790e3a244e3205fc64561d30b5572b3dce0fada))
+* **ngw-kit:** ngw webmap items layer order ([c5dad6b](https://github.com/nextgis/nextgis_frontend/commit/c5dad6b1db927b7ff30da21f752c4a1d1786b70e))
+* **ngw-kit:** remove async from NgwWebmapItem child add ([4b9a75f](https://github.com/nextgis/nextgis_frontend/commit/4b9a75f6ee64700992cd95b7b992265a0564aaed))
+* **ngw-kit:** set NgwWebmap tree item property before layer load ([5b9335e](https://github.com/nextgis/nextgis_frontend/commit/5b9335ecb097b8cacb77472ab4ffcaea27f8e3f9))
+* **ngw-kit:** webmap item children ordering ([cfb69b0](https://github.com/nextgis/nextgis_frontend/commit/cfb69b074bcfc9c817c671fc66c5a33c7da14996))
+* **ngw-map:** constructor options for control ([9e71281](https://github.com/nextgis/nextgis_frontend/commit/9e71281139d0532e574e7f2bcfef68e819f90834))
+* **ngw:** ngw webmap resource ordering ([fb0e502](https://github.com/nextgis/nextgis_frontend/commit/fb0e5023c7f17e9b6200c1406081e5691a2941f5))
+* **ol:** css control fixes ([facf608](https://github.com/nextgis/nextgis_frontend/commit/facf608fa99064da1a3b817497b0317890b77915))
+* remove require imports ([2674a8c](https://github.com/nextgis/nextgis_frontend/commit/2674a8ce29ef4116b939283ee1f4ec02b26b8025))
+* replace emitter.of by emitter.removeListener ([a92b281](https://github.com/nextgis/nextgis_frontend/commit/a92b2810df7fae74bb58f50d6791a21bb4a4ef0e))
+* **util:** arrayCompare typecasting ([80326b2](https://github.com/nextgis/nextgis_frontend/commit/80326b22e3ba78f9d33fe0006a1c5fbfe3751537))
+* **utils:** applyMixin options on no replace ([904caa3](https://github.com/nextgis/nextgis_frontend/commit/904caa3c80a0bc96c7ac961ee70436052def1cfa))
+* **vue:** NgwlayersList independent mode ([568cc1b](https://github.com/nextgis/nextgis_frontend/commit/568cc1b9ef3ab77ad1cdbdd9fdc4df0ce921a676))
+* **vue:** NgwLayersList selection event ([be63e99](https://github.com/nextgis/nextgis_frontend/commit/be63e9999449acca6a9daf535fc2669c1e4e3299))
+* **vue:** NgwlayersList visibility toggle ([1a85fc6](https://github.com/nextgis/nextgis_frontend/commit/1a85fc61cd49fc5d0d9474041d701512b993cc8b))
+* **vue:** NgwLayersList webmap visibility ([90a5bc1](https://github.com/nextgis/nextgis_frontend/commit/90a5bc1647882f6c37a4e518fbca01f46f289368))
+* **vue:** saveselection of webmap in NgwLayersList ([1fe8c28](https://github.com/nextgis/nextgis_frontend/commit/1fe8c289d3b513ef2a0a85c23b6a4b5f028e3664))
+* **vue:** selection for items with properties and tree ([23f0709](https://github.com/nextgis/nextgis_frontend/commit/23f0709c9a37e755d2a11828d8b4f3a7d955745d))
+* **vuetify:** allow custom label slot for NgwLayersList ([e0b6e30](https://github.com/nextgis/nextgis_frontend/commit/e0b6e30b96eec6eb81e71f9b7ae239b38c8e9c4d))
+* **vuetify:** correction for set empty BasemapSelect text ([7a5ac48](https://github.com/nextgis/nextgis_frontend/commit/7a5ac48724243c0c38b39a808561b222493bf9af))
+* **vuetify:** improve BaselayerSelect ([76a047c](https://github.com/nextgis/nextgis_frontend/commit/76a047ce6bd4dfa591cd650a30e0f2648bd4b448))
+* **vuetify:** NgwLayersList init select ([4b9cce0](https://github.com/nextgis/nextgis_frontend/commit/4b9cce04fe3b819a993a88bee47bad66592bd19a))
+* **vuetify:** NgwLayersList root item hide ([73ab6d1](https://github.com/nextgis/nextgis_frontend/commit/73ab6d180444843b9ace2bb36d2b797950762806))
+* **vuetify:** NgwLayersList visibility for webmap root item ([d092ba2](https://github.com/nextgis/nextgis_frontend/commit/d092ba21e949e46797b9ce9d60f88f1810ce1ca4))
+* **vuetify:** pass $attrs from parent ([8ab3a36](https://github.com/nextgis/nextgis_frontend/commit/8ab3a36f609875a593739c5d9cb8de5abb0b7b28))
+* **vuetify:** update items on init ([a153fd5](https://github.com/nextgis/nextgis_frontend/commit/a153fd5de0804e0b8e88f2a488c879883e033416))
+* **webmap:** constructor options; move controls options from ngw to webmap ([5a3b582](https://github.com/nextgis/nextgis_frontend/commit/5a3b58209126a5b1e7a802ae8503129b11602512))
+* **webmap:** get layers method only string keys ([a14017b](https://github.com/nextgis/nextgis_frontend/commit/a14017bdcba2fcc2989b4d7a2cbc1b393694e6b8))
+
+
+### Build System
+
+* wepmap to rollup ([c6f038a](https://github.com/nextgis/nextgis_frontend/commit/c6f038ad6bcd2a9581f852b35600b2560381c246))
+
+
+### chore
+
+* build; eslint ([ee1e03d](https://github.com/nextgis/nextgis_frontend/commit/ee1e03d85625b02a09c2ee1e4d66007fbf57d626))
+
+
+### Code Refactoring
+
+* **ngw-kit:** naming ([434411a](https://github.com/nextgis/nextgis_frontend/commit/434411a8b2f7e63d436632821d11d0e476d410b3))
+* rename layerAdapter baseLayer option to baselayer ([e5c595d](https://github.com/nextgis/nextgis_frontend/commit/e5c595d6df24b1b22906ad1e06eb60bf0327e9c0))
+
+
+### Features
+
+* add getExtent method for all mapAdapters GeoJsonLayerAdapter ([7e8010f](https://github.com/nextgis/nextgis_frontend/commit/7e8010f7d5579f2b7909a31a2073479de1faa6a5))
+* handle vector layer mouse over and out events ([1f537c2](https://github.com/nextgis/nextgis_frontend/commit/1f537c277b433db365b319d4bbdfb26aa44528fd))
+* **leaflet-map-adapter:** add position to vector adapter layers definition ([053ccf0](https://github.com/nextgis/nextgis_frontend/commit/053ccf05ed8d9d76592c8ca648365e176c609277))
+* **ngw-kit:** add addLayerOptionsPriority for createGeoJsonAdapter ([eb7db26](https://github.com/nextgis/nextgis_frontend/commit/eb7db2620f2bf66812ab90b03f5359c70f46ecf9))
+* **ngw-kit:** add baselayers from webmap; vuetify BaseLayerSelect ([7862680](https://github.com/nextgis/nextgis_frontend/commit/78626807a6e9c7420ffffeba5c9a4f90fdba24b8))
+* **ngw-kit:** extensibility increased ([2b7286d](https://github.com/nextgis/nextgis_frontend/commit/2b7286d7aba2551e22ea72f1329b3009893af64f))
+* **ngw-kit:** make create basemap layer adapter universal ([b17781d](https://github.com/nextgis/nextgis_frontend/commit/b17781df8afabd9e5353a07c94a3769390ea8591))
+* **ngw-kit:** ngwwebmap item toggle on zoom layer range ([52abb1d](https://github.com/nextgis/nextgis_frontend/commit/52abb1d2fee3b2c306b9269e8287d98362ef5128))
+* **util:** add arrayCompare util ([dd58235](https://github.com/nextgis/nextgis_frontend/commit/dd58235aecd04de213aa962e002145a65fdc2d52))
+* **vue:** add layer toggle listener for baselayerselect ([a78a687](https://github.com/nextgis/nextgis_frontend/commit/a78a6874814740637adee39c5813015a5d7dd6eb))
+* **vue:** NgwlayersList bubble with propagation ([9c7b38a](https://github.com/nextgis/nextgis_frontend/commit/9c7b38a5688aaa1a69e3efbcc58c99c6d4717ed9))
+* **vue:** NgwLayersList ctrl key to propagation reverse ([6d5ee63](https://github.com/nextgis/nextgis_frontend/commit/6d5ee634b65a6064b604d6c1073d4dc471f971e8))
+* **vue:** NgwLayersList propagation param ([65879c9](https://github.com/nextgis/nextgis_frontend/commit/65879c9f8ea141bffb4213f5e3ad590447423ddc))
+* **vue:** NgwLayersList watch ngwMap change ([8496ec7](https://github.com/nextgis/nextgis_frontend/commit/8496ec772ec9c6998bcd1ca604d058acbea75172))
+* **vue:** selection for NgwLayersList ([3ce2a7b](https://github.com/nextgis/nextgis_frontend/commit/3ce2a7b39ee5166ef719a718dfdc608f66b92b0f))
+* **vue:** split vue-ngw-map for leaflet, ol an mapbox adapters ([bcea6c3](https://github.com/nextgis/nextgis_frontend/commit/bcea6c35e61f6ba2aab0b25eb30da9f5f719c92e))
+* **vuetify:** allow VTree scopes for NgwLayersList ([0639026](https://github.com/nextgis/nextgis_frontend/commit/063902636fa1425a1dba6bce89a40b040d042387))
+* **vuetify:** NgwLayersList remove layer ability ([411b5a3](https://github.com/nextgis/nextgis_frontend/commit/411b5a32ddf0443dccc639e7cf86fb41d08f2d0a)), closes [#CU-jzby65](https://github.com/nextgis/nextgis_frontend/issues/CU-jzby65)
+* **vuetify:** NgwLayersList set open from ngw webmap item ([a278789](https://github.com/nextgis/nextgis_frontend/commit/a278789929e604059432e1a7f0967c83b3d2fee2))
+* **vue:** use vuetify tree prop to NgwLayersList selection strategy ([e1f4a95](https://github.com/nextgis/nextgis_frontend/commit/e1f4a95a03189f1cd50ada7dfb95fd5b4a5284aa))
+
+
+### Performance Improvements
+
+* **ngw-kit:** default limit to load large vector layer data ([bcdba09](https://github.com/nextgis/nextgis_frontend/commit/bcdba0973fad5204bf3b067afa9cfdb692d48a99))
+* **vuetify:** replace components gwMap param with webMapId ([e807f90](https://github.com/nextgis/nextgis_frontend/commit/e807f90de22cafeb4409cca11ceba863275cd542))
+* **vue:** Vuetify NgwLayersList set visibility only for changed ([b7bd76c](https://github.com/nextgis/nextgis_frontend/commit/b7bd76c63c9338fcbbe3e9fb7ae26e61cd2b8551))
+
+
+### BREAKING CHANGES
+
+* **ngw-kit:** replace `import { WebMapLayerAdapter } from @nextgis/ngw-kit` to `import { NgwWebmapLayerAdapter } from @nextgis/ngw-kit` and `import { WebMapLayerItem} from @nextgis/ngw-kit` to `import { NgwWebmapLayerItem } from @nextgis/ngw-kit`
+* No more default export from `ngw-map`. You should replace `import NgwMap from "@nextgis/ngw-map"` to `import { NgwMap } from "@nextgis/ngw-map"` everywhere
+* LayerAdapter option baseLayer was renamed to baselayer;
+* webMap.getBaseLayers() method now return LayerAdapter, not string array of ids
+* code formatting rules changed to prettier 2.0 compatibility
+
+
+
+
+
 ## [1.16.7](https://github.com/nextgis/nextgis_frontend/compare/v1.16.6...v1.16.7) (2023-04-21)
 
 **Note:** Version bump only for package @nextgis/vuetify-ngw-components

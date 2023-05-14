@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.16.8 (2023-05-14)
+
+
+### Bug Fixes
+
+* **mapboxgl-map-adapter:** remove image source on layer remove ([b5e2001](https://github.com/nextgis/nextgis_frontend/commit/b5e2001c9438d7ba248207022ffbd5ca7e28185b))
+
+
+### Features
+
+* add react-ngw-leaflet library ([b2234aa](https://github.com/nextgis/nextgis_frontend/commit/b2234aa488070086481294920296e5c7211c1aae))
+* **react-ngw-map:** add getContext hook to module export ([8a672b4](https://github.com/nextgis/nextgis_frontend/commit/8a672b4e0fb58ccdf14d69282e11a0e93640f721))
+* **react:** add react map toggle control component ([41421e5](https://github.com/nextgis/nextgis_frontend/commit/41421e5d22e14432bc27d0110cf2150297520ce3))
+* **webmap:** add addLayer onAdded option ([880ccbb](https://github.com/nextgis/nextgis_frontend/commit/880ccbba94e7e0309260cce01790bd039ce3039d))
+* **webmap:** add MapAdapter map options ([15e3c50](https://github.com/nextgis/nextgis_frontend/commit/15e3c50eb61c8457e9695e527274beb6cf751a6a))
+
+
+
+
+
 ## [1.16.7](https://github.com/nextgis/nextgis_frontend/compare/v1.16.6...v1.16.7) (2023-04-21)
 
 **Note:** Version bump only for package @nextgis/react-ngw-map

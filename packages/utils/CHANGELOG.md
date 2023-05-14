@@ -3,6 +3,120 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.16.8 (2023-05-14)
+
+
+### Bug Fixes
+
+* **build:** control-container extract css ([a02d24b](https://github.com/nextgis/nextgis_frontend/commit/a02d24bf2dbe246420803d5d1be9348e4b647c6d))
+* **leaflet-map-adapter:** geojson selection ([d260db5](https://github.com/nextgis/nextgis_frontend/commit/d260db579912644fdb641a72e930df3575df566b))
+* **leaflet-map-adapter:** init center option ([32793bf](https://github.com/nextgis/nextgis_frontend/commit/32793bf237c404232cf4056ab9f6ec35eeb73d12))
+* **mapbox:** geojson getFeatures method return whole source data ([adc92f9](https://github.com/nextgis/nextgis_frontend/commit/adc92f9c6846e183d8b4d5679a147e5965b38b41))
+* **ngw-connector:** node request write data for no POST mode ([abf9f63](https://github.com/nextgis/nextgis_frontend/commit/abf9f63f66b4ad6c3753fe0659bf1c33b63d5f90))
+* **ngw-kit:** createGeojsonAdapter propertiesFilter ([06c109f](https://github.com/nextgis/nextgis_frontend/commit/06c109fd4ddae20db91b15fbb7c5e7d2909aaf76))
+* **ngw-kit:** do not reassign getExtent for geojson layer ([feca330](https://github.com/nextgis/nextgis_frontend/commit/feca330c45fd6f96ba7d2a7bb2f6d34a47de0dba))
+* **ngw-map:** identify order ([bbb6a1c](https://github.com/nextgis/nextgis_frontend/commit/bbb6a1c7295dfcaf1146d976aa8ca87a81da1cde))
+* **ol-map-adapter:** geojson adapter layer remove ([8ec9df3](https://github.com/nextgis/nextgis_frontend/commit/8ec9df39941c4f1ccfbabfbe0ead2ec9138642bb))
+* **ol-map-adapter:** geojson adapter style function type detection ([c71d83f](https://github.com/nextgis/nextgis_frontend/commit/c71d83f45822138428bdd4ebedbc67ecefaead9d))
+* **properties-filte:** allow any chars for `like` and `ilike` search ([1d6ee0f](https://github.com/nextgis/nextgis_frontend/commit/1d6ee0ffc869b7633642eff760c413c813ba8701))
+* remove require imports ([2674a8c](https://github.com/nextgis/nextgis_frontend/commit/2674a8ce29ef4116b939283ee1f4ec02b26b8025))
+* rename Clipboard ([abfde3e](https://github.com/nextgis/nextgis_frontend/commit/abfde3ee02e7038dc106056c9458478c34e97464))
+* **util:** arrayCompare typecasting ([80326b2](https://github.com/nextgis/nextgis_frontend/commit/80326b22e3ba78f9d33fe0006a1c5fbfe3751537))
+* **utils:** applyMixin options on no replace ([904caa3](https://github.com/nextgis/nextgis_frontend/commit/904caa3c80a0bc96c7ac961ee70436052def1cfa))
+* **utils:** fix objectDeepEqual function ([a70d626](https://github.com/nextgis/nextgis_frontend/commit/a70d62647d06b83a3497fb3f1dddc405903ac101))
+* **utils:** function name typos ([2b86610](https://github.com/nextgis/nextgis_frontend/commit/2b86610669d0d1075008c0523af21159634e5f47))
+* **utils:** update applyMixins util to allow babel build ([9905326](https://github.com/nextgis/nextgis_frontend/commit/99053262f9dc71236f1bcfa934fa5eb5d0072e71))
+* **webmap:** constructor options; move controls options from ngw to webmap ([5a3b582](https://github.com/nextgis/nextgis_frontend/commit/5a3b58209126a5b1e7a802ae8503129b11602512))
+
+
+### chore
+
+* build; eslint ([ee1e03d](https://github.com/nextgis/nextgis_frontend/commit/ee1e03d85625b02a09c2ee1e4d66007fbf57d626))
+
+
+### Code Refactoring
+
+* **utils:** update geom utils ([43c11b0](https://github.com/nextgis/nextgis_frontend/commit/43c11b0f3c45b22ab66789bd00594d34078316f3))
+
+
+### Features
+
+* add getExtent method for all mapAdapters GeoJsonLayerAdapter ([7e8010f](https://github.com/nextgis/nextgis_frontend/commit/7e8010f7d5579f2b7909a31a2073479de1faa6a5))
+* add library `@nextgis/properties-filter` ([8ec97de](https://github.com/nextgis/nextgis_frontend/commit/8ec97de9bd48112211c11cb39eb2da857dd21cac))
+* add library cancelable-promise ([2cfb08f](https://github.com/nextgis/nextgis_frontend/commit/2cfb08f1143a773a43f1279690e0c9a7e2b2fec5))
+* add new library `ControlContainer` ([bf566e2](https://github.com/nextgis/nextgis_frontend/commit/bf566e218c53462f65a1e0574d812a6e1c667e06))
+* **area:** add new Area package ([c723d1a](https://github.com/nextgis/nextgis_frontend/commit/c723d1a144d9218ae1c586ac633afaa01bcc3c94))
+* **cache:** add array to match options deep compare ([6b8a096](https://github.com/nextgis/nextgis_frontend/commit/6b8a09676c40b6a3c1d86819043af4ec9aa34ce9))
+* **cache:** add namespaces support ([f65b6ec](https://github.com/nextgis/nextgis_frontend/commit/f65b6ec88885af749b7095dbb7b8dc97f9d6c34d))
+* **cache:** new package to cache key value with async ability ([48fce9b](https://github.com/nextgis/nextgis_frontend/commit/48fce9b6450556b7684731f873039ed6a22b907b))
+* **cancelable-promise:** create abort control ([c915206](https://github.com/nextgis/nextgis_frontend/commit/c915206ffad61c28e1020587a41f8844862f3074))
+* **cancelable-promise:** throw CancelError instead of onCancel callback ([087180a](https://github.com/nextgis/nextgis_frontend/commit/087180adc9bcea72d1fd02ebdaaef3fd751b0a52))
+* **clipboard:** on static copy return operation status ([dac89f0](https://github.com/nextgis/nextgis_frontend/commit/dac89f0e82641b7b91b9d1630cadade4b857c1fd))
+* **control:** add universal zoom control ([d1371be](https://github.com/nextgis/nextgis_frontend/commit/d1371be1f88085dcfc864de31a7d4d89f2690216))
+* eslint no-dupe off; object utils; propertiesFilter generic ([6989c5c](https://github.com/nextgis/nextgis_frontend/commit/6989c5c03548669db771eabcbce2c3f0a8f9843e))
+* improve popup, add new options, ol support ([e3ea91b](https://github.com/nextgis/nextgis_frontend/commit/e3ea91b91d03a4cef471c5c92a09a7fa0640b90a))
+* **mapboxgl-map-adapter:** set maxBounds init map option ([29b5152](https://github.com/nextgis/nextgis_frontend/commit/29b5152a81d01e582f40ae2a45ec9ef165b98f6e))
+* move getIdentifyRadius from ngw-map to utils package ([159cbfc](https://github.com/nextgis/nextgis_frontend/commit/159cbfccb0ee32c774c2b32f5599d05146df9006))
+* new @nextgis/dom library ([572d4c2](https://github.com/nextgis/nextgis_frontend/commit/572d4c2c554eb4da30be01c25a2d14cd4125d847))
+* **ngw-connector:** add static create method ([d141a1b](https://github.com/nextgis/nextgis_frontend/commit/d141a1bf5f5aa8693ae10c061459694cf960e07e))
+* **ngw-connector:** new getResourceBy method ([fc355b2](https://github.com/nextgis/nextgis_frontend/commit/fc355b217641f0449adac0c415707091563df9a1))
+* **ngw-kit:** add polygon intersection identify util ([a378415](https://github.com/nextgis/nextgis_frontend/commit/a3784154fe9961f90b88e4ca11fc84a1393c99ff))
+* **ngw-kit:** log to get item extensions if not request param set ([aef5fdf](https://github.com/nextgis/nextgis_frontend/commit/aef5fdfac6a81be98b8115bea87625a83d987a67))
+* **ngw-orm:** update VectorLayer.toTypescript ([f437527](https://github.com/nextgis/nextgis_frontend/commit/f4375275202790c305fba6b2620ae62b86c1e66f))
+* **util:** add arrayCompare util ([dd58235](https://github.com/nextgis/nextgis_frontend/commit/dd58235aecd04de213aa962e002145a65fdc2d52))
+* **util:** add coord format transformer ([7d3d072](https://github.com/nextgis/nextgis_frontend/commit/7d3d0727cb39d3317f6d2cd60331911a1a86d36e))
+* **util:** add debounce util ([c89223e](https://github.com/nextgis/nextgis_frontend/commit/c89223e509d79e829df2ffda086aa0ed87b30918))
+* **util:** add keyInObj typescript helper ([a978aac](https://github.com/nextgis/nextgis_frontend/commit/a978aacd3e28a5e0cc8ff5136e442d3324d67b33))
+* **util:** create typeHelpers utils ([387d5dc](https://github.com/nextgis/nextgis_frontend/commit/387d5dcda12e21fdef0c49d812a9543ed280b087))
+* **util:** move properties filter to utils library ([175cd56](https://github.com/nextgis/nextgis_frontend/commit/175cd56d93380591a764e2c06c011f7f6fe919c8))
+* **utils:** add `arrayCompareStrict` function ([b647b10](https://github.com/nextgis/nextgis_frontend/commit/b647b10f6363462261ff13df9fcefc5cb377fdac))
+* **utils:** add `full` method ([39d1dee](https://github.com/nextgis/nextgis_frontend/commit/39d1dee32c1e5f21c079d8e8e393aa31c0794225))
+* **utils:** add DebounceDecorator ([033f482](https://github.com/nextgis/nextgis_frontend/commit/033f4827e32a9ef9cb764e80cde6944534a5f923))
+* **utils:** add debug log util ([35b2173](https://github.com/nextgis/nextgis_frontend/commit/35b21732aa785ad3c16d3972be439dcef8be7e6a))
+* **utils:** add degrees to radian transform function ([12d0ab9](https://github.com/nextgis/nextgis_frontend/commit/12d0ab9cb120d0ede41c01d96e3953ce6fdcd3bd))
+* **utils:** add flatten and unflatten functions ([9584ccb](https://github.com/nextgis/nextgis_frontend/commit/9584ccbeaa2b384ac0699c0f47be3cd97ae75d6c))
+* **utils:** add function to get coordinates from bbox ([35a0d8b](https://github.com/nextgis/nextgis_frontend/commit/35a0d8b8bc94fba336aa32fc6ceaaac364015d78))
+* **utils:** add geojson eachCoordinates util ([566aa77](https://github.com/nextgis/nextgis_frontend/commit/566aa77b56fab120d32408e89a9b6bdb5bd76f24))
+* **utils:** add getPolygons coordinates function ([49dba46](https://github.com/nextgis/nextgis_frontend/commit/49dba46e498510087c5368da2fcb06cdbba6d26f))
+* **utils:** add new tools ([4e534fb](https://github.com/nextgis/nextgis_frontend/commit/4e534fb45fb066ebeba3c586c2c448772c2df4f9))
+* **utils:** add number utils ([b6b7ea5](https://github.com/nextgis/nextgis_frontend/commit/b6b7ea5deaa9720f9ad85e0f714a7755ffb84ca6))
+* **utils:** add options to flatten ([066c09f](https://github.com/nextgis/nextgis_frontend/commit/066c09fce9dd21f1ddadc983a509856d09269f9c))
+* **utils:** clipbord static create may throw error ([8577e78](https://github.com/nextgis/nextgis_frontend/commit/8577e78624f3dae0a5d73becd7c3c81d370cdfb8))
+* **utils:** create universal MapControlContainer ([ce5a984](https://github.com/nextgis/nextgis_frontend/commit/ce5a984fd97928e1c9dda2bac81578a62a328e64))
+* **utils:** deprecated helper utils ([d324e3f](https://github.com/nextgis/nextgis_frontend/commit/d324e3f9e0babdb10779a0add5d53bae78235086))
+* **utils:** geom coordinates count ([06184f0](https://github.com/nextgis/nextgis_frontend/commit/06184f0d0df6db860b1f1b2cc47289c61b6f2786))
+* **utils:** move some utils from ngw-kit and webmap to geom ([03ff50e](https://github.com/nextgis/nextgis_frontend/commit/03ff50e30d1562ad29561ad0741924b49c6aa907))
+* **utils:** update string util ([68d7a05](https://github.com/nextgis/nextgis_frontend/commit/68d7a0593a2482c47d8a181c9e7c379b4c2e78f2))
+* **vue:** GeojsonLayer selected model and onClick ([ca76ab8](https://github.com/nextgis/nextgis_frontend/commit/ca76ab877a9e48014813e36d515ae1efd7a4bc40))
+* **vue:** split vue-ngw-map for leaflet, ol an mapbox adapters ([bcea6c3](https://github.com/nextgis/nextgis_frontend/commit/bcea6c35e61f6ba2aab0b25eb30da9f5f719c92e))
+* **webmap:** create webmap from TileJson ([07fa33e](https://github.com/nextgis/nextgis_frontend/commit/07fa33ea1ae914f6cd53ef42e4453b9c76a3a357))
+* **webmap:** layer adapter waitFullLoad and crossOrigin new options ([5e2b6d2](https://github.com/nextgis/nextgis_frontend/commit/5e2b6d2ae1db3b48775bca7f31a85338d451d61a))
+
+
+### Performance Improvements
+
+* **leaflet:** abort image overlay request on view change ([4587532](https://github.com/nextgis/nextgis_frontend/commit/45875328ba48453ce5fcbe730cfa4fbd12633d2c))
+
+
+### wip
+
+* **util:** move CancelablePromise to util ([a687a8f](https://github.com/nextgis/nextgis_frontend/commit/a687a8fe0b8389adeb2a6d6f97db330c2f60ad48))
+
+
+### BREAKING CHANGES
+
+* **utils:** removed latLng from MapClickEvent, use lngLat: numner[] instead
+* **utils:** WebMap static property utils have been removed, import utilites from `@nextgis/webmap` library instead
+* **cancelable-promise:** Removed onCancel argument from CancelablePromise. Now you should handle catch CancelError
+* code formatting rules changed to prettier 2.0 compatibility
+* `propertiesFilter` removed from `@nextgis/utils`
+* **util:** CancelablePromise has been removed from ngw-connecter. Now you should do this: import {CancelablePromise} from '@nextgis/utils;'
+* **util:** Use xport { propertiesFilter } from '@nextgis/utils'; instead of Webmap.utils.propertiesFilter
+
+
+
+
+
 ## [1.16.6](https://github.com/nextgis/nextgis_frontend/compare/v1.16.5...v1.16.6) (2023-02-09)
 
 **Note:** Version bump only for package @nextgis/utils

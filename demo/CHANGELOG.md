@@ -3,6 +3,59 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.16.8 (2023-05-14)
+
+
+### Bug Fixes
+
+* **demo:** import utils from cdn ([e4db110](https://github.com/nextgis/nextgis_frontend/commit/e4db110229976ada8abe6b35203f9a7b86411551))
+* **demo:** show codepen icon ([8d610ea](https://github.com/nextgis/nextgis_frontend/commit/8d610ead66c47a0d996587337f25c03551b39cde))
+* **leaflet-map-adapter:** repain unSelectOnSecondClick ([1460de0](https://github.com/nextgis/nextgis_frontend/commit/1460de0c7e8fa671ff3a2c0e7dd47e4a6cd18954))
+* **mapbox-map-adapter:** show label not only for filtered layer ([0fde977](https://github.com/nextgis/nextgis_frontend/commit/0fde97772541f7c2c45f445e64fd6163e5af4e8e))
+* **mapboxgl-map-adapter:** repair unselectOnSecondClick ([997c596](https://github.com/nextgis/nextgis_frontend/commit/997c596fcb418b78eabb80299429ab4b7e3f00b2))
+* **ngw-connector:** fixes to apiRequest cancel work ([e4451d8](https://github.com/nextgis/nextgis_frontend/commit/e4451d8a7ad349ba17692a3f906677f1a29bf691)), closes [#6](https://github.com/nextgis/nextgis_frontend/issues/6)
+* **ngw-kit:** do not load BBOX out of min-max zoom range ([a029ca0](https://github.com/nextgis/nextgis_frontend/commit/a029ca04228998da050e47d337678b223eb86715))
+* **ngw-kit:** fetchNgwLayerItems client filter ([2574448](https://github.com/nextgis/nextgis_frontend/commit/25744487b8b709234764138b85c9c341632b0cc6))
+* **ngw-kit:** make async onFirstShowAdapter hide and show methods ([502b261](https://github.com/nextgis/nextgis_frontend/commit/502b261b478872aed0bed0657b961481c22ce109))
+* **ngw-kit:** wms adapter layers options from adapterOptions ([eabe108](https://github.com/nextgis/nextgis_frontend/commit/eabe108162162f404c1b3a4da02203ab4cd32318))
+* **ol-map-adapter:** repair unselect on second click ([7fc2252](https://github.com/nextgis/nextgis_frontend/commit/7fc22521e07a281397f9e891c71038d0a96b7ac6))
+* remove require imports ([2674a8c](https://github.com/nextgis/nextgis_frontend/commit/2674a8ce29ef4116b939283ee1f4ec02b26b8025))
+* **utils:** function name typos ([2b86610](https://github.com/nextgis/nextgis_frontend/commit/2b86610669d0d1075008c0523af21159634e5f47))
+
+
+### Features
+
+* add BBOX+ strategy; extends options for setView ([309b697](https://github.com/nextgis/nextgis_frontend/commit/309b697e141adf6eedeb85c87b6fa89b9b629c13))
+* add getExtent method for all mapAdapters GeoJsonLayerAdapter ([7e8010f](https://github.com/nextgis/nextgis_frontend/commit/7e8010f7d5579f2b7909a31a2073479de1faa6a5))
+* handle vector layer mouse over and out events ([1f537c2](https://github.com/nextgis/nextgis_frontend/commit/1f537c277b433db365b319d4bbdfb26aa44528fd))
+* improve geojson adapter multiselect ([2c9c01c](https://github.com/nextgis/nextgis_frontend/commit/2c9c01c42757c87c4d588e97802f8d2626c5b078))
+* improve popup, add new options, ol support ([e3ea91b](https://github.com/nextgis/nextgis_frontend/commit/e3ea91b91d03a4cef471c5c92a09a7fa0640b90a))
+* **leaflet-map-adapter:** add position to vector adapter layers definition ([053ccf0](https://github.com/nextgis/nextgis_frontend/commit/053ccf05ed8d9d76592c8ca648365e176c609277))
+* **leaflet-map-adapter:** change geojson layer opacity ([9862e2d](https://github.com/nextgis/nextgis_frontend/commit/9862e2de02efeef0bc55102ecdac942d0687f036))
+* **leaflet-map-adapter:** label redraw on map position change ([b8c926e](https://github.com/nextgis/nextgis_frontend/commit/b8c926eb0109aa4e155097c23d436de891a4fc11))
+* **mapbox-gl-js:** improve popup ([dbec3c5](https://github.com/nextgis/nextgis_frontend/commit/dbec3c5f68275e72dc91bfa4a7f21164aa9bdc62))
+* **mapbox-map-adapter:** GeoJson layer label workaround ([6c73629](https://github.com/nextgis/nextgis_frontend/commit/6c736293bf498591d27fc050848503802e9da94e))
+* **mapboxgl-map-adapter:** add popup for selected feature ([bf7ee99](https://github.com/nextgis/nextgis_frontend/commit/bf7ee994ba4307c2a85bc28c985198f000c463de))
+* **mapboxgl-map-adapter:** add setLayerOpacity methods ([3f84f3e](https://github.com/nextgis/nextgis_frontend/commit/3f84f3e44f776fb685afa66f0d8f5fa0165f3806))
+* **nge-kit:** add uploadFeatureAttachment util ([da40397](https://github.com/nextgis/nextgis_frontend/commit/da40397b7cc3943c9570dc13eb3ca7420f97a6ee)), closes [#CU-m356](https://github.com/nextgis/nextgis_frontend/issues/CU-m356)
+* **ngw-kit:** add bbox strategy layer preupdate event ([8156f17](https://github.com/nextgis/nextgis_frontend/commit/8156f17816779a76bf6ec7f3049ec52a62998bf5))
+* **ngw-kit:** add BBOX+ strategy ([4d20810](https://github.com/nextgis/nextgis_frontend/commit/4d20810575c5b246dfadd01a5371ccd5e1b1ca1b))
+* **ngw-kit:** add identify item for speedup ngw selection ([4f751d0](https://github.com/nextgis/nextgis_frontend/commit/4f751d0af8b1b7973d0979fef5beaf4c5b8e17b4))
+* **ngw-kit:** add postgis_layer cls adapter ([0417b13](https://github.com/nextgis/nextgis_frontend/commit/0417b13e0e8fbc1afb3ae3dd7456ff03e92d6483))
+* **ngw-kit:** add useBasemap NgwWebmaplayerAdapter option ([cf8c491](https://github.com/nextgis/nextgis_frontend/commit/cf8c4918a3f0c2261f679a06dc51c82ce09b978c))
+* **ngw-kit:** ngw webmap item bookmarks handler ([88b4b8c](https://github.com/nextgis/nextgis_frontend/commit/88b4b8cbbefbe236dd475100d2a143c0b3f1deca))
+* **ngw-kit:** ngwwebmap item toggle on zoom layer range ([52abb1d](https://github.com/nextgis/nextgis_frontend/commit/52abb1d2fee3b2c306b9269e8287d98362ef5128))
+* **ngw-kit:** NgwWebmapItem opacity ([c7846df](https://github.com/nextgis/nextgis_frontend/commit/c7846dff298d1d1e022cdb9258ba346f86505527))
+* **ol-map-adapter:** add position to vector adapter layers defenition ([235928f](https://github.com/nextgis/nextgis_frontend/commit/235928fc7ee497e5eab94bd037f343715d9839b5))
+* **ol-map-adapter:** add setLayerOpacity mapAdapter and each layer methods ([0d71962](https://github.com/nextgis/nextgis_frontend/commit/0d71962899409203f31ff7f4fcad9e0142f6efa0))
+* **webmap:** add map mouse move events ([c50638c](https://github.com/nextgis/nextgis_frontend/commit/c50638ccefad63e9b21416e922ea0d4c33fc1adf))
+* **webmap:** add setLayerPaint method ([3cadfbf](https://github.com/nextgis/nextgis_frontend/commit/3cadfbfac802c19ad0e981e944be69a07f548414))
+* **webmap:** new addTileLayer shortcut WebMap method ([a209dfc](https://github.com/nextgis/nextgis_frontend/commit/a209dfc8b09bde6b99ebea4604a5238f40a1f911))
+
+
+
+
+
 ## [1.16.7](https://github.com/nextgis/nextgis_frontend/compare/v1.16.6...v1.16.7) (2023-04-21)
 
 **Note:** Version bump only for package @nextgis/demo-app

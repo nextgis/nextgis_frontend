@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.16.8 (2023-05-14)
+
+
+### Features
+
+* **logging:** add logging package ([fac3cb8](https://github.com/nextgis/nextgis_frontend/commit/fac3cb8cc12ebf8a30ec3d6d83f5cb3c13364d10))
+* **logging:** add new options ([d64aaa9](https://github.com/nextgis/nextgis_frontend/commit/d64aaa9370e32f07d58af7d2ae1bfff5282cb3c5))
+* **nglog:** add eachLog option ([c3605a2](https://github.com/nextgis/nextgis_frontend/commit/c3605a2feb9b19f33650147970799876f768a10a))
+* **nglog:** add session and duration fields ([300ca5a](https://github.com/nextgis/nextgis_frontend/commit/300ca5ad1e6e6436d82b0b67589f4b04cd85fc94))
+* **ngw-kit:** use abort signal in fetch requests ([fe2e5cc](https://github.com/nextgis/nextgis_frontend/commit/fe2e5cc1a291e7e1ea1821a8380f4f4db68ea270))
+
+
+
+
+
 ## [1.16.7](https://github.com/nextgis/nextgis_frontend/compare/v1.16.6...v1.16.7) (2023-04-21)
 
 **Note:** Version bump only for package @nextgis/logging

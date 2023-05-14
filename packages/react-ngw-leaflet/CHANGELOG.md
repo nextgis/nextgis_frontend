@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.16.8 (2023-05-14)
+
+
+### Features
+
+* add react-ngw-leaflet library ([b2234aa](https://github.com/nextgis/nextgis_frontend/commit/b2234aa488070086481294920296e5c7211c1aae))
+
+
+
+
+
 ## [1.16.7](https://github.com/nextgis/nextgis_frontend/compare/v1.16.6...v1.16.7) (2023-04-21)
 
 **Note:** Version bump only for package @nextgis/react-ngw-leaflet

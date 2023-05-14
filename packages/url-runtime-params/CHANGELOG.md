@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.16.8 (2023-05-14)
+
+
+### Bug Fixes
+
+* **build:** control-container extract css ([a02d24b](https://github.com/nextgis/nextgis_frontend/commit/a02d24bf2dbe246420803d5d1be9348e4b647c6d))
+* **ngw-uploader:** correct imports and sandbox url ([4d78e25](https://github.com/nextgis/nextgis_frontend/commit/4d78e25f758d4f4274c5914bd319e7e788e68d23))
+
+
+### chore
+
+* build; eslint ([ee1e03d](https://github.com/nextgis/nextgis_frontend/commit/ee1e03d85625b02a09c2ee1e4d66007fbf57d626))
+
+
+### Features
+
+* **url-runtime-params:** remove trailing sharp from hash ([3c0d8c7](https://github.com/nextgis/nextgis_frontend/commit/3c0d8c75c781b66a4752ca9c49bde7acfc231ba8))
+* **vue:** split vue-ngw-map for leaflet, ol an mapbox adapters ([bcea6c3](https://github.com/nextgis/nextgis_frontend/commit/bcea6c35e61f6ba2aab0b25eb30da9f5f719c92e))
+* **webmap:** implement WebmapLayers get Attributions onlyBaselayer option ([928d351](https://github.com/nextgis/nextgis_frontend/commit/928d351fea9a321c178ecbb4e03a70bd9a64fc90))
+
+
+### BREAKING CHANGES
+
+* code formatting rules changed to prettier 2.0 compatibility
+
+
+
+
+
 ## [1.16.7](https://github.com/nextgis/nextgis_frontend/compare/v1.16.6...v1.16.7) (2023-04-21)
 
 **Note:** Version bump only for package @nextgis/url-runtime-params

@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.16.8 (2023-05-14)
+
+
+### Bug Fixes
+
+* **build:** control-container extract css ([a02d24b](https://github.com/nextgis/nextgis_frontend/commit/a02d24bf2dbe246420803d5d1be9348e4b647c6d))
+* **cesium-map-adapter:** set layer adapters request headers ([38074ba](https://github.com/nextgis/nextgis_frontend/commit/38074ba672e67a635f6c1ea7e30f7de5489a0af3))
+* **ngw-connector:** fixes to apiRequest cancel work ([e4451d8](https://github.com/nextgis/nextgis_frontend/commit/e4451d8a7ad349ba17692a3f906677f1a29bf691)), closes [#6](https://github.com/nextgis/nextgis_frontend/issues/6)
+* **ngw-kit:** create async adapter from parent resource ([5ce6394](https://github.com/nextgis/nextgis_frontend/commit/5ce6394c4d9313c79f6d540df0b1683648a6af83))
+* **ngw-kit:** make async onFirstShowAdapter hide and show methods ([502b261](https://github.com/nextgis/nextgis_frontend/commit/502b261b478872aed0bed0657b961481c22ce109))
+* remove require imports ([2674a8c](https://github.com/nextgis/nextgis_frontend/commit/2674a8ce29ef4116b939283ee1f4ec02b26b8025))
+
+
+### chore
+
+* build; eslint ([ee1e03d](https://github.com/nextgis/nextgis_frontend/commit/ee1e03d85625b02a09c2ee1e4d66007fbf57d626))
+* **vue-ngw-map:** update dependencies ([13fc35d](https://github.com/nextgis/nextgis_frontend/commit/13fc35dbd959c49d62fb8fad46534eb4da1a6684))
+
+
+### Features
+
+* add react-ngw-leaflet library ([b2234aa](https://github.com/nextgis/nextgis_frontend/commit/b2234aa488070086481294920296e5c7211c1aae))
+* **leaflet-map-adapter:** add position to vector adapter layers definition ([053ccf0](https://github.com/nextgis/nextgis_frontend/commit/053ccf05ed8d9d76592c8ca648365e176c609277))
+* **ngw-kit:** ngwwebmap item toggle on zoom layer range ([52abb1d](https://github.com/nextgis/nextgis_frontend/commit/52abb1d2fee3b2c306b9269e8287d98362ef5128))
+* **ngw-uploader:** make ability to upload vector resources ([14aa7af](https://github.com/nextgis/nextgis_frontend/commit/14aa7af81314bca5f4e83574c8fb9b83372497bf))
+* **utils:** create universal MapControlContainer ([ce5a984](https://github.com/nextgis/nextgis_frontend/commit/ce5a984fd97928e1c9dda2bac81578a62a328e64))
+
+
+### BREAKING CHANGES
+
+* **vue-ngw-map:** Vue is now required as peer dependency
+* **ngw-uploader:** `createInput` and `dialog` methods have been moved from the `@nextgis/ngw-uploader` to the new `@nextgis/ngw-uploader-input`
+* code formatting rules changed to prettier 2.0 compatibility
+
+
+
+
+
 ## [1.16.6](https://github.com/nextgis/nextgis_frontend/compare/v1.16.5...v1.16.6) (2023-02-09)
 
 **Note:** Version bump only for package @nextgis/build-tools

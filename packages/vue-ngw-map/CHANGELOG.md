@@ -3,6 +3,75 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.16.8 (2023-05-14)
+
+
+### Bug Fixes
+
+* **build:** control-container extract css ([a02d24b](https://github.com/nextgis/nextgis_frontend/commit/a02d24bf2dbe246420803d5d1be9348e4b647c6d))
+* **cesium-map-adapter:** set layer adapters request headers ([38074ba](https://github.com/nextgis/nextgis_frontend/commit/38074ba672e67a635f6c1ea7e30f7de5489a0af3))
+* **leaflet-map-adapter:** maxBounds hotfix ([7e51591](https://github.com/nextgis/nextgis_frontend/commit/7e5159150552826907ec6119007b690d834d5a0e))
+* **ngw-connector:** fixes to apiRequest cancel work ([e4451d8](https://github.com/nextgis/nextgis_frontend/commit/e4451d8a7ad349ba17692a3f906677f1a29bf691)), closes [#6](https://github.com/nextgis/nextgis_frontend/issues/6)
+* **ngw-connector:** update error response status code list ([19da260](https://github.com/nextgis/nextgis_frontend/commit/19da26068982e5a9ade2c1db1604f1e58e09e31e))
+* **vue:** fix vue observable leaks ([53fcb88](https://github.com/nextgis/nextgis_frontend/commit/53fcb886ada33e8deddd40d7899cab76e48d47f6))
+* **vue:** layer and control components ([a2da2df](https://github.com/nextgis/nextgis_frontend/commit/a2da2df66099cbd2ba3aaa2687d6a818c9fa245b))
+* **vue:** prop definition ([303dada](https://github.com/nextgis/nextgis_frontend/commit/303dada8e3478a5273e72abf90d6e357ee4ab57b))
+* **vue:** set types for VueNgwMap adapter components ([51361df](https://github.com/nextgis/nextgis_frontend/commit/51361dfd913174ec025f954aadbef9ad42302b31))
+* **webmap:** hide the rest when base layer showing ([4cd3950](https://github.com/nextgis/nextgis_frontend/commit/4cd3950c95fd5987819a206295ba6518023c7ff2))
+* **webmap:** webmap constructor options ([e096e72](https://github.com/nextgis/nextgis_frontend/commit/e096e723d76b8db753ecdd0248b601f24fcb5026))
+
+
+### Build System
+
+* wepmap to rollup ([c6f038a](https://github.com/nextgis/nextgis_frontend/commit/c6f038ad6bcd2a9581f852b35600b2560381c246))
+
+
+### chore
+
+* build; eslint ([ee1e03d](https://github.com/nextgis/nextgis_frontend/commit/ee1e03d85625b02a09c2ee1e4d66007fbf57d626))
+* **vue-ngw-map:** update dependencies ([13fc35d](https://github.com/nextgis/nextgis_frontend/commit/13fc35dbd959c49d62fb8fad46534eb4da1a6684))
+
+
+### Code Refactoring
+
+* **utils:** update geom utils ([43c11b0](https://github.com/nextgis/nextgis_frontend/commit/43c11b0f3c45b22ab66789bd00594d34078316f3))
+
+
+### Features
+
+* add setViewDelay options to control map update ([a83e5ab](https://github.com/nextgis/nextgis_frontend/commit/a83e5ab9ed6207e0a41fd31a3c56cd14a512c50d))
+* **cesium:** implement getCenter ([6eb5db5](https://github.com/nextgis/nextgis_frontend/commit/6eb5db52ac974a5cfcb7407ced56982b2a22dd6b))
+* handle vector layer mouse over and out events ([1f537c2](https://github.com/nextgis/nextgis_frontend/commit/1f537c277b433db365b319d4bbdfb26aa44528fd))
+* **leaflet-map-adapter:** add position to vector adapter layers definition ([053ccf0](https://github.com/nextgis/nextgis_frontend/commit/053ccf05ed8d9d76592c8ca648365e176c609277))
+* **ngw-map:** default bounds; add mapOption for show osm baselayer ([b376198](https://github.com/nextgis/nextgis_frontend/commit/b376198b1b9038899a6ec46ed97e443d9f591365))
+* **ol-map-adapter:** add map native adapterOptions parameter ([5128ce4](https://github.com/nextgis/nextgis_frontend/commit/5128ce4497c6d81987b7506f6500a097fe5f9095))
+* **paint:** add experimental paint 3d style ([25fce10](https://github.com/nextgis/nextgis_frontend/commit/25fce10064a2b38f8e50f92402b585956ce5b425))
+* **utils:** add `full` method ([39d1dee](https://github.com/nextgis/nextgis_frontend/commit/39d1dee32c1e5f21c079d8e8e393aa31c0794225))
+* **utils:** add flatten and unflatten functions ([9584ccb](https://github.com/nextgis/nextgis_frontend/commit/9584ccbeaa2b384ac0699c0f47be3cd97ae75d6c))
+* **vue-ngw-map:** map props priority ([8c42fb3](https://github.com/nextgis/nextgis_frontend/commit/8c42fb3e2f83a55b70ecdff1337f2b0c776b3d93))
+* **vue:** add GeojsonLayer ([de1875b](https://github.com/nextgis/nextgis_frontend/commit/de1875b9f5a962d432ea00ab2e2a0a35ba6f37a9))
+* **vue:** add GeojsonLayer paint param ([a2f26a8](https://github.com/nextgis/nextgis_frontend/commit/a2f26a8dbccae5daa3b5071e67ccc60b240c98c3))
+* **vue:** add load emit in VueNgwControl ([6ec5fa5](https://github.com/nextgis/nextgis_frontend/commit/6ec5fa587164a9de4fd8de897614286bf46f7fe7))
+* **vue:** add VueNgwLayer component ([f5bf617](https://github.com/nextgis/nextgis_frontend/commit/f5bf6177ffb02be346584d49b3b08126a88d82b3))
+* **vue:** GeojsonLayer selected model and onClick ([ca76ab8](https://github.com/nextgis/nextgis_frontend/commit/ca76ab877a9e48014813e36d515ae1efd7a4bc40))
+* **vue:** split vue-ngw-map for leaflet, ol an mapbox adapters ([bcea6c3](https://github.com/nextgis/nextgis_frontend/commit/bcea6c35e61f6ba2aab0b25eb30da9f5f719c92e))
+* **vue:** VueNgwControl from string  kind option ([9a1a51b](https://github.com/nextgis/nextgis_frontend/commit/9a1a51b4ecad8f74f2bb2f54b67c34b94c4237ad))
+* **vue:** VueNgwMap add onLoad event ([8dfb1b8](https://github.com/nextgis/nextgis_frontend/commit/8dfb1b87603af23281f73803d5fad19b6df0ef6a))
+* **vue:** VueNgwMap bounds param watch ([d685f49](https://github.com/nextgis/nextgis_frontend/commit/d685f49d30f909b67defb2c02a19ca25b8819f2e))
+* **webmap:** add async control in correct order ([e79572c](https://github.com/nextgis/nextgis_frontend/commit/e79572ca8dbe3d41eefb64e9203fa16d0c9aec9e))
+
+
+### BREAKING CHANGES
+
+* **vue-ngw-map:** Vue is now required as peer dependency
+* **utils:** WebMap static property utils have been removed, import utilites from `@nextgis/webmap` library instead
+* No more default export from `ngw-map`. You should replace `import NgwMap from "@nextgis/ngw-map"` to `import { NgwMap } from "@nextgis/ngw-map"` everywhere
+* code formatting rules changed to prettier 2.0 compatibility
+
+
+
+
+
 ## [1.16.7](https://github.com/nextgis/nextgis_frontend/compare/v1.16.6...v1.16.7) (2023-04-21)
 
 **Note:** Version bump only for package @nextgis/vue-ngw-map

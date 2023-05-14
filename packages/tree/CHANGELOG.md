@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.16.8 (2023-05-14)
+
+
+### Features
+
+* **item:** add @nextgis/tree dependency ([8f5f4e7](https://github.com/nextgis/nextgis_frontend/commit/8f5f4e702ee6deaab6cca7f36a90ba06ee9c000c))
+* **tree:** TreeHelper ([5e77ce9](https://github.com/nextgis/nextgis_frontend/commit/5e77ce9d6a8e9f71d7039fa298210e11d1a6f040))
+
+
+
+
+
 ## [1.16.6](https://github.com/nextgis/nextgis_frontend/compare/v1.16.5...v1.16.6) (2023-02-09)
 
 **Note:** Version bump only for package @nextgis/tree

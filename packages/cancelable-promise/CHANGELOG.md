@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.16.8 (2023-05-14)
+
+
+### Bug Fixes
+
+* **build:** control-container extract css ([a02d24b](https://github.com/nextgis/nextgis_frontend/commit/a02d24bf2dbe246420803d5d1be9348e4b647c6d))
+* **cancelable-promise:** do not cancel already complate promise ([f32db82](https://github.com/nextgis/nextgis_frontend/commit/f32db820a4a818c92187dbcb07889011d04078d8))
+* **cancelable-promise:** handle error for CancelablePromise.all ([0929761](https://github.com/nextgis/nextgis_frontend/commit/0929761d8a70ed14fa54daadb664c1337b260edd))
+* **ngw-connector:** remove requestControl ([b1ccdfa](https://github.com/nextgis/nextgis_frontend/commit/b1ccdfacefff0ff89be4c8b32b37978c321d815a))
+* **ngw-connect:** properly abort request on cancel ([a2193b7](https://github.com/nextgis/nextgis_frontend/commit/a2193b78c4d24b663b8850946b05712bce1046c4))
+* **webmap:** hide the rest when base layer showing ([4cd3950](https://github.com/nextgis/nextgis_frontend/commit/4cd3950c95fd5987819a206295ba6518023c7ff2))
+
+
+### chore
+
+* build; eslint ([ee1e03d](https://github.com/nextgis/nextgis_frontend/commit/ee1e03d85625b02a09c2ee1e4d66007fbf57d626))
+
+
+### Features
+
+* add library cancelable-promise ([2cfb08f](https://github.com/nextgis/nextgis_frontend/commit/2cfb08f1143a773a43f1279690e0c9a7e2b2fec5))
+* **cancelable-promise:** add control GetOrCreateDecorator ([c99091b](https://github.com/nextgis/nextgis_frontend/commit/c99091bcbe193756787879094639172e1a7a0b98))
+* **cancelable-promise:** add timeout ([5b48e4b](https://github.com/nextgis/nextgis_frontend/commit/5b48e4b7e53a64a0f29adb4940c0d0dce2e85c7c))
+* **cancelable-promise:** create abort control ([c915206](https://github.com/nextgis/nextgis_frontend/commit/c915206ffad61c28e1020587a41f8844862f3074))
+* **cancelable-promise:** throw CancelError instead of onCancel callback ([087180a](https://github.com/nextgis/nextgis_frontend/commit/087180adc9bcea72d1fd02ebdaaef3fd751b0a52))
+* **cancelable-promise:** шьзкщму PromisesControl ([e68b127](https://github.com/nextgis/nextgis_frontend/commit/e68b127779e7da634225cec6354198c67ecae874))
+* **ngw-kit:** use abort signal in fetch requests ([fe2e5cc](https://github.com/nextgis/nextgis_frontend/commit/fe2e5cc1a291e7e1ea1821a8380f4f4db68ea270))
+
+
+### BREAKING CHANGES
+
+* **cancelable-promise:** Removed onCancel argument from CancelablePromise. Now you should handle catch CancelError
+* code formatting rules changed to prettier 2.0 compatibility
+
+
+
+
+
 ## [1.16.6](https://github.com/nextgis/nextgis_frontend/compare/v1.16.5...v1.16.6) (2023-02-09)
 
 **Note:** Version bump only for package @nextgis/cancelable-promise
