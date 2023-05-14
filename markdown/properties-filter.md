@@ -19,6 +19,7 @@
 |  --- | --- |
 |  [Operation](./properties-filter.operation.md) | gt - greater (<!-- -->&gt;<!-- -->) lt - lower (<!-- -->&lt;<!-- -->) ge - greater or equal (<!-- -->&gt;<!-- -->=) le - lower or equal (<!-- -->&lt;<!-- -->=) eq - equal (=) ne - not equal (!=) like - LIKE SQL statement (for strings compare) ilike - ILIKE SQL statement (for strings compare) |
 |  [Operations](./properties-filter.operations.md) |  |
+|  [Properties](./properties-filter.properties.md) |  |
 |  [PropertiesFilter](./properties-filter.propertiesfilter.md) |  |
 |  [PropertyFilter](./properties-filter.propertyfilter.md) | field, operation, value \['foo', 'eq', 'bar'\] \['count', 'ge', 20\] |
 

@@ -9,5 +9,5 @@
 ```typescript
 export declare type PropertiesFilter<T extends Properties = Properties> = ('all' | 'any' | PropertyFilter<T> | PropertiesFilter<T>)[];
 ```
-**References:** [PropertyFilter](./properties-filter.propertyfilter.md)<!-- -->, [PropertiesFilter](./properties-filter.propertiesfilter.md)
+**References:** [Properties](./properties-filter.properties.md)<!-- -->, [PropertyFilter](./properties-filter.propertyfilter.md)<!-- -->, [PropertiesFilter](./properties-filter.propertiesfilter.md)
 

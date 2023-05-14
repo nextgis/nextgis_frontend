@@ -21,8 +21,11 @@ export type Operation = 'gt' | 'lt' | 'ge' | 'le' | 'eq' | 'ne' | 'in' | 'notin'
 // @public @deprecated (undocumented)
 export type Operations = Operation;
 
-// Warning: (ae-forgotten-export) The symbol "Properties" needs to be exported by the entry point index.d.ts
-//
+// @public (undocumented)
+export type Properties = {
+    [name: string]: any;
+};
+
 // @public (undocumented)
 export type PropertiesFilter<T extends Properties = Properties> = ('all' | 'any' | PropertyFilter<T> | PropertiesFilter<T>)[];
 

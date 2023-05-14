@@ -427,6 +427,32 @@
           }
         },
         {
+          "kind": "TypeAlias",
+          "canonicalReference": "@nextgis/properties-filter!Properties:type",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type Properties = "
+            },
+            {
+              "kind": "Content",
+              "text": "{\n    [name: string]: any;\n}"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "fileUrlPath": "src/interfaces.ts",
+          "releaseTag": "Public",
+          "name": "Properties",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          }
+        },
+        {
           "kind": "Function",
           "canonicalReference": "@nextgis/properties-filter!propertiesFilter:function(1)",
           "docComment": "",
@@ -438,7 +464,7 @@
             {
               "kind": "Reference",
               "text": "Properties",
-              "canonicalReference": "@nextgis/properties-filter!~Properties:type"
+              "canonicalReference": "@nextgis/properties-filter!Properties:type"
             },
             {
               "kind": "Content",
@@ -447,7 +473,7 @@
             {
               "kind": "Reference",
               "text": "Properties",
-              "canonicalReference": "@nextgis/properties-filter!~Properties:type"
+              "canonicalReference": "@nextgis/properties-filter!Properties:type"
             },
             {
               "kind": "Content",
@@ -535,7 +561,7 @@
             {
               "kind": "Reference",
               "text": "Properties",
-              "canonicalReference": "@nextgis/properties-filter!~Properties:type"
+              "canonicalReference": "@nextgis/properties-filter!Properties:type"
             },
             {
               "kind": "Content",
@@ -544,7 +570,7 @@
             {
               "kind": "Reference",
               "text": "Properties",
-              "canonicalReference": "@nextgis/properties-filter!~Properties:type"
+              "canonicalReference": "@nextgis/properties-filter!Properties:type"
             },
             {
               "kind": "Content",
@@ -610,7 +636,7 @@
             {
               "kind": "Reference",
               "text": "Properties",
-              "canonicalReference": "@nextgis/properties-filter!~Properties:type"
+              "canonicalReference": "@nextgis/properties-filter!Properties:type"
             },
             {
               "kind": "Content",
@@ -619,7 +645,7 @@
             {
               "kind": "Reference",
               "text": "Properties",
-              "canonicalReference": "@nextgis/properties-filter!~Properties:type"
+              "canonicalReference": "@nextgis/properties-filter!Properties:type"
             },
             {
               "kind": "Content",

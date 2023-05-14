@@ -3051,6 +3051,34 @@
         },
         {
           "kind": "Function",
+          "canonicalReference": "@nextgis/webmap!getDefaultControls:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function getDefaultControls(): "
+            },
+            {
+              "kind": "Content",
+              "text": "string[]"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "fileUrlPath": "src/utils/getDefaultControls.ts",
+          "returnTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [],
+          "name": "getDefaultControls"
+        },
+        {
+          "kind": "Function",
           "canonicalReference": "@nextgis/webmap!getWebMap:function(1)",
           "docComment": "",
           "excerptTokens": [

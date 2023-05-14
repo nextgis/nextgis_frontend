@@ -55,6 +55,7 @@ webMap.onLoad().then(() => {
 |  Function | Description |
 |  --- | --- |
 |  [createWebMap(options)](./webmap.createwebmap.md) |  |
+|  [getDefaultControls()](./webmap.getdefaultcontrols.md) |  |
 |  [getWebMap(id)](./webmap.getwebmap.md) |  |
 
 ## Interfaces

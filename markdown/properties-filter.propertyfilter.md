@@ -15,5 +15,5 @@ export declare type PropertyFilter<T extends Properties = Properties> = [
     any
 ];
 ```
-**References:** [Operation](./properties-filter.operation.md)
+**References:** [Properties](./properties-filter.properties.md)<!-- -->, [Operation](./properties-filter.operation.md)
 

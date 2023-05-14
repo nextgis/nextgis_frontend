@@ -210,6 +210,9 @@ export interface GetAttributionsOptions {
 }
 
 // @public (undocumented)
+export function getDefaultControls(): string[];
+
+// @public (undocumented)
 export function getWebMap<T extends WebMap = WebMap>(id: number): T;
 
 // @public (undocumented)

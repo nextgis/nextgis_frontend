@@ -17,6 +17,7 @@ import { MultiPolygon } from 'geojson';
 import NgwConnector from '@nextgis/ngw-connector';
 import { Point } from 'geojson';
 import { Polygon } from 'geojson';
+import { Properties } from '@nextgis/properties-filter';
 import { PropertiesFilter } from '@nextgis/properties-filter';
 import { Resource } from '@nextgis/ngw-connector';
 import { ResourceCls } from '@nextgis/ngw-connector';
