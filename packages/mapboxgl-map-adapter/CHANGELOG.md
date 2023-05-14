@@ -3,6 +3,129 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.16.8 (2023-05-14)
+
+
+### Bug Fixes
+
+* **build:** control-container extract css ([a02d24b](https://github.com/nextgis/nextgis_frontend/commit/a02d24bf2dbe246420803d5d1be9348e4b647c6d))
+* **demo:** remove layer id from ngw properties filter example ([a47dba9](https://github.com/nextgis/nextgis_frontend/commit/a47dba976b80822bd92ae20a9952b140f4fa18ec))
+* **mapbox-gl-js:** fix for babel build ([7caf5b9](https://github.com/nextgis/nextgis_frontend/commit/7caf5b9602876b9740f089fbb6db637e43e6de7e))
+* **mapbox-map-adapter:** change osm adapter url ([d99a2ba](https://github.com/nextgis/nextgis_frontend/commit/d99a2ba150b4c5c08466973bae8b7597b90b867a))
+* **mapbox-map-adapter:** point paint stroke color ([4970102](https://github.com/nextgis/nextgis_frontend/commit/4970102b6b494e1bcdee76a2e0f39013c93aad28))
+* **mapbox-map-adapter:** popup on hover ([c8ac81b](https://github.com/nextgis/nextgis_frontend/commit/c8ac81b69f6f224ca9d2d664de49a7f76af22fd7))
+* **mapbox-map-adapter:** remove type prop frm native paint ([1e09101](https://github.com/nextgis/nextgis_frontend/commit/1e09101b644a32a12a804a74700ea5424b96a748))
+* **mapbox-map-adapter:** show label not only for filtered layer ([0fde977](https://github.com/nextgis/nextgis_frontend/commit/0fde97772541f7c2c45f445e64fd6163e5af4e8e))
+* **mapbox:** beforeRemove check for map exist ([3daebb0](https://github.com/nextgis/nextgis_frontend/commit/3daebb06389a587557861906d3202b795f07c8e4))
+* **mapbox:** disable mapbox image layer ([e30c9bb](https://github.com/nextgis/nextgis_frontend/commit/e30c9bb13a8fb780df69ffa9578652100051ba77))
+* **mapbox:** geojson adapter select ([8975ef3](https://github.com/nextgis/nextgis_frontend/commit/8975ef3d664c63561942bc58d5229a80ce008f2e))
+* **mapbox:** geojson getFeatures method return whole source data ([adc92f9](https://github.com/nextgis/nextgis_frontend/commit/adc92f9c6846e183d8b4d5679a147e5965b38b41))
+* **mapbox:** geojson getSelected method ([5e9044c](https://github.com/nextgis/nextgis_frontend/commit/5e9044cb0a5479de8e8abbaca437289a6e7a2013))
+* **mapbox:** geojson layer selection with nativeFilter option ([893305c](https://github.com/nextgis/nextgis_frontend/commit/893305ca09272ef5876eafa829115a5a58e048f0))
+* **mapboxgl-map-adapter:** clean popup on vectorlayer remove ([2af88cf](https://github.com/nextgis/nextgis_frontend/commit/2af88cfbbb2f450dd858a43dd459595b6412604e))
+* **mapboxgl-map-adapter:** disable unselect on label hover out ([0fcdf35](https://github.com/nextgis/nextgis_frontend/commit/0fcdf3535a09abdf73a1c22f0ae996d0312ada54))
+* **mapboxgl-map-adapter:** fix onSelect event ([4391a8b](https://github.com/nextgis/nextgis_frontend/commit/4391a8b3060f7828750676f172b65571bc7291f1))
+* **mapboxgl-map-adapter:** geojson addlayer protected methods ([af07060](https://github.com/nextgis/nextgis_frontend/commit/af0706024a5427e44a45bd5fc5d22fe7013eeee8))
+* **mapboxgl-map-adapter:** parse mapAdapterOptions ([6a7a748](https://github.com/nextgis/nextgis_frontend/commit/6a7a7482e0fd8f8d47d63521b84eaeec65cc331d))
+* **mapboxgl-map-adapter:** remove image source on layer remove ([b5e2001](https://github.com/nextgis/nextgis_frontend/commit/b5e2001c9438d7ba248207022ffbd5ca7e28185b))
+* **mapboxgl-map-adapter:** repair unselectOnSecondClick ([997c596](https://github.com/nextgis/nextgis_frontend/commit/997c596fcb418b78eabb80299429ab4b7e3f00b2))
+* **mapboxgl-map-adapter:** select features by propertiesfilter improve ([c41bb2a](https://github.com/nextgis/nextgis_frontend/commit/c41bb2a1d16746c6eb2db000c1aee916c10d87b6))
+* **mapbox:** propertyFilter for selected vector data ([05d94a8](https://github.com/nextgis/nextgis_frontend/commit/05d94a826db91351478adcd58880ef87f09ce026))
+* **mapbox:** right selected event order call ([08859e5](https://github.com/nextgis/nextgis_frontend/commit/08859e575c6562b9028970c614b896fbe6d9f242))
+* **mapbox:** set transformRequest option only then map is loaded ([9911365](https://github.com/nextgis/nextgis_frontend/commit/9911365fe11575707adea8195a15f0b9289fd184))
+* **mapbox:** transformRequests hotfix ([762b294](https://github.com/nextgis/nextgis_frontend/commit/762b2941f4ad78a9980be5bf2e41a4e0ac3a30cb))
+* **mapbxo:** resolve geojson selection-filter conflict ([b1b8744](https://github.com/nextgis/nextgis_frontend/commit/b1b8744e424625c81da7b876f04062b87dc2a78a))
+* **ngw-connector:** fixes to apiRequest cancel work ([e4451d8](https://github.com/nextgis/nextgis_frontend/commit/e4451d8a7ad349ba17692a3f906677f1a29bf691)), closes [#6](https://github.com/nextgis/nextgis_frontend/issues/6)
+* **ngw-kit:** make async onFirstShowAdapter hide and show methods ([502b261](https://github.com/nextgis/nextgis_frontend/commit/502b261b478872aed0bed0657b961481c22ce109))
+* provide support for map preclick event ([c7b7f66](https://github.com/nextgis/nextgis_frontend/commit/c7b7f662f6e0507cf20fb8a43e4bb22547c9b18b)), closes [#8](https://github.com/nextgis/nextgis_frontend/issues/8)
+* **webmap:** webmap constructor options ([e096e72](https://github.com/nextgis/nextgis_frontend/commit/e096e723d76b8db753ecdd0248b601f24fcb5026))
+
+
+### Build System
+
+* wepmap to rollup ([c6f038a](https://github.com/nextgis/nextgis_frontend/commit/c6f038ad6bcd2a9581f852b35600b2560381c246))
+
+
+### chore
+
+* build; eslint ([ee1e03d](https://github.com/nextgis/nextgis_frontend/commit/ee1e03d85625b02a09c2ee1e4d66007fbf57d626))
+
+
+### Code Refactoring
+
+* rename layerAdapter baseLayer option to baselayer ([e5c595d](https://github.com/nextgis/nextgis_frontend/commit/e5c595d6df24b1b22906ad1e06eb60bf0327e9c0))
+* **utils:** update geom utils ([43c11b0](https://github.com/nextgis/nextgis_frontend/commit/43c11b0f3c45b22ab66789bd00594d34078316f3))
+
+
+### Features
+
+* add BBOX+ strategy; extends options for setView ([309b697](https://github.com/nextgis/nextgis_frontend/commit/309b697e141adf6eedeb85c87b6fa89b9b629c13))
+* add getExtent method for all mapAdapters GeoJsonLayerAdapter ([7e8010f](https://github.com/nextgis/nextgis_frontend/commit/7e8010f7d5579f2b7909a31a2073479de1faa6a5))
+* add library `@nextgis/paint` ([0f72300](https://github.com/nextgis/nextgis_frontend/commit/0f723006c722cc0e183a3c2dcfe7b2366e63cd96))
+* add library `@nextgis/properties-filter` ([8ec97de](https://github.com/nextgis/nextgis_frontend/commit/8ec97de9bd48112211c11cb39eb2da857dd21cac))
+* add nativeOptions for alladdLayer adapter methods ([c98568f](https://github.com/nextgis/nextgis_frontend/commit/c98568f1f122fc67fdfc911500aa2c509149e293))
+* add WmsLayerAdapter ([aec0ce1](https://github.com/nextgis/nextgis_frontend/commit/aec0ce15ddb5292b6334833bcab8812400815d0b))
+* **cancelable-promise:** throw CancelError instead of onCancel callback ([087180a](https://github.com/nextgis/nextgis_frontend/commit/087180adc9bcea72d1fd02ebdaaef3fd751b0a52))
+* **control:** add universal zoom control ([d1371be](https://github.com/nextgis/nextgis_frontend/commit/d1371be1f88085dcfc864de31a7d4d89f2690216))
+* handle vector layer mouse over and out events ([1f537c2](https://github.com/nextgis/nextgis_frontend/commit/1f537c277b433db365b319d4bbdfb26aa44528fd))
+* improve geojson adapter multiselect ([2c9c01c](https://github.com/nextgis/nextgis_frontend/commit/2c9c01c42757c87c4d588e97802f8d2626c5b078))
+* improve popup, add new options, ol support ([e3ea91b](https://github.com/nextgis/nextgis_frontend/commit/e3ea91b91d03a4cef471c5c92a09a7fa0640b90a))
+* **leaflet-map-adapter:** add position to vector adapter layers definition ([053ccf0](https://github.com/nextgis/nextgis_frontend/commit/053ccf05ed8d9d76592c8ca648365e176c609277))
+* **mapbox-gl-js:** improve popup ([dbec3c5](https://github.com/nextgis/nextgis_frontend/commit/dbec3c5f68275e72dc91bfa4a7f21164aa9bdc62))
+* **mapbox-map-adapter:** GeoJson layer label workaround ([6c73629](https://github.com/nextgis/nextgis_frontend/commit/6c736293bf498591d27fc050848503802e9da94e))
+* **mapbox-map-adapter:** MVT match paint ([4115554](https://github.com/nextgis/nextgis_frontend/commit/41155542218ef1e28fa57803f586cfa384df4784))
+* **mapbox-map-adapter:** set opacity with native paint ([4751d0b](https://github.com/nextgis/nextgis_frontend/commit/4751d0bdf178c6812590f11196e97f696a01c303))
+* **mapbox-map-adapter:** upgrade maplibre to 2.x.x ([6eb84d4](https://github.com/nextgis/nextgis_frontend/commit/6eb84d4a5595b98f1b608f91f11d770aaa9a5867))
+* **mapbox-map-adapter:** use direct mapAdapteOptions style ([80b0d7b](https://github.com/nextgis/nextgis_frontend/commit/80b0d7bddaed6484651604bb13bbab9a5549f36f))
+* **mapboxgl-map-adapter:** add popup for selected feature ([bf7ee99](https://github.com/nextgis/nextgis_frontend/commit/bf7ee994ba4307c2a85bc28c985198f000c463de))
+* **mapboxgl-map-adapter:** add setLayerOpacity methods ([3f84f3e](https://github.com/nextgis/nextgis_frontend/commit/3f84f3e44f776fb685afa66f0d8f5fa0165f3806))
+* **mapboxgl-map-adapter:** implement labelOnHover option ([2e575b3](https://github.com/nextgis/nextgis_frontend/commit/2e575b349f06adc6f6a6906b4ca592ec4b0362fc))
+* **mapboxgl-map-adapter:** label on hover improve ([63890c8](https://github.com/nextgis/nextgis_frontend/commit/63890c81435cf690543b1e10a83ce10f2a9284c2))
+* **mapboxgl-map-adapter:** set maxBounds init map option ([29b5152](https://github.com/nextgis/nextgis_frontend/commit/29b5152a81d01e582f40ae2a45ec9ef165b98f6e))
+* **mapobxgl-map-adapter:** improve map initializing ([a15d43c](https://github.com/nextgis/nextgis_frontend/commit/a15d43c61fc56066bb505a0c841237af1c464bac))
+* **ngw-kit:** add bbox strategy for large vector layer ([9641d20](https://github.com/nextgis/nextgis_frontend/commit/9641d20ed48975b59d37befad9614b27bd5594e7))
+* **ngw-kit:** update feature request params ([ebceeaf](https://github.com/nextgis/nextgis_frontend/commit/ebceeafc4ccb9f95b34ddbe7ce31436ccc0cae45))
+* **ngw-kit:** update features request params on no geom ([a1f27a2](https://github.com/nextgis/nextgis_frontend/commit/a1f27a28fe52a8ef7076f406273d84caeecd30fc))
+* **ngw-mapbox:** add MVT support for addNgwlayer ([50fc868](https://github.com/nextgis/nextgis_frontend/commit/50fc868d73ca9ab5a069994991fdcb69ac0ae7c5))
+* **vue:** split vue-ngw-map for leaflet, ol an mapbox adapters ([bcea6c3](https://github.com/nextgis/nextgis_frontend/commit/bcea6c35e61f6ba2aab0b25eb30da9f5f719c92e))
+* **vue:** VueNgwControl from string  kind option ([9a1a51b](https://github.com/nextgis/nextgis_frontend/commit/9a1a51b4ecad8f74f2bb2f54b67c34b94c4237ad))
+* **webmap:** add map mouse move events ([c50638c](https://github.com/nextgis/nextgis_frontend/commit/c50638ccefad63e9b21416e922ea0d4c33fc1adf))
+* **webmap:** add MapAdapter map options ([15e3c50](https://github.com/nextgis/nextgis_frontend/commit/15e3c50eb61c8457e9695e527274beb6cf751a6a))
+* **webmap:** add setLayerPaint method ([3cadfbf](https://github.com/nextgis/nextgis_frontend/commit/3cadfbfac802c19ad0e981e944be69a07f548414))
+* **webmap:** implement WebmapLayers get Attributions onlyBaselayer option ([928d351](https://github.com/nextgis/nextgis_frontend/commit/928d351fea9a321c178ecbb4e03a70bd9a64fc90))
+* **webmap:** paint from properties filter ([64ba0f7](https://github.com/nextgis/nextgis_frontend/commit/64ba0f7d957c2a902691e7245276b8f78356586c))
+* **webmap:** update PropertiesFilter interface ([8ef2e3b](https://github.com/nextgis/nextgis_frontend/commit/8ef2e3b937204a4a7440cce231d08e35c6393114))
+* **webmap:** vector layer select event ([5bc51ac](https://github.com/nextgis/nextgis_frontend/commit/5bc51ac9c98efa785fd34db3d5e71514f269ffd1))
+
+
+### Performance Improvements
+
+* **mapbox:** selection with PropertiesFilter ([212b052](https://github.com/nextgis/nextgis_frontend/commit/212b052456223774fed38156aead15b01bb947b7))
+* **mapbox:** upgrade layer ordering ([125d900](https://github.com/nextgis/nextgis_frontend/commit/125d900e800f645701d63a1b5379b019feaaa186))
+* **mapbox:** vector layer click event prevent by order ([3e42d44](https://github.com/nextgis/nextgis_frontend/commit/3e42d441fef0f82342406e53d8949345bba54056))
+
+
+### wip
+
+* rename VectorLayerAdapterType ([726ab7d](https://github.com/nextgis/nextgis_frontend/commit/726ab7dd7cd112750165a9e15c5672086cd8261a))
+
+
+### BREAKING CHANGES
+
+* **ngw-kit:** `extensions` for any ngw feature request is now empty for default
+* **utils:** WebMap static property utils have been removed, import utilites from `@nextgis/webmap` library instead
+* No more default export from `ngw-map`. You should replace `import NgwMap from "@nextgis/ngw-map"` to `import { NgwMap } from "@nextgis/ngw-map"` everywhere
+* LayerAdapter option baseLayer was renamed to baselayer;
+* webMap.getBaseLayers() method now return LayerAdapter, not string array of ids
+* rename VectorLayerAdapter types: circle > point; fill > polygon
+* **cancelable-promise:** Removed onCancel argument from CancelablePromise. Now you should handle catch CancelError
+* code formatting rules changed to prettier 2.0 compatibility
+* `propertiesFilter` removed from `@nextgis/utils`
+
+
+
+
+
 ## [1.16.7](https://github.com/nextgis/nextgis_frontend/compare/v1.16.6...v1.16.7) (2023-04-21)
 
 **Note:** Version bump only for package @nextgis/mapboxgl-map-adapter

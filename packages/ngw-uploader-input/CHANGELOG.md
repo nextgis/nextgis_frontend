@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.16.8 (2023-05-14)
+
+
+### Features
+
+* **ngw-uploader:** make ability to upload vector resources ([14aa7af](https://github.com/nextgis/nextgis_frontend/commit/14aa7af81314bca5f4e83574c8fb9b83372497bf))
+
+
+### BREAKING CHANGES
+
+* **ngw-uploader:** `createInput` and `dialog` methods have been moved from the `@nextgis/ngw-uploader` to the new `@nextgis/ngw-uploader-input`
+
+
+
+
+
 ## [1.16.7](https://github.com/nextgis/nextgis_frontend/compare/v1.16.6...v1.16.7) (2023-04-21)
 
 **Note:** Version bump only for package @nextgis/ngw-uploader-input

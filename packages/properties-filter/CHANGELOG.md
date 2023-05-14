@@ -3,6 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.16.8 (2023-05-14)
+
+
+### Bug Fixes
+
+* **build:** control-container extract css ([a02d24b](https://github.com/nextgis/nextgis_frontend/commit/a02d24bf2dbe246420803d5d1be9348e4b647c6d))
+* **mapboxgl-map-adapter:** select features by propertiesfilter improve ([c41bb2a](https://github.com/nextgis/nextgis_frontend/commit/c41bb2a1d16746c6eb2db000c1aee916c10d87b6))
+* **properties-filte:** allow any chars for `like` and `ilike` search ([1d6ee0f](https://github.com/nextgis/nextgis_frontend/commit/1d6ee0ffc869b7633642eff760c413c813ba8701))
+* **properties-filter:** add field type check for like\ilike filter ([d9d0489](https://github.com/nextgis/nextgis_frontend/commit/d9d0489fa5dcfb1b1ecd6232fac2d67ba661ac13))
+* **properties-filter:** repair like and ilike operations ([d5eb13a](https://github.com/nextgis/nextgis_frontend/commit/d5eb13a7fa524ad81f547a0090c4a3ae4fb9b0c4))
+
+
+### chore
+
+* build; eslint ([ee1e03d](https://github.com/nextgis/nextgis_frontend/commit/ee1e03d85625b02a09c2ee1e4d66007fbf57d626))
+
+
+### Features
+
+* add library `@nextgis/paint` ([0f72300](https://github.com/nextgis/nextgis_frontend/commit/0f723006c722cc0e183a3c2dcfe7b2366e63cd96))
+* add library `@nextgis/properties-filter` ([8ec97de](https://github.com/nextgis/nextgis_frontend/commit/8ec97de9bd48112211c11cb39eb2da857dd21cac))
+* **cesium:** geojson adapter paint ([4de7367](https://github.com/nextgis/nextgis_frontend/commit/4de7367fc7203d0ba11328a837be1098e6e710fe))
+* eslint no-dupe off; object utils; propertiesFilter generic ([6989c5c](https://github.com/nextgis/nextgis_frontend/commit/6989c5c03548669db771eabcbce2c3f0a8f9843e))
+
+
+### BREAKING CHANGES
+
+* code formatting rules changed to prettier 2.0 compatibility
+* `propertiesFilter` removed from `@nextgis/utils`
+
+
+
+
+
 ## [1.16.6](https://github.com/nextgis/nextgis_frontend/compare/v1.16.5...v1.16.6) (2023-02-09)
 
 **Note:** Version bump only for package @nextgis/properties-filter

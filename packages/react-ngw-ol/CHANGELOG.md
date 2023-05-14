@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.16.8 (2023-05-14)
+
+
+### Features
+
+* **react:** add mapbox and ol packages ([ec5d31d](https://github.com/nextgis/nextgis_frontend/commit/ec5d31d7dd40a8eb9cf0794b9e15a1d289cc0764))
+
+
+
+
+
 ## [1.16.7](https://github.com/nextgis/nextgis_frontend/compare/v1.16.6...v1.16.7) (2023-04-21)
 
 **Note:** Version bump only for package @nextgis/react-ngw-ol
