@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.16.9](https://github.com/nextgis/nextgisweb_frontend/compare/v1.16.8...v1.16.9) (2023-07-04)
+
+
+### Features
+
+* **webmap:** do not use tilejson min max zoom settings for map ([ca4094c](https://github.com/nextgis/nextgisweb_frontend/commit/ca4094cebad3feb20b3791bdc69742e456685f97))
+
+
+
+
+
 ## 1.16.8 (2023-05-14)
 
 

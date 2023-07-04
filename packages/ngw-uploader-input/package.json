@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/ngw-uploader-input",
-  "version": "1.16.8",
+  "version": "1.16.9",
   "_priority": 13,
   "description": "",
   "main": "index.js",
@@ -9,9 +9,9 @@
   "jsdelivr": "lib/ngw-uploader-input.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/dialog": "^1.16.8",
+    "@nextgis/dialog": "^1.16.9",
     "@nextgis/ngw-connector": "^1.16.8",
-    "@nextgis/ngw-uploader": "^1.16.8",
+    "@nextgis/ngw-uploader": "^1.16.9",
     "@types/events": "^3.0.0",
     "events": "^3.3.0"
   },
