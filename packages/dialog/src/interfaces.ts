@@ -1,6 +1,3 @@
-/**
- * @alpha
- */
 export interface DialogAdapterOptions {
   template?: string | Node;
   openers?: HTMLElement[];
@@ -9,9 +6,6 @@ export interface DialogAdapterOptions {
   closeBtnTemplate?: string | Node;
 }
 
-/**
- * @alpha
- */
 export interface DialogAdapter {
   options: DialogAdapterOptions;
   show(): void;

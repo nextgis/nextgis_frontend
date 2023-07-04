@@ -6,9 +6,6 @@ import { ControlPosition, MapControl, MapAdapter } from '@nextgis/webmap';
 import { ZoomControl } from './controls/ZoomControl';
 import { ControlContainerOptions } from './interfaces';
 
-/**
- * @alpha
- */
 export class ControlContainer {
   static controls = {
     ZOOM: ZoomControl,
