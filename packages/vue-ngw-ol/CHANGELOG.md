@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.16.9](https://github.com/nextgis/nextgis_frontend/compare/v1.16.8...v1.16.9) (2023-07-04)
+
+**Note:** Version bump only for package @nextgis/vue-ngw-ol
+
+
+
+
+
 ## 1.16.8 (2023-05-14)
 
 

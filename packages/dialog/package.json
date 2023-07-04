@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/dialog",
-  "version": "1.16.8",
+  "version": "1.16.9",
   "description": "Modal window management",
   "main": "lib/dialog.global.prod.js",
   "module": "lib/dialog.esm-bundler.js",
