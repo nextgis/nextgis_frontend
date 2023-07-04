@@ -213,7 +213,7 @@
                 {
                   "kind": "Reference",
                   "text": "LayerAdapter",
-                  "canonicalReference": "!unknown"
+                  "canonicalReference": "@nextgis/webmap!LayerAdapter:type"
                 },
                 {
                   "kind": "Content",
@@ -257,7 +257,7 @@
                 {
                   "kind": "Reference",
                   "text": "LayerAdapter",
-                  "canonicalReference": "!unknown"
+                  "canonicalReference": "@nextgis/webmap!LayerAdapter:type"
                 },
                 {
                   "kind": "Content",
@@ -315,7 +315,7 @@
                 {
                   "kind": "Reference",
                   "text": "LayerAdapter",
-                  "canonicalReference": "!unknown"
+                  "canonicalReference": "@nextgis/webmap!LayerAdapter:type"
                 },
                 {
                   "kind": "Content",
@@ -359,7 +359,7 @@
                 {
                   "kind": "Reference",
                   "text": "LayerAdapter",
-                  "canonicalReference": "!unknown"
+                  "canonicalReference": "@nextgis/webmap!LayerAdapter:type"
                 },
                 {
                   "kind": "Content",
@@ -912,7 +912,7 @@
                 {
                   "kind": "Reference",
                   "text": "WebMap",
-                  "canonicalReference": "!unknown"
+                  "canonicalReference": "@nextgis/webmap!WebMap:class"
                 },
                 {
                   "kind": "Content",
@@ -1544,7 +1544,7 @@
                 {
                   "kind": "Reference",
                   "text": "LayerAdapter",
-                  "canonicalReference": "!unknown"
+                  "canonicalReference": "@nextgis/webmap!LayerAdapter:type"
                 },
                 {
                   "kind": "Content",
@@ -1655,7 +1655,7 @@
                 {
                   "kind": "Reference",
                   "text": "WebMap",
-                  "canonicalReference": "!unknown"
+                  "canonicalReference": "@nextgis/webmap!WebMap:class"
                 },
                 {
                   "kind": "Content",

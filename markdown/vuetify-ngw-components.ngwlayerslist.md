@@ -26,8 +26,8 @@ export declare class NgwLayersList extends Vue
 |  [selection](./vuetify-ngw-components.ngwlayerslist.selection.md) |  | string\[\] |  |
 |  [selectionType](./vuetify-ngw-components.ngwlayerslist.selectiontype.md) |  | 'independent' \| 'leaf' |  |
 |  [showLayer](./vuetify-ngw-components.ngwlayerslist.showlayer.md) |  | (layer: [NgwWebmapItem](./ngw-kit.ngwwebmapitem.md)<!-- -->) =&gt; boolean |  |
-|  [showResourceAdapter](./vuetify-ngw-components.ngwlayerslist.showresourceadapter.md) |  | (adapter: LayerAdapter \| [ResourceAdapter](./ngw-kit.resourceadapter.md)<!-- -->) =&gt; boolean |  |
-|  [webMap](./vuetify-ngw-components.ngwlayerslist.webmap.md) | <code>readonly</code> | WebMap \| undefined |  |
+|  [showResourceAdapter](./vuetify-ngw-components.ngwlayerslist.showresourceadapter.md) |  | (adapter: [LayerAdapter](./webmap.layeradapter.md) \| [ResourceAdapter](./ngw-kit.resourceadapter.md)<!-- -->) =&gt; boolean |  |
+|  [webMap](./vuetify-ngw-components.ngwlayerslist.webmap.md) | <code>readonly</code> | [WebMap](./webmap.webmap.md) \| undefined |  |
 |  [webMapId](./vuetify-ngw-components.ngwlayerslist.webmapid.md) |  | number |  |
 
 ## Methods

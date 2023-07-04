@@ -14,10 +14,10 @@ fetchIdentifyItem<G extends Geometry = Geometry, P extends FeatureProperties = F
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  identify | [NgwIdentify](./ngw-kit.ngwidentify.md) |  |
-|  requestOptions | [NgwFeatureRequestOptions](./ngw-kit.ngwfeaturerequestoptions.md) | _(Optional)_ |
+|  identify | NgwIdentify |  |
+|  requestOptions | NgwFeatureRequestOptions | _(Optional)_ |
 
 **Returns:**
 
-[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;[NgwFeatureItemResponse](./ngw-kit.ngwfeatureitemresponse.md)<!-- -->&lt;P, G&gt; \| undefined&gt;
+[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;NgwFeatureItemResponse&lt;P, G&gt; \| undefined&gt;
 

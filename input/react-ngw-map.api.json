@@ -275,7 +275,7 @@
                 {
                   "kind": "Reference",
                   "text": "LayerAdapter",
-                  "canonicalReference": "@nextgis/webmap!LayerAdapter:type"
+                  "canonicalReference": "!unknown"
                 },
                 {
                   "kind": "Content",
@@ -321,7 +321,7 @@
                 {
                   "kind": "Reference",
                   "text": "LayerAdapter",
-                  "canonicalReference": "@nextgis/webmap!LayerAdapter:type"
+                  "canonicalReference": "!unknown"
                 },
                 {
                   "kind": "Content",
@@ -402,7 +402,7 @@
             {
               "kind": "Reference",
               "text": "NgwMapOptions",
-              "canonicalReference": "@nextgis/ngw-map!NgwMapOptions:interface"
+              "canonicalReference": "!unknown"
             },
             {
               "kind": "Content",
@@ -415,7 +415,7 @@
             {
               "kind": "Reference",
               "text": "NgwMapOptions",
-              "canonicalReference": "@nextgis/ngw-map!NgwMapOptions:interface"
+              "canonicalReference": "!unknown"
             },
             {
               "kind": "Content",
@@ -428,7 +428,7 @@
             {
               "kind": "Reference",
               "text": "NgwMapOptions",
-              "canonicalReference": "@nextgis/ngw-map!NgwMapOptions:interface"
+              "canonicalReference": "!unknown"
             },
             {
               "kind": "Content",
@@ -640,7 +640,7 @@
                 {
                   "kind": "Reference",
                   "text": "NgwMap",
-                  "canonicalReference": "@nextgis/ngw-map!NgwMap:class"
+                  "canonicalReference": "!unknown"
                 },
                 {
                   "kind": "Content",
@@ -761,7 +761,7 @@
             {
               "kind": "Reference",
               "text": "ControlOptions",
-              "canonicalReference": "@nextgis/webmap!ControlOptions:interface"
+              "canonicalReference": "!unknown"
             },
             {
               "kind": "Content",
@@ -946,7 +946,7 @@
                 {
                   "kind": "Reference",
                   "text": "NgwMap",
-                  "canonicalReference": "@nextgis/ngw-map!NgwMap:class"
+                  "canonicalReference": "!unknown"
                 },
                 {
                   "kind": "Content",
@@ -974,7 +974,7 @@
                 {
                   "kind": "Reference",
                   "text": "LayerAdapter",
-                  "canonicalReference": "@nextgis/webmap!LayerAdapter:type"
+                  "canonicalReference": "!unknown"
                 },
                 {
                   "kind": "Content",

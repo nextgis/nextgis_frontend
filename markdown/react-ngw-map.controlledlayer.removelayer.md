@@ -14,7 +14,7 @@ removeLayer(layer: LayerAdapter): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  layer | [LayerAdapter](./webmap.layeradapter.md) |  |
+|  layer | LayerAdapter |  |
 
 **Returns:**
 

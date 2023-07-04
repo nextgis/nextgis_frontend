@@ -15,7 +15,7 @@ export interface NgwMapContextInterface
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [layerContainer?](./react-ngw-map.ngwmapcontextinterface.layercontainer.md) |  | [ControlledLayer](./react-ngw-map.controlledlayer.md) | _(Optional)_ |
-|  [ngwMap](./react-ngw-map.ngwmapcontextinterface.ngwmap.md) |  | [NgwMap](./ngw-map.ngwmap.md) |  |
-|  [overlayContainer?](./react-ngw-map.ngwmapcontextinterface.overlaycontainer.md) |  | [LayerAdapter](./webmap.layeradapter.md) | _(Optional)_ |
+|  [ngwMap](./react-ngw-map.ngwmapcontextinterface.ngwmap.md) |  | NgwMap |  |
+|  [overlayContainer?](./react-ngw-map.ngwmapcontextinterface.overlaycontainer.md) |  | LayerAdapter | _(Optional)_ |
 |  [pane?](./react-ngw-map.ngwmapcontextinterface.pane.md) |  | string | _(Optional)_ |
 

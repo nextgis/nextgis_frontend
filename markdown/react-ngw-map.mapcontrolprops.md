@@ -9,7 +9,7 @@
 ```typescript
 export interface MapControlProps extends ControlOptions 
 ```
-**Extends:** [ControlOptions](./webmap.controloptions.md)
+**Extends:** ControlOptions
 
 ## Properties
 

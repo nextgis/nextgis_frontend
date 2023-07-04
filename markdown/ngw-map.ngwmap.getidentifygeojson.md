@@ -19,7 +19,7 @@ getIdentifyGeoJson(identify: NgwIdentify, multiple?: boolean): CancelablePromise
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  identify | [NgwIdentify](./ngw-kit.ngwidentify.md) |  |
+|  identify | NgwIdentify |  |
 |  multiple | boolean | _(Optional)_ |
 
 **Returns:**

@@ -19,7 +19,7 @@ getNgwLayerFeatures<G extends Geometry | null = Geometry, P extends JsonMap = Js
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | [FetchNgwItemsOptions](./ngw-kit.fetchngwitemsoptions.md)<!-- -->&lt;P&gt; |  |
+|  options | FetchNgwItemsOptions&lt;P&gt; |  |
 
 **Returns:**
 
