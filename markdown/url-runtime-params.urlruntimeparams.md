@@ -9,7 +9,7 @@
 ```typescript
 export declare class UrlRuntimeParams implements RuntimeParams 
 ```
-**Implements:** RuntimeParams
+**Implements:** [RuntimeParams](./webmap.runtimeparams.md)
 
 ## Methods
 

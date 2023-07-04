@@ -10,3 +10,9 @@
 |  --- | --- |
 |  [Dialog](./dialog.dialog.md) |  |
 
+## Interfaces
+
+|  Interface | Description |
+|  --- | --- |
+|  [DialogAdapterOptions](./dialog.dialogadapteroptions.md) |  |
+

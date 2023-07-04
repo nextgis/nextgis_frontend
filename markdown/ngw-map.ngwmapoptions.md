@@ -17,7 +17,7 @@ export interface NgwMapOptions<M = any, C = any> extends MapOptions<M, C>
 |  --- | --- | --- | --- |
 |  [auth?](./ngw-map.ngwmapoptions.auth.md) |  | [Credentials](./ngw-connector.credentials.md) | _(Optional)_ User credentials for authorization in NGW. Provides the ability to display protected resources |
 |  [baseUrl?](./ngw-map.ngwmapoptions.baseurl.md) |  | string | _(Optional)_ Url of NGW server like this https://demo.nextgis.com |
-|  [companyLogoOptions?](./ngw-map.ngwmapoptions.companylogooptions.md) |  | CompanyLogoOptions | _(Optional)_ |
+|  [companyLogoOptions?](./ngw-map.ngwmapoptions.companylogooptions.md) |  | [CompanyLogoOptions](./ngw-kit.companylogooptions.md) | _(Optional)_ |
 |  [connector?](./ngw-map.ngwmapoptions.connector.md) |  | [NgwConnector](./ngw-connector.ngwconnector.md) | _(Optional)_ |
 |  [osm?](./ngw-map.ngwmapoptions.osm.md) |  | boolean | _(Optional)_ Shortcut to add OSM baselayer. |
 |  [pixelRadius?](./ngw-map.ngwmapoptions.pixelradius.md) |  | number | _(Optional)_ |

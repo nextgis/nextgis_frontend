@@ -11,5 +11,5 @@ export declare type NgwIdentifyEvent<F extends FeatureProperties = FeatureProper
     getIdentifyItems: () => IdentifyItem<F, G>[];
 };
 ```
-**References:** [FeatureProperties](./utils.featureproperties.md)
+**References:** [FeatureProperties](./utils.featureproperties.md)<!-- -->, [NgwIdentify](./ngw-kit.ngwidentify.md)<!-- -->, [IdentifyItem](./ngw-kit.identifyitem.md)
 

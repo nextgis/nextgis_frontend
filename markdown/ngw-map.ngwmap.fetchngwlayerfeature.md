@@ -14,7 +14,7 @@ fetchNgwLayerFeature<G extends Geometry = Geometry, P extends FeatureProperties 
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | Omit&lt;FetchNgwItemOptions&lt;P&gt;, 'connector'&gt; |  |
+|  options | Omit&lt;[FetchNgwItemOptions](./ngw-kit.fetchngwitemoptions.md)<!-- -->&lt;P&gt;, 'connector'&gt; |  |
 
 **Returns:**
 

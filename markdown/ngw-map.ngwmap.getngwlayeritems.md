@@ -19,7 +19,7 @@ getNgwLayerItems<F extends FeatureProperties = FeatureProperties, G extends Geom
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | Omit&lt;FetchNgwItemsOptions&lt;F&gt;, 'connector'&gt; |  |
+|  options | Omit&lt;[FetchNgwItemsOptions](./ngw-kit.fetchngwitemsoptions.md)<!-- -->&lt;F&gt;, 'connector'&gt; |  |
 
 **Returns:**
 

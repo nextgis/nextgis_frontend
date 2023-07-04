@@ -4,6 +4,12 @@
 
 ## control-container package
 
+## Classes
+
+|  Class | Description |
+|  --- | --- |
+|  [ControlContainer](./control-container.controlcontainer.md) |  |
+
 ## Interfaces
 
 |  Interface | Description |

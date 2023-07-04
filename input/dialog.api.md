@@ -8,7 +8,6 @@
 //
 // @public (undocumented)
 class Dialog implements DialogAdapter {
-    // Warning: (ae-incompatible-release-tags) The symbol "__constructor" is marked as @public, but its signature references "DialogAdapterOptions" which is marked as @alpha
     constructor(options?: DialogAdapterOptions);
     // (undocumented)
     static clean(): void;
@@ -20,8 +19,6 @@ class Dialog implements DialogAdapter {
     static dialogs: Dialog[];
     // (undocumented)
     getContainer(): HTMLDialogElement;
-    // Warning: (ae-incompatible-release-tags) The symbol "options" is marked as @public, but its signature references "DialogAdapterOptions" which is marked as @alpha
-    //
     // (undocumented)
     options: DialogAdapterOptions;
     // (undocumented)
@@ -31,7 +28,7 @@ class Dialog implements DialogAdapter {
 }
 export default Dialog;
 
-// @alpha (undocumented)
+// @public (undocumented)
 export interface DialogAdapterOptions {
     // (undocumented)
     closeBtn?: boolean;

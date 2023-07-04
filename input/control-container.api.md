@@ -8,7 +8,7 @@ import { ControlPosition } from '@nextgis/webmap';
 import { MapAdapter } from '@nextgis/webmap';
 import { MapControl } from '@nextgis/webmap';
 
-// @alpha (undocumented)
+// @public (undocumented)
 class ControlContainer {
     constructor(opt?: ControlContainerOptions);
     // (undocumented)
@@ -46,7 +46,7 @@ export interface ControlContainerOptions {
 
 // Warnings were encountered during analysis:
 //
-// src/ControlContainer.ts:14:7 - (ae-forgotten-export) The symbol "ZoomControl" needs to be exported by the entry point index.d.ts
+// src/ControlContainer.ts:11:7 - (ae-forgotten-export) The symbol "ZoomControl" needs to be exported by the entry point index.d.ts
 
 // (No @packageDocumentation comment for this package)
 

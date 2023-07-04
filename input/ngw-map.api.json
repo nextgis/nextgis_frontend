@@ -280,7 +280,7 @@
             {
               "kind": "Reference",
               "text": "NgwIdentify",
-              "canonicalReference": "!unknown"
+              "canonicalReference": "@nextgis/ngw-kit!NgwIdentify:type"
             },
             {
               "kind": "Content",
@@ -289,7 +289,7 @@
             {
               "kind": "Reference",
               "text": "IdentifyItem",
-              "canonicalReference": "!unknown"
+              "canonicalReference": "@nextgis/ngw-kit!IdentifyItem:class"
             },
             {
               "kind": "Content",
@@ -422,7 +422,7 @@
                 {
                   "kind": "Reference",
                   "text": "ResourceAdapter",
-                  "canonicalReference": "!unknown"
+                  "canonicalReference": "@nextgis/ngw-kit!ResourceAdapter:interface"
                 },
                 {
                   "kind": "Content",
@@ -802,7 +802,7 @@
                 {
                   "kind": "Reference",
                   "text": "NgwLayerOptions",
-                  "canonicalReference": "!unknown"
+                  "canonicalReference": "@nextgis/ngw-kit!NgwLayerOptions:interface"
                 },
                 {
                   "kind": "Content",
@@ -820,7 +820,7 @@
                 {
                   "kind": "Reference",
                   "text": "ResourceAdapter",
-                  "canonicalReference": "!unknown"
+                  "canonicalReference": "@nextgis/ngw-kit!ResourceAdapter:interface"
                 },
                 {
                   "kind": "Content",
@@ -1117,7 +1117,7 @@
                 {
                   "kind": "Reference",
                   "text": "NgwIdentify",
-                  "canonicalReference": "!unknown"
+                  "canonicalReference": "@nextgis/ngw-kit!NgwIdentify:type"
                 },
                 {
                   "kind": "Content",
@@ -1232,7 +1232,7 @@
                 {
                   "kind": "Reference",
                   "text": "NgwIdentify",
-                  "canonicalReference": "!unknown"
+                  "canonicalReference": "@nextgis/ngw-kit!NgwIdentify:type"
                 },
                 {
                   "kind": "Content",
@@ -1241,7 +1241,7 @@
                 {
                   "kind": "Reference",
                   "text": "NgwFeatureRequestOptions",
-                  "canonicalReference": "!unknown"
+                  "canonicalReference": "@nextgis/ngw-kit!NgwFeatureRequestOptions:interface"
                 },
                 {
                   "kind": "Content",
@@ -1259,7 +1259,7 @@
                 {
                   "kind": "Reference",
                   "text": "NgwFeatureItemResponse",
-                  "canonicalReference": "!unknown"
+                  "canonicalReference": "@nextgis/ngw-kit!NgwFeatureItemResponse:interface"
                 },
                 {
                   "kind": "Content",
@@ -1381,7 +1381,7 @@
                 {
                   "kind": "Reference",
                   "text": "FetchNgwItemOptions",
-                  "canonicalReference": "!unknown"
+                  "canonicalReference": "@nextgis/ngw-kit!FetchNgwItemOptions:type"
                 },
                 {
                   "kind": "Content",
@@ -1521,7 +1521,7 @@
                 {
                   "kind": "Reference",
                   "text": "FetchNgwItemsOptions",
-                  "canonicalReference": "!unknown"
+                  "canonicalReference": "@nextgis/ngw-kit!FetchNgwItemsOptions:type"
                 },
                 {
                   "kind": "Content",
@@ -1657,7 +1657,7 @@
                 {
                   "kind": "Reference",
                   "text": "FetchNgwItemOptions",
-                  "canonicalReference": "!unknown"
+                  "canonicalReference": "@nextgis/ngw-kit!FetchNgwItemOptions:type"
                 },
                 {
                   "kind": "Content",
@@ -1793,7 +1793,7 @@
                 {
                   "kind": "Reference",
                   "text": "FetchNgwItemsOptions",
-                  "canonicalReference": "!unknown"
+                  "canonicalReference": "@nextgis/ngw-kit!FetchNgwItemsOptions:type"
                 },
                 {
                   "kind": "Content",
@@ -2025,7 +2025,7 @@
                 {
                   "kind": "Reference",
                   "text": "NgwIdentify",
-                  "canonicalReference": "!unknown"
+                  "canonicalReference": "@nextgis/ngw-kit!NgwIdentify:type"
                 },
                 {
                   "kind": "Content",
@@ -2211,7 +2211,7 @@
                 {
                   "kind": "Reference",
                   "text": "FetchNgwItemOptions",
-                  "canonicalReference": "!unknown"
+                  "canonicalReference": "@nextgis/ngw-kit!FetchNgwItemOptions:type"
                 },
                 {
                   "kind": "Content",
@@ -2342,7 +2342,7 @@
                 {
                   "kind": "Reference",
                   "text": "FetchNgwItemsOptions",
-                  "canonicalReference": "!unknown"
+                  "canonicalReference": "@nextgis/ngw-kit!FetchNgwItemsOptions:type"
                 },
                 {
                   "kind": "Content",
@@ -2478,7 +2478,7 @@
                 {
                   "kind": "Reference",
                   "text": "FetchNgwItemOptions",
-                  "canonicalReference": "!unknown"
+                  "canonicalReference": "@nextgis/ngw-kit!FetchNgwItemOptions:type"
                 },
                 {
                   "kind": "Content",
@@ -2614,7 +2614,7 @@
                 {
                   "kind": "Reference",
                   "text": "FetchNgwItemsOptions",
-                  "canonicalReference": "!unknown"
+                  "canonicalReference": "@nextgis/ngw-kit!FetchNgwItemsOptions:type"
                 },
                 {
                   "kind": "Content",
@@ -2924,7 +2924,7 @@
                 {
                   "kind": "Reference",
                   "text": "ResourceAdapter",
-                  "canonicalReference": "!unknown"
+                  "canonicalReference": "@nextgis/ngw-kit!ResourceAdapter:interface"
                 },
                 {
                   "kind": "Content",
@@ -3227,7 +3227,7 @@
                 {
                   "kind": "Reference",
                   "text": "CompanyLogoOptions",
-                  "canonicalReference": "!unknown"
+                  "canonicalReference": "@nextgis/ngw-kit!CompanyLogoOptions:interface"
                 },
                 {
                   "kind": "Content",
@@ -3522,7 +3522,7 @@
             {
               "kind": "Reference",
               "text": "NgwLayerOptions",
-              "canonicalReference": "!unknown"
+              "canonicalReference": "@nextgis/ngw-kit!NgwLayerOptions:interface"
             },
             {
               "kind": "Content",

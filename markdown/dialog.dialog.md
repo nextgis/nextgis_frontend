@@ -22,7 +22,7 @@ export declare class Dialog implements DialogAdapter
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [dialogs](./dialog.dialog.dialogs.md) | <code>static</code> | [Dialog](./dialog.dialog.md)<!-- -->\[\] |  |
-|  [options](./dialog.dialog.options.md) |  | DialogAdapterOptions |  |
+|  [options](./dialog.dialog.options.md) |  | [DialogAdapterOptions](./dialog.dialogadapteroptions.md) |  |
 
 ## Methods
 
