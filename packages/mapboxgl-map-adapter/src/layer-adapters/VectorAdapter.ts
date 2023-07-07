@@ -27,6 +27,7 @@ import {
   SourceSpecification,
   MapLayerMouseEvent,
   FilterSpecification,
+  LegacyFilterSpecification,
 } from 'maplibre-gl';
 import type { Paint, IconPaint } from '@nextgis/paint';
 import type {
@@ -667,7 +668,7 @@ export abstract class VectorAdapter<
       for (const t of this._types) {
         const geomType = typeAliasForFilter[t];
         if (geomType) {
-          const geomFilter = ['==', '$type', geomType];
+          const geomFilter: LegacyFilterSpecification = ['==', '$type', geomType];
           const layerName = this._getLayerNameFromType(t);
           const selLayerName = this._getSelectionLayerNameFromType(t);
           const selectProperties = this._selectProperties;

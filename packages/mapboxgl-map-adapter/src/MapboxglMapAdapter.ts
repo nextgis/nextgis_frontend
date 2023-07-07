@@ -33,8 +33,8 @@ import type {
 import type {
   IControl,
   MapEventType,
+  ResourceType,
   MapMouseEvent,
-  ResourceTypeEnum,
   LngLatBoundsLike,
   FitBoundsOptions,
   RequestParameters,
@@ -165,7 +165,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
             console.warn('The maplibre transformRequest has been overwritten');
           }
           this.map.setTransformRequest(
-            (url: string, resourceType?: ResourceTypeEnum) => {
+            (url: string, resourceType?: ResourceType) => {
               const transformed = this._transformRequest(url, resourceType);
               if (transformed) {
                 return transformed;
@@ -576,7 +576,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
 
   private _transformRequest(
     url: string,
-    resourceType?: ResourceTypeEnum,
+    resourceType?: ResourceType,
   ): RequestParameters | undefined {
     const transformRequests = this.map && this.map.transformRequests;
     if (transformRequests) {
