@@ -17,6 +17,7 @@ import type {
   Map,
   GeoJSONSource,
   FilterSpecification,
+  LegacyFilterSpecification,
   GeoJSONSourceSpecification,
 } from 'maplibre-gl';
 import type {
@@ -373,7 +374,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
       for (const t of this._types) {
         const geomType = typeAliasForFilter[t];
         if (geomType) {
-          const geomFilter = ['==', '$type', geomType];
+          const geomFilter: LegacyFilterSpecification = ['==', '$type', geomType];
           const layerName = this._getLayerNameFromType(t);
           const selLayerName = this._getSelectionLayerNameFromType(t);
           if (layers.indexOf(selLayerName) !== -1) {
