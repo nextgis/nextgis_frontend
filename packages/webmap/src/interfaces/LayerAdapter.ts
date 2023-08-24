@@ -685,4 +685,5 @@ export interface VectorLayerAdapter<
 
   hideLabel?(): void;
   showLabel?(): void;
+  isLabelVisible?(): boolean;
 }

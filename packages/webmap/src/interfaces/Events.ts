@@ -82,6 +82,10 @@ export interface WebMapEvents extends MainMapEvents {
   /**
    * @eventProperty
    */
+  'layer:label:toggle': LayerAdapter;
+  /**
+   * @eventProperty
+   */
   'controls:create': any;
 }
 

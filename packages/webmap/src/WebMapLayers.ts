@@ -217,8 +217,8 @@ export class WebMapLayers<
     const _order = defined(order)
       ? order
       : options.order !== undefined
-      ? options.order
-      : this.reserveOrder();
+        ? options.order
+        : this.reserveOrder();
     let adapterEngine: Type<LayerAdapter<M, L, LO>> | undefined;
     if (typeof adapter === 'string') {
       adapterEngine = this.getLayerAdapter(adapter) as Type<
@@ -635,6 +635,14 @@ export class WebMapLayers<
     }
   }
 
+  isLayerLabelVisible(layerDef: LayerDef): boolean | undefined {
+    const layer = this.getLayer(layerDef) as VectorLayerAdapter;
+    if (layer.isLabelVisible) {
+      return layer.isLabelVisible();
+    }
+    return layer.options.labelVisibility ?? true;
+  }
+
   showLayerLabel(layerDef: LayerDef): void {
     this.toggleLayerLabel(layerDef, true);
   }
@@ -643,19 +651,26 @@ export class WebMapLayers<
     this.toggleLayerLabel(layerDef, false);
   }
 
-  toggleLayerLabel(layerDef: LayerDef, status: boolean): void {
+  toggleLayerLabel(layerDef: LayerDef, status?: boolean): boolean {
     const layer = this.getLayer(layerDef) as VectorLayerAdapter;
+    status = status ?? !this.isLayerLabelVisible(layerDef)
     if (layer) {
       if (status) {
         if (layer.showLabel) {
+          layer.options.labelVisibility = true;
           layer.showLabel();
         }
       } else {
         if (layer.hideLabel) {
+          layer.options.labelVisibility = false;
           layer.hideLabel();
         }
       }
+      if (layer.id) {
+        this._emitLayerEvent('layer:label:toggle', layer.id, layer);
+      }
     }
+    return status;
   }
 
   /**

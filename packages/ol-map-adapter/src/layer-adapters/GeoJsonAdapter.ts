@@ -294,6 +294,11 @@ export class GeoJsonAdapter
     this._setPaintEachLayer(this.selectedPaint);
   }
 
+
+  isLabelVisible(): boolean {
+    return this._labelVisibility;
+  }
+
   hideLabel() {
     this._toggleLabel(false);
   }
