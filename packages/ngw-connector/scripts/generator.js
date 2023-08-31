@@ -40,7 +40,7 @@ function generateTypes(router) {
 }
 
 function insertRequestItemsParamsMap(lines, routers) {
-  lines.push('interface RequestItemsParamsMap {');
+  lines.push('export interface RequestItemsParamsMap {');
   for (var r in routers) {
     const router = routers[r];
     const params = router.slice(1, router.length);
