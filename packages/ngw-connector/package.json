@@ -24,7 +24,8 @@
     "dev": "node ../build-tools/lib/build.js",
     "prod": "npm run dev -- --release",
     "lint": "eslint ./src/**/*.ts --fix --c ../../.eslintrc",
-    "watch": "npm run dev -- --watch"
+    "watch": "npm run dev -- --watch",
+    "gen:types": "node ./scripts/generator"
   },
   "buildOptions": {
     "name": "NgwConnector",

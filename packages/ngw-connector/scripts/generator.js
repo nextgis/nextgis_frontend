@@ -1,11 +1,11 @@
 /**
  * This node script allow to generate actual index.js and index.d.ts files for current api version
  */
-const NgwConnector = require('../lib/ngw-connector');
+const NgwConnector = require('@nextgis/ngw-connector');
 const args = require('minimist')(process.argv.slice(2));
-// TODO: use something like http://api.nextgis.com to get all available data
+// TODO: use something like https://api.nextgis.com to get all available data
 //       from current version on installed NGW Server API
-let baseUrl = 'http://demo.nextgis.com';
+let baseUrl = 'https://demo.nextgis.com';
 
 const typePath = 'src/types/RequestItemsParamsMap.ts';
 
@@ -15,7 +15,7 @@ if (args.url || args.u) {
 
 const connector = new NgwConnector({ baseUrl });
 
-connector.connect(function (router) {
+connector.connect().then((router) => {
   generateTypes(router);
 });
 
