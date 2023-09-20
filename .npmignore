@@ -234,3 +234,4 @@ dist
 
 *.tgz
 **/.yarn
+input

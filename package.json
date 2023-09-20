@@ -21,6 +21,8 @@
     "minor": "npm run test:build && lerna version minor --conventional-commits -m \"chore(release): publish %s\" --no-push --create-release github",
     "prerelease": "npm run test:build && lerna version --conventional-commits --conventional-prerelease -m \"chore(release): publish %s\" --no-push --create-release github"
   },
+  "homepage": "https://code.nextgis.com",
+  "repository": "https://github.com/nextgis/nextgis_frontend",
   "devDependencies": {
     "@types/node": "^18.11.0",
     "eslint-plugin-tsdoc": "^0.2.17",
@@ -44,5 +46,6 @@
     "packages/*",
     "demo",
     "tests"
-  ]
+  ],
+  "packageManager": "yarn@3.6.3"
 }

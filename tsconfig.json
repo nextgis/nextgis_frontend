@@ -1,9 +1,8 @@
 {
   "compilerOptions": {
-    /* Basic Options */
     "baseUrl": ".",
     "sourceMap": false,
-    "target": "es5",
+    "target": "es2019",
     "module": "esnext",
     "moduleResolution": "node",
     "allowJs": false,
