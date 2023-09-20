@@ -13,7 +13,6 @@
     "test:build": "node ./scripts/testBuildCmd.js",
     "karma": "karma start tests/karma.conf.js",
     "doc": "cd ./docs && yarn doc",
-    "doc:md": "api-documenter markdown",
     "docker:demo": "cd ./demo/ && yarn run docker",
     "docker:docs": "cd ./docs/ && yarn run docker",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
@@ -23,7 +22,6 @@
     "prerelease": "npm run test:build && lerna version --conventional-commits --conventional-prerelease -m \"chore(release): publish %s\" --no-push --create-release github"
   },
   "devDependencies": {
-    "@microsoft/api-documenter": "^7.21.7",
     "@types/node": "^18.11.0",
     "eslint-plugin-tsdoc": "^0.2.17",
     "lerna": "^6.6.1",

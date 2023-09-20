@@ -238,4 +238,4 @@ temp
 !packages/build-tools/lib
 stats.html
 *.tgz
-.yarn
+**/.yarn
