@@ -2,26 +2,24 @@
 
 ![Github lerna version](https://img.shields.io/github/lerna-json/v/nextgis/nextgis_frontend)
 
-[![http://code.nextgis.com](https://raw.githubusercontent.com/nextgis/nextgis_frontend/master/demo/src/images/logo_96x96.png)](http://code.nextgis.com)
+[![NextGIS Code](https://raw.githubusercontent.com/nextgis/nextgis_frontend/master/demo/src/images/logo_96x96.png)](http://code.nextgis.com)
 
-Suite of frontend JavaScript-libraries that allow you to speed up building your own web-gis apps using NextGIS software and services as a backend.
+A suite of frontend JavaScript libraries designed to accelerate the development of web-GIS applications using NextGIS software and services as a backend. NextGIS Frontend supports three major open-source GIS frameworks with unified interfaces.
 
-NextGIS Frontend support three main open-source GIS frameworks with common interfaces.
+## Quick Links
 
-## Links
-
-- [NGF Live examples and docs](https://code.nextgis.com)
-- [NGF API](https://code-api.nextgis.com)
-- [NGF Repository](https://github.com/nextgis/nextgis_frontend)
-- [NGF Article](https://nextgis.com/blog/nextgis-frontend)
-- [NGF Tutorials repo](https://github.com/nextgis/ngf-tutorial)
-- [NextGIS official](https://nextgis.com)
+- [Live Examples & Documentation](https://code.nextgis.com)
+- [API Documentation](https://code-api.nextgis.com)
+- [GitHub Repository](https://github.com/nextgis/nextgis_frontend)
+- [Related Article](https://nextgis.com/blog/nextgis-frontend)
+- [Tutorial Repository](https://github.com/nextgis/ngf-tutorial)
+- [NextGIS Official Website](https://nextgis.com)
 - [NextGIS Web](https://nextgis.com/nextgis-web)
-- [Cloud plans](https://nextgis.com/pricing-base)
-- [On premise](https://nextgis.ru/pricing)
-- [Telegram chat](https://t.me/nextgis_chat)
+- [Cloud Pricing Plans](https://nextgis.com/pricing-base)
+- [On-Premise Pricing](https://nextgis.ru/pricing)
+- [Telegram Chat](https://t.me/nextgis_chat)
 
-## Examples
+## Featured Examples
 
 - [Add layer from NGW Cloud](http://code.nextgis.com/demo-examples-ngw-layer)
 - [Add webmap from NGW Cloud](http://code.nextgis.com/demo-examples-ngw-webmap)
@@ -96,9 +94,9 @@ Map-free tools for common purpose
 - [vuetify-ngw-components](https://github.com/nextgis/nextgis_frontend/tree/master/packages/vuetify-ngw-components) – vuetify components for NGW Frontend
 - [vuex-ngw](https://github.com/nextgis/nextgis_frontend/tree/master/packages/vuex-ngw) – vuex store for NGW resources;
 
-## Example projects
+## Real-World Projects
 
-See how nextgis frontend libraries are used in real projects
+Explore how NextGIS frontend libraries are utilized in actual projects:
 
 - [nglink](https://github.com/nextgis/nglink) ([LIVE](https://show.nextgis.com)) – Server side - express.js with ngw-uploader; client - webpack, typescript, ngw-map.
 - [russia-history](https://github.com/nextgis/russia-history) – Russia history live web map ([LIVE](https://map.runivers.ru)). Mapbox-gl-js, NGW MTV api, layer load event listener. Webpacj and typescript.
@@ -111,9 +109,9 @@ See how nextgis frontend libraries are used in real projects
 - [nextgisweb_viewer](https://github.com/nextgis/nextgisweb_viewer) – Service for viewing map resources from NextGIS Web ([LIVE](http://viewer.nextgis.com)). Vuetify, typescript (outdated).
 - [ngw_frontend_boilerplate](https://github.com/nextgis/ngw_frontend_boilerplate). Parcel build (outdated).
 
-## Install
+## Installation
 
-### In Browser
+### Browser Integration
 
 #### Include assets
 
@@ -132,9 +130,9 @@ Download and include with a script tag. \[Package\] will be registered as a glob
 </script>
 ```
 
-#### CDN
+#### Via CDN
 
-unpkg
+Choose between `unpkg`:
 
 ```html
 <script src="https://unpkg.com/@nextgis/[package]"></script>
@@ -142,7 +140,7 @@ unpkg
 <script src="https://unpkg.com/@nextgis/[package]@[version]/lib/[file]"></script>
 ```
 
-jsdelivr
+and `jsdelivr`
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@nextgis/[package]"></script>
@@ -160,7 +158,7 @@ jsdelivr
 
 We recommend linking to a specific `[version]` number that you can update manually
 
-### In Node.js
+### Node.js Integration
 
 ```bash
 npm i -S @nextgis/[package]
@@ -182,7 +180,7 @@ const package = new Package(options);
 
 ## Usage
 
-### Create map
+### Map Creation
 
 ```javascript
 import { NgwMap } from '@nextgis/ngw-map';
@@ -207,7 +205,7 @@ ngwMap.onLoad().then(() => {
 });
 ```
 
-### Add layers from NGW
+### Adding Layers from NGW
 
 ```javascript
 // from resource id
@@ -226,9 +224,9 @@ Examples
 
 [Add different NGW resource](http://code.nextgis.com/demo-examples-ngw-layers)
 
-## For developers
+## Developer Guide
 
-### Instructions for whole repository
+### Repository Setup
 
 First install [Yarn](https://yarnpkg.com/lang/en/docs/install/)
 
@@ -252,7 +250,7 @@ To copy the pages of universal examples from the demo/examples into the correspo
 yarn run examples
 ```
 
-### Instructions for a particular package
+### Package-Specific Instructions
 
 ```bash
 # Go to package directory (for example webmap)
