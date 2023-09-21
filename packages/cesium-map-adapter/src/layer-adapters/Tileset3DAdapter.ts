@@ -1,10 +1,11 @@
 import {
-  Cesium3DTileset,
+  Color,
   Matrix4,
   Cartesian3,
   Cartographic,
+  Cesium3DTileset,
   Cesium3DTileStyle,
-  Color,
+  PointCloudShading,
 } from 'cesium';
 import { debugLog } from '@nextgis/utils';
 import { getBoundsFromBoundingSphere } from '../utils/getBoundsFromBoundingSphere';
@@ -83,6 +84,7 @@ export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
     const options: Partial<Cesium3DTileset> & { url: string | Resource } = {
       url,
       skipLevelOfDetail: true,
+      pointCloudShading: new PointCloudShading({ attenuation: true }),
     };
     const maximumScreenSpaceError =
       this.options.nativeOptions &&
