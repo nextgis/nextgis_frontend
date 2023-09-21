@@ -73,18 +73,18 @@ export class NgwLayersList extends Vue {
       .filter((x) => !old.includes(x))
       .concat(old.filter((x) => !selection.includes(x)));
 
-    // const isSame = arrayCompare(selection, old);
     if (difference.length) {
       this._layers.forEach((x) => {
         let itemIsNotHideRoot = false;
-        // layer properties fpr webmap tree items detect
+        // layer properties for webmap tree items detect
         // check visibility for all webmap tree layer
         if (x.layer && x.layer.properties) {
           const layer = x.layer as NgwWebmapItem;
-          if (
-            (!this.independent && this.itemIsGroup(layer.item)) ||
-            (this.hideWebmapRoot && layer.item.item_type === 'root')
-          ) {
+          const isNotIndependentGroup =
+            !this.independent && this.itemIsGroup(layer.item);
+          const alwaysVisibleRoot =
+            this.hideWebmapRoot && layer.item.item_type === 'root';
+          if (isNotIndependentGroup || alwaysVisibleRoot) {
             itemIsNotHideRoot = true;
             layer.properties.set('visibility', true);
           }
