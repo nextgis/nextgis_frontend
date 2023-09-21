@@ -2,13 +2,6 @@ import { EventEmitter } from 'events';
 import type { Item } from '../Item';
 import type { ItemBasePropertyOptions, ItemOptions } from '../interfaces';
 
-// import StrictEventEmitter from 'strict-event-emitter-types/types/src';
-
-// export interface BasePropertyEvents<V, O> {
-//   'change': {value: V, options: O};
-//   'change-tree': {value: V, options: O, item: Item};
-// }
-
 export abstract class BaseProperty<
   V = any,
   O extends ItemBasePropertyOptions<V> = ItemBasePropertyOptions<V>,
@@ -16,7 +9,6 @@ export abstract class BaseProperty<
 > {
   options: O;
 
-  // emitter: StrictEventEmitter<EventEmitter, BasePropertyEvents<V, O>> = new EventEmitter();
   emitter = new EventEmitter();
   name: string;
 
@@ -59,21 +51,12 @@ export abstract class BaseProperty<
   }
 
   isBlocked(): boolean {
-    if (this._blocked === undefined) {
-      const parents = this.item.tree.getParents();
-      if (parents) {
-        const isBlocked = parents.find((x: Item) => {
-          const parentProp = x.properties && x.properties.property(this.name);
-          if (parentProp) {
-            return !parentProp.get();
-          }
-          return false;
-        });
-        this._blocked = !!isBlocked;
-      } else {
-        this._blocked = false;
-      }
+    if (this._blocked !== undefined) {
+      return this._blocked;
     }
+
+    const parents = this.item.tree.getParents();
+    this._blocked = this._calculateBlockedStatus(parents);
     return this._blocked;
   }
 
@@ -139,5 +122,14 @@ export abstract class BaseProperty<
         }
       });
     }
+  }
+
+  private _calculateBlockedStatus(parents: Item[]): boolean {
+    const isBlocked = parents.some((parent: Item) => {
+      const parentProp = parent.properties?.property(this.name);
+      return parentProp ? !parentProp.get() : false;
+    });
+
+    return isBlocked;
   }
 }
