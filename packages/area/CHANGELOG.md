@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://github.com/nextgis/nextgis_frontend/compare/v0.5.0...v1.17.0) (2023-09-25)
+
+
+### Features
+
+* **area:** add new Area package ([2062f17](https://github.com/nextgis/nextgis_frontend/commit/2062f179fd8cbb5f75a6c8f78e440444f424ada8))
+* **cache:** new package to cache key value with async ability ([3606d7e](https://github.com/nextgis/nextgis_frontend/commit/3606d7ea891e60e2993823bde8bf8f37ce76e383))
+
+
+
+
+
 ## 1.16.8 (2023-05-14)
 
 

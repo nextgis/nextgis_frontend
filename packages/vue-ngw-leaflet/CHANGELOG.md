@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://github.com/nextgis/nextgis_frontend/compare/v0.5.0...v1.17.0) (2023-09-25)
+
+
+### Bug Fixes
+
+* **build:** control-container extract css ([ff15f22](https://github.com/nextgis/nextgis_frontend/commit/ff15f221bd46de3d0e32aaa2735f7224d49b24fc))
+* **vue:** fix vue observable leaks ([7931934](https://github.com/nextgis/nextgis_frontend/commit/79319343e100d75903fa354956b923b5782c903a))
+* **vue:** prop definition ([58efbeb](https://github.com/nextgis/nextgis_frontend/commit/58efbebad542bbddec4d614adcd7caa9e00fdcf8))
+* **vue:** set types for VueNgwMap adapter components ([d481f51](https://github.com/nextgis/nextgis_frontend/commit/d481f515e9e16d3c375d1c42fa9cee721042bbfe))
+* **vue:** VueNgwLeaflet default icons for FF ([a6b5a11](https://github.com/nextgis/nextgis_frontend/commit/a6b5a111a39e7b919be47af0b1daf58a4a00a792))
+
+
+### chore
+
+* build; eslint ([f9a736e](https://github.com/nextgis/nextgis_frontend/commit/f9a736ef43d07f295a9c63015ce745416584bd25))
+
+
+### Features
+
+* **vue:** split vue-ngw-map for leaflet, ol an mapbox adapters ([4e2d149](https://github.com/nextgis/nextgis_frontend/commit/4e2d1495810480af84fee0644061157df1b6f0b5))
+
+
+### BREAKING CHANGES
+
+* code formatting rules changed to prettier 2.0 compatibility
+
+
+
+
+
 ## [1.16.9](https://github.com/nextgis/nextgis_frontend/compare/v1.16.8...v1.16.9) (2023-07-04)
 
 **Note:** Version bump only for package @nextgis/vue-ngw-leaflet

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://github.com/nextgis/nextgis_frontend/compare/v0.5.0...v1.17.0) (2023-09-25)
+
+
+### Features
+
+* add new library `progress` ([a9fe285](https://github.com/nextgis/nextgis_frontend/commit/a9fe2856dc3526d0085b63f36e049cfa8a09b4c0))
+* **logging:** add logging package ([e51431e](https://github.com/nextgis/nextgis_frontend/commit/e51431e5d507f25ae4aecf49a43c8b8d8ca527c6))
+
+
+
+
+
 ## 1.16.8 (2023-05-14)
 
 

@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://github.com/nextgis/nextgis_frontend/compare/v0.5.0...v1.17.0) (2023-09-25)
+
+
+### Bug Fixes
+
+* **build:** control-container extract css ([ff15f22](https://github.com/nextgis/nextgis_frontend/commit/ff15f221bd46de3d0e32aaa2735f7224d49b24fc))
+* **ngw-connector:** fixes to apiRequest cancel work ([40fee1a](https://github.com/nextgis/nextgis_frontend/commit/40fee1a96a389a0d617bd35b6140db4f4a097eb6)), closes [#6](https://github.com/nextgis/nextgis_frontend/issues/6)
+* **ngw-kit:** create async adapter from parent resource ([3a5b1a0](https://github.com/nextgis/nextgis_frontend/commit/3a5b1a0d08fc2fd7e8f654d7070dbfb22063a72f))
+* replace emitter.of by emitter.removeListener ([e31a4e0](https://github.com/nextgis/nextgis_frontend/commit/e31a4e09c0e414314e98c84caca9322e4e4f39a9))
+
+
+### Build System
+
+* wepmap to rollup ([8b27550](https://github.com/nextgis/nextgis_frontend/commit/8b27550fc396a032d637996d43679362baa2d0c4))
+
+
+### chore
+
+* build; eslint ([f9a736e](https://github.com/nextgis/nextgis_frontend/commit/f9a736ef43d07f295a9c63015ce745416584bd25))
+
+
+### Features
+
+* add WmsLayerAdapter ([3b5bf17](https://github.com/nextgis/nextgis_frontend/commit/3b5bf17bb2f699683d9b726a112f50b432859e4e))
+* **cesium:** geojson adapter paint ([22211e0](https://github.com/nextgis/nextgis_frontend/commit/22211e0f1e303452de9a1e3286fc8144062d7d5f))
+
+
+### BREAKING CHANGES
+
+* No more default export from `ngw-map`. You should replace `import NgwMap from "@nextgis/ngw-map"` to `import { NgwMap } from "@nextgis/ngw-map"` everywhere
+* code formatting rules changed to prettier 2.0 compatibility
+
+
+
+
+
 ## [1.16.9](https://github.com/nextgis/nextgis_frontend/compare/v1.16.8...v1.16.9) (2023-07-04)
 
 **Note:** Version bump only for package @nextgis/ngw-cesium

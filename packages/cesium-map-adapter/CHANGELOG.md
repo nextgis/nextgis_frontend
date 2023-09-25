@@ -3,6 +3,121 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://github.com/nextgis/nextgis_frontend/compare/v0.5.0...v1.17.0) (2023-09-25)
+
+
+### Bug Fixes
+
+* **build:** control-container extract css ([ff15f22](https://github.com/nextgis/nextgis_frontend/commit/ff15f221bd46de3d0e32aaa2735f7224d49b24fc))
+* **cesium-map-adapter:** extent from bounding sphere ([0de1f71](https://github.com/nextgis/nextgis_frontend/commit/0de1f71e5c6fd474095a7e29876630585aa4b49d))
+* **cesium-map-adapter:** set layer adapters request headers ([1430387](https://github.com/nextgis/nextgis_frontend/commit/1430387627af0b6a593ff1b64c9f86979344de5c))
+* **cesium-map-adapter:** update geojson adapter ([6566e0c](https://github.com/nextgis/nextgis_frontend/commit/6566e0c5a7295c9ed796963fc5307479871d10f5))
+* **cesium:** add check for telset3d adapter addLayer ([3a05937](https://github.com/nextgis/nextgis_frontend/commit/3a05937b88858866b3decf983699ff6821471650))
+* **cesium:** cesium geojson layer style ([36fbc74](https://github.com/nextgis/nextgis_frontend/commit/36fbc745681fdffec3d02c24f469da49ddd26773))
+* **cesium:** change geojson extrude height set ([6fe70b8](https://github.com/nextgis/nextgis_frontend/commit/6fe70b82c3160a42a5a7d818c2664d811e726e41))
+* **cesium:** disable zoom undergroung ([13ea7db](https://github.com/nextgis/nextgis_frontend/commit/13ea7dbd7c42bb5feffdaa7a0be7215ccdf2a212))
+* **cesium:** do not clamp to ground 3d geojson ([080fc0d](https://github.com/nextgis/nextgis_frontend/commit/080fc0d423c5935137f5a7ee5819c5238b66a8e4))
+* **cesium:** empty default imagery provider ([c753819](https://github.com/nextgis/nextgis_frontend/commit/c753819c21cf63d2730074430fa8bbb2f040b541))
+* **cesium:** fitBounds for not Scene3D modes ([4b3f12f](https://github.com/nextgis/nextgis_frontend/commit/4b3f12f4b338e77a304f6a6705bacb8d049cee2f))
+* **cesium:** fix Tilset3D setHeight ([68a64af](https://github.com/nextgis/nextgis_frontend/commit/68a64afea39ddad04bba9b5e5fe0c1004d82deb3))
+* **cesium:** geojson terrainsample ([9d0ed5e](https://github.com/nextgis/nextgis_frontend/commit/9d0ed5ee417e09d31cfa9ccecbda1be23ac98947))
+* **cesium:** GeoJsonAdapter pin color from empty string ([50e65b1](https://github.com/nextgis/nextgis_frontend/commit/50e65b16dd3c0c82edfe22b6c511876acd47f29a))
+* **cesium:** remove default imagery provider ([006c09f](https://github.com/nextgis/nextgis_frontend/commit/006c09f35eb82fce7dd58049ac123fc406f247e4))
+* **cesium:** scene requestRender on layers visibility change ([417b2e8](https://github.com/nextgis/nextgis_frontend/commit/417b2e8d0aa4b7f916648c3bf8f549e5d475c09b))
+* **cesium:** TileAdapter baselayer ordering ([2edad34](https://github.com/nextgis/nextgis_frontend/commit/2edad340db47b3d6d4126ebdb2a017ac6287dacd))
+* **cesium:** TileLayer ordering ([50df2f7](https://github.com/nextgis/nextgis_frontend/commit/50df2f72cd66ac8f70301a331252cfbb1d11910d))
+* **cesium:** Tileset#DAdapter set terrain height ([90b8563](https://github.com/nextgis/nextgis_frontend/commit/90b85632a5cf553c227522c4970b4e95151af885))
+* **cesium:** Tilset3D adapter paint ([c27c7e0](https://github.com/nextgis/nextgis_frontend/commit/c27c7e01224f27449f1c3c5196ef89458949a548))
+* **ngw-connector:** clean cache on resource delete ([179c372](https://github.com/nextgis/nextgis_frontend/commit/179c372b8c2358d57e1ad93a1afa2c6496d2619e))
+* **ngw-connector:** fixes to apiRequest cancel work ([40fee1a](https://github.com/nextgis/nextgis_frontend/commit/40fee1a96a389a0d617bd35b6140db4f4a097eb6)), closes [#6](https://github.com/nextgis/nextgis_frontend/issues/6)
+* **ngw-kit:** create async adapter from parent resource ([3a5b1a0](https://github.com/nextgis/nextgis_frontend/commit/3a5b1a0d08fc2fd7e8f654d7070dbfb22063a72f))
+* **ngw-kit:** make async onFirstShowAdapter hide and show methods ([95362a8](https://github.com/nextgis/nextgis_frontend/commit/95362a89085ecda4a6225cd58bc9347ff970fd81))
+* **ngw-kit:** resolve createGeoJsonAdapter options override II ([324da98](https://github.com/nextgis/nextgis_frontend/commit/324da983210ac023b8877abf3f7b3e92534e2141))
+* **ngw-kit:** show only one enabled webmap basemap ([100414f](https://github.com/nextgis/nextgis_frontend/commit/100414f3264d0995b86375a33d1898be31489939))
+* **ngw-kit:** webmap iten async addLayer method ([2c24b3a](https://github.com/nextgis/nextgis_frontend/commit/2c24b3acf77643a394139a6eeff8a95173ea7c60))
+* **qms-kit:** mix layerAdapter class property ([831e731](https://github.com/nextgis/nextgis_frontend/commit/831e731c532e71962ae80aff7771963970d20341))
+* remove require imports ([c227e90](https://github.com/nextgis/nextgis_frontend/commit/c227e9003e209ea88ed86bab2903fa88492083f4))
+* **vue:** fix vue observable leaks ([7931934](https://github.com/nextgis/nextgis_frontend/commit/79319343e100d75903fa354956b923b5782c903a))
+* **vuetify:** correction for set empty BasemapSelect text ([445c6a5](https://github.com/nextgis/nextgis_frontend/commit/445c6a571496ce936bffcb542d2f67b9580215da))
+* **vuetify:** NgwLayersList root item hide ([3eabbe4](https://github.com/nextgis/nextgis_frontend/commit/3eabbe4b35657cae6c59bff559ffc6671c47fb38))
+* **vuetify:** update items on init ([78298ef](https://github.com/nextgis/nextgis_frontend/commit/78298efbb68da09ba644d4bcb00d09b47bc4a6ac))
+* **webmap:** webmap constructor options ([81b53ee](https://github.com/nextgis/nextgis_frontend/commit/81b53ee68e1d0f3b945038c718e999d0f5cfe15c))
+
+
+### chore
+
+* build; eslint ([f9a736e](https://github.com/nextgis/nextgis_frontend/commit/f9a736ef43d07f295a9c63015ce745416584bd25))
+
+
+### Code Refactoring
+
+* rename layerAdapter baseLayer option to baselayer ([e5428f1](https://github.com/nextgis/nextgis_frontend/commit/e5428f1f5bc6148ffb3c933a6ac96a4b373b6a02))
+* **utils:** update geom utils ([caebd68](https://github.com/nextgis/nextgis_frontend/commit/caebd68833967eeb23f78c35bdaa3c83bdf7442d))
+
+
+### Features
+
+* add library `@nextgis/paint` ([e7079c9](https://github.com/nextgis/nextgis_frontend/commit/e7079c9e231cafba634a3a6fa3efc448b4525f75))
+* add new library `ControlContainer` ([db89d97](https://github.com/nextgis/nextgis_frontend/commit/db89d974a4548c84b311b8e5f2517115511ed03d))
+* **casium:** zoomIn and zoomOut onground control ([f0e7916](https://github.com/nextgis/nextgis_frontend/commit/f0e7916132ced974b12198b94a67c025e66ded7b))
+* **cesium-map-adapter:** add geojson adapter getExtent method ([3c7aa80](https://github.com/nextgis/nextgis_frontend/commit/3c7aa807e7e519ffd65573968533152a5161412a))
+* **cesium-map-adapter:** add map click event ([d3a2050](https://github.com/nextgis/nextgis_frontend/commit/d3a205014436fe89f8036afa00d20af44b2421d5))
+* **cesium-map-adapter:** add point cloud sharing to  tileset3d adater ([6c523a6](https://github.com/nextgis/nextgis_frontend/commit/6c523a680cccc84acd72cbdc2e2fa3370573f7e5))
+* **cesium-map-adapter:** add subdomains for TileAdapter ([c13f4d1](https://github.com/nextgis/nextgis_frontend/commit/c13f4d193313cfc6fc59f7b84193f182445aeaaf))
+* **cesium-map-adapter:** add watchTerrainChange geojson option ([93de673](https://github.com/nextgis/nextgis_frontend/commit/93de6738cab97dd7299b04f9a78bafa1a3a5dc6a))
+* **cesium-map-adapter:** remove camera inertion ([d30c05f](https://github.com/nextgis/nextgis_frontend/commit/d30c05f355cc8f47feded90486f0b63bd07682b2))
+* **cesium:** add heightOffset geojson option ([53b1a5b](https://github.com/nextgis/nextgis_frontend/commit/53b1a5b8f118c46ea5921f1262e453c35606349e))
+* **cesium:** add mapAdapter listeners and getBounds method ([de74e02](https://github.com/nextgis/nextgis_frontend/commit/de74e025c72a5c1d90c779fb431e252d7602a4f3))
+* **cesium:** add maximumScreenSpaceError option for tilset3d adapter ([e35d282](https://github.com/nextgis/nextgis_frontend/commit/e35d2820614a6c5603858aa06698774d83b7f0eb))
+* **cesium:** add scale and rotate for 3d model adapter ([2cac285](https://github.com/nextgis/nextgis_frontend/commit/2cac285e66ab67bcca8fdc9494e8fb8caf6d7490))
+* **cesium:** add Tileset3dAdapter ([08ce606](https://github.com/nextgis/nextgis_frontend/commit/08ce606cb09437cdf0ccd3de8bd8134af5649a4b))
+* **cesium:** add tilset3d adapter paint options ([26ce884](https://github.com/nextgis/nextgis_frontend/commit/26ce884c5fda26bfafcddb9df098b328967b74c4))
+* **cesium:** change default screenSpaceError value ([2f03a35](https://github.com/nextgis/nextgis_frontend/commit/2f03a351c426b5f267d4e6b678279184fbc15ab6))
+* **cesium:** change layers height on terrain change ([3c257e9](https://github.com/nextgis/nextgis_frontend/commit/3c257e939082165bf32ff5aa5f46a6b873d8f664))
+* **cesium:** extrude3d paint option ([bfa3518](https://github.com/nextgis/nextgis_frontend/commit/bfa3518f3c661c44ca8755ef435f66c76b03622c))
+* **cesium:** fitBounds up tp terrain ([08abf2e](https://github.com/nextgis/nextgis_frontend/commit/08abf2ebe6e90b795737369700415b784e731fe8))
+* **cesium:** geojson adapter paint ([22211e0](https://github.com/nextgis/nextgis_frontend/commit/22211e0f1e303452de9a1e3286fc8144062d7d5f))
+* **cesium:** get extent of tileset3D ([a40cd75](https://github.com/nextgis/nextgis_frontend/commit/a40cd75b8d0da78bbad211d1964186244ba57979))
+* **cesium:** implement getCenter ([4d88345](https://github.com/nextgis/nextgis_frontend/commit/4d883458b88ec1736deef624730bc13d4ec423a1))
+* **cesium:** pin paint implementation for geojson layer ([62f50a6](https://github.com/nextgis/nextgis_frontend/commit/62f50a6004388b45e3f620a46ad082fe45aaeea3))
+* **cesium:** set custom logo ([4792cd7](https://github.com/nextgis/nextgis_frontend/commit/4792cd747d4111a22526dab8864eb559ab54f19f))
+* **cesium:** set scene view from new adapter option ([82d12de](https://github.com/nextgis/nextgis_frontend/commit/82d12de71ea47cbbc71ba10ab8743ca487be144b))
+* **cesium:** skipLevelOfDetail by default ([1d12b87](https://github.com/nextgis/nextgis_frontend/commit/1d12b8736ed11710f7f81a0a896194d87ce35ad2))
+* **cesium:** tilset 3d adapter height options ([9588160](https://github.com/nextgis/nextgis_frontend/commit/9588160423f33c09611ca61e67ecdcd10e0c087c))
+* **cesium:** update layer and map adapter ([8539d15](https://github.com/nextgis/nextgis_frontend/commit/8539d15a9f34cb765380b306b7bcc01e676336ea))
+* **control:** add universal zoom control ([6941bb5](https://github.com/nextgis/nextgis_frontend/commit/6941bb5fdd290b788d819f0c64acdaa63d561d8b))
+* handle vector layer mouse over and out events ([82700e2](https://github.com/nextgis/nextgis_frontend/commit/82700e2e9fddd85a4282126a6c8b917a6f29d9ca))
+* **leaflet-map-adapter:** add position to vector adapter layers definition ([3a20a8c](https://github.com/nextgis/nextgis_frontend/commit/3a20a8c2bedbd953e7e29446e1acf28a5ce68a4d))
+* new @nextgis/dom library ([1cf0044](https://github.com/nextgis/nextgis_frontend/commit/1cf004410146a6232e36beb0c72ed51ba7592c3b))
+* **ngw-kit:** add addLayerOptionsPriority for createGeoJsonAdapter ([7498e3d](https://github.com/nextgis/nextgis_frontend/commit/7498e3df0849f0f7958f74194e04149569d70ba3))
+* **ngw-kit:** add NgwKit.utils.getCompanyLogo method ([348beb6](https://github.com/nextgis/nextgis_frontend/commit/348beb6419166726edb2854acfb303411e28d0c9))
+* **ngw-kit:** improve createOnFirstShowAdapter ([ac63cae](https://github.com/nextgis/nextgis_frontend/commit/ac63cae206a9bc4bd71a19772baef168c6d8c82b))
+* **ngw-kit:** make create basemap layer adapter universal ([182da50](https://github.com/nextgis/nextgis_frontend/commit/182da506f649a86c425a30db649fb49efa76e4d9))
+* **ngw-kit:** ngwwebmap item toggle on zoom layer range ([4c64a8c](https://github.com/nextgis/nextgis_frontend/commit/4c64a8c15deb3f73a3f948610d06b3877f9577ab))
+* **ngw-map:** add promise groups handler ([9cbe6b7](https://github.com/nextgis/nextgis_frontend/commit/9cbe6b76d08b88a24c1bd4ad0041f7be6d2b2ad9))
+* **ngw:** option to create popup content from item ([7a7a3ff](https://github.com/nextgis/nextgis_frontend/commit/7a7a3ffa44cb4165a4911312f6592e71a43f1624))
+* **paint:** add experimental paint 3d style ([b970433](https://github.com/nextgis/nextgis_frontend/commit/b97043374696683efdf174949a68eef3759e06e2))
+* **utils:** add debug log util ([aad775f](https://github.com/nextgis/nextgis_frontend/commit/aad775f48feffd9316306a6de8dc5f2e596a3b78))
+* **utils:** deprecated helper utils ([c10ecb9](https://github.com/nextgis/nextgis_frontend/commit/c10ecb9bc3067257a5c2ae9927ecc1d26fbfefda))
+* **webmap:** add special MapAdapterOptions option to MapOptions ([d05e535](https://github.com/nextgis/nextgis_frontend/commit/d05e535f4cab70769e133f7ef22978a348c30f3a))
+* **webmap:** change default maxZoom option to 20 ([0fdd839](https://github.com/nextgis/nextgis_frontend/commit/0fdd839a158cc54be2111d7cb1749a2f6500d5c7))
+* **webmap:** implement WebmapLayers get Attributions onlyBaselayer option ([8e123a9](https://github.com/nextgis/nextgis_frontend/commit/8e123a9f5c257f9c0786b83e8d1f4d1cb603edfa))
+* **webmap:** update layer adapter options ([977426f](https://github.com/nextgis/nextgis_frontend/commit/977426f8b86c53528ac00d727deb6daf50696559))
+* **webmap:** zoomIn and zoomOut MapAdapter optional methods ([c94483a](https://github.com/nextgis/nextgis_frontend/commit/c94483a063f339acfe789e729aab2f7d0681a90b))
+
+
+### BREAKING CHANGES
+
+* **utils:** removed latLng from MapClickEvent, use lngLat: numner[] instead
+* **utils:** WebMap static property utils have been removed, import utilites from `@nextgis/webmap` library instead
+* LayerAdapter option baseLayer was renamed to baselayer;
+* webMap.getBaseLayers() method now return LayerAdapter, not string array of ids
+* code formatting rules changed to prettier 2.0 compatibility
+
+
+
+
+
 ## [1.16.9](https://github.com/nextgis/nextgis_frontend/compare/v1.16.8...v1.16.9) (2023-07-04)
 
 **Note:** Version bump only for package @nextgis/cesium-map-adapter

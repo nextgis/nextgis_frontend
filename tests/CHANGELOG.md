@@ -3,6 +3,46 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://github.com/nextgis/nextgis_frontend/compare/v0.5.0...v1.17.0) (2023-09-25)
+
+
+### Bug Fixes
+
+* **ngw-connector:** clean cache on resource delete ([179c372](https://github.com/nextgis/nextgis_frontend/commit/179c372b8c2358d57e1ad93a1afa2c6496d2619e))
+* **ngw-connector:** fixes to apiRequest cancel work ([40fee1a](https://github.com/nextgis/nextgis_frontend/commit/40fee1a96a389a0d617bd35b6140db4f4a097eb6)), closes [#6](https://github.com/nextgis/nextgis_frontend/issues/6)
+* **ngw-kit:** fix like and ilike filter requests ([3654c2b](https://github.com/nextgis/nextgis_frontend/commit/3654c2baa9bb90ab2ccfda75ce24fd4a5713d0c7))
+* **ngw-kit:** make async onFirstShowAdapter hide and show methods ([95362a8](https://github.com/nextgis/nextgis_frontend/commit/95362a89085ecda4a6225cd58bc9347ff970fd81))
+* **ngw-kit:** remove duplicates from a query with filter by ANY condition ([d3b1ab9](https://github.com/nextgis/nextgis_frontend/commit/d3b1ab9dbc8e7e3862a45ba3b9bdae0b0b9d715c))
+* **ngw-uploader:** correct imports and sandbox url ([2695c29](https://github.com/nextgis/nextgis_frontend/commit/2695c291ddce650a761195f97ce7bcbd58822688))
+* **ngw-сщттусещк:** resource search query parent_id param ([f7dd32a](https://github.com/nextgis/nextgis_frontend/commit/f7dd32aa600eb7a608a81dd9adf6cd88defc3615))
+* remove require imports ([c227e90](https://github.com/nextgis/nextgis_frontend/commit/c227e9003e209ea88ed86bab2903fa88492083f4))
+* **webmap:** webmap constructor options ([81b53ee](https://github.com/nextgis/nextgis_frontend/commit/81b53ee68e1d0f3b945038c718e999d0f5cfe15c))
+
+
+### Code Refactoring
+
+* change WebMap and NgwMap constructor options ([dcd03e2](https://github.com/nextgis/nextgis_frontend/commit/dcd03e29f349ea632f791ac10c2dfa5d3f379b80))
+
+
+### Features
+
+* **area:** add new Area package ([2062f17](https://github.com/nextgis/nextgis_frontend/commit/2062f179fd8cbb5f75a6c8f78e440444f424ada8))
+* **leaflet-map-adapter:** add position to vector adapter layers definition ([3a20a8c](https://github.com/nextgis/nextgis_frontend/commit/3a20a8c2bedbd953e7e29446e1acf28a5ce68a4d))
+* **nge-kit:** add uploadFeatureAttachment util ([f0c2d5e](https://github.com/nextgis/nextgis_frontend/commit/f0c2d5eebc3a73277b25fd4af21501f8744ef8a3)), closes [#CU-m356](https://github.com/nextgis/nextgis_frontend/issues/CU-m356)
+* **ngw-kit:** add identify item for speedup ngw selection ([3bd8626](https://github.com/nextgis/nextgis_frontend/commit/3bd86264d1ae7712eb39f377b02c60daf5f070dd))
+* **ngw-kit:** ngwwebmap item toggle on zoom layer range ([4c64a8c](https://github.com/nextgis/nextgis_frontend/commit/4c64a8c15deb3f73a3f948610d06b3877f9577ab))
+
+
+### BREAKING CHANGES
+
+* `new WebMap({ mapAdapter: new MapAdapter(), ...appOptions, mapOptions: MapOptions })` > `new WebMap(mapOptions)`
+* `new NgwMap(new MapAdapter(), ngwMapOptions)` > `new NgwMap(ngwMapOptions)`
+* `WebMapOptions.create` is now `true` by default
+
+
+
+
+
 ## 1.16.8 (2023-05-14)
 
 

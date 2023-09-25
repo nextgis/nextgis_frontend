@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://github.com/nextgis/nextgis_frontend/compare/v0.5.0...v1.17.0) (2023-09-25)
+
+
+### Bug Fixes
+
+* **ngw-connector:** clean cache on resource delete ([179c372](https://github.com/nextgis/nextgis_frontend/commit/179c372b8c2358d57e1ad93a1afa2c6496d2619e))
+
+
+### Features
+
+* **geocoder:** add new geocoder package ([55c269b](https://github.com/nextgis/nextgis_frontend/commit/55c269b0a05f8e1cfb45227126b2a9c9c2e90f5d))
+* **geocoder:** index for all result items ([15d3dac](https://github.com/nextgis/nextgis_frontend/commit/15d3dacc3e21897c038cb2feccd96a220e6aec26))
+* handle vector layer mouse over and out events ([82700e2](https://github.com/nextgis/nextgis_frontend/commit/82700e2e9fddd85a4282126a6c8b917a6f29d9ca))
+* improve popup, add new options, ol support ([c0da880](https://github.com/nextgis/nextgis_frontend/commit/c0da8801931c3db3b860f0f06f4ac2dc16668faf))
+
+
+
+
+
 ## 1.16.8 (2023-05-14)
 
 

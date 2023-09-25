@@ -3,6 +3,45 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://github.com/nextgis/nextgis_frontend/compare/v0.5.0...v1.17.0) (2023-09-25)
+
+
+### Bug Fixes
+
+* **build:** control-container extract css ([ff15f22](https://github.com/nextgis/nextgis_frontend/commit/ff15f221bd46de3d0e32aaa2735f7224d49b24fc))
+* **ol-map-adapter:** geojson adapter style function type detection ([29452d1](https://github.com/nextgis/nextgis_frontend/commit/29452d1389794bc188bcc5da9d32082065e6cb43))
+
+
+### chore
+
+* build; eslint ([f9a736e](https://github.com/nextgis/nextgis_frontend/commit/f9a736ef43d07f295a9c63015ce745416584bd25))
+
+
+### Code Refactoring
+
+* **webmap:** change default paint ([8baa408](https://github.com/nextgis/nextgis_frontend/commit/8baa4081314a4024d32b01396dab0b9e0ec4684e))
+
+
+### Features
+
+* add library `@nextgis/paint` ([e7079c9](https://github.com/nextgis/nextgis_frontend/commit/e7079c9e231cafba634a3a6fa3efc448b4525f75))
+* **cesium:** extrude3d paint option ([bfa3518](https://github.com/nextgis/nextgis_frontend/commit/bfa3518f3c661c44ca8755ef435f66c76b03622c))
+* **cesium:** pin paint implementation for geojson layer ([62f50a6](https://github.com/nextgis/nextgis_frontend/commit/62f50a6004388b45e3f620a46ad082fe45aaeea3))
+* **mapbox-map-adapter:** MVT match paint ([441d857](https://github.com/nextgis/nextgis_frontend/commit/441d8575d135cbb3ff2ca3bc48a87a90460d3ce5))
+* **ngw-kit:** extensibility increased ([19869de](https://github.com/nextgis/nextgis_frontend/commit/19869de87b61f0c28586d8be560b95ca3f783f06))
+* **paint:** add experimental paint 3d style ([b970433](https://github.com/nextgis/nextgis_frontend/commit/b97043374696683efdf174949a68eef3759e06e2))
+* **paint:** implement of `match`-decision expression ([df6642f](https://github.com/nextgis/nextgis_frontend/commit/df6642f50b69880a63fdec2de01f469f02817787))
+
+
+### BREAKING CHANGES
+
+* **webmap:** changed the default paint: the fill is semi-transparent, add stroke
+* code formatting rules changed to prettier 2.0 compatibility
+
+
+
+
+
 ## 1.16.8 (2023-05-14)
 
 

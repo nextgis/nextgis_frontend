@@ -3,6 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://github.com/nextgis/nextgis_frontend/compare/v0.5.0...v1.17.0) (2023-09-25)
+
+
+### Bug Fixes
+
+* **build:** control-container extract css ([ff15f22](https://github.com/nextgis/nextgis_frontend/commit/ff15f221bd46de3d0e32aaa2735f7224d49b24fc))
+* **control-container:** style url ([323e1b2](https://github.com/nextgis/nextgis_frontend/commit/323e1b2f7744bff363846816a8cf3a00b4a8999d))
+* **ngw-kit:** create async adapter from parent resource ([3a5b1a0](https://github.com/nextgis/nextgis_frontend/commit/3a5b1a0d08fc2fd7e8f654d7070dbfb22063a72f))
+
+
+### chore
+
+* build; eslint ([f9a736e](https://github.com/nextgis/nextgis_frontend/commit/f9a736ef43d07f295a9c63015ce745416584bd25))
+
+
+### Features
+
+* add library cancelable-promise ([7a0d99f](https://github.com/nextgis/nextgis_frontend/commit/7a0d99f7ae874c058068141e8a8634032004195f))
+* add new library `ControlContainer` ([db89d97](https://github.com/nextgis/nextgis_frontend/commit/db89d974a4548c84b311b8e5f2517115511ed03d))
+* **cancelable-promise:** throw CancelError instead of onCancel callback ([0da1cc9](https://github.com/nextgis/nextgis_frontend/commit/0da1cc98645ec337bd9a869730991c7635e341af))
+* **control:** add universal zoom control ([6941bb5](https://github.com/nextgis/nextgis_frontend/commit/6941bb5fdd290b788d819f0c64acdaa63d561d8b))
+* new @nextgis/dom library ([1cf0044](https://github.com/nextgis/nextgis_frontend/commit/1cf004410146a6232e36beb0c72ed51ba7592c3b))
+* **webmap:** zoomIn and zoomOut MapAdapter optional methods ([c94483a](https://github.com/nextgis/nextgis_frontend/commit/c94483a063f339acfe789e729aab2f7d0681a90b))
+
+
+### BREAKING CHANGES
+
+* **cancelable-promise:** Removed onCancel argument from CancelablePromise. Now you should handle catch CancelError
+* code formatting rules changed to prettier 2.0 compatibility
+
+
+
+
+
 ## [1.16.9](https://github.com/nextgis/nextgis_frontend/compare/v1.16.8...v1.16.9) (2023-07-04)
 
 **Note:** Version bump only for package @nextgis/control-container

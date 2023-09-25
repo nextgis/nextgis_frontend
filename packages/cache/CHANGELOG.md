@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://github.com/nextgis/nextgis_frontend/compare/v0.5.0...v1.17.0) (2023-09-25)
+
+
+### Bug Fixes
+
+* **ngw-connector:** clean cache on resource delete ([179c372](https://github.com/nextgis/nextgis_frontend/commit/179c372b8c2358d57e1ad93a1afa2c6496d2619e))
+* **ngw-kit:** createGeojsonAdapter propertiesFilter ([c053f3c](https://github.com/nextgis/nextgis_frontend/commit/c053f3c2c57bcf6919c2082c5c624c47ed1c4413))
+
+
+### Features
+
+* **cache:** add array to match options deep compare ([a8c773f](https://github.com/nextgis/nextgis_frontend/commit/a8c773f3f3b55470c6dbd46040e5203ab8ba7816))
+* **cache:** add namespaces support ([8e7498b](https://github.com/nextgis/nextgis_frontend/commit/8e7498bf12685b1226c2d8daa033471e6e74a4b1))
+* **cache:** new package to cache key value with async ability ([3606d7e](https://github.com/nextgis/nextgis_frontend/commit/3606d7ea891e60e2993823bde8bf8f37ce76e383))
+* handle vector layer mouse over and out events ([82700e2](https://github.com/nextgis/nextgis_frontend/commit/82700e2e9fddd85a4282126a6c8b917a6f29d9ca))
+* **vue:** update cache on resource store patch ([8c8d98b](https://github.com/nextgis/nextgis_frontend/commit/8c8d98bc0a6f6211caacdec3adf2491db983a59f))
+
+
+
+
+
 ## 1.16.8 (2023-05-14)
 
 

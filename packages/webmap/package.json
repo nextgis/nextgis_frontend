@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/webmap",
-  "version": "1.16.9",
+  "version": "1.17.0",
   "_priority": 14,
   "description": "Universal map constructor",
   "main": "index.js",
@@ -9,17 +9,17 @@
   "jsdelivr": "lib/webmap.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/cancelable-promise": "^1.16.8",
-    "@nextgis/paint": "^1.16.8",
-    "@nextgis/properties-filter": "^1.16.8",
-    "@nextgis/utils": "^1.16.8",
+    "@nextgis/cancelable-promise": "^1.17.0",
+    "@nextgis/paint": "^1.17.0",
+    "@nextgis/properties-filter": "^1.17.0",
+    "@nextgis/utils": "^1.17.0",
     "@types/events": "^3.0.0",
     "@types/geojson": "^7946.0.8",
     "events": "^3.3.0",
     "strict-event-emitter-types": "^2.0.0"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "^1.16.8"
+    "@nextgis/build-tools": "^1.17.0"
   },
   "buildOptions": {
     "name": "WebMap",

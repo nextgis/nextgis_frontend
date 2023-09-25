@@ -3,6 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://github.com/nextgis/nextgis_frontend/compare/v0.5.0...v1.17.0) (2023-09-25)
+
+
+### Bug Fixes
+
+* **build:** control-container extract css ([ff15f22](https://github.com/nextgis/nextgis_frontend/commit/ff15f221bd46de3d0e32aaa2735f7224d49b24fc))
+* **mapboxgl-map-adapter:** select features by propertiesfilter improve ([f603c58](https://github.com/nextgis/nextgis_frontend/commit/f603c58c272324a3670a6b0e230c6a324cfb2774))
+* **properties-filte:** allow any chars for `like` and `ilike` search ([5845943](https://github.com/nextgis/nextgis_frontend/commit/584594307301fd62603015bce08205840698758a))
+* **properties-filter:** add field type check for like\ilike filter ([6f10344](https://github.com/nextgis/nextgis_frontend/commit/6f10344e3424cc14397fb69b4a61869c21ccf630))
+* **properties-filter:** repair like and ilike operations ([e104088](https://github.com/nextgis/nextgis_frontend/commit/e10408807a0387df162806850e6b457cf5eedbda))
+
+
+### chore
+
+* build; eslint ([f9a736e](https://github.com/nextgis/nextgis_frontend/commit/f9a736ef43d07f295a9c63015ce745416584bd25))
+
+
+### Features
+
+* add library `@nextgis/paint` ([e7079c9](https://github.com/nextgis/nextgis_frontend/commit/e7079c9e231cafba634a3a6fa3efc448b4525f75))
+* add library `@nextgis/properties-filter` ([5f874e8](https://github.com/nextgis/nextgis_frontend/commit/5f874e8d2a28bf873e61273bcf55ae29e60e16d0))
+* **cesium:** geojson adapter paint ([22211e0](https://github.com/nextgis/nextgis_frontend/commit/22211e0f1e303452de9a1e3286fc8144062d7d5f))
+* eslint no-dupe off; object utils; propertiesFilter generic ([e0678f0](https://github.com/nextgis/nextgis_frontend/commit/e0678f04ac73c1e8204b089fbc2443eb5892d80a))
+
+
+### BREAKING CHANGES
+
+* code formatting rules changed to prettier 2.0 compatibility
+* `propertiesFilter` removed from `@nextgis/utils`
+
+
+
+
+
 ## 1.16.8 (2023-05-14)
 
 

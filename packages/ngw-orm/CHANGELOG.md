@@ -3,6 +3,49 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://github.com/nextgis/nextgis_frontend/compare/v0.5.0...v1.17.0) (2023-09-25)
+
+
+### Bug Fixes
+
+* **ngw-connector:** clean cache on resource delete ([179c372](https://github.com/nextgis/nextgis_frontend/commit/179c372b8c2358d57e1ad93a1afa2c6496d2619e))
+* **ngw-connector:** do not throw error on node data load6 use promise reject ([5d772c8](https://github.com/nextgis/nextgis_frontend/commit/5d772c8a322941bddce89041ff98a4d4b7897821))
+* **ngw-connector:** improve for node ([b683ad8](https://github.com/nextgis/nextgis_frontend/commit/b683ad8faab7ff11344a630bc27762cc798e02c3))
+* **ngw-connector:** retunr undefined on empty apiRequest ([57bf52e](https://github.com/nextgis/nextgis_frontend/commit/57bf52e852fc6e3aad7f1653260b6fb01ea0810d))
+* **ngw-kit:** create async adapter from parent resource ([3a5b1a0](https://github.com/nextgis/nextgis_frontend/commit/3a5b1a0d08fc2fd7e8f654d7070dbfb22063a72f))
+* **ngw-kit:** fix like and ilike filter requests ([3654c2b](https://github.com/nextgis/nextgis_frontend/commit/3654c2baa9bb90ab2ccfda75ce24fd4a5713d0c7))
+* **ngw-orm:** remove console log ([d97814b](https://github.com/nextgis/nextgis_frontend/commit/d97814b471cae24f41b6dd9c5043979bef8df3f9))
+* **ngw-orm:** return sync resource ([9427524](https://github.com/nextgis/nextgis_frontend/commit/9427524894d4aa10d41cab59faea1017e236b08d))
+* **ngw-orm:** vector resource geometry ([94587f5](https://github.com/nextgis/nextgis_frontend/commit/94587f5d8d477fe29d34aeb751842eb025db4202))
+* **ngw-сщттусещк:** resource search query parent_id param ([f7dd32a](https://github.com/nextgis/nextgis_frontend/commit/f7dd32aa600eb7a608a81dd9adf6cd88defc3615))
+* remove require imports ([c227e90](https://github.com/nextgis/nextgis_frontend/commit/c227e9003e209ea88ed86bab2903fa88492083f4))
+
+
+### Features
+
+* **ngw-connector:** new getResourceBy method ([3014d39](https://github.com/nextgis/nextgis_frontend/commit/3014d396d9e35d05b6e5587b7fe444bb3b772269))
+* **ngw-orm:** new updateResource conection method ([123b785](https://github.com/nextgis/nextgis_frontend/commit/123b785bf7cf1422466e340987f37e836c603ff7))
+* **ngw-orm:** remove 3rd part libs to convers geom to wkt, use new ngw api ([bed453b](https://github.com/nextgis/nextgis_frontend/commit/bed453baeb6fabb0b3348f370395f930119130ea))
+* **ngw-orm:** update VectorLayer.toTypescript ([483a59a](https://github.com/nextgis/nextgis_frontend/commit/483a59a4ad6c53ae8bcd5cdeb2bf478fb2e2ae65))
+* **ngw-orm:** validate resource ([69f4ecb](https://github.com/nextgis/nextgis_frontend/commit/69f4ecb18ae383a1ffbf5c6b10174cddc8bc645f))
+* **ngw-orm:** vector layer payload for update ([d6569e7](https://github.com/nextgis/nextgis_frontend/commit/d6569e74ef1858453cc91be2f7c173aafe5c8206))
+
+
+### types
+
+* **ngw-connector:** rename ([032b555](https://github.com/nextgis/nextgis_frontend/commit/032b5550d0e6d0146dd36ac6091fb978bf1668ba))
+* rename interface ([8117938](https://github.com/nextgis/nextgis_frontend/commit/8117938b0e13d389df84705a5905042710e740a0))
+
+
+### BREAKING CHANGES
+
+* **ngw-connector:** FeatureLayerFields type is now FeatureProperties
+* change GetNgwLayerItemsOptions to GetNgwItemsOptions
+
+
+
+
+
 ## [1.16.9](https://github.com/nextgis/nextgis_frontend/compare/v1.16.8...v1.16.9) (2023-07-04)
 
 **Note:** Version bump only for package @nextgis/ngw-orm

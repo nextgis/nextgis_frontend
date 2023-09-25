@@ -3,6 +3,45 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://github.com/nextgis/nextgis_frontend/compare/v0.5.0...v1.17.0) (2023-09-25)
+
+
+### Bug Fixes
+
+* **build:** control-container extract css ([ff15f22](https://github.com/nextgis/nextgis_frontend/commit/ff15f221bd46de3d0e32aaa2735f7224d49b24fc))
+* **build:** fix item index.js error ([f1450fd](https://github.com/nextgis/nextgis_frontend/commit/f1450fda04c7afe18d642622b772925489998147))
+* **item:** check if property changed before set new value ([938af41](https://github.com/nextgis/nextgis_frontend/commit/938af41143cfad0c29695bfe97fa1112a4769704))
+* **item:** protect tree children arrays from modiffy ([1c87385](https://github.com/nextgis/nextgis_frontend/commit/1c8738599cdf167ee48f964f5b74aa5c58752763))
+* **ngw-kit:** webmapLayerItem options ([d12c301](https://github.com/nextgis/nextgis_frontend/commit/d12c301497c48403e5fb1d971976af420b055cb4))
+* remove require imports ([c227e90](https://github.com/nextgis/nextgis_frontend/commit/c227e9003e209ea88ed86bab2903fa88492083f4))
+* replace emitter.of by emitter.removeListener ([e31a4e0](https://github.com/nextgis/nextgis_frontend/commit/e31a4e09c0e414314e98c84caca9322e4e4f39a9))
+
+
+### chore
+
+* build; eslint ([f9a736e](https://github.com/nextgis/nextgis_frontend/commit/f9a736ef43d07f295a9c63015ce745416584bd25))
+
+
+### Features
+
+* add setViewDelay options to control map update ([7a06377](https://github.com/nextgis/nextgis_frontend/commit/7a06377c556975b51f828d8c823195aa727dfe88))
+* add WmsLayerAdapter ([3b5bf17](https://github.com/nextgis/nextgis_frontend/commit/3b5bf17bb2f699683d9b726a112f50b432859e4e))
+* handle vector layer mouse over and out events ([82700e2](https://github.com/nextgis/nextgis_frontend/commit/82700e2e9fddd85a4282126a6c8b917a6f29d9ca))
+* **item:** add @nextgis/tree dependency ([e74dd5f](https://github.com/nextgis/nextgis_frontend/commit/e74dd5f698901b65e1af958cda371e7e787245e9))
+* **ngw-kit:** ngwwebmap item toggle on zoom layer range ([4c64a8c](https://github.com/nextgis/nextgis_frontend/commit/4c64a8c15deb3f73a3f948610d06b3877f9577ab))
+* **ngw-kit:** NgwWebmapItem opacity ([30878c6](https://github.com/nextgis/nextgis_frontend/commit/30878c6a02e83ab68f00af765b07cf156d612002))
+* **paint:** add experimental paint 3d style ([b970433](https://github.com/nextgis/nextgis_frontend/commit/b97043374696683efdf174949a68eef3759e06e2))
+* **vue:** split vue-ngw-map for leaflet, ol an mapbox adapters ([4e2d149](https://github.com/nextgis/nextgis_frontend/commit/4e2d1495810480af84fee0644061157df1b6f0b5))
+
+
+### BREAKING CHANGES
+
+* code formatting rules changed to prettier 2.0 compatibility
+
+
+
+
+
 ## 1.16.8 (2023-05-14)
 
 

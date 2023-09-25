@@ -3,6 +3,55 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://github.com/nextgis/nextgis_frontend/compare/v0.5.0...v1.17.0) (2023-09-25)
+
+
+### Bug Fixes
+
+* **build:** control-container extract css ([ff15f22](https://github.com/nextgis/nextgis_frontend/commit/ff15f221bd46de3d0e32aaa2735f7224d49b24fc))
+* **ngw-connector:** fixes to apiRequest cancel work ([40fee1a](https://github.com/nextgis/nextgis_frontend/commit/40fee1a96a389a0d617bd35b6140db4f4a097eb6)), closes [#6](https://github.com/nextgis/nextgis_frontend/issues/6)
+* **ngw-kit:** set correct options when add webmaplayeritem ([8de2484](https://github.com/nextgis/nextgis_frontend/commit/8de24843fce1bb936c5077f4928cd2c671d1df61))
+* **ngw-orm:** return sync resource ([9427524](https://github.com/nextgis/nextgis_frontend/commit/9427524894d4aa10d41cab59faea1017e236b08d))
+* **ol-map-adapter:** geojson adapter style function type detection ([29452d1](https://github.com/nextgis/nextgis_frontend/commit/29452d1389794bc188bcc5da9d32082065e6cb43))
+* **ol:** geojson label null field ([32c2b23](https://github.com/nextgis/nextgis_frontend/commit/32c2b23bba4095ebf4c2a3a29960320d4e0d4388))
+
+
+### chore
+
+* build; eslint ([f9a736e](https://github.com/nextgis/nextgis_frontend/commit/f9a736ef43d07f295a9c63015ce745416584bd25))
+
+
+### Features
+
+* **cache:** add namespaces support ([8e7498b](https://github.com/nextgis/nextgis_frontend/commit/8e7498bf12685b1226c2d8daa033471e6e74a4b1))
+* **leaflet-map-adapter:** add position to vector adapter layers definition ([3a20a8c](https://github.com/nextgis/nextgis_frontend/commit/3a20a8c2bedbd953e7e29446e1acf28a5ce68a4d))
+* **ngw-kit:** add datetime ngw formatter ([a3bb90e](https://github.com/nextgis/nextgis_frontend/commit/a3bb90ef52da17f8d7110b811b0efa72b0941e60))
+* **ngw-kit:** add parse date from ngw feature and store util ([c50201f](https://github.com/nextgis/nextgis_frontend/commit/c50201f9f892cb5895fcab6ee1d6133993a61543))
+* **vues:** add onBeforeDelete hook ([4ec3bc6](https://github.com/nextgis/nextgis_frontend/commit/4ec3bc61fc94b9733e3ee2cf52e5285936c62756))
+* **vue:** split vue-ngw-map for leaflet, ol an mapbox adapters ([4e2d149](https://github.com/nextgis/nextgis_frontend/commit/4e2d1495810480af84fee0644061157df1b6f0b5))
+* **vue:** update cache on resource store patch ([8c8d98b](https://github.com/nextgis/nextgis_frontend/commit/8c8d98bc0a6f6211caacdec3adf2491db983a59f))
+* **vue:** vuex ResourceStore override delete function ability ([6c946ae](https://github.com/nextgis/nextgis_frontend/commit/6c946aebd82e91b86aa8ca9f4af4d665f1a5b41a))
+
+
+### Performance Improvements
+
+* **ngw-commector:** decrease get resource queries count ([18f3854](https://github.com/nextgis/nextgis_frontend/commit/18f38541050189fc27ee8b82d173e07de647eff3))
+
+
+### types
+
+* **ngw-connector:** rename ([032b555](https://github.com/nextgis/nextgis_frontend/commit/032b5550d0e6d0146dd36ac6091fb978bf1668ba))
+
+
+### BREAKING CHANGES
+
+* **ngw-connector:** FeatureLayerFields type is now FeatureProperties
+* code formatting rules changed to prettier 2.0 compatibility
+
+
+
+
+
 ## [1.16.9](https://github.com/nextgis/nextgis_frontend/compare/v1.16.8...v1.16.9) (2023-07-04)
 
 **Note:** Version bump only for package @nextgis/vuex-ngw

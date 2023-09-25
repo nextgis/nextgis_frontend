@@ -3,6 +3,239 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://github.com/nextgis/nextgis_frontend/compare/v0.5.0...v1.17.0) (2023-09-25)
+
+
+### Bug Fixes
+
+* **build:** control-container extract css ([ff15f22](https://github.com/nextgis/nextgis_frontend/commit/ff15f221bd46de3d0e32aaa2735f7224d49b24fc))
+* **cesium:** TileLayer ordering ([50df2f7](https://github.com/nextgis/nextgis_frontend/commit/50df2f72cd66ac8f70301a331252cfbb1d11910d))
+* **examples:** rapair examples ([abaa2d0](https://github.com/nextgis/nextgis_frontend/commit/abaa2d088d8e86567ba3a6a8c9ab80824c3f5226))
+* improve node/browser splitting ([8776970](https://github.com/nextgis/nextgis_frontend/commit/87769708a5eef959eca40bdce4c32dcc310eb608))
+* **leafelt-map-adapter:** selected layer click event param ([664fc7f](https://github.com/nextgis/nextgis_frontend/commit/664fc7f2436b577972f82198259b7fc69bca1c90))
+* **leaflet-map-adapter:** fix BaseAdapter pane zIndex set ([80ff87e](https://github.com/nextgis/nextgis_frontend/commit/80ff87e3576a817056ed28c1e9aa0e19274ceabf))
+* **leaflet-map-adapter:** geojson selection ([933507a](https://github.com/nextgis/nextgis_frontend/commit/933507a7fe61825c4742617073cd2c21deabe69d))
+* **mapboxgl-map-adapter:** select features by propertiesfilter improve ([f603c58](https://github.com/nextgis/nextgis_frontend/commit/f603c58c272324a3670a6b0e230c6a324cfb2774))
+* **ngw-connector:** clean cache on resource delete ([179c372](https://github.com/nextgis/nextgis_frontend/commit/179c372b8c2358d57e1ad93a1afa2c6496d2619e))
+* **ngw-connector:** fixes to apiRequest cancel work ([40fee1a](https://github.com/nextgis/nextgis_frontend/commit/40fee1a96a389a0d617bd35b6140db4f4a097eb6)), closes [#6](https://github.com/nextgis/nextgis_frontend/issues/6)
+* **ngw-connector:** retunr undefined on empty apiRequest ([57bf52e](https://github.com/nextgis/nextgis_frontend/commit/57bf52e852fc6e3aad7f1653260b6fb01ea0810d))
+* **ngw-connect:** properly abort request on cancel ([6dc8cd4](https://github.com/nextgis/nextgis_frontend/commit/6dc8cd43baa55280e2c8b8f38b806101f21f674b))
+* **ngw-kit:** check company_logo in settings ([7ddaeac](https://github.com/nextgis/nextgis_frontend/commit/7ddaeac056803fef6602c53ede9f60bc5a44666a))
+* **ngw-kit:** clean layer adapter options ([9037855](https://github.com/nextgis/nextgis_frontend/commit/903785543e73d13649adb6edadade56c50864024))
+* **ngw-kit:** create async adapter from parent resource ([3a5b1a0](https://github.com/nextgis/nextgis_frontend/commit/3a5b1a0d08fc2fd7e8f654d7070dbfb22063a72f))
+* **ngw-kit:** createGeojsonAdapter propertiesFilter ([c053f3c](https://github.com/nextgis/nextgis_frontend/commit/c053f3c2c57bcf6919c2082c5c624c47ed1c4413))
+* **ngw-kit:** do not load BBOX out of min-max zoom range ([e2b9e5e](https://github.com/nextgis/nextgis_frontend/commit/e2b9e5ee5257a3d0adc3143d22bc5bc7d489317b))
+* **ngw-kit:** do not reassign getExtent for geojson layer ([efcb4c9](https://github.com/nextgis/nextgis_frontend/commit/efcb4c9ee767e78bc36628e4244516a23f18ef4a))
+* **ngw-kit:** duplication of the server filter by the client ([1b19368](https://github.com/nextgis/nextgis_frontend/commit/1b1936814b70768b74f0cd6a94bdb6ce8980eddd))
+* **ngw-kit:** editing for a new layer visibility standard ([2548eec](https://github.com/nextgis/nextgis_frontend/commit/2548eec48008a7b01efff4a8d9b6013b45a6abf9))
+* **ngw-kit:** fetchNgwLayerItems client filter ([4d1e085](https://github.com/nextgis/nextgis_frontend/commit/4d1e0855ff4759d5415f7d6cadae6776f5efe3d6))
+* **ngw-kit:** fix addNgwLayer resource options ([c51d446](https://github.com/nextgis/nextgis_frontend/commit/c51d4461db59d7f235e4356976172bf72f991465))
+* **ngw-kit:** fix emppty identify geometry ([a833582](https://github.com/nextgis/nextgis_frontend/commit/a833582f4edd430891ad2c1417d98b889d15a6d2))
+* **ngw-kit:** fix like and ilike filter requests ([3654c2b](https://github.com/nextgis/nextgis_frontend/commit/3654c2baa9bb90ab2ccfda75ce24fd4a5713d0c7))
+* **ngw-kit:** getIdentifyItems multiple ([22cdd6f](https://github.com/nextgis/nextgis_frontend/commit/22cdd6f21ce649ef2dbae993c0ee374903c6a984))
+* **ngw-kit:** inject item into the createRasterAdapter class factory ([5e0ecf8](https://github.com/nextgis/nextgis_frontend/commit/5e0ecf814237f912e08cc3be07f2484fb5b2118b))
+* **ngw-kit:** insert headers into createOnFirstShowAdapter addLayer method ([e06ba86](https://github.com/nextgis/nextgis_frontend/commit/e06ba862811ccf4f0e66099130391cc765c09b3d))
+* **ngw-kit:** make async onFirstShowAdapter hide and show methods ([95362a8](https://github.com/nextgis/nextgis_frontend/commit/95362a89085ecda4a6225cd58bc9347ff970fd81))
+* **ngw-kit:** ngw webmap item childrensafe reverse ([056c9c7](https://github.com/nextgis/nextgis_frontend/commit/056c9c77d771976bbff13ec54da4a75138ec7302))
+* **ngw-kit:** ngw webmap items layer order ([0c7028b](https://github.com/nextgis/nextgis_frontend/commit/0c7028b821121a54d82106000d21b1cac76d79f6))
+* **ngw-kit:** ngw-webmap tree sublevel order ([11a12e7](https://github.com/nextgis/nextgis_frontend/commit/11a12e739640e0ca264088c14642f5b65c92f987))
+* **ngw-kit:** NgwWebmapItem max min zoom calculate ([3a5ea03](https://github.com/nextgis/nextgis_frontend/commit/3a5ea039d196c2bb5138ebcd9ccdc0c576c1b036))
+* **ngw-kit:** NgwWebmapLayerAdapter constuctor options ([7895f8f](https://github.com/nextgis/nextgis_frontend/commit/7895f8fcd4650fe8d7fa1c7db0600188d18cded4))
+* **ngw-kit:** NgwWebMapLayerAdapter exent constrained ([f026ae8](https://github.com/nextgis/nextgis_frontend/commit/f026ae81fdd9fc6e8effc3a1cf04678040b1b73c))
+* **ngw-kit:** no load date for geojson layer if data ([e527d3f](https://github.com/nextgis/nextgis_frontend/commit/e527d3f32e5540c2d5dba4444fa1b31879d61845))
+* **ngw-kit:** not identify for not supported layer ([7c62528](https://github.com/nextgis/nextgis_frontend/commit/7c62528ea2cbadd78d39ad139e65a21a1ab67cae))
+* **ngw-kit:** not stringify null on save ngw feature ([98af7a7](https://github.com/nextgis/nextgis_frontend/commit/98af7a7698a3d4e7a14977052fd0f45687b63642))
+* **ngw-kit:** on first adapter wait while show layer ([4f7b217](https://github.com/nextgis/nextgis_frontend/commit/4f7b2178336a56bb0afdc40520d6871e9915641c))
+* **ngw-kit:** order_by param ([8dfdf4a](https://github.com/nextgis/nextgis_frontend/commit/8dfdf4a73c2a6580950c560bfe5553bdfbcc30f7))
+* **ngw-kit:** protect firstShowAdapter from multiple creation ([ec7d44a](https://github.com/nextgis/nextgis_frontend/commit/ec7d44ab90f753845076cc2cf0d7040325b18791))
+* **ngw-kit:** remove async from NgwWebmapItem child add ([8667c88](https://github.com/nextgis/nextgis_frontend/commit/8667c88d8ca560444e5f09e497090ca5834fcf7b))
+* **ngw-kit:** remove duplicates from a query with filter by ANY condition ([d3b1ab9](https://github.com/nextgis/nextgis_frontend/commit/d3b1ab9dbc8e7e3862a45ba3b9bdae0b0b9d715c))
+* **ngw-kit:** remove forgotten log ([674ac9f](https://github.com/nextgis/nextgis_frontend/commit/674ac9f3478961800b83e764e72a15adc77ba2c0))
+* **ngw-kit:** remove unresolved variable ([e202f9d](https://github.com/nextgis/nextgis_frontend/commit/e202f9df68c9ce71298d1d04b74c0a6625c02894))
+* **ngw-kit:** resolve createGeoJsonAdapter options override II ([324da98](https://github.com/nextgis/nextgis_frontend/commit/324da983210ac023b8877abf3f7b3e92534e2141))
+* **ngw-kit:** return raster_layer resource support ([2ea59da](https://github.com/nextgis/nextgis_frontend/commit/2ea59da25e1e80a3381c0553b452c71d80809fd9))
+* **ngw-kit:** set correct options when add webmaplayeritem ([8de2484](https://github.com/nextgis/nextgis_frontend/commit/8de24843fce1bb936c5077f4928cd2c671d1df61))
+* **ngw-kit:** set image adapter default nd param ([4f25fab](https://github.com/nextgis/nextgis_frontend/commit/4f25fabe27d7571fcd04d0cb1689a4e20c629ebc))
+* **ngw-kit:** set NgwWebmap tree item property before layer load ([3b6a137](https://github.com/nextgis/nextgis_frontend/commit/3b6a137213a8478193078c1e88c781e83326f149))
+* **ngw-kit:** show only one enabled webmap basemap ([100414f](https://github.com/nextgis/nextgis_frontend/commit/100414f3264d0995b86375a33d1898be31489939))
+* **ngw-kit:** webmap item children ordering ([b4136f8](https://github.com/nextgis/nextgis_frontend/commit/b4136f839102319beb3a23f2b81da14195cffa23))
+* **ngw-kit:** webmap iten async addLayer method ([2c24b3a](https://github.com/nextgis/nextgis_frontend/commit/2c24b3acf77643a394139a6eeff8a95173ea7c60))
+* **ngw-kit:** webmapLayerItem options ([d12c301](https://github.com/nextgis/nextgis_frontend/commit/d12c301497c48403e5fb1d971976af420b055cb4))
+* **ngw-kit:** WebmapLayerItem ordering ([ebc98c2](https://github.com/nextgis/nextgis_frontend/commit/ebc98c2134c8c2def041b02127c8c75a207322b4))
+* **ngw-kit:** wms adapter layers options from adapterOptions ([5d06e3e](https://github.com/nextgis/nextgis_frontend/commit/5d06e3e17b2642679074b5b02468b926486fca4c))
+* **ngw:** create async adapter for webmap ([4ef3d3e](https://github.com/nextgis/nextgis_frontend/commit/4ef3d3ec0d0c30da5ede1f8a0c03ef5a05413b19))
+* **ngw:** get geojson request options ([26e3c9e](https://github.com/nextgis/nextgis_frontend/commit/26e3c9ea6a81e825db649b5ad429426c96ef7bd5))
+* **ngw:** ngw webmap resource ordering ([f00e010](https://github.com/nextgis/nextgis_frontend/commit/f00e010bffaadb9db5f512c048ef83a6e271018f))
+* **ngw:** return support for vector layer adapter ([97db806](https://github.com/nextgis/nextgis_frontend/commit/97db806649eb9fd5cfaf3b8c18186b121480a9d5))
+* **nngw-kit:** resolve create geojson adapter options override ([c82403b](https://github.com/nextgis/nextgis_frontend/commit/c82403b2a9fb98ba75ec1e11e75b62cc605a19ca))
+* **qms:** add createQmsAdapter options ([11e7450](https://github.com/nextgis/nextgis_frontend/commit/11e7450408eedc9d2fe54bd1492ebfdc60e2e8cd))
+* remove require imports ([c227e90](https://github.com/nextgis/nextgis_frontend/commit/c227e9003e209ea88ed86bab2903fa88492083f4))
+* replace emitter.of by emitter.removeListener ([e31a4e0](https://github.com/nextgis/nextgis_frontend/commit/e31a4e09c0e414314e98c84caca9322e4e4f39a9))
+* **utils:** applyMixin options on no replace ([10869d1](https://github.com/nextgis/nextgis_frontend/commit/10869d12d0834cfad5159b32b2b94ab00cc283ef))
+* **utils:** update applyMixins util to allow babel build ([97aea6d](https://github.com/nextgis/nextgis_frontend/commit/97aea6db46e5c7b4ba4eaa8f88dbb2118557d33a))
+* **vue:** selection for items with properties and tree ([9ab628a](https://github.com/nextgis/nextgis_frontend/commit/9ab628a70e67e22377242a02b73eef5758fd9d40))
+* **vuetify:** NgwLayersList root item hide ([3eabbe4](https://github.com/nextgis/nextgis_frontend/commit/3eabbe4b35657cae6c59bff559ffc6671c47fb38))
+* **webmap:** add check for fitBounds extent ([fcc3060](https://github.com/nextgis/nextgis_frontend/commit/fcc30604f787d7ada7561904d18a5a83c440777a))
+* **webmap:** addLayer adapter options set ([e2ac2a9](https://github.com/nextgis/nextgis_frontend/commit/e2ac2a96b9eecd7ff56edf362c0caf09fbc87300))
+* **webmap:** constructor options; move controls options from ngw to webmap ([10ad07e](https://github.com/nextgis/nextgis_frontend/commit/10ad07ed1342dd3a1301e4c48255e16d65751c0d))
+* **webmap:** get layers method only string keys ([631a684](https://github.com/nextgis/nextgis_frontend/commit/631a68428b544f64e68d7727a709bb6bebc9afb1))
+
+
+### Build System
+
+* qms-kit to rollup ([9fdc1f8](https://github.com/nextgis/nextgis_frontend/commit/9fdc1f8155aea86e7ddc1d2b2d078c21391ca803))
+
+
+### chore
+
+* build; eslint ([f9a736e](https://github.com/nextgis/nextgis_frontend/commit/f9a736ef43d07f295a9c63015ce745416584bd25))
+
+
+### Code Refactoring
+
+* **ngw-kit:** naming ([53a80b7](https://github.com/nextgis/nextgis_frontend/commit/53a80b742c0462f744fc0884d1499a09b51f2b18))
+* rename layerAdapter baseLayer option to baselayer ([e5428f1](https://github.com/nextgis/nextgis_frontend/commit/e5428f1f5bc6148ffb3c933a6ac96a4b373b6a02))
+* **utils:** update geom utils ([caebd68](https://github.com/nextgis/nextgis_frontend/commit/caebd68833967eeb23f78c35bdaa3c83bdf7442d))
+
+
+### Features
+
+* add BBOX+ strategy; extends options for setView ([d7db9a6](https://github.com/nextgis/nextgis_frontend/commit/d7db9a619b702c78bbfe939233972a57923f46ac))
+* add library `@nextgis/properties-filter` ([5f874e8](https://github.com/nextgis/nextgis_frontend/commit/5f874e8d2a28bf873e61273bcf55ae29e60e16d0))
+* add library cancelable-promise ([7a0d99f](https://github.com/nextgis/nextgis_frontend/commit/7a0d99f7ae874c058068141e8a8634032004195f))
+* add setViewDelay options to control map update ([7a06377](https://github.com/nextgis/nextgis_frontend/commit/7a06377c556975b51f828d8c823195aa727dfe88))
+* add WmsLayerAdapter ([3b5bf17](https://github.com/nextgis/nextgis_frontend/commit/3b5bf17bb2f699683d9b726a112f50b432859e4e))
+* **cache:** add array to match options deep compare ([a8c773f](https://github.com/nextgis/nextgis_frontend/commit/a8c773f3f3b55470c6dbd46040e5203ab8ba7816))
+* **cache:** add namespaces support ([8e7498b](https://github.com/nextgis/nextgis_frontend/commit/8e7498bf12685b1226c2d8daa033471e6e74a4b1))
+* **cesium-map-adapter:** add map click event ([d3a2050](https://github.com/nextgis/nextgis_frontend/commit/d3a205014436fe89f8036afa00d20af44b2421d5))
+* **cesium:** add heightOffset geojson option ([53b1a5b](https://github.com/nextgis/nextgis_frontend/commit/53b1a5b8f118c46ea5921f1262e453c35606349e))
+* **cesium:** add mapAdapter listeners and getBounds method ([de74e02](https://github.com/nextgis/nextgis_frontend/commit/de74e025c72a5c1d90c779fb431e252d7602a4f3))
+* **cesium:** add tilset3d adapter paint options ([26ce884](https://github.com/nextgis/nextgis_frontend/commit/26ce884c5fda26bfafcddb9df098b328967b74c4))
+* **cesium:** fitBounds up tp terrain ([08abf2e](https://github.com/nextgis/nextgis_frontend/commit/08abf2ebe6e90b795737369700415b784e731fe8))
+* **cesium:** update layer and map adapter ([8539d15](https://github.com/nextgis/nextgis_frontend/commit/8539d15a9f34cb765380b306b7bcc01e676336ea))
+* handle vector layer mouse over and out events ([82700e2](https://github.com/nextgis/nextgis_frontend/commit/82700e2e9fddd85a4282126a6c8b917a6f29d9ca))
+* **item:** add @nextgis/tree dependency ([e74dd5f](https://github.com/nextgis/nextgis_frontend/commit/e74dd5f698901b65e1af958cda371e7e787245e9))
+* **leaflet-map-adapter:** add position to vector adapter layers definition ([3a20a8c](https://github.com/nextgis/nextgis_frontend/commit/3a20a8c2bedbd953e7e29446e1acf28a5ce68a4d))
+* **leaflet-map-adapter:** setMinZoom on maxExtent ([c539bf2](https://github.com/nextgis/nextgis_frontend/commit/c539bf2b52098dffdc8d4eea4c6048eead2158a7))
+* **mapbox-map-adapter:** GeoJson layer label workaround ([836cc44](https://github.com/nextgis/nextgis_frontend/commit/836cc44c43ee55cdc9270ff944a322382ae631eb))
+* **mapbox-map-adapter:** MVT match paint ([441d857](https://github.com/nextgis/nextgis_frontend/commit/441d8575d135cbb3ff2ca3bc48a87a90460d3ce5))
+* **mapbox-map-adapter:** set opacity with native paint ([6f4ac72](https://github.com/nextgis/nextgis_frontend/commit/6f4ac72538088445bd5fb0a10f059eddb76cada1))
+* new @nextgis/dom library ([1cf0044](https://github.com/nextgis/nextgis_frontend/commit/1cf004410146a6232e36beb0c72ed51ba7592c3b))
+* **nge-kit:** add uploadFeatureAttachment util ([f0c2d5e](https://github.com/nextgis/nextgis_frontend/commit/f0c2d5eebc3a73277b25fd4af21501f8744ef8a3)), closes [#CU-m356](https://github.com/nextgis/nextgis_frontend/issues/CU-m356)
+* **ngw-connector:** remove login logic from getUserInfo ([1608e2c](https://github.com/nextgis/nextgis_frontend/commit/1608e2cd652d4d92d0602c5345160b1f2b392596))
+* **ngw-kit:** add ability to render multilayers image adapter ([3376f82](https://github.com/nextgis/nextgis_frontend/commit/3376f82f2c91399495baa05c1a799e5e8e82fe43))
+* **ngw-kit:** add addLayerOptionsPriority for createGeoJsonAdapter ([7498e3d](https://github.com/nextgis/nextgis_frontend/commit/7498e3df0849f0f7958f74194e04149569d70ba3))
+* **ngw-kit:** add baselayers from webmap; vuetify BaseLayerSelect ([e060be1](https://github.com/nextgis/nextgis_frontend/commit/e060be1e47750362032cffc0a41d81d20cdb4cd5))
+* **ngw-kit:** add bbox strategy for large vector layer ([8ac9e8c](https://github.com/nextgis/nextgis_frontend/commit/8ac9e8c245431062aade39a0576e4e56f50c78f7))
+* **ngw-kit:** add bbox strategy layer preupdate event ([344ab06](https://github.com/nextgis/nextgis_frontend/commit/344ab06726f90d0ace6b02e005100b150ebe1413))
+* **ngw-kit:** add BBOX+ strategy ([c665a9f](https://github.com/nextgis/nextgis_frontend/commit/c665a9fcc2264678543f6a20a5db3c90ccfaad31))
+* **ngw-kit:** add datetime ngw formatter ([a3bb90e](https://github.com/nextgis/nextgis_frontend/commit/a3bb90ef52da17f8d7110b811b0efa72b0941e60))
+* **ngw-kit:** add feature request extensions param ([a0e6376](https://github.com/nextgis/nextgis_frontend/commit/a0e63766e8e32f4ebc7d2c61b6ed3fccb1fa71d2))
+* **ngw-kit:** add feature request srs param ([5261a89](https://github.com/nextgis/nextgis_frontend/commit/5261a891fca25999d31a7fd7ae6af2f8b01b551c))
+* **ngw-kit:** add feature to getIdentifyItems ([e512ee7](https://github.com/nextgis/nextgis_frontend/commit/e512ee7dae4b09f5e44932e5cb1be07a50f1931b))
+* **ngw-kit:** add fetchNgwLayerItems option to disable clietn filter ([e3dd5f3](https://github.com/nextgis/nextgis_frontend/commit/e3dd5f3a04e9021c80b509f037ba1266b80721a3))
+* **ngw-kit:** add identify item for speedup ngw selection ([3bd8626](https://github.com/nextgis/nextgis_frontend/commit/3bd86264d1ae7712eb39f377b02c60daf5f070dd))
+* **ngw-kit:** add new selectNgwLayerDistinct util ([3eccc4b](https://github.com/nextgis/nextgis_frontend/commit/3eccc4bad51687271b8483595e7b4a9855aa0739))
+* **ngw-kit:** add ngw basemap suppor for url ([6a9c7da](https://github.com/nextgis/nextgis_frontend/commit/6a9c7daa4ff690eee095da956503ac6154e5ff5a))
+* **ngw-kit:** add NgwKit.utils.getCompanyLogo method ([348beb6](https://github.com/nextgis/nextgis_frontend/commit/348beb6419166726edb2854acfb303411e28d0c9))
+* **ngw-kit:** add parse date from ngw feature and store util ([c50201f](https://github.com/nextgis/nextgis_frontend/commit/c50201f9f892cb5895fcab6ee1d6133993a61543))
+* **ngw-kit:** add polygon intersection identify util ([439cf4a](https://github.com/nextgis/nextgis_frontend/commit/439cf4a213314d2e1c6479a99d67b939e6742ef3))
+* **ngw-kit:** add postgis_layer cls adapter ([aa0233c](https://github.com/nextgis/nextgis_frontend/commit/aa0233c69bc94593e1e632463b78f68a87b8d37e))
+* **ngw-kit:** add tileNoData ngw adapter option ([eef8b87](https://github.com/nextgis/nextgis_frontend/commit/eef8b878dca035754e73c90fabea12c4dc4639e5))
+* **ngw-kit:** add tmsclient_layer adapter class support ([fced84c](https://github.com/nextgis/nextgis_frontend/commit/fced84cb059a9e3d1c52c9cc0812b477a254bd9c))
+* **ngw-kit:** add toGeojson in ngw layer item response ([9ca7349](https://github.com/nextgis/nextgis_frontend/commit/9ca734951c7e6fdfe2a231b97d3aa19fc660289a))
+* **ngw-kit:** add useBasemap NgwWebmaplayerAdapter option ([9c31fe5](https://github.com/nextgis/nextgis_frontend/commit/9c31fe5fd10f158ae6cb361e3c5c60b968f3014f))
+* **ngw-kit:** add webmap item method to cotrol item children order ([f40f729](https://github.com/nextgis/nextgis_frontend/commit/f40f7299d89cafb441716c45dd4649991ccc59a2))
+* **ngw-kit:** calculate group NgwWebMapItem init visibility ([4641ae6](https://github.com/nextgis/nextgis_frontend/commit/4641ae6eb2650439650c7f5fd2b5f47581821591))
+* **ngw-kit:** default WebmapLayerAdapter basemap ([96d56d0](https://github.com/nextgis/nextgis_frontend/commit/96d56d0ee0cab7873d09c8cc012ac10b9484984f))
+* **ngw-kit:** disable api clien filter without any case ([49872bd](https://github.com/nextgis/nextgis_frontend/commit/49872bdcf3d4a0c51c370be51072f2964403ff38))
+* **ngw-kit:** duplication of the server filter by the client ([7c6af59](https://github.com/nextgis/nextgis_frontend/commit/7c6af59e48a477b5ed67392d4cbaa282a9c6825c))
+* **ngw-kit:** export createPopupContent util ([d72c9f3](https://github.com/nextgis/nextgis_frontend/commit/d72c9f36873bc217867dc64f45c53b5227e55980))
+* **ngw-kit:** export getImageAdapterOptions method ([97135fe](https://github.com/nextgis/nextgis_frontend/commit/97135fe1301d91982f67075a6e7a7913ca04e7d9))
+* **ngw-kit:** extensibility increased ([19869de](https://github.com/nextgis/nextgis_frontend/commit/19869de87b61f0c28586d8be560b95ca3f783f06))
+* **ngw-kit:** features request cache option ([a8c5a8a](https://github.com/nextgis/nextgis_frontend/commit/a8c5a8a17eb149d3d8e9f02ca08ba9d848f9fde1))
+* **ngw-kit:** handle Infinity in fetchNgwItems query limit param ([3997c88](https://github.com/nextgis/nextgis_frontend/commit/3997c8823cf9cd7d2489ec7f4c8925c7e77b066e))
+* **ngw-kit:** id fields as number for client filter ([cb4afc0](https://github.com/nextgis/nextgis_frontend/commit/cb4afc0f3795aabb68bea6f4dbfe4126989e5f70))
+* **ngw-kit:** improve createOnFirstShowAdapter ([ac63cae](https://github.com/nextgis/nextgis_frontend/commit/ac63cae206a9bc4bd71a19772baef168c6d8c82b))
+* **ngw-kit:** log to get item extensions if not request param set ([3e4b31c](https://github.com/nextgis/nextgis_frontend/commit/3e4b31cae4e5c8a036c427cc1fd18b053bdf1a6a))
+* **ngw-kit:** make create basemap layer adapter universal ([182da50](https://github.com/nextgis/nextgis_frontend/commit/182da506f649a86c425a30db649fb49efa76e4d9))
+* **ngw-kit:** new addNgwLayer resource option for keyname or resourceId ([c7826dd](https://github.com/nextgis/nextgis_frontend/commit/c7826dd658eb18656f9802a12d5c3c4d5e19f000))
+* **ngw-kit:** new approach to extend adapters for any resource classes ([21e5385](https://github.com/nextgis/nextgis_frontend/commit/21e538538e4480baf6d8293158bd2cacdd235478))
+* **ngw-kit:** ngw webmap item bookmarks handler ([3084cea](https://github.com/nextgis/nextgis_frontend/commit/3084cea63f8093683e4ed165b43641484091884e))
+* **ngw-kit:** ngwwebmap item toggle on zoom layer range ([4c64a8c](https://github.com/nextgis/nextgis_frontend/commit/4c64a8c15deb3f73a3f948610d06b3877f9577ab))
+* **ngw-kit:** NgwWebmapItem opacity ([30878c6](https://github.com/nextgis/nextgis_frontend/commit/30878c6a02e83ab68f00af765b07cf156d612002))
+* **ngw-kit:** prepare datetime fields to ngw ([8b359c8](https://github.com/nextgis/nextgis_frontend/commit/8b359c830aef4c3205f4f419742f2b68344bb5ec))
+* **ngw-kit:** update feature request params ([98fddef](https://github.com/nextgis/nextgis_frontend/commit/98fddef5f83931013d511166ce567a669f41d30f))
+* **ngw-kit:** update features request params on no geom ([12b49a8](https://github.com/nextgis/nextgis_frontend/commit/12b49a88adcad77a7a3e066eef2c15678b16c827))
+* **ngw-kit:** update loaded date before property filter ([a8565cb](https://github.com/nextgis/nextgis_frontend/commit/a8565cb3c96c5c3394641b9cac21489c3b0eeefa))
+* **ngw-kit:** use abort signal in fetch requests ([57a9d0d](https://github.com/nextgis/nextgis_frontend/commit/57a9d0d35df1c490507e1499262749735ec599ba))
+* **ngw-map:** add ngw layer from resource item object ([c4118d3](https://github.com/nextgis/nextgis_frontend/commit/c4118d3835818f3ae4d356c5220a1c72a905f619))
+* **ngw-map:** add promise groups handler ([9cbe6b7](https://github.com/nextgis/nextgis_frontend/commit/9cbe6b76d08b88a24c1bd4ad0041f7be6d2b2ad9))
+* **ngw-mapbox:** add MVT support for addNgwlayer ([09e7bcd](https://github.com/nextgis/nextgis_frontend/commit/09e7bcd129643d8604555eb655d06cb0cc0d1a4e))
+* **ngw-orm:** remove 3rd part libs to convers geom to wkt, use new ngw api ([bed453b](https://github.com/nextgis/nextgis_frontend/commit/bed453baeb6fabb0b3348f370395f930119130ea))
+* **ngw:** add support for `qgis_raster_style` ([6c712d0](https://github.com/nextgis/nextgis_frontend/commit/6c712d021370c945f5eda604c0071fc7487b0340))
+* **ngw:** conditions and nesting for filtering ngw feature layer ([2e0668e](https://github.com/nextgis/nextgis_frontend/commit/2e0668e1c57bb05223e926387823c4f219c7286a))
+* **ngw:** option to create popup content from item ([7a7a3ff](https://github.com/nextgis/nextgis_frontend/commit/7a7a3ffa44cb4165a4911312f6592e71a43f1624))
+* **ol-map-adapter:** add srs options to draw vector layer ([b49815d](https://github.com/nextgis/nextgis_frontend/commit/b49815d3fdd60cebcef7a2d0a32b7d5bc6abaabd))
+* **ol-map-adapter:** use add layer opacity option ([e3b1ea6](https://github.com/nextgis/nextgis_frontend/commit/e3b1ea68571d83c87938774ad9b686acc16534c0))
+* **paint:** add experimental paint 3d style ([b970433](https://github.com/nextgis/nextgis_frontend/commit/b97043374696683efdf174949a68eef3759e06e2))
+* **util:** create typeHelpers utils ([12a946d](https://github.com/nextgis/nextgis_frontend/commit/12a946d99a83250355a5862d9ac3f14de1b9459f))
+* **utils:** deprecated helper utils ([c10ecb9](https://github.com/nextgis/nextgis_frontend/commit/c10ecb9bc3067257a5c2ae9927ecc1d26fbfefda))
+* **utils:** move some utils from ngw-kit and webmap to geom ([78c0e05](https://github.com/nextgis/nextgis_frontend/commit/78c0e05c9ee91fb947c3cab9c2e084815b469f31))
+* **vue:** add layer toggle listener for baselayerselect ([c343fec](https://github.com/nextgis/nextgis_frontend/commit/c343fecca6f64ec8dd2c663837dedf9d3b2d1cbf))
+* **vue:** split vue-ngw-map for leaflet, ol an mapbox adapters ([4e2d149](https://github.com/nextgis/nextgis_frontend/commit/4e2d1495810480af84fee0644061157df1b6f0b5))
+* **webmap:** add addLayer onAdded option ([1be452a](https://github.com/nextgis/nextgis_frontend/commit/1be452a9b3cb761ddcb6aa6804ae0a601227358b))
+* **webmap:** implement WebmapLayers get Attributions onlyBaselayer option ([8e123a9](https://github.com/nextgis/nextgis_frontend/commit/8e123a9f5c257f9c0786b83e8d1f4d1cb603edfa))
+* **webmap:** layer adapter waitFullLoad and crossOrigin new options ([2ab3789](https://github.com/nextgis/nextgis_frontend/commit/2ab378949c26d3eb2360dea3f7052d6348ccd9a2))
+* **webmap:** make propertiesFilter async ([00ebfd6](https://github.com/nextgis/nextgis_frontend/commit/00ebfd613262ee60e72820266ac54ba82232574d))
+* **webmap:** new addTileLayer shortcut WebMap method ([ce601eb](https://github.com/nextgis/nextgis_frontend/commit/ce601eb454fd6d1b06e82ed2617c042477f7f9b1))
+* **webmap:** update layer adapter options ([977426f](https://github.com/nextgis/nextgis_frontend/commit/977426f8b86c53528ac00d727deb6daf50696559))
+* **webmap:** update PropertiesFilter interface ([8312bd3](https://github.com/nextgis/nextgis_frontend/commit/8312bd384797c55f3646417954107885de7c9c2f))
+
+
+### Performance Improvements
+
+* **leaflet:** abort xhr tile loading on setView ([60ec4be](https://github.com/nextgis/nextgis_frontend/commit/60ec4bec931c820edc44137886d0bc4d9f93b2a4))
+* **leaflet:** setViewDelay for tile layer ([043fd3e](https://github.com/nextgis/nextgis_frontend/commit/043fd3e5739b6fb69de216ca2630ea6b36bc5c5b))
+* **ngw-kit:** abort BBOX request on map movestart ([ebd9c2b](https://github.com/nextgis/nextgis_frontend/commit/ebd9c2bd0b65f5429e0112cf483ce0110e271efb))
+* **ngw-kit:** default limit to load large vector layer data ([4dcfdf8](https://github.com/nextgis/nextgis_frontend/commit/4dcfdf8c1eb5a6905f17d84c2a8d971b721b4fa2))
+* **ngw-kit:** geojson adapter not blocked on data load ([4dbf64f](https://github.com/nextgis/nextgis_frontend/commit/4dbf64f95fadb680b4be6db39b08275d938f791c))
+
+
+### types
+
+* **ngw-connector:** rename ([032b555](https://github.com/nextgis/nextgis_frontend/commit/032b5550d0e6d0146dd36ac6091fb978bf1668ba))
+* rename interface ([8117938](https://github.com/nextgis/nextgis_frontend/commit/8117938b0e13d389df84705a5905042710e740a0))
+
+
+### wip
+
+* rename VectorLayerAdapterType ([a4779ff](https://github.com/nextgis/nextgis_frontend/commit/a4779ff53e00e9ea7d0f829e1b0f69221ec79065))
+* **util:** move CancelablePromise to util ([9d7a645](https://github.com/nextgis/nextgis_frontend/commit/9d7a6454b273edf228b8bf8be353ddb8a8bc250e))
+
+
+### BREAKING CHANGES
+
+* **ngw-connector:** The getUserInfo mehod does not emit any more login events. Only login method does this
+* **ngw-connector:** FeatureLayerFields type is now FeatureProperties
+* change GetNgwLayerItemsOptions to GetNgwItemsOptions
+* **ngw-kit:** `extensions` for any ngw feature request is now empty for default
+* **utils:** removed latLng from MapClickEvent, use lngLat: numner[] instead
+* **utils:** WebMap static property utils have been removed, import utilites from `@nextgis/webmap` library instead
+* **ngw-kit:** replace `import { WebMapLayerAdapter } from @nextgis/ngw-kit` to `import { NgwWebmapLayerAdapter } from @nextgis/ngw-kit` and `import { WebMapLayerItem} from @nextgis/ngw-kit` to `import { NgwWebmapLayerItem } from @nextgis/ngw-kit`
+* No more default export from `qms-kit`. You should replace `import QmsKit from "@nextgis/qms-kit"` to `import { QmsKit } from "@nextgis/qms-kit"` everywhere
+* LayerAdapter option baseLayer was renamed to baselayer;
+* webMap.getBaseLayers() method now return LayerAdapter, not string array of ids
+* rename VectorLayerAdapter types: circle > point; fill > polygon
+* **ngw-kit:** rename NgwKit.utils.getIdentifyGeoJsonParams > NgwKit.utils.getIdentifyItems
+* code formatting rules changed to prettier 2.0 compatibility
+* `propertiesFilter` removed from `@nextgis/utils`
+* **util:** CancelablePromise has been removed from ngw-connecter. Now you should do this: import {CancelablePromise} from '@nextgis/utils;'
+
+
+
+
+
 ## [1.16.9](https://github.com/nextgis/nextgis_frontend/compare/v1.16.8...v1.16.9) (2023-07-04)
 
 **Note:** Version bump only for package @nextgis/ngw-kit

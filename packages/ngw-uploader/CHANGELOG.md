@@ -3,6 +3,52 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://github.com/nextgis/nextgis_frontend/compare/v0.5.0...v1.17.0) (2023-09-25)
+
+
+### Bug Fixes
+
+* **build:** control-container extract css ([ff15f22](https://github.com/nextgis/nextgis_frontend/commit/ff15f221bd46de3d0e32aaa2735f7224d49b24fc))
+* **ngw-kit:** create async adapter from parent resource ([3a5b1a0](https://github.com/nextgis/nextgis_frontend/commit/3a5b1a0d08fc2fd7e8f654d7070dbfb22063a72f))
+* **ngw-uploader:** correct imports and sandbox url ([2695c29](https://github.com/nextgis/nextgis_frontend/commit/2695c291ddce650a761195f97ce7bcbd58822688))
+* **ngw-uploader:** fix createGroup helper method ([990f4bc](https://github.com/nextgis/nextgis_frontend/commit/990f4bcd48897a60e6c4940f81a3323d185248e1))
+* **ngw-uploader:** fixUrlStr for tus uploader ([d9001f6](https://github.com/nextgis/nextgis_frontend/commit/d9001f6edea2b6a6326703362ae730ed039878ef))
+* **ngw-uploader:** unification of resource createion options ([fd81307](https://github.com/nextgis/nextgis_frontend/commit/fd8130788e2ee4c4731e4bc59d26ec2e898570bf))
+* replace emitter.of by emitter.removeListener ([e31a4e0](https://github.com/nextgis/nextgis_frontend/commit/e31a4e09c0e414314e98c84caca9322e4e4f39a9))
+
+
+### Build System
+
+* wepmap to rollup ([8b27550](https://github.com/nextgis/nextgis_frontend/commit/8b27550fc396a032d637996d43679362baa2d0c4))
+
+
+### chore
+
+* build; eslint ([f9a736e](https://github.com/nextgis/nextgis_frontend/commit/f9a736ef43d07f295a9c63015ce745416584bd25))
+
+
+### Features
+
+* add WmsLayerAdapter ([3b5bf17](https://github.com/nextgis/nextgis_frontend/commit/3b5bf17bb2f699683d9b726a112f50b432859e4e))
+* **nge-kit:** add uploadFeatureAttachment util ([f0c2d5e](https://github.com/nextgis/nextgis_frontend/commit/f0c2d5eebc3a73277b25fd4af21501f8744ef8a3)), closes [#CU-m356](https://github.com/nextgis/nextgis_frontend/issues/CU-m356)
+* **ngw-uplader:** save meta on upload ([c558ebd](https://github.com/nextgis/nextgis_frontend/commit/c558ebd7ce516dc22073fb5ca874a8b6d3b62f64))
+* **ngw-uploader:** make ability to upload vector resources ([2da3746](https://github.com/nextgis/nextgis_frontend/commit/2da3746c5e2fc1e0ebe023f461441853ef753423))
+* **ngw-uploader:** style resource options in upload rasetr and vector methods ([20a2402](https://github.com/nextgis/nextgis_frontend/commit/20a2402e8be3505455fa45af901a506ab217a94f))
+* **ngw-uploader:** use tus for file upload ([7a667da](https://github.com/nextgis/nextgis_frontend/commit/7a667daf0c3b3f854816665795dc49b1a47b7ee1))
+* **qms-kit:** update createAdapter options interface ([dd48f8d](https://github.com/nextgis/nextgis_frontend/commit/dd48f8d382a36f2f8c384e9af919b7c777a43e61))
+* **vue:** split vue-ngw-map for leaflet, ol an mapbox adapters ([4e2d149](https://github.com/nextgis/nextgis_frontend/commit/4e2d1495810480af84fee0644061157df1b6f0b5))
+
+
+### BREAKING CHANGES
+
+* **ngw-uploader:** `createInput` and `dialog` methods have been moved from the `@nextgis/ngw-uploader` to the new `@nextgis/ngw-uploader-input`
+* No more default export from `ngw-map`. You should replace `import NgwMap from "@nextgis/ngw-map"` to `import { NgwMap } from "@nextgis/ngw-map"` everywhere
+* code formatting rules changed to prettier 2.0 compatibility
+
+
+
+
+
 ## [1.16.9](https://github.com/nextgis/nextgis_frontend/compare/v1.16.8...v1.16.9) (2023-07-04)
 
 **Note:** Version bump only for package @nextgis/ngw-uploader

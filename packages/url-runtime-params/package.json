@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/url-runtime-params",
-  "version": "1.16.9",
+  "version": "1.17.0",
   "description": "Сontrol of writing and reading URL parameters",
   "main": "lib/url-runtime-params.global.prod.js",
   "module": "lib/url-runtime-params.esm-bundler.js",
@@ -8,10 +8,10 @@
   "jsdelivr": "lib/url-runtime-params.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/webmap": "^1.16.9"
+    "@nextgis/webmap": "^1.17.0"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "^1.16.8"
+    "@nextgis/build-tools": "^1.17.0"
   },
   "buildOptions": {
     "name": "UrlRuntimeParams",

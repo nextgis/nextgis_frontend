@@ -3,6 +3,152 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://github.com/nextgis/nextgis_frontend/compare/v0.5.0...v1.17.0) (2023-09-25)
+
+
+### Bug Fixes
+
+* **build:** control-container extract css ([ff15f22](https://github.com/nextgis/nextgis_frontend/commit/ff15f221bd46de3d0e32aaa2735f7224d49b24fc))
+* **cesium:** add check for telset3d adapter addLayer ([3a05937](https://github.com/nextgis/nextgis_frontend/commit/3a05937b88858866b3decf983699ff6821471650))
+* **cesium:** Tileset#DAdapter set terrain height ([90b8563](https://github.com/nextgis/nextgis_frontend/commit/90b85632a5cf553c227522c4970b4e95151af885))
+* **ngw-connector:** add export from router generated types ([724f6d5](https://github.com/nextgis/nextgis_frontend/commit/724f6d5ca5f9b6a7d0abff436eab2c9c051176fa))
+* **ngw-connector:** clean cache on resource delete ([179c372](https://github.com/nextgis/nextgis_frontend/commit/179c372b8c2358d57e1ad93a1afa2c6496d2619e))
+* **ngw-connector:** disable request params list convert to object ([ed2afc5](https://github.com/nextgis/nextgis_frontend/commit/ed2afc5c0c26d57220a86207578bb11c8bea2d94))
+* **ngw-connector:** do not create new instance on same url and auth ([cf1a44e](https://github.com/nextgis/nextgis_frontend/commit/cf1a44ee0792f9102d7645fb1be1fc0ffdb54ef9))
+* **ngw-connector:** do not throw error on node data load6 use promise reject ([5d772c8](https://github.com/nextgis/nextgis_frontend/commit/5d772c8a322941bddce89041ff98a4d4b7897821))
+* **ngw-connector:** fixes to apiRequest cancel work ([40fee1a](https://github.com/nextgis/nextgis_frontend/commit/40fee1a96a389a0d617bd35b6140db4f4a097eb6)), closes [#6](https://github.com/nextgis/nextgis_frontend/issues/6)
+* **ngw-connector:** get resource children resourceId zero check ([87a205d](https://github.com/nextgis/nextgis_frontend/commit/87a205da2f38f2f67041b70e18b496409d3d801b))
+* **ngw-connector:** getResource cache when keyname ([4a2c0b1](https://github.com/nextgis/nextgis_frontend/commit/4a2c0b1bb91493e0dc47e5aa63aefe96e371dcfe))
+* **ngw-connector:** getResourceByKeyname cache ([4f83a5a](https://github.com/nextgis/nextgis_frontend/commit/4f83a5abc4157c212f3c7a2163e81019589dc8f2))
+* **ngw-connector:** improve compatibility with Node ([f92cdc1](https://github.com/nextgis/nextgis_frontend/commit/f92cdc15de50058dd21084062361d3e80ca586f8))
+* **ngw-connector:** improve for node ([b683ad8](https://github.com/nextgis/nextgis_frontend/commit/b683ad8faab7ff11344a630bc27762cc798e02c3))
+* **ngw-connector:** improve node/browser separation ([1e909f9](https://github.com/nextgis/nextgis_frontend/commit/1e909f9e490349a9e8968396d0543156fb329913))
+* **ngw-connector:** make login on connect ([b28879a](https://github.com/nextgis/nextgis_frontend/commit/b28879a41b1b43cd78d5fda07d2096b2e25bc1fb))
+* **ngw-connector:** node request write data for no POST mode ([c7cc7e9](https://github.com/nextgis/nextgis_frontend/commit/c7cc7e91b8b49bd71bf344b7ca81ef23adcae875))
+* **ngw-connector:** remove caching for update put request ([429abbd](https://github.com/nextgis/nextgis_frontend/commit/429abbda30311f3b736c187534d4c7c7a83d6e55))
+* **ngw-connector:** remove requestControl ([6c0f2c9](https://github.com/nextgis/nextgis_frontend/commit/6c0f2c9fb92f1fbfdb80328bae91c83214eddc18))
+* **ngw-connector:** retunr undefined on empty apiRequest ([57bf52e](https://github.com/nextgis/nextgis_frontend/commit/57bf52e852fc6e3aad7f1653260b6fb01ea0810d))
+* **ngw-connector:** update error response status code list ([7e7fcf2](https://github.com/nextgis/nextgis_frontend/commit/7e7fcf229cd7b62d308ac179421ab4c28cad2159))
+* **ngw-connector:** use `this` in fabric method ([ec614d8](https://github.com/nextgis/nextgis_frontend/commit/ec614d8da48b5312b192e5623ae1379732e1348a))
+* **ngw-connect:** properly abort request on cancel ([6dc8cd4](https://github.com/nextgis/nextgis_frontend/commit/6dc8cd43baa55280e2c8b8f38b806101f21f674b))
+* **ngw-connect:** remove unnecessary console log ([01e63c1](https://github.com/nextgis/nextgis_frontend/commit/01e63c12c3877474aeebf2e945b86518ed4025f0))
+* **ngw-kit:** createGeojsonAdapter propertiesFilter ([c053f3c](https://github.com/nextgis/nextgis_frontend/commit/c053f3c2c57bcf6919c2082c5c624c47ed1c4413))
+* **ngw-kit:** fix like and ilike filter requests ([3654c2b](https://github.com/nextgis/nextgis_frontend/commit/3654c2baa9bb90ab2ccfda75ce24fd4a5713d0c7))
+* **ngw-kit:** not identify for not supported layer ([7c62528](https://github.com/nextgis/nextgis_frontend/commit/7c62528ea2cbadd78d39ad139e65a21a1ab67cae))
+* **ngw-uploader:** correct imports and sandbox url ([2695c29](https://github.com/nextgis/nextgis_frontend/commit/2695c291ddce650a761195f97ce7bcbd58822688))
+* **ngw-сщттусещк:** resource search query parent_id param ([f7dd32a](https://github.com/nextgis/nextgis_frontend/commit/f7dd32aa600eb7a608a81dd9adf6cd88defc3615))
+* remove require imports ([c227e90](https://github.com/nextgis/nextgis_frontend/commit/c227e9003e209ea88ed86bab2903fa88492083f4))
+* replace emitter.of by emitter.removeListener ([e31a4e0](https://github.com/nextgis/nextgis_frontend/commit/e31a4e09c0e414314e98c84caca9322e4e4f39a9))
+* **utils:** fix objectDeepEqual function ([e2a88f9](https://github.com/nextgis/nextgis_frontend/commit/e2a88f98b5b5faebadb911ebedd22e7de3d89e98))
+
+
+### Build System
+
+* wepmap to rollup ([8b27550](https://github.com/nextgis/nextgis_frontend/commit/8b27550fc396a032d637996d43679362baa2d0c4))
+
+
+### chore
+
+* build; eslint ([f9a736e](https://github.com/nextgis/nextgis_frontend/commit/f9a736ef43d07f295a9c63015ce745416584bd25))
+
+
+### Code Refactoring
+
+* **utils:** update geom utils ([caebd68](https://github.com/nextgis/nextgis_frontend/commit/caebd68833967eeb23f78c35bdaa3c83bdf7442d))
+
+
+### Features
+
+* add getExtent method for all mapAdapters GeoJsonLayerAdapter ([d5d90ef](https://github.com/nextgis/nextgis_frontend/commit/d5d90ef9c758ebd8195bbaa1e50d6fe5fbe36c15))
+* add library cancelable-promise ([7a0d99f](https://github.com/nextgis/nextgis_frontend/commit/7a0d99f7ae874c058068141e8a8634032004195f))
+* add WmsLayerAdapter ([3b5bf17](https://github.com/nextgis/nextgis_frontend/commit/3b5bf17bb2f699683d9b726a112f50b432859e4e))
+* **cache:** add array to match options deep compare ([a8c773f](https://github.com/nextgis/nextgis_frontend/commit/a8c773f3f3b55470c6dbd46040e5203ab8ba7816))
+* **cache:** add namespaces support ([8e7498b](https://github.com/nextgis/nextgis_frontend/commit/8e7498bf12685b1226c2d8daa033471e6e74a4b1))
+* **cache:** new package to cache key value with async ability ([3606d7e](https://github.com/nextgis/nextgis_frontend/commit/3606d7ea891e60e2993823bde8bf8f37ce76e383))
+* **cancelable-promise:** throw CancelError instead of onCancel callback ([0da1cc9](https://github.com/nextgis/nextgis_frontend/commit/0da1cc98645ec337bd9a869730991c7635e341af))
+* **cesium:** add maximumScreenSpaceError option for tilset3d adapter ([e35d282](https://github.com/nextgis/nextgis_frontend/commit/e35d2820614a6c5603858aa06698774d83b7f0eb))
+* **cesium:** add Tileset3dAdapter ([08ce606](https://github.com/nextgis/nextgis_frontend/commit/08ce606cb09437cdf0ccd3de8bd8134af5649a4b))
+* **demo:** add new example for simple resource table ([af1cc68](https://github.com/nextgis/nextgis_frontend/commit/af1cc68c7668b968c8b2600ae9b737d09b18f4d4))
+* handle vector layer mouse over and out events ([82700e2](https://github.com/nextgis/nextgis_frontend/commit/82700e2e9fddd85a4282126a6c8b917a6f29d9ca))
+* **leaflet-map-adapter:** change geojson layer opacity ([b0a02c7](https://github.com/nextgis/nextgis_frontend/commit/b0a02c7725999d54cb23081d7181df88d12ebca7))
+* **leaflet-map-adapter:** setMinZoom on maxExtent ([c539bf2](https://github.com/nextgis/nextgis_frontend/commit/c539bf2b52098dffdc8d4eea4c6048eead2158a7))
+* **nge-kit:** add uploadFeatureAttachment util ([f0c2d5e](https://github.com/nextgis/nextgis_frontend/commit/f0c2d5eebc3a73277b25fd4af21501f8744ef8a3)), closes [#CU-m356](https://github.com/nextgis/nextgis_frontend/issues/CU-m356)
+* **ngw-connector:** add abort signal to request options ([fbc0edd](https://github.com/nextgis/nextgis_frontend/commit/fbc0eddb48020c256c415d3bedd4aadf2bf4f7d3))
+* **ngw-connector:** add check for 403 ngw error ([22627ea](https://github.com/nextgis/nextgis_frontend/commit/22627ea0f8e2c3f169bf3d83956f1aa525179488))
+* **ngw-connector:** add getResourceIdOrError method ([f2fc194](https://github.com/nextgis/nextgis_frontend/commit/f2fc1948cca16ab6015ff2ffbec4ae043a9b9959))
+* **ngw-connector:** add recursive option to getChildrenOf ([7904dba](https://github.com/nextgis/nextgis_frontend/commit/7904dba7b094ee09672643aa23bd7ae0fc4f6428))
+* **ngw-connector:** add request transform method ([7e86ea4](https://github.com/nextgis/nextgis_frontend/commit/7e86ea4bb0a2ccf94cef84587eb48706bf83bc60))
+* **ngw-connector:** add static create method ([6d67857](https://github.com/nextgis/nextgis_frontend/commit/6d67857e018d28cf3b7efda4ea8890d253d07b44))
+* **ngw-connector:** disable transfer-encoding for node requests ([d68e5f2](https://github.com/nextgis/nextgis_frontend/commit/d68e5f2bedb986c827367ce99afdeb5bd1a97778))
+* **ngw-connector:** disable transfer-encoding for node requests II ([aa3baa4](https://github.com/nextgis/nextgis_frontend/commit/aa3baa451989e47820adf07d67a771967688687b))
+* **ngw-connector:** get already created connector by url only ([977a4d6](https://github.com/nextgis/nextgis_frontend/commit/977a4d6060206ad6ce9f78efa3353468889ea1bc))
+* **ngw-connector:** handle network error ([99a702c](https://github.com/nextgis/nextgis_frontend/commit/99a702c562d57c3d5e231dae7204a4b0dac5db78))
+* **ngw-connector:** make library polymorphic for both node and browser ([643510a](https://github.com/nextgis/nextgis_frontend/commit/643510ab4b3ec0cdb18123091d34f621e2cdc574))
+* **ngw-connector:** more improvement for Node ([4c673ef](https://github.com/nextgis/nextgis_frontend/commit/4c673ef1723211f7bf9af02850f4f8299a6985f4))
+* **ngw-connector:** new abort methods ([dadb1b1](https://github.com/nextgis/nextgis_frontend/commit/dadb1b18bc49a61d9bddb7e8476c2007fc6c8db6))
+* **ngw-connector:** new getResourceBy method ([3014d39](https://github.com/nextgis/nextgis_frontend/commit/3014d396d9e35d05b6e5587b7fe444bb3b772269))
+* **ngw-connector:** remove login logic from getUserInfo ([1608e2c](https://github.com/nextgis/nextgis_frontend/commit/1608e2cd652d4d92d0602c5345160b1f2b392596))
+* **ngw-connector:** upgrade router type definition ([261e148](https://github.com/nextgis/nextgis_frontend/commit/261e1484d6a18264834fc5172a4299ab7e841813))
+* **ngw-kit:** add bbox strategy for large vector layer ([8ac9e8c](https://github.com/nextgis/nextgis_frontend/commit/8ac9e8c245431062aade39a0576e4e56f50c78f7))
+* **ngw-kit:** add feature request srs param ([5261a89](https://github.com/nextgis/nextgis_frontend/commit/5261a891fca25999d31a7fd7ae6af2f8b01b551c))
+* **ngw-kit:** add identify item for speedup ngw selection ([3bd8626](https://github.com/nextgis/nextgis_frontend/commit/3bd86264d1ae7712eb39f377b02c60daf5f070dd))
+* **ngw-kit:** add NgwKit.utils.getCompanyLogo method ([348beb6](https://github.com/nextgis/nextgis_frontend/commit/348beb6419166726edb2854acfb303411e28d0c9))
+* **ngw-kit:** add tmsclient_layer adapter class support ([fced84c](https://github.com/nextgis/nextgis_frontend/commit/fced84cb059a9e3d1c52c9cc0812b477a254bd9c))
+* **ngw-kit:** add toGeojson in ngw layer item response ([9ca7349](https://github.com/nextgis/nextgis_frontend/commit/9ca734951c7e6fdfe2a231b97d3aa19fc660289a))
+* **ngw-kit:** features request cache option ([a8c5a8a](https://github.com/nextgis/nextgis_frontend/commit/a8c5a8a17eb149d3d8e9f02ca08ba9d848f9fde1))
+* **ngw-kit:** make create basemap layer adapter universal ([182da50](https://github.com/nextgis/nextgis_frontend/commit/182da506f649a86c425a30db649fb49efa76e4d9))
+* **ngw-kit:** ngw error handling ([87625ef](https://github.com/nextgis/nextgis_frontend/commit/87625ef94c5741d04a3661d60ff6573a7ef8cc84))
+* **ngw-kit:** prepare datetime fields to ngw ([8b359c8](https://github.com/nextgis/nextgis_frontend/commit/8b359c830aef4c3205f4f419742f2b68344bb5ec))
+* **ngw-kit:** update loaded date before property filter ([a8565cb](https://github.com/nextgis/nextgis_frontend/commit/a8565cb3c96c5c3394641b9cac21489c3b0eeefa))
+* **ngw-kit:** use abort signal in fetch requests ([57a9d0d](https://github.com/nextgis/nextgis_frontend/commit/57a9d0d35df1c490507e1499262749735ec599ba))
+* **ngw-orm:** remove 3rd part libs to convers geom to wkt, use new ngw api ([bed453b](https://github.com/nextgis/nextgis_frontend/commit/bed453baeb6fabb0b3348f370395f930119130ea))
+* **ngw-uplader:** save meta on upload ([c558ebd](https://github.com/nextgis/nextgis_frontend/commit/c558ebd7ce516dc22073fb5ca874a8b6d3b62f64))
+* **ngw-uploader:** make ability to upload vector resources ([2da3746](https://github.com/nextgis/nextgis_frontend/commit/2da3746c5e2fc1e0ebe023f461441853ef753423))
+* **ngw-uploader:** use tus for file upload ([7a667da](https://github.com/nextgis/nextgis_frontend/commit/7a667daf0c3b3f854816665795dc49b1a47b7ee1))
+* **ngw:** add support for `qgis_raster_style` ([6c712d0](https://github.com/nextgis/nextgis_frontend/commit/6c712d021370c945f5eda604c0071fc7487b0340))
+* **ngw:** conditions and nesting for filtering ngw feature layer ([2e0668e](https://github.com/nextgis/nextgis_frontend/commit/2e0668e1c57bb05223e926387823c4f219c7286a))
+* **qms-kit:** update createAdapter options interface ([dd48f8d](https://github.com/nextgis/nextgis_frontend/commit/dd48f8d382a36f2f8c384e9af919b7c777a43e61))
+* **utils:** add flatten and unflatten functions ([b4c3aa3](https://github.com/nextgis/nextgis_frontend/commit/b4c3aa3d32bdfd74847f397d5d54e5eadd8398b8))
+* **vue:** split vue-ngw-map for leaflet, ol an mapbox adapters ([4e2d149](https://github.com/nextgis/nextgis_frontend/commit/4e2d1495810480af84fee0644061157df1b6f0b5))
+* **vuetify:** allow VTree scopes for NgwLayersList ([f95a842](https://github.com/nextgis/nextgis_frontend/commit/f95a84228006c48023d8e208b50b003332b77b3f))
+* **webmap:** implement WebmapLayers get Attributions onlyBaselayer option ([8e123a9](https://github.com/nextgis/nextgis_frontend/commit/8e123a9f5c257f9c0786b83e8d1f4d1cb603edfa))
+
+
+### Performance Improvements
+
+* **ngw-commector:** decrease get resource queries count ([18f3854](https://github.com/nextgis/nextgis_frontend/commit/18f38541050189fc27ee8b82d173e07de647eff3))
+* **ngw-connector:** getResourceByKeyname one request ([c1612a3](https://github.com/nextgis/nextgis_frontend/commit/c1612a3a16b9102579e18388e170758e23e7a7cf))
+* **ngw-kit:** default limit to load large vector layer data ([4dcfdf8](https://github.com/nextgis/nextgis_frontend/commit/4dcfdf8c1eb5a6905f17d84c2a8d971b721b4fa2))
+* **ngw-kit:** geojson adapter not blocked on data load ([4dbf64f](https://github.com/nextgis/nextgis_frontend/commit/4dbf64f95fadb680b4be6db39b08275d938f791c))
+
+
+### types
+
+* **ngw-connector:** rename ([032b555](https://github.com/nextgis/nextgis_frontend/commit/032b5550d0e6d0146dd36ac6091fb978bf1668ba))
+* rename interface ([8117938](https://github.com/nextgis/nextgis_frontend/commit/8117938b0e13d389df84705a5905042710e740a0))
+
+
+### wip
+
+* **util:** move CancelablePromise to util ([9d7a645](https://github.com/nextgis/nextgis_frontend/commit/9d7a6454b273edf228b8bf8be353ddb8a8bc250e))
+
+
+### BREAKING CHANGES
+
+* **ngw-connector:** The getUserInfo mehod does not emit any more login events. Only login method does this
+* **ngw-uploader:** `createInput` and `dialog` methods have been moved from the `@nextgis/ngw-uploader` to the new `@nextgis/ngw-uploader-input`
+* **ngw-connector:** FeatureLayerFields type is now FeatureProperties
+* change GetNgwLayerItemsOptions to GetNgwItemsOptions
+* **utils:** WebMap static property utils have been removed, import utilites from `@nextgis/webmap` library instead
+* No more default export from `ngw-map`. You should replace `import NgwMap from "@nextgis/ngw-map"` to `import { NgwMap } from "@nextgis/ngw-map"` everywhere
+* **cancelable-promise:** Removed onCancel argument from CancelablePromise. Now you should handle catch CancelError
+* code formatting rules changed to prettier 2.0 compatibility
+* **util:** CancelablePromise has been removed from ngw-connecter. Now you should do this: import {CancelablePromise} from '@nextgis/utils;'
+
+
+
+
+
 ## 1.16.8 (2023-05-14)
 
 

@@ -3,6 +3,116 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://github.com/nextgis/nextgis_frontend/compare/v0.5.0...v1.17.0) (2023-09-25)
+
+
+### Bug Fixes
+
+* **build:** control-container extract css ([ff15f22](https://github.com/nextgis/nextgis_frontend/commit/ff15f221bd46de3d0e32aaa2735f7224d49b24fc))
+* **ngw-connector:** fixes to apiRequest cancel work ([40fee1a](https://github.com/nextgis/nextgis_frontend/commit/40fee1a96a389a0d617bd35b6140db4f4a097eb6)), closes [#6](https://github.com/nextgis/nextgis_frontend/issues/6)
+* **ngw-kit:** do not reassign getExtent for geojson layer ([efcb4c9](https://github.com/nextgis/nextgis_frontend/commit/efcb4c9ee767e78bc36628e4244516a23f18ef4a))
+* **ngw-kit:** make async onFirstShowAdapter hide and show methods ([95362a8](https://github.com/nextgis/nextgis_frontend/commit/95362a89085ecda4a6225cd58bc9347ff970fd81))
+* **ngw-kit:** ngw webmap items layer order ([0c7028b](https://github.com/nextgis/nextgis_frontend/commit/0c7028b821121a54d82106000d21b1cac76d79f6))
+* **ngw-ol:** container style ([9ff5caa](https://github.com/nextgis/nextgis_frontend/commit/9ff5caa4cea79d88224518ac85a859ed61827df7))
+* **ngw-ol:** layer min-max zoom options ([c6751a0](https://github.com/nextgis/nextgis_frontend/commit/c6751a03f83ced3a1482f98115bdc43037b2ca57))
+* **ol-map-adapter:** do not return nothing from poinermove cb ([ce53ec7](https://github.com/nextgis/nextgis_frontend/commit/ce53ec738ed33c478a9d2b6214c47e9aee36253b))
+* **ol-map-adapter:** geojson adapter layer remove ([e9de53b](https://github.com/nextgis/nextgis_frontend/commit/e9de53b952fcfb237137e213b97dea99984f7810))
+* **ol-map-adapter:** geojson adapter style function type detection ([29452d1](https://github.com/nextgis/nextgis_frontend/commit/29452d1389794bc188bcc5da9d32082065e6cb43))
+* **ol-map-adapter:** geojson labelField only for string ([a0d5748](https://github.com/nextgis/nextgis_frontend/commit/a0d5748bfdeb92f5369f61a1c82afb9eedeb0d55))
+* **ol-map-adapter:** label type for geojson adapter ([68aa157](https://github.com/nextgis/nextgis_frontend/commit/68aa1576da58663f43ca88a3d349476b141fd180))
+* **ol-map-adapter:** repair unselect on second click ([9046322](https://github.com/nextgis/nextgis_frontend/commit/90463222f6df8b650a2512a70f44cd2692e13a7b))
+* **ol:** css control fixes ([7ba4c05](https://github.com/nextgis/nextgis_frontend/commit/7ba4c05a7a592aaf7a8acc45ad24d8b40046218a))
+* **ol:** geojson label null field ([32c2b23](https://github.com/nextgis/nextgis_frontend/commit/32c2b23bba4095ebf4c2a3a29960320d4e0d4388))
+* **ol:** no vector layer label for undefined property ([37b8a7d](https://github.com/nextgis/nextgis_frontend/commit/37b8a7d632676dfa47eef0c5b9d772e5468788a2))
+* **ol:** remove tileAdapter pixelratio option ([20403b7](https://github.com/nextgis/nextgis_frontend/commit/20403b755294a56f1cf6a26ffa336f69cb2b8704))
+* provide support for map preclick event ([ad8d260](https://github.com/nextgis/nextgis_frontend/commit/ad8d260dcd49de8999e8f29adf1414ecb372636a)), closes [#8](https://github.com/nextgis/nextgis_frontend/issues/8)
+* remove require imports ([c227e90](https://github.com/nextgis/nextgis_frontend/commit/c227e9003e209ea88ed86bab2903fa88492083f4))
+* **webmap:** disable experimental left and right control positions ([0b68996](https://github.com/nextgis/nextgis_frontend/commit/0b68996d8848f6b96470569d16812ab773b6f7e2))
+* **webmap:** editing for new layer visibility standard ([2dcd9e0](https://github.com/nextgis/nextgis_frontend/commit/2dcd9e0e98b3db8414aad2f6bc15b36acf9401f7))
+* **webmap:** not use ordering for layer id ([fe07755](https://github.com/nextgis/nextgis_frontend/commit/fe07755e0ac4defa03512dc78960aae4bca4e152))
+
+
+### chore
+
+* build; eslint ([f9a736e](https://github.com/nextgis/nextgis_frontend/commit/f9a736ef43d07f295a9c63015ce745416584bd25))
+* **vue-ngw-map:** update dependencies ([7100009](https://github.com/nextgis/nextgis_frontend/commit/71000090d5745b8ef28409f3001edb5c6d359081))
+
+
+### Code Refactoring
+
+* rename layerAdapter baseLayer option to baselayer ([e5428f1](https://github.com/nextgis/nextgis_frontend/commit/e5428f1f5bc6148ffb3c933a6ac96a4b373b6a02))
+
+
+### Features
+
+* add BBOX+ strategy; extends options for setView ([d7db9a6](https://github.com/nextgis/nextgis_frontend/commit/d7db9a619b702c78bbfe939233972a57923f46ac))
+* add getExtent method for all mapAdapters GeoJsonLayerAdapter ([d5d90ef](https://github.com/nextgis/nextgis_frontend/commit/d5d90ef9c758ebd8195bbaa1e50d6fe5fbe36c15))
+* add library `@nextgis/paint` ([e7079c9](https://github.com/nextgis/nextgis_frontend/commit/e7079c9e231cafba634a3a6fa3efc448b4525f75))
+* add nativeOptions for alladdLayer adapter methods ([74645a1](https://github.com/nextgis/nextgis_frontend/commit/74645a13ce2fe9fbeaa73c76465d834129e73ce3))
+* add new library `ControlContainer` ([db89d97](https://github.com/nextgis/nextgis_frontend/commit/db89d974a4548c84b311b8e5f2517115511ed03d))
+* add WmsLayerAdapter ([3b5bf17](https://github.com/nextgis/nextgis_frontend/commit/3b5bf17bb2f699683d9b726a112f50b432859e4e))
+* **control:** add universal zoom control ([6941bb5](https://github.com/nextgis/nextgis_frontend/commit/6941bb5fdd290b788d819f0c64acdaa63d561d8b))
+* handle vector layer mouse over and out events ([82700e2](https://github.com/nextgis/nextgis_frontend/commit/82700e2e9fddd85a4282126a6c8b917a6f29d9ca))
+* improve geojson adapter multiselect ([57cb926](https://github.com/nextgis/nextgis_frontend/commit/57cb9268d8b8ad6878feb950dbd53c41941311b9))
+* improve popup, add new options, ol support ([c0da880](https://github.com/nextgis/nextgis_frontend/commit/c0da8801931c3db3b860f0f06f4ac2dc16668faf))
+* **leaflet-map-adapter:** add position to vector adapter layers definition ([3a20a8c](https://github.com/nextgis/nextgis_frontend/commit/3a20a8c2bedbd953e7e29446e1acf28a5ce68a4d))
+* **mapbox-gl-js:** improve popup ([a1a5506](https://github.com/nextgis/nextgis_frontend/commit/a1a5506090188c2a63e6b165be6494f8a5014db4))
+* **mapboxgl-map-adapter:** add setLayerOpacity methods ([5f4d0cc](https://github.com/nextgis/nextgis_frontend/commit/5f4d0ccb193abb62d8a8b90b3c6afde78be924b0))
+* new @nextgis/dom library ([1cf0044](https://github.com/nextgis/nextgis_frontend/commit/1cf004410146a6232e36beb0c72ed51ba7592c3b))
+* **ngw-kit:** default WebmapLayerAdapter basemap ([96d56d0](https://github.com/nextgis/nextgis_frontend/commit/96d56d0ee0cab7873d09c8cc012ac10b9484984f))
+* **ngw-kit:** ngwwebmap item toggle on zoom layer range ([4c64a8c](https://github.com/nextgis/nextgis_frontend/commit/4c64a8c15deb3f73a3f948610d06b3877f9577ab))
+* **ngw-kit:** update feature request params ([98fddef](https://github.com/nextgis/nextgis_frontend/commit/98fddef5f83931013d511166ce567a669f41d30f))
+* **ol-map-adapter:** add map native adapterOptions parameter ([0a40227](https://github.com/nextgis/nextgis_frontend/commit/0a40227725979737ff28f89949ffa3d92703f93d))
+* **ol-map-adapter:** add position to vector adapter layers defenition ([0eca250](https://github.com/nextgis/nextgis_frontend/commit/0eca25054cb2549f552ecb4322faf98e5e20358a))
+* **ol-map-adapter:** add setLayerOpacity mapAdapter and each layer methods ([378de0a](https://github.com/nextgis/nextgis_frontend/commit/378de0a7bd149689718f9a0d13a7136e371d6e16))
+* **ol-map-adapter:** add srs options to draw vector layer ([b49815d](https://github.com/nextgis/nextgis_frontend/commit/b49815d3fdd60cebcef7a2d0a32b7d5bc6abaabd))
+* **ol-map-adapter:** hide and show label dynamic ([7aa7485](https://github.com/nextgis/nextgis_frontend/commit/7aa7485f55f87bdf8a08c1cf9e74ae1df5db3795))
+* **ol-map-adapter:** use add layer opacity option ([e3b1ea6](https://github.com/nextgis/nextgis_frontend/commit/e3b1ea68571d83c87938774ad9b686acc16534c0))
+* **ol-map-adapter:** use geojson layer label calback option ([62530af](https://github.com/nextgis/nextgis_frontend/commit/62530afced9e39b2831d60e66595c551ee851e0c))
+* **ol:** implement labelField options for OL geojson adapter ([0f925bf](https://github.com/nextgis/nextgis_frontend/commit/0f925bfa817ac40f309824ba32e5484a7c7948de))
+* **ol:** implemented getBounds method for OlMapAdapter ([1546211](https://github.com/nextgis/nextgis_frontend/commit/15462114a04727aeea8e44837362705a4a9bd38a))
+* **ol:** labeling for circle layer paint ([576c543](https://github.com/nextgis/nextgis_frontend/commit/576c543f42d4289c04dd72ffeef50b95f7d1be5f))
+* remove default MarkerLayerAdapter ([914c674](https://github.com/nextgis/nextgis_frontend/commit/914c674bcb59854387296b53a25c3bc06877c828))
+* **utils:** create universal MapControlContainer ([20c2510](https://github.com/nextgis/nextgis_frontend/commit/20c25102ba7adc9c9be3eb87407c6c8f604e401f))
+* **vue:** split vue-ngw-map for leaflet, ol an mapbox adapters ([4e2d149](https://github.com/nextgis/nextgis_frontend/commit/4e2d1495810480af84fee0644061157df1b6f0b5))
+* **webmap:** add event for layer label toggle ([d5a1a30](https://github.com/nextgis/nextgis_frontend/commit/d5a1a3083f2fb0b82e69f9a9165dfe2e99a1dcbe))
+* **webmap:** add getControlContainer method ([84994fe](https://github.com/nextgis/nextgis_frontend/commit/84994feddd2afe4d849b244dbf99938c88883cf7))
+* **webmap:** add labelVisibility layer adapter option ([75bc7f9](https://github.com/nextgis/nextgis_frontend/commit/75bc7f94cf55a60956ed3240900217cf8ccaf68e))
+* **webmap:** add map mouse move events ([e4bd157](https://github.com/nextgis/nextgis_frontend/commit/e4bd157ed86ea49f023f63a8651165e249ac6792))
+* **webmap:** add MapAdapter map options ([3742ebe](https://github.com/nextgis/nextgis_frontend/commit/3742ebef1832b160575880e0d67b117162f4591f))
+* **webmap:** add setLayerPaint method ([d4f1a03](https://github.com/nextgis/nextgis_frontend/commit/d4f1a03b907280dc4806e7728270e10fb64b855f))
+* **webmap:** implement WebmapLayers get Attributions onlyBaselayer option ([8e123a9](https://github.com/nextgis/nextgis_frontend/commit/8e123a9f5c257f9c0786b83e8d1f4d1cb603edfa))
+* **webmap:** layer adapter waitFullLoad and crossOrigin new options ([2ab3789](https://github.com/nextgis/nextgis_frontend/commit/2ab378949c26d3eb2360dea3f7052d6348ccd9a2))
+* **webmap:** make propertiesFilter async ([00ebfd6](https://github.com/nextgis/nextgis_frontend/commit/00ebfd613262ee60e72820266ac54ba82232574d))
+* **webmap:** paint from expressions ([d340222](https://github.com/nextgis/nextgis_frontend/commit/d3402228c2460827ab15fa286cac26d98ab390eb))
+* **webmap:** ratio in vectorlayer adapter interface ([dc845b7](https://github.com/nextgis/nextgis_frontend/commit/dc845b72f55b9b7ace70fff1fbb15b28c069a475))
+
+
+### Performance Improvements
+
+* **ol-map-adapter:** style function for each feature ([20e1a73](https://github.com/nextgis/nextgis_frontend/commit/20e1a73ba9d9a33fa3dbce29ae0dfdc33020eae5))
+
+
+### wip
+
+* rename VectorLayerAdapterType ([a4779ff](https://github.com/nextgis/nextgis_frontend/commit/a4779ff53e00e9ea7d0f829e1b0f69221ec79065))
+
+
+### BREAKING CHANGES
+
+* **vue-ngw-map:** Vue is now required as peer dependency
+* **ngw-kit:** `extensions` for any ngw feature request is now empty for default
+* LayerAdapter option baseLayer was renamed to baselayer;
+* webMap.getBaseLayers() method now return LayerAdapter, not string array of ids
+* rename VectorLayerAdapter types: circle > point; fill > polygon
+* code formatting rules changed to prettier 2.0 compatibility
+* **webmap:** New Paint specification may cause problems with types
+* MARKER layer adapter has been removed. Use ddLayer('GEOJSON', {data}) instead of ddLayer('MARKER', {lngLat})
+
+
+
+
+
 ## [1.16.9](https://github.com/nextgis/nextgis_frontend/compare/v1.16.8...v1.16.9) (2023-07-04)
 
 **Note:** Version bump only for package @nextgis/ol-map-adapter
