@@ -11,7 +11,7 @@
     "@nextgis/cesium-map-adapter": "^1.16.9",
     "@nextgis/ngw-map": "^1.16.9",
     "@types/events": "^3.0.0",
-    "cesium": "^1.96.0",
+    "cesium": "1.96.0",
     "events": "^3.3.0"
   },
   "devDependencies": {
