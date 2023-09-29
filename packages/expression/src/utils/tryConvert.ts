@@ -1,6 +1,10 @@
-export const tryConvert = (converter: (arg: any) => any, arg: any): any => {
+export const tryConvert = (
+  converter: (arg: any, data: any) => any,
+  arg: any,
+  data: any,
+): any => {
   try {
-    const result = converter(arg);
+    const result = converter(arg, data);
     if (result !== undefined) {
       return result;
     }

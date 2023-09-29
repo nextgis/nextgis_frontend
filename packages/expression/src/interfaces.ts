@@ -71,20 +71,8 @@ export type ExpressionName =
   | 'coalesce'
   | 'match';
 
+export type SimpleType = string | number | boolean | null | Record<string, any>;
+type ExpressionArg = SimpleType | Expression;
 export type Expression = [ExpressionName, ...ExpressionArg[]];
 
-export type SimpleType = string | number | boolean | undefined;
-
-export type ExpressionArg = SimpleType | Expression;
-
-export type ExpressionFunc<T = any, R extends T = T> = (
-  data: Data,
-  args: T[],
-) => R;
-export type ExpressionArgsFunc<
-  T extends ExpressionArg = ExpressionArg,
-  R extends T = T,
-> = (args: T[]) => R;
-
-export type MathExpressionFunc = ExpressionFunc<number>;
-export type TypeExpressionFunc = ExpressionFunc<any[], any>;
+export type ExpressionFunc<T = any, R = T> = (args: T, data: Data) => R;

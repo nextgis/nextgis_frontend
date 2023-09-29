@@ -1,62 +1,87 @@
-import { evaluateArg } from '../expression';
+import type {
+  Data,
+  SimpleType,
+  ExpressionFunc,
+  LookupExpressionName,
+} from '../interfaces';
 
-import type { Data, LookupExpressionName } from '../interfaces';
+type GetArg = [key: string] | [key: string, obj: Record<string, any>];
 
-type LookupExpressionFunc = (data: Data, args: any[]) => any;
+function get([key, objExp]: GetArg, data: Data): SimpleType | null {
+  const target = objExp || data;
+  if (target && typeof target === 'object' && key in target) {
+    return target[key];
+  }
+  return null;
+}
 
-type LookupExpressionNameRaw = Exclude<LookupExpressionName, 'get' | 'length'>;
-const lookupExpressionsRaw: Record<
-  LookupExpressionNameRaw,
-  (args: any[]) => any
-> = {
-  at: ([arrayOrString, index]) => arrayOrString[index],
-  has: ([arrayOrString, item]) => arrayOrString.includes(item),
-  in: ([item, arr]) => arr.includes(item),
-  'index-of': (args) => {
-    const [arrayOrString, target] = args;
-    if (typeof arrayOrString === 'string') {
-      return arrayOrString.indexOf(target);
-    } else if (Array.isArray(arrayOrString)) {
-      return arrayOrString.indexOf(target);
-    }
-    throw new Error(`Parameters for 'index-of' not corrected`);
-  },
-  slice: (args) => {
-    const [arrayOrString, start, end] = args;
-    if (typeof arrayOrString === 'string' || Array.isArray(arrayOrString)) {
-      return arrayOrString.slice(start, end);
-    }
-    throw new Error(`Parameters for 'slice' not corrected`);
-  },
-};
+function has([key, objExp]: GetArg, data: Data): boolean {
+  const target = objExp || data;
+  return !!(target && typeof target === 'object' && key in target);
+}
 
-const get: LookupExpressionFunc = (data, args) => {
-  const [key, objExp] = args;
+function at([index, array]: [index: number, array: any[]]): SimpleType {
+  return array[index];
+}
 
-  const target = objExp ? evaluateArg(data, objExp) : data;
+type InArgs = [keyword: string | boolean | number, input: string | any[]];
+function inFunc([keyword, input]: InArgs): boolean {
+  if (typeof input === 'string') {
+    return input.includes(String(keyword));
+  } else if (Array.isArray(input)) {
+    return input.includes(keyword);
+  }
+  throw new Error(
+    `Invalid input type for 'in'. Expected string or array, got ${typeof input}.`,
+  );
+}
 
-  return target[key];
-};
-
-function length(data: Data, args: any[]): number | undefined {
-  const [item] = args;
-  const evaluatedItem = evaluateArg(data, item);
-  if (typeof evaluatedItem === 'string' || Array.isArray(evaluatedItem)) {
-    return evaluatedItem.length;
+const length = ([item]: [string | any[]]) => {
+  if (typeof item === 'string' || Array.isArray(item)) {
+    return item.length;
   }
   return undefined;
+};
+
+type IndexOfArgs =
+  | [keyword: string | boolean | number, input: string | any[]]
+  | [keyword: string | boolean | number, input: string | any[], index: number];
+function indexOf([keyword, input, startIndex]: IndexOfArgs): number {
+  if (typeof input === 'string') {
+    return input.indexOf(String(keyword), startIndex);
+  } else if (Array.isArray(input)) {
+    return input.indexOf(keyword, startIndex);
+  }
+
+  throw new Error(
+    `Invalid input type for 'index-of'. Expected string or array, got ${typeof input}.`,
+  );
 }
 
-export const lookupExpressions = {
+type SliceArgs =
+  | [input: string | any[], startIndex: number]
+  | [input: string | any[], startIndex: number, endIndex: number];
+
+function slice(args: SliceArgs): string | any[] {
+  const [input, startIndex, endIndex] = args;
+
+  if (typeof input === 'string') {
+    return input.slice(startIndex, endIndex);
+  } else if (Array.isArray(input)) {
+    return input.slice(startIndex, endIndex);
+  }
+
+  throw new Error(
+    `Invalid input type for 'slice'. Expected string or array, got ${typeof input}.`,
+  );
+}
+
+export const lookupExpressions: Record<LookupExpressionName, ExpressionFunc> = {
   get,
   length,
-} as Record<LookupExpressionName, LookupExpressionFunc>;
-for (const key in lookupExpressionsRaw) {
-  const t = key as LookupExpressionNameRaw;
-  const lookupExpression: LookupExpressionFunc = (data, args) => {
-    const evaluatedArgs = args.map((arg) => evaluateArg(data, arg));
-    return lookupExpressionsRaw[t](evaluatedArgs);
-  };
-
-  lookupExpressions[t] = lookupExpression;
-}
+  at,
+  has,
+  in: inFunc,
+  'index-of': indexOf,
+  slice,
+};
