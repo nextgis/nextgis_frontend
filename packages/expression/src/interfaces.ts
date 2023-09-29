@@ -1,5 +1,15 @@
-export type ExpressionName =
-  // Types
+export type Data = Record<string, any>;
+
+export type LookupExpressionName =
+  | 'at'
+  | 'get'
+  | 'has'
+  | 'length'
+  | 'in'
+  | 'index-of'
+  | 'slice';
+
+export type TypeExpressionName =
   | 'array'
   | 'boolean'
   // | 'collator'
@@ -13,28 +23,14 @@ export type ExpressionName =
   // | 'to-color'
   | 'to-number'
   | 'to-string'
-  | 'typeof'
-  // Feature data
-  // | 'feature-state'
-  // | 'geometry-type'
-  // | 'id'
-  // | 'line-progress'
-  // | 'properties'
-  // Lookup
-  | 'at'
-  | 'get'
-  | 'has'
-  | 'length'
-  | 'in'
-  | 'index-of'
-  | 'slice'
+  | 'typeof';
 
-  // Math
+export type MathExpressionName =
   | '+'
   | '-'
   | '*'
-  | '/ '
-  | '% '
+  | '/'
+  | '%'
   | '^'
   | 'abs'
   | 'acos'
@@ -54,10 +50,13 @@ export type ExpressionName =
   | 'round'
   | 'sin'
   | 'sqrt'
-  | 'tan'
   // | 'distance'
+  | 'tan';
 
-  // Decision
+export type ExpressionName =
+  | MathExpressionName
+  | TypeExpressionName
+  | LookupExpressionName
   | '!'
   | '!='
   | '<'
@@ -69,13 +68,22 @@ export type ExpressionName =
   | 'any'
   | 'case'
   | 'step'
-  | 'match'
-  | 'coalesce';
-// String
-// | 'concat'
-// | 'downcase'
-// | 'is-supported-script'
-// | 'resolved-locale'
-// | 'upcase'
+  | 'coalesce'
+  | 'match';
 
-export type Expression = [ExpressionName, ...any[]];
+export type Expression = [ExpressionName, ...ExpressionArg[]];
+
+export type SimpleType = string | number | boolean | undefined;
+
+export type ExpressionArg = SimpleType | Expression;
+
+export type ExpressionFunc<T = any, R extends T = T> = (
+  data: Data,
+  args: T[],
+) => R;
+export type ExpressionArgsFunc<
+  T extends SimpleType = SimpleType,
+  R extends T = T,
+> = (args: T[]) => R;
+
+export type MathExpressionFunc = ExpressionFunc<number>;
