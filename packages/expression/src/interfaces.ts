@@ -82,8 +82,9 @@ export type ExpressionFunc<T = any, R extends T = T> = (
   args: T[],
 ) => R;
 export type ExpressionArgsFunc<
-  T extends SimpleType = SimpleType,
+  T extends ExpressionArg = ExpressionArg,
   R extends T = T,
 > = (args: T[]) => R;
 
 export type MathExpressionFunc = ExpressionFunc<number>;
+export type TypeExpressionFunc = ExpressionFunc<any[], any>;

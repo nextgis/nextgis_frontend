@@ -1,41 +1,69 @@
+import evaluateAndApply from '../utils/evaluateAndApply';
 import { evaluateArg } from '../expression';
-import { tryConvert } from '../utils/tryConvert';
 
-import type { Data, TypeExpressionName } from '../interfaces';
+import type { TypeExpressionFunc, TypeExpressionName } from '../interfaces';
+import fallback from '../utils/fallback';
 
-type TypeExpressionFunc = (data: Data, args: any[]) => any;
+const m = evaluateAndApply<any>;
+const f = fallback<any>;
 
-const typeExpressionsRaw: Record<TypeExpressionName, (arg: any) => any> = {
-  array: (arg) => (Array.isArray(arg) ? arg : undefined),
-  boolean: (arg) => (typeof arg === 'boolean' ? arg : undefined),
-  literal: (arg) => arg,
-  number: (arg) => (typeof arg === 'number' ? arg : undefined),
-  object: (arg) =>
-    arg !== null && typeof arg === 'object' && !Array.isArray(arg)
-      ? arg
-      : undefined,
-  string: (arg) => (typeof arg === 'string' ? arg : undefined),
-  'to-boolean': Boolean,
-  'to-number': Number,
-  'to-string': String,
-  typeof: (arg) => typeof arg,
-};
-export const typeExpressions = {} as Record<
-  TypeExpressionName,
-  TypeExpressionFunc
->;
-for (const key in typeExpressionsRaw) {
-  const t = key as TypeExpressionName;
-  const typeExpression: TypeExpressionFunc = (data, args) => {
-    const evaluatedArgs = args.map((arg) => evaluateArg(data, arg));
-    for (const arg of evaluatedArgs) {
-      const result = tryConvert(typeExpressionsRaw[t], arg);
-      if (result !== undefined) {
-        return result;
-      }
+type ArrayType = 'string' | 'number' | 'boolean';
+
+const array: TypeExpressionFunc = (data, args) => {
+  const [firstArg, secondArg, thirdArg, fourthArg] = args;
+
+  let requiredType: ArrayType | undefined = undefined;
+  let requiredLength: number | undefined = undefined;
+  let value: any;
+
+  if (
+    typeof firstArg === 'string' &&
+    ['string', 'number', 'boolean'].includes(firstArg)
+  ) {
+    requiredType = firstArg;
+
+    if (typeof secondArg === 'number') {
+      requiredLength = secondArg;
+      value = evaluateArg(data, fourthArg);
+    } else {
+      value = evaluateArg(data, thirdArg);
     }
-    throw new Error(`Parameters for '${t}' not corrected`);
-  };
+  } else {
+    value = evaluateArg(data, firstArg);
+  }
 
-  typeExpressions[t] = typeExpression;
-}
+  if (!Array.isArray(value)) {
+    throw new Error('Expected an array');
+  }
+
+  if (requiredType && !value.every((item) => typeof item === requiredType)) {
+    throw new Error(
+      `Expected all items in array to be of type ${requiredType}`,
+    );
+  }
+
+  if (requiredLength && value.length !== requiredLength) {
+    throw new Error(`Expected array of length ${requiredLength}`);
+  }
+
+  return value;
+};
+
+export const typeExpressions: Record<TypeExpressionName, TypeExpressionFunc> = {
+  array,
+  boolean: m(f((arg) => (typeof arg === 'boolean' ? arg : undefined))),
+  literal: m((arg) => arg),
+  number: m(f((arg) => (typeof arg === 'number' ? arg : undefined))),
+  object: m(
+    f((arg) =>
+      arg !== null && typeof arg === 'object' && !Array.isArray(arg)
+        ? arg
+        : undefined,
+    ),
+  ),
+  string: m(f((arg) => (typeof arg === 'string' ? arg : undefined))),
+  'to-boolean': m(Boolean),
+  'to-number': m(Number),
+  'to-string': m(String),
+  typeof: m((arg) => typeof arg),
+};

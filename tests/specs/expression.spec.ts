@@ -284,6 +284,57 @@ describe('Mathematical Expressions', () => {
 });
 
 describe('Type Expressions', () => {
+  describe('Array', () => {
+    const data = {
+      stringArray: ['a', 'b', 'c'],
+      mixedArray: [1, 'a', true],
+      numberArray: [1, 2, 3, 4],
+      booleanArray: [true, false, true],
+    };
+
+    it('should check if a value is an array', () => {
+      expect(evaluate(data, ['array', ['get', 'stringArray']])).to.eql([
+        'a',
+        'b',
+        'c',
+      ]);
+      expect(evaluate(data, ['array', ['get', 'mixedArray']])).to.throw(Error);
+    });
+
+    it('should check if all items of an array are of a specific type', () => {
+      expect(
+        evaluate(data, ['array', 'string', ['get', 'stringArray']]),
+      ).to.eql(['a', 'b', 'c']);
+      expect(
+        evaluate(data, ['array', 'number', ['get', 'stringArray']]),
+      ).to.throw(Error);
+      expect(
+        evaluate(data, ['array', 'boolean', ['get', 'mixedArray']]),
+      ).to.throw(Error);
+    });
+
+    it('should check the length of the array if specified', () => {
+      expect(
+        evaluate(data, ['array', 'number', 4, ['get', 'numberArray']]),
+      ).to.eql([1, 2, 3, 4]);
+      expect(
+        evaluate(data, ['array', 'number', 3, ['get', 'numberArray']]),
+      ).to.throw(Error);
+    });
+
+    it('should check both type and length if specified', () => {
+      expect(
+        evaluate(data, ['array', 'boolean', 3, ['get', 'booleanArray']]),
+      ).to.eql([true, false, true]);
+      expect(
+        evaluate(data, ['array', 'boolean', 2, ['get', 'booleanArray']]),
+      ).to.throw(Error);
+      expect(
+        evaluate(data, ['array', 'string', 3, ['get', 'booleanArray']]),
+      ).to.throw(Error);
+    });
+  });
+
   const prop = {
     num: 123,
     str: 'Hello World',
