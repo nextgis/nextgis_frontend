@@ -124,7 +124,7 @@ describe('Lookup Expressions', () => {
   });
 });
 
-describe(`Expression`, () => {
+describe(`Decision Expression`, () => {
   const prop = {
     zero: 0,
     two: 2,
@@ -136,6 +136,64 @@ describe(`Expression`, () => {
     nullValue: null,
     undefinedValue: undefined,
   };
+
+  describe('caseFunc', () => {
+    it('returns the correct branch based on the condition', () => {
+      expect(
+        evaluate(prop, [
+          'case',
+          ['==', ['get', 'two'], 2],
+          'matches two',
+          ['==', ['get', 'str'], 'Not Foo Bar'],
+          'matches string',
+          'fallback',
+        ]),
+      ).to.be.equal('matches two');
+
+      expect(
+        evaluate(prop, [
+          'case',
+          ['==', ['get', 'two'], 3],
+          'matches two',
+          ['==', ['get', 'str'], 'Foo Bar'],
+          'matches string',
+          'fallback',
+        ]),
+      ).to.be.equal('matches string');
+
+      expect(
+        evaluate(prop, [
+          'case',
+          ['==', ['get', 'two'], 3],
+          'matches two',
+          ['==', ['get', 'str'], 'Not Foo Bar'],
+          'matches string',
+          'fallback',
+        ]),
+      ).to.be.equal('fallback');
+    });
+
+    it('throws an error if no fallback is provided', () => {
+      expect(() =>
+        evaluate(prop, ['case', ['==', ['get', 'two'], 2], 'matches two']),
+      ).to.throw;
+    });
+
+    it('works with multiple condition-output pairs', () => {
+      expect(
+        evaluate(prop, [
+          'case',
+          ['==', ['get', 'two'], 3],
+          'matches two',
+          ['==', ['get', 'str'], 'Not Foo Bar'],
+          'matches string',
+          ['==', ['get', 'zero'], 0],
+          'matches zero',
+          'fallback',
+        ]),
+      ).to.be.equal('matches zero');
+    });
+  });
 
   it('match', () => {
     expect(
@@ -152,23 +210,56 @@ describe(`Expression`, () => {
     ).to.be.equal('not matched');
   });
 
-  it('case', () => {
-    expect(
-      evaluate(prop, [
-        'case',
-        ['==', ['get', 'two'], 2],
-        'true branch',
-        'false branch',
-      ]),
-    ).to.be.equal('true branch');
-    expect(
-      evaluate(prop, [
-        'case',
-        ['==', ['get', 'str'], 'Foo'],
-        'true branch',
-        'false branch',
-      ]),
-    ).to.be.equal('false branch');
+  it('not', () => {
+    expect(evaluate(prop, ['!', ['get', 'true']])).to.be.false;
+    expect(evaluate(prop, ['!', ['get', 'false']])).to.be.true;
+  });
+
+  describe('notEqual', () => {
+    it('should return true when two numbers are not equal', () => {
+      expect(evaluate(prop, ['!=', ['get', 'two'], 3])).to.be.true;
+    });
+
+    it('should return false when two numbers are equal', () => {
+      expect(evaluate(prop, ['!=', ['get', 'two'], 2])).to.be.false;
+    });
+
+    it('should throw for different data types', () => {
+      expect(() => evaluate(prop, ['!=', ['get', 'str'], 2])).to.be.throw;
+    });
+
+    it('should throw when comparing null and undefined', () => {
+      expect(() =>
+        evaluate(prop, ['!=', ['get', 'nullValue'], ['get', 'undefinedValue']]),
+      ).to.be.throw;
+    });
+
+    it('should throw when comparing true and false', () => {
+      expect(() => evaluate(prop, ['!=', ['get', 'true'], ['get', 'false']])).to
+        .be.throw;
+    });
+  });
+
+  // Test for relational operators
+  it('relational', () => {
+    expect(evaluate(prop, ['==', ['get', 'two'], 2])).to.be.true;
+    expect(evaluate(prop, ['<', ['get', 'two'], 3])).to.be.true;
+    expect(evaluate(prop, ['<=', ['get', 'two'], 2])).to.be.true;
+    expect(evaluate(prop, ['>', ['get', 'two'], 1])).to.be.true;
+    expect(evaluate(prop, ['>=', ['get', 'two'], 2])).to.be.true;
+  });
+
+  it('all and any', () => {
+    expect(evaluate(prop, ['all', ['get', 'true'], ['==', ['get', 'two'], 2]]))
+      .to.be.true;
+    expect(evaluate(prop, ['any', ['get', 'false'], ['==', ['get', 'two'], 2]]))
+      .to.be.true;
+  });
+
+  it('isExpression', () => {
+    expect(isExpression(['get', 'two'])).to.be.true;
+    expect(isExpression(['get'])).to.be.false;
+    expect(isExpression(['unknown', 'two'])).to.be.false;
   });
 
   it('step', () => {
@@ -188,61 +279,6 @@ describe(`Expression`, () => {
         'high',
       ]),
     ).to.be.equal('low');
-  });
-
-  it(`coalesce`, () => {
-    expect(
-      evaluate(prop, [
-        'coalesce',
-        ['get', 'nullValue'],
-        ['get', 'undefinedValue'],
-        ['get', 'str'],
-      ]),
-    ).to.be.equal('Foo Bar');
-    expect(
-      evaluate(prop, [
-        'coalesce',
-        ['get', 'nullValue'],
-        ['get', 'two'],
-        ['get', 'str'],
-      ]),
-    ).to.be.equal(2);
-    expect(
-      evaluate(prop, [
-        'coalesce',
-        ['get', 'nullValue'],
-        ['get', 'undefinedValue'],
-        ['get', 'false'],
-      ]),
-    ).to.be.equal(false);
-  });
-
-  it('not', () => {
-    expect(evaluate(prop, ['!', ['get', 'true']])).to.be.false;
-    expect(evaluate(prop, ['!', ['get', 'false']])).to.be.true;
-  });
-
-  // Test for relational operators
-  it('relational', () => {
-    expect(evaluate(prop, ['==', ['get', 'two'], 2])).to.be.true;
-    expect(evaluate(prop, ['!=', ['get', 'two'], 3])).to.be.true;
-    expect(evaluate(prop, ['<', ['get', 'two'], 3])).to.be.true;
-    expect(evaluate(prop, ['<=', ['get', 'two'], 2])).to.be.true;
-    expect(evaluate(prop, ['>', ['get', 'two'], 1])).to.be.true;
-    expect(evaluate(prop, ['>=', ['get', 'two'], 2])).to.be.true;
-  });
-
-  it('all and any', () => {
-    expect(evaluate(prop, ['all', ['get', 'true'], ['==', ['get', 'two'], 2]]))
-      .to.be.true;
-    expect(evaluate(prop, ['any', ['get', 'false'], ['==', ['get', 'two'], 2]]))
-      .to.be.true;
-  });
-
-  it('isExpression', () => {
-    expect(isExpression(['get', 'two'])).to.be.true;
-    expect(isExpression(['get'])).to.be.false;
-    expect(isExpression(['unknown', 'two'])).to.be.false;
   });
 });
 

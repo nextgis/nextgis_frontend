@@ -53,23 +53,27 @@ export type MathExpressionName =
   // | 'distance'
   | 'tan';
 
-export type ExpressionName =
-  | MathExpressionName
-  | TypeExpressionName
-  | LookupExpressionName
+export type DecisionExpressionName =
   | '!'
   | '!='
   | '<'
   | '<='
   | '=='
-  | '>'
   | '>='
+  | '>'
   | 'all'
   | 'any'
   | 'case'
-  | 'step'
-  | 'coalesce'
   | 'match';
+
+export type InterpolationExpressionName = 'step';
+
+export type ExpressionName =
+  | MathExpressionName
+  | TypeExpressionName
+  | LookupExpressionName
+  | DecisionExpressionName
+  | InterpolationExpressionName;
 
 export type SimpleType = string | number | boolean | null | Record<string, any>;
 type ExpressionArg = SimpleType | Expression;
