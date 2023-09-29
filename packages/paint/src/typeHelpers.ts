@@ -3,17 +3,9 @@ import type {
   GetPaintCallback,
   PropertiesPaint,
   GeometryPaint,
-  Expression,
   IconPaint,
   Paint,
 } from './interfaces';
-
-export function isExpression(value: unknown): value is Expression {
-  if (Array.isArray(value)) {
-    return true;
-  }
-  return false;
-}
 
 export function isPropertiesPaint(paint: Paint): paint is PropertiesPaint {
   if (Array.isArray(paint)) {

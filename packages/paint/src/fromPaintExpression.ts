@@ -1,60 +1,19 @@
-import { isExpression } from './typeHelpers';
+import { evaluate, isExpression, type Expression } from '@nextgis/expression';
 
 import type { Feature } from 'geojson';
-import type {
-  VectorAdapterLayerPaint,
-  GetPaintCallback,
-  Expression,
-  ExpressionName,
-} from './interfaces';
+import type { VectorAdapterLayerPaint, GetPaintCallback } from './interfaces';
 
-type ExpressionFun = (feature: Feature, args: any[]) => SimpleType;
-
-function get(feature: Feature, args: any[]) {
-  const field = args[0];
-  return feature.properties && feature.properties[field];
-}
-
-function match(feature: Feature, args: any[]) {
-  const [lookup, ...cases] = args;
-  let property = lookup;
-  if (Array.isArray(lookup)) {
-    property = featureExpression(feature, lookup as Expression);
-  }
-  // remove last odd item from cases array
-  const defValue = cases.splice(-1, cases.length % 2)[0];
-  for (let fry = 0; fry < cases.length - 1; fry += 2) {
-    const key = cases[fry];
-    if (key === property) {
-      return cases[fry + 1];
-    }
-  }
-  return defValue;
-}
-
-const expressions: { [key in ExpressionName]: ExpressionFun } = {
-  get,
-  match,
-};
-
-type SimpleType = string | number | boolean | undefined;
-
-type PropertyExpressionCb = (feature: Feature) => SimpleType;
-
-function featureExpression(feature: Feature, expression: Expression) {
-  const [name, ...args] = expression;
-  const expressionFun = expressions[name];
-  if (expressionFun) {
-    return expressionFun(feature, args);
-  }
-  return undefined;
-}
+type PropertyExpressionCb = (feature: Feature) => ReturnType<typeof evaluate>;
 
 function createPropertyExpressionCb(
   expression: Expression,
 ): PropertyExpressionCb {
   return (feature: Feature) => {
-    return featureExpression(feature, expression);
+    const properties = feature.properties;
+    if (properties) {
+      return evaluate(properties, expression);
+    }
+    return false;
   };
 }
 

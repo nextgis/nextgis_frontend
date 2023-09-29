@@ -1203,6 +1203,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@nextgis/expression@workspace:packages/expression":
+  version: 0.0.0-use.local
+  resolution: "@nextgis/expression@workspace:packages/expression"
+  dependencies:
+    "@nextgis/build-tools": ^1.17.0
+  languageName: unknown
+  linkType: soft
+
 "@nextgis/frontend_test@workspace:tests":
   version: 0.0.0-use.local
   resolution: "@nextgis/frontend_test@workspace:tests"

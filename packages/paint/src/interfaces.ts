@@ -1,5 +1,6 @@
 import type { Feature } from 'geojson';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
+import { Expression } from '@nextgis/expression';
 
 export type PaintType = 'circle' | 'path' | 'pin' | 'icon' | 'get-paint';
 
@@ -153,52 +154,3 @@ export type Paint3D<
   | VectorAdapterLayerPaint3D
   | GetPaintCallback<F>
   | PropertyPaint3D<P extends null ? Properties : P>;
-
-// MAPBOX
-export type ExpressionName =
-  // Types
-  // | 'array'
-  // | 'boolean'
-  // | 'collator'
-  // | 'format'
-  // | 'literal'
-  // | 'number'
-  // | 'object'
-  // | 'string'
-  // | 'to-boolean'
-  // | 'to-color'
-  // | 'to-number'
-  // | 'to-string'
-  // | 'typeof'
-  // Feature data
-  // | 'feature-state'
-  // | 'geometry-type'
-  // | 'id'
-  // | 'line-progress'
-  // | 'properties'
-  // Lookup
-  // | 'at'
-  | 'get'
-  // | 'has'
-  // | 'length'
-  // Decision
-  // | '!'
-  // | '!='
-  // | '<'
-  // | '<='
-  // | '=='
-  // | '>'
-  // | '>='
-  // | 'all'
-  // | 'any'
-  // | 'case'
-  | 'match';
-// | 'coalesce'
-// String
-// | 'concat'
-// | 'downcase'
-// | 'is-supported-script'
-// | 'resolved-locale'
-// | 'upcase'
-
-export type Expression = [ExpressionName, ...any[]];
