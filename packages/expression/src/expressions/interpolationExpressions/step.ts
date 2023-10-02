@@ -1,11 +1,6 @@
-import type {
-  ExpressionFunc,
-  InterpolationExpressionName,
-} from '../interfaces';
-
 type OutputType = number | string | boolean | null;
 
-function step(args: (number | OutputType)[]): OutputType {
+export function step(args: (number | OutputType)[]): OutputType {
   const [input, defaultValue, ...stops] = args;
 
   if (typeof input !== 'number') {
@@ -28,10 +23,3 @@ function step(args: (number | OutputType)[]): OutputType {
 
   return defaultValue;
 }
-
-export const interpolationExpressions: Record<
-  InterpolationExpressionName,
-  ExpressionFunc
-> = {
-  step,
-};

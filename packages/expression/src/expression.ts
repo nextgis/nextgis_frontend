@@ -1,5 +1,10 @@
 import { typeExpressions } from './expressions/typeExpressions';
 import { mathExpressions } from './expressions/mathExpressions';
+import { lookupExpressions } from './expressions/lookupExpressions';
+import { stringExpressions } from './expressions/stringExpressions';
+import { decisionExpressions } from './expressions/decisionExpressions';
+import { interpolationExpressions } from './expressions/interpolationExpressions';
+
 import type {
   Data,
   SimpleType,
@@ -7,63 +12,41 @@ import type {
   ExpressionFunc,
   ExpressionName,
 } from './interfaces';
-import { lookupExpressions } from './expressions/lookupExpressions';
-import { decisionExpressions } from './expressions/decisionExpressions';
-import { interpolationExpressions } from './expressions/interpolationExpressions';
 
 export function isExpression(value: any): value is Expression {
   if (Array.isArray(value)) {
     const [lookup, ...cases] = value;
+    const l = lookup as ExpressionName;
     return (
-      typeof lookup === 'string' && lookup in expressions && cases.length > 0
+      typeof l === 'string' &&
+      l !== 'literal' &&
+      l in expressions &&
+      cases.length > 0
     );
   }
   return false;
 }
 
-function step(args: any[]) {
-  const [input, defaultValue, ...stops] = args;
-
-  if (typeof input !== 'number') {
-    return undefined;
-  }
-
-  for (let i = 0; i < stops.length - 2; i += 2) {
-    const stopInput = stops[i];
-    const stopOutput = stops[i + 1];
-    const nextStopInput = stops[i + 2];
-
-    if (input >= stopInput && input < nextStopInput) {
-      return stopOutput;
-    }
-  }
-
-  if (input >= stops[stops.length - 2]) {
-    return stops[stops.length - 1];
-  }
-
-  return defaultValue;
-}
-
 const expressions: { [key in ExpressionName]: ExpressionFunc } = {
   ...mathExpressions,
   ...typeExpressions,
+  ...stringExpressions,
   ...lookupExpressions,
   ...decisionExpressions,
   ...interpolationExpressions,
 };
 
 export function evaluate<T extends SimpleType = SimpleType>(
-  data: Data,
   expression: Expression,
-): T | undefined {
+  data: Data = {},
+): T {
   const [name, ...args] = expression;
   const expressionFun = expressions[name];
   if (expressionFun) {
     return expressionFun(
-      args.map((arg) => (isExpression(arg) ? evaluate(data, arg) : arg)),
+      args.map((arg) => (isExpression(arg) ? evaluate(arg, data) : arg)),
       data,
     );
   }
-  return undefined;
+  throw new Error(`Expression "${name}" is not supported.`);
 }

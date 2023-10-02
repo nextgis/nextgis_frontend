@@ -12,6 +12,6 @@ export default function fallback<T extends SimpleType = SimpleType, R = T>(
         return result;
       }
     }
-    throw new Error(`Parameters not corrected`);
+    throw new Error(`Received a mismatched type`);
   };
 }

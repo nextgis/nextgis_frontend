@@ -12,18 +12,20 @@ export type LookupExpressionName =
 export type TypeExpressionName =
   | 'array'
   | 'boolean'
-  // | 'collator'
-  // | 'format'
   | 'literal'
   | 'number'
-  // | 'number-format'
   | 'object'
   | 'string'
   | 'to-boolean'
-  // | 'to-color'
   | 'to-number'
   | 'to-string'
   | 'typeof';
+// | 'collator'
+// | 'format'
+// | 'number-format'
+// | 'to-color'
+
+export type StringExpressionName = 'concat' | 'downcase' | 'upcase';
 
 export type MathExpressionName =
   | '+'
@@ -50,8 +52,8 @@ export type MathExpressionName =
   | 'round'
   | 'sin'
   | 'sqrt'
-  // | 'distance'
   | 'tan';
+// | 'distance'
 
 export type DecisionExpressionName =
   | '!'
@@ -66,11 +68,12 @@ export type DecisionExpressionName =
   | 'case'
   | 'match';
 
-export type InterpolationExpressionName = 'step';
+export type InterpolationExpressionName = 'step' | 'interpolate';
 
 export type ExpressionName =
   | MathExpressionName
   | TypeExpressionName
+  | StringExpressionName
   | LookupExpressionName
   | DecisionExpressionName
   | InterpolationExpressionName;
