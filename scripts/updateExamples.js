@@ -12,7 +12,7 @@ function copyExampleToLib(packageName, exampleFolderPath, exampleName) {
     packagesPath,
     packageName,
     'examples',
-    exampleName
+    exampleName,
   );
 
   const metaPath = join(exampleFolderPath, 'index.json');
@@ -29,7 +29,7 @@ function copyExampleToLib(packageName, exampleFolderPath, exampleName) {
   const newMeta = { ...opts };
   fs.writeFileSync(
     join(libExamplesPath, 'index.json'),
-    JSON.stringify(newMeta)
+    JSON.stringify(newMeta),
   );
 
   // copy html
