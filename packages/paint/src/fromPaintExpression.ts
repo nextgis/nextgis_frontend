@@ -11,7 +11,7 @@ function createPropertyExpressionCb(
   return (feature: Feature) => {
     const properties = feature.properties;
     if (properties) {
-      return evaluate(properties, expression);
+      return evaluate(expression, properties);
     }
     return false;
   };
