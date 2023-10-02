@@ -1,6 +1,6 @@
 import Color from 'color';
 
-import type { Expression } from '@nextgis/paint';
+import type { Expression } from '@nextgis/expression';
 import type { CreateMapserverStyleOptions } from '../interfaces';
 
 export function mapserverStyle(opt: CreateMapserverStyleOptions) {
