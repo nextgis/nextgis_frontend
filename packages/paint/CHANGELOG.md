@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.1](https://github.com/nextgis/nextgis_frontend/compare/v1.18.0...v1.18.1) (2023-10-03)
+
+
+### Performance Improvements
+
+* **mapbox-map-adapter:** use expression for native painting ([f6889af](https://github.com/nextgis/nextgis_frontend/commit/f6889aff5e0f8cd013df309f8ff6de2b53d96eea))
+
+
+
+
+
 # [1.18.0](https://github.com/nextgis/nextgis_frontend/compare/v1.17.0...v1.18.0) (2023-10-02)
 
 **Note:** Version bump only for package @nextgis/paint
