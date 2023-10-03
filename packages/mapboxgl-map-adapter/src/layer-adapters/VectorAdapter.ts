@@ -914,7 +914,6 @@ export abstract class VectorAdapter<
     // const features = this.map.queryRenderedFeatures(e.point, {
     //   layers: this.layer
     // });
-
     const map = this.map;
     if (map) {
       if (this.options.onMouseOver && this.layer) {

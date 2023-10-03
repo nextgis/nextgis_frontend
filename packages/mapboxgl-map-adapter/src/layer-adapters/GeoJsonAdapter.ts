@@ -102,6 +102,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     }
     if (data && type) {
       const features = this.filterGeometries(data, type);
+      this._features = this._features.concat(features);
       for (const x of features) {
         // to avoid id = 0 is false
         const fid = '_' + ID++;
@@ -522,7 +523,6 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
       };
       newFeatures = [obj];
     }
-    this._features = this._features.concat(newFeatures);
     return newFeatures;
   }
 
