@@ -217,8 +217,8 @@ export class WebMapLayers<
     const _order = defined(order)
       ? order
       : options.order !== undefined
-        ? options.order
-        : this.reserveOrder();
+      ? options.order
+      : this.reserveOrder();
     let adapterEngine: Type<LayerAdapter<M, L, LO>> | undefined;
     if (typeof adapter === 'string') {
       adapterEngine = this.getLayerAdapter(adapter) as Type<
@@ -653,7 +653,7 @@ export class WebMapLayers<
 
   toggleLayerLabel(layerDef: LayerDef, status?: boolean): boolean {
     const layer = this.getLayer(layerDef) as VectorLayerAdapter;
-    status = status ?? !this.isLayerLabelVisible(layerDef)
+    status = status ?? !this.isLayerLabelVisible(layerDef);
     if (layer) {
       if (status) {
         if (layer.showLabel) {
@@ -999,18 +999,18 @@ export class WebMapLayers<
 
     if (!options.nativePaint) {
       if (this.options.paint) {
-        options.paint = preparePaint(
-          options.paint || {},
-          this.options.paint,
-          this.getPaintFunctions,
-        );
+        options.paint = preparePaint({
+          paint: options.paint || {},
+          defaultPaint: this.options.paint,
+          getPaintFunctions: this.getPaintFunctions,
+        });
       }
       if (options.selectedPaint && this.options.selectedPaint) {
-        options.selectedPaint = preparePaint(
-          options.selectedPaint,
-          this.options.selectedPaint,
-          this.getPaintFunctions,
-        );
+        options.selectedPaint = preparePaint({
+          paint: options.selectedPaint,
+          defaultPaint: this.options.selectedPaint,
+          getPaintFunctions: this.getPaintFunctions,
+        });
       }
     }
   }

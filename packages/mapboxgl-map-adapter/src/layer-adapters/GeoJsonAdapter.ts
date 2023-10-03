@@ -274,10 +274,13 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     name: string,
   ): Promise<any> {
     if (typeof paint === 'function') {
-      return await this._getPaintFromCallback(paint, type, name);
-    } else {
-      return super._createPaintForType(paint, type, name);
+      if (paint.paint) {
+        paint = paint.paint;
+      } else {
+        return await this._getPaintFromCallback(paint, type, name);
+      }
     }
+    return super._createPaintForType(paint, type, name);
   }
 
   protected _selectFeature(
@@ -374,7 +377,11 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
       for (const t of this._types) {
         const geomType = typeAliasForFilter[t];
         if (geomType) {
-          const geomFilter: LegacyFilterSpecification = ['==', '$type', geomType];
+          const geomFilter: LegacyFilterSpecification = [
+            '==',
+            '$type',
+            geomType,
+          ];
           const layerName = this._getLayerNameFromType(t);
           const selLayerName = this._getSelectionLayerNameFromType(t);
           if (layers.indexOf(selLayerName) !== -1) {

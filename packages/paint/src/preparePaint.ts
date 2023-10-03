@@ -53,28 +53,28 @@ function createPropertiesPaint(
   };
 }
 
-export function expressionCallback<
-  P extends Record<string, any> = Record<string, any>,
->(
-  paint: P,
-  defaultPaint?: P,
-  getPaintFunctions?: Record<string, GetPaintFunction>,
-) {
+function expressionCallback({
+  paint,
+  defaultPaint,
+}: PreparePaintOptions): Paint | VectorAdapterLayerPaint {
   const expressionCallback = createExpressionCallback(paint);
   if (expressionCallback) {
     const expressionPaintCb = (feature: Feature) => {
-      return preparePaint(
-        expressionCallback(feature),
+      return preparePaint({
+        paint: expressionCallback(feature),
         defaultPaint,
-        getPaintFunctions,
-      ) as VectorAdapterLayerPaint;
+      }) as VectorAdapterLayerPaint;
     };
-    expressionPaintCb.paint = paint;
-    return expressionPaintCb;
+    expressionPaintCb.paint = finalizePaint({ paint, defaultPaint });
+    return expressionPaintCb as VectorAdapterLayerPaint;
   }
+  return finalizePaint({ paint, defaultPaint });
+}
+
+function finalizePaint({ paint, defaultPaint }: PreparePaintOptions): Paint {
   let newPaint: Paint = { ...defaultPaint };
-  newPaint = { ...newPaint, ...paint };
-  newPaint.fill = newPaint.fill !== undefined ? newPaint.fill : true;
+  newPaint = { ...newPaint, ...paint } as GeometryPaint;
+  newPaint.fill = newPaint.fill ?? true;
   newPaint.stroke =
     newPaint.stroke !== undefined
       ? newPaint.stroke
@@ -82,22 +82,28 @@ export function expressionCallback<
   return newPaint;
 }
 
-export function preparePaint(
-  paint: Paint,
-  defaultPaint?: GeometryPaint,
-  getPaintFunctions?: { [name: string]: GetPaintFunction },
-): Paint {
+export interface PreparePaintOptions {
+  paint: Paint;
+  defaultPaint?: GeometryPaint;
+  getPaintFunctions?: { [name: string]: GetPaintFunction };
+}
+
+export function preparePaint({
+  paint,
+  defaultPaint,
+  getPaintFunctions,
+}: PreparePaintOptions): Paint {
   if (!paint) {
     throw new Error('paint is empty');
   }
   let newPaint: Paint = { ...defaultPaint };
   if (isPaintCallback(paint)) {
     const getPaintFunction: GetPaintCallback = (feature: Feature) => {
-      const getPaint = preparePaint(
-        paint(feature),
+      const getPaint = preparePaint({
+        paint: paint(feature),
         defaultPaint,
         getPaintFunctions,
-      ) as VectorAdapterLayerPaint;
+      }) as VectorAdapterLayerPaint;
       getPaint.type = paint.type;
       return getPaint;
     };
@@ -105,21 +111,25 @@ export function preparePaint(
     return getPaintFunction;
   } else if (isPropertiesPaint(paint)) {
     return (feature: Feature) => {
-      return preparePaint(
-        createPropertiesPaint(paint)(feature),
+      return preparePaint({
+        paint: createPropertiesPaint(paint)(feature),
         defaultPaint,
         getPaintFunctions,
-      ) as VectorAdapterLayerPaint;
+      }) as VectorAdapterLayerPaint;
     };
   } else if (paint.type === 'get-paint') {
     const getPaint = updatePaintOptionFromCallback(paint, getPaintFunctions);
     if (getPaint) {
-      newPaint = preparePaint(getPaint, defaultPaint, getPaintFunctions);
+      newPaint = preparePaint({
+        paint: getPaint,
+        defaultPaint,
+        getPaintFunctions,
+      });
     }
   } else if (paint.type === 'icon') {
     return paint;
   } else {
-    newPaint = expressionCallback(paint, defaultPaint, getPaintFunctions);
+    newPaint = expressionCallback({ paint, defaultPaint });
   }
 
   if (isPaintCallback(newPaint)) {
