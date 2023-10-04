@@ -74,11 +74,11 @@ export function getIcon(opt: IconOptions = {}): IconPaint {
   const color = opt.color ?? 'blue';
   const strokeColor = opt.strokeColor ?? 'white';
   const size = opt.size ?? 12;
-  const rotate = opt.rotate ?? 0; // Extract rotation
+  const rotate = opt.rotate ?? 0;
 
   const anchor = size / 2;
   const defSize = 12;
-  const stroke = typeof opt.stroke === 'number' ? opt.stroke : STROKE;
+  const stroke = opt.stroke !== undefined ? Number(opt.stroke) : STROKE;
   const scale = size / defSize;
 
   const pathAlias = opt.p || svgPath[shape] || 'circle';
@@ -89,7 +89,9 @@ export function getIcon(opt: IconOptions = {}): IconPaint {
   );
   const fistChild = svg.firstChild as SVGElement;
 
-  const transform = `scale(${scale}) rotate(${rotate}, ${anchor}, ${anchor})`; // Add rotation to the transform
+  const scaledAnchor = defSize / 2;
+
+  const transform = `scale(${scale}) rotate(${rotate}, ${scaledAnchor}, ${scaledAnchor})`;
 
   fistChild.setAttribute('fill', color);
   if (stroke) {
