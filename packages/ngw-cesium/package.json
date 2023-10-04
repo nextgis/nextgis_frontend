@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/ngw-cesium",
-  "version": "1.18.1",
+  "version": "1.18.2",
   "private": true,
   "description": "",
   "main": "lib/ngw-cesium.js",
@@ -9,7 +9,7 @@
   "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/cesium-map-adapter": "^1.18.1",
-    "@nextgis/ngw-map": "^1.18.1",
+    "@nextgis/ngw-map": "^1.18.2",
     "@types/events": "^3.0.0",
     "cesium": "1.96.0",
     "events": "^3.3.0"

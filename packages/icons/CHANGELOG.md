@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.2](https://github.com/nextgis/nextgis_frontend/compare/v1.18.1...v1.18.2) (2023-10-04)
+
+
+### Bug Fixes
+
+* **icons:** icon rotation now works ([1e90837](https://github.com/nextgis/nextgis_frontend/commit/1e90837b3fa5f38a3fbc5de835c9cf016c0b16cb))
+
+
+
+
+
 ## [1.18.1](https://github.com/nextgis/nextgis_frontend/compare/v1.18.0...v1.18.1) (2023-10-03)
 
 **Note:** Version bump only for package @nextgis/icons
