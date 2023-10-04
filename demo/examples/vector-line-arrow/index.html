@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Line with mixed arrows</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body,
+      #map {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+
+<script src="../../../packages/ngw-leaflet/lib/ngw-leaflet.global.js"></script>
+<script src="../../../packages/icons/lib/icons.global.js"></script>
+</head>
+
+<body>
+<div id="map"></div>
+<script>
+
+
+
+  NgwMap.create({
+    baseUrl: 'https://demo.nextgis.com',
+    osm: true,
+    resources: [
+      {
+        resource: 1733,
+        id: 'cafe',
+        fit: true,
+        adapterOptions: { limit: 10 },
+      },
+    ],
+  }).then((ngwMap) => {
+    const points = ngwMap.getLayer('cafe');
+      if (points && points.getLayers) {
+        const layerItems = points.getLayers();
+        const features = layerItems.map(
+          (item) => item.feature,
+        );
+        const lines = {
+          type: 'FeatureCollection',
+          features: [],
+        };
+        for (let i = 0; i < features.length; i += 2) {
+          const [start, end] = [i, i + 1].map(
+            (index) => features[index].geometry.coordinates,
+          );
+          if (start && end) {
+            const controlPoint = getControlPoint(start, end);
+
+            const arc = getArcPoints(start, end, controlPoint);
+
+            lines.features.push(createLineFeature(arc));
+            if (arc.length > 1) {
+              const [arrowLeft, arrowRight] = getArrowPoints(
+                arc[arc.length - 1],
+                controlPoint,
+                0.3,
+              );
+              lines.features.push(
+                createLineFeature([arrowLeft, end, arrowRight]),
+              );
+            }
+          }
+        }
+        if (lines.features.length) {
+          ngwMap.addGeoJsonLayer({
+            data: lines,
+            paint: { color: 'red', opacity: 1, weight: 3 },
+          });
+        }
+      }
+  });
+
+  function getArrowPoints(
+  end,
+  prev,
+  length = 1,
+  angle = Math.PI / 6,
+) {
+  const dx = end[0] - prev[0];
+  const dy = end[1] - prev[1];
+
+  const theta = Math.atan2(dy, dx);
+
+  const arrowPoint1 = [
+    end[0] - length * Math.cos(theta - angle),
+    end[1] - length * Math.sin(theta - angle),
+  ];
+
+  const arrowPoint2 = [
+    end[0] - length * Math.cos(theta + angle),
+    end[1] - length * Math.sin(theta + angle),
+  ];
+
+  return [arrowPoint1, arrowPoint2];
+}
+
+function getControlPoint(start, end, bend = 0.5) {
+  const midPoint = [(start[0] + end[0]) / 2, (start[1] + end[1]) / 2];
+
+  const dx = end[0] - start[0];
+  const dy = end[1] - start[1];
+
+  const distance = Math.sqrt(dx * dx + dy * dy);
+
+  const angle = Math.atan2(dy, dx);
+
+  const offsetX = bend * distance * Math.sin(angle);
+  const offsetY = bend * distance * -Math.cos(angle);
+
+  return [midPoint[0] + offsetX, midPoint[1] + offsetY];
+}
+
+function getArcPoints(
+  start,
+  end,
+  controlPoint,
+  numPoints = 100,
+) {
+  const points = [];
+  for (let i = 0; i <= numPoints; i++) {
+    const t = i / numPoints;
+    const x =
+      Math.pow(1 - t, 2) * start[0] +
+      2 * (1 - t) * t * controlPoint[0] +
+      t * t * end[0];
+    const y =
+      Math.pow(1 - t, 2) * start[1] +
+      2 * (1 - t) * t * controlPoint[1] +
+      t * t * end[1];
+    points.push([x, y]);
+  }
+  return points;
+}
+
+function createLineFeature(coordinates) {
+  return {
+    type: 'Feature',
+    properties: {},
+    geometry: { type: 'LineString', coordinates },
+  };
+}
+
+</script>
+</body>
+</html>

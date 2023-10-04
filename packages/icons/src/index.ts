@@ -74,6 +74,7 @@ export function getIcon(opt: IconOptions = {}): IconPaint {
   const color = opt.color ?? 'blue';
   const strokeColor = opt.strokeColor ?? 'white';
   const size = opt.size ?? 12;
+  const rotate = opt.rotate ?? 0; // Extract rotation
 
   const anchor = size / 2;
   const defSize = 12;
@@ -88,7 +89,7 @@ export function getIcon(opt: IconOptions = {}): IconPaint {
   );
   const fistChild = svg.firstChild as SVGElement;
 
-  const transform = `scale(${scale})`;
+  const transform = `scale(${scale}) rotate(${rotate}, ${anchor}, ${anchor})`; // Add rotation to the transform
 
   fistChild.setAttribute('fill', color);
   if (stroke) {

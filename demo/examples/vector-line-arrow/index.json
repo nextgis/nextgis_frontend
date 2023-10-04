@@ -1,0 +1,5 @@
+{
+  "name": "Line with mixed arrows",
+  "description": "Connect two points with a line that has an arrow originating from the line at one end and an arrow from a marker at the other end.",
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
+}
