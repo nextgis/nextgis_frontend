@@ -288,6 +288,8 @@ export interface FeatureRequestParams {
   intersects?: string;
   order_by?: string;
   geom?: 'yes' | 'no';
+  ilike?: string;
+  like?: string;
 }
 
 type Extensions = keyof FeatureItem['extensions'];
@@ -295,6 +297,8 @@ type Extensions = keyof FeatureItem['extensions'];
 export interface NgwFeatureRequestOptions<
   P extends FeatureProperties = FeatureProperties,
 > extends FilterOptions<P> {
+  ilike?: string;
+  like?: string;
   extensions?: Extensions[] | string[] | null | false;
   geom?: boolean;
   geomFormat?: GeomFormat;

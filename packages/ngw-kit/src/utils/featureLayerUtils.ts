@@ -46,8 +46,10 @@ export function createGeoJsonFeature<
 export function updateItemRequestParam<
   P extends FeatureProperties = FeatureProperties,
 >(params: FeatureRequestParams, options: NgwFeatureRequestOptions<P>): void {
-  const { extensions, geom, fields, srs } = options;
-  params.extensions = extensions ? extensions.join(',') : '';
+  const { extensions, geom, fields, srs, ilike, like } = options;
+  if (extensions) {
+    params.extensions = extensions.join(',');
+  }
   if (fields !== undefined) {
     params.fields = Array.isArray(fields) ? fields.join(',') : '';
   }
@@ -57,6 +59,11 @@ export function updateItemRequestParam<
       delete params.srs;
       delete params.geom_format;
     }
+  }
+  if (defined(ilike)) {
+    params.ilike = ilike;
+  } else if (defined(like)) {
+    params.like = like;
   }
   if (defined(srs)) {
     params.srs = srs;
