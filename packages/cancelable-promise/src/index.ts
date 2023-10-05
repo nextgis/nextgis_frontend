@@ -7,6 +7,6 @@
 import { CancelablePromise } from './CancelablePromise';
 import { CancelError } from './CancelError';
 
-export type { CancelError };
+export { CancelError };
 
 export default CancelablePromise;
