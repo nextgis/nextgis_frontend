@@ -4,8 +4,8 @@
  * @packageDocumentation
  * @module geocoder
  */
-import { GeocoderOptions } from './GeocoderOptions';
 import { Geocoder } from './Geocoder';
+import type { GeocoderOptions } from './GeocoderOptions';
 
 export { Geocoder, GeocoderOptions };
 export { BaseProvider } from './providers/BaseProvider';

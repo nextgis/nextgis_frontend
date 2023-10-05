@@ -10,6 +10,7 @@
   "dependencies": {
     "@nextgis/cancelable-promise": "^1.17.0",
     "@nextgis/ngw-connector": "^1.17.0",
+    "@nextgis/ngw-kit": "^1.18.1",
     "@nextgis/utils": "^1.17.0",
     "@types/events": "^3.0.0",
     "@types/geojson": "^7946.0.8",

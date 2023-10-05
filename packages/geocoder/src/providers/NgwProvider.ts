@@ -1,91 +1,142 @@
-import NgwConnector, { ResourceStoreItem } from '@nextgis/ngw-connector';
-import CancelablePromise from '@nextgis/cancelable-promise';
+import NgwConnector from '@nextgis/ngw-connector';
+import { fetchNgwLayerItems } from '@nextgis/ngw-kit';
+
 import { BaseProvider } from './BaseProvider';
-import { BaseProviderOptions } from './BaseProviderOptions';
-import { SearchItem } from '../types/SearchItem';
-import { ResultItem } from '../types/ResultItem';
+
+import type CancelablePromise from '@nextgis/cancelable-promise';
+import type {
+  FeatureItem,
+  NgwConnectorOptions,
+  ResourceItem,
+} from '@nextgis/ngw-connector';
+import type { FetchNgwItemsOptions } from '@nextgis/ngw-kit';
+
+import type { ResultItem } from '../types/ResultItem';
+import type { SearchItem } from '../types/SearchItem';
+import type { BaseProviderOptions } from './BaseProviderOptions';
 
 interface NgwSearchItem extends SearchItem {
   resourceId: number;
   featureId: number;
+  item: FeatureItem;
+  resourceItem: ResourceItem;
 }
 
-interface SearchResource {
-  id: number;
-  limit?: number;
+interface RenderSearchItem {
+  item: FeatureItem;
+  resourceItem: ResourceItem;
+}
+
+interface SearchResource extends FetchNgwItemsOptions {
+  searchMethod?: 'ilike' | 'like';
+  renderSearch?: (item: RenderSearchItem) => string | HTMLElement;
 }
 
 interface NgwProviderOptions extends BaseProviderOptions {
   connector?: NgwConnector;
   searchResources: SearchResource[];
+  connectorOptions?: NgwConnectorOptions;
 }
 
 export class NgwProvider extends BaseProvider<NgwProviderOptions> {
+  static limit = 300;
+
   caseInsensitive = true;
-  searchUrl = 'https://maxim.nextgis.com';
   searchResources: SearchResource[] = [];
+
   private connector: NgwConnector;
-  private requests: CancelablePromise[] = [];
+  private _abortControllers: AbortController[] = [];
 
   constructor(options: NgwProviderOptions) {
     super(options);
+    if (!options.searchUrl && !options.connectorOptions?.baseUrl) {
+      throw new Error(
+        'The `searchUrl` of `connectorOptions.baseUrl` are required',
+      );
+    }
 
     this.connector =
       options.connector ||
       new NgwConnector({
         baseUrl: this.searchUrl,
+        ...options.connectorOptions,
       });
     this.searchResources = options.searchResources;
   }
 
   abort(): void {
-    this.requests.forEach((x) => {
-      x.cancel();
+    this._abortControllers.forEach((a) => {
+      a.abort();
     });
-    this.requests = [];
+    this._abortControllers.length = 0;
   }
 
-  async *search(like: string): AsyncGenerator<NgwSearchItem, void, unknown> {
-    for (const resource of this.searchResources) {
-      const limit = resource.limit || 300;
-      const request = this.connector.get(
-        'feature_layer.store',
-        {
-          headers: { RANGE: `items=0-${limit}` },
-        },
-        {
-          id: resource.id,
-          like,
-        },
-      );
-      this.requests.push(request);
-      request.catch((er) => {
-        console.warn(er);
-      });
-      const resp = await request;
-      const entries: ResourceStoreItem[] = [];
-      if (resp) {
-        resp.forEach((x) => {
-          entries.push({
-            query: like,
-            resourceId: resource.id,
-            ...x,
-          });
-        });
+  async *search(query: string): AsyncGenerator<NgwSearchItem, void, unknown> {
+    const signal = this._makeSignal();
+    for (const config of this.searchResources) {
+      if (signal.aborted) {
+        break;
       }
-      for (const item of this._items(entries)) {
-        item.result = () => this.result(item);
-        yield item;
+      const { searchMethod } = config;
+
+      const limit = config.limit ?? NgwProvider.limit;
+      //
+      const resourceId = (config as any).id ?? config.resourceId;
+
+      try {
+        const resource = await this.connector.getResourceOrFail(resourceId, {
+          cache: true,
+        });
+
+        const options: FetchNgwItemsOptions = {
+          connector: this.connector,
+          resourceId,
+          signal,
+          limit,
+        };
+
+        if (searchMethod === 'like') {
+          options.like = query;
+        } else {
+          options.ilike = query;
+        }
+
+        const request = fetchNgwLayerItems(options);
+
+        const entries = await request;
+
+        for (const item of this._items({
+          entries,
+          query,
+          config,
+          resourceItem: resource,
+        })) {
+          item.result = () => this.result(item);
+          yield item;
+        }
+      } catch (er) {
+        if (
+          er &&
+          'name' in (er as Error) &&
+          (er as Error).name !== 'CancelError'
+        ) {
+          console.warn(er);
+        }
       }
     }
   }
 
   result(item: NgwSearchItem): CancelablePromise<ResultItem> {
+    const signal = this._makeSignal();
     const req = this.connector
-      .get('feature_layer.feature.item_extent', null, {
-        id: item.resourceId,
-        fid: item.featureId,
-      })
+      .get(
+        'feature_layer.feature.item_extent',
+        { signal },
+        {
+          id: item.resourceId,
+          fid: item.featureId,
+        },
+      )
       .then((x) => {
         const e = x.extent;
         return {
@@ -93,23 +144,61 @@ export class NgwProvider extends BaseProvider<NgwProviderOptions> {
           extent: [e.minLon, e.minLat, e.maxLon, e.maxLat],
         };
       });
-    this.requests.push(req);
     return req;
   }
 
-  _items(entries: ResourceStoreItem[]): NgwSearchItem[] {
+  private _makeSignal() {
+    const abortController = new AbortController();
+    this._abortControllers.push(abortController);
+    return abortController.signal;
+  }
+
+  private _items({
+    entries,
+    query,
+    config,
+    resourceItem,
+  }: {
+    config: SearchResource;
+    entries: FeatureItem[];
+    query: string;
+    resourceItem: ResourceItem;
+  }): NgwSearchItem[] {
     const items: NgwSearchItem[] = [];
-    entries.forEach((entry) => {
-      const meta = this.searchResources.find((x) => x.id === entry.resourceId);
-      if (meta) {
+
+    let labelField: string | undefined = undefined;
+
+    if (resourceItem.feature_layer) {
+      labelField = resourceItem.feature_layer.fields.find(
+        (f) => f.label_field,
+      )?.keyname;
+    }
+
+    const meta = this.searchResources.find(
+      (x) => (x as any).id ?? x.resourceId === resourceItem.resource.id,
+    );
+    if (meta) {
+      entries.forEach((entry) => {
+        let text = labelField ? entry.fields[labelField] : entry.id;
+        if (config.renderSearch) {
+          text = config.renderSearch({
+            item: entry,
+            resourceItem,
+          });
+        } else if (labelField) {
+          text = entry.fields[labelField];
+        }
+
         items.push({
-          query: entry.query,
-          text: entry.label,
+          query: query,
+          text,
           featureId: entry.id,
-          resourceId: entry.resourceId,
+          resourceId: resourceItem.resource.id,
+          item: entry,
+          resourceItem,
         });
-      }
-    });
+      });
+    }
     return items;
   }
 }
