@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/leaflet-map-adapter",
-  "version": "1.18.1",
+  "version": "1.18.3",
   "_priority": 15,
   "description": "Webmap adapter to use Laeflet GIS framework",
   "main": "lib/leaflet-map-adapter.global.prod.js",
@@ -11,7 +11,7 @@
   "dependencies": {
     "@nextgis/paint": "^1.18.1",
     "@nextgis/utils": "^1.17.0",
-    "@nextgis/webmap": "^1.18.1",
+    "@nextgis/webmap": "^1.18.3",
     "@types/events": "^3.0.0",
     "@types/geojson": "^7946.0.8",
     "@types/leaflet": "^1.7.5",

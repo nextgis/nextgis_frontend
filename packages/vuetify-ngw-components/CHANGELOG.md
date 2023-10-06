@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.3](https://github.com/nextgis/nextgis_frontend/compare/v1.18.2...v1.18.3) (2023-10-06)
+
+**Note:** Version bump only for package @nextgis/vuetify-ngw-components
+
+
+
+
+
 ## [1.18.2](https://github.com/nextgis/nextgis_frontend/compare/v1.18.1...v1.18.2) (2023-10-04)
 
 **Note:** Version bump only for package @nextgis/vuetify-ngw-components

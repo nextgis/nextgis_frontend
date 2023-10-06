@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.3](https://github.com/nextgis/nextgis_frontend/compare/v1.18.2...v1.18.3) (2023-10-06)
+
+
+### Features
+
+* **ngw-kit:** add like and ilike in featureLayerUtils query ([ebe7f17](https://github.com/nextgis/nextgis_frontend/commit/ebe7f17fe7ac55f294347a64c8c848c10bb7ce01))
+
+
+
+
+
 ## [1.18.1](https://github.com/nextgis/nextgis_frontend/compare/v1.18.0...v1.18.1) (2023-10-03)
 
 **Note:** Version bump only for package @nextgis/ngw-kit

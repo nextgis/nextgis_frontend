@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.3](https://github.com/nextgis/nextgis_frontend/compare/v1.18.2...v1.18.3) (2023-10-06)
+
+
+### Bug Fixes
+
+* **cancelable-promise:** export CancelError ([caea5ff](https://github.com/nextgis/nextgis_frontend/commit/caea5ff53c4b48b161d9504aa560585d45c1836a))
+
+
+### Features
+
+* **geocoder:** improve NgwProvider ([2599feb](https://github.com/nextgis/nextgis_frontend/commit/2599febaf11bb073b0912814cbf4750fa2a96427))
+* **ngw-kit:** add like and ilike in featureLayerUtils query ([ebe7f17](https://github.com/nextgis/nextgis_frontend/commit/ebe7f17fe7ac55f294347a64c8c848c10bb7ce01))
+
+
+
+
+
 ## [1.18.2](https://github.com/nextgis/nextgis_frontend/compare/v1.18.1...v1.18.2) (2023-10-04)
 
 

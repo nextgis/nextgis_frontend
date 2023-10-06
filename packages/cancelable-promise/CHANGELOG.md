@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.3](https://github.com/nextgis/nextgis_frontend/compare/v1.18.2...v1.18.3) (2023-10-06)
+
+
+### Bug Fixes
+
+* **cancelable-promise:** export CancelError ([caea5ff](https://github.com/nextgis/nextgis_frontend/commit/caea5ff53c4b48b161d9504aa560585d45c1836a))
+
+
+
+
+
 # [1.17.0](https://github.com/nextgis/nextgis_frontend/compare/v0.5.0...v1.17.0) (2023-09-25)
 
 

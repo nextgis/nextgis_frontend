@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.3](https://github.com/nextgis/nextgis_frontend/compare/v1.18.2...v1.18.3) (2023-10-06)
+
+
+### Features
+
+* **geocoder:** improve NgwProvider ([2599feb](https://github.com/nextgis/nextgis_frontend/commit/2599febaf11bb073b0912814cbf4750fa2a96427))
+
+
+
+
+
 # [1.17.0](https://github.com/nextgis/nextgis_frontend/compare/v0.5.0...v1.17.0) (2023-09-25)
 
 
