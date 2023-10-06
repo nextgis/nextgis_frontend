@@ -1,7 +1,13 @@
 import { objectAssign } from '@nextgis/utils';
-import CancelablePromise from '@nextgis/cancelable-promise';
-import { SearchItem } from './types/SearchItem';
+import type CancelablePromise from '@nextgis/cancelable-promise';
+import type { SearchItem } from './types/SearchItem';
 
+/**
+ * Represents the base class for a geocoder.
+ * This abstract class provides the basic methods that every geocoder should implement.
+ *
+ * @template O - The type of options that can be passed to the geocoder.
+ */
 export abstract class BaseGeocoder<
   O extends Record<string, any> = Record<string, any>,
 > {
@@ -11,9 +17,28 @@ export abstract class BaseGeocoder<
     }
   }
 
+  /**
+   * Search method to retrieve geocoding results.
+   *
+   * @abstract
+   * @param {string} query - The search string to geocode.
+   * @yields {AsyncGenerator<SearchItem>} - An async generator that yields search results.
+   */
   abstract search(query: string): AsyncGenerator<SearchItem>;
 
+  /**
+   * Method to retrieve detailed result for a specific search item.
+   *
+   * @abstract
+   * @param {SearchItem} item - The search item to get detailed result for.
+   * @returns {CancelablePromise<any>} - A promise that resolves to the detailed result.
+   */
   abstract result(item: SearchItem): CancelablePromise<any>;
 
+  /**
+   * Optional method to abort any ongoing geocoding requests.
+   *
+   * @abstract
+   */
   abstract abort?(): void;
 }
