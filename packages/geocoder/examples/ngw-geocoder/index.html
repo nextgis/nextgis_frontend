@@ -6,11 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- External Libraries -->
-    <script src="../../../ngw-leaflet/lib/ngw-leaflet.global.js"
-    ></script>
+    <script src="../../../ngw-leaflet/lib/ngw-leaflet.global.js"></script>
     <script type="text/javascript" src="../../lib/geocoder.global.js"></script>
-    <script src="../../../utils/lib/utils.global.js"
-    ></script>
+    <script src="../../../utils/lib/utils.global.js"></script>
 
     <!-- Styles -->
     <style>
@@ -104,8 +102,8 @@
               container.appendChild(geocoderResults);
 
               const search = Utils.debounce(async (val) => {
-                geocoderResults.innerHTML = '';
                 if (val) {
+                  let isSomethingFound = false;
                   const geocoderGenerator = geocoder.search(val);
                   for await (const item of geocoderGenerator) {
                     const resultItem = document.createElement('div');
@@ -116,11 +114,16 @@
                         ngwMap.fitBounds(extent, { maxZoom: 16 });
                       });
                     };
+                    if (!isSomethingFound) {
+                      geocoderResults.innerHTML = '';
+                    }
+                    isSomethingFound = true;
+
                     geocoderResults.appendChild(resultItem);
                   }
-                }
-                if (!geocoderResults.firstChild) {
-                  geocoderResults.innerHTML = 'Nothing found';
+                  if (!isSomethingFound) {
+                    geocoderResults.innerHTML = '';
+                  }
                 }
               }, 300);
 
@@ -128,15 +131,10 @@
                 geocoder.abort();
                 if (queryInput.value) {
                   geocoderResults.innerHTML = '...loading';
-                  try {
-                    search(queryInput.value);
-                  } catch (er) {
-                    console.error('Error:', er);
-                    geocoderResults.innerHTML = 'Loading error';
-                  }
                 } else {
                   geocoderResults.innerHTML = '';
                 }
+                search(queryInput.value);
               };
 
               return container;
