@@ -543,9 +543,16 @@ export abstract class VectorAdapter<
       const paint_ = { ...PAINT, ...(paint || {}) };
       if (paint.type === 'icon' && paint.html) {
         await this._registerImage(paint);
-        return {
+        const image: Record<string, unknown> = {
           'icon-image': paint.html,
         };
+        if (paint.rotate) {
+          image['icon-rotate'] = paint.rotate;
+        }
+        if (paint.iconAnchor) {
+          image['icon-offset'] = paint.iconAnchor;
+        }
+        return image;
       } else {
         const pathPaint = paint_ as PathPaint;
         const mapboxType = mapboxTypeAlias[type];
@@ -668,7 +675,11 @@ export abstract class VectorAdapter<
       for (const t of this._types) {
         const geomType = typeAliasForFilter[t];
         if (geomType) {
-          const geomFilter: LegacyFilterSpecification = ['==', '$type', geomType];
+          const geomFilter: LegacyFilterSpecification = [
+            '==',
+            '$type',
+            geomType,
+          ];
           const layerName = this._getLayerNameFromType(t);
           const selLayerName = this._getSelectionLayerNameFromType(t);
           const selectProperties = this._selectProperties;
