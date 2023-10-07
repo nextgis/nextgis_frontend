@@ -41,21 +41,38 @@ export interface IconOptions {
   rotate?: number;
 }
 
+interface GenerateSvgOptions {
+  width: number;
+  height: number;
+  stroke?: number;
+  content?: string;
+  rotate?: number;
+}
+
 const STROKE = 0.8;
 
-function generateSvg(
-  width: number,
-  height: number,
+function generateSvg({
+  width,
+  height,
   stroke = 0,
-  content?: string,
-) {
+  content,
+  rotate = 0,
+}: GenerateSvgOptions) {
   const s = stroke / 2;
+  const rotationFactor = rotate % 180 !== 0 ? Math.SQRT2 : 1;
+  const adjustedWidth = width * rotationFactor;
+  const adjustedHeight = height * rotationFactor;
+  const viewBoxWidth = adjustedWidth + stroke;
+  const viewBoxHeight = adjustedHeight + stroke;
+  const offsetX = (adjustedWidth - width) / 2;
+  const offsetY = (adjustedHeight - height) / 2;
+
   const svg = `<svg
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
     width="${width}"
     height="${height}"
-    viewBox="-${s} -${s} ${width + stroke} ${height + stroke}"
+    viewBox="${-s - offsetX} ${-s - offsetY} ${viewBoxWidth} ${viewBoxHeight}"
   >${content}</svg>`;
   return svg;
 }
@@ -68,8 +85,14 @@ function insertSvg(svg: string) {
 
 type GetPathCallback = (opt?: IconOptions) => string;
 
+/**
+ * Retrieves an icon with the provided options.
+ * @function
+ * @param {IconOptions} [opt={}] - Options for the icon.
+ * @returns {IconPaint} Icon paint object.
+ */
 export function getIcon(opt: IconOptions = {}): IconPaint {
-  // default values
+  // Default values
   const shape = opt.shape ?? 'circle';
   const color = opt.color ?? 'blue';
   const strokeColor = opt.strokeColor ?? 'white';
@@ -85,20 +108,31 @@ export function getIcon(opt: IconOptions = {}): IconPaint {
 
   const path = typeof pathAlias === 'string' ? pathAlias : pathAlias(opt);
   const svg = insertSvg(
-    opt.svg || generateSvg(size, size, stroke * scale, path),
+    opt.svg ||
+      generateSvg({
+        width: size,
+        height: size,
+        stroke: stroke * scale,
+        content: path,
+        rotate,
+      }),
   );
   const fistChild = svg.firstChild as SVGElement;
 
-  const scaledAnchor = defSize / 2;
-
-  const transform = `scale(${scale}) rotate(${rotate}, ${scaledAnchor}, ${scaledAnchor})`;
-
-  fistChild.setAttribute('fill', color);
-  if (stroke) {
-    fistChild.setAttribute('stroke', strokeColor);
-    fistChild.setAttribute('stroke-width', String(stroke));
+  if (opt.svg) {
+    svg.setAttribute('width', String(size));
+    svg.setAttribute('height', String(size));
+    svg.setAttribute('transform', `scale(${scale}) rotate(${rotate})`);
+  } else {
+    const scaledAnchor = defSize / 2;
+    const transform = `scale(${scale}) rotate(${rotate}, ${scaledAnchor}, ${scaledAnchor})`;
+    fistChild.setAttribute('fill', color);
+    if (stroke) {
+      fistChild.setAttribute('stroke', strokeColor);
+      fistChild.setAttribute('stroke-width', String(stroke));
+    }
+    fistChild.setAttribute('transform', transform);
   }
-  fistChild.setAttribute('transform', transform);
   const s = new XMLSerializer();
 
   return {
