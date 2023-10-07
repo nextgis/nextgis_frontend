@@ -1260,7 +1260,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/icons@^1.18.4, @nextgis/icons@workspace:packages/icons":
+"@nextgis/icons@^1.18.5, @nextgis/icons@workspace:packages/icons":
   version: 0.0.0-use.local
   resolution: "@nextgis/icons@workspace:packages/icons"
   dependencies:
@@ -1334,7 +1334,7 @@ __metadata:
   dependencies:
     "@nextgis/build-tools": "file:../build-tools"
     "@nextgis/cesium-map-adapter": ^1.18.3
-    "@nextgis/ngw-map": ^1.18.4
+    "@nextgis/ngw-map": ^1.18.5
     "@types/events": ^3.0.0
     cesium: 1.96.0
     events: ^3.3.0
@@ -1379,18 +1379,18 @@ __metadata:
   dependencies:
     "@nextgis/build-tools": ^1.17.0
     "@nextgis/leaflet-map-adapter": ^1.18.4
-    "@nextgis/ngw-map": ^1.18.4
+    "@nextgis/ngw-map": ^1.18.5
     leaflet: 1.7.1
     leaflet.wms: ^0.2.0
   languageName: unknown
   linkType: soft
 
-"@nextgis/ngw-map@^1.18.4, @nextgis/ngw-map@workspace:packages/ngw-map":
+"@nextgis/ngw-map@^1.18.5, @nextgis/ngw-map@workspace:packages/ngw-map":
   version: 0.0.0-use.local
   resolution: "@nextgis/ngw-map@workspace:packages/ngw-map"
   dependencies:
     "@nextgis/build-tools": ^1.17.0
-    "@nextgis/icons": ^1.18.4
+    "@nextgis/icons": ^1.18.5
     "@nextgis/ngw-connector": ^1.18.4
     "@nextgis/ngw-kit": ^1.18.4
     "@nextgis/qms-kit": ^1.18.3
@@ -1408,7 +1408,7 @@ __metadata:
   dependencies:
     "@nextgis/build-tools": ^1.17.0
     "@nextgis/mapboxgl-map-adapter": ^1.18.3
-    "@nextgis/ngw-map": ^1.18.4
+    "@nextgis/ngw-map": ^1.18.5
     canvg: ^3.0.9
     maplibre-gl: ^3.3.1
   languageName: unknown
@@ -1419,7 +1419,7 @@ __metadata:
   resolution: "@nextgis/ngw-ol@workspace:packages/ngw-ol"
   dependencies:
     "@nextgis/build-tools": ^1.17.0
-    "@nextgis/ngw-map": ^1.18.4
+    "@nextgis/ngw-map": ^1.18.5
     "@nextgis/ol-map-adapter": ^1.18.3
     "@types/events": ^3.0.0
     events: ^3.3.0
@@ -1538,16 +1538,16 @@ __metadata:
   dependencies:
     "@nextgis/build-tools": ^1.17.0
     "@nextgis/leaflet-map-adapter": ^1.18.4
-    "@nextgis/react-ngw-map": ^1.18.4
+    "@nextgis/react-ngw-map": ^1.18.5
   languageName: unknown
   linkType: soft
 
-"@nextgis/react-ngw-map@^1.18.4, @nextgis/react-ngw-map@workspace:packages/react-ngw-map":
+"@nextgis/react-ngw-map@^1.18.5, @nextgis/react-ngw-map@workspace:packages/react-ngw-map":
   version: 0.0.0-use.local
   resolution: "@nextgis/react-ngw-map@workspace:packages/react-ngw-map"
   dependencies:
     "@nextgis/build-tools": ^1.17.0
-    "@nextgis/ngw-map": ^1.18.4
+    "@nextgis/ngw-map": ^1.18.5
     "@nextgis/utils": ^1.17.0
     "@types/react": "*"
     "@types/react-dom": "*"
@@ -1563,7 +1563,7 @@ __metadata:
   dependencies:
     "@nextgis/build-tools": ^1.17.0
     "@nextgis/mapboxgl-map-adapter": ^1.18.3
-    "@nextgis/react-ngw-map": ^1.18.4
+    "@nextgis/react-ngw-map": ^1.18.5
   languageName: unknown
   linkType: soft
 
@@ -1573,7 +1573,7 @@ __metadata:
   dependencies:
     "@nextgis/build-tools": ^1.17.0
     "@nextgis/ol-map-adapter": ^1.18.3
-    "@nextgis/react-ngw-map": ^1.18.4
+    "@nextgis/react-ngw-map": ^1.18.5
   languageName: unknown
   linkType: soft
 
@@ -1611,17 +1611,17 @@ __metadata:
   dependencies:
     "@nextgis/build-tools": ^1.17.0
     "@nextgis/leaflet-map-adapter": ^1.18.4
-    "@nextgis/vue-ngw-map": ^1.18.4
+    "@nextgis/vue-ngw-map": ^1.18.5
   languageName: unknown
   linkType: soft
 
-"@nextgis/vue-ngw-map@^1.18.4, @nextgis/vue-ngw-map@workspace:packages/vue-ngw-map":
+"@nextgis/vue-ngw-map@^1.18.5, @nextgis/vue-ngw-map@workspace:packages/vue-ngw-map":
   version: 0.0.0-use.local
   resolution: "@nextgis/vue-ngw-map@workspace:packages/vue-ngw-map"
   dependencies:
     "@nextgis/build-tools": ^1.17.0
     "@nextgis/leaflet-map-adapter": ^1.18.4
-    "@nextgis/ngw-map": ^1.18.4
+    "@nextgis/ngw-map": ^1.18.5
     "@nextgis/utils": ^1.17.0
   peerDependencies:
     vue: 2.x
@@ -1637,7 +1637,7 @@ __metadata:
   dependencies:
     "@nextgis/build-tools": ^1.17.0
     "@nextgis/mapboxgl-map-adapter": ^1.18.3
-    "@nextgis/vue-ngw-map": ^1.18.4
+    "@nextgis/vue-ngw-map": ^1.18.5
   languageName: unknown
   linkType: soft
 
@@ -1647,7 +1647,7 @@ __metadata:
   dependencies:
     "@nextgis/build-tools": ^1.17.0
     "@nextgis/ol-map-adapter": ^1.18.3
-    "@nextgis/vue-ngw-map": ^1.18.4
+    "@nextgis/vue-ngw-map": ^1.18.5
   languageName: unknown
   linkType: soft
 
@@ -1657,7 +1657,7 @@ __metadata:
   dependencies:
     "@nextgis/build-tools": ^1.17.0
     "@nextgis/leaflet-map-adapter": ^1.18.4
-    "@nextgis/ngw-map": ^1.18.4
+    "@nextgis/ngw-map": ^1.18.5
     "@nextgis/utils": ^1.17.0
     vue: ^2.6.14
     vue-class-component: ^7.2.6

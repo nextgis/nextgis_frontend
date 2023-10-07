@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.5](https://github.com/nextgis/nextgis_frontend/compare/v1.18.4...v1.18.5) (2023-10-07)
+
+
+### Bug Fixes
+
+* **icons:** rotate ([5e5012c](https://github.com/nextgis/nextgis_frontend/commit/5e5012cd7f04d0a7537bf7323ec69b26ba94d619))
+
+
+
+
+
 ## [1.18.4](https://github.com/nextgis/nextgis_frontend/compare/v1.18.3...v1.18.4) (2023-10-07)
 
 
