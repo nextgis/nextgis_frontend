@@ -64,7 +64,6 @@ interface NgwProviderOptions extends BaseProviderOptions {
 export class NgwProvider extends BaseProvider<NgwProviderOptions> {
   static limit = 300;
 
-  caseInsensitive = true;
   searchResources: SearchResource[] = [];
 
   private connector: NgwConnector;
