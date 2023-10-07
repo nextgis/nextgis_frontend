@@ -392,21 +392,24 @@ export class NgwUploader {
         });
       });
     } else {
-      const request = options.put ? this.connector.put : this.connector.post;
-      return request
-        .call(connector, 'file_upload.upload', {
-          file: file as File,
-          onProgress,
-        })
-        .then((resp) => {
-          if (resp) {
-            if (resp.upload_meta) {
-              return resp.upload_meta[0];
-            } else if (options.put) {
-              return resp;
-            }
+      const request = options.put
+        ? this.connector.put('file_upload.upload', {
+            file: file as File,
+            onProgress,
+          })
+        : this.connector.post('file_upload.upload', {
+            file: file as File,
+            onProgress,
+          });
+      return request.then((resp) => {
+        if (resp) {
+          if (resp.upload_meta) {
+            return resp.upload_meta[0];
+          } else if (options.put) {
+            return resp;
           }
-        });
+        }
+      });
     }
   }
 
