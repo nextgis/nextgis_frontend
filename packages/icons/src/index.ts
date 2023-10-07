@@ -39,6 +39,7 @@ export interface IconOptions {
   stroke?: number;
   strokeColor?: string;
   rotate?: number;
+  anchor?: [number, number];
 }
 
 interface GenerateSvgOptions {
@@ -87,11 +88,11 @@ export function getIcon(opt: IconOptions = {}): IconPaint {
   const shape = opt.shape ?? 'circle';
   const color = opt.color ?? 'blue';
   const strokeColor = opt.strokeColor ?? 'white';
-  let size = opt.size ?? VIEW_BOX;
-  size = size * 2;
+  const size = opt.size ?? VIEW_BOX;
+
   const rotate = opt.rotate ?? 0;
 
-  const anchor = size / 2;
+  const anchor = opt.anchor ?? [size / 2, size / 2];
 
   const stroke = opt.stroke !== undefined ? Number(opt.stroke) : STROKE;
 
@@ -108,16 +109,8 @@ export function getIcon(opt: IconOptions = {}): IconPaint {
       }),
   );
 
-  if (!opt.svg && !opt.p) {
-    (svg.firstChild as SVGElement).setAttribute(
-      'transform',
-      `scale(0.5), translate(${VIEW_BOX / 2}, ${VIEW_BOX / 2})`,
-    );
-  } else {
-    svg.setAttribute('width', String(size));
-    svg.setAttribute('height', String(size));
-  }
-  svg.setAttribute('transform', `rotate(${rotate})`);
+  svg.setAttribute('width', String(size));
+  svg.setAttribute('height', String(size));
 
   svg.setAttribute('fill', color);
   if (stroke) {
@@ -129,8 +122,9 @@ export function getIcon(opt: IconOptions = {}): IconPaint {
   return {
     type: 'icon',
     iconSize: [size, size],
-    iconAnchor: [anchor, anchor],
+    iconAnchor: anchor,
     html: s.serializeToString(svg),
+    rotate,
     svg,
   };
 }
