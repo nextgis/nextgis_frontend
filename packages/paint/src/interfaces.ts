@@ -55,6 +55,7 @@ export interface IconPaint extends BasePaintTypes {
   svg?: HTMLElement;
   iconSize?: [number, number];
   iconAnchor?: [number, number];
+  rotate?: number;
 }
 
 /**
