@@ -294,7 +294,6 @@ export class GeoJsonAdapter
     this._setPaintEachLayer(this.selectedPaint);
   }
 
-
   isLabelVisible(): boolean {
     return this._labelVisibility;
   }
@@ -371,7 +370,7 @@ export class GeoJsonAdapter
       if (source) {
         const features = source.getFeatures();
         for (const f of features) {
-          const style = this._getFeatureStyle(f, paint, this.options.type)
+          const style = this._getFeatureStyle(f, paint, this.options.type);
           if (style) {
             f.setStyle(style);
           }

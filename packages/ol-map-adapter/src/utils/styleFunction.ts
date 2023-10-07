@@ -113,11 +113,12 @@ export function styleFunction(
       const svg = paint.html;
       if (svg) {
         const iconOptions: IconOptions = {
-          src: 'data:image/svg+xml,' + escape(svg),
+          src: 'data:image/svg+xml,' + encodeURIComponent(svg),
           anchorXUnits: IconAnchorUnits.PIXELS,
           anchorYUnits: IconAnchorUnits.PIXELS,
           anchor: paint.iconAnchor,
           imgSize: paint.iconSize,
+          rotation: paint.rotate,
         };
         style.image = new Icon(iconOptions);
       }
