@@ -269,6 +269,8 @@ export class NgwConnector {
     requestOptions: RequestOptions = {},
   ): CancelablePromise<P[K]> {
     const { method, headers, withCredentials, responseType } = requestOptions;
+
+    params_ = requestOptions.params ?? params_;
     const params = objectRemoveEmpty(params_);
     const makeApiRequest = () =>
       apiRequest({ name, params, requestOptions, connector: this });
@@ -303,7 +305,7 @@ export class NgwConnector {
    */
   post<K extends keyof RequestItemsParamsMap>(
     name: K,
-    options?: RequestOptions<'POST'>,
+    options?: RequestOptions<'POST', K>,
     params?: RequestItemsParams<K>,
   ): CancelablePromise<PostRequestItemsResponseMap[K]> {
     options = options || {};
@@ -323,7 +325,7 @@ export class NgwConnector {
    */
   get<K extends keyof RequestItemsParamsMap>(
     name: K,
-    options?: RequestOptions | undefined | null,
+    options?: RequestOptions<'GET', K> | undefined | null,
     params?: RequestItemsParams<K>,
   ): CancelablePromise<GetRequestItemsResponseMap[K]> {
     options = options || {};
@@ -343,7 +345,7 @@ export class NgwConnector {
    */
   patch<K extends keyof RequestItemsParamsMap>(
     name: K,
-    options?: RequestOptions,
+    options?: RequestOptions<'PATCH', K>,
     params?: RequestItemsParams<K>,
   ): CancelablePromise<PatchRequestItemsResponseMap[K]> {
     options = options || {};
@@ -363,7 +365,7 @@ export class NgwConnector {
    */
   put<K extends keyof RequestItemsParamsMap>(
     name: K,
-    options?: RequestOptions,
+    options?: RequestOptions<'PUT', K>,
     params?: RequestItemsParams<K>,
   ): CancelablePromise<PutRequestItemsResponseMap[K]> {
     options = options || {};
@@ -383,7 +385,7 @@ export class NgwConnector {
    */
   delete<K extends keyof RequestItemsParamsMap>(
     name: K,
-    options?: RequestOptions | undefined | null,
+    options?: RequestOptions<'DELETE', K> | undefined | null,
     params?: RequestItemsParams<K>,
   ): CancelablePromise<DeleteRequestItemsResponseMap[K]> {
     options = options || {};
@@ -427,7 +429,7 @@ export class NgwConnector {
    */
   getResource(
     resource: ResourceDefinition,
-    requestOptions?: RequestOptions,
+    requestOptions?: RequestOptions<'GET'>,
   ): CancelablePromise<ResourceItem | undefined> {
     return this.resources.getOne(resource, requestOptions);
   }
@@ -437,7 +439,7 @@ export class NgwConnector {
    */
   getResourceOrFail(
     resource: ResourceDefinition,
-    requestOptions?: RequestOptions,
+    requestOptions?: RequestOptions<'GET'>,
   ): CancelablePromise<ResourceItem> {
     return this.resources.getOneOrFail(resource, requestOptions);
   }
@@ -472,7 +474,7 @@ export class NgwConnector {
    */
   getResourceId(
     resource: ResourceDefinition,
-    requestOptions?: RequestOptions,
+    requestOptions?: RequestOptions<'GET'>,
   ): CancelablePromise<number | undefined> {
     return this.resources.getId(resource, requestOptions);
   }
@@ -482,7 +484,7 @@ export class NgwConnector {
    */
   getResourceIdOrFail(
     resource: ResourceDefinition,
-    requestOptions?: RequestOptions,
+    requestOptions?: RequestOptions<'GET'>,
   ): CancelablePromise<number> {
     return this.resources.getIdOrFail(resource, requestOptions);
   }
@@ -492,7 +494,7 @@ export class NgwConnector {
    */
   getResourcesBy(
     resource: DeepPartial<Resource>,
-    requestOptions?: RequestOptions,
+    requestOptions?: RequestOptions<'GET'>,
   ): CancelablePromise<ResourceItem[]> {
     return this.resources.getMany(resource, requestOptions);
   }
@@ -502,7 +504,7 @@ export class NgwConnector {
    */
   getResourceParent(
     resource: ResourceDefinition,
-    requestOptions?: RequestOptions,
+    requestOptions?: RequestOptions<'GET'>,
   ): CancelablePromise<ResourceItem | undefined> {
     return this.resources.getParent(resource, requestOptions);
   }

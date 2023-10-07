@@ -157,7 +157,10 @@ export type NgwExceptions =
   | 'nextgisweb.resource.exception.ResourceNotFound'
   | 'nextgisweb.core.exception.InsufficientPermissions';
 
-export interface RequestOptions<M = RequestMethods> {
+export interface RequestOptions<
+  M extends RequestMethods = RequestMethods,
+  K extends keyof RequestItemsParamsMap = keyof RequestItemsParamsMap,
+> {
   data?: any;
   file?: File;
   method?: M;
@@ -166,6 +169,7 @@ export interface RequestOptions<M = RequestMethods> {
   responseType?: 'json' | 'blob';
   cache?: boolean;
   signal?: AbortSignal;
+  params?: RequestItemsParams<K>;
   onProgress?: (percentComplete: number, event: ProgressEvent) => void;
 }
 

@@ -38,7 +38,7 @@ export class ResourcesControl {
    */
   getOne(
     resource: ResourceDefinition,
-    requestOptions?: RequestOptions,
+    requestOptions?: RequestOptions<'GET'>,
   ): CancelablePromise<ResourceItem | undefined> {
     const cache = new Cache();
     const forCache: { keyname?: string; id?: number } = {};
@@ -70,7 +70,7 @@ export class ResourcesControl {
 
   getOneOrFail(
     resource: ResourceDefinition,
-    requestOptions?: RequestOptions,
+    requestOptions?: RequestOptions<'GET'>,
   ): CancelablePromise<ResourceItem> {
     return this.getOne(resource, requestOptions).then((res) => {
       if (res) {
@@ -92,7 +92,7 @@ export class ResourcesControl {
    */
   getId(
     resource: ResourceDefinition,
-    requestOptions?: RequestOptions,
+    requestOptions?: RequestOptions<'GET'>,
   ): CancelablePromise<number | undefined> {
     if (typeof resource === 'number') {
       return CancelablePromise.resolve(resource);
@@ -116,7 +116,7 @@ export class ResourcesControl {
    */
   getIdOrFail(
     resource: ResourceDefinition,
-    requestOptions?: RequestOptions,
+    requestOptions?: RequestOptions<'GET'>,
   ): CancelablePromise<number> {
     return this.getId(resource, requestOptions).then((resp) => {
       if (resp === undefined) {
@@ -128,7 +128,7 @@ export class ResourcesControl {
 
   getMany(
     resource: DeepPartial<Resource>,
-    requestOptions?: RequestOptions,
+    requestOptions?: RequestOptions<'GET'>,
   ): CancelablePromise<ResourceItem[]> {
     return this._resourceCacheFilter(resource).then((items) => {
       if (!items.length) {
@@ -160,7 +160,7 @@ export class ResourcesControl {
 
   getParent(
     resource: ResourceDefinition,
-    requestOptions?: RequestOptions,
+    requestOptions?: RequestOptions<'GET'>,
   ): CancelablePromise<ResourceItem | undefined> {
     return this.getOne(resource, requestOptions).then((child) => {
       if (child) {
@@ -265,7 +265,7 @@ export class ResourcesControl {
 
   private _fetchResourceById(
     id: number,
-    requestOptions?: RequestOptions,
+    requestOptions?: RequestOptions<'GET'>,
   ): CancelablePromise<ResourceItem | undefined> {
     const promise = () =>
       this.connector.get('resource.item', requestOptions, { id });
@@ -284,7 +284,7 @@ export class ResourcesControl {
 
   private _fetchResourceBy(
     resource: DeepPartial<Resource>,
-    requestOptions?: RequestOptions,
+    requestOptions?: RequestOptions<'GET'>,
   ): CancelablePromise<ResourceItem | undefined> {
     return this.getMany(resource, requestOptions).then((resources) => {
       return resources[0];
