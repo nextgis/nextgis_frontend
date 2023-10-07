@@ -9,7 +9,7 @@ import { convertMapClickEvent } from './utils/convertMapClickEvent';
 import { createButtonControl } from './controls/createButtonControl';
 import { AttributionControl } from './controls/Attribution';
 import { createControl } from './controls/createControl';
-import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
+import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter/GeoJsonAdapter';
 import { ImageAdapter } from './layer-adapters/ImageAdapter/ImageAdapter';
 import { TileAdapter } from './layer-adapters/TileAdapter/TileAdapter';
 import { WmsAdapter } from './layer-adapters/WmsAdapter/WmsAdapter';

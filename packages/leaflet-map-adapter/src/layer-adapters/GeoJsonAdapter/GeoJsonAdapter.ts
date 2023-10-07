@@ -1,57 +1,39 @@
-import {
-  CircleMarker,
-  FeatureGroup,
-  DomEvent,
-  GeoJSON,
-  DivIcon,
-  Marker,
-  Layer,
-} from 'leaflet';
+import { FeatureGroup, DomEvent, GeoJSON, Layer } from 'leaflet';
 import { debounce, defined } from '@nextgis/utils';
 
-import { isPaintCallback, isPaint } from '@nextgis/paint';
 import {
   PAINT,
   typeAlias,
   filterGeometries,
   createFeaturePositionOptions,
-} from '../utils/geometries';
-import { createMouseEvent } from '../utils/createMouseEvent';
-import { boundsToArray } from '../utils/boundsToArray';
-import { detectType } from '../utils/detectType';
-import { BaseAdapter } from './BaseAdapter';
+} from '../../utils/geometries';
+import { boundsToArray } from '../../utils/boundsToArray';
+import { detectType } from '../../utils/detectType';
+import { BaseAdapter } from '../BaseAdapter';
+import { GeoJsonEvents } from './utils/GeoJsonEvents';
 
 import type { GeoJsonObject, Feature, Point } from 'geojson';
 import type {
   PopupOptions as LPopupOptions,
-  CircleMarkerOptions,
   LeafletMouseEvent,
   LatLngExpression,
   GeoJSONOptions,
-  LeafletEvent,
-  PathOptions,
   LatLng,
-  Path,
   Map,
 } from 'leaflet';
-import type {
-  Paint,
-  IconPaint,
-  PathPaint,
-  VectorAdapterLayerPaint,
-} from '@nextgis/paint';
+import type { Paint, IconPaint, VectorAdapterLayerPaint } from '@nextgis/paint';
 import type { LngLatBoundsArray } from '@nextgis/utils';
 import type {
   VectorAdapterLayerType,
   GeoJsonAdapterOptions,
   PopupOnCloseFunction,
-  OnLayerMouseOptions,
   VectorLayerAdapter,
   OnLayerSelectType,
   LayerDefinition,
   DataLayerFilter,
   PopupOptions,
 } from '@nextgis/webmap';
+import { GeoJsonPaint } from './utils/GeojsonPaint';
 
 export type LayerDef = LayerDefinition<Feature, Layer>;
 
@@ -62,15 +44,17 @@ export class GeoJsonAdapter
   layer?: FeatureGroup;
   selected = false;
 
+  type?: VectorAdapterLayerType;
+  _layers: LayerDef[] = [];
+  _events: GeoJsonEvents;
   private paint?: Paint;
   private selectedPaint?: Paint;
-  private type?: VectorAdapterLayerType;
 
-  private _layers: LayerDef[] = [];
   private _selectedLayers: LayerDef[] = [];
   private _filteredLayers: LayerDef[] = [];
   private _filterFun?: DataLayerFilter<Feature>;
   private _openedPopup: [Layer, PopupOnCloseFunction[], LayerDef][] = [];
+  private _paint: GeoJsonPaint;
 
   private $updateTooltip = debounce(() => {
     this.updateTooltip();
@@ -78,6 +62,8 @@ export class GeoJsonAdapter
 
   constructor(map: Map, options: GeoJsonAdapterOptions) {
     super(map, options);
+    this._events = new GeoJsonEvents(this);
+    this._paint = new GeoJsonPaint(this);
   }
 
   addLayer(options: GeoJsonAdapterOptions): FeatureGroup<any> | undefined {
@@ -113,7 +99,9 @@ export class GeoJsonAdapter
     } else if (!this.selected) {
       this.selected = true;
       if (this.selectedPaint) {
-        this._setPaintEachLayer(this.selectedPaint);
+        this._paint.setPaintEachLayer(
+          this.selectedPaint as VectorAdapterLayerPaint,
+        );
       }
     }
   }
@@ -129,7 +117,7 @@ export class GeoJsonAdapter
         this._removePopup(p[0]);
       }
       if (this.paint) {
-        this._setPaintEachLayer(this.paint);
+        this._paint.setPaintEachLayer(this.paint as VectorAdapterLayerPaint);
       }
       this._selectedLayers.length = 0;
       this.selected = false;
@@ -318,7 +306,7 @@ export class GeoJsonAdapter
     if (paint) {
       this.paint = paint;
       for (const l of this._layers) {
-        this._setPaint(l, paint);
+        this._paint.setPaint(l, paint as VectorAdapterLayerPaint);
       }
     }
   }
@@ -326,21 +314,25 @@ export class GeoJsonAdapter
     if (paint) {
       this.selectedPaint = paint;
       for (const l of this._selectedLayers) {
-        this._setPaint(l, paint);
+        this._paint.setPaint(l, paint as VectorAdapterLayerPaint);
       }
     }
   }
   updatePaint(paint: Partial<Paint>): void {
     this.paint = { ...this.paint, ...paint } as Paint;
     for (const l of this._layers) {
-      this._setPaint(l, this.paint);
+      this._paint.setPaint(l, this.paint as VectorAdapterLayerPaint);
     }
   }
   updateSelectedPaint(paint: Partial<Paint>): void {
     this.selectedPaint = { ...this.selectedPaint, ...paint } as Paint;
     for (const l of this._selectedLayers) {
-      this._setPaint(l, this.selectedPaint);
+      this._paint.setPaint(l, this.selectedPaint as VectorAdapterLayerPaint);
     }
+  }
+
+  _getSelected(layer: LayerDef['layer']) {
+    return this._selectedLayers.find((x) => x.layer === layer);
   }
 
   private $unselect = () => {
@@ -455,86 +447,6 @@ export class GeoJsonAdapter
     }
   }
 
-  private _setPaintEachLayer(paint: Paint) {
-    this._layers.forEach((l) => {
-      this._setPaint(l, paint);
-    });
-  }
-
-  private _setPaint(def: LayerDef, paint: Paint) {
-    let style: VectorAdapterLayerPaint | undefined = undefined;
-    const { layer, feature } = def;
-    if (layer && feature) {
-      if (isPaintCallback(paint)) {
-        style = paint(feature);
-      } else if (isPaint(paint)) {
-        style = paint;
-      }
-      if (style) {
-        if (this.type === 'point' && style.type === 'icon') {
-          const marker = layer as Marker;
-          const divIcon = this._createDivIcon(style);
-          marker.setIcon(divIcon);
-        } else if ('setStyle' in layer) {
-          (layer as Path).setStyle(this._preparePaint(style));
-        }
-      }
-    }
-  }
-
-  private _preparePaint(paint: VectorAdapterLayerPaint): PathOptions {
-    if (paint.type !== 'get-paint') {
-      // const path: CircleMarkerOptions | PathOptions = paint as CircleMarkerOptions | PathOptions;
-      // if (path.opacity) {
-      //   path.fillOpacity = path.opacity;
-      // }
-
-      const paintAliases: [keyof PathOptions, keyof PathPaint][] = [
-        // ['color', 'color'],
-        ['color', 'strokeColor'],
-        ['opacity', 'strokeOpacity'],
-        ['stroke', 'stroke'],
-        ['fillColor', 'fillColor'],
-        ['fillOpacity', 'fillOpacity'],
-        ['fill', 'fill'],
-        ['weight', 'weight'],
-      ];
-      const aliases: [keyof PathOptions, keyof PathPaint][] =
-        this.type === 'line'
-          ? [
-              ['color', 'strokeColor'],
-              ['opacity', 'strokeOpacity'],
-              ['weight', 'weight'],
-            ]
-          : paintAliases;
-
-      const readyPaint: PathOptions & CircleMarkerOptions = {};
-
-      if ('radius' in paint && typeof paint.radius === 'number') {
-        readyPaint.radius = paint.radius;
-      }
-      for (const [to, from] of aliases) {
-        let paintProp = (paint as PathPaint)[from];
-        if (
-          defined(this.options.opacity) &&
-          from.toLowerCase().indexOf('opacity') !== -1
-        ) {
-          paintProp = Number(paintProp) * this.options.opacity;
-        }
-
-        if (paintProp !== undefined) {
-          Object.defineProperty(readyPaint, to, {
-            enumerable: true,
-            value: paintProp,
-          });
-        }
-      }
-
-      return readyPaint;
-    }
-    return PAINT;
-  }
-
   private _getGeoJsonOptions(
     options: GeoJsonAdapterOptions,
     type: VectorAdapterLayerType,
@@ -550,22 +462,24 @@ export class GeoJsonAdapter
           latLng: LatLng,
         ) => {
           const iconOpt = paint(feature);
-          const pointToLayer = this._createPaintToLayer(iconOpt as IconPaint);
+          const pointToLayer = this._paint.createPaintToLayer(
+            iconOpt as IconPaint,
+          );
           return pointToLayer(feature, latLng);
         };
       } else {
         lopt = {
           style: (feature) => {
             if (feature) {
-              return this._preparePaint({ ...PAINT, ...paint(feature) });
+              return this._paint.preparePaint({ ...PAINT, ...paint(feature) });
             } else {
-              return this._preparePaint({ ...PAINT, type: 'path' });
+              return this._paint.preparePaint({ ...PAINT, type: 'path' });
             }
           },
         };
       }
     } else {
-      lopt = this._createPaintOptions(paint as VectorAdapterLayerPaint, type);
+      lopt = this._paint.createPaintOptions(paint as VectorAdapterLayerPaint);
     }
 
     lopt.onEachFeature = (feature: Feature, layer) => {
@@ -585,7 +499,6 @@ export class GeoJsonAdapter
         ...createFeaturePositionOptions(feature),
       };
 
-      // @ts-ignore
       layer.options.pane = this.pane;
       this._layers.push(def);
       let ok = true;
@@ -614,7 +527,7 @@ export class GeoJsonAdapter
             );
           }
         }
-        this._handleMouseEvents(layer);
+        this._events.handleMouseEvents(layer);
         // The timeout is needed to display the popup immediately when adding a layer to the map.
         // Without a timeout, the layer may not yet have a _map object
         setTimeout(() => {
@@ -634,54 +547,6 @@ export class GeoJsonAdapter
         });
       }
     }
-  }
-
-  private _handleMouseEvents(layer: Layer) {
-    const { onClick, onLayerClick, onMouseOut, onMouseOver } = this.options;
-    // TODO: remove backward compatibility for onLayerClick
-    const onClick_ = onClick || onLayerClick;
-    if (onClick_) {
-      layer.on(
-        'click',
-        (e) => {
-          const selected = !!this._getSelected(layer);
-          onClick_({
-            selected,
-            ...this._createMouseEvent(e),
-          });
-        },
-        this,
-      );
-    }
-    if (onMouseOut) {
-      layer.on(
-        'mouseout',
-        (e) => {
-          onMouseOut(this._createMouseEvent(e));
-        },
-        this,
-      );
-    }
-    if (onMouseOver) {
-      layer.on(
-        'mouseover',
-        (e) => {
-          onMouseOver(this._createMouseEvent(e));
-        },
-        this,
-      );
-    }
-  }
-
-  private _createMouseEvent(source: LeafletEvent): OnLayerMouseOptions {
-    return createMouseEvent({
-      layer: this,
-      source: source as LeafletMouseEvent,
-    });
-  }
-
-  private _getSelected(layer: LayerDef['layer']) {
-    return this._selectedLayers.find((x) => x.layer === layer);
   }
 
   private _selectOnLayerClick(e: LeafletMouseEvent) {
@@ -722,7 +587,7 @@ export class GeoJsonAdapter
     const { selectedPaint, popupOnSelect, popupOptions } = this.options;
 
     if (selectedPaint && def.layer) {
-      this._setPaint(def, selectedPaint);
+      this._paint.setPaint(def, selectedPaint as VectorAdapterLayerPaint);
     }
     if (popupOnSelect) {
       this._openPopup(def, popupOptions, type, latlng);
@@ -744,7 +609,10 @@ export class GeoJsonAdapter
       this._selectedLayers.splice(index, 1);
       if (this.options) {
         if (this.options.paint) {
-          this._setPaint(def, this.options.paint);
+          this._paint.setPaint(
+            def,
+            this.options.paint as VectorAdapterLayerPaint,
+          );
         }
 
         if (this.options.popupOnSelect && def.layer) {
@@ -753,56 +621,6 @@ export class GeoJsonAdapter
       }
     }
     this.selected = this._selectedLayers.length > 0;
-  }
-
-  private _createDivIcon(icon: IconPaint) {
-    const { ...toLIconOpt } = icon;
-    return new DivIcon({ className: '', ...toLIconOpt });
-  }
-
-  private _createPaintToLayer(icon: IconPaint) {
-    if (icon && icon.type) {
-      if (icon.type === 'icon') {
-        const iconClassName = icon.className;
-        const html = icon.html;
-        if (iconClassName || html) {
-          return (geoJsonPoint: any, latlng: LatLngExpression) => {
-            const divIcon = this._createDivIcon(icon);
-            return new Marker(latlng, { icon: divIcon });
-          };
-        }
-      } else if (icon.type === 'pin') {
-        return (geoJsonPoint: any, latlng: LatLngExpression) => {
-          // const divIcon = this.createDivIcon(icon);
-          return new Marker(latlng);
-        };
-      }
-    }
-    return (geoJsonPoint: any, latlng: LatLngExpression) => {
-      const p: any = PAINT;
-      return new CircleMarker(latlng, this._preparePaint({ ...p, ...icon }));
-    };
-  }
-
-  private _createPaintOptions(
-    paintOptions: VectorAdapterLayerPaint,
-    type: VectorAdapterLayerType,
-  ): GeoJSONOptions {
-    const geoJsonOptions: GeoJSONOptions = {};
-    const paint = (paintOptions && this._preparePaint(paintOptions)) || {};
-    if (paintOptions) {
-      geoJsonOptions.style = () => {
-        return paint;
-      };
-    }
-    if (type === 'point') {
-      (geoJsonOptions as any).pointToLayer = this._createPaintToLayer(
-        paintOptions as IconPaint,
-      );
-    } else if (type === 'line') {
-      paint.stroke = true;
-    }
-    return geoJsonOptions;
   }
 
   private _addMapClickListener() {

@@ -3,7 +3,7 @@ import { createFeaturePositionOptions } from './geometries';
 
 import type { LeafletMouseEvent } from 'leaflet';
 import type { LayerAdapter, OnLayerMouseOptions } from '@nextgis/webmap';
-import type { LayerDef } from '../layer-adapters/GeoJsonAdapter';
+import type { LayerDef } from '../layer-adapters/GeoJsonAdapter/GeoJsonAdapter';
 
 export interface CreateMouseEventOptions {
   layer: LayerAdapter;
