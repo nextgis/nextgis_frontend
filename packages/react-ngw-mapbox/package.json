@@ -1,13 +1,13 @@
 {
   "name": "@nextgis/react-ngw-mapbox",
-  "version": "1.18.3",
+  "version": "1.18.4",
   "description": "React NGW map component for mapbox-gl-js",
   "main": "lib/index.js",
   "module": "lib/react-ngw-mapbox.esm-bundler.js",
   "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/mapboxgl-map-adapter": "^1.18.3",
-    "@nextgis/react-ngw-map": "^1.18.3"
+    "@nextgis/react-ngw-map": "^1.18.4"
   },
   "devDependencies": {
     "@nextgis/build-tools": "^1.17.0"
