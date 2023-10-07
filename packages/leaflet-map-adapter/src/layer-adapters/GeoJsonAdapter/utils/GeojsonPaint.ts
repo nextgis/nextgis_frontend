@@ -100,8 +100,25 @@ export class GeoJsonPaint {
   }
 
   _createDivIcon(icon: IconPaint) {
-    const { ...toLIconOpt } = icon;
-    return new DivIcon({ className: '', ...toLIconOpt });
+    const { html, rotate, className, ...toLIconOpt } = icon;
+
+    const element = document.createElement('div');
+    if (className) {
+      element.className = className;
+    }
+    if (rotate) {
+      element.style.transform = `rotateZ(${rotate}deg)`;
+    }
+    if (html) {
+      element.innerHTML = html;
+    }
+
+    const divIcon = new DivIcon({
+      className: '',
+      ...toLIconOpt,
+      html: element,
+    });
+    return divIcon;
   }
 
   createPaintToLayer(icon: IconPaint) {
