@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.7](https://github.com/nextgis/nextgis_frontend/compare/v1.18.6...v1.18.7) (2023-10-08)
+
+
+### Bug Fixes
+
+* **mapboxgl-map-adapter:** fix anchor position ([9574e0e](https://github.com/nextgis/nextgis_frontend/commit/9574e0e78daae9c80ff4f89f7f1b4095df9f01b0))
+
+
+
+
+
 ## [1.18.6](https://github.com/nextgis/nextgis_frontend/compare/v1.18.5...v1.18.6) (2023-10-08)
 
 
