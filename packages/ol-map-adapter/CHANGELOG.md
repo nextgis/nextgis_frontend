@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.6](https://github.com/nextgis/nextgis_frontend/compare/v1.18.5...v1.18.6) (2023-10-08)
+
+
+### Features
+
+* **ol-map-adapter:** add icon rotate ([ea2bc81](https://github.com/nextgis/nextgis_frontend/commit/ea2bc81077f73c98ea330ea4d2f1e0b7b9a4f9a8))
+
+
+
+
+
 ## [1.18.3](https://github.com/nextgis/nextgis_frontend/compare/v1.18.2...v1.18.3) (2023-10-06)
 
 **Note:** Version bump only for package @nextgis/ol-map-adapter

@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.6](https://github.com/nextgis/nextgis_frontend/compare/v1.18.5...v1.18.6) (2023-10-08)
+
+**Note:** Version bump only for package @nextgis/ngw-leaflet
+
+
+
+
+
 ## [1.18.5](https://github.com/nextgis/nextgis_frontend/compare/v1.18.4...v1.18.5) (2023-10-07)
 
 **Note:** Version bump only for package @nextgis/ngw-leaflet

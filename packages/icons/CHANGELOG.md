@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.6](https://github.com/nextgis/nextgis_frontend/compare/v1.18.5...v1.18.6) (2023-10-08)
+
+
+### Features
+
+* **icons:** remove svg rotation ([6bd030a](https://github.com/nextgis/nextgis_frontend/commit/6bd030ad8c57950138586cb45a02200fabea1d0c))
+
+
+
+
+
 ## [1.18.5](https://github.com/nextgis/nextgis_frontend/compare/v1.18.4...v1.18.5) (2023-10-07)
 
 

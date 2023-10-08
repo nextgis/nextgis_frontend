@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.6](https://github.com/nextgis/nextgis_frontend/compare/v1.18.5...v1.18.6) (2023-10-08)
+
+
+### Features
+
+* **icons:** remove svg rotation ([6bd030a](https://github.com/nextgis/nextgis_frontend/commit/6bd030ad8c57950138586cb45a02200fabea1d0c))
+* **leflet-map-adapter:** add icon rotate ([a3ab9c1](https://github.com/nextgis/nextgis_frontend/commit/a3ab9c1f0f5cc822d3a92d0846ff6bdfc6824027))
+* **mapboxgl-map-adapter:** add icon rotate ([69919ab](https://github.com/nextgis/nextgis_frontend/commit/69919abc24e87f026152fe1446f9b3e317098f88))
+* **ol-map-adapter:** add icon rotate ([ea2bc81](https://github.com/nextgis/nextgis_frontend/commit/ea2bc81077f73c98ea330ea4d2f1e0b7b9a4f9a8))
+
+
+
+
+
 ## [1.18.5](https://github.com/nextgis/nextgis_frontend/compare/v1.18.4...v1.18.5) (2023-10-07)
 
 

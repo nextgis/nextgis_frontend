@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.6](https://github.com/nextgis/nextgis_frontend/compare/v1.18.5...v1.18.6) (2023-10-08)
+
+
+### Features
+
+* **mapboxgl-map-adapter:** add icon rotate ([69919ab](https://github.com/nextgis/nextgis_frontend/commit/69919abc24e87f026152fe1446f9b3e317098f88))
+
+
+
+
+
 ## [1.18.3](https://github.com/nextgis/nextgis_frontend/compare/v1.18.2...v1.18.3) (2023-10-06)
 
 **Note:** Version bump only for package @nextgis/mapboxgl-map-adapter

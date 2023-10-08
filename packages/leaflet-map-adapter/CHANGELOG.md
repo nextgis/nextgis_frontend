@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.6](https://github.com/nextgis/nextgis_frontend/compare/v1.18.5...v1.18.6) (2023-10-08)
+
+
+### Features
+
+* **leflet-map-adapter:** add icon rotate ([a3ab9c1](https://github.com/nextgis/nextgis_frontend/commit/a3ab9c1f0f5cc822d3a92d0846ff6bdfc6824027))
+
+
+
+
+
 ## [1.18.4](https://github.com/nextgis/nextgis_frontend/compare/v1.18.3...v1.18.4) (2023-10-07)
 
 **Note:** Version bump only for package @nextgis/leaflet-map-adapter

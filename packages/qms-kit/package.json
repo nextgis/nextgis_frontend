@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/qms-kit",
-  "version": "1.18.3",
+  "version": "1.18.6",
   "_priority": 20,
   "description": "Build webmap with QuickMapServices",
   "main": "index.js",
@@ -10,7 +10,7 @@
   "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/utils": "^1.17.0",
-    "@nextgis/webmap": "^1.18.3"
+    "@nextgis/webmap": "^1.18.6"
   },
   "devDependencies": {
     "@nextgis/build-tools": "^1.17.0"
