@@ -550,6 +550,7 @@ export abstract class VectorAdapter<
           image['icon-rotate'] = paint.rotate;
         }
         if (paint.iconAnchor) {
+          image['icon-anchor'] = 'bottom-right';
           image['icon-offset'] = paint.iconAnchor;
         }
         return image;
