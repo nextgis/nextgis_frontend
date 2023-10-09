@@ -25,26 +25,13 @@ export function ReactNgwMap<Props extends ReactNgwMapProps = ReactNgwMapProps>({
         whenCreated(ngwMap);
       });
     }
-  }, [ngwMap, [whenCreated]]);
+  }, [ngwMap, whenCreated]);
 
-  // on unmount
-  useEffect(() => {
-    return () => {
-      if (ngwMap) {
-        ngwMap.destroy();
-      }
-    };
-  }, []);
-
-  const [props] = useState({ className, id, style });
   const context = useMemo(() => (ngwMap ? { ngwMap } : null), [ngwMap]);
 
   const contents = context
     ? createElement(NgwMapProvider, { value: context }, children)
     : placeholder ?? null;
-  const p = { ...props };
-  if (!p.id) {
-    p.id = 'map';
-  }
+  const p = { className, id, style };
   return createElement('div', { ...p, ref: mapRef }, contents);
 }

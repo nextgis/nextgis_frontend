@@ -1,29 +1,47 @@
-// import NgwMap from '@nextgis/ngw-leaflet';
-// import NgwMap from '@nextgis/ngw-ol';
+import { useEffect, useState, useRef } from 'react';
 import { NgwMap } from '@nextgis/ngw-map';
-import { useEffect, useState } from 'react';
+
+import { shallowEqual } from '../utils/shallowEqual';
 
 import type { MutableRefObject } from 'react';
 import type { MapContainerProps } from '../interfaces';
 
 export function useMapElement(
   mapRef: MutableRefObject<HTMLElement | null>,
-  props: MapContainerProps,
+  { center, zoom, ...restProps }: MapContainerProps,
 ): NgwMap | null {
   const [ngwMap, setNgwMap] = useState<NgwMap | null>(null);
 
+  const prevPropsRef = useRef<MapContainerProps | null>(null);
+
   useEffect(() => {
-    if (mapRef.current !== null && ngwMap === null) {
-      const ngwMap = new NgwMap({
-        target: mapRef.current,
-        ...props,
-      });
-      if (props.center !== null && props.zoom !== null) {
-        ngwMap.setView(props);
-      }
-      setNgwMap(ngwMap);
+    const propsChanged = prevPropsRef.current
+      ? !shallowEqual(prevPropsRef.current, restProps)
+      : true;
+
+    if (!mapRef.current || ngwMap || !propsChanged) return;
+
+    const newNgwMap = new NgwMap({
+      target: mapRef.current,
+      ...restProps,
+    });
+
+    setNgwMap(newNgwMap);
+
+    if (propsChanged) {
+      prevPropsRef.current = restProps;
     }
-  }, [mapRef, ngwMap, props]);
+
+    return () => {
+      newNgwMap.destroy();
+    };
+  }, [mapRef, restProps]);
+
+  useEffect(() => {
+    if (ngwMap && center && zoom) {
+      ngwMap.setView({ center, zoom });
+    }
+  }, [ngwMap, center, zoom]);
 
   return ngwMap;
 }
