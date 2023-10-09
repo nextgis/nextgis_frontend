@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.8](https://github.com/nextgis/nextgis_frontend/compare/v1.18.7...v1.18.8) (2023-10-09)
+
+
+### Features
+
+* **vuex:** drop out for feature store support ([3af5558](https://github.com/nextgis/nextgis_frontend/commit/3af5558f791e9cb9c4d3fd916976e507f17e5ccb))
+
+
+
+
+
 ## [1.18.6](https://github.com/nextgis/nextgis_frontend/compare/v1.18.5...v1.18.6) (2023-10-08)
 
 **Note:** Version bump only for package @nextgis/vuex-ngw

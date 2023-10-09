@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.8](https://github.com/nextgis/nextgis_frontend/compare/v1.18.7...v1.18.8) (2023-10-09)
+
+
+### Bug Fixes
+
+* **react-ngw-map:** add comparison check for props ([614ebe3](https://github.com/nextgis/nextgis_frontend/commit/614ebe309bfc7474e3b0aac9bff2cf77e6e07f0f))
+
+
+
+
+
 ## [1.18.6](https://github.com/nextgis/nextgis_frontend/compare/v1.18.5...v1.18.6) (2023-10-08)
 
 **Note:** Version bump only for package @nextgis/react-ngw-map
