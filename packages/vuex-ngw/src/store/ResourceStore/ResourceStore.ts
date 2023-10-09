@@ -23,6 +23,16 @@ import type { ForeignResource, PatchOptions } from '../../interfaces';
 
 type ResourceDef = string | number;
 
+function featureItemToStoreItem<
+  P extends FeatureProperties = FeatureProperties,
+>(featureItem: FeatureItem<P>): ResourceStoreItem<P> {
+  return {
+    id: featureItem.id,
+    label: `#${featureItem.id}`,
+    ...featureItem.fields,
+  };
+}
+
 export abstract class ResourceStore<
   P extends FeatureProperties = FeatureProperties,
   G extends Geometry | null = Geometry,
@@ -92,10 +102,11 @@ export abstract class ResourceStore<
     }
     const id = this.resources[this.resource];
     if (defined(id)) {
-      const store = (await this.connector.get('feature_layer.store', null, {
-        id,
-      })) as ResourceStoreItem<P>[];
-      return store;
+      const store = (await this.connector.get(
+        'feature_layer.feature.collection',
+        { params: { id } },
+      )) as FeatureItem<P>[];
+      return store.map(featureItemToStoreItem);
     }
   }
 
