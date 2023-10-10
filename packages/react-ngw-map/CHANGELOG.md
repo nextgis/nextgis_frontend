@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.9](https://github.com/nextgis/nextgis_frontend/compare/v1.18.8...v1.18.9) (2023-10-10)
+
+
+### Bug Fixes
+
+* **react-ngw-map:** do not recreate ngwMap on props change ([1e21291](https://github.com/nextgis/nextgis_frontend/commit/1e212915962a9c68b27bbbb1d656e6cb283d5aed))
+
+
+
+
+
 ## [1.18.8](https://github.com/nextgis/nextgis_frontend/compare/v1.18.7...v1.18.8) (2023-10-09)
 
 

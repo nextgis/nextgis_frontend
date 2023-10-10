@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.9](https://github.com/nextgis/nextgis_frontend/compare/v1.18.8...v1.18.9) (2023-10-10)
+
+**Note:** Version bump only for package @nextgis/vue-ngw-mapbox
+
+
+
+
+
 ## [1.18.7](https://github.com/nextgis/nextgis_frontend/compare/v1.18.6...v1.18.7) (2023-10-08)
 
 **Note:** Version bump only for package @nextgis/vue-ngw-mapbox

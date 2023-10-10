@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.9](https://github.com/nextgis/nextgis_frontend/compare/v1.18.8...v1.18.9) (2023-10-10)
+
+
+### Bug Fixes
+
+* **ngw-kit:** do not fetch feature extensions by default ([278b5eb](https://github.com/nextgis/nextgis_frontend/commit/278b5ebf07c8aa1d3258aae49a010ac066291373))
+
+
+
+
+
 ## [1.18.6](https://github.com/nextgis/nextgis_frontend/compare/v1.18.5...v1.18.6) (2023-10-08)
 
 **Note:** Version bump only for package @nextgis/ngw-kit
