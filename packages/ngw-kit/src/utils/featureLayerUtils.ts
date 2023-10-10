@@ -47,9 +47,13 @@ export function updateItemRequestParam<
   P extends FeatureProperties = FeatureProperties,
 >(params: FeatureRequestParams, options: NgwFeatureRequestOptions<P>): void {
   const { extensions, geom, fields, srs, ilike, like } = options;
-  if (extensions) {
-    params.extensions = extensions.join(',');
+  // Empty extesions by default
+  let extensionsStr = extensions ? extensions.join(',') : '';
+  // Use character * to set all extensions
+  if (extensionsStr !== '*') {
+    params.extensions = extensionsStr;
   }
+
   if (fields !== undefined) {
     params.fields = Array.isArray(fields) ? fields.join(',') : '';
   }
