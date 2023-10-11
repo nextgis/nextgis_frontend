@@ -26,6 +26,7 @@ export class NgwLayersList extends Vue {
   @Prop({ type: Array }) include!: Array<ResourceAdapter | string>;
   @Prop({ type: Boolean, default: false }) hideWebmapRoot!: boolean;
   @Prop({ type: Boolean, default: false }) notOnlyNgwLayer!: boolean;
+  @Prop({ type: String, default: 'includeInNgwLayersList' }) layerIncludeProp!: string;
   @Prop({ type: Function }) showLayer!: (layer: NgwWebmapItem) => boolean;
   @Prop({ type: String, default: 'mdi-cancel' }) removeLayerIcon!: string;
   @Prop({ type: String, default: 'independent' }) selectionType!:
@@ -231,13 +232,18 @@ export class NgwLayersList extends Vue {
     this._layers = [];
     let layersList: LayerAdapter[] | undefined;
     if (this.webMap) {
+      await this.webMap.onLoad();
+      const layers = this.webMap.allLayers();
+      const allLayers = Object.keys(layers).map((x) => layers[x]);
       if (this.notOnlyNgwLayer) {
-        await this.webMap.onLoad();
-        const layers = this.webMap.allLayers();
-        layersList = Object.keys(layers).map((x) => layers[x]);
+        layersList = allLayers;
       } else if ('getNgwLayers' in this.webMap) {
         const ngwLayers = await (this.webMap as NgwMap).getNgwLayers();
         layersList = Object.keys(ngwLayers).map((x) => ngwLayers[x].layer);
+        const includedLayers = allLayers.filter((l) => l.options.props?.[this.layerIncludeProp])
+        if (includedLayers.length) {
+          layersList.push(...includedLayers);
+        }
       }
     }
     this.items = [];
