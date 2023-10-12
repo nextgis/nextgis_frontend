@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.10](https://github.com/nextgis/nextgis_frontend/compare/v1.18.9...v1.18.10) (2023-10-12)
+
+
+### Features
+
+* **vuetify-ngw-components:** improve NgwLayersList ([c3549fa](https://github.com/nextgis/nextgis_frontend/commit/c3549fa6d10259d1bceed5f9c6fb4f6359a74074))
+
+
+
+
+
 ## [1.18.9](https://github.com/nextgis/nextgis_frontend/compare/v1.18.8...v1.18.9) (2023-10-10)
 
 **Note:** Version bump only for package @nextgis/vuetify-ngw-components

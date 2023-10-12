@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.10](https://github.com/nextgis/nextgis_frontend/compare/v1.18.9...v1.18.10) (2023-10-12)
+
+
+### Features
+
+* **vuetify-ngw-components:** improve NgwLayersList ([c3549fa](https://github.com/nextgis/nextgis_frontend/commit/c3549fa6d10259d1bceed5f9c6fb4f6359a74074))
+
+
+### Performance Improvements
+
+* **expression:** consider breaks in evaluate ([41360a7](https://github.com/nextgis/nextgis_frontend/commit/41360a7e0d4e0ad9439397d0bc600fed0810fba5))
+
+
+
+
+
 ## [1.18.9](https://github.com/nextgis/nextgis_frontend/compare/v1.18.8...v1.18.9) (2023-10-10)
 
 

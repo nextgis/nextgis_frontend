@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.10](https://github.com/nextgis/nextgis_frontend/compare/v1.18.9...v1.18.10) (2023-10-12)
+
+**Note:** Version bump only for package @nextgis/ngw-uploader-input
+
+
+
+
+
 ## [1.18.4](https://github.com/nextgis/nextgis_frontend/compare/v1.18.3...v1.18.4) (2023-10-07)
 
 **Note:** Version bump only for package @nextgis/ngw-uploader-input
