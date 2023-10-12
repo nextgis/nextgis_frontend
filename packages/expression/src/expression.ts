@@ -36,15 +36,15 @@ const expressions: { [key in ExpressionName]: ExpressionFunc } = {
   ...interpolationExpressions,
 };
 
-export function evaluate<T extends SimpleType = SimpleType>(
+export function evaluate<T extends SimpleType[] = SimpleType[], R = T[0]>(
   expression: Expression,
   data: Data = {},
-): T {
+): R {
   const [name, ...args] = expression;
   const expressionFun = expressions[name];
   if (expressionFun) {
     return expressionFun(
-      args.map((arg) => (isExpression(arg) ? evaluate(arg, data) : arg)),
+      args.map((arg) => () => isExpression(arg) ? evaluate(arg, data) : arg),
       data,
     );
   }

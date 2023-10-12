@@ -1,6 +1,7 @@
 import f from '../utils/fallback';
+import e from '../utils/evaluateArgs';
 
-import type { ExpressionFunc, TypeExpressionName } from '../interfaces';
+import type { ExpressionCbFunc, TypeExpressionName } from '../interfaces';
 
 type ArrayType = 'string' | 'number' | 'boolean';
 
@@ -45,20 +46,24 @@ const array = (args: ArrayArgs): any[] => {
   return value;
 };
 
-export const typeExpressions: Record<TypeExpressionName, ExpressionFunc> = {
-  array,
-  boolean: f<boolean>((arg) => (typeof arg === 'boolean' ? arg : undefined)),
-  literal: ([arg]) => arg,
-  number: f<number>((arg) => (typeof arg === 'number' ? arg : undefined)),
-  object: f<Record<string, any>>((arg) =>
-    arg !== null && typeof arg === 'object' && !Array.isArray(arg)
-      ? arg
-      : undefined,
+export const typeExpressions: Record<TypeExpressionName, ExpressionCbFunc> = {
+  array: e(array),
+  boolean: e(
+    f<boolean[]>((arg) => (typeof arg === 'boolean' ? arg : undefined)),
+  ),
+  literal: e(([arg]) => arg),
+  number: e(f<number[]>((arg) => (typeof arg === 'number' ? arg : undefined))),
+  object: e(
+    f<Record<string, any>[]>((arg) =>
+      arg !== null && typeof arg === 'object' && !Array.isArray(arg)
+        ? arg
+        : undefined,
+    ),
   ),
 
-  string: f((arg) => (typeof arg === 'string' ? arg : undefined)),
-  'to-boolean': f(Boolean),
-  'to-number': f(Number),
-  'to-string': f(String),
-  typeof: ([arg]) => typeof arg,
+  string: e(f((arg) => (typeof arg === 'string' ? arg : undefined))),
+  'to-boolean': e(f(Boolean)),
+  'to-number': e(f(Number)),
+  'to-string': e(f(String)),
+  typeof: e(([arg]) => typeof arg),
 };

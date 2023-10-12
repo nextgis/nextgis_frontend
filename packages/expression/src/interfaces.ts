@@ -82,4 +82,14 @@ export type SimpleType = string | number | boolean | null | Record<string, any>;
 type ExpressionArg = SimpleType | Expression;
 export type Expression = [ExpressionName, ...ExpressionArg[]];
 
-export type ExpressionFunc<T = any, R = T> = (args: T, data: Data) => R;
+type Callback<T> = () => T;
+export type MapToCallback<T = any> = { [K in keyof T]: Callback<T[K]> };
+
+export type ExpressionCbFunc<T = any, R = T extends Array<any> ? T[0] : any> = (
+  args: MapToCallback<T>,
+  data: Data,
+) => R;
+export type ExpressionFunc<T = any, R = T extends Array<any> ? T[0] : any> = (
+  args: T,
+  data: Data,
+) => R;

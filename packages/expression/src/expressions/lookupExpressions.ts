@@ -1,8 +1,10 @@
+import e from '../utils/evaluateArgs';
+
 import type {
   Data,
   SimpleType,
-  ExpressionFunc,
   LookupExpressionName,
+  ExpressionCbFunc,
 } from '../interfaces';
 
 type GetArg = [key: string] | [key: string, obj: Record<string, any>];
@@ -76,12 +78,13 @@ function slice(args: SliceArgs): string | any[] {
   );
 }
 
-export const lookupExpressions: Record<LookupExpressionName, ExpressionFunc> = {
-  get,
-  length,
-  at,
-  has,
-  in: inFunc,
-  'index-of': indexOf,
-  slice,
-};
+export const lookupExpressions: Record<LookupExpressionName, ExpressionCbFunc> =
+  {
+    get: e(get),
+    length: e(length),
+    at: e(at),
+    has: e(has),
+    in: e(inFunc),
+    'index-of': e(indexOf),
+    slice: e(slice),
+  };

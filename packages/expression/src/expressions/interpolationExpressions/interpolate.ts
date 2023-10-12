@@ -1,4 +1,5 @@
 import { type ColorArray, colorToRGB, toColor } from '../../utils/color';
+import type { ExpressionCbFunc } from '../../interfaces';
 
 type LinearInterpolation = ['linear'];
 type ExponentialInterpolation = [name: 'exponential', base: number];
@@ -52,26 +53,28 @@ function linearInterpolation(
   throw new Error('Unsupported output type for linear interpolation.');
 }
 
-export function interpolate([
-  interpolation,
-  input,
+export const interpolate: ExpressionCbFunc<InterpolateArgs, OutputType> = ([
+  interpolationFn,
+  inputFn,
   ...stops
-]: InterpolateArgs): OutputType {
+]) => {
   if (stops.length < 2) {
     throw new Error('At least two stops are required');
-  }
-  if (typeof input !== 'number') {
-    throw new Error('Input must be a number.');
   }
   if (stops.length < 2 || stops.length % 2 !== 0) {
     throw new Error('Invalid stops provided.');
   }
+  const input = inputFn();
 
+  if (typeof input !== 'number') {
+    throw new Error('Input must be a number.');
+  }
+  const interpolation = interpolationFn();
   for (let i = 0; i < stops.length - 2; i += 2) {
-    const stopInput1 = stops[i] as number;
-    const stopOutput1 = stops[i + 1] as OutputType;
-    const stopInput2 = stops[i + 2] as number;
-    const stopOutput2 = stops[i + 3] as OutputType;
+    const stopInput1 = stops[i]() as number;
+    const stopOutput1 = stops[i + 1]() as OutputType;
+    const stopInput2 = stops[i + 2]() as number;
+    const stopOutput2 = stops[i + 3]() as OutputType;
 
     if (input >= stopInput1 && input <= stopInput2) {
       if (interpolation[0] === 'linear') {
@@ -98,4 +101,4 @@ export function interpolate([
   }
 
   throw new Error('Invalid interpolation type.');
-}
+};
