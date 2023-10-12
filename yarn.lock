@@ -1215,33 +1215,33 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis/frontend_test@workspace:tests"
   dependencies:
-    "@types/chai": ^4.3.6
-    "@types/mocha": ^10.0.2
+    "@types/chai": ^4.2.22
+    "@types/mocha": ^9.0.0
     "@types/rimraf": ^3.0.2
-    "@types/sinon": ^10.0.17
+    "@types/sinon": ^10.0.4
     base64-inline-loader: ^2.0.1
-    chai: ^4.3.10
+    chai: ^4.3.4
     codecov: ^3.8.3
     istanbul-instrumenter-loader: ^3.0.1
-    karma: ^6.4.2
-    karma-chrome-launcher: ^3.2.0
+    karma: ^6.3.5
+    karma-chrome-launcher: ^3.1.0
     karma-coverage-istanbul-reporter: ^3.0.3
-    karma-firefox-launcher: ^2.1.2
+    karma-firefox-launcher: ^2.1.1
     karma-mocha: ^2.0.1
     karma-sinon-chai: ^2.0.2
-    karma-sourcemap-loader: ^0.4.0
-    karma-spec-reporter: 0.0.36
+    karma-sourcemap-loader: ^0.3.8
+    karma-spec-reporter: 0.0.32
     karma-webpack: ^5.0.0
-    mocha: ^10.2.0
+    mocha: ^9.1.3
     process: ^0.11.10
-    sinon: ^16.0.0
+    sinon: ^11.1.2
     sinon-chai: ^3.7.0
-    ts-loader: ^9.4.4
-    ts-node: ^10.9.1
-    typescript: ~5.2
-    util: ^0.12.5
-    webpack: ^5.88.2
-    webpack-cli: ^5.1.4
+    ts-loader: ^9.2.6
+    ts-node: ^10.3.0
+    typescript: ~5.1
+    util: ^0.12.4
+    webpack: ^5.59.1
+    webpack-cli: ^4.9.1
   languageName: unknown
   linkType: soft
 
@@ -2507,6 +2507,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sinonjs/commons@npm:^1.6.0, @sinonjs/commons@npm:^1.7.0, @sinonjs/commons@npm:^1.8.3":
+  version: 1.8.6
+  resolution: "@sinonjs/commons@npm:1.8.6"
+  dependencies:
+    type-detect: 4.0.8
+  checksum: 7d3f8c1e85f30cd4e83594fc19b7a657f14d49eb8d95a30095631ce15e906c869e0eff96c5b93dffea7490c00418b07f54582ba49c6560feb2a8c34c0b16832d
+  languageName: node
+  linkType: hard
+
 "@sinonjs/commons@npm:^2.0.0":
   version: 2.0.0
   resolution: "@sinonjs/commons@npm:2.0.0"
@@ -2525,7 +2534,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sinonjs/fake-timers@npm:^10.0.2, @sinonjs/fake-timers@npm:^10.3.0":
+"@sinonjs/fake-timers@npm:^10.0.2":
   version: 10.3.0
   resolution: "@sinonjs/fake-timers@npm:10.3.0"
   dependencies:
@@ -2534,14 +2543,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sinonjs/samsam@npm:^8.0.0":
-  version: 8.0.0
-  resolution: "@sinonjs/samsam@npm:8.0.0"
+"@sinonjs/fake-timers@npm:^7.1.2":
+  version: 7.1.2
+  resolution: "@sinonjs/fake-timers@npm:7.1.2"
   dependencies:
-    "@sinonjs/commons": ^2.0.0
+    "@sinonjs/commons": ^1.7.0
+  checksum: c84773d7973edad5511a31d2cc75023447b5cf714a84de9bb50eda45dda88a0d3bd2c30bf6e6e936da50a048d5352e2151c694e13e59b97d187ba1f329e9a00c
+  languageName: node
+  linkType: hard
+
+"@sinonjs/samsam@npm:^6.0.2":
+  version: 6.1.3
+  resolution: "@sinonjs/samsam@npm:6.1.3"
+  dependencies:
+    "@sinonjs/commons": ^1.6.0
     lodash.get: ^4.4.2
     type-detect: ^4.0.8
-  checksum: 95e40d0bb9f7288e27c379bee1b03c3dc51e7e78b9d5ea6aef66a690da7e81efc4715145b561b449cefc5361a171791e3ce30fb1a46ab247d4c0766024c60a60
+  checksum: d533e8792af00879d78dd181822e8b00bb8a81671f2fbcf1c5257a59649b21d881ba7ddc42aaf09690d7325c8a6dcc7a1a341591a379742b54e4eb25b273417a
   languageName: node
   linkType: hard
 
@@ -2658,10 +2676,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/chai@npm:^4.3.6":
-  version: 4.3.6
-  resolution: "@types/chai@npm:4.3.6"
-  checksum: 32a6c18bf53fb3dbd89d1bfcadb1c6fd45cc0007c34e436393cc37a0a5a556f9e6a21d1e8dd71674c40cc36589d2f30bf4d9369d7787021e54d6e997b0d7300a
+"@types/chai@npm:^4.2.22":
+  version: 4.3.8
+  resolution: "@types/chai@npm:4.3.8"
+  checksum: 21431e46fa4a5602641726a24c7631bbf7ba8a41b1a290d0c73dcef6b3521c1d973ee605236b83a978cc918e55470fd04a3109d51aa30dcdf93a8b122e6c3e2c
   languageName: node
   linkType: hard
 
@@ -2922,10 +2940,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/mocha@npm:^10.0.2":
-  version: 10.0.2
-  resolution: "@types/mocha@npm:10.0.2"
-  checksum: a78a02691f102beb02f9ec435458107d21b518fc477c3b2f37c90b8e70b67bff888351715ae173bd31ede25ee5e0d688aefb0faf4284034d08ba63027c8b0c01
+"@types/mocha@npm:^9.0.0":
+  version: 9.1.1
+  resolution: "@types/mocha@npm:9.1.1"
+  checksum: 516077c0acd9806dc78317f88aaac0df5aaf0bdc2f63dfdadeabdf0b0137953b6ca65472e6ff7c30bc93ce4e0ae76eae70e8d46764b9a8eae4877a928b6ef49a
   languageName: node
   linkType: hard
 
@@ -3103,12 +3121,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/sinon@npm:^10.0.17":
-  version: 10.0.17
-  resolution: "@types/sinon@npm:10.0.17"
+"@types/sinon@npm:^10.0.4":
+  version: 10.0.19
+  resolution: "@types/sinon@npm:10.0.19"
   dependencies:
     "@types/sinonjs__fake-timers": "*"
-  checksum: 329055c022810d058f90fabb3fe0dd730331885e757666789ef252feeccc67d4c5cbd87e71857e2df11d094d67e32e3e304cfd9b12b9327fd2cf486d635c36e2
+  checksum: 79cab4cfc618a37a11e519795a297aa641b30eb05e2d2c7a9b03f40845b54ef631af80bddbef3e57dcd4be6c67bd78dce5210ea9860617d870f1d365c78468b6
   languageName: node
   linkType: hard
 
@@ -3264,6 +3282,13 @@ __metadata:
     "@typescript-eslint/types": 5.62.0
     eslint-visitor-keys: ^3.3.0
   checksum: 976b05d103fe8335bef5c93ad3f76d781e3ce50329c0243ee0f00c0fcfb186c81df50e64bfdd34970148113f8ade90887f53e3c4938183afba830b4ba8e30a35
+  languageName: node
+  linkType: hard
+
+"@ungap/promise-all-settled@npm:1.1.2":
+  version: 1.1.2
+  resolution: "@ungap/promise-all-settled@npm:1.1.2"
+  checksum: 08d37fdfa23a6fe8139f1305313562ebad973f3fac01bcce2773b2bda5bcb0146dfdcf3cb6a722cf0a5f2ca0bc56a827eac8f1e7b3beddc548f654addf1fc34c
   languageName: node
   linkType: hard
 
@@ -3459,16 +3484,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@webpack-cli/configtest@npm:^2.1.1":
-  version: 2.1.1
-  resolution: "@webpack-cli/configtest@npm:2.1.1"
-  peerDependencies:
-    webpack: 5.x.x
-    webpack-cli: 5.x.x
-  checksum: 9f9f9145c2d05471fc83d426db1df85cf49f329836b0c4b9f46b6948bed4b013464c00622b136d2a0a26993ce2306976682592245b08ee717500b1db45009a72
-  languageName: node
-  linkType: hard
-
 "@webpack-cli/info@npm:^1.5.0":
   version: 1.5.0
   resolution: "@webpack-cli/info@npm:1.5.0"
@@ -3477,16 +3492,6 @@ __metadata:
   peerDependencies:
     webpack-cli: 4.x.x
   checksum: 7f56fe037cd7d1fd5c7428588519fbf04a0cad33925ee4202ffbafd00f8ec1f2f67d991245e687d50e0f3e23f7b7814273d56cb9f7da4b05eed47c8d815c6296
-  languageName: node
-  linkType: hard
-
-"@webpack-cli/info@npm:^2.0.2":
-  version: 2.0.2
-  resolution: "@webpack-cli/info@npm:2.0.2"
-  peerDependencies:
-    webpack: 5.x.x
-    webpack-cli: 5.x.x
-  checksum: 8f9a178afca5c82e113aed1efa552d64ee5ae4fdff63fe747c096a981ec74f18a5d07bd6e89bbe6715c3e57d96eea024a410e58977169489fe1df044c10dd94e
   languageName: node
   linkType: hard
 
@@ -3499,19 +3504,6 @@ __metadata:
     webpack-dev-server:
       optional: true
   checksum: d475e8effa23eb7ff9a48b14d4de425989fd82f906ce71c210921cc3852327c22873be00c35e181a25a6bd03d424ae2b83e7f3b3f410ac7ee31b128ab4ac7713
-  languageName: node
-  linkType: hard
-
-"@webpack-cli/serve@npm:^2.0.5":
-  version: 2.0.5
-  resolution: "@webpack-cli/serve@npm:2.0.5"
-  peerDependencies:
-    webpack: 5.x.x
-    webpack-cli: 5.x.x
-  peerDependenciesMeta:
-    webpack-dev-server:
-      optional: true
-  checksum: 75f0e54681796d567a71ac3e2781d2901a8d8cf1cdfc82f261034dddac59a8343e8c3bc5e32b4bb9d6766759ba49fb29a5cd86ef1701d79c506fe886bb63ac75
   languageName: node
   linkType: hard
 
@@ -4790,7 +4782,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chai@npm:^4.3.10":
+"chai@npm:^4.3.4":
   version: 4.3.10
   resolution: "chai@npm:4.3.10"
   dependencies:
@@ -5231,7 +5223,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"colors@npm:1.4.0, colors@npm:^1.4.0":
+"colors@npm:^1.1.2, colors@npm:^1.4.0":
   version: 1.4.0
   resolution: "colors@npm:1.4.0"
   checksum: 98aa2c2418ad87dedf25d781be69dc5fc5908e279d9d30c34d8b702e586a0474605b3a189511482b9d5ed0d20c867515d22749537f7bc546256c6014f3ebdcec
@@ -5288,7 +5280,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:^10.0.0, commander@npm:^10.0.1":
+"commander@npm:^10.0.0":
   version: 10.0.1
   resolution: "commander@npm:10.0.1"
   checksum: 436901d64a818295803c1996cd856621a74f30b9f9e28a588e726b2b1670665bccd7c1a77007ebf328729f0139838a88a19265858a0fa7a8728c4656796db948
@@ -5899,6 +5891,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"debug@npm:4.3.3":
+  version: 4.3.3
+  resolution: "debug@npm:4.3.3"
+  dependencies:
+    ms: 2.1.2
+  peerDependenciesMeta:
+    supports-color:
+      optional: true
+  checksum: 14472d56fe4a94dbcfaa6dbed2dd3849f1d72ba78104a1a328047bb564643ca49df0224c3a17fa63533fd11dd3d4c8636cd861191232a2c6735af00cc2d4de16
+  languageName: node
+  linkType: hard
+
 "decache@npm:^4.6.0":
   version: 4.6.2
   resolution: "decache@npm:4.6.2"
@@ -6121,7 +6125,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"diff@npm:^5.1.0":
+"diff@npm:^5.0.0":
   version: 5.1.0
   resolution: "diff@npm:5.1.0"
   checksum: c7bf0df7c9bfbe1cf8a678fd1b2137c4fb11be117a67bc18a0e03ae75105e8533dbfb1cda6b46beb3586ef5aed22143ef9d70713977d5fb1f9114e21455fba90
@@ -7906,7 +7910,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graceful-fs@npm:^4.1.11, graceful-fs@npm:^4.1.15, graceful-fs@npm:^4.1.2, graceful-fs@npm:^4.1.6, graceful-fs@npm:^4.2.0, graceful-fs@npm:^4.2.10, graceful-fs@npm:^4.2.4, graceful-fs@npm:^4.2.6, graceful-fs@npm:^4.2.9":
+"graceful-fs@npm:^4.1.11, graceful-fs@npm:^4.1.15, graceful-fs@npm:^4.1.2, graceful-fs@npm:^4.1.6, graceful-fs@npm:^4.2.0, graceful-fs@npm:^4.2.4, graceful-fs@npm:^4.2.6, graceful-fs@npm:^4.2.9":
   version: 4.2.11
   resolution: "graceful-fs@npm:4.2.11"
   checksum: ac85f94da92d8eb6b7f5a8b20ce65e43d66761c55ce85ac96df6865308390da45a8d3f0296dd3a663de65d30ba497bd46c696cc1e248c72b13d6d567138a4fc7
@@ -7924,6 +7928,13 @@ __metadata:
   version: 1.4.0
   resolution: "graphemer@npm:1.4.0"
   checksum: bab8f0be9b568857c7bec9fda95a89f87b783546d02951c40c33f84d05bb7da3fd10f863a9beb901463669b6583173a8c8cc6d6b306ea2b9b9d5d3d943c3a673
+  languageName: node
+  linkType: hard
+
+"growl@npm:1.10.5":
+  version: 1.10.5
+  resolution: "growl@npm:1.10.5"
+  checksum: 4b86685de6831cebcbb19f93870bea624afee61124b0a20c49017013987cd129e73a8c4baeca295728f41d21265e1f859d25ef36731b142ca59c655fea94bb1a
   languageName: node
   linkType: hard
 
@@ -8639,13 +8650,6 @@ __metadata:
   version: 2.2.0
   resolution: "interpret@npm:2.2.0"
   checksum: f51efef7cb8d02da16408ffa3504cd6053014c5aeb7bb8c223727e053e4235bf565e45d67028b0c8740d917c603807aa3c27d7bd2f21bf20b6417e2bb3e5fd6e
-  languageName: node
-  linkType: hard
-
-"interpret@npm:^3.1.1":
-  version: 3.1.1
-  resolution: "interpret@npm:3.1.1"
-  checksum: 35cebcf48c7351130437596d9ab8c8fe131ce4038da4561e6d665f25640e0034702a031cf7e3a5cea60ac7ac548bf17465e0571ede126f3d3a6933152171ac82
   languageName: node
   linkType: hard
 
@@ -9555,7 +9559,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"karma-chrome-launcher@npm:^3.2.0":
+"karma-chrome-launcher@npm:^3.1.0":
   version: 3.2.0
   resolution: "karma-chrome-launcher@npm:3.2.0"
   dependencies:
@@ -9577,7 +9581,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"karma-firefox-launcher@npm:^2.1.2":
+"karma-firefox-launcher@npm:^2.1.1":
   version: 2.1.2
   resolution: "karma-firefox-launcher@npm:2.1.2"
   dependencies:
@@ -9607,23 +9611,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"karma-sourcemap-loader@npm:^0.4.0":
-  version: 0.4.0
-  resolution: "karma-sourcemap-loader@npm:0.4.0"
+"karma-sourcemap-loader@npm:^0.3.8":
+  version: 0.3.8
+  resolution: "karma-sourcemap-loader@npm:0.3.8"
   dependencies:
-    graceful-fs: ^4.2.10
-  checksum: 9d85efb3e2c1eb5ce66b04195798aa33d97c25add1aa6d2b5f2f1e1056f60bb2cefbd408457dc8e70e85becc92abfe319084c87e02fe643285a20ff64656d9b3
+    graceful-fs: ^4.1.2
+  checksum: 12e21849af695f4aaa012752128b494e8b4b601c8d910212253d153b92153017364ad99f9ed86d58578ce44a7e53e9498ebd329950f1d0f0290bb90f4fea6d2c
   languageName: node
   linkType: hard
 
-"karma-spec-reporter@npm:0.0.36":
-  version: 0.0.36
-  resolution: "karma-spec-reporter@npm:0.0.36"
+"karma-spec-reporter@npm:0.0.32":
+  version: 0.0.32
+  resolution: "karma-spec-reporter@npm:0.0.32"
   dependencies:
-    colors: 1.4.0
+    colors: ^1.1.2
   peerDependencies:
     karma: ">=0.9"
-  checksum: e9bf5f4d0e16226048f4e1311821a00adfd9277a65694462ed91a47f5f0989e5ca47ccb7cb98b56a8646aaaaf377105bdfed3dd74805e29987a036f1a39f524f
+  checksum: 1857e8c9c862ee03a26e6a784838a751689d27f640ebc304e38220e3de60d521d96bddcaa0f3460b138f233cec03533618c21d80197afe6e42d4c5334057e9cc
   languageName: node
   linkType: hard
 
@@ -9640,7 +9644,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"karma@npm:^6.4.2":
+"karma@npm:^6.3.5":
   version: 6.4.2
   resolution: "karma@npm:6.4.2"
   dependencies:
@@ -10719,12 +10723,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimatch@npm:5.0.1":
-  version: 5.0.1
-  resolution: "minimatch@npm:5.0.1"
+"minimatch@npm:4.2.1":
+  version: 4.2.1
+  resolution: "minimatch@npm:4.2.1"
   dependencies:
-    brace-expansion: ^2.0.1
-  checksum: b34b98463da4754bc526b244d680c69d4d6089451ebe512edaf6dd9eeed0279399cfa3edb19233513b8f830bf4bfcad911dddcdf125e75074100d52f724774f0
+    brace-expansion: ^1.1.7
+  checksum: 2b1514e3d0f29a549912f0db7ae7b82c5cab4a8f2dd0369f1c6451a325b3f12b2cf473c95873b6157bb8df183d6cf6db82ff03614b6adaaf1d7e055beccdfd01
   languageName: node
   linkType: hard
 
@@ -10972,35 +10976,38 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mocha@npm:^10.2.0":
-  version: 10.2.0
-  resolution: "mocha@npm:10.2.0"
+"mocha@npm:^9.1.3":
+  version: 9.2.2
+  resolution: "mocha@npm:9.2.2"
   dependencies:
+    "@ungap/promise-all-settled": 1.1.2
     ansi-colors: 4.1.1
     browser-stdout: 1.3.1
     chokidar: 3.5.3
-    debug: 4.3.4
+    debug: 4.3.3
     diff: 5.0.0
     escape-string-regexp: 4.0.0
     find-up: 5.0.0
     glob: 7.2.0
+    growl: 1.10.5
     he: 1.2.0
     js-yaml: 4.1.0
     log-symbols: 4.1.0
-    minimatch: 5.0.1
+    minimatch: 4.2.1
     ms: 2.1.3
-    nanoid: 3.3.3
+    nanoid: 3.3.1
     serialize-javascript: 6.0.0
     strip-json-comments: 3.1.1
     supports-color: 8.1.1
-    workerpool: 6.2.1
+    which: 2.0.2
+    workerpool: 6.2.0
     yargs: 16.2.0
     yargs-parser: 20.2.4
     yargs-unparser: 2.0.0
   bin:
     _mocha: bin/_mocha
-    mocha: bin/mocha.js
-  checksum: 406c45eab122ffd6ea2003c2f108b2bc35ba036225eee78e0c784b6fa2c7f34e2b13f1dbacef55a4fdf523255d76e4f22d1b5aacda2394bd11666febec17c719
+    mocha: bin/mocha
+  checksum: 4d5ca4ce33fc66627e63acdf09a634e2358c9a00f61de7788b1091b6aad430da04f97f9ecb82d56dc034b623cb833b65576136fd010d77679c03fcea5bc1e12d
   languageName: node
   linkType: hard
 
@@ -11078,12 +11085,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanoid@npm:3.3.3":
-  version: 3.3.3
-  resolution: "nanoid@npm:3.3.3"
+"nanoid@npm:3.3.1":
+  version: 3.3.1
+  resolution: "nanoid@npm:3.3.1"
   bin:
     nanoid: bin/nanoid.cjs
-  checksum: ada019402a07464a694553c61d2dca8a4353645a7d92f2830f0d487fedff403678a0bee5323a46522752b2eab95a0bc3da98b6cccaa7c0c55cd9975130e6d6f0
+  checksum: 4ef0969e1bbe866fc223eb32276cbccb0961900bfe79104fa5abe34361979dead8d0e061410a5c03bc3d47455685adf32c09d6f27790f4a6898fb51f7df7ec86
   languageName: node
   linkType: hard
 
@@ -11131,7 +11138,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nise@npm:^5.1.4":
+"nise@npm:^5.1.0":
   version: 5.1.4
   resolution: "nise@npm:5.1.4"
   dependencies:
@@ -13495,15 +13502,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rechoir@npm:^0.8.0":
-  version: 0.8.0
-  resolution: "rechoir@npm:0.8.0"
-  dependencies:
-    resolve: ^1.20.0
-  checksum: ad3caed8afdefbc33fbc30e6d22b86c35b3d51c2005546f4e79bcc03c074df804b3640ad18945e6bef9ed12caedc035655ec1082f64a5e94c849ff939dc0a788
-  languageName: node
-  linkType: hard
-
 "redent@npm:^3.0.0":
   version: 3.0.0
   resolution: "redent@npm:3.0.0"
@@ -14433,17 +14431,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sinon@npm:^16.0.0":
-  version: 16.0.0
-  resolution: "sinon@npm:16.0.0"
+"sinon@npm:^11.1.2":
+  version: 11.1.2
+  resolution: "sinon@npm:11.1.2"
   dependencies:
-    "@sinonjs/commons": ^3.0.0
-    "@sinonjs/fake-timers": ^10.3.0
-    "@sinonjs/samsam": ^8.0.0
-    diff: ^5.1.0
-    nise: ^5.1.4
+    "@sinonjs/commons": ^1.8.3
+    "@sinonjs/fake-timers": ^7.1.2
+    "@sinonjs/samsam": ^6.0.2
+    diff: ^5.0.0
+    nise: ^5.1.0
     supports-color: ^7.2.0
-  checksum: fbcad39d1610c669bb37ce2d325f2ac666ff5187935d09d1e757e11c50d07b8556b7dfa322eb38ad6ace8a18912224cc502e990779bc3d0954244a1ae8391984
+  checksum: 1d01377e230c9ba976bf33f28b588bae7901b0b5a503d2f6b2a7914b0dbaa9f09823481926c6f2abed820123c7fa865519695af3ae2e9ba18d8b025616163501
   languageName: node
   linkType: hard
 
@@ -15514,7 +15512,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-loader@npm:^9.2.6, ts-loader@npm:^9.4.4":
+"ts-loader@npm:^9.2.6":
   version: 9.4.4
   resolution: "ts-loader@npm:9.4.4"
   dependencies:
@@ -15529,7 +15527,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-node@npm:^10.9.1":
+"ts-node@npm:^10.3.0":
   version: 10.9.1
   resolution: "ts-node@npm:10.9.1"
   dependencies:
@@ -15771,16 +15769,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:~5.2":
-  version: 5.2.2
-  resolution: "typescript@npm:5.2.2"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 7912821dac4d962d315c36800fe387cdc0a6298dba7ec171b350b4a6e988b51d7b8f051317786db1094bd7431d526b648aba7da8236607febb26cf5b871d2d3c
-  languageName: node
-  linkType: hard
-
 "typescript@patch:typescript@^3 || ^4#~builtin<compat/typescript>":
   version: 4.9.5
   resolution: "typescript@patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=289587"
@@ -15808,16 +15796,6 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: f53bfe97f7c8b2b6d23cf572750d4e7d1e0c5fff1c36d859d0ec84556a827b8785077bc27676bf7e71fae538e517c3ecc0f37e7f593be913d884805d931bc8be
-  languageName: node
-  linkType: hard
-
-"typescript@patch:typescript@~5.2#~builtin<compat/typescript>":
-  version: 5.2.2
-  resolution: "typescript@patch:typescript@npm%3A5.2.2#~builtin<compat/typescript>::version=5.2.2&hash=f3b441"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 0f4da2f15e6f1245e49db15801dbee52f2bbfb267e1c39225afdab5afee1a72839cd86000e65ee9d7e4dfaff12239d28beaf5ee431357fcced15fb08583d72ca
   languageName: node
   linkType: hard
 
@@ -16059,7 +16037,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"util@npm:^0.12.5":
+"util@npm:^0.12.4":
   version: 0.12.5
   resolution: "util@npm:0.12.5"
   dependencies:
@@ -16506,38 +16484,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack-cli@npm:^5.1.4":
-  version: 5.1.4
-  resolution: "webpack-cli@npm:5.1.4"
-  dependencies:
-    "@discoveryjs/json-ext": ^0.5.0
-    "@webpack-cli/configtest": ^2.1.1
-    "@webpack-cli/info": ^2.0.2
-    "@webpack-cli/serve": ^2.0.5
-    colorette: ^2.0.14
-    commander: ^10.0.1
-    cross-spawn: ^7.0.3
-    envinfo: ^7.7.3
-    fastest-levenshtein: ^1.0.12
-    import-local: ^3.0.2
-    interpret: ^3.1.1
-    rechoir: ^0.8.0
-    webpack-merge: ^5.7.3
-  peerDependencies:
-    webpack: 5.x.x
-  peerDependenciesMeta:
-    "@webpack-cli/generators":
-      optional: true
-    webpack-bundle-analyzer:
-      optional: true
-    webpack-dev-server:
-      optional: true
-  bin:
-    webpack-cli: bin/cli.js
-  checksum: 3a4ad0d0342a6815c850ee4633cc2a8a5dae04f918e7847f180bf24ab400803cf8a8943707ffbed03eb20fe6ce647f996f60a2aade87b0b4a9954da3da172ce0
-  languageName: node
-  linkType: hard
-
 "webpack-dev-middleware@npm:^5.3.1":
   version: 5.3.3
   resolution: "webpack-dev-middleware@npm:5.3.3"
@@ -16626,7 +16572,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack@npm:^5.59.1, webpack@npm:^5.88.2":
+"webpack@npm:^5.59.1":
   version: 5.88.2
   resolution: "webpack@npm:5.88.2"
   dependencies:
@@ -16711,6 +16657,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"which@npm:2.0.2, which@npm:^2.0.1, which@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "which@npm:2.0.2"
+  dependencies:
+    isexe: ^2.0.0
+  bin:
+    node-which: ./bin/node-which
+  checksum: 1a5c563d3c1b52d5f893c8b61afe11abc3bab4afac492e8da5bde69d550de701cf9806235f20a47b5c8fa8a1d6a9135841de2596535e998027a54589000e66d1
+  languageName: node
+  linkType: hard
+
 "which@npm:^1.2.1, which@npm:^1.2.9, which@npm:^1.3.1":
   version: 1.3.1
   resolution: "which@npm:1.3.1"
@@ -16719,17 +16676,6 @@ __metadata:
   bin:
     which: ./bin/which
   checksum: f2e185c6242244b8426c9df1510e86629192d93c1a986a7d2a591f2c24869e7ffd03d6dac07ca863b2e4c06f59a4cc9916c585b72ee9fa1aa609d0124df15e04
-  languageName: node
-  linkType: hard
-
-"which@npm:^2.0.1, which@npm:^2.0.2":
-  version: 2.0.2
-  resolution: "which@npm:2.0.2"
-  dependencies:
-    isexe: ^2.0.0
-  bin:
-    node-which: ./bin/node-which
-  checksum: 1a5c563d3c1b52d5f893c8b61afe11abc3bab4afac492e8da5bde69d550de701cf9806235f20a47b5c8fa8a1d6a9135841de2596535e998027a54589000e66d1
   languageName: node
   linkType: hard
 
@@ -16781,10 +16727,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"workerpool@npm:6.2.1":
-  version: 6.2.1
-  resolution: "workerpool@npm:6.2.1"
-  checksum: c2c6eebbc5225f10f758d599a5c016fa04798bcc44e4c1dffb34050cd361d7be2e97891aa44419e7afe647b1f767b1dc0b85a5e046c409d890163f655028b09d
+"workerpool@npm:6.2.0":
+  version: 6.2.0
+  resolution: "workerpool@npm:6.2.0"
+  checksum: 3493b4f0ef979a23d2c1583d7ef85f62fc9463cc02f82829d3e7e663b517f8ae9707da0249b382e46ac58986deb0ca2232ee1081713741211bda9254b429c9bb
   languageName: node
   linkType: hard
 
