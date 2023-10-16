@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.11](https://github.com/nextgis/nextgis_frontend/compare/v1.18.10...v1.18.11) (2023-10-16)
+
+
+### Features
+
+* **expression:** improve expression; pass some mapbox-gl-js tests ([51b9387](https://github.com/nextgis/nextgis_frontend/commit/51b93878a919d19e71d31cb89eacb12ff3eeee0a))
+
+
+
+
+
 ## [1.18.10](https://github.com/nextgis/nextgis_frontend/compare/v1.18.9...v1.18.10) (2023-10-12)
 
 **Note:** Version bump only for package @nextgis/frontend_test
