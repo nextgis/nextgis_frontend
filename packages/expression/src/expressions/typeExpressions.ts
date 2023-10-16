@@ -46,6 +46,34 @@ const array = (args: ArrayArgs): any[] => {
   return value;
 };
 
+function typeOfValue(value: any): string {
+  if (value === null) return 'null';
+  switch (typeof value) {
+    case 'string':
+      return 'string';
+    case 'number':
+      return 'number';
+    case 'boolean':
+      return 'boolean';
+    case 'object':
+      if (Array.isArray(value)) {
+        let arrayType = 'value';
+        if (value.every((item) => typeof item === 'number')) {
+          arrayType = 'number';
+        } else if (value.every((item) => typeof item === 'string')) {
+          arrayType = 'string';
+        } else if (value.every((item) => typeof item === 'boolean')) {
+          arrayType = 'boolean';
+        }
+        return `array<${arrayType}, ${value.length}>`;
+      } else {
+        return 'object';
+      }
+    default:
+      return 'undefined';
+  }
+}
+
 export const typeExpressions: Record<TypeExpressionName, ExpressionCbFunc> = {
   array: e(array),
   boolean: e(
@@ -65,5 +93,5 @@ export const typeExpressions: Record<TypeExpressionName, ExpressionCbFunc> = {
   'to-boolean': e(f(Boolean)),
   'to-number': e(f(Number)),
   'to-string': e(f(String)),
-  typeof: e(([arg]) => typeof arg),
+  typeof: e(([arg]) => typeOfValue(arg)),
 };

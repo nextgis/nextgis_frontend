@@ -66,7 +66,8 @@ export type DecisionExpressionName =
   | 'all'
   | 'any'
   | 'case'
-  | 'match';
+  | 'match'
+  | 'coalesce';
 
 export type InterpolationExpressionName = 'step' | 'interpolate';
 

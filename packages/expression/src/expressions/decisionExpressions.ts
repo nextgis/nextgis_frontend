@@ -5,34 +5,23 @@ function not([expr]: [boolean]): boolean {
   return !expr;
 }
 
-const checkCompareValues = ([a, b]: [value1: any, value2: any]) => {
-  if (typeof a !== typeof b) {
-    throw new Error('Values have different types.');
-  }
-};
-
 function notEqual([a, b]: [value1: any, value2: any]): boolean {
-  checkCompareValues([a, b]);
   return a !== b;
 }
 
 function lessThan([left, right]: [value1: any, value2: any]): boolean {
-  checkCompareValues([left, right]);
   return left < right;
 }
 
 function lessThanOrEqual([left, right]: [value1: any, value2: any]): boolean {
-  checkCompareValues([left, right]);
   return left <= right;
 }
 
 function equal([left, right]: [value1: any, value2: any]): boolean {
-  checkCompareValues([left, right]);
   return left === right;
 }
 
 function greaterThan([left, right]: [value1: any, value2: any]): boolean {
-  checkCompareValues([left, right]);
   return left > right;
 }
 
@@ -40,9 +29,18 @@ function greaterThanOrEqual([left, right]: [
   value1: any,
   value2: any,
 ]): boolean {
-  checkCompareValues([left, right]);
   return left >= right;
 }
+
+const coalesce: ExpressionCbFunc<any[], any> = (args) => {
+  for (let i = 0; i < args.length; i++) {
+    const arg = args[i]();
+    if (arg !== null && arg !== undefined) {
+      return arg;
+    }
+  }
+  return null;
+};
 
 const all: ExpressionCbFunc<any[], boolean> = (args) => {
   for (let i = 0; i < args.length; i++) {
@@ -116,6 +114,7 @@ export const decisionExpressions: Record<
   '==': e(equal),
   '>': e(greaterThan),
   '>=': e(greaterThanOrEqual),
+  coalesce,
   all,
   any,
   case: caseFunc,

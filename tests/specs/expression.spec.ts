@@ -135,6 +135,44 @@ describe(`Decision Expression`, () => {
     undefinedValue: undefined,
   };
 
+  describe('Coalesce', () => {
+    const testData1 = [
+      { properties: { x: 1 }, expected: 1 },
+      { properties: { x: 1, y: 2, z: 3 }, expected: 1 },
+      { properties: { y: 2 }, expected: 2 },
+      { properties: { z: 3 }, expected: 3 },
+      { properties: {}, expected: 0 },
+    ];
+
+    testData1.forEach((data) => {
+      it(`should return ${data.expected} for properties ${JSON.stringify(
+        data.properties,
+      )}`, () => {
+        expect(
+          evaluate(
+            ['coalesce', ['get', 'x'], ['get', 'y'], ['get', 'z'], 0],
+            data.properties,
+          ),
+        ).to.eql(data.expected);
+      });
+    });
+
+    const testData2 = [
+      { properties: { z: 1 }, expected: 1 },
+      { properties: { z: null }, expected: 0 },
+    ];
+
+    testData2.forEach((data) => {
+      it(`should return ${data.expected} for properties ${JSON.stringify(
+        data.properties,
+      )}`, () => {
+        expect(evaluate(['coalesce', ['get', 'z'], 0], data.properties)).to.eql(
+          data.expected,
+        );
+      });
+    });
+  });
+
   describe('caseFunc', () => {
     it('returns the correct branch based on the condition', () => {
       expect(
@@ -616,16 +654,28 @@ describe('Type Expressions', () => {
     expect(evaluate(['to-string', ['get', 'bool']], prop)).to.equal('true');
   });
 
-  // Testing for 'typeof'
-  it('should return type of arg', () => {
-    expect(evaluate(['typeof', ['get', 'num']], prop)).to.equal('number');
-    expect(evaluate(['typeof', ['get', 'bool']], prop)).to.equal('boolean');
-    expect(evaluate(['typeof', ['get', 'arr']], prop)).to.equal('object');
-    expect(evaluate(['typeof', ['get', 'str']], prop)).to.equal('string');
-    expect(evaluate(['typeof', ['get', 'nullVal']], prop)).to.equal('object');
-    expect(evaluate(['typeof', ['get', 'undefinedVal']], prop)).to.equal(
-      'undefined',
-    );
+  describe('Typeof', () => {
+    const testData = [
+      { properties: { x: null }, expected: 'null' },
+      { properties: { x: 's' }, expected: 'string' },
+      { properties: { x: 0 }, expected: 'number' },
+      { properties: { x: false }, expected: 'boolean' },
+      { properties: { x: [1, 2, 3] }, expected: 'array<number, 3>' },
+      { properties: { x: ['a', 'b', 'c'] }, expected: 'array<string, 3>' },
+      { properties: { x: [true, false] }, expected: 'array<boolean, 2>' },
+      { properties: { x: [1, false] }, expected: 'array<value, 2>' },
+      { properties: { x: {} }, expected: 'object' },
+    ];
+
+    testData.forEach((data) => {
+      it(`should return type ${data.expected} for properties ${JSON.stringify(
+        data.properties,
+      )}`, () => {
+        expect(evaluate(['typeof', ['get', 'x']], data.properties)).to.eql(
+          data.expected,
+        );
+      });
+    });
   });
 });
 
