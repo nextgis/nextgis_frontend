@@ -320,6 +320,7 @@ export interface VectorAdapterOptions<
   selectOnHover?: boolean;
   popup?: boolean;
   popupOnSelect?: boolean;
+  popupOnHover?: boolean;
   popupOptions?: PopupOptions<F, L>;
   filter?: DataLayerFilter<F, L>;
   propertiesFilter?: PropertiesFilter<P>;

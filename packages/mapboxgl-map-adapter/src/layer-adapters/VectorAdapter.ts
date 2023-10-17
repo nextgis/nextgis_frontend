@@ -108,8 +108,8 @@ const mapboxTypeAlias: Record<VectorAdapterLayerType, MapboxLayerType> = {
 };
 
 export abstract class VectorAdapter<
-    O extends VectorAdapterOptions = VectorAdapterOptions,
-  >
+  O extends VectorAdapterOptions = VectorAdapterOptions,
+>
   extends BaseAdapter<O>
   implements VectorLayerAdapter<Map, TLayer, O, Feature>
 {
@@ -824,11 +824,11 @@ export abstract class VectorAdapter<
 
     const content = createPopupContent
       ? await createPopupContent({
-          type,
-          close,
-          onClose,
-          ...this._createLayerOptions(feature),
-        })
+        type,
+        close,
+        onClose,
+        ...this._createLayerOptions(feature),
+      })
       : popupContent;
     coordinates =
       coordinates || (feature && (getCentroid(feature) as [number, number]));
@@ -898,6 +898,12 @@ export abstract class VectorAdapter<
     };
   }
 
+  private _removeAllPopups() {
+    for (const o of this._openedPopup) {
+      this._removePopup(o[1], true);
+    }
+  }
+
   private _removePopup(popup: Popup, doNotUnselect = false) {
     const map = this.map;
     if (map) {
@@ -948,10 +954,10 @@ export abstract class VectorAdapter<
   private _onLayerMouseMove(evt: MapEventType['mousemove'] & MapMouseEvent) {
     const map = this.map;
     if (map) {
-      const { onMouseOver, selectOnHover, selectable, labelOnHover } =
+      const { onMouseOver, selectOnHover, selectable, interactive, labelOnHover, popupOnHover } =
         this.options;
       const event = convertMapClickEvent(evt);
-      if (onMouseOver || selectOnHover || labelOnHover) {
+      if (onMouseOver || selectOnHover || interactive || labelOnHover || popupOnHover) {
         const feature = this._getFeatureFromPoint(evt);
         if (onMouseOver && this.layer) {
           onMouseOver({
@@ -966,24 +972,28 @@ export abstract class VectorAdapter<
           if (selectOnHover) {
             this._featureSelect(feature);
           }
-          if (labelOnHover) {
-            for (const o of this._openedPopup) {
-              this._removePopup(o[1], true);
-              // if (o[0].id !== feature.id) {
-              // }
+          if (labelOnHover || popupOnHover) {
+            this._removeAllPopups();
+            if (labelOnHover) {
+              this._openLabel(feature, event.lngLat as [number, number]);
+            } else if (popupOnHover) {
+              this._openPopup({
+                feature,
+                type: 'api',
+                options: this.options.popupOptions,
+              });
             }
-            this._openLabel(feature, event.lngLat as [number, number]);
           }
         }
       }
-      if (selectable) {
+      if (selectable || interactive) {
         map.getCanvas().style.cursor = 'pointer';
       }
     }
   }
 
   private _onLayerMouseLeave(evt: MapEventType['mousemove'] & MapMouseEvent) {
-    const { onMouseOut, labelOnHover, selectOnHover } = this.options;
+    const { onMouseOut, labelOnHover, popupOnHover, selectOnHover } = this.options;
     if (this.map) {
       if (onMouseOut) {
         onMouseOut({
@@ -999,6 +1009,9 @@ export abstract class VectorAdapter<
     }
     if (labelOnHover) {
       this._closeLabel();
+    }
+    if (popupOnHover) {
+      this._removeAllPopups();
     }
   }
 
