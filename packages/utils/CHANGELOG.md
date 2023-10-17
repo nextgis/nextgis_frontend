@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.12](https://github.com/nextgis/nextgis_frontend/compare/v1.18.11...v1.18.12) (2023-10-17)
+
+
+### Features
+
+* **util:** add getSquarePolygon function ([823c3a8](https://github.com/nextgis/nextgis_frontend/commit/823c3a84293ca78b1d7e9a2e317dbf174108285f))
+
+
+
+
+
 # [1.17.0](https://github.com/nextgis/nextgis_frontend/compare/v0.5.0...v1.17.0) (2023-09-25)
 
 

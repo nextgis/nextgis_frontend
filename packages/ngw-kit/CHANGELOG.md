@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.12](https://github.com/nextgis/nextgis_frontend/compare/v1.18.11...v1.18.12) (2023-10-17)
+
+
+### Features
+
+* **ngw-kit:** use geom for identify from wkt string direct ([b7dfdb0](https://github.com/nextgis/nextgis_frontend/commit/b7dfdb06aba8734258f4e05d1a918042c0dfff6d))
+
+
+
+
+
 ## [1.18.11](https://github.com/nextgis/nextgis_frontend/compare/v1.18.10...v1.18.11) (2023-10-16)
 
 **Note:** Version bump only for package @nextgis/ngw-kit

@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.12](https://github.com/nextgis/nextgis_frontend/compare/v1.18.11...v1.18.12) (2023-10-17)
+
+
+### Features
+
+* **mapboxgl-map-adapter:** add popup on mouse hover options ([358df67](https://github.com/nextgis/nextgis_frontend/commit/358df67f38b9ac378163735489364250cfa97520))
+* **ngw-kit:** use geom for identify from wkt string direct ([b7dfdb0](https://github.com/nextgis/nextgis_frontend/commit/b7dfdb06aba8734258f4e05d1a918042c0dfff6d))
+* **util:** add getSquarePolygon function ([823c3a8](https://github.com/nextgis/nextgis_frontend/commit/823c3a84293ca78b1d7e9a2e317dbf174108285f))
+
+
+
+
+
 ## [1.18.11](https://github.com/nextgis/nextgis_frontend/compare/v1.18.10...v1.18.11) (2023-10-16)
 
 

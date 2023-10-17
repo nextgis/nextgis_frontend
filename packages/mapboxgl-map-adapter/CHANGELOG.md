@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.12](https://github.com/nextgis/nextgis_frontend/compare/v1.18.11...v1.18.12) (2023-10-17)
+
+
+### Features
+
+* **mapboxgl-map-adapter:** add popup on mouse hover options ([358df67](https://github.com/nextgis/nextgis_frontend/commit/358df67f38b9ac378163735489364250cfa97520))
+
+
+
+
+
 ## [1.18.11](https://github.com/nextgis/nextgis_frontend/compare/v1.18.10...v1.18.11) (2023-10-16)
 
 **Note:** Version bump only for package @nextgis/mapboxgl-map-adapter
