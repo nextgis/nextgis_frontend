@@ -156,48 +156,53 @@ export function getIdentifyGeoJson<
 export function featureLayerIdentify(
   options: FeatureLayerIdentifyOptions,
 ): CancelablePromise<FeatureLayersIdentify> {
-  const { geom, signal, cache } = options;
-  let geom_: Position[] = [];
-  if (Array.isArray(geom)) {
-    geom_ = geom;
-  } else {
-    const polygon =
-      geom.type === 'Feature'
-        ? geom.geometry
-        : geom.type === 'Polygon'
-        ? geom
-        : false;
-    if (polygon) {
-      geom_ = polygon.coordinates[0];
-    }
-  }
-  if (geom_) {
-    // create wkt string
-    const polygonStr: string[] = [];
+  const { geom, signal, cache, layers } = options;
 
-    for (const [lng, lat] of geom_) {
-      const [x, y] = degrees2meters(lng, lat);
-      polygonStr.push(x + ' ' + y);
-    }
+  const wkt = typeof geom === 'string' ? geom : convertGeomToWKT(geom);
 
-    const wkt = `POLYGON((${polygonStr.join(', ')}))`;
-
-    const layers: number[] = options.layers;
-
-    const data: FeatureIdentifyRequestOptions = {
-      geom: wkt,
-      srs: 3857,
-      layers,
-    };
-
-    return options.connector.post('feature_layer.identify', {
-      data,
-      signal,
-      cache,
-    });
-  } else {
+  if (!wkt) {
     throw new Error('Not valid geometry format to make intersection');
   }
+
+  const data: FeatureIdentifyRequestOptions = {
+    geom: wkt,
+    srs: 3857,
+    layers,
+  };
+
+  return options.connector.post('feature_layer.identify', {
+    data,
+    signal,
+    cache,
+  });
+}
+
+function convertGeomToWKT(geom: FeatureLayerIdentifyOptions["geom"]): string | null {
+  const coordinates = getPolygonCoordinates(geom);
+  if (!coordinates) return null;
+
+  const polygonStr = coordinates.map(([lng, lat]) => {
+    const [x, y] = degrees2meters(lng, lat);
+    return `${x} ${y}`;
+  });
+
+  return `POLYGON((${polygonStr.join(',')}))`;
+}
+
+function getPolygonCoordinates(geom: FeatureLayerIdentifyOptions["geom"]): Position[] | null {
+  if (Array.isArray(geom)) {
+    return geom;
+  }
+
+  if (geom.type === 'Feature') {
+    return geom.geometry?.coordinates[0];
+  }
+
+  if (geom.type === 'Polygon') {
+    return geom.coordinates[0];
+  }
+
+  return null;
 }
 
 export function sendIdentifyRequest(
