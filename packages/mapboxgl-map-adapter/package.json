@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/mapboxgl-map-adapter",
-  "version": "1.18.12",
+  "version": "1.18.13",
   "_priority": 16,
   "description": "Webmap adapter to use Mapbox GL JS GIS framework.",
   "main": "lib/mapboxgl-map-adapter.global.prod.js",

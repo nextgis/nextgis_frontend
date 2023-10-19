@@ -1307,7 +1307,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/mapboxgl-map-adapter@^1.18.12, @nextgis/mapboxgl-map-adapter@workspace:packages/mapboxgl-map-adapter":
+"@nextgis/mapboxgl-map-adapter@^1.18.13, @nextgis/mapboxgl-map-adapter@workspace:packages/mapboxgl-map-adapter":
   version: 0.0.0-use.local
   resolution: "@nextgis/mapboxgl-map-adapter@workspace:packages/mapboxgl-map-adapter"
   dependencies:
@@ -1407,7 +1407,7 @@ __metadata:
   resolution: "@nextgis/ngw-mapbox@workspace:packages/ngw-mapbox"
   dependencies:
     "@nextgis/build-tools": ^1.17.0
-    "@nextgis/mapboxgl-map-adapter": ^1.18.12
+    "@nextgis/mapboxgl-map-adapter": ^1.18.13
     "@nextgis/ngw-map": ^1.18.12
     canvg: ^3.0.9
     maplibre-gl: ^3.3.1
@@ -1562,7 +1562,7 @@ __metadata:
   resolution: "@nextgis/react-ngw-mapbox@workspace:packages/react-ngw-mapbox"
   dependencies:
     "@nextgis/build-tools": ^1.17.0
-    "@nextgis/mapboxgl-map-adapter": ^1.18.12
+    "@nextgis/mapboxgl-map-adapter": ^1.18.13
     "@nextgis/react-ngw-map": ^1.18.12
   languageName: unknown
   linkType: soft
@@ -1636,7 +1636,7 @@ __metadata:
   resolution: "@nextgis/vue-ngw-mapbox@workspace:packages/vue-ngw-mapbox"
   dependencies:
     "@nextgis/build-tools": ^1.17.0
-    "@nextgis/mapboxgl-map-adapter": ^1.18.12
+    "@nextgis/mapboxgl-map-adapter": ^1.18.13
     "@nextgis/vue-ngw-map": ^1.18.12
   languageName: unknown
   linkType: soft

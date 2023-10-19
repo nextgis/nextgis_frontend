@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.13](https://github.com/nextgis/nextgis_frontend/compare/v1.18.12...v1.18.13) (2023-10-19)
+
+
+### Bug Fixes
+
+* **mapboxgl-map-adapter:** circle stroke issue ([c4325c9](https://github.com/nextgis/nextgis_frontend/commit/c4325c90d3f0eac7d6fb55138abdfbeaf7ab2bd5))
+
+
+
+
+
 ## [1.18.12](https://github.com/nextgis/nextgis_frontend/compare/v1.18.11...v1.18.12) (2023-10-17)
 
 
