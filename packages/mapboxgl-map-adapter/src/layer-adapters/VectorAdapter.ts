@@ -576,6 +576,9 @@ export abstract class VectorAdapter<
                 return false;
               });
               if (allowedType) {
+                if (allowedType[1] && allowedType[1].includes('stroke') && !pathPaint.stroke) {
+                  continue;
+                }
                 const paramName = Array.isArray(allowedType)
                   ? allowedType[1]
                   : allowedType;
