@@ -1,8 +1,8 @@
-import type { CSSProperties, MutableRefObject, ReactNode } from 'react';
+import type { MutableRefObject, ReactNode } from 'react';
 import type {
   NgwMap,
-  NgwMapOptions,
   LayerAdapter,
+  NgwMapOptions,
   ControlOptions,
 } from '@nextgis/ngw-map';
 
