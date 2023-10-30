@@ -13,7 +13,6 @@ export function useMapElement(
   const [ngwMap, setNgwMap] = useState<NgwMap | null>(null);
 
   useEffect(() => {
-
     if (!mapRef.current || ngwMap) return;
 
     const newNgwMap = new NgwMap({
@@ -22,9 +21,8 @@ export function useMapElement(
     });
     newNgwMap.onLoad().then(() => {
       isReady.current = true;
-    })
+    });
     setNgwMap(newNgwMap);
-
   }, [mapRef]);
 
   useEffect(() => {
@@ -38,8 +36,8 @@ export function useMapElement(
       if (ngwMap) {
         ngwMap.destroy();
       }
-    }
-  }, [])
+    };
+  }, []);
 
   return ngwMap;
 }

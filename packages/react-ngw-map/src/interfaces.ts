@@ -27,16 +27,20 @@ export interface NgwMapContextInterface {
 export type ReactNgwMapProps = MapContainerProps &
   Required<Pick<MapContainerProps, 'mapAdapter'>>;
 
+export interface ReactElementAttributes {
+  children?: ReactNode;
+  className?: string;
+  id?: string;
+  placeholder?: ReactNode;
+  style?: Partial<CSSStyleDeclaration>;
+}
+
 export interface MapContainerProps<
   M = any,
   L = any,
   C extends object = any,
   O extends NgwMapOptions<M, C> = NgwMapOptions<M, C>,
-> extends NgwMapOptions {
-  children?: ReactNode;
-  className?: string;
-  id?: string;
-  placeholder?: ReactNode;
-  style?: CSSProperties;
+> extends ReactElementAttributes,
+    NgwMapOptions {
   whenCreated?: (map: NgwMap<M, L, C, O>) => void;
 }

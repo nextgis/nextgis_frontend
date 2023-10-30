@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useState, useEffect ,useCallback } from 'react';
 
 import { useNgwMapContext } from './context';
 
@@ -16,12 +16,16 @@ export function ButtonControl<P extends MapControlProps = MapControlProps>(
   const { position } = props;
   const context = useNgwMapContext();
 
-  function createControl() {
+  const createControl = useCallback(() => {
     return context.ngwMap.createButtonControl(props);
-  }
+  }, []);
 
-  const ref = useRef(createControl());
-  useNgwControl(context, ref, position);
+  const [instance, setInstance] = useState(createControl);
+  useNgwControl({context, instance, position});
+
+  useEffect(() => {
+    setInstance(createControl());
+  }, [createControl, position]);
 
   return null;
 }

@@ -1,21 +1,21 @@
 import { useEffect } from 'react';
 
-import type { MutableRefObject } from 'react';
+
 import type { ControlPosition } from '@nextgis/webmap';
 import type { NgwMapContextInterface } from '../interfaces';
 
-export function useNgwControl(
+export function useNgwControl({context, instance, position}: {
   context: NgwMapContextInterface,
-  instance: MutableRefObject<Promise<unknown>>,
+  instance: Promise<unknown>,
   position?: ControlPosition,
-): MutableRefObject<Promise<unknown>> {
+}): Promise<unknown> {
   const pos = position || 'top-left';
   useEffect(
     function addControl() {
-      context.ngwMap.addControl(instance.current, pos);
+      context.ngwMap.addControl(instance, pos);
 
       return function removeControl() {
-        context.ngwMap.removeControl(instance.current);
+        context.ngwMap.removeControl(instance);
       };
     },
     [context.ngwMap, instance],
