@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.14](https://github.com/nextgis/nextgis_frontend/compare/v1.18.13...v1.18.14) (2023-10-30)
+
+
+### Features
+
+* **react-ngw-map:** update on MapControl props change ([a328a71](https://github.com/nextgis/nextgis_frontend/commit/a328a711ab689d20960fbe1f855c5bb268608070))
+
+
+
+
+
 ## [1.18.13](https://github.com/nextgis/nextgis_frontend/compare/v1.18.12...v1.18.13) (2023-10-19)
 
 

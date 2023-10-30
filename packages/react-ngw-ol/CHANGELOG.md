@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.14](https://github.com/nextgis/nextgis_frontend/compare/v1.18.13...v1.18.14) (2023-10-30)
+
+**Note:** Version bump only for package @nextgis/react-ngw-ol
+
+
+
+
+
 ## [1.18.12](https://github.com/nextgis/nextgis_frontend/compare/v1.18.11...v1.18.12) (2023-10-17)
 
 **Note:** Version bump only for package @nextgis/react-ngw-ol

@@ -1,13 +1,13 @@
 {
   "name": "@nextgis/react-ngw-leaflet",
-  "version": "1.18.12",
+  "version": "1.18.14",
   "description": "React NGW map component for leaflet",
   "main": "lib/index.js",
   "module": "lib/react-ngw-leaflet.esm-bundler.js",
   "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/leaflet-map-adapter": "^1.18.12",
-    "@nextgis/react-ngw-map": "^1.18.12"
+    "@nextgis/react-ngw-map": "^1.18.14"
   },
   "devDependencies": {
     "@nextgis/build-tools": "^1.17.0"
