@@ -12,6 +12,10 @@ export function createControl(
       return 'top-left' as ControlPosition;
     }
 
+    getContainer() {
+      return this._container;
+    }
+
     onAdd() {
       const element = document.createElement('div');
       const content = control.onAdd();

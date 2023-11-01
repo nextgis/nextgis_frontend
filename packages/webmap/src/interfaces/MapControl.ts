@@ -58,6 +58,7 @@ export type ControlsOptions<
 export interface MapControl<M = any> {
   onAdd(map?: M): HTMLElement | undefined;
   onRemove(map?: M): unknown;
+  getContainer?(): HTMLElement;
   remove?(): void;
 }
 

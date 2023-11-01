@@ -41,14 +41,12 @@ export function MapControl<P extends MapControlProps = MapControlProps>(
     [bar, margin, addClass],
   );
 
-  const [instance, setInstance] = useState<Promise<unknown>>(() =>
-    createControl(portal),
-  );
+  const [instance, setInstance] = useState<Promise<unknown>>();
 
-  useNgwControl({ context, instance, position });
+  const { container } = useNgwControl({ context, instance, position });
 
   useEffect(() => {
-    const el = portal.current;
+    const el = container;
     if (el) {
       if (id) el.id = id;
       if (className) el.className = className;
@@ -58,7 +56,7 @@ export function MapControl<P extends MapControlProps = MapControlProps>(
         }
       }
     }
-  }, [id, className, style]);
+  }, [id, className, style, container]);
 
   useEffect(() => {
     setInstance(createControl(portal));

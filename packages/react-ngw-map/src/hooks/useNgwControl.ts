@@ -1,25 +1,40 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
-
-import type { ControlPosition } from '@nextgis/webmap';
+import type { ControlPosition, MapControl } from '@nextgis/webmap';
 import type { NgwMapContextInterface } from '../interfaces';
 
-export function useNgwControl({context, instance, position}: {
-  context: NgwMapContextInterface,
-  instance: Promise<unknown>,
-  position?: ControlPosition,
-}): Promise<unknown> {
+export function useNgwControl({
+  context,
+  instance,
+  position,
+}: {
+  context: NgwMapContextInterface;
+  instance?: Promise<unknown>;
+  position?: ControlPosition;
+}) {
   const pos = position || 'top-left';
+  const added = useRef<MapControl>();
   useEffect(
     function addControl() {
-      context.ngwMap.addControl(instance, pos);
+      if (instance) {
+        context.ngwMap.addControl(instance, pos).then((control) => {
+          added.current = control;
+        });
+      }
 
       return function removeControl() {
-        context.ngwMap.removeControl(instance);
+        if (added.current) {
+          context.ngwMap.removeControl(added.current);
+        }
       };
     },
     [context.ngwMap, instance],
   );
 
-  return instance;
+  return {
+    container:
+      added.current &&
+      added.current.getContainer &&
+      added.current.getContainer(),
+  };
 }
