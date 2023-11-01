@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/webmap",
-  "version": "1.18.12",
+  "version": "1.18.15",
   "_priority": 14,
   "description": "Universal map constructor",
   "main": "index.js",

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.15](https://github.com/nextgis/nextgis_frontend/compare/v1.18.14...v1.18.15) (2023-11-01)
+
+
+### Features
+
+* **webmap:** add control getContainer optional method ([bdbe58f](https://github.com/nextgis/nextgis_frontend/commit/bdbe58f4cee74d8ead2263e54d7f3bfa80069b10))
+
+
+
+
+
 ## [1.18.12](https://github.com/nextgis/nextgis_frontend/compare/v1.18.11...v1.18.12) (2023-10-17)
 
 
