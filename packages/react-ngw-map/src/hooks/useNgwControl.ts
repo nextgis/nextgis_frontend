@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import type { ControlPosition, MapControl } from '@nextgis/webmap';
 import type { NgwMapContextInterface } from '../interfaces';
@@ -13,12 +13,15 @@ export function useNgwControl({
   position?: ControlPosition;
 }) {
   const pos = position || 'top-left';
+  const [container, setContainer] = useState<HTMLElement>()
   const added = useRef<MapControl>();
   useEffect(
     function addControl() {
       if (instance) {
         context.ngwMap.addControl(instance, pos).then((control) => {
           added.current = control;
+          if (control.getContainer)
+            setContainer(control.getContainer());
         });
       }
 
@@ -32,9 +35,6 @@ export function useNgwControl({
   );
 
   return {
-    container:
-      added.current &&
-      added.current.getContainer &&
-      added.current.getContainer(),
+    container,
   };
 }
