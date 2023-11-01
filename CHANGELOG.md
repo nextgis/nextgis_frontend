@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.16](https://github.com/nextgis/nextgis_frontend/compare/v1.18.15...v1.18.16) (2023-11-01)
+
+
+### Bug Fixes
+
+* **react-ngw-map:** control container reactive style ([a6d8ff0](https://github.com/nextgis/nextgis_frontend/commit/a6d8ff0c95e830577c033102c755372b1011576e))
+
+
+
+
+
 ## [1.18.15](https://github.com/nextgis/nextgis_frontend/compare/v1.18.14...v1.18.15) (2023-11-01)
 
 
