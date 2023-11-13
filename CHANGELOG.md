@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.17](https://github.com/nextgis/nextgis_frontend/compare/v1.18.16...v1.18.17) (2023-11-13)
+
+
+### Features
+
+* **geocoder:** implement reverse geocoding ([8db1f5c](https://github.com/nextgis/nextgis_frontend/commit/8db1f5c4cb8996c3ef9f3d0f2a8a9909c94ab256))
+
+
+
+
+
 ## [1.18.16](https://github.com/nextgis/nextgis_frontend/compare/v1.18.15...v1.18.16) (2023-11-01)
 
 

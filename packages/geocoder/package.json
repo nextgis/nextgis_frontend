@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/geocoder",
-  "version": "1.18.15",
+  "version": "1.18.17",
   "description": "",
   "main": "index.js",
   "module": "lib/geocoder.esm-bundler.js",
