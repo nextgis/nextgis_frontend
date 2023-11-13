@@ -1,10 +1,10 @@
-import { fixUrlStr } from '@nextgis/utils';
+import { LngLatArray, fixUrlStr } from '@nextgis/utils';
 import CancelablePromise from '@nextgis/cancelable-promise';
 import { BaseProvider } from './BaseProvider';
 import { BaseProviderOptions } from './BaseProviderOptions';
 import { FeatureCollection } from 'geojson';
-import { SearchItem } from '../types/SearchItem';
-import { ResultItem } from '../types/ResultItem';
+import type { SearchItem } from '../types/SearchItem';
+import type { ResultItem } from '../types/ResultItem';
 
 export class NominatimProvider extends BaseProvider {
   searchUrl = 'https://nominatim.openstreetmap.org';
@@ -80,4 +80,53 @@ export class NominatimProvider extends BaseProvider {
       geom: model.geom,
     });
   }
+
+
+    async *reverse(coordinates: LngLatArray): AsyncGenerator<SearchItem, void, unknown> {
+      const [lng, lat] = coordinates;
+      const url = fixUrlStr(
+        `${this.searchUrl}/reverse?format=geojson&lat=${lat}&lon=${lng}`,
+      );
+      const request = new CancelablePromise<SearchItem>(
+        (resolve, reject, onCancel) => {
+          const xhr = new XMLHttpRequest();
+          xhr.open('GET', url, true);
+          xhr.onload = () => {
+            try {
+              const geojson = JSON.parse(xhr.responseText) as FeatureCollection;
+              const feature = geojson.features[0];
+              const result: SearchItem = {
+                geom: feature,
+                extent: feature.bbox,
+                text: feature.properties && feature.properties.display_name,
+                query: `${lat}, ${lng}`,
+              };
+              resolve(result);
+            } catch (er) {
+              reject(er);
+            }
+          };
+          xhr.onerror = (er) => {
+            reject(er);
+          };
+
+          onCancel(() => {
+            xhr.abort();
+          });
+
+          xhr.send();
+        },
+      ).catch((er) => {
+        if (er.name === 'CancelError') {
+          //
+        }
+        throw er;
+      });
+      this._requests.push(request);
+      const item = await request;
+      if (item) {
+        item.result = () => this.result(item);
+        yield item;
+      }
+    }
 }

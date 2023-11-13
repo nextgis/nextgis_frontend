@@ -1,4 +1,6 @@
 import { objectAssign } from '@nextgis/utils';
+
+import type { LngLatArray } from '@nextgis/utils';
 import type CancelablePromise from '@nextgis/cancelable-promise';
 import type { SearchItem } from './types/SearchItem';
 
@@ -34,6 +36,16 @@ export abstract class BaseGeocoder<
    * @returns {CancelablePromise<any>} - A promise that resolves to the detailed result.
    */
   abstract result(item: SearchItem): CancelablePromise<any>;
+
+  /**
+   * Method for reverse geocoding.
+   * Takes coordinates and returns the corresponding address or location information.
+   *
+   * @abstract
+   * @param {LngLatArray} coordinates - The longitude and latitude values.
+   * @returns {AsyncGenerator<SearchItem>} - An async generator that yields reverse geocoding results.
+   */
+  abstract reverse(coordinates: LngLatArray): AsyncGenerator<SearchItem>;
 
   /**
    * Optional method to abort any ongoing geocoding requests.

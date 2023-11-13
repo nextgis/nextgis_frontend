@@ -10,6 +10,7 @@ import type {
   ResourceItem,
 } from '@nextgis/ngw-connector';
 import type { FetchNgwItemsOptions } from '@nextgis/ngw-kit';
+import type { LngLatArray } from '@nextgis/utils';
 
 import type { ResultItem } from '../types/ResultItem';
 import type { SearchItem } from '../types/SearchItem';
@@ -169,6 +170,12 @@ export class NgwProvider extends BaseProvider<NgwProviderOptions> {
     return req;
   }
 
+  async *reverse(
+    coordinates: LngLatArray,
+  ): AsyncGenerator<SearchItem, void, unknown> {
+    throw new Error('Not implemented');
+  }
+
   private _makeSignal() {
     const abortController = new AbortController();
     this._abortControllers.push(abortController);
@@ -191,9 +198,8 @@ export class NgwProvider extends BaseProvider<NgwProviderOptions> {
     let labelField: string | undefined = undefined;
 
     if (resourceItem.feature_layer) {
-      labelField = resourceItem.feature_layer.fields.find(
-        (f) => f.label_field,
-      )?.keyname;
+      labelField = resourceItem.feature_layer.fields.find((f) => f.label_field)
+        ?.keyname;
     }
 
     const meta = this.searchResources.find(
