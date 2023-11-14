@@ -27,16 +27,28 @@ export class Geocoder extends BaseGeocoder<GeocoderOptions> {
   }
 
   async *search(query: string): AsyncGenerator<SearchItem, void, unknown> {
+    this.abort();
+    let allProvidersFailed = true;
+    let errors: Error[] = [];
+
     for (const provider of this.providers) {
       try {
         const results = provider.search(query);
 
         for await (const r of results) {
+          allProvidersFailed = false;
           yield { ...r, provider, _id: ID++ };
         }
       } catch (er) {
-        //
+        errors.push(er as Error);
       }
+    }
+
+    if (allProvidersFailed) {
+      // If all providers failed, throw an error
+      throw new Error(
+        `All providers failed: ${errors.map((e) => e.message).join('; ')}`,
+      );
     }
   }
 
@@ -47,7 +59,9 @@ export class Geocoder extends BaseGeocoder<GeocoderOptions> {
     return CancelablePromise.resolve(undefined);
   }
 
-  async *reverse(coordinates: LngLatArray): AsyncGenerator<SearchItem, void, unknown> {
+  async *reverse(
+    coordinates: LngLatArray,
+  ): AsyncGenerator<SearchItem, void, unknown> {
     for (const provider of this.providers) {
       if (!provider.reverse) {
         continue;
@@ -71,7 +85,9 @@ export class Geocoder extends BaseGeocoder<GeocoderOptions> {
    * @param {LngLatArray} coordinates - The longitude and latitude values.
    * @returns {Promise<SearchItem | undefined>} - A promise that resolves to the first reverse geocoding result, or undefined if no results are found.
    */
-  async reverseGeocodeFirstResult(coordinates: LngLatArray): Promise<SearchItem | undefined> {
+  async reverseGeocodeFirstResult(
+    coordinates: LngLatArray,
+  ): Promise<SearchItem | undefined> {
     for (const provider of this.providers) {
       if (typeof provider.reverse === 'function') {
         try {
