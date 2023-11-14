@@ -23,8 +23,8 @@ export abstract class BaseGeocoder<
    * Search method to retrieve geocoding results.
    *
    * @abstract
-   * @param {string} query - The search string to geocode.
-   * @yields {AsyncGenerator<SearchItem>} - An async generator that yields search results.
+   * @param query - The search string to geocode.
+   * @yields An async generator that yields search results.
    */
   abstract search(query: string): AsyncGenerator<SearchItem>;
 
@@ -32,8 +32,8 @@ export abstract class BaseGeocoder<
    * Method to retrieve detailed result for a specific search item.
    *
    * @abstract
-   * @param {SearchItem} item - The search item to get detailed result for.
-   * @returns {CancelablePromise<any>} - A promise that resolves to the detailed result.
+   * @param item - The search item to get detailed result for.
+   * @returns A promise that resolves to the detailed result.
    */
   abstract result(item: SearchItem): CancelablePromise<any>;
 
@@ -42,8 +42,8 @@ export abstract class BaseGeocoder<
    * Takes coordinates and returns the corresponding address or location information.
    *
    * @abstract
-   * @param {LngLatArray} coordinates - The longitude and latitude values.
-   * @returns {AsyncGenerator<SearchItem>} - An async generator that yields reverse geocoding results.
+   * @param  coordinates - The longitude and latitude values.
+   * @returns An async generator that yields reverse geocoding results.
    */
   abstract reverse(coordinates: LngLatArray): AsyncGenerator<SearchItem>;
 
