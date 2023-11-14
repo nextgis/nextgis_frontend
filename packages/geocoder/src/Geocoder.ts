@@ -39,13 +39,15 @@ export class Geocoder extends BaseGeocoder<GeocoderOptions> {
           allProvidersFailed = false;
           yield { ...r, provider, _id: ID++ };
         }
-      } catch (er) {
-        errors.push(er as Error);
+      } catch (err) {
+        const er = err as Error
+        if (er.name !== 'CancelError') {
+          errors.push(er);
+        }
       }
     }
 
-    if (allProvidersFailed) {
-      // If all providers failed, throw an error
+    if (allProvidersFailed && errors.length) {
       throw new Error(
         `All providers failed: ${errors.map((e) => e.message).join('; ')}`,
       );
