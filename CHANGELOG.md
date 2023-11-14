@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.18](https://github.com/nextgis/nextgis_frontend/compare/v1.18.17...v1.18.18) (2023-11-14)
+
+
+### Features
+
+* **geocoder:** search error handling ([0fbd0cb](https://github.com/nextgis/nextgis_frontend/commit/0fbd0cb1f6b556ef835b78157dde646bd2cd9f31))
+
+
+
+
+
 ## [1.18.17](https://github.com/nextgis/nextgis_frontend/compare/v1.18.16...v1.18.17) (2023-11-13)
 
 
