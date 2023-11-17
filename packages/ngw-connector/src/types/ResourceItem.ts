@@ -37,7 +37,7 @@ export interface Permission {
 }
 
 export type ResourceCls =
-  | 'resource'
+  // | 'resource'
   | 'resource_group'
   | 'postgis_layer'
   | 'wmsserver_service'
