@@ -37,6 +37,7 @@ export interface Permission {
 }
 
 export type ResourceCls =
+  | 'resource'
   | 'resource_group'
   | 'postgis_layer'
   | 'wmsserver_service'
@@ -56,6 +57,14 @@ export type ResourceCls =
   | 'wmsclient_connection'
   | 'formbuilder_form'
   | 'file_bucket'
+  | 'svg_marker_library'
+  | 'ogcfserver_service'
+  | 'tmsclient_connection'
+  | 'tileset'
+  | 'collector_project'
+  | 'demo_project'
+  | 'trackers_group'
+  | 'tracker'
   // tms branch
   | 'terrain_provider'
   | 'model_3d'
