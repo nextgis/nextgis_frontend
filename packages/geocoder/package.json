@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/geocoder",
-  "version": "1.18.19",
+  "version": "1.18.20",
   "description": "",
   "main": "index.js",
   "module": "lib/geocoder.esm-bundler.js",
@@ -9,8 +9,8 @@
   "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/cancelable-promise": "^1.18.3",
-    "@nextgis/ngw-connector": "^1.18.12",
-    "@nextgis/ngw-kit": "^1.18.15",
+    "@nextgis/ngw-connector": "^1.18.20",
+    "@nextgis/ngw-kit": "^1.18.20",
     "@nextgis/utils": "^1.18.12",
     "@types/events": "^3.0.0",
     "@types/geojson": "^7946.0.8",

@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/ngw-uploader",
-  "version": "1.18.12",
+  "version": "1.18.20",
   "_priority": 13,
   "description": "",
   "main": "index.js",
@@ -12,7 +12,7 @@
     "@nextgis/cancelable-promise": "^1.18.3",
     "@nextgis/dialog": "^1.17.0",
     "@nextgis/expression": "^1.18.11",
-    "@nextgis/ngw-connector": "^1.18.12",
+    "@nextgis/ngw-connector": "^1.18.20",
     "@nextgis/utils": "^1.18.12",
     "@types/color": "^3.0.2",
     "@types/events": "^3.0.0",

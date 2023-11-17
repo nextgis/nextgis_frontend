@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.20](https://github.com/nextgis/nextgis_frontend/compare/v1.18.19...v1.18.20) (2023-11-17)
+
+**Note:** Version bump only for package @nextgis/logging
+
+
+
+
+
 ## [1.18.12](https://github.com/nextgis/nextgis_frontend/compare/v1.18.11...v1.18.12) (2023-10-17)
 
 **Note:** Version bump only for package @nextgis/logging
