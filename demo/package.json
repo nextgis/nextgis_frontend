@@ -76,7 +76,7 @@
   ],
   "dockerpkg": {
     "name": "code-nextgis",
-    "registry": "registry.nextgis.com"
+    "registry": "habor.nextgis.net"
   },
   "license": "MIT"
 }
