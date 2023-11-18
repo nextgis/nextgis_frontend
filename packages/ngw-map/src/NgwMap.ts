@@ -547,7 +547,13 @@ export class NgwMap<
         typeof layer.getIdentificationIds === 'function'
           ? layer.getIdentificationIds
           : false;
-      if (identFunc && layer.options.selectable && this.isLayerVisible(layer)) {
+      const interactive = layer.options.interactive ?? true;
+      if (
+        identFunc &&
+        layer.options.selectable &&
+        interactive &&
+        this.isLayerVisible(layer)
+      ) {
         promises.push(identFunc.call(layer));
       }
     }

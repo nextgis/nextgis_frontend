@@ -8,7 +8,6 @@ import {
   LayerAdapterDefinition,
   VectorAdapterOptions,
 } from '@nextgis/webmap';
-import { objectAssign } from '@nextgis/utils';
 
 import { setScaleRatio } from './utils/utils';
 import { WebmapLayerOpacityPropertyHandler } from './utils/WebmapLayerOpacityPropertyHandler';
@@ -133,55 +132,11 @@ export class NgwWebmapItem extends Item<ItemOptions> {
   }
 
   initItem(item: TreeGroup | TreeLayer): Promise<void> {
-    const i = item;
-    const options: Partial<ImageAdapterOptions> = this.getItemOptions(item);
-    const setNewLayer = (l: LayerAdapter) => {
-      i._layer = l;
-      this.layer = l;
-      const enabled = this.properties.get('visibility');
-      if (enabled) {
-        this.properties.set('visibility', true);
-      }
-
-      if (options.opacity !== undefined) {
-        this.webMap.setLayerOpacity(l, options.opacity);
-      }
-    };
-
     if (item.item_type === 'group' || item.item_type === 'root') {
-      if (item.children && item.children.length) {
-        const children = this.getChildren(item);
-        for (const x of children) {
-          const children = new (this.constructor as typeof NgwWebmapItem)(
-            this.webMap,
-            x,
-            this.options,
-            this.connector,
-            this,
-          );
-          this.tree.addChild(children);
-        }
-      }
-      return Promise.resolve();
+      return this.initGroupItem(item as TreeGroup);
     } else {
-      let adapter: LayerAdapterDefinition | undefined;
-      if (item.item_type === 'layer') {
-        adapter = item.adapter || item.layer_adapter.toUpperCase();
-      } else if (NgwWebmapItem.GetAdapterFromLayerType[item.item_type]) {
-        const getAdapter =
-          NgwWebmapItem.GetAdapterFromLayerType[item.item_type];
-        adapter = getAdapter(item, options, this.webMap, this.connector);
-      }
-      if (adapter) {
-        return this.webMap.addLayer(adapter, options).then((newLayer) => {
-          setNewLayer(newLayer);
-        });
-      }
+      return this.initLayerItem(item as TreeLayer);
     }
-    if (item._layer) {
-      return Promise.resolve(setNewLayer(item._layer));
-    }
-    return Promise.reject('No layer added');
   }
 
   bringToFront(): void {
@@ -227,7 +182,7 @@ export class NgwWebmapItem extends Item<ItemOptions> {
     if (item.item_type === 'layer') {
       const { maxZoom, minZoom } = this._getZoomRange(item);
 
-      objectAssign(options, {
+      Object.assign(options, {
         updateWmsParams: item.updateWmsParams,
         url: item.url,
         headers: this.options.headers,
@@ -236,6 +191,7 @@ export class NgwWebmapItem extends Item<ItemOptions> {
         minZoom,
         minScale: item.layer_min_scale_denom,
         maxScale: item.layer_max_scale_denom,
+        interactive: item.layer_identifiable,
       });
     }
     if (opacity !== undefined) {
@@ -250,6 +206,59 @@ export class NgwWebmapItem extends Item<ItemOptions> {
 
   private _mapScaleToZoomLevel(scale: number) {
     return setScaleRatio(scale);
+  }
+
+  private initGroupItem(group: TreeGroup): Promise<void> {
+    if (group.children && group.children.length) {
+      const children = this.getChildren(group);
+      for (const child of children) {
+        const childItem = new (this.constructor as typeof NgwWebmapItem)(
+          this.webMap,
+          child,
+          this.options,
+          this.connector,
+          this,
+        );
+        this.tree.addChild(childItem);
+      }
+    }
+    return Promise.resolve();
+  }
+
+  private initLayerItem(layer: TreeLayer): Promise<void> {
+    const options: Partial<ImageAdapterOptions> = this.getItemOptions(layer);
+    const setNewLayer = (l: LayerAdapter) => {
+      layer._layer = l;
+      this.layer = l;
+      const enabled = this.properties.get('visibility');
+      if (enabled) {
+        this.properties.set('visibility', true);
+      }
+
+      if (options.opacity !== undefined) {
+        this.webMap.setLayerOpacity(l, options.opacity);
+      }
+    };
+
+    let adapter: LayerAdapterDefinition | undefined;
+    if (layer.item_type === 'layer') {
+      adapter = layer.adapter || layer.layer_adapter.toUpperCase();
+    } else if (NgwWebmapItem.GetAdapterFromLayerType[layer.item_type]) {
+      const getAdapter = NgwWebmapItem.GetAdapterFromLayerType[layer.item_type];
+      adapter = getAdapter(layer, options, this.webMap, this.connector);
+    }
+
+    if (adapter) {
+      return this.webMap.addLayer(adapter, options).then((newLayer) => {
+        setNewLayer(newLayer);
+      });
+    }
+
+    if (layer._layer) {
+      return Promise.resolve(setNewLayer(layer._layer));
+    }
+
+    return Promise.reject('No layer added');
   }
 
   private _getZoomRange(item: TreeLayer) {

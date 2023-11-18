@@ -53,7 +53,10 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
   private _webmapBaselayersIds: string[] = [];
   private _lastActiveBaselayer?: string;
 
-  constructor(public map: M, public options: NgwWebmapAdapterOptions) {
+  constructor(
+    public map: M,
+    public options: NgwWebmapAdapterOptions,
+  ) {
     const r = options.resourceId;
 
     if (Array.isArray(r)) {
@@ -197,7 +200,11 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
       deps.forEach((x) => {
         const item = x.item;
         const parentId = item.parentId;
-        if (parentId !== undefined && item.item_type === 'layer') {
+        if (
+          parentId !== undefined &&
+          item.item_type === 'layer' &&
+          item.layer_identifiable
+        ) {
           const visible = x.properties.property('visibility');
           const isVisible = visible.get() && !visible.isBlocked();
           if (isVisible) {

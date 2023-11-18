@@ -81,6 +81,7 @@ export interface TreeLayer extends TreeItem {
   layer_style_id: number;
   style_parent_id: number;
   layer_transparency: number;
+  layer_identifiable: boolean;
 
   layer_url?: string;
 

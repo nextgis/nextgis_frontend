@@ -177,7 +177,9 @@ export function featureLayerIdentify(
   });
 }
 
-function convertGeomToWKT(geom: FeatureLayerIdentifyOptions["geom"]): string | null {
+function convertGeomToWKT(
+  geom: FeatureLayerIdentifyOptions['geom'],
+): string | null {
   const coordinates = getPolygonCoordinates(geom);
   if (!coordinates) return null;
 
@@ -189,7 +191,9 @@ function convertGeomToWKT(geom: FeatureLayerIdentifyOptions["geom"]): string | n
   return `POLYGON((${polygonStr.join(',')}))`;
 }
 
-function getPolygonCoordinates(geom: FeatureLayerIdentifyOptions["geom"]): Position[] | null {
+function getPolygonCoordinates(
+  geom: FeatureLayerIdentifyOptions['geom'],
+): Position[] | null {
   if (Array.isArray(geom)) {
     return geom;
   }
