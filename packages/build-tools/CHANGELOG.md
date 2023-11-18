@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.21](https://github.com/nextgis/nextgis_frontend/compare/v1.18.20...v1.18.21) (2023-11-18)
+
+**Note:** Version bump only for package @nextgis/build-tools
+
+
+
+
+
 # [1.17.0](https://github.com/nextgis/nextgis_frontend/compare/v0.5.0...v1.17.0) (2023-09-25)
 
 

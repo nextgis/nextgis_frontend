@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.21](https://github.com/nextgis/nextgis_frontend/compare/v1.18.20...v1.18.21) (2023-11-18)
+
+
+### Features
+
+* **ngw-kit:** do not interact with webmap no identifiable layers ([0f7afd3](https://github.com/nextgis/nextgis_frontend/commit/0f7afd3c593e6d89c1f11c6c1a66579102cb79b1))
+
+
+
+
+
 # [1.17.0](https://github.com/nextgis/nextgis_frontend/compare/v0.5.0...v1.17.0) (2023-09-25)
 
 

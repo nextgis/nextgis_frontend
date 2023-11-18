@@ -1,16 +1,16 @@
 {
   "name": "@nextgis/react-ngw-ol",
-  "version": "1.18.20",
+  "version": "1.18.21",
   "description": "React NGW map component for openlayers",
   "main": "lib/index.js",
   "module": "lib/react-ngw-ol.esm-bundler.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/ol-map-adapter": "^1.18.15",
-    "@nextgis/react-ngw-map": "^1.18.20"
+    "@nextgis/ol-map-adapter": "^1.18.21",
+    "@nextgis/react-ngw-map": "^1.18.21"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "^1.17.0"
+    "@nextgis/build-tools": "^1.18.21"
   },
   "buildOptions": {
     "name": "ReactNgwOl",
