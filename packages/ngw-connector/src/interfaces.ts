@@ -32,6 +32,16 @@ export interface SrsItem {
   wkt: string;
 }
 
+interface Icon {
+  format: string;
+  data: string;
+}
+
+export interface RenderLegendSymbol {
+  display_name: string;
+  icon: Icon;
+}
+
 export interface FeatureLayerCount {
   total_count: number;
 }
@@ -97,6 +107,7 @@ export interface GetRequestItemsResponseMap extends RequestItemKeys {
   'feature_layer.feature.count': FeatureLayerCount;
   'pyramid.company_logo': string;
   'spatial_ref_sys.collection': SrsItem[];
+  'render.legend_symbols': RenderLegendSymbol[];
 }
 
 export interface IdOnly {
