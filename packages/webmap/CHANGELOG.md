@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.19.0](https://github.com/nextgis/nextgis_frontend/compare/v1.18.21...v1.19.0) (2023-11-24)
+
+
+### Features
+
+* **webmap:** implement legend methods ([6049ef8](https://github.com/nextgis/nextgis_frontend/commit/6049ef88745a47e324793d594fd18384a927c9d2))
+
+
+
+
+
 ## [1.18.21](https://github.com/nextgis/nextgis_frontend/compare/v1.18.20...v1.18.21) (2023-11-18)
 
 **Note:** Version bump only for package @nextgis/webmap

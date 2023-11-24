@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.19.0](https://github.com/nextgis/nextgis_frontend/compare/v1.18.21...v1.19.0) (2023-11-24)
+
+
+### Features
+
+* **ngw-kit:** implement legend for raster layer ([91ca2e5](https://github.com/nextgis/nextgis_frontend/commit/91ca2e581685c441581a3cd9cd09b49d98c05dc2))
+* **ngw-kit:** implement legend for webmap ([c8b904d](https://github.com/nextgis/nextgis_frontend/commit/c8b904df384e725161040f2803bf0023f5f5c0f6))
+
+
+
+
+
 ## [1.18.21](https://github.com/nextgis/nextgis_frontend/compare/v1.18.20...v1.18.21) (2023-11-18)
 
 

@@ -984,17 +984,17 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis/area@workspace:packages/area"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
-    "@nextgis/utils": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
+    "@nextgis/utils": ^1.19.0
   languageName: unknown
   linkType: soft
 
-"@nextgis/build-tools@^1.18.21, @nextgis/build-tools@workspace:packages/build-tools":
+"@nextgis/build-tools@^1.19.0, @nextgis/build-tools@workspace:packages/build-tools":
   version: 0.0.0-use.local
   resolution: "@nextgis/build-tools@workspace:packages/build-tools"
   dependencies:
     "@microsoft/api-extractor": ^7.37.0
-    "@nextgis/eslint-config": ^1.18.21
+    "@nextgis/eslint-config": ^1.19.0
     "@rollup/plugin-alias": ^3.1.9
     "@rollup/plugin-commonjs": ^22.0.1
     "@rollup/plugin-image": ^2.1.1
@@ -1021,11 +1021,11 @@ __metadata:
   linkType: soft
 
 "@nextgis/build-tools@file:../build-tools::locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter":
-  version: 1.18.21
-  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=1199fc&locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter"
+  version: 1.19.0
+  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=8c8e74&locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter"
   dependencies:
     "@microsoft/api-extractor": ^7.37.0
-    "@nextgis/eslint-config": ^1.18.21
+    "@nextgis/eslint-config": ^1.19.0
     "@rollup/plugin-alias": ^3.1.9
     "@rollup/plugin-commonjs": ^22.0.1
     "@rollup/plugin-image": ^2.1.1
@@ -1047,16 +1047,16 @@ __metadata:
     rollup-plugin-terser: ^7.0.2
     rollup-plugin-typescript2: ^0.32.1
     typescript: ~5.1
-  checksum: 29480e5793cf9d605e8739e4d848cc244e01b42acbb9a31352b6be419076001bb17bfe1ebb5a0cde16da0a197be686f67cd5f6b8c793b258db5acd2ce0650f9c
+  checksum: 42ed7527ebbeccd26ca13a2c39ab3a114271be092e027f68c8ee70e6ae357492c4fbd7060ff6e9161ef17820364d0949e76fbfce8e73cb37a87e1e3164ac581a
   languageName: node
   linkType: hard
 
 "@nextgis/build-tools@file:../build-tools::locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium":
-  version: 1.18.21
-  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=1199fc&locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium"
+  version: 1.19.0
+  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=8c8e74&locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium"
   dependencies:
     "@microsoft/api-extractor": ^7.37.0
-    "@nextgis/eslint-config": ^1.18.21
+    "@nextgis/eslint-config": ^1.19.0
     "@rollup/plugin-alias": ^3.1.9
     "@rollup/plugin-commonjs": ^22.0.1
     "@rollup/plugin-image": ^2.1.1
@@ -1078,37 +1078,37 @@ __metadata:
     rollup-plugin-terser: ^7.0.2
     rollup-plugin-typescript2: ^0.32.1
     typescript: ~5.1
-  checksum: 29480e5793cf9d605e8739e4d848cc244e01b42acbb9a31352b6be419076001bb17bfe1ebb5a0cde16da0a197be686f67cd5f6b8c793b258db5acd2ce0650f9c
+  checksum: 42ed7527ebbeccd26ca13a2c39ab3a114271be092e027f68c8ee70e6ae357492c4fbd7060ff6e9161ef17820364d0949e76fbfce8e73cb37a87e1e3164ac581a
   languageName: node
   linkType: hard
 
-"@nextgis/cache@^1.18.21, @nextgis/cache@workspace:packages/cache":
+"@nextgis/cache@^1.19.0, @nextgis/cache@workspace:packages/cache":
   version: 0.0.0-use.local
   resolution: "@nextgis/cache@workspace:packages/cache"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
-    "@nextgis/utils": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
+    "@nextgis/utils": ^1.19.0
   languageName: unknown
   linkType: soft
 
-"@nextgis/cancelable-promise@^1.18.21, @nextgis/cancelable-promise@workspace:packages/cancelable-promise":
+"@nextgis/cancelable-promise@^1.19.0, @nextgis/cancelable-promise@workspace:packages/cancelable-promise":
   version: 0.0.0-use.local
   resolution: "@nextgis/cancelable-promise@workspace:packages/cancelable-promise"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
   languageName: unknown
   linkType: soft
 
-"@nextgis/cesium-map-adapter@^1.18.21, @nextgis/cesium-map-adapter@workspace:packages/cesium-map-adapter":
+"@nextgis/cesium-map-adapter@^1.19.0, @nextgis/cesium-map-adapter@workspace:packages/cesium-map-adapter":
   version: 0.0.0-use.local
   resolution: "@nextgis/cesium-map-adapter@workspace:packages/cesium-map-adapter"
   dependencies:
     "@nextgis/build-tools": "file:../build-tools"
-    "@nextgis/control-container": ^1.18.21
-    "@nextgis/dom": ^1.18.21
-    "@nextgis/paint": ^1.18.21
-    "@nextgis/utils": ^1.18.21
-    "@nextgis/webmap": ^1.18.21
+    "@nextgis/control-container": ^1.19.0
+    "@nextgis/dom": ^1.19.0
+    "@nextgis/paint": ^1.19.0
+    "@nextgis/utils": ^1.19.0
+    "@nextgis/webmap": ^1.19.0
     "@types/events": ^3.0.0
     events: ^3.3.0
   peerDependencies:
@@ -1116,14 +1116,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/control-container@^1.18.21, @nextgis/control-container@workspace:packages/control-container":
+"@nextgis/control-container@^1.19.0, @nextgis/control-container@workspace:packages/control-container":
   version: 0.0.0-use.local
   resolution: "@nextgis/control-container@workspace:packages/control-container"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
-    "@nextgis/dom": ^1.18.21
-    "@nextgis/utils": ^1.18.21
-    "@nextgis/webmap": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
+    "@nextgis/dom": ^1.19.0
+    "@nextgis/utils": ^1.19.0
+    "@nextgis/webmap": ^1.19.0
     "@types/events": ^3.0.0
     events: ^3.3.0
   languageName: unknown
@@ -1135,8 +1135,8 @@ __metadata:
   dependencies:
     "@mdi/font": ^6.3.95
     "@mdi/js": ^6.3.95
-    "@nextgis/eslint-config": ^1.18.21
-    "@nextgis/ngw-uploader": ^1.18.21
+    "@nextgis/eslint-config": ^1.19.0
+    "@nextgis/ngw-uploader": ^1.19.0
     "@types/lodash": ^4.14.176
     "@types/showdown": ^1.9.4
     core-js: ^3.18.3
@@ -1180,24 +1180,24 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/dialog@^1.18.21, @nextgis/dialog@workspace:packages/dialog":
+"@nextgis/dialog@^1.19.0, @nextgis/dialog@workspace:packages/dialog":
   version: 0.0.0-use.local
   resolution: "@nextgis/dialog@workspace:packages/dialog"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
     dialog-polyfill: ^0.5.6
   languageName: unknown
   linkType: soft
 
-"@nextgis/dom@^1.18.21, @nextgis/dom@workspace:packages/dom":
+"@nextgis/dom@^1.19.0, @nextgis/dom@workspace:packages/dom":
   version: 0.0.0-use.local
   resolution: "@nextgis/dom@workspace:packages/dom"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
   languageName: unknown
   linkType: soft
 
-"@nextgis/eslint-config@^1.18.21, @nextgis/eslint-config@workspace:packages/eslint-config":
+"@nextgis/eslint-config@^1.19.0, @nextgis/eslint-config@workspace:packages/eslint-config":
   version: 0.0.0-use.local
   resolution: "@nextgis/eslint-config@workspace:packages/eslint-config"
   dependencies:
@@ -1211,11 +1211,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/expression@^1.18.21, @nextgis/expression@workspace:packages/expression":
+"@nextgis/expression@^1.19.0, @nextgis/expression@workspace:packages/expression":
   version: 0.0.0-use.local
   resolution: "@nextgis/expression@workspace:packages/expression"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
   languageName: unknown
   linkType: soft
 
@@ -1257,45 +1257,45 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis/geocoder@workspace:packages/geocoder"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
-    "@nextgis/cancelable-promise": ^1.18.21
-    "@nextgis/ngw-connector": ^1.18.21
-    "@nextgis/ngw-kit": ^1.18.21
-    "@nextgis/utils": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
+    "@nextgis/cancelable-promise": ^1.19.0
+    "@nextgis/ngw-connector": ^1.19.0
+    "@nextgis/ngw-kit": ^1.19.0
+    "@nextgis/utils": ^1.19.0
     "@types/events": ^3.0.0
     "@types/geojson": ^7946.0.8
     events: ^3.3.0
   languageName: unknown
   linkType: soft
 
-"@nextgis/icons@^1.18.21, @nextgis/icons@workspace:packages/icons":
+"@nextgis/icons@^1.19.0, @nextgis/icons@workspace:packages/icons":
   version: 0.0.0-use.local
   resolution: "@nextgis/icons@workspace:packages/icons"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
-    "@nextgis/paint": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
+    "@nextgis/paint": ^1.19.0
   languageName: unknown
   linkType: soft
 
-"@nextgis/item@^1.18.21, @nextgis/item@workspace:packages/item":
+"@nextgis/item@^1.19.0, @nextgis/item@workspace:packages/item":
   version: 0.0.0-use.local
   resolution: "@nextgis/item@workspace:packages/item"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
-    "@nextgis/tree": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
+    "@nextgis/tree": ^1.19.0
     "@types/events": ^3.0.0
     events: ^3.3.0
   languageName: unknown
   linkType: soft
 
-"@nextgis/leaflet-map-adapter@^1.18.21, @nextgis/leaflet-map-adapter@workspace:packages/leaflet-map-adapter":
+"@nextgis/leaflet-map-adapter@^1.19.0, @nextgis/leaflet-map-adapter@workspace:packages/leaflet-map-adapter":
   version: 0.0.0-use.local
   resolution: "@nextgis/leaflet-map-adapter@workspace:packages/leaflet-map-adapter"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
-    "@nextgis/paint": ^1.18.21
-    "@nextgis/utils": ^1.18.21
-    "@nextgis/webmap": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
+    "@nextgis/paint": ^1.19.0
+    "@nextgis/utils": ^1.19.0
+    "@nextgis/webmap": ^1.19.0
     "@types/events": ^3.0.0
     "@types/geojson": ^7946.0.8
     "@types/leaflet": ^1.7.5
@@ -1310,19 +1310,19 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis/logging@workspace:packages/logging"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
-    "@nextgis/ngw-connector": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
+    "@nextgis/ngw-connector": ^1.19.0
   languageName: unknown
   linkType: soft
 
-"@nextgis/mapboxgl-map-adapter@^1.18.21, @nextgis/mapboxgl-map-adapter@workspace:packages/mapboxgl-map-adapter":
+"@nextgis/mapboxgl-map-adapter@^1.19.0, @nextgis/mapboxgl-map-adapter@workspace:packages/mapboxgl-map-adapter":
   version: 0.0.0-use.local
   resolution: "@nextgis/mapboxgl-map-adapter@workspace:packages/mapboxgl-map-adapter"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
-    "@nextgis/paint": ^1.18.21
-    "@nextgis/properties-filter": ^1.18.21
-    "@nextgis/webmap": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
+    "@nextgis/paint": ^1.19.0
+    "@nextgis/properties-filter": ^1.19.0
+    "@nextgis/webmap": ^1.19.0
     "@types/events": ^3.0.0
     "@types/polylabel": ^1.0.5
     canvg: ^3.0.9
@@ -1341,40 +1341,40 @@ __metadata:
   resolution: "@nextgis/ngw-cesium@workspace:packages/ngw-cesium"
   dependencies:
     "@nextgis/build-tools": "file:../build-tools"
-    "@nextgis/cesium-map-adapter": ^1.18.21
-    "@nextgis/ngw-map": ^1.18.21
+    "@nextgis/cesium-map-adapter": ^1.19.0
+    "@nextgis/ngw-map": ^1.19.0
     "@types/events": ^3.0.0
     cesium: 1.96.0
     events: ^3.3.0
   languageName: unknown
   linkType: soft
 
-"@nextgis/ngw-connector@^1.18.21, @nextgis/ngw-connector@workspace:packages/ngw-connector":
+"@nextgis/ngw-connector@^1.19.0, @nextgis/ngw-connector@workspace:packages/ngw-connector":
   version: 0.0.0-use.local
   resolution: "@nextgis/ngw-connector@workspace:packages/ngw-connector"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
-    "@nextgis/cache": ^1.18.21
-    "@nextgis/cancelable-promise": ^1.18.21
-    "@nextgis/utils": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
+    "@nextgis/cache": ^1.19.0
+    "@nextgis/cancelable-promise": ^1.19.0
+    "@nextgis/utils": ^1.19.0
     "@types/events": ^3.0.0
     events: ^3.3.0
     form-data: ^4.0.0
   languageName: unknown
   linkType: soft
 
-"@nextgis/ngw-kit@^1.18.21, @nextgis/ngw-kit@workspace:packages/ngw-kit":
+"@nextgis/ngw-kit@^1.19.0, @nextgis/ngw-kit@workspace:packages/ngw-kit":
   version: 0.0.0-use.local
   resolution: "@nextgis/ngw-kit@workspace:packages/ngw-kit"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
-    "@nextgis/cancelable-promise": ^1.18.21
-    "@nextgis/item": ^1.18.21
-    "@nextgis/ngw-connector": ^1.18.21
-    "@nextgis/properties-filter": ^1.18.21
-    "@nextgis/qms-kit": ^1.18.21
-    "@nextgis/utils": ^1.18.21
-    "@nextgis/webmap": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
+    "@nextgis/cancelable-promise": ^1.19.0
+    "@nextgis/item": ^1.19.0
+    "@nextgis/ngw-connector": ^1.19.0
+    "@nextgis/properties-filter": ^1.19.0
+    "@nextgis/qms-kit": ^1.19.0
+    "@nextgis/utils": ^1.19.0
+    "@nextgis/webmap": ^1.19.0
     "@types/events": ^3.0.0
     events: ^3.3.0
     strict-event-emitter-types: ^2.0.0
@@ -1385,25 +1385,25 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis/ngw-leaflet@workspace:packages/ngw-leaflet"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
-    "@nextgis/leaflet-map-adapter": ^1.18.21
-    "@nextgis/ngw-map": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
+    "@nextgis/leaflet-map-adapter": ^1.19.0
+    "@nextgis/ngw-map": ^1.19.0
     leaflet: 1.7.1
     leaflet.wms: ^0.2.0
   languageName: unknown
   linkType: soft
 
-"@nextgis/ngw-map@^1.18.21, @nextgis/ngw-map@workspace:packages/ngw-map":
+"@nextgis/ngw-map@^1.19.0, @nextgis/ngw-map@workspace:packages/ngw-map":
   version: 0.0.0-use.local
   resolution: "@nextgis/ngw-map@workspace:packages/ngw-map"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
-    "@nextgis/icons": ^1.18.21
-    "@nextgis/ngw-connector": ^1.18.21
-    "@nextgis/ngw-kit": ^1.18.21
-    "@nextgis/qms-kit": ^1.18.21
-    "@nextgis/utils": ^1.18.21
-    "@nextgis/webmap": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
+    "@nextgis/icons": ^1.19.0
+    "@nextgis/ngw-connector": ^1.19.0
+    "@nextgis/ngw-kit": ^1.19.0
+    "@nextgis/qms-kit": ^1.19.0
+    "@nextgis/utils": ^1.19.0
+    "@nextgis/webmap": ^1.19.0
     "@types/events": ^3.0.0
     events: ^3.3.0
     strict-event-emitter-types: ^2.0.0
@@ -1414,9 +1414,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis/ngw-mapbox@workspace:packages/ngw-mapbox"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
-    "@nextgis/mapboxgl-map-adapter": ^1.18.21
-    "@nextgis/ngw-map": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
+    "@nextgis/mapboxgl-map-adapter": ^1.19.0
+    "@nextgis/ngw-map": ^1.19.0
     canvg: ^3.0.9
     maplibre-gl: ^3.3.1
   languageName: unknown
@@ -1426,9 +1426,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis/ngw-ol@workspace:packages/ngw-ol"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
-    "@nextgis/ngw-map": ^1.18.21
-    "@nextgis/ol-map-adapter": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
+    "@nextgis/ngw-map": ^1.19.0
+    "@nextgis/ol-map-adapter": ^1.19.0
     "@types/events": ^3.0.0
     events: ^3.3.0
     ol: ^6.15.1
@@ -1439,11 +1439,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis/ngw-orm@workspace:packages/ngw-orm"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
-    "@nextgis/ngw-connector": ^1.18.21
-    "@nextgis/ngw-kit": ^1.18.21
-    "@nextgis/utils": ^1.18.21
-    "@nextgis/webmap": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
+    "@nextgis/ngw-connector": ^1.19.0
+    "@nextgis/ngw-kit": ^1.19.0
+    "@nextgis/utils": ^1.19.0
+    "@nextgis/webmap": ^1.19.0
     reflect-metadata: ^0.1.13
   languageName: unknown
   linkType: soft
@@ -1452,25 +1452,25 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis/ngw-uploader-input@workspace:packages/ngw-uploader-input"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
-    "@nextgis/dialog": ^1.18.21
-    "@nextgis/ngw-connector": ^1.18.21
-    "@nextgis/ngw-uploader": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
+    "@nextgis/dialog": ^1.19.0
+    "@nextgis/ngw-connector": ^1.19.0
+    "@nextgis/ngw-uploader": ^1.19.0
     "@types/events": ^3.0.0
     events: ^3.3.0
   languageName: unknown
   linkType: soft
 
-"@nextgis/ngw-uploader@^1.18.21, @nextgis/ngw-uploader@workspace:packages/ngw-uploader":
+"@nextgis/ngw-uploader@^1.19.0, @nextgis/ngw-uploader@workspace:packages/ngw-uploader":
   version: 0.0.0-use.local
   resolution: "@nextgis/ngw-uploader@workspace:packages/ngw-uploader"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
-    "@nextgis/cancelable-promise": ^1.18.21
-    "@nextgis/dialog": ^1.18.21
-    "@nextgis/expression": ^1.18.21
-    "@nextgis/ngw-connector": ^1.18.21
-    "@nextgis/utils": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
+    "@nextgis/cancelable-promise": ^1.19.0
+    "@nextgis/dialog": ^1.19.0
+    "@nextgis/expression": ^1.19.0
+    "@nextgis/ngw-connector": ^1.19.0
+    "@nextgis/utils": ^1.19.0
     "@types/color": ^3.0.2
     "@types/events": ^3.0.0
     color: ^4.1.0
@@ -1479,16 +1479,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/ol-map-adapter@^1.18.21, @nextgis/ol-map-adapter@workspace:packages/ol-map-adapter":
+"@nextgis/ol-map-adapter@^1.19.0, @nextgis/ol-map-adapter@workspace:packages/ol-map-adapter":
   version: 0.0.0-use.local
   resolution: "@nextgis/ol-map-adapter@workspace:packages/ol-map-adapter"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
-    "@nextgis/control-container": ^1.18.21
-    "@nextgis/dom": ^1.18.21
-    "@nextgis/paint": ^1.18.21
-    "@nextgis/properties-filter": ^1.18.21
-    "@nextgis/webmap": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
+    "@nextgis/control-container": ^1.19.0
+    "@nextgis/dom": ^1.19.0
+    "@nextgis/paint": ^1.19.0
+    "@nextgis/properties-filter": ^1.19.0
+    "@nextgis/webmap": ^1.19.0
     "@types/events": ^3.0.0
     "@types/polylabel": ^1.0.5
     events: ^3.3.0
@@ -1498,13 +1498,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/paint@^1.18.21, @nextgis/paint@workspace:packages/paint":
+"@nextgis/paint@^1.19.0, @nextgis/paint@workspace:packages/paint":
   version: 0.0.0-use.local
   resolution: "@nextgis/paint@workspace:packages/paint"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
-    "@nextgis/expression": ^1.18.21
-    "@nextgis/properties-filter": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
+    "@nextgis/expression": ^1.19.0
+    "@nextgis/properties-filter": ^1.19.0
     "@types/geojson": ^7946.0.8
   languageName: unknown
   linkType: soft
@@ -1513,30 +1513,30 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis/progress@workspace:packages/progress"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
     "@types/events": ^3.0.0
     events: ^3.3.0
     strict-event-emitter-types: ^2.0.0
   languageName: unknown
   linkType: soft
 
-"@nextgis/properties-filter@^1.18.21, @nextgis/properties-filter@workspace:packages/properties-filter":
+"@nextgis/properties-filter@^1.19.0, @nextgis/properties-filter@workspace:packages/properties-filter":
   version: 0.0.0-use.local
   resolution: "@nextgis/properties-filter@workspace:packages/properties-filter"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
-    "@nextgis/utils": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
+    "@nextgis/utils": ^1.19.0
     "@types/geojson": ^7946.0.8
   languageName: unknown
   linkType: soft
 
-"@nextgis/qms-kit@^1.18.21, @nextgis/qms-kit@workspace:packages/qms-kit":
+"@nextgis/qms-kit@^1.19.0, @nextgis/qms-kit@workspace:packages/qms-kit":
   version: 0.0.0-use.local
   resolution: "@nextgis/qms-kit@workspace:packages/qms-kit"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
-    "@nextgis/utils": ^1.18.21
-    "@nextgis/webmap": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
+    "@nextgis/utils": ^1.19.0
+    "@nextgis/webmap": ^1.19.0
   languageName: unknown
   linkType: soft
 
@@ -1544,19 +1544,19 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis/react-ngw-leaflet@workspace:packages/react-ngw-leaflet"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
-    "@nextgis/leaflet-map-adapter": ^1.18.21
-    "@nextgis/react-ngw-map": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
+    "@nextgis/leaflet-map-adapter": ^1.19.0
+    "@nextgis/react-ngw-map": ^1.19.0
   languageName: unknown
   linkType: soft
 
-"@nextgis/react-ngw-map@^1.18.21, @nextgis/react-ngw-map@workspace:packages/react-ngw-map":
+"@nextgis/react-ngw-map@^1.19.0, @nextgis/react-ngw-map@workspace:packages/react-ngw-map":
   version: 0.0.0-use.local
   resolution: "@nextgis/react-ngw-map@workspace:packages/react-ngw-map"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
-    "@nextgis/ngw-map": ^1.18.21
-    "@nextgis/utils": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
+    "@nextgis/ngw-map": ^1.19.0
+    "@nextgis/utils": ^1.19.0
     "@types/react": "*"
     "@types/react-dom": "*"
   peerDependencies:
@@ -1569,9 +1569,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis/react-ngw-mapbox@workspace:packages/react-ngw-mapbox"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
-    "@nextgis/mapboxgl-map-adapter": ^1.18.21
-    "@nextgis/react-ngw-map": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
+    "@nextgis/mapboxgl-map-adapter": ^1.19.0
+    "@nextgis/react-ngw-map": ^1.19.0
   languageName: unknown
   linkType: soft
 
@@ -1579,19 +1579,19 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis/react-ngw-ol@workspace:packages/react-ngw-ol"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
-    "@nextgis/ol-map-adapter": ^1.18.21
-    "@nextgis/react-ngw-map": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
+    "@nextgis/ol-map-adapter": ^1.19.0
+    "@nextgis/react-ngw-map": ^1.19.0
   languageName: unknown
   linkType: soft
 
-"@nextgis/tree@^1.18.21, @nextgis/tree@workspace:packages/tree":
+"@nextgis/tree@^1.19.0, @nextgis/tree@workspace:packages/tree":
   version: 0.0.0-use.local
   resolution: "@nextgis/tree@workspace:packages/tree"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
-    "@nextgis/properties-filter": ^1.18.21
-    "@nextgis/utils": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
+    "@nextgis/properties-filter": ^1.19.0
+    "@nextgis/utils": ^1.19.0
   languageName: unknown
   linkType: soft
 
@@ -1599,16 +1599,16 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis/url-runtime-params@workspace:packages/url-runtime-params"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
-    "@nextgis/webmap": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
+    "@nextgis/webmap": ^1.19.0
   languageName: unknown
   linkType: soft
 
-"@nextgis/utils@^1.18.21, @nextgis/utils@workspace:packages/utils":
+"@nextgis/utils@^1.19.0, @nextgis/utils@workspace:packages/utils":
   version: 0.0.0-use.local
   resolution: "@nextgis/utils@workspace:packages/utils"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
     "@types/geojson": ^7946.0.8
   languageName: unknown
   linkType: soft
@@ -1617,20 +1617,20 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis/vue-ngw-leaflet@workspace:packages/vue-ngw-leaflet"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
-    "@nextgis/leaflet-map-adapter": ^1.18.21
-    "@nextgis/vue-ngw-map": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
+    "@nextgis/leaflet-map-adapter": ^1.19.0
+    "@nextgis/vue-ngw-map": ^1.19.0
   languageName: unknown
   linkType: soft
 
-"@nextgis/vue-ngw-map@^1.18.21, @nextgis/vue-ngw-map@workspace:packages/vue-ngw-map":
+"@nextgis/vue-ngw-map@^1.19.0, @nextgis/vue-ngw-map@workspace:packages/vue-ngw-map":
   version: 0.0.0-use.local
   resolution: "@nextgis/vue-ngw-map@workspace:packages/vue-ngw-map"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
-    "@nextgis/leaflet-map-adapter": ^1.18.21
-    "@nextgis/ngw-map": ^1.18.21
-    "@nextgis/utils": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
+    "@nextgis/leaflet-map-adapter": ^1.19.0
+    "@nextgis/ngw-map": ^1.19.0
+    "@nextgis/utils": ^1.19.0
   peerDependencies:
     vue: 2.x
     vue-class-component: 7.x
@@ -1643,9 +1643,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis/vue-ngw-mapbox@workspace:packages/vue-ngw-mapbox"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
-    "@nextgis/mapboxgl-map-adapter": ^1.18.21
-    "@nextgis/vue-ngw-map": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
+    "@nextgis/mapboxgl-map-adapter": ^1.19.0
+    "@nextgis/vue-ngw-map": ^1.19.0
   languageName: unknown
   linkType: soft
 
@@ -1653,9 +1653,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis/vue-ngw-ol@workspace:packages/vue-ngw-ol"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
-    "@nextgis/ol-map-adapter": ^1.18.21
-    "@nextgis/vue-ngw-map": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
+    "@nextgis/ol-map-adapter": ^1.19.0
+    "@nextgis/vue-ngw-map": ^1.19.0
   languageName: unknown
   linkType: soft
 
@@ -1663,10 +1663,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis/vuetify-ngw-components@workspace:packages/vuetify-ngw-components"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
-    "@nextgis/leaflet-map-adapter": ^1.18.21
-    "@nextgis/ngw-map": ^1.18.21
-    "@nextgis/utils": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
+    "@nextgis/leaflet-map-adapter": ^1.19.0
+    "@nextgis/ngw-map": ^1.19.0
+    "@nextgis/utils": ^1.19.0
     vue: ^2.6.14
     vue-class-component: ^7.2.6
     vue-property-decorator: ^9.1.2
@@ -1678,9 +1678,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis/vuex-ngw@workspace:packages/vuex-ngw"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
-    "@nextgis/ngw-connector": ^1.18.21
-    "@nextgis/webmap": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
+    "@nextgis/ngw-connector": ^1.19.0
+    "@nextgis/webmap": ^1.19.0
     vue: ^2.6.14
     vue-class-component: ^7.2.6
     vue-property-decorator: ^9.1.2
@@ -1688,15 +1688,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/webmap@^1.18.21, @nextgis/webmap@workspace:packages/webmap":
+"@nextgis/webmap@^1.19.0, @nextgis/webmap@workspace:packages/webmap":
   version: 0.0.0-use.local
   resolution: "@nextgis/webmap@workspace:packages/webmap"
   dependencies:
-    "@nextgis/build-tools": ^1.18.21
-    "@nextgis/cancelable-promise": ^1.18.21
-    "@nextgis/paint": ^1.18.21
-    "@nextgis/properties-filter": ^1.18.21
-    "@nextgis/utils": ^1.18.21
+    "@nextgis/build-tools": ^1.19.0
+    "@nextgis/cancelable-promise": ^1.19.0
+    "@nextgis/paint": ^1.19.0
+    "@nextgis/properties-filter": ^1.19.0
+    "@nextgis/utils": ^1.19.0
     "@types/events": ^3.0.0
     "@types/geojson": ^7946.0.8
     events: ^3.3.0
