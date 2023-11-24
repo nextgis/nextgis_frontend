@@ -1,3 +1,4 @@
+import type { LayerLegend } from './LegendItem';
 import type { MapClickEvent } from './MapAdapter';
 import type { Paint } from '@nextgis/paint';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
@@ -517,6 +518,11 @@ export type LayerAdapter<
   O extends AdapterOptions = AdapterOptions,
 > = MainLayerAdapter<M, L, O> | VectorLayerAdapter<M, L, O>;
 
+export interface GetLegendOptions {
+  signal?: AbortSignal;
+  cache?: boolean;
+}
+
 export interface MainLayerAdapter<
   M = any,
   L = any,
@@ -554,6 +560,8 @@ export interface MainLayerAdapter<
   setSelectedPaint?(paint: Paint): void;
   updateSelectedPaint?(paint: Partial<Paint>): void;
   setOpacity?(val: number): void;
+
+  getLegend?(options?: GetLegendOptions): Promise<LayerLegend[]>;
 }
 
 /**

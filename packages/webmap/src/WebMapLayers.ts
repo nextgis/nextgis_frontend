@@ -14,6 +14,7 @@ import type {
   FeatureLayerAdapter,
   FilterOptions,
   GeoJsonAdapterOptions,
+  GetLegendOptions,
   ImageAdapterOptions,
   LayerAdapter,
   LayerAdapterDefinition,
@@ -26,6 +27,7 @@ import type {
   TileAdapterOptions,
   VectorLayerAdapter,
 } from './interfaces/LayerAdapter';
+import type { LayerLegend } from './interfaces/LegendItem';
 import type { FitOptions } from './interfaces/MapAdapter';
 import type {
   GetAttributionsOptions,
@@ -372,6 +374,16 @@ export class WebMapLayers<
         delete this._layers[l];
       }
     }
+  }
+
+  async getLegend(options?: GetLegendOptions): Promise<LayerLegend[]> {
+    const promises: Promise<LayerLegend[]>[] = [];
+    for (const l of this.orderedLayers()) {
+      if (l.getLegend) {
+        promises.push(l.getLegend(options));
+      }
+    }
+    return (await Promise.all(promises)).flat();
   }
 
   reserveOrder(): number {
