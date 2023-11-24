@@ -1,8 +1,8 @@
 import { objectAssign } from '@nextgis/utils';
 
-import type { LngLatArray } from '@nextgis/utils';
-import type CancelablePromise from '@nextgis/cancelable-promise';
 import type { SearchItem } from './types/SearchItem';
+import type CancelablePromise from '@nextgis/cancelable-promise';
+import type { LngLatArray } from '@nextgis/utils';
 
 /**
  * Represents the base class for a geocoder.

@@ -1,11 +1,13 @@
-import type { LngLatArray } from '@nextgis/utils';
-import { fixUrlStr } from '@nextgis/utils';
 import CancelablePromise from '@nextgis/cancelable-promise';
+import { fixUrlStr } from '@nextgis/utils';
+
 import { BaseProvider } from './BaseProvider';
+
 import type { BaseProviderOptions } from './BaseProviderOptions';
-import type { FeatureCollection } from 'geojson';
-import type { SearchItem } from '../types/SearchItem';
 import type { ResultItem } from '../types/ResultItem';
+import type { SearchItem } from '../types/SearchItem';
+import type { LngLatArray } from '@nextgis/utils';
+import type { FeatureCollection } from 'geojson';
 
 export class NominatimProvider extends BaseProvider {
   searchUrl = 'https://nominatim.openstreetmap.org';

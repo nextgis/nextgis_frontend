@@ -1,5 +1,6 @@
-import type { BaseProviderOptions } from './BaseProviderOptions';
 import { BaseGeocoder } from '../BaseGeocoder';
+
+import type { BaseProviderOptions } from './BaseProviderOptions';
 
 /**
  * Abstract base class representing a search provider.

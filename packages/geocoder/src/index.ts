@@ -5,6 +5,7 @@
  * @module geocoder
  */
 import { Geocoder } from './Geocoder';
+
 import type { GeocoderOptions } from './GeocoderOptions';
 
 export { Geocoder, GeocoderOptions };
