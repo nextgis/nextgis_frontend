@@ -1022,7 +1022,7 @@ __metadata:
 
 "@nextgis/build-tools@file:../build-tools::locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter":
   version: 1.19.0
-  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=8c8e74&locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter"
+  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=cf315e&locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter"
   dependencies:
     "@microsoft/api-extractor": ^7.37.0
     "@nextgis/eslint-config": ^1.19.0
@@ -1047,13 +1047,13 @@ __metadata:
     rollup-plugin-terser: ^7.0.2
     rollup-plugin-typescript2: ^0.32.1
     typescript: ~5.1
-  checksum: 42ed7527ebbeccd26ca13a2c39ab3a114271be092e027f68c8ee70e6ae357492c4fbd7060ff6e9161ef17820364d0949e76fbfce8e73cb37a87e1e3164ac581a
+  checksum: 1d1837ddff1270c682def802fc700fe63c01198ba26481561cdb2fdab09139293254a95f3a507bedb71bd32c4e65f22e8538956f3e865fb66c2f54c01c8daad3
   languageName: node
   linkType: hard
 
 "@nextgis/build-tools@file:../build-tools::locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium":
   version: 1.19.0
-  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=8c8e74&locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium"
+  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=cf315e&locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium"
   dependencies:
     "@microsoft/api-extractor": ^7.37.0
     "@nextgis/eslint-config": ^1.19.0
@@ -1078,7 +1078,7 @@ __metadata:
     rollup-plugin-terser: ^7.0.2
     rollup-plugin-typescript2: ^0.32.1
     typescript: ~5.1
-  checksum: 42ed7527ebbeccd26ca13a2c39ab3a114271be092e027f68c8ee70e6ae357492c4fbd7060ff6e9161ef17820364d0949e76fbfce8e73cb37a87e1e3164ac581a
+  checksum: 1d1837ddff1270c682def802fc700fe63c01198ba26481561cdb2fdab09139293254a95f3a507bedb71bd32c4e65f22e8538956f3e865fb66c2f54c01c8daad3
   languageName: node
   linkType: hard
 
@@ -4232,13 +4232,13 @@ __metadata:
   linkType: hard
 
 "axios@npm:^1.0.0":
-  version: 1.5.0
-  resolution: "axios@npm:1.5.0"
+  version: 1.6.2
+  resolution: "axios@npm:1.6.2"
   dependencies:
     follow-redirects: ^1.15.0
     form-data: ^4.0.0
     proxy-from-env: ^1.1.0
-  checksum: e7405a5dbbea97760d0e6cd58fecba311b0401ddb4a8efbc4108f5537da9b3f278bde566deb777935a960beec4fa18e7b8353881f2f465e4f2c0e949fead35be
+  checksum: 4a7429e2b784be0f2902ca2680964391eae7236faa3967715f30ea45464b98ae3f1c6f631303b13dfe721b17126b01f486c7644b9ef276bfc63112db9fd379f8
   languageName: node
   linkType: hard
 
