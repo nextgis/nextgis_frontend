@@ -2,7 +2,7 @@
  * @module icons
  */
 
-import { IconPaint } from '@nextgis/paint';
+import type { IconPaint } from '@nextgis/paint';
 
 const svgPath: { [name: string]: string | GetPathCallback } = {
   brill: '<path d="m6 0-5 6 5 6 5-6z"/>',

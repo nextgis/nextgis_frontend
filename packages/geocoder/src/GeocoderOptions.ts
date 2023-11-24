@@ -1,4 +1,4 @@
-import { BaseProvider } from './providers/BaseProvider';
+import type { BaseProvider } from './providers/BaseProvider';
 
 /**
  * Defines the options for creating a Geocoder instance.

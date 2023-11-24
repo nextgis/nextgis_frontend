@@ -1,28 +1,28 @@
 import CancelablePromise from '@nextgis/cancelable-promise';
+import { isPropertyFilter } from '@nextgis/properties-filter';
 import {
-  isPropertyFilter,
+  defined,
+  degrees2meters,
+  getBoundsCoordinates,
+  isLngLatBoundsArray,
+  round,
+} from '@nextgis/utils';
+
+import type {
+  FeatureRequestParams,
+  FetchNgwItemsOptions,
+  NgwFeatureRequestOptions,
+} from '../interfaces';
+import type {
+  FeatureItem,
+  RequestItemAdditionalParams,
+} from '@nextgis/ngw-connector';
+import type {
   PropertiesFilter,
   PropertyFilter,
 } from '@nextgis/properties-filter';
-import {
-  round,
-  defined,
-  degrees2meters,
-  isLngLatBoundsArray,
-  getBoundsCoordinates,
-} from '@nextgis/utils';
-
-import type { Geometry, Feature } from 'geojson';
-import type {
-  RequestItemAdditionalParams,
-  FeatureItem,
-} from '@nextgis/ngw-connector';
-import type { LngLatArray, FeatureProperties } from '@nextgis/utils';
-import type {
-  NgwFeatureRequestOptions,
-  FeatureRequestParams,
-  FetchNgwItemsOptions,
-} from '../interfaces';
+import type { FeatureProperties, LngLatArray } from '@nextgis/utils';
+import type { Feature, Geometry } from 'geojson';
 
 export const FEATURE_REQUEST_PARAMS: FeatureRequestParams = {
   srs: 4326,
@@ -48,7 +48,7 @@ export function updateItemRequestParam<
 >(params: FeatureRequestParams, options: NgwFeatureRequestOptions<P>): void {
   const { extensions, geom, fields, srs, ilike, like } = options;
   // Empty extesions by default
-  let extensionsStr = extensions ? extensions.join(',') : '';
+  const extensionsStr = extensions ? extensions.join(',') : '';
   // Use character * to set all extensions
   if (extensionsStr !== '*') {
     params.extensions = extensionsStr;

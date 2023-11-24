@@ -1,5 +1,5 @@
-import polylabel from 'polylabel';
 import { getCoordinates } from '@nextgis/utils';
+import polylabel from 'polylabel';
 
 import type { Feature } from 'geojson';
 

@@ -1,6 +1,7 @@
 import { EventEmitter } from 'events';
-import type StrictEventEmitter from 'strict-event-emitter-types';
+
 import type { ProgressEvents } from './ProgressEvents';
+import type StrictEventEmitter from 'strict-event-emitter-types';
 
 export class Progress {
   readonly emitter: StrictEventEmitter<EventEmitter, ProgressEvents> =

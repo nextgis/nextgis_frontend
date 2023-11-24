@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { NgwResourceOptions } from '../options/NgwResourceOptions';
-import { Connection } from '../connection/Connection';
+import type { NgwResourceOptions } from '../options/NgwResourceOptions';
+import type { Connection } from '../connection/Connection';
 
 /**
  * Arguments for TableMetadata class, helps to construct an TableMetadata object.

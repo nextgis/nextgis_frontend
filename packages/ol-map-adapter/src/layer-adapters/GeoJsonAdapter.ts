@@ -1,50 +1,52 @@
 import './Popup.css';
 
+import { create } from '@nextgis/dom';
+import { defined } from '@nextgis/utils';
 import Overlay from 'ol/Overlay';
 import GeoJSON from 'ol/format/GeoJSON';
 import VectorLayer from 'ol/layer/Vector';
+import { transform, transformExtent } from 'ol/proj';
 import VectorSource from 'ol/source/Vector';
-import { transformExtent, transform } from 'ol/proj';
 
-import { Paint } from '@nextgis/paint';
-import { create } from '@nextgis/dom';
-import { defined } from '@nextgis/utils';
-
-import { getFeature } from '../utils/utils';
-import { getCentroid } from '../utils/getCentroid';
-import { resolutionOptions } from '../utils/gerResolution';
-import { makeHtmlFromString } from '../utils/makeHtmlFromString';
 import { convertMapClickEvent } from '../utils/convertMapClickEvent';
 import { createFeaturePositionOptions } from '../utils/createFeaturePositionOptions';
-import { styleFunction, labelStyleFunction } from '../utils/styleFunction';
-import { BaseAdapter } from './BaseAdapter';
+import { resolutionOptions } from '../utils/gerResolution';
+import { getCentroid } from '../utils/getCentroid';
+import { makeHtmlFromString } from '../utils/makeHtmlFromString';
+import { labelStyleFunction, styleFunction } from '../utils/styleFunction';
+import { getFeature } from '../utils/utils';
 
+import { BaseAdapter } from './BaseAdapter';
+import type { Paint } from '@nextgis/paint';
+
+
+
+import type { PropertiesFilter } from '@nextgis/properties-filter';
+import type { LngLatArray, LngLatBoundsArray } from '@nextgis/utils';
+import type {
+  DataLayerFilter,
+  GeoJsonAdapterOptions,
+  LayerDefinition,
+  OnLayerSelectType,
+  PopupOnCloseFunction,
+  PopupOptions,
+  VectorAdapterLayerType,
+  VectorLayerAdapter,
+} from '@nextgis/webmap';
 import type { Feature, GeoJsonObject } from 'geojson';
-import type MapBrowserEvent from 'ol/MapBrowserEvent';
 import type OlFeature from 'ol/Feature';
 import type { FeatureLike } from 'ol/Feature';
+import type Map from 'ol/Map';
+import type MapBrowserEvent from 'ol/MapBrowserEvent';
 import type { Options as OverlayOptions } from 'ol/Overlay';
+import type Base from 'ol/layer/Base';
 import type { Pixel } from 'ol/pixel';
 import type { Style } from 'ol/style';
-import type Base from 'ol/layer/Base';
-import type Map from 'ol/Map';
-import type { LngLatArray, LngLatBoundsArray } from '@nextgis/utils';
-import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type {
-  PopupOptions,
-  LayerDefinition,
-  DataLayerFilter,
-  OnLayerSelectType,
-  VectorLayerAdapter,
-  PopupOnCloseFunction,
-  GeoJsonAdapterOptions,
-  VectorAdapterLayerType,
-} from '@nextgis/webmap';
-import type {
-  ForEachFeatureAtPixelOrderedCallback,
   ForEachFeatureAtPixelCallback,
-  MouseEventType,
+  ForEachFeatureAtPixelOrderedCallback,
   MapClickEvent,
+  MouseEventType,
   UnselectCb,
 } from '../OlMapAdapter';
 
@@ -77,7 +79,10 @@ export class GeoJsonAdapter
   private _styleCache: Record<string | number, Style[]> = {};
   private _labelVisibility = true;
 
-  constructor(public map: Map, public options: GeoJsonAdapterOptions) {
+  constructor(
+    public map: Map,
+    public options: GeoJsonAdapterOptions,
+  ) {
     super(map, options);
     this._labelVisibility = options.labelVisibility ?? this._labelVisibility;
     this.displayProjection = map.getView().getProjection().getCode();

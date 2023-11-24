@@ -1,8 +1,10 @@
-import { defined, FeatureProperties } from '@nextgis/utils';
+import { defined } from '@nextgis/utils';
+
 import { fetchNgwLayerItems } from './fetchNgwLayerItems';
 
-import type CancelablePromise from '@nextgis/cancelable-promise';
 import type { FetchNgwItemsOptions } from '../interfaces';
+import type CancelablePromise from '@nextgis/cancelable-promise';
+import type { FeatureProperties } from '@nextgis/utils';
 
 export interface MapSelectNgwLayerDistinctOptions<
   P extends FeatureProperties = FeatureProperties,

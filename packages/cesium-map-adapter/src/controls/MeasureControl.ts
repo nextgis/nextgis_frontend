@@ -1,5 +1,5 @@
-import { MapControl } from '@nextgis/webmap';
-import { Viewer } from 'cesium';
+import type { MapControl } from '@nextgis/webmap';
+import type { Viewer } from 'cesium';
 
 type M = Viewer;
 

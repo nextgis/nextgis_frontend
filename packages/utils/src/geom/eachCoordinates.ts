@@ -1,4 +1,4 @@
-import type { GeoJSON, Position, Geometry } from 'geojson';
+import type { GeoJSON, Geometry, Position } from 'geojson';
 
 export function coordinatesCount(geojson: GeoJSON): number {
   let count = 0;

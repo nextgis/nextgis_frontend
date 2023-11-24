@@ -1,48 +1,47 @@
 import { EventEmitter } from 'events';
 
+import { debounce } from '@nextgis/utils';
 import { Map } from 'maplibre-gl';
 
-import { debounce } from '@nextgis/utils';
-
+import { AttributionControl } from './controls/AttributionControl';
+import { CompassControl } from './controls/CompassControl';
+import { ZoomControl } from './controls/ZoomControl';
+import { createButtonControl } from './controls/createButtonControl';
+import { createControl } from './controls/createControl';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
-import { WmsAdapter } from './layer-adapters/WmsAdapter';
 import { MvtAdapter } from './layer-adapters/MvtAdapter';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
 import { TileAdapter } from './layer-adapters/TileAdapter';
-import { ZoomControl } from './controls/ZoomControl';
-import { createControl } from './controls/createControl';
-import { CompassControl } from './controls/CompassControl';
-import { AttributionControl } from './controls/AttributionControl';
-import { createButtonControl } from './controls/createButtonControl';
-import { convertMapClickEvent } from './utils/convertMapClickEvent';
+import { WmsAdapter } from './layer-adapters/WmsAdapter';
 import { arrayToBoundsLike } from './utils/arrayToBoundsLike';
+import { convertMapClickEvent } from './utils/convertMapClickEvent';
 import { convertZoomLevel } from './utils/convertZoomLevel';
 
-import type { LngLatBoundsArray, LngLatArray } from '@nextgis/utils';
+import type { Feature } from './layer-adapters/VectorAdapter';
+import type { LngLatArray, LngLatBoundsArray } from '@nextgis/utils';
 import type {
-  CreateControlOptions,
   ButtonControlOptions,
   ControlPosition,
-  LayerAdapter,
-  ViewOptions,
-  MapAdapter,
+  CreateControlOptions,
   FitOptions,
+  LayerAdapter,
+  MapAdapter,
   MapControl,
   MapOptions,
+  ViewOptions,
 } from '@nextgis/webmap';
 import type {
-  IControl,
-  MapEventType,
-  ResourceType,
-  MapMouseEvent,
-  LngLatBoundsLike,
   FitBoundsOptions,
-  RequestParameters,
+  IControl,
+  LngLatBoundsLike,
+  MapEventType,
+  MapMouseEvent,
   MapSourceDataEvent,
-  StyleSpecification,
   MapOptions as MapboxOptions,
+  RequestParameters,
+  ResourceType,
+  StyleSpecification,
 } from 'maplibre-gl';
-import type { Feature } from './layer-adapters/VectorAdapter';
 
 export type TLayer = string[];
 export type UnselectCb = () => void;

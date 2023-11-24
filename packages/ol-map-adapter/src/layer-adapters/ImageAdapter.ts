@@ -3,19 +3,23 @@ import CanvasImageLayerRenderer from 'ol/renderer/canvas/ImageLayer';
 import ImageWMS from 'ol/source/ImageWMS';
 
 import { resolutionOptions } from '../utils/gerResolution';
-import { queryToObject, objectToQuery } from '../utils/utils';
 import { setTileLoadFunction } from '../utils/setTileLoadFunction';
+import { objectToQuery, queryToObject } from '../utils/utils';
+
 import { BaseAdapter } from './BaseAdapter';
 
-import type { Extent } from 'ol/extent';
+import type { ImageAdapterOptions, MainLayerAdapter } from '@nextgis/webmap';
 import type Map from 'ol/Map';
+import type { Extent } from 'ol/extent';
 import type { Options as ImageWMSOptions } from 'ol/source/ImageWMS';
-import type { MainLayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
 
 export class ImageAdapter extends BaseAdapter implements MainLayerAdapter {
   layer: any;
 
-  constructor(public map: Map, public options: ImageAdapterOptions) {
+  constructor(
+    public map: Map,
+    public options: ImageAdapterOptions,
+  ) {
     super(map, options);
   }
 

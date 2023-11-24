@@ -1,10 +1,11 @@
 import { isObject } from '@nextgis/utils';
+
 import type {
   EachLog,
   LogEngine,
   LogOptions,
-  LoggingOptions,
   LogShortcutOptions,
+  LoggingOptions,
 } from './interfaces';
 
 export class Logging<D> implements LogEngine<D> {

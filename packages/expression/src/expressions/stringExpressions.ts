@@ -1,4 +1,5 @@
 import e from '../utils/evaluateArgs';
+
 import type { ExpressionCbFunc, StringExpressionName } from '../interfaces';
 
 export const stringExpressions: Record<

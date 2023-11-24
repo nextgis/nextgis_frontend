@@ -1,12 +1,12 @@
-import type { DeepPartial } from '@nextgis/utils';
+import type { FeatureItem, FeatureLayersIdentify } from './types/FeatureLayer';
+import type { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
 import type {
+  FeatureLayerField,
   Resource,
   ResourceItem,
-  FeatureLayerField,
 } from './types/ResourceItem';
-import type { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
-import type { FeatureLayersIdentify, FeatureItem } from './types/FeatureLayer';
 import type { ResourceStoreItem } from './types/ResourceStore';
+import type { DeepPartial } from '@nextgis/utils';
 
 export interface FileMeta {
   id: string;

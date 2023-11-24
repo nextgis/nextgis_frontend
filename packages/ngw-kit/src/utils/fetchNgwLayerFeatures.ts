@@ -1,11 +1,11 @@
-import { fetchNgwLayerItems } from './fetchNgwLayerItems';
 import { createGeoJsonFeature } from './featureLayerUtils';
+import { fetchNgwLayerItems } from './fetchNgwLayerItems';
 
-import type { Geometry, Feature } from 'geojson';
+import type { FetchNgwItemsOptions } from '../interfaces';
 import type CancelablePromise from '@nextgis/cancelable-promise';
 import type { FeatureItem } from '@nextgis/ngw-connector';
-import type { FetchNgwItemsOptions } from '../interfaces';
 import type { FeatureProperties } from '@nextgis/utils';
+import type { Feature, Geometry } from 'geojson';
 
 export function fetchNgwLayerFeatures<
   G extends Geometry | null = Geometry,

@@ -1,5 +1,5 @@
-import type { LngLatBoundsLike } from 'maplibre-gl';
 import type { LngLatBoundsArray } from '@nextgis/utils';
+import type { LngLatBoundsLike } from 'maplibre-gl';
 
 export function arrayToBoundsLike(bounds: LngLatBoundsArray): LngLatBoundsLike {
   const e = bounds;

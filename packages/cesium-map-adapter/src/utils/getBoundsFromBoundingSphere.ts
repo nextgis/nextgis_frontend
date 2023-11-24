@@ -1,4 +1,6 @@
-import { BoundingSphere, Ellipsoid, Math as CMath } from 'cesium';
+import { Math as CMath, Ellipsoid } from 'cesium';
+
+import type { BoundingSphere } from 'cesium';
 
 export function getBoundsFromBoundingSphere(
   boundingSphere: BoundingSphere,

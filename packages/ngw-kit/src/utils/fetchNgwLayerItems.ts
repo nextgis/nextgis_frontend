@@ -1,16 +1,18 @@
 import { propertiesFilter } from '@nextgis/properties-filter';
-import CancelablePromise from '@nextgis/cancelable-promise';
+import { isArray } from '@nextgis/utils';
+
 import {
   createFeatureFieldFilterQueries,
   fetchNgwLayerItemsRequest,
 } from './featureLayerUtils';
 import { prepareNgwFieldsToPropertiesFilter } from './prepareNgwFieldsToPropertiesFilter';
 
-import type { Geometry } from 'geojson';
-import type { FeatureItem } from '@nextgis/ngw-connector';
-import { FeatureProperties, isArray } from '@nextgis/utils';
-import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type { FetchNgwItemsOptions } from '../interfaces';
+import type CancelablePromise from '@nextgis/cancelable-promise';
+import type { FeatureItem } from '@nextgis/ngw-connector';
+import type { PropertiesFilter } from '@nextgis/properties-filter';
+import type { FeatureProperties } from '@nextgis/utils';
+import type { Geometry } from 'geojson';
 
 export function fetchNgwLayerItems<
   G extends Geometry = Geometry,

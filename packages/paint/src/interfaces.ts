@@ -1,6 +1,6 @@
-import type { Feature } from 'geojson';
+import type { Expression } from '@nextgis/expression';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
-import { Expression } from '@nextgis/expression';
+import type { Feature } from 'geojson';
 
 export type PaintType = 'circle' | 'path' | 'pin' | 'icon' | 'get-paint';
 

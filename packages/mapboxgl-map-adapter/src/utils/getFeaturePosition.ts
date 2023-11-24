@@ -1,8 +1,9 @@
-import { LngLatBounds } from 'maplibre-gl';
 import { getCoordinates } from '@nextgis/utils';
-import type { Feature } from 'geojson';
+import { LngLatBounds } from 'maplibre-gl';
+
+import type { LngLatArray, LngLatBoundsArray } from '@nextgis/utils';
 import type { FeaturePosition } from '@nextgis/webmap';
-import type { LngLatBoundsArray, LngLatArray } from '@nextgis/utils';
+import type { Feature } from 'geojson';
 
 function getFeatureLngLatBounds(
   featureOrFeatures: Feature | Feature[],

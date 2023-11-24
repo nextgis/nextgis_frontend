@@ -1,12 +1,12 @@
-import VectorSource from 'ol/source/Vector';
+import { getCenter } from 'ol/extent';
 import GeoJSON from 'ol/format/GeoJSON';
 import { transformExtent } from 'ol/proj';
-import { getCenter } from 'ol/extent';
+import VectorSource from 'ol/source/Vector';
 
+import type { LngLatArray, LngLatBoundsArray } from '@nextgis/utils';
+import type { FeaturePosition } from '@nextgis/webmap';
 import type { Feature } from 'geojson';
 import type Geometry from 'ol/geom/Geometry';
-import type { FeaturePosition } from '@nextgis/webmap';
-import type { LngLatArray, LngLatBoundsArray } from '@nextgis/utils';
 
 interface GetFeaturePositionOptions {
   feature: Feature | Feature[];

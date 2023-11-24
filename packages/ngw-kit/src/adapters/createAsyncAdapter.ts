@@ -1,27 +1,27 @@
-import NgwConnector, {
-  ResourceCls,
-  ResourceItem,
-} from '@nextgis/ngw-connector';
-import { WebMap } from '@nextgis/webmap';
-import { Type, applyMixins } from '@nextgis/utils';
+import { applyMixins } from '@nextgis/utils';
 
-import { vectorLayerGeomToPaintTypeAlias } from '../utils/utils';
 import { NgwResource } from '../NgwResource';
-import { createGeoJsonAdapter } from './createGeoJsonAdapter';
-import { createRasterAdapter } from './createRasterAdapter';
-import { createWebMapAdapter } from './createNgwWebmapAdapter';
 import { resourceIdFromLayerOptions } from '../utils/resourceIdFromLayerOptions';
+import { vectorLayerGeomToPaintTypeAlias } from '../utils/utils';
+
 import { createBasemapLayerAdapter } from './createBasemapLayerAdapter';
+import { createGeoJsonAdapter } from './createGeoJsonAdapter';
+import { createWebMapAdapter } from './createNgwWebmapAdapter';
+import { createRasterAdapter } from './createRasterAdapter';
 
 import type {
+  ClassAdapter,
+  GetClassAdapter,
+  GetClassAdapterByType,
   GetClassAdapterCallback,
   GetClassAdapterOptions,
-  GetClassAdapterByType,
-  ResourceAdapter,
   NgwLayerOptions,
-  GetClassAdapter,
-  ClassAdapter,
+  ResourceAdapter,
 } from '../interfaces';
+import type NgwConnector from '@nextgis/ngw-connector';
+import type { ResourceCls, ResourceItem } from '@nextgis/ngw-connector';
+import type { Type } from '@nextgis/utils';
+import type { WebMap } from '@nextgis/webmap';
 
 export const classAdapters: Record<string, GetClassAdapter> = {};
 

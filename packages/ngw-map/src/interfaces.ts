@@ -27,7 +27,7 @@ export interface NgwMapOptions<M = any, C = any> extends MapOptions<M, C> {
    */
   auth?: Credentials;
   /**
-   * Id number of webmap resource from NGW cloud.
+   * Id number of webmap resource from NextGIS Web.
    * If specified through an array,
    * the first element will be the webmapId from NGW,
    * and the second will be the name for identification in the application.

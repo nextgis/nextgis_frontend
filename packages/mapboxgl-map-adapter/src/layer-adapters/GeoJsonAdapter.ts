@@ -1,45 +1,46 @@
-import { defined } from '@nextgis/utils';
 import { featureFilter } from '@nextgis/properties-filter';
+import { defined } from '@nextgis/utils';
 
-import { EventOptions, VectorAdapter } from './VectorAdapter';
+import {
+  detectType,
+  geometryFilter,
+  typeAlias,
+  typeAliasForFilter,
+} from '../utils/geomType';
 import {
   createFeaturePositionOptions,
   getFeatureBounds,
 } from '../utils/getFeaturePosition';
-import {
-  typeAliasForFilter,
-  geometryFilter,
-  detectType,
-  typeAlias,
-} from '../utils/geomType';
 
-import type {
-  Map,
-  GeoJSONSource,
-  FilterSpecification,
-  LegacyFilterSpecification,
-  GeoJSONSourceSpecification,
-} from 'maplibre-gl';
-import type {
-  GeometryCollection,
-  GeoJsonProperties,
-  FeatureCollection,
-  GeometryObject,
-  GeoJsonObject,
-  Geometry,
-} from 'geojson';
-import type { VectorAdapterLayerPaint, GetPaintCallback } from '@nextgis/paint';
+import { VectorAdapter } from './VectorAdapter';
+
+import type { EventOptions, Feature } from './VectorAdapter';
+import type { TLayer } from '../MapboxglMapAdapter';
+import type { SelectedFeaturesIds } from '../interfaces';
+import type { GetPaintCallback, VectorAdapterLayerPaint } from '@nextgis/paint';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type { LngLatBoundsArray } from '@nextgis/utils';
 import type {
   DataLayerFilter,
-  LayerDefinition,
   GeoJsonAdapterOptions,
+  LayerDefinition,
   VectorAdapterLayerType,
 } from '@nextgis/webmap';
-import type { Feature } from './VectorAdapter';
-import type { TLayer } from '../MapboxglMapAdapter';
-import { SelectedFeaturesIds } from '../interfaces';
+import type {
+  FeatureCollection,
+  GeoJsonObject,
+  GeoJsonProperties,
+  Geometry,
+  GeometryCollection,
+  GeometryObject,
+} from 'geojson';
+import type {
+  FilterSpecification,
+  GeoJSONSource,
+  GeoJSONSourceSpecification,
+  LegacyFilterSpecification,
+  Map,
+} from 'maplibre-gl';
 
 let ID = 0;
 
@@ -53,7 +54,10 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   private _filterFun?: DataLayerFilter<Feature>;
   private _sources: Record<string, GeoJSONSource> = {};
 
-  constructor(public map: Map, public options: GeoJsonAdapterOptions) {
+  constructor(
+    public map: Map,
+    public options: GeoJsonAdapterOptions,
+  ) {
     super(map, options);
     this.source = this._sourceId;
   }

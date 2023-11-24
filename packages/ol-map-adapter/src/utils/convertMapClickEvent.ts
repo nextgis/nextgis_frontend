@@ -1,7 +1,7 @@
 import { transform } from 'ol/proj';
 
+import type { MapClickEvent } from '@nextgis/webmap';
 import type MapBrowserPointerEvent from 'ol/MapBrowserEvent';
-import { MapClickEvent } from '@nextgis/webmap';
 
 export function convertMapClickEvent(
   evt: Pick<MapBrowserPointerEvent<any>, 'coordinate' | 'pixel'>,

@@ -1,11 +1,11 @@
-import {
+import type { VectorAdapterLayerType } from '@nextgis/webmap';
+import type {
+  Feature,
+  FeatureCollection,
   GeoJsonGeometryTypes,
   GeoJsonObject,
-  FeatureCollection,
-  Feature,
   GeometryCollection,
 } from 'geojson';
-import { VectorAdapterLayerType } from '@nextgis/webmap';
 
 export const allowedParams: ([string, string] | string)[] = [
   'color',

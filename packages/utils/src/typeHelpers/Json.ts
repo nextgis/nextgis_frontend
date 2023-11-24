@@ -1,4 +1,4 @@
-import { isObject, isArray } from '../index';
+import { isArray, isObject } from '../index';
 
 export type AnyJson = boolean | number | string | null | JsonArray | JsonMap;
 export interface JsonMap {

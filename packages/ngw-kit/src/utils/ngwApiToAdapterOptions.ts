@@ -1,13 +1,13 @@
 import { updateImageParams } from './utils';
 
-import type {
-  RasterAdapterOptions,
-  ImageAdapterOptions,
-  WmsAdapterOptions,
-  MvtAdapterOptions,
-  WebMap,
-} from '@nextgis/webmap';
 import type { NgwLayerOptions, TileNoData } from '../interfaces';
+import type {
+  ImageAdapterOptions,
+  MvtAdapterOptions,
+  RasterAdapterOptions,
+  WebMap,
+  WmsAdapterOptions,
+} from '@nextgis/webmap';
 
 export interface GetLayerAdapterOptions {
   options: NgwLayerOptions;

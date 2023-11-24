@@ -1,5 +1,5 @@
-import { Feature } from 'geojson';
-import { ResourceItem } from '@nextgis/ngw-connector';
+import type { ResourceItem } from '@nextgis/ngw-connector';
+import type { Feature } from 'geojson';
 
 export function createPopupContent(
   feature: Feature,

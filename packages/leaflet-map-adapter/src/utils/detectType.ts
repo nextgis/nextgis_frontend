@@ -1,8 +1,8 @@
 import type {
-  GeoJsonObject,
-  GeoJsonGeometryTypes,
-  FeatureCollection,
   Feature,
+  FeatureCollection,
+  GeoJsonGeometryTypes,
+  GeoJsonObject,
   GeometryCollection,
 } from 'geojson';
 

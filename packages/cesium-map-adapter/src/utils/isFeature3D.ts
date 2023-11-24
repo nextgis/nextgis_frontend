@@ -1,4 +1,4 @@
-import { Feature, Geometry, Position } from 'geojson';
+import type { Feature, Geometry, Position } from 'geojson';
 
 export function isFeature3D(feature: Feature<Geometry>): boolean {
   if ('coordinates' in feature.geometry) {

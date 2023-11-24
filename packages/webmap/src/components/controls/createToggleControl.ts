@@ -1,7 +1,7 @@
 import type {
-  ToggleControlOptions,
-  ToggleControl,
   ButtonControlOptions,
+  ToggleControl,
+  ToggleControlOptions,
 } from '../../interfaces/MapControl';
 
 /**

@@ -1,44 +1,43 @@
 import { EventEmitter } from 'events';
-import {
-  Map,
-  Control,
-  FitBoundsOptions,
-  LatLngBoundsExpression,
-} from 'leaflet';
-import { convertMapClickEvent } from './utils/convertMapClickEvent';
-import { createButtonControl } from './controls/createButtonControl';
+
+import { Control, Map } from 'leaflet';
+
 import { AttributionControl } from './controls/Attribution';
+import { createButtonControl } from './controls/createButtonControl';
 import { createControl } from './controls/createControl';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter/GeoJsonAdapter';
 import { ImageAdapter } from './layer-adapters/ImageAdapter/ImageAdapter';
+import { OsmAdapter } from './layer-adapters/OsmAdapter';
 import { TileAdapter } from './layer-adapters/TileAdapter/TileAdapter';
 import { WmsAdapter } from './layer-adapters/WmsAdapter/WmsAdapter';
-import { OsmAdapter } from './layer-adapters/OsmAdapter';
-
-import type {
-  Layer,
-  GridLayer,
-  LeafletEvent,
-  LocationEvent,
-  ControlPosition,
-  LeafletMouseEvent,
-} from 'leaflet';
-import type { LngLatBoundsArray, LngLatArray } from '@nextgis/utils';
-import type {
-  CreateControlOptions,
-  ButtonControlOptions,
-  LocationEvents,
-  LocateOptions,
-  MainMapEvents,
-  LayerAdapter,
-  ViewOptions,
-  MapAdapter,
-  MapOptions,
-  FitOptions,
-  MapControl,
-  Locate,
-} from '@nextgis/webmap';
 import { arrayToBoundsExpression } from './utils/arrayToBoundsExpression';
+import { convertMapClickEvent } from './utils/convertMapClickEvent';
+
+import type { LngLatArray, LngLatBoundsArray } from '@nextgis/utils';
+import type {
+  ButtonControlOptions,
+  CreateControlOptions,
+  FitOptions,
+  LayerAdapter,
+  Locate,
+  LocateOptions,
+  LocationEvents,
+  MainMapEvents,
+  MapAdapter,
+  MapControl,
+  MapOptions,
+  ViewOptions,
+} from '@nextgis/webmap';
+import type {
+  ControlPosition,
+  FitBoundsOptions,
+  GridLayer,
+  LatLngBoundsExpression,
+  Layer,
+  LeafletEvent,
+  LeafletMouseEvent,
+  LocationEvent,
+} from 'leaflet';
 
 export type Type<T> = new (...args: any[]) => T;
 export type UnselectCb = () => void;

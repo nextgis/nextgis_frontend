@@ -1,4 +1,4 @@
-import { Credentials } from '@nextgis/ngw-connector';
+import type { Credentials } from '@nextgis/ngw-connector';
 
 /**
  * ConnectionOptions is an interface with settings and options for connection to NGW.

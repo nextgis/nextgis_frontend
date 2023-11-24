@@ -1,17 +1,21 @@
-import XYZ from 'ol/source/XYZ';
 import TileLayer from 'ol/layer/Tile';
+import XYZ from 'ol/source/XYZ';
 
+import { resolutionOptions } from '../utils/gerResolution';
 import { getUrlsWithSubdomains } from '../utils/getUrlsWithSubdomains';
 import { setTileLoadFunction } from '../utils/setTileLoadFunction';
-import { resolutionOptions } from '../utils/gerResolution';
+
 import { BaseAdapter } from './BaseAdapter';
 
-import type { Options } from 'ol/source/XYZ';
-import type Map from 'ol/Map';
 import type { MainLayerAdapter, TileAdapterOptions } from '@nextgis/webmap';
+import type Map from 'ol/Map';
+import type { Options } from 'ol/source/XYZ';
 
 export class TileAdapter extends BaseAdapter implements MainLayerAdapter {
-  constructor(public map: Map, public options: TileAdapterOptions) {
+  constructor(
+    public map: Map,
+    public options: TileAdapterOptions,
+  ) {
     super(map, options);
   }
 

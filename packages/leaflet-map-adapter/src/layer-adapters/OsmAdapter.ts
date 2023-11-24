@@ -1,7 +1,7 @@
-import { MainLayerAdapter, TileAdapterOptions } from '@nextgis/webmap';
-import { TileLayer } from 'leaflet';
-
 import { TileAdapter } from './TileAdapter/TileAdapter';
+
+import type { MainLayerAdapter, TileAdapterOptions } from '@nextgis/webmap';
+import type { TileLayer } from 'leaflet';
 
 export class OsmAdapter extends TileAdapter implements MainLayerAdapter {
   addLayer(options: Omit<TileAdapterOptions, 'url'>): TileLayer | undefined {

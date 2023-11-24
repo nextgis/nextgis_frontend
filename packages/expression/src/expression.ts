@@ -1,16 +1,16 @@
-import { typeExpressions } from './expressions/typeExpressions';
-import { mathExpressions } from './expressions/mathExpressions';
-import { lookupExpressions } from './expressions/lookupExpressions';
-import { stringExpressions } from './expressions/stringExpressions';
 import { decisionExpressions } from './expressions/decisionExpressions';
 import { interpolationExpressions } from './expressions/interpolationExpressions';
+import { lookupExpressions } from './expressions/lookupExpressions';
+import { mathExpressions } from './expressions/mathExpressions';
+import { stringExpressions } from './expressions/stringExpressions';
+import { typeExpressions } from './expressions/typeExpressions';
 
 import type {
   Data,
-  SimpleType,
   Expression,
   ExpressionFunc,
   ExpressionName,
+  SimpleType,
 } from './interfaces';
 
 export function isExpression(value: any): value is Expression {
@@ -44,7 +44,7 @@ export function evaluate<T extends SimpleType[] = SimpleType[], R = T[0]>(
   const expressionFun = expressions[name];
   if (expressionFun) {
     return expressionFun(
-      args.map((arg) => () => isExpression(arg) ? evaluate(arg, data) : arg),
+      args.map((arg) => () => (isExpression(arg) ? evaluate(arg, data) : arg)),
       data,
     );
   }

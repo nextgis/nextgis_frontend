@@ -1,5 +1,6 @@
-import { GeoJSON, Position } from 'geojson';
 import { getCoordinates } from '@nextgis/utils';
+
+import type { GeoJSON, Position } from 'geojson';
 
 // WGS84 params
 const mSemiMajor = 6378137.0;

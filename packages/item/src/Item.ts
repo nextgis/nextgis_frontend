@@ -1,6 +1,7 @@
 import { TreeHelper } from './TreeHelper';
 import { ItemProperties } from './properties/ItemProperties';
-import { ItemOptions } from './interfaces';
+
+import type { ItemOptions } from './interfaces';
 
 let ID = 0;
 export class Item<O extends ItemOptions = ItemOptions> {

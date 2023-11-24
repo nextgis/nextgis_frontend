@@ -1,5 +1,5 @@
-import f from '../utils/fallback';
 import e from '../utils/evaluateArgs';
+import f from '../utils/fallback';
 
 import type { ExpressionCbFunc, TypeExpressionName } from '../interfaces';
 

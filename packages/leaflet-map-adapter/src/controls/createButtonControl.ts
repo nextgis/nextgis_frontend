@@ -1,6 +1,9 @@
-import { ButtonControlOptions, MapAdapter } from '@nextgis/webmap';
+import { DomEvent } from 'leaflet';
+
 import { createControl } from './createControl';
-import { DomEvent, Control } from 'leaflet';
+
+import type { ButtonControlOptions, MapAdapter } from '@nextgis/webmap';
+import type { Control } from 'leaflet';
 
 export function createButtonControl(
   options: ButtonControlOptions,

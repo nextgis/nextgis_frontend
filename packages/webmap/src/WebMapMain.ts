@@ -1,38 +1,38 @@
 import { EventEmitter } from 'events';
 
-import { deepmerge, defined, getBoundsFeature } from '@nextgis/utils';
-import { GetPaintFunction } from '@nextgis/paint';
 import CancelablePromise from '@nextgis/cancelable-promise';
+import { deepmerge, defined, getBoundsFeature } from '@nextgis/utils';
 import { deprecatedMapClick } from '@nextgis/utils';
 
 import { Keys } from './components/keys/Keys';
 import { CenterState } from './components/mapStates/CenterState';
-import { StateItem } from './components/mapStates/StateItem';
 import { ZoomState } from './components/mapStates/ZoomState';
 import { clearObject } from './utils/clearObject';
 
-import type StrictEventEmitter from 'strict-event-emitter-types';
-import type { Feature, Polygon } from 'geojson';
+import type { StateItem } from './components/mapStates/StateItem';
+import type { Cursor } from './interfaces/BaseTypes';
+import type { MainMapEvents, WebMapEvents } from './interfaces/Events';
+import type { LayerAdapter } from './interfaces/LayerAdapter';
 import type {
-  Type,
-  TileJson,
+  FitOptions,
+  Locate,
+  LocateOptions,
+  LocationEvents,
+  MapAdapter,
+  MapClickEvent,
+} from './interfaces/MapAdapter';
+import type { MapOptions, ViewOptions } from './interfaces/MapOptions';
+import type { RuntimeParams } from './interfaces/RuntimeParams';
+import type { StarterKit } from './interfaces/StarterKit';
+import type { GetPaintFunction } from '@nextgis/paint';
+import type {
   LngLatArray,
   LngLatBoundsArray,
+  TileJson,
+  Type,
 } from '@nextgis/utils';
-import type { Cursor } from './interfaces/BaseTypes';
-import type {
-  LocationEvents,
-  MapClickEvent,
-  LocateOptions,
-  FitOptions,
-  MapAdapter,
-  Locate,
-} from './interfaces/MapAdapter';
-import type { StarterKit } from './interfaces/StarterKit';
-import type { LayerAdapter } from './interfaces/LayerAdapter';
-import type { RuntimeParams } from './interfaces/RuntimeParams';
-import type { MapOptions, ViewOptions } from './interfaces/MapOptions';
-import type { WebMapEvents, MainMapEvents } from './interfaces/Events';
+import type { Feature, Polygon } from 'geojson';
+import type StrictEventEmitter from 'strict-event-emitter-types';
 
 type EmitStatusEventData = any;
 

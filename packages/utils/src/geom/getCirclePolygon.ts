@@ -1,4 +1,5 @@
 import { EARTHS_RADIUS } from './constants';
+
 import type { Feature, Polygon, Position } from 'geojson';
 
 const d2r = Math.PI / 180; // degrees to radians

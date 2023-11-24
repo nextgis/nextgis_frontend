@@ -1,5 +1,5 @@
-import type { WebMap, MainLayerAdapter, AdapterOptions } from '@nextgis/webmap';
 import type { Type } from '@nextgis/utils';
+import type { AdapterOptions, MainLayerAdapter, WebMap } from '@nextgis/webmap';
 
 interface CreateOnFirstShowAdapterOptions {
   webMap: WebMap;

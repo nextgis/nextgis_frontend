@@ -3,8 +3,8 @@
  */
 
 import { Logging } from './Logging';
-import { NgLogEngine } from './engines/NgLogEngine/NgLogEngine';
 import { ConsoleEngine } from './engines/ConsoleEngine';
+import { NgLogEngine } from './engines/NgLogEngine/NgLogEngine';
 
 export * from './interfaces';
 

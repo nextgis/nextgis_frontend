@@ -1,5 +1,5 @@
-import type { FileMeta, IdOnly } from '@nextgis/ngw-connector';
 import type { GetNgwItemOptions } from '../interfaces';
+import type { FileMeta, IdOnly } from '@nextgis/ngw-connector';
 
 export interface UploadFeatureAttachmentOptions {
   file: File;

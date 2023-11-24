@@ -1,13 +1,13 @@
 import type NgwConnector from '@nextgis/ngw-connector';
 import type {
-  Resmeta,
-  FileMeta,
-  ResourceCls,
-  GeometryType,
-  WmsClientLayer,
   CreatedResource,
+  FileMeta,
+  GeometryType,
   NgwConnectorOptions,
+  Resmeta,
+  ResourceCls,
   WmsClientConnection,
+  WmsClientLayer,
   WmsServerServiceLayer,
 } from '@nextgis/ngw-connector';
 import type { GeometryPaint } from '@nextgis/paint';

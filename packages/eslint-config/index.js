@@ -12,13 +12,14 @@ module.exports = {
     amd: true,
     es6: true,
     es2017: true,
+    es2021: true,
   },
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    ecmaVersion: 10,
+    ecmaVersion: 2020,
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint', 'prettier'],
+  plugins: ['@typescript-eslint', 'prettier', 'import'],
   overrides: [
     {
       files: ['*.ts', '*.tsx'],
@@ -49,6 +50,30 @@ module.exports = {
       'error',
       { singleQuote: true, printWidth: 80, trailingComma: 'all' },
     ],
+
+    'sort-imports': ['warn', { ignoreDeclarationSort: true }],
+    '@typescript-eslint/consistent-type-imports': 'warn',
+    'import/first': 'warn',
+    'import/newline-after-import': 'warn',
+    'import/order': [
+      'warn',
+      {
+        groups: [
+          'builtin',
+          'external',
+          'internal',
+          'parent',
+          'sibling',
+          'index',
+          'type',
+        ],
+        alphabetize: { order: 'asc', orderImportKind: 'desc' },
+        'newlines-between': 'always',
+        distinctGroup: false,
+        pathGroupsExcludedImportTypes: ['builtin'],
+      },
+    ],
+
     // do not place in overrides rules
     '@typescript-eslint/member-ordering': 'error',
     '@typescript-eslint/no-unused-vars': [

@@ -1,5 +1,5 @@
-import type { Geometry, GeoJsonObject } from 'geojson';
 import type { FeatureProperties } from '@nextgis/utils';
+import type { GeoJsonObject, Geometry } from 'geojson';
 
 export interface NgwLayerIdentifyError {
   error: 'Not implemented';

@@ -1,41 +1,41 @@
-import { defined } from '@nextgis/utils';
-import { Paint, preparePaint } from '@nextgis/paint';
+import { preparePaint } from '@nextgis/paint';
 import { propertiesFilter } from '@nextgis/properties-filter';
+import { defined } from '@nextgis/utils';
 
-import { updateGeoJsonAdapterOptions } from './utils/updateGeoJsonAdapterOptions';
 import { WebMapMain } from './WebMapMain';
+import { updateGeoJsonAdapterOptions } from './utils/updateGeoJsonAdapterOptions';
 
-import type { Feature, GeoJsonObject, Geometry } from 'geojson';
-import type { FeatureProperties, TileJson, Type } from '@nextgis/utils';
-import type { PropertiesFilter } from '@nextgis/properties-filter';
-
-import type {
-  LayerAdapter,
-  LayerAdapters,
-  FilterOptions,
-  AdapterOptions,
-  LayerDefinition,
-  DataLayerFilter,
-  MainLayerAdapter,
-  AdapterConstructor,
-  VectorLayerAdapter,
-  TileAdapterOptions,
-  FeatureLayerAdapter,
-  ImageAdapterOptions,
-  OnLayerMouseOptions,
-  LayerAdaptersOptions,
-  OnLayerSelectOptions,
-  GeoJsonAdapterOptions,
-  LayerAdapterDefinition,
-} from './interfaces/LayerAdapter';
 import type { LayerDef } from './interfaces/BaseTypes';
+import type { WebMapEvents } from './interfaces/Events';
+import type {
+  AdapterConstructor,
+  AdapterOptions,
+  DataLayerFilter,
+  FeatureLayerAdapter,
+  FilterOptions,
+  GeoJsonAdapterOptions,
+  ImageAdapterOptions,
+  LayerAdapter,
+  LayerAdapterDefinition,
+  LayerAdapters,
+  LayerAdaptersOptions,
+  LayerDefinition,
+  MainLayerAdapter,
+  OnLayerMouseOptions,
+  OnLayerSelectOptions,
+  TileAdapterOptions,
+  VectorLayerAdapter,
+} from './interfaces/LayerAdapter';
+import type { FitOptions } from './interfaces/MapAdapter';
 import type {
   GetAttributionsOptions,
-  ToggleLayerOptions,
   MapOptions,
+  ToggleLayerOptions,
 } from './interfaces/MapOptions';
-import type { WebMapEvents } from './interfaces/Events';
-import type { FitOptions } from './interfaces/MapAdapter';
+import type { Paint } from '@nextgis/paint';
+import type { PropertiesFilter } from '@nextgis/properties-filter';
+import type { FeatureProperties, TileJson, Type } from '@nextgis/utils';
+import type { Feature, GeoJsonObject, Geometry } from 'geojson';
 
 type AddedLayers<M = any, L = any> = { [id: string]: LayerAdapter<M, L> };
 
@@ -217,8 +217,8 @@ export class WebMapLayers<
     const _order = defined(order)
       ? order
       : options.order !== undefined
-      ? options.order
-      : this.reserveOrder();
+        ? options.order
+        : this.reserveOrder();
     let adapterEngine: Type<LayerAdapter<M, L, LO>> | undefined;
     if (typeof adapter === 'string') {
       adapterEngine = this.getLayerAdapter(adapter) as Type<

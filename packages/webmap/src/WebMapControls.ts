@@ -2,17 +2,17 @@ import { WebMapLayers } from './WebMapLayers';
 import { createToggleControl } from './components/controls/createToggleControl';
 
 import type { WebMapMain } from './WebMapMain';
-import type { MapOptions } from './interfaces/MapOptions';
 import type { WebMapEvents } from './interfaces/Events';
-import type {
-  MapControl,
-  CreateControlOptions,
-  ButtonControlOptions,
-  ToggleControlOptions,
-  ToggleControl,
-  MapControls,
-} from './interfaces/MapControl';
 import type { ControlPosition } from './interfaces/MapAdapter';
+import type {
+  ButtonControlOptions,
+  CreateControlOptions,
+  MapControl,
+  MapControls,
+  ToggleControl,
+  ToggleControlOptions,
+} from './interfaces/MapControl';
+import type { MapOptions } from './interfaces/MapOptions';
 
 /**
  * Collection of methods for managing map controls

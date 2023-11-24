@@ -1,6 +1,9 @@
-import { DeepPartial, defined } from '@nextgis/utils';
-import { Resource } from '../types/ResourceItem';
+import { defined } from '@nextgis/utils';
+
 import { isObject } from './isObject';
+
+import type { Resource } from '../types/ResourceItem';
+import type { DeepPartial } from '@nextgis/utils';
 
 const exclude = ['description'];
 

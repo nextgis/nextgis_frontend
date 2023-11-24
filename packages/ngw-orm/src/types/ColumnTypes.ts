@@ -1,4 +1,4 @@
-import { VectorFieldDatatype } from '@nextgis/ngw-connector';
+import type { VectorFieldDatatype } from '@nextgis/ngw-connector';
 
 /**
  * Any vector layer column type column can be.

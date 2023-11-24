@@ -1,4 +1,4 @@
-import { MapAdapter } from '@nextgis/webmap';
+import type { MapAdapter } from '@nextgis/webmap';
 
 export interface ControlContainerOptions {
   target?: string;

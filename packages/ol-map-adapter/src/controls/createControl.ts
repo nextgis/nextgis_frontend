@@ -1,8 +1,9 @@
 import Control from 'ol/control/Control';
+
 import type {
-  MapControl,
   CreateControlOptions,
   MapAdapter,
+  MapControl,
 } from '@nextgis/webmap';
 
 export function createControl(

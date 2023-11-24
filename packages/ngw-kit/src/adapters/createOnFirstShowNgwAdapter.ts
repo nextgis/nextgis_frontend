@@ -1,8 +1,10 @@
-import { Type } from '@nextgis/utils';
-import { WebMap, MainLayerAdapter } from '@nextgis/webmap';
-import NgwConnector, { BasemapWebmapItem } from '@nextgis/ngw-connector';
 import { createAsyncAdapter } from './createAsyncAdapter';
 import { createOnFirstShowAdapter } from './createOnFirstShowAdapter';
+
+import type { BasemapWebmapItem } from '@nextgis/ngw-connector';
+import type NgwConnector from '@nextgis/ngw-connector';
+import type { Type } from '@nextgis/utils';
+import type { MainLayerAdapter, WebMap } from '@nextgis/webmap';
 
 interface CreateOnFirstShowAdapterOptions {
   webMap: WebMap;

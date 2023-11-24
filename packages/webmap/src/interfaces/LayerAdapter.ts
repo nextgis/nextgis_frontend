@@ -1,14 +1,14 @@
-import type { GeoJsonObject, Feature, Geometry } from 'geojson';
-import type { PropertiesFilter } from '@nextgis/properties-filter';
+import type { MapClickEvent } from './MapAdapter';
 import type { Paint } from '@nextgis/paint';
+import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type {
-  LngLatBoundsArray,
+  ExtractFeatureProperties,
   FeatureProperties,
   LngLatArray,
+  LngLatBoundsArray,
   Type,
-  ExtractFeatureProperties,
 } from '@nextgis/utils';
-import type { MapClickEvent } from './MapAdapter';
+import type { Feature, GeoJsonObject, Geometry } from 'geojson';
 
 export type AdapterConstructor = () => Promise<Type<LayerAdapter> | any>;
 

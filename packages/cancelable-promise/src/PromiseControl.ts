@@ -1,4 +1,4 @@
-import CancelablePromise from '.';
+import type CancelablePromise from '.';
 
 export interface PromiseControlOptions {
   onStart?: () => void;

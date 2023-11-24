@@ -2,18 +2,22 @@ import TileLayer from 'ol/layer/Tile';
 import TileWMS from 'ol/source/TileWMS';
 
 import { resolutionOptions } from '../utils/gerResolution';
-import { queryToObject, objectToQuery } from '../utils/utils';
 import { setTileLoadFunction } from '../utils/setTileLoadFunction';
+import { objectToQuery, queryToObject } from '../utils/utils';
+
 import { BaseAdapter } from './BaseAdapter';
 
+import type { MainLayerAdapter, WmsAdapterOptions } from '@nextgis/webmap';
 import type Map from 'ol/Map';
 import type { Options as TileWMSOptions } from 'ol/source/TileWMS';
-import type { MainLayerAdapter, WmsAdapterOptions } from '@nextgis/webmap';
 
 export class WmsAdapter extends BaseAdapter implements MainLayerAdapter {
   layer: any;
 
-  constructor(public map: Map, public options: WmsAdapterOptions) {
+  constructor(
+    public map: Map,
+    public options: WmsAdapterOptions,
+  ) {
     super(map, options);
   }
 

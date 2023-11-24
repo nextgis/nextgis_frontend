@@ -1,9 +1,10 @@
-import { MainLayerAdapter } from '@nextgis/webmap';
-import { ImageLayer } from './ImageLayer';
 import { BaseAdapter } from '../BaseAdapter';
 
-import type { Map } from 'leaflet';
+import { ImageLayer } from './ImageLayer';
+
+import type { MainLayerAdapter } from '@nextgis/webmap';
 import type { ImageAdapterOptions } from '@nextgis/webmap';
+import type { Map } from 'leaflet';
 
 export class ImageAdapter
   extends BaseAdapter<ImageAdapterOptions>

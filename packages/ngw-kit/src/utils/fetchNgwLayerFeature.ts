@@ -1,9 +1,9 @@
-import { fetchNgwLayerItem } from './fetchNgwLayerItem';
 import { createGeoJsonFeature } from './featureLayerUtils';
+import { fetchNgwLayerItem } from './fetchNgwLayerItem';
 
-import type { Geometry, Feature } from 'geojson';
-import type CancelablePromise from '@nextgis/cancelable-promise';
 import type { FetchNgwItemOptions } from '../interfaces';
+import type CancelablePromise from '@nextgis/cancelable-promise';
+import type { Feature, Geometry } from 'geojson';
 
 export function fetchNgwLayerFeature<
   G extends Geometry = Geometry,

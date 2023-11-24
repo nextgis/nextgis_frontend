@@ -1,4 +1,5 @@
 import e from '../utils/evaluateArgs';
+
 import type { DecisionExpressionName, ExpressionCbFunc } from '../interfaces';
 
 function not([expr]: [boolean]): boolean {

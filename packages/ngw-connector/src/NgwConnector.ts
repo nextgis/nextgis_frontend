@@ -1,45 +1,46 @@
 import { EventEmitter } from 'events';
+
+import Cache from '@nextgis/cache';
 import CancelablePromise from '@nextgis/cancelable-promise';
 import { objectRemoveEmpty } from '@nextgis/utils';
 import { fixUrlStr } from '@nextgis/utils';
-import Cache from '@nextgis/cache';
 
-import { loadData } from './utils/loadData';
-import { template } from './utils/template';
-import { NgwError } from './errors/NgwError';
-import { apiRequest } from './utils/apiRequest';
-import { ResourceNotFoundError } from './errors/ResourceNotFoundError';
-import { InsufficientPermissionsError } from './errors/InsufficientPermissionsError';
+import { ResourcesControl } from './ResourcesControl';
 import {
   addConnector,
   findConnector,
   removeConnector,
 } from './activeConnectors';
-import { ResourcesControl } from './ResourcesControl';
+import { InsufficientPermissionsError } from './errors/InsufficientPermissionsError';
+import { NgwError } from './errors/NgwError';
+import { ResourceNotFoundError } from './errors/ResourceNotFoundError';
+import { apiRequest } from './utils/apiRequest';
+import { loadData } from './utils/loadData';
+import { template } from './utils/template';
 
-import type { DeepPartial } from '@nextgis/utils';
 import type {
+  Credentials,
   DeleteRequestItemsResponseMap,
+  GetChildrenOfOptions,
+  GetRequestItemsResponseMap,
+  NgwConnectorOptions,
+  Params,
   PatchRequestItemsResponseMap,
   PostRequestItemsResponseMap,
-  GetRequestItemsResponseMap,
   PutRequestItemsResponseMap,
-  RequestTransformFunction,
-  GetChildrenOfOptions,
-  ResourceIdKeynameDef,
-  NgwConnectorOptions,
-  ResourceDefinition,
-  RequestItemsParams,
-  RequestItemKeys,
-  RequestHeaders,
-  RequestOptions,
   PyramidRoute,
-  Credentials,
+  RequestHeaders,
+  RequestItemKeys,
+  RequestItemsParams,
+  RequestOptions,
+  RequestTransformFunction,
+  ResourceDefinition,
+  ResourceIdKeynameDef,
   UserInfo,
-  Params,
 } from './interfaces';
 import type { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
-import type { ResourceItem, Resource } from './types/ResourceItem';
+import type { Resource, ResourceItem } from './types/ResourceItem';
+import type { DeepPartial } from '@nextgis/utils';
 
 let ID = 0;
 

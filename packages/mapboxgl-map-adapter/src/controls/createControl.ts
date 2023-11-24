@@ -1,5 +1,5 @@
+import type { CreateControlOptions, MapControl } from '@nextgis/webmap';
 import type { ControlPosition, IControl } from 'maplibre-gl';
-import type { MapControl, CreateControlOptions } from '@nextgis/webmap';
 
 export function createControl(
   control: MapControl,

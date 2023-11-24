@@ -1,4 +1,5 @@
 import { type ColorArray, colorToRGB, toColor } from '../../utils/color';
+
 import type { ExpressionCbFunc } from '../../interfaces';
 
 type LinearInterpolation = ['linear'];

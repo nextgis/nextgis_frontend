@@ -1,10 +1,11 @@
 import './ControlContainer.css';
 
 import * as dom from '@nextgis/dom';
-import { ControlPosition, MapControl, MapAdapter } from '@nextgis/webmap';
 
 import { ZoomControl } from './controls/ZoomControl';
-import { ControlContainerOptions } from './interfaces';
+
+import type { ControlContainerOptions } from './interfaces';
+import type { ControlPosition, MapAdapter, MapControl } from '@nextgis/webmap';
 
 export class ControlContainer {
   static controls = {

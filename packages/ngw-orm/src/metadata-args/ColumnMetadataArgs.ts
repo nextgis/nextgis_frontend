@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { ColumnOptions } from '../options/ColumnOptions';
+import type { ColumnOptions } from '../options/ColumnOptions';
 
 /**
  * Arguments for ColumnMetadata class.

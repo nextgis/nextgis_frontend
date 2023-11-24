@@ -1,10 +1,10 @@
 import type {
-  VectorAdapterLayerPaint,
-  GetPaintCallback,
-  PropertiesPaint,
   GeometryPaint,
+  GetPaintCallback,
   IconPaint,
   Paint,
+  PropertiesPaint,
+  VectorAdapterLayerPaint,
 } from './interfaces';
 
 export function isPropertiesPaint(paint: Paint): paint is PropertiesPaint {

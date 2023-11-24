@@ -1,4 +1,4 @@
-import { Connection } from '../connection/Connection';
+import type { Connection } from '../connection/Connection';
 
 export class CannotExecuteResourceNotExistError extends Error {
   name = 'CannotExecuteResourceNotExistError';

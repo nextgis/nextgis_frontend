@@ -1,5 +1,5 @@
-import { WebMap } from '../../WebMap';
-import { ButtonControlOptions } from '../../interfaces/MapControl';
+import type { WebMap } from '../../WebMap';
+import type { ButtonControlOptions } from '../../interfaces/MapControl';
 
 /**
  * @param webMap - WebMap instance

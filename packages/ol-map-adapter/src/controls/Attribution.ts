@@ -1,4 +1,5 @@
 import Attr from 'ol/control/Attribution';
+
 import type { AttributionControlOptions } from '@nextgis/webmap';
 
 const OPTIONS = {

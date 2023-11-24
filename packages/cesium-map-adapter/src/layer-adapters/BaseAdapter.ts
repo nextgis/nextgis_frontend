@@ -1,5 +1,6 @@
-import { MainLayerAdapter, AdapterOptions } from '@nextgis/webmap';
-import { Viewer as TViewer, Event } from 'cesium';
+import type { AdapterOptions, MainLayerAdapter } from '@nextgis/webmap';
+import type { Event, Viewer as TViewer } from 'cesium';
+
 export type Map = TViewer;
 
 type Layer = any;
@@ -12,7 +13,10 @@ export abstract class BaseAdapter<
   protected onTerrainChange?: () => void;
   private _terrainProviderChangedListener?: Event.RemoveCallback;
 
-  constructor(public map: Map, public options: O) {
+  constructor(
+    public map: Map,
+    public options: O,
+  ) {
     const t = map.scene.terrainProviderChanged;
     this._terrainProviderChangedListener = t.addEventListener(() => {
       if (this.onTerrainChange) this.onTerrainChange();

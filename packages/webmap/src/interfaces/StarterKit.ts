@@ -1,7 +1,7 @@
-import { Type } from '@nextgis/utils';
 import type { MapClickEvent } from './MapAdapter';
 import type { MapOptions } from './MapOptions';
-import type { WebMap, LayerAdapter } from '../index';
+import type { LayerAdapter, WebMap } from '../index';
+import type { Type } from '@nextgis/utils';
 
 export interface LayerAdapterCreators {
   name: string;

@@ -1,7 +1,7 @@
-import {
-  LineLayerSpecification,
-  FillLayerSpecification,
+import type {
   CircleLayerSpecification,
+  FillLayerSpecification,
+  LineLayerSpecification,
   SymbolLayerSpecification,
 } from 'maplibre-gl';
 

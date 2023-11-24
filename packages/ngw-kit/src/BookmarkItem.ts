@@ -1,10 +1,10 @@
-import { Feature, Point } from 'geojson';
-import { createGeoJsonFeature, fetchNgwLayerItem } from '@nextgis/ngw-kit';
 import CancelablePromise from '@nextgis/cancelable-promise';
+import { createGeoJsonFeature, fetchNgwLayerItem } from '@nextgis/ngw-kit';
 
 import type NgwConnector from '@nextgis/ngw-connector';
 import type { FeatureItem } from '@nextgis/ngw-connector';
 import type { LngLatBoundsArray } from '@nextgis/utils';
+import type { Feature, Point } from 'geojson';
 
 interface BookmarkItemOptions {
   connector: NgwConnector;

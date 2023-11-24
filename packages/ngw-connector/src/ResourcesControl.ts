@@ -1,21 +1,20 @@
+import Cache from '@nextgis/cache';
 import CancelablePromise from '@nextgis/cancelable-promise';
 import { defined } from '@nextgis/utils';
-import Cache from '@nextgis/cache';
 
-import { resourceToQuery } from './utils/resourceToQuery';
-import { resourceCompare } from './utils/resourceCompare';
 import { ResourceNotFoundError } from './errors/ResourceNotFoundError';
-
 import { isObject } from './utils/isObject';
+import { resourceCompare } from './utils/resourceCompare';
+import { resourceToQuery } from './utils/resourceToQuery';
 
-import type { DeepPartial } from '@nextgis/utils';
 import type { NgwConnector } from './NgwConnector';
-import type { ResourceItem, Resource } from './types/ResourceItem';
 import type {
   GetChildrenOfOptions,
-  ResourceDefinition,
   RequestOptions,
+  ResourceDefinition,
 } from './interfaces';
+import type { Resource, ResourceItem } from './types/ResourceItem';
+import type { DeepPartial } from '@nextgis/utils';
 
 export class ResourcesControl {
   cache = new Cache<

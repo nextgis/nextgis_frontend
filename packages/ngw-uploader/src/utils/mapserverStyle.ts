@@ -1,7 +1,7 @@
 import Color from 'color';
 
-import type { Expression } from '@nextgis/expression';
 import type { CreateMapserverStyleOptions } from '../interfaces';
+import type { Expression } from '@nextgis/expression';
 
 export function mapserverStyle(opt: CreateMapserverStyleOptions) {
   const {

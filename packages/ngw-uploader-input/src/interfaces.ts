@@ -1,4 +1,4 @@
-import { NgwUploadOptions } from '@nextgis/ngw-uploader';
+import type { NgwUploadOptions } from '@nextgis/ngw-uploader';
 
 export interface NgwUploadInputOptions extends NgwUploadOptions {
   loginDialog?: boolean;

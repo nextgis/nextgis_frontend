@@ -1,6 +1,7 @@
-import { NgwConnectorOptions } from './interfaces';
-import { NgwConnector } from './NgwConnector';
 import { objectDeepEqual } from '@nextgis/utils';
+
+import type { NgwConnector } from './NgwConnector';
+import type { NgwConnectorOptions } from './interfaces';
 
 export const CONNECTORS: NgwConnector[] = [];
 

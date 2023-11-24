@@ -1,56 +1,57 @@
-import { isPaint, isIcon, PathPaint, isPaintCallback } from '@nextgis/paint';
-import { isPropertyFilter, featureFilter } from '@nextgis/properties-filter';
+import { isIcon, isPaint, isPaintCallback } from '@nextgis/paint';
+import { featureFilter, isPropertyFilter } from '@nextgis/properties-filter';
+import { Popup } from 'maplibre-gl';
 
-import { getImage } from '../utils/imageIcons';
-import { getCentroid } from '../utils/getCentroid';
-import { convertZoomLevel } from '../utils/convertZoomLevel';
-import { makeHtmlFromString } from '../utils/makeHtmlFromString';
 import { convertMapClickEvent } from '../utils/convertMapClickEvent';
-import { typeAliasForFilter, allowedByType } from '../utils/geomType';
+import { convertZoomLevel } from '../utils/convertZoomLevel';
+import { allowedByType, typeAliasForFilter } from '../utils/geomType';
+import { getCentroid } from '../utils/getCentroid';
 import { createFeaturePositionOptions } from '../utils/getFeaturePosition';
+import { getImage } from '../utils/imageIcons';
+import { makeHtmlFromString } from '../utils/makeHtmlFromString';
+
 import { BaseAdapter } from './BaseAdapter';
 
-import type {
-  GeoJsonProperties,
-  GeometryObject,
-  Feature as F,
-  Geometry,
-} from 'geojson';
-import {
-  Map,
-  Popup,
-  Layout,
-  LngLatLike,
-  MapEventType,
-  MapMouseEvent,
-  LayerSpecification,
-  SourceSpecification,
-  MapLayerMouseEvent,
-  FilterSpecification,
-  LegacyFilterSpecification,
-} from 'maplibre-gl';
-import type { Paint, IconPaint } from '@nextgis/paint';
-import type {
-  VectorAdapterLayerType,
-  PopupOnCloseFunction,
-  VectorAdapterOptions,
-  VectorLayerAdapter,
-  OnLayerSelectType,
-  DataLayerFilter,
-  LayerDefinition,
-  FilterOptions,
-  PopupOptions,
-} from '@nextgis/webmap';
 import type { TLayer } from '../MapboxglMapAdapter';
-import type {
-  PropertiesFilter,
-  PropertyFilter,
-  Operations,
-} from '@nextgis/properties-filter';
 import type {
   SelectedFeaturesIds,
   VectorLayerSpecification,
 } from '../interfaces';
+import type { IconPaint, Paint, PathPaint } from '@nextgis/paint';
+import type {
+  Operations,
+  PropertiesFilter,
+  PropertyFilter,
+} from '@nextgis/properties-filter';
+import type {
+  DataLayerFilter,
+  FilterOptions,
+  LayerDefinition,
+  OnLayerSelectType,
+  PopupOnCloseFunction,
+  PopupOptions,
+  VectorAdapterLayerType,
+  VectorAdapterOptions,
+  VectorLayerAdapter,
+} from '@nextgis/webmap';
+import type {
+  Feature as F,
+  GeoJsonProperties,
+  Geometry,
+  GeometryObject,
+} from 'geojson';
+import type {
+  FilterSpecification,
+  LayerSpecification,
+  Layout,
+  LegacyFilterSpecification,
+  LngLatLike,
+  Map,
+  MapEventType,
+  MapLayerMouseEvent,
+  MapMouseEvent,
+  SourceSpecification,
+} from 'maplibre-gl';
 
 type Layer = VectorLayerSpecification;
 
@@ -108,8 +109,8 @@ const mapboxTypeAlias: Record<VectorAdapterLayerType, MapboxLayerType> = {
 };
 
 export abstract class VectorAdapter<
-  O extends VectorAdapterOptions = VectorAdapterOptions,
->
+    O extends VectorAdapterOptions = VectorAdapterOptions,
+  >
   extends BaseAdapter<O>
   implements VectorLayerAdapter<Map, TLayer, O, Feature>
 {
@@ -128,7 +129,10 @@ export abstract class VectorAdapter<
   private $onLayerMouseMove?: (e: MapLayerMouseEvent) => void;
   private $onLayerMouseLeave?: (e: MapLayerMouseEvent) => void;
 
-  constructor(map: Map, public options: O) {
+  constructor(
+    map: Map,
+    public options: O,
+  ) {
     super(map, options);
     this._sourceId = this.options.source
       ? (this.options.source as string)
@@ -576,7 +580,11 @@ export abstract class VectorAdapter<
                 return false;
               });
               if (allowedType) {
-                if (allowedType[1] && allowedType[1].includes('stroke') && !pathPaint.stroke) {
+                if (
+                  allowedType[1] &&
+                  allowedType[1].includes('stroke') &&
+                  !pathPaint.stroke
+                ) {
                   continue;
                 }
                 const paramName = Array.isArray(allowedType)
@@ -827,11 +835,11 @@ export abstract class VectorAdapter<
 
     const content = createPopupContent
       ? await createPopupContent({
-        type,
-        close,
-        onClose,
-        ...this._createLayerOptions(feature),
-      })
+          type,
+          close,
+          onClose,
+          ...this._createLayerOptions(feature),
+        })
       : popupContent;
     coordinates =
       coordinates || (feature && (getCentroid(feature) as [number, number]));
@@ -957,10 +965,22 @@ export abstract class VectorAdapter<
   private _onLayerMouseMove(evt: MapEventType['mousemove'] & MapMouseEvent) {
     const map = this.map;
     if (map) {
-      const { onMouseOver, selectOnHover, selectable, interactive, labelOnHover, popupOnHover } =
-        this.options;
+      const {
+        onMouseOver,
+        selectOnHover,
+        selectable,
+        interactive,
+        labelOnHover,
+        popupOnHover,
+      } = this.options;
       const event = convertMapClickEvent(evt);
-      if (onMouseOver || selectOnHover || interactive || labelOnHover || popupOnHover) {
+      if (
+        onMouseOver ||
+        selectOnHover ||
+        interactive ||
+        labelOnHover ||
+        popupOnHover
+      ) {
         const feature = this._getFeatureFromPoint(evt);
         if (onMouseOver && this.layer) {
           onMouseOver({
@@ -996,7 +1016,8 @@ export abstract class VectorAdapter<
   }
 
   private _onLayerMouseLeave(evt: MapEventType['mousemove'] & MapMouseEvent) {
-    const { onMouseOut, labelOnHover, popupOnHover, selectOnHover } = this.options;
+    const { onMouseOut, labelOnHover, popupOnHover, selectOnHover } =
+      this.options;
     if (this.map) {
       if (onMouseOut) {
         onMouseOut({

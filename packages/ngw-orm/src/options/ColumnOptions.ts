@@ -1,4 +1,4 @@
-import { ColumnType } from '../types/ColumnTypes';
+import type { ColumnType } from '../types/ColumnTypes';
 
 /**
  * Describes all column's options.

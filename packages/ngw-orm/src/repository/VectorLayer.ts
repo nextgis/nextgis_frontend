@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/member-ordering */
-import {
+import type {
   Point,
   Polygon,
   Feature,
@@ -10,15 +10,12 @@ import {
   MultiLineString,
   GeoJsonProperties,
 } from 'geojson';
-import { FilterOptions } from '@nextgis/webmap';
-import { PropertiesFilter } from '@nextgis/properties-filter';
-import { DeepPartial } from '@nextgis/utils';
-import {
-  GetNgwItemsOptions,
-  fetchNgwLayerItems,
-  fetchNgwLayerItem,
-} from '@nextgis/ngw-kit';
-import {
+import type { FilterOptions } from '@nextgis/webmap';
+import type { PropertiesFilter } from '@nextgis/properties-filter';
+import type { DeepPartial } from '@nextgis/utils';
+import type { GetNgwItemsOptions } from '@nextgis/ngw-kit';
+import { fetchNgwLayerItems, fetchNgwLayerItem } from '@nextgis/ngw-kit';
+import type {
   GeometryType,
   VectorLayerResourceItem,
   FeatureLayerField,
@@ -33,27 +30,27 @@ import {
 // import { FindManyOptions } from '../find-options/FindManyOptions';
 // import { FindOneOptions } from '../find-options/FindOneOptions';
 import { getMetadataArgsStorage, Column } from '..';
-import { VectorResourceSyncItem } from '../sync-items/VectorResourceSyncItem';
-import { FindOneOptions } from '../find-options/FindOneOptions';
-import { FindConditions } from '../find-options/FindConditions';
+import type { VectorResourceSyncItem } from '../sync-items/VectorResourceSyncItem';
+import type { FindOneOptions } from '../find-options/FindOneOptions';
+import type { FindConditions } from '../find-options/FindConditions';
 import { CannotExecuteNotConnectedError } from '../error/CannotExecuteNotConnectedError';
-import { FindManyOptions } from '../find-options/FindManyOptions';
+import type { FindManyOptions } from '../find-options/FindManyOptions';
 import {
   itemsToEntities,
   itemToEntity,
 } from '../vector-layer-utils/itemsToEntities';
 import { saveVectorLayer } from '../vector-layer-utils/saveVectorLayer';
-import { ObjectType } from '../common/ObjectType';
+import type { ObjectType } from '../common/ObjectType';
 import { BaseResource } from './BaseResource';
-import { SyncOptions } from './SyncOptions';
-import { UpdateOptions } from './UpdateOptions';
+import type { SyncOptions } from './SyncOptions';
+import type { UpdateOptions } from './UpdateOptions';
 import { toTypescript } from '../vector-layer-utils/toTypescript';
-import {
+import type {
   ToTypescript,
   ToTypescriptOptions,
 } from '../options/ToTypescriptOptions';
-import { ValidateErrorType } from '../types/ValidateErrorType';
-import { VectorResourceUpdateItem } from '../sync-items/VectorResourceUpdateItem';
+import type { ValidateErrorType } from '../types/ValidateErrorType';
+import type { VectorResourceUpdateItem } from '../sync-items/VectorResourceUpdateItem';
 // import { SyncOptions } from './SyncOptions';
 // import { Connection } from '../connection/Connection';
 // import { ConnectionOptions } from '../connection/ConnectionOptions';

@@ -1,15 +1,17 @@
 import NgwConnector from '@nextgis/ngw-connector';
+
+import { generateSessionId } from './utils/generateSessionId';
+
 import type {
   Log,
-  NgLog,
   LogEngine,
   LogOptions,
   LogPostBulk,
   LogShortcutOptions,
+  NgLog,
   NgLogEngineOptions,
   NgLogEngineSessionId,
 } from '../../interfaces';
-import { generateSessionId } from './utils/generateSessionId';
 
 export class NgLogEngine<D = null> implements LogEngine<D> {
   clientId: string;

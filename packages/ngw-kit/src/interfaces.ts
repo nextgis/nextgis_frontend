@@ -1,35 +1,35 @@
-import type { Feature, Geometry, Polygon, Position } from 'geojson';
-import type {
-  WebMap,
-  PopupOptions,
-  WebMapEvents,
-  LayerAdapter,
-  FilterOptions,
-  MapClickEvent,
-  AdapterOptions,
-  MainLayerAdapter,
-  VectorLayerAdapter,
-  OnLayerMouseOptions,
-  RasterAdapterOptions,
-  LayerAdaptersOptions,
-  GeoJsonAdapterOptions,
-} from '@nextgis/webmap';
-import type { PropertiesFilter } from '@nextgis/properties-filter';
+import type CancelablePromise from '@nextgis/cancelable-promise';
 import type NgwConnector from '@nextgis/ngw-connector';
 import type {
+  FeatureItem,
+  LayerFeature,
+  RequestOptions,
   ResourceDefinition,
   ResourceItem,
-  LayerFeature,
-  FeatureItem,
-  RequestOptions,
 } from '@nextgis/ngw-connector';
 import type { FeatureLayersIdentify } from '@nextgis/ngw-connector';
+import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type {
-  Type,
   FeatureProperties,
   LngLatBoundsArray,
+  Type,
 } from '@nextgis/utils';
-import type CancelablePromise from '@nextgis/cancelable-promise';
+import type {
+  AdapterOptions,
+  FilterOptions,
+  GeoJsonAdapterOptions,
+  LayerAdapter,
+  LayerAdaptersOptions,
+  MainLayerAdapter,
+  MapClickEvent,
+  OnLayerMouseOptions,
+  PopupOptions,
+  RasterAdapterOptions,
+  VectorLayerAdapter,
+  WebMap,
+  WebMapEvents,
+} from '@nextgis/webmap';
+import type { Feature, Geometry, Polygon, Position } from 'geojson';
 
 declare module '@nextgis/webmap' {
   interface LayerAdaptersOptions {

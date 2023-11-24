@@ -1,16 +1,17 @@
 import { mixinProperties } from '@nextgis/utils';
-import { alias, updateQmsOptions } from './updateQmsOptions';
-import { loadJson } from './loadJson';
-import { getSubdomainsOriginUrl } from './getSubmodulesFromOriginUrl';
 
-import type { Type } from '@nextgis/utils';
-import type { WebMap, MainLayerAdapter } from '@nextgis/webmap';
+import { getSubdomainsOriginUrl } from './getSubmodulesFromOriginUrl';
+import { loadJson } from './loadJson';
+import { alias, updateQmsOptions } from './updateQmsOptions';
+
 import type {
+  CreateQmsAdapterOptions,
+  QmsAdapter as QA,
   QmsAdapterOptions,
   QmsBasemap,
-  QmsAdapter as QA,
-  CreateQmsAdapterOptions,
 } from '../interfaces';
+import type { Type } from '@nextgis/utils';
+import type { MainLayerAdapter, WebMap } from '@nextgis/webmap';
 
 const URL = 'https://qms.nextgis.com';
 

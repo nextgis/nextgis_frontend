@@ -1,5 +1,5 @@
-import type { RuntimeParams } from '@nextgis/webmap';
 import type { Params, StateData } from './interfaces';
+import type { RuntimeParams } from '@nextgis/webmap';
 
 export class UrlRuntimeParams implements RuntimeParams {
   private _params: Params = {};

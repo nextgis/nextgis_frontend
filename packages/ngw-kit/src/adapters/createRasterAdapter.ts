@@ -3,14 +3,14 @@ import { defined } from '@nextgis/utils';
 import { ngwApiToAdapterOptions } from '../utils/ngwApiToAdapterOptions';
 import { resourceIdFromLayerOptions } from '../utils/resourceIdFromLayerOptions';
 
-import type { Type } from '@nextgis/utils';
-import type { ResourceItem, ResourceCls } from '@nextgis/ngw-connector';
-import type { MainLayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
 import type {
-  ResourceAdapter,
-  NgwLayerAdapterType,
   GetClassAdapterOptions,
+  NgwLayerAdapterType,
+  ResourceAdapter,
 } from '../interfaces';
+import type { ResourceCls, ResourceItem } from '@nextgis/ngw-connector';
+import type { Type } from '@nextgis/utils';
+import type { ImageAdapterOptions, MainLayerAdapter } from '@nextgis/webmap';
 
 export async function createRasterAdapter({
   layerOptions,
@@ -51,7 +51,10 @@ export async function createRasterAdapter({
       item?: ResourceItem = item;
       resourceId = resourceId;
 
-      constructor(public map: any, _options: any) {
+      constructor(
+        public map: any,
+        _options: any,
+      ) {
         super(map, _options);
         const opt = ngwApiToAdapterOptions({
           options: layerOptions,

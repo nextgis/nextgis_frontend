@@ -1,4 +1,4 @@
-import { ExpressionCbFunc } from '../../interfaces';
+import type { ExpressionCbFunc } from '../../interfaces';
 
 type OutputType = number | string | boolean | null;
 

@@ -1,16 +1,17 @@
 import { GeoJSON } from 'leaflet';
+
 import { boundsToArray } from './boundsToArray';
 
+import type { LngLatArray, LngLatBoundsArray } from '@nextgis/utils';
+import type { FeaturePosition, VectorAdapterLayerType } from '@nextgis/webmap';
 import type {
   Feature,
-  GeoJsonObject,
   FeatureCollection,
-  GeometryCollection,
   GeoJsonGeometryTypes,
+  GeoJsonObject,
+  GeometryCollection,
 } from 'geojson';
 import type { LatLngBounds } from 'leaflet';
-import type { FeaturePosition, VectorAdapterLayerType } from '@nextgis/webmap';
-import type { LngLatArray, LngLatBoundsArray } from '@nextgis/utils';
 
 export const typeAlias: {
   [key in GeoJsonGeometryTypes]: VectorAdapterLayerType;

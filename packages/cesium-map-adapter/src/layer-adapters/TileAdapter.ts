@@ -1,13 +1,15 @@
-import { TileAdapterOptions } from '@nextgis/webmap';
 import { defined } from '@nextgis/utils';
-import { UrlTemplateImageryProvider, ImageryLayer } from 'cesium';
-import { makeUrl } from '../utils/makeUrl';
+import { ImageryLayer, UrlTemplateImageryProvider } from 'cesium';
 
-import { BaseAdapter } from './BaseAdapter';
 import {
   addToTileCatalog,
   removeFromTileCatalog,
 } from '../utils/TileAdapterOrderControl';
+import { makeUrl } from '../utils/makeUrl';
+
+import { BaseAdapter } from './BaseAdapter';
+
+import type { TileAdapterOptions } from '@nextgis/webmap';
 
 type Layer = ImageryLayer;
 

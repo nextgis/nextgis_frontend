@@ -1,16 +1,17 @@
-import NgwConnector, {
+import type {
   ResourceItem,
   Resource,
   ResourceIdKeynameDef,
 } from '@nextgis/ngw-connector';
+import NgwConnector from '@nextgis/ngw-connector';
 import { objectAssign, defined } from '@nextgis/utils';
-import { ConnectionOptions } from './ConnectionOptions';
-import { SyncOptions } from '../repository/SyncOptions';
-import { BaseResource } from '../repository/BaseResource';
+import type { ConnectionOptions } from './ConnectionOptions';
+import type { SyncOptions } from '../repository/SyncOptions';
+import type { BaseResource } from '../repository/BaseResource';
 import { getMetadataArgsStorage } from '..';
-import { ResourceMetadataArgs } from '../metadata-args/ResourceMetadataArgs';
-import { DeepPartial } from '../common/DeepPartial';
-import { ResourceSyncItem } from '../sync-items/ResourceSyncItem';
+import type { ResourceMetadataArgs } from '../metadata-args/ResourceMetadataArgs';
+import type { DeepPartial } from '../common/DeepPartial';
+import type { ResourceSyncItem } from '../sync-items/ResourceSyncItem';
 import { NgwResources } from '../ngw/NgwResources';
 
 /**

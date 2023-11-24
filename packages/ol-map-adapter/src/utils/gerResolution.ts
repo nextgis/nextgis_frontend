@@ -1,5 +1,5 @@
-import type Map from 'ol/Map';
 import type { AdapterOptions } from '@nextgis/webmap';
+import type Map from 'ol/Map';
 
 const DPI = 1000 / 39.37 / 0.28;
 const IPM = 39.37;

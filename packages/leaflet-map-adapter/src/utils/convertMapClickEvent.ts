@@ -1,6 +1,5 @@
-import type { LeafletMouseEvent } from 'leaflet';
-
 import type { MapClickEvent } from '@nextgis/webmap';
+import type { LeafletMouseEvent } from 'leaflet';
 
 export function convertMapClickEvent(evt: LeafletMouseEvent): MapClickEvent {
   const coord = evt.containerPoint;

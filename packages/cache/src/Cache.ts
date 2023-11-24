@@ -1,4 +1,4 @@
-import { objectDeepEqual, objectRemoveEmpty, full } from '@nextgis/utils';
+import { full, objectDeepEqual, objectRemoveEmpty } from '@nextgis/utils';
 
 type CacheValue<T> = T;
 type CacheMatchProps<T> = Record<keyof T, T[keyof T]>;

@@ -1,5 +1,6 @@
 import { NgwError } from './NgwError';
-import { NgwExceptions } from '../interfaces';
+
+import type { NgwExceptions } from '../interfaces';
 
 /**
  * Thrown when ...

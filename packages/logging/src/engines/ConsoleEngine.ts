@@ -1,8 +1,8 @@
 import type {
+  ConsoleEngineOptions,
   LogEngine,
   LogOptions,
   LogShortcutOptions,
-  ConsoleEngineOptions,
 } from '../interfaces';
 
 export class ConsoleEngine<D = null> implements LogEngine<D> {

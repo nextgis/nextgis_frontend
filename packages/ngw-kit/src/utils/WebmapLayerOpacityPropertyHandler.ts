@@ -1,4 +1,5 @@
 import { BaseProperty } from '@nextgis/item';
+
 import type { ItemBasePropertyOptions } from '../../../item/src/interfaces';
 import type { NgwWebmapItem } from '../NgwWebmapItem';
 

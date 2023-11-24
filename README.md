@@ -21,8 +21,8 @@ A suite of frontend JavaScript libraries designed to accelerate the development 
 
 ## Featured Examples
 
-- [Add layer from NGW Cloud](http://code.nextgis.com/demo-examples-ngw-layer)
-- [Add webmap from NGW Cloud](http://code.nextgis.com/demo-examples-ngw-webmap)
+- [Add layer from NextGIS Web](http://code.nextgis.com/demo-examples-ngw-layer)
+- [Add webmap from NextGIS Web](http://code.nextgis.com/demo-examples-ngw-webmap)
 - [Zoom to NGW layer feature, partial data load](https://code.nextgis.com/demo-examples-ngw-zoom-to-feature)
 - [Highlight features from NGW webmap](https://code.nextgis.com/demo-examples-webmap-identification)
 - [Expression paint](https://code.nextgis.com/demo-examples-expression-paint-match)

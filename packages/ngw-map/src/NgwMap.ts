@@ -1,9 +1,9 @@
-import StrictEventEmitter from 'strict-event-emitter-types';
+import type StrictEventEmitter from 'strict-event-emitter-types';
 import { EventEmitter } from 'events';
 import CancelablePromise from '@nextgis/cancelable-promise';
 import { defined, isObject, getIdentifyRadius } from '@nextgis/utils';
-import { AdapterOptions, WebMap } from '@nextgis/webmap';
-import NgwConnector from '@nextgis/ngw-connector';
+import { WebMap } from '@nextgis/webmap';
+import type NgwConnector from '@nextgis/ngw-connector';
 
 import {
   fetchNgwLayerFeatureCollection,
@@ -42,6 +42,7 @@ import type {
   MapControls,
   FitOptions,
   LayerDef,
+  AdapterOptions,
 } from '@nextgis/webmap';
 import type {
   NgwIdentify,

@@ -1,5 +1,5 @@
-import type Tile from 'ol/Tile';
 import type ImageWrapper from 'ol/Image';
+import type Tile from 'ol/Tile';
 
 export function setTileLoadFunction(
   tile: Tile | ImageWrapper,

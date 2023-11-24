@@ -1,20 +1,22 @@
 /**
  * UNDER DEVELOPMENT
  */
-import { LngLatBoundsArray } from '@nextgis/utils';
-import { Model3DOptions } from '@nextgis/webmap';
 import {
+  Math as CMath,
+  Cartesian3,
+  Cartographic,
+  HeadingPitchRoll,
   Model,
   Transforms,
-  Cartesian3,
-  Math as CMath,
-  HeadingPitchRoll,
-  Cartographic,
 } from 'cesium';
 
-import { BaseAdapter } from './BaseAdapter';
-import { whenSampleTerrainMostDetailed } from '../utils/whenSampleTerrainMostDetailed';
 import { makeUrl } from '../utils/makeUrl';
+import { whenSampleTerrainMostDetailed } from '../utils/whenSampleTerrainMostDetailed';
+
+import { BaseAdapter } from './BaseAdapter';
+
+import type { LngLatBoundsArray } from '@nextgis/utils';
+import type { Model3DOptions } from '@nextgis/webmap';
 
 type Layer = Model;
 

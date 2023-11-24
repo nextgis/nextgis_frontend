@@ -1,25 +1,28 @@
-import CircleStyle from 'ol/style/Circle';
-import { asArray, Color } from 'ol/color';
+import { isPaint, isPaintCallback } from '@nextgis/paint';
+import { asArray } from 'ol/color';
 import { Fill, Stroke, Style, Text } from 'ol/style';
-import IconAnchorUnits from 'ol/style/IconAnchorUnits';
+import CircleStyle from 'ol/style/Circle';
 import Icon from 'ol/style/Icon';
-import { isPaintCallback, isPaint } from '@nextgis/paint';
+import IconAnchorUnits from 'ol/style/IconAnchorUnits';
 
-import type { Feature } from 'geojson';
-import type OlFeature from 'ol/Feature';
-import type { Options as TextOptions } from 'ol/style/Text';
-import type { Options as IconOptions } from 'ol/style/Icon';
+import { getFeature } from './utils';
+
+import type {
+  GeometryPaint,
+  Paint,
+  PaintType,
+  VectorAdapterLayerPaint,
+} from '@nextgis/paint';
 import type {
   GeoJsonAdapterOptions,
   VectorAdapterLayerType,
 } from '@nextgis/webmap';
-import type {
-  Paint,
-  PaintType,
-  GeometryPaint,
-  VectorAdapterLayerPaint,
-} from '@nextgis/paint';
-import { getFeature } from './utils';
+import type { Feature } from 'geojson';
+import type OlFeature from 'ol/Feature';
+import type { Color } from 'ol/color';
+
+import type { Options as IconOptions } from 'ol/style/Icon';
+import type { Options as TextOptions } from 'ol/style/Text';
 
 const typeAlias: { [x: string]: VectorAdapterLayerType } = {
   Point: 'point',
@@ -64,8 +67,8 @@ export function styleFunction(
         ta === 'polygon' || ta === 'line'
           ? 'path'
           : 'html' in paint || 'className' in paint
-          ? 'icon'
-          : paintTypeAlias[ta];
+            ? 'icon'
+            : paintTypeAlias[ta];
       if (t) {
         (paint as VectorAdapterLayerPaint).type = t;
       }

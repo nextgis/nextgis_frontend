@@ -2,9 +2,9 @@ import e from '../utils/evaluateArgs';
 
 import type {
   Data,
-  SimpleType,
-  LookupExpressionName,
   ExpressionCbFunc,
+  LookupExpressionName,
+  SimpleType,
 } from '../interfaces';
 
 type GetArg = [key: string] | [key: string, obj: Record<string, any>];

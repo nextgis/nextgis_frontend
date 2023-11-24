@@ -1,9 +1,11 @@
-import { MainLayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
 import { convertZoomLevel } from '../utils/convertZoomLevel';
+
 import { BaseRasterAdapter } from './BaseRasterAdapter';
 
-import type { Map, RasterSourceSpecification } from 'maplibre-gl';
 import type { TLayer } from '../MapboxglMapAdapter';
+import type { ImageAdapterOptions, MainLayerAdapter } from '@nextgis/webmap';
+import type { Map, RasterSourceSpecification } from 'maplibre-gl';
+
 export class ImageAdapter
   extends BaseRasterAdapter<ImageAdapterOptions>
   implements MainLayerAdapter<Map, TLayer, ImageAdapterOptions>

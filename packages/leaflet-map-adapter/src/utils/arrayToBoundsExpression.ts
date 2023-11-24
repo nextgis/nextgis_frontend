@@ -1,5 +1,5 @@
-import type { LatLngBoundsExpression } from 'leaflet';
 import type { LngLatBoundsArray } from '@nextgis/utils';
+import type { LatLngBoundsExpression } from 'leaflet';
 
 export function arrayToBoundsExpression(
   bounds: LngLatBoundsArray,

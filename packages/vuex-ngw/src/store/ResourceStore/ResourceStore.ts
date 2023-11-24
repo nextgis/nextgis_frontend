@@ -1,25 +1,25 @@
-import { Store } from 'vuex';
-import { VuexModule, Mutation, Action, Module } from 'vuex-module-decorators';
-import {
-  prepareFieldsToNgw,
-  FEATURE_REQUEST_PARAMS,
-  parseDate,
-} from '@nextgis/ngw-kit';
-import NgwConnector from '@nextgis/ngw-connector';
 import Cache from '@nextgis/cache';
 import CancelablePromise from '@nextgis/cancelable-promise';
+import {
+  FEATURE_REQUEST_PARAMS,
+  parseDate,
+  prepareFieldsToNgw,
+} from '@nextgis/ngw-kit';
 import { defined } from '@nextgis/utils';
+import { Action, Module, Mutation, VuexModule } from 'vuex-module-decorators';
 
-import type { Geometry, Feature } from 'geojson';
+import type { ForeignResource, PatchOptions } from '../../interfaces';
+import type NgwConnector from '@nextgis/ngw-connector';
 import type {
-  VectorFieldDatatype,
-  ResourceStoreItem,
-  FeatureLayerField,
   FeatureItem,
+  FeatureLayerField,
+  ResourceStoreItem,
+  VectorFieldDatatype,
 } from '@nextgis/ngw-connector';
 import type { FeatureProperties } from '@nextgis/utils';
 import type { Type } from '@nextgis/utils';
-import type { ForeignResource, PatchOptions } from '../../interfaces';
+import type { Feature, Geometry } from 'geojson';
+import type { Store } from 'vuex';
 
 type ResourceDef = string | number;
 

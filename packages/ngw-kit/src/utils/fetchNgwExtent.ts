@@ -1,12 +1,12 @@
 import CancelablePromise from '@nextgis/cancelable-promise';
 
-import type { LngLatBoundsArray } from '@nextgis/utils';
-import type NgwConnector from '@nextgis/ngw-connector';
-import type { WebmapResource, ResourceItem } from '@nextgis/ngw-connector';
 import type {
   FetchNgwLayerExtentOptions,
   FetchNgwLayerItemExtentOptions,
 } from '../interfaces';
+import type NgwConnector from '@nextgis/ngw-connector';
+import type { ResourceItem, WebmapResource } from '@nextgis/ngw-connector';
+import type { LngLatBoundsArray } from '@nextgis/utils';
 
 export function getNgwWebmapExtent(
   webmap: WebmapResource,

@@ -1,37 +1,38 @@
 import { EventEmitter } from 'events';
-import { fixUrlStr, isObject } from '@nextgis/utils';
-import NgwConnector from '@nextgis/ngw-connector';
+
 import CancelablePromise from '@nextgis/cancelable-promise';
+import NgwConnector from '@nextgis/ngw-connector';
+import { fixUrlStr, isObject } from '@nextgis/utils';
 
 import { createStyleName, nameFromOpt } from './utils/createName';
 import { createResourceOptions } from './utils/createResourceOptions';
 import { evented, onLoad } from './utils/decorators';
 import { mapserverStyle } from './utils/mapserverStyle';
 
-import type { Upload } from 'tus-js-client';
+import type {
+  CreateRasterOptions,
+  CreateStyleOptions,
+  CreateVectorOptions,
+  CreateWmsConnectedLayerOptions,
+  CreateWmsConnectionOptions,
+  CreateWmsOptions,
+  CreatedRes,
+  EmitterStatus,
+  FileUploadOptions,
+  GroupOptions,
+  NgwUploadOptions,
+  RasterUploadOptions,
+  VectorUploadOptions,
+} from './interfaces';
 import type { ResourceCls } from '@nextgis/ngw-connector';
 import type { CreatedResource, ResourceItem } from '@nextgis/ngw-connector';
 import type {
-  WmsServerServiceLayer,
+  FileMeta,
   WmsClientConnection,
   WmsClientLayer,
-  FileMeta,
+  WmsServerServiceLayer,
 } from '@nextgis/ngw-connector';
-import type {
-  CreatedRes,
-  GroupOptions,
-  EmitterStatus,
-  CreateWmsOptions,
-  NgwUploadOptions,
-  FileUploadOptions,
-  CreateStyleOptions,
-  RasterUploadOptions,
-  VectorUploadOptions,
-  CreateRasterOptions,
-  CreateVectorOptions,
-  CreateWmsConnectionOptions,
-  CreateWmsConnectedLayerOptions,
-} from './interfaces';
+import type { Upload } from 'tus-js-client';
 
 type FileType = File | Buffer | { file: File | Buffer; name: string };
 

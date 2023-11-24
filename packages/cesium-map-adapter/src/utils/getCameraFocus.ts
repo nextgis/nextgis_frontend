@@ -1,11 +1,6 @@
-import {
-  Scene,
-  Cartesian3,
-  Ray,
-  IntersectionTests,
-  defined,
-  Ellipsoid,
-} from 'cesium';
+import { Ellipsoid, IntersectionTests, Ray, defined } from 'cesium';
+
+import type { Cartesian3, Scene } from 'cesium';
 
 export function getCameraFocus(scene: Scene): Cartesian3 {
   const ray = new Ray(scene.camera.positionWC, scene.camera.directionWC);

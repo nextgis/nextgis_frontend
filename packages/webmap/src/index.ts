@@ -40,6 +40,7 @@
  * @module webmap
  */
 import { WebMap } from './WebMap';
+
 import type { MapOptions } from './interfaces/MapOptions';
 
 export { createToggleControl } from './components/controls/createToggleControl';

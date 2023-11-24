@@ -1,5 +1,6 @@
-import { MainLayerAdapter, TileAdapterOptions } from '@nextgis/webmap';
 import { TileAdapter } from './TileAdapter';
+
+import type { MainLayerAdapter, TileAdapterOptions } from '@nextgis/webmap';
 
 const OPTIONS = {
   url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',

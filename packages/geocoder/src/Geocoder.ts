@@ -1,9 +1,10 @@
 import CancelablePromise from '@nextgis/cancelable-promise';
-import { BaseProvider } from './providers/BaseProvider';
-import { GeocoderOptions } from './GeocoderOptions';
-import { BaseGeocoder } from './BaseGeocoder';
-import { SearchItem } from './types/SearchItem';
 
+import { BaseGeocoder } from './BaseGeocoder';
+
+import type { GeocoderOptions } from './GeocoderOptions';
+import type { BaseProvider } from './providers/BaseProvider';
+import type { SearchItem } from './types/SearchItem';
 import type { LngLatArray } from '@nextgis/utils';
 
 let ID = 0;
@@ -40,7 +41,7 @@ export class Geocoder extends BaseGeocoder<GeocoderOptions> {
           yield { ...r, provider, _id: ID++ };
         }
       } catch (err) {
-        const er = err as Error
+        const er = err as Error;
         if (er.name !== 'CancelError') {
           errors.push(er);
         }

@@ -1,4 +1,4 @@
-import { Feature, Geometry, GeoJsonProperties } from 'geojson';
+import type { Feature, GeoJsonProperties, Geometry } from 'geojson';
 
 export interface ForeignResource {
   relationField?: string;

@@ -1,6 +1,6 @@
-import type { AdapterOptions, VectorAdapterOptions } from '@nextgis/webmap';
-import type { BaseProperty } from './properties/BaseProperty';
 import type { Item } from './Item';
+import type { BaseProperty } from './properties/BaseProperty';
+import type { AdapterOptions, VectorAdapterOptions } from '@nextgis/webmap';
 
 export type Type<T> = new (...args: any[]) => T;
 

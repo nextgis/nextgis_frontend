@@ -1,5 +1,7 @@
 import { TileLayer } from 'leaflet';
+
 import { makeRemote } from '../../utils/makeRemoteTileLayer';
+
 import type { WMSOptions } from 'leaflet';
 
 type LayerOptions = WMSOptions & { headers: any };

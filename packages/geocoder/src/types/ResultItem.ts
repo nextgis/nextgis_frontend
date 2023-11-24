@@ -1,5 +1,5 @@
-import { GeoJsonObject } from 'geojson';
-import { LngLatBoundsArray } from '@nextgis/utils';
+import type { GeoJsonObject } from 'geojson';
+import type { LngLatBoundsArray } from '@nextgis/utils';
 
 export interface ResultItem {
   /**

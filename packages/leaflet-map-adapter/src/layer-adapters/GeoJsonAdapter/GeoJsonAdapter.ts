@@ -1,39 +1,41 @@
-import { FeatureGroup, DomEvent, GeoJSON, Layer } from 'leaflet';
 import { debounce, defined } from '@nextgis/utils';
+import { DomEvent, FeatureGroup, GeoJSON } from 'leaflet';
 
-import {
-  PAINT,
-  typeAlias,
-  filterGeometries,
-  createFeaturePositionOptions,
-} from '../../utils/geometries';
 import { boundsToArray } from '../../utils/boundsToArray';
 import { detectType } from '../../utils/detectType';
+import {
+  PAINT,
+  createFeaturePositionOptions,
+  filterGeometries,
+  typeAlias,
+} from '../../utils/geometries';
 import { BaseAdapter } from '../BaseAdapter';
-import { GeoJsonEvents } from './utils/GeoJsonEvents';
 
-import type { GeoJsonObject, Feature, Point } from 'geojson';
-import type {
-  PopupOptions as LPopupOptions,
-  LeafletMouseEvent,
-  LatLngExpression,
-  GeoJSONOptions,
-  LatLng,
-  Map,
-} from 'leaflet';
-import type { Paint, IconPaint, VectorAdapterLayerPaint } from '@nextgis/paint';
+import { GeoJsonEvents } from './utils/GeoJsonEvents';
+import { GeoJsonPaint } from './utils/GeojsonPaint';
+
+import type { IconPaint, Paint, VectorAdapterLayerPaint } from '@nextgis/paint';
 import type { LngLatBoundsArray } from '@nextgis/utils';
 import type {
-  VectorAdapterLayerType,
-  GeoJsonAdapterOptions,
-  PopupOnCloseFunction,
-  VectorLayerAdapter,
-  OnLayerSelectType,
-  LayerDefinition,
   DataLayerFilter,
+  GeoJsonAdapterOptions,
+  LayerDefinition,
+  OnLayerSelectType,
+  PopupOnCloseFunction,
   PopupOptions,
+  VectorAdapterLayerType,
+  VectorLayerAdapter,
 } from '@nextgis/webmap';
-import { GeoJsonPaint } from './utils/GeojsonPaint';
+import type { Feature, GeoJsonObject, Point } from 'geojson';
+import type {
+  GeoJSONOptions,
+  PopupOptions as LPopupOptions,
+  LatLng,
+  LatLngExpression,
+  Layer,
+  LeafletMouseEvent,
+  Map,
+} from 'leaflet';
 
 export type LayerDef = LayerDefinition<Feature, Layer>;
 

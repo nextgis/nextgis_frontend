@@ -1,31 +1,32 @@
 import { EventEmitter } from 'events';
-import { debounce, LngLatBoundsArray } from '@nextgis/utils';
+
 import { propertiesFilter } from '@nextgis/properties-filter';
+import { debounce } from '@nextgis/utils';
 
 import { createPopupContent } from '../utils/createPopupContent';
-import { getLayerFilterOptions } from '../utils/getLayerFilterOptions';
 import { fetchNgwExtent } from '../utils/fetchNgwExtent';
+import { fetchNgwLayerCount } from '../utils/fetchNgwLayerCount';
+import { fetchNgwLayerFeatureCollection } from '../utils/fetchNgwLayerFeatureCollection';
+import { getLayerFilterOptions } from '../utils/getLayerFilterOptions';
+import { prepareNgwFieldsToPropertiesFilter } from '../utils/prepareNgwFieldsToPropertiesFilter';
 import { resourceIdFromLayerOptions } from '../utils/resourceIdFromLayerOptions';
 import { vectorLayerGeomToPaintTypeAlias } from '../utils/utils';
-import { fetchNgwLayerFeatureCollection } from '../utils/fetchNgwLayerFeatureCollection';
-import { prepareNgwFieldsToPropertiesFilter } from '../utils/prepareNgwFieldsToPropertiesFilter';
 
-import type { FeatureCollection } from 'geojson';
-import type { PropertiesFilter } from '@nextgis/properties-filter';
-import type CancelablePromise from '@nextgis/cancelable-promise';
-import type { Type } from '@nextgis/utils';
 import type {
-  GeoJsonAdapterOptions,
-  VectorLayerAdapter,
-  FilterOptions,
-  LayerAdapter,
-} from '@nextgis/webmap';
-import type {
-  NgwLayerOptions,
   GetClassAdapterOptions,
   NgwFeatureRequestOptions,
+  NgwLayerOptions,
 } from '../interfaces';
-import { fetchNgwLayerCount } from '../utils/fetchNgwLayerCount';
+import type CancelablePromise from '@nextgis/cancelable-promise';
+import type { PropertiesFilter } from '@nextgis/properties-filter';
+import type { LngLatBoundsArray, Type } from '@nextgis/utils';
+import type {
+  FilterOptions,
+  GeoJsonAdapterOptions,
+  LayerAdapter,
+  VectorLayerAdapter,
+} from '@nextgis/webmap';
+import type { FeatureCollection } from 'geojson';
 
 interface FilterArgs {
   filters?: PropertiesFilter;
@@ -242,7 +243,10 @@ export async function createGeoJsonAdapter(
       }
     }
 
-    async propertiesFilter(filters: PropertiesFilter, opt?: FilterOptions): Promise<void> {
+    async propertiesFilter(
+      filters: PropertiesFilter,
+      opt?: FilterOptions,
+    ): Promise<void> {
       abort();
       if (this.filter && _fullDataLoad) {
         this.filter((e) => {

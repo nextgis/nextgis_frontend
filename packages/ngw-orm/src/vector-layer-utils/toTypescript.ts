@@ -1,12 +1,12 @@
-import {
+import type {
   GeometryType,
   VectorLayerResourceItem,
   VectorFieldDatatype,
 } from '@nextgis/ngw-connector';
 import { capitalize, camelize } from '@nextgis/utils';
-import { VectorLayer } from '../repository/VectorLayer';
+import type { VectorLayer } from '../repository/VectorLayer';
 import { CannotExecuteNotConnectedError } from '../error/CannotExecuteNotConnectedError';
-import {
+import type {
   ToTypescriptOptions,
   ToTypescript,
 } from '../options/ToTypescriptOptions';

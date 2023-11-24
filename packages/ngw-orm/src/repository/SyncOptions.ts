@@ -1,5 +1,5 @@
-import { ResourceIdKeynameDef } from '@nextgis/ngw-connector';
-import { BaseResource } from './BaseResource';
+import type { ResourceIdKeynameDef } from '@nextgis/ngw-connector';
+import type { BaseResource } from './BaseResource';
 
 export interface SyncOptions {
   parent: ResourceIdKeynameDef | typeof BaseResource;

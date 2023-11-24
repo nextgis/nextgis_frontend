@@ -1,10 +1,10 @@
-import type { WebMap } from '../WebMap';
-import type { MapAdapter, MapClickEvent, DataLoadError } from './MapAdapter';
 import type {
   LayerAdapter,
   OnLayerClickOptions,
   OnLayerSelectOptions,
 } from './LayerAdapter';
+import type { DataLoadError, MapAdapter, MapClickEvent } from './MapAdapter';
+import type { WebMap } from '../WebMap';
 
 export interface WebMapEvents extends MainMapEvents {
   /**

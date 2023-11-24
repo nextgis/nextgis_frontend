@@ -1,6 +1,6 @@
-import { MainLayerAdapter, WmsAdapterOptions } from '@nextgis/webmap';
-
 import { TileAdapter } from './TileAdapter';
+
+import type { MainLayerAdapter, WmsAdapterOptions } from '@nextgis/webmap';
 
 export class WmsAdapter
   extends TileAdapter<WmsAdapterOptions>

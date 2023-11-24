@@ -1,4 +1,4 @@
-import { FindConditions } from './FindConditions';
+import type { FindConditions } from './FindConditions';
 
 import type { Properties } from '@nextgis/properties-filter';
 

@@ -1,5 +1,6 @@
-import { MapControl, MapAdapter } from '@nextgis/webmap';
 import * as dom from '@nextgis/dom';
+
+import type { MapAdapter, MapControl } from '@nextgis/webmap';
 
 export class ZoomControl implements MapControl {
   private map?: MapAdapter;

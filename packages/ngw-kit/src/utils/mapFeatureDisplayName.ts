@@ -1,7 +1,9 @@
 import CancelablePromise from '@nextgis/cancelable-promise';
+
+import { defined } from '../../../utils/src';
+
 import type NgwConnector from '@nextgis/ngw-connector';
 import type { ResourceDefinition } from '@nextgis/ngw-connector';
-import { defined } from '../../../utils/src';
 
 export interface MapFeatureDisplayNameOptions {
   connector: NgwConnector;

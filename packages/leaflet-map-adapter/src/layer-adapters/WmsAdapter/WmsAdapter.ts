@@ -1,6 +1,8 @@
 import { TileLayer } from 'leaflet';
-import { WmsLayer as WMS } from './WmsLayer';
+
 import { BaseAdapter } from '../BaseAdapter';
+
+import { WmsLayer as WMS } from './WmsLayer';
 
 import type { MainLayerAdapter, WmsAdapterOptions } from '@nextgis/webmap';
 import type { WMSOptions } from 'leaflet';

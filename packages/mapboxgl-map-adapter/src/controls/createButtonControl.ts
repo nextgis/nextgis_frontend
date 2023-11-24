@@ -1,6 +1,7 @@
-import { IControl } from 'maplibre-gl';
-import { ButtonControlOptions } from '@nextgis/webmap';
 import { createControl } from './createControl';
+
+import type { ButtonControlOptions } from '@nextgis/webmap';
+import type { IControl } from 'maplibre-gl';
 
 export function createButtonControl(options: ButtonControlOptions): IControl {
   const link = document.createElement('button');

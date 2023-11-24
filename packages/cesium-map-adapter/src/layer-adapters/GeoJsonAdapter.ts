@@ -1,42 +1,41 @@
-import { GeoJsonObject, Feature, FeatureCollection } from 'geojson';
+import { isBasePaint, isPaint, isPaintCallback } from '@nextgis/paint';
 import {
-  Color,
-  Entity,
-  Property,
   Cartesian3,
-  PinBuilder,
-  JulianDate,
   Cartographic,
-  VerticalOrigin,
-  HeightReference,
+  Color,
   GeoJsonDataSource,
-  EllipsoidGraphics,
+  HeightReference,
+  JulianDate,
+  PinBuilder,
+  VerticalOrigin,
 } from 'cesium';
-import { isPaintCallback, isBasePaint, isPaint } from '@nextgis/paint';
 
-import type { LngLatBoundsArray } from '@nextgis/utils';
-import type {
-  GeoJsonAdapterOptions,
-  VectorLayerAdapter,
-  DataLayerFilter,
-  LayerDefinition,
-} from '@nextgis/webmap';
-import { PropertiesFilter } from '@nextgis/properties-filter';
-
-import { BaseAdapter, Map } from './BaseAdapter';
-import { isFeature3D } from '../utils/isFeature3D';
-import { getEntitiesBoundingSphere } from '../utils/getEntitiesBoundingSphere';
 import { getBoundsFromBoundingSphere } from '../utils/getBoundsFromBoundingSphere';
+import { getEntitiesBoundingSphere } from '../utils/getEntitiesBoundingSphere';
+import { isFeature3D } from '../utils/isFeature3D';
 import { whenSampleTerrainMostDetailed } from '../utils/whenSampleTerrainMostDetailed';
 
+import { BaseAdapter } from './BaseAdapter';
+
+import type { Map } from './BaseAdapter';
 import type {
-  VectorAdapterLayerPaint,
   Ellipsoid3DPaint,
-  Sphere3DPaint,
   GeometryPaint,
-  PinPaint,
   Paint,
+  PinPaint,
+  Sphere3DPaint,
+  VectorAdapterLayerPaint,
 } from '@nextgis/paint';
+import type { PropertiesFilter } from '@nextgis/properties-filter';
+import type { LngLatBoundsArray } from '@nextgis/utils';
+import type {
+  DataLayerFilter,
+  GeoJsonAdapterOptions,
+  LayerDefinition,
+  VectorLayerAdapter,
+} from '@nextgis/webmap';
+import type { EllipsoidGraphics, Entity, Property } from 'cesium';
+import type { Feature, FeatureCollection, GeoJsonObject } from 'geojson';
 
 type Layer = GeoJsonDataSource;
 

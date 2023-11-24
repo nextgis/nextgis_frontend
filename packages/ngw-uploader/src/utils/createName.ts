@@ -1,6 +1,7 @@
 import { defined } from '@nextgis/utils';
-import type { FileMeta } from '@nextgis/ngw-connector';
+
 import type { ResourceCreateOptions } from '../interfaces';
+import type { FileMeta } from '@nextgis/ngw-connector';
 
 export function nameFromOpt(opt: ResourceCreateOptions): string | undefined {
   return opt.displayName || opt.display_name || opt.name || defined(opt.id)

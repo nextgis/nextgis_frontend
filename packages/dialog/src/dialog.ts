@@ -1,6 +1,7 @@
 import 'dialog-polyfill/dialog-polyfill.css';
 import dialogPolyfill from 'dialog-polyfill';
-import { DialogAdapter, DialogAdapterOptions } from './interfaces';
+
+import type { DialogAdapter, DialogAdapterOptions } from './interfaces';
 
 import './dialog.css';
 

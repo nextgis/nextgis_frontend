@@ -1,21 +1,18 @@
-import {
-  fetchNgwLayerItem,
-  IdentifyItemOptions,
-  fetchNgwLayerItemExtent,
-} from '.';
 import CancelablePromise from '@nextgis/cancelable-promise';
 
-import type { NgwFeatureItemResponse } from '.';
-import type { GeoJsonObject, Geometry, Feature } from 'geojson';
+import { fetchNgwLayerItem, fetchNgwLayerItemExtent } from '.';
+
+import type { IdentifyItemOptions, NgwFeatureItemResponse } from '.';
+import type { FetchNgwItemOptions } from './interfaces';
 import type {
-  VectorLayerResourceItem,
   FeatureItemExtensions,
   FeatureResource,
   LayerFeature,
+  VectorLayerResourceItem,
 } from '@nextgis/ngw-connector';
 import type NgwConnector from '@nextgis/ngw-connector';
 import type { FeatureProperties, LngLatBoundsArray } from '@nextgis/utils';
-import type { FetchNgwItemOptions } from './interfaces';
+import type { Feature, GeoJsonObject, Geometry } from 'geojson';
 
 export class IdentifyItem<
   F extends FeatureProperties = FeatureProperties,

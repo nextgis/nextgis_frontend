@@ -1,4 +1,4 @@
-import { FilterOptions, GeoJsonAdapterOptions } from '@nextgis/webmap';
+import type { FilterOptions, GeoJsonAdapterOptions } from '@nextgis/webmap';
 
 const filterOptionsKeys: (keyof FilterOptions)[] = [
   'fields',

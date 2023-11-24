@@ -1,7 +1,7 @@
 import './PanelControl.css';
 
-import Control from 'ol/control/Control';
 import ControlContainer from '@nextgis/control-container';
+import Control from 'ol/control/Control';
 
 import type { ControlPosition } from '@nextgis/webmap';
 

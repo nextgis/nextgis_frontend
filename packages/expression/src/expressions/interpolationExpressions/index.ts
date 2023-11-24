@@ -1,5 +1,5 @@
-import { step } from './step';
 import { interpolate } from './interpolate';
+import { step } from './step';
 
 import type {
   ExpressionFunc,

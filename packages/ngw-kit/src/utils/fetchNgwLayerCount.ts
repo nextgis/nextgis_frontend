@@ -1,6 +1,5 @@
-import CancelablePromise from '@nextgis/cancelable-promise';
-
 import type { FetchNgwLayerCountOptions } from '../interfaces';
+import type CancelablePromise from '@nextgis/cancelable-promise';
 
 export function fetchNgwLayerCount({
   connector,

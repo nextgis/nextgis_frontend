@@ -1,4 +1,5 @@
 import { isObject } from '@nextgis/utils';
+
 import { NetworksResponseError } from './NetworksResponseError';
 
 export function extractError(error: unknown) {

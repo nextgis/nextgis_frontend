@@ -1,4 +1,5 @@
 import { isPaint } from '@nextgis/paint';
+
 import { detectGeometryType } from './geometryTypes';
 
 import type {
@@ -38,10 +39,10 @@ export function updateGeoJsonAdapterOptions<
       p.type = p.type
         ? p.type
         : geomType === 'polygon' || geomType === 'line'
-        ? 'path'
-        : 'html' in p || 'className' in p
-        ? 'icon'
-        : paintTypeAlias[geomType];
+          ? 'path'
+          : 'html' in p || 'className' in p
+            ? 'icon'
+            : paintTypeAlias[geomType];
     }
     opt.type = opt.type || geomType;
   }

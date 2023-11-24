@@ -1,11 +1,13 @@
-import {
-  RequestOptions as NgwRequestOptions,
-  RequestMethods,
-} from '../interfaces';
 import { NetworkError } from '../errors/NetworkError';
 import { NgwError } from '../errors/NgwError';
 import { isError } from '../errors/isError';
+
 import { isObject } from './isObject';
+
+import type {
+  RequestOptions as NgwRequestOptions,
+  RequestMethods,
+} from '../interfaces';
 
 // readyState
 // Holds the status of the XMLHttpRequest.

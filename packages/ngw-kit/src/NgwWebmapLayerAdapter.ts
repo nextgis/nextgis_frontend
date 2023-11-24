@@ -1,36 +1,36 @@
 import { EventEmitter } from 'events';
 
-import CancelablePromise from '@nextgis/cancelable-promise';
-import { fixUrlStr } from '@nextgis/utils';
 import {
-  fetchNgwLayerItems,
   WEBMAP_BASELAYER_ID_PREFIX,
+  fetchNgwLayerItems,
 } from '@nextgis/ngw-kit';
+import { fixUrlStr } from '@nextgis/utils';
 
+import { BookmarkItem } from './BookmarkItem';
 import { NgwWebmapItem } from './NgwWebmapItem';
 import { createOnFirstShowNgwAdapter } from './adapters/createOnFirstShowNgwAdapter';
-import { ngwApiToAdapterOptions } from './utils/ngwApiToAdapterOptions';
 import { getNgwWebmapExtent } from './utils/fetchNgwExtent';
+import { ngwApiToAdapterOptions } from './utils/ngwApiToAdapterOptions';
 import { updateImageParams } from './utils/utils';
-import { BookmarkItem } from './BookmarkItem';
 
-import type StrictEventEmitter from 'strict-event-emitter-types';
-import type { Type, LngLatBoundsArray } from '@nextgis/utils';
-import type { ItemOptions } from '@nextgis/item';
 import type {
-  WebmapResource,
-  BasemapWebmap,
-  ResourceItem,
-} from '@nextgis/ngw-connector';
-import type { WebMap, RasterAdapterOptions } from '@nextgis/webmap';
-import type {
-  TreeGroup,
-  TreeLayer,
-  ResourceAdapter,
   NgwLayerAdapterType,
   NgwWebmapAdapterOptions,
   NgwWebmapLayerAdapterEvents,
+  ResourceAdapter,
+  TreeGroup,
+  TreeLayer,
 } from './interfaces';
+import type CancelablePromise from '@nextgis/cancelable-promise';
+import type { ItemOptions } from '@nextgis/item';
+import type {
+  BasemapWebmap,
+  ResourceItem,
+  WebmapResource,
+} from '@nextgis/ngw-connector';
+import type { LngLatBoundsArray, Type } from '@nextgis/utils';
+import type { RasterAdapterOptions, WebMap } from '@nextgis/webmap';
+import type StrictEventEmitter from 'strict-event-emitter-types';
 
 export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
   layer?: NgwWebmapItem;

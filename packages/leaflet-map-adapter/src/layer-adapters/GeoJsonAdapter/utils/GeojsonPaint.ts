@@ -1,22 +1,22 @@
-import { CircleMarker, DivIcon, Marker } from 'leaflet';
+import { isPaint, isPaintCallback } from '@nextgis/paint';
 import { defined } from '@nextgis/utils';
+import { CircleMarker, DivIcon, Marker } from 'leaflet';
 
-import { isPaintCallback, isPaint } from '@nextgis/paint';
 import { PAINT } from '../../../utils/geometries';
 
-import type {
-  CircleMarkerOptions,
-  LatLngExpression,
-  GeoJSONOptions,
-  PathOptions,
-  Path,
-} from 'leaflet';
+import type { GeoJsonAdapter, LayerDef } from '../GeoJsonAdapter';
 import type {
   IconPaint,
   PathPaint,
   VectorAdapterLayerPaint,
 } from '@nextgis/paint';
-import type { GeoJsonAdapter, LayerDef } from '../GeoJsonAdapter';
+import type {
+  CircleMarkerOptions,
+  GeoJSONOptions,
+  LatLngExpression,
+  Path,
+  PathOptions,
+} from 'leaflet';
 
 export class GeoJsonPaint {
   private layer: GeoJsonAdapter;

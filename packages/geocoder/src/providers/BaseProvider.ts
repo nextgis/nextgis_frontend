@@ -1,4 +1,4 @@
-import { BaseProviderOptions } from './BaseProviderOptions';
+import type { BaseProviderOptions } from './BaseProviderOptions';
 import { BaseGeocoder } from '../BaseGeocoder';
 
 /**

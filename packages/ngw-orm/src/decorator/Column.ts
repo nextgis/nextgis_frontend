@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { ColumnType } from '../types/ColumnTypes';
-import { ColumnOptions } from '../options/ColumnOptions';
+import type { ColumnType } from '../types/ColumnTypes';
+import type { ColumnOptions } from '../options/ColumnOptions';
 import { ColumnTypeUndefinedError } from '../error/ColumnTypeUndefinedError';
 import { getMetadataArgsStorage } from '../index';
-import { ColumnMetadataArgs } from '../metadata-args/ColumnMetadataArgs';
+import type { ColumnMetadataArgs } from '../metadata-args/ColumnMetadataArgs';
 
 /**
  * Column decorator is used to mark a specific class property as a table column. Only properties decorated with this

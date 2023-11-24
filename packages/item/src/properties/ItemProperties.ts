@@ -1,12 +1,12 @@
-import { BaseProperty } from './BaseProperty';
 import { CheckProperty } from './CheckProperty';
-import { Item } from '../Item';
 
-import {
+import type { BaseProperty } from './BaseProperty';
+import type { Item } from '../Item';
+import type {
   ItemBasePropertyOptions,
-  Type,
   ItemPropertyConfig,
   ItemPropertyTypes,
+  Type,
 } from '../interfaces';
 
 // Constants for property types

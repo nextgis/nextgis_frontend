@@ -3,6 +3,7 @@ import type {
   RasterAdapterOptions,
   WebMap,
 } from '@nextgis/webmap';
+
 export interface QmsOptions {
   url: string;
 }

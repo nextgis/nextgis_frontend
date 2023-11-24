@@ -1,4 +1,5 @@
-import { isObject, defined } from '@nextgis/utils';
+import { defined, isObject } from '@nextgis/utils';
+
 import type { NgwDateFormat, NgwDateTimeFormat } from '@nextgis/ngw-connector';
 
 export function prepareNgwFieldsToPropertiesFilter(

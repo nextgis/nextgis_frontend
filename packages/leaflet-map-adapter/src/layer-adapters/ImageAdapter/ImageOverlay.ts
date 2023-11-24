@@ -1,9 +1,8 @@
-import {
-  ImageOverlay as LImageOverlay,
-  LatLngBoundsExpression,
-  ImageOverlayOptions,
-} from 'leaflet';
+import { ImageOverlay as LImageOverlay } from 'leaflet';
+
 import { callAjax } from '../../utils/callAjax';
+
+import type { ImageOverlayOptions, LatLngBoundsExpression } from 'leaflet';
 
 type IOptions = ImageOverlayOptions & { headers?: any };
 

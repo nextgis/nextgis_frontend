@@ -1,53 +1,55 @@
 import { EventEmitter } from 'events';
-import ControlContainer from '@nextgis/control-container';
 
+import ControlContainer from '@nextgis/control-container';
 import {
-  Color,
-  Event,
-  Viewer,
-  Entity,
-  SceneMode,
-  Rectangle,
-  Ellipsoid,
   Cartesian3,
-  Cartesian2,
   Cartographic,
-  TerrainProvider,
-  GeoJsonDataSource,
   Math as CesiumMath,
+  Color,
+  Ellipsoid,
+  Entity,
+  GeoJsonDataSource,
   GridImageryProvider,
+  Rectangle,
+  SceneMode,
   ScreenSpaceEventType,
+  Viewer,
   WebMercatorProjection,
-  viewerCesiumInspectorMixin,
   viewerCesium3DTilesInspectorMixin,
+  viewerCesiumInspectorMixin,
 } from 'cesium';
 
-import { TileAdapter } from './layer-adapters/TileAdapter';
+import { MeasureControl } from './controls/MeasureControl';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
-import { TerrainAdapter } from './layer-adapters/TerrainAdapter';
 import { Model3DAdapter } from './layer-adapters/Model3DAdapter';
+import { TerrainAdapter } from './layer-adapters/TerrainAdapter';
+import { TileAdapter } from './layer-adapters/TileAdapter';
 import { Tileset3DAdapter } from './layer-adapters/Tileset3DAdapter';
+import { cartesian3ToLngLat } from './utils/cartesian3ToLngLat';
 import { getCameraFocus } from './utils/getCameraFocus';
 import { getDefaultTerrain } from './utils/getDefaultTerrain';
-import { cartesian3ToLngLat } from './utils/cartesian3ToLngLat';
 import { whenSampleTerrainMostDetailed } from './utils/whenSampleTerrainMostDetailed';
-import { MeasureControl } from './controls/MeasureControl';
 
-import type { ScreenSpaceEventHandler } from 'cesium';
+import type { CesiumAdapterMapClickEvent } from './interfaces';
+import type { PathPaint } from '@nextgis/paint';
+import type { LngLatArray, LngLatBoundsArray, Type } from '@nextgis/utils';
 import type {
-  FitOptions,
-  MapControl,
-  MapOptions,
-  MapAdapter,
-  WebMapEvents,
-  MapClickEvent,
+  ButtonControlOptions,
   ControlPosition,
   CreateControlOptions,
-  ButtonControlOptions,
+  FitOptions,
+  MapAdapter,
+  MapClickEvent,
+  MapControl,
+  MapOptions,
+  WebMapEvents,
 } from '@nextgis/webmap';
-import type { Type, LngLatArray, LngLatBoundsArray } from '@nextgis/utils';
-import type { PathPaint } from '@nextgis/paint';
-import type { CesiumAdapterMapClickEvent } from './interfaces';
+import type {
+  Cartesian2,
+  Event,
+  ScreenSpaceEventHandler,
+  TerrainProvider,
+} from 'cesium';
 
 type Layer = any;
 type Control = any;

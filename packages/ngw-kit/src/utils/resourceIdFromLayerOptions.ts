@@ -1,5 +1,6 @@
-import NgwConnector, { ResourceItem } from '@nextgis/ngw-connector';
 import type { NgwLayerOptions } from '../interfaces';
+import type { ResourceItem } from '@nextgis/ngw-connector';
+import type NgwConnector from '@nextgis/ngw-connector';
 
 export async function resourceIdFromLayerOptions(
   options: NgwLayerOptions,

@@ -1,4 +1,5 @@
 import { EARTHS_RADIUS } from './constants';
+
 import type { Position } from 'geojson';
 
 const d2r = Math.PI / 180;
@@ -18,5 +19,4 @@ export function getSquarePolygonCoordinates(
   const bottomLeft: Position = [lng - rlng, lat - rlat];
 
   return [topLeft, topRight, bottomRight, bottomLeft, topLeft];
-
 }

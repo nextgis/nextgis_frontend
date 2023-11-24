@@ -1,4 +1,4 @@
-import { LngLatArray } from '@nextgis/utils';
+import type { LngLatArray } from '@nextgis/utils';
 
 export function getIdentifyRadius(
   center: LngLatArray,

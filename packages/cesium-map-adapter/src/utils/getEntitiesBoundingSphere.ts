@@ -1,4 +1,6 @@
-import { BoundingSphere, defined, Entity, SceneMode, Viewer } from 'cesium';
+import { BoundingSphere, SceneMode, defined } from 'cesium';
+
+import type { Entity, Viewer } from 'cesium';
 
 const boundingSphereScratch = new BoundingSphere();
 

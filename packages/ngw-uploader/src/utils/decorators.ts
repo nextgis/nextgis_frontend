@@ -1,7 +1,7 @@
 import { template } from './template';
 
 import type { NgwUploader } from '../NgwUploader';
-import type { EmitterStatus, AvailableStatus } from '../interfaces';
+import type { AvailableStatus, EmitterStatus } from '../interfaces';
 
 /**
  * decorator to emit events on start end and error for async methods

@@ -3,7 +3,8 @@
  */
 
 import { Dialog } from './dialog';
-import { DialogAdapterOptions } from './interfaces';
+
+import type { DialogAdapterOptions } from './interfaces';
 
 export type { DialogAdapterOptions };
 

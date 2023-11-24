@@ -2,42 +2,42 @@ import { EventEmitter } from 'events';
 
 import Map from 'ol/Map';
 import View from 'ol/View';
-import { Extent } from 'ol/extent';
-import { fromLonLat, transformExtent, transform } from 'ol/proj';
+import { fromLonLat, transform, transformExtent } from 'ol/proj';
 
-import { WmsAdapter } from './layer-adapters/WmsAdapter';
 // import { CogAdapter } from './layer-adapters/CogAdapter';
-import { OsmAdapter } from './layer-adapters/OsmAdapter';
-import { TileAdapter } from './layer-adapters/TileAdapter';
-import { ImageAdapter } from './layer-adapters/ImageAdapter';
-import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 
-import { ZoomControl } from './controls/ZoomControl';
 import { Attribution } from './controls/Attribution';
 import { PanelControl } from './controls/PanelControl';
-import { createControl } from './controls/createControl';
+import { ZoomControl } from './controls/ZoomControl';
 import { createButtonControl } from './controls/createButtonControl';
+import { createControl } from './controls/createControl';
+import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
+import { ImageAdapter } from './layer-adapters/ImageAdapter';
+import { OsmAdapter } from './layer-adapters/OsmAdapter';
+import { TileAdapter } from './layer-adapters/TileAdapter';
+import { WmsAdapter } from './layer-adapters/WmsAdapter';
 import { convertMapClickEvent } from './utils/convertMapClickEvent';
 
-import type { FitOptions as OlFitOptions } from 'ol/View';
-import type Base from 'ol/layer/Base';
-import type { Pixel } from 'ol/pixel';
-import type { ViewOptions as OlViewOptions } from 'ol/View';
-import type BaseEvent from 'ol/events/Event';
-import type Control from 'ol/control/Control';
-import type MapBrowserEvent from 'ol/MapBrowserEvent';
-import type { MapOptions as OlMapOptions } from 'ol/PluggableMap';
 import type { LngLatArray, LngLatBoundsArray } from '@nextgis/utils';
 import type {
-  FitOptions,
-  MapControl,
-  MapAdapter,
-  MapOptions,
-  ViewOptions,
+  ButtonControlOptions,
   ControlPosition,
   CreateControlOptions,
-  ButtonControlOptions,
+  FitOptions,
+  MapAdapter,
+  MapControl,
+  MapOptions,
+  ViewOptions,
 } from '@nextgis/webmap';
+import type MapBrowserEvent from 'ol/MapBrowserEvent';
+import type { MapOptions as OlMapOptions } from 'ol/PluggableMap';
+import type { ViewOptions as OlViewOptions } from 'ol/View';
+import type { FitOptions as OlFitOptions } from 'ol/View';
+import type Control from 'ol/control/Control';
+import type BaseEvent from 'ol/events/Event';
+import type { Extent } from 'ol/extent';
+import type Base from 'ol/layer/Base';
+import type { Pixel } from 'ol/pixel';
 
 export type MouseEventType = 'click' | 'hover';
 

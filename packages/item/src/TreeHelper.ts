@@ -1,6 +1,7 @@
-import { treeFind, treeFilter, treeEvery, treeSome } from '@nextgis/tree';
-import { Item } from './Item';
-import { ItemOptions } from './interfaces';
+import { treeEvery, treeFilter, treeFind, treeSome } from '@nextgis/tree';
+
+import type { Item } from './Item';
+import type { ItemOptions } from './interfaces';
 
 export class TreeHelper {
   item: Item;

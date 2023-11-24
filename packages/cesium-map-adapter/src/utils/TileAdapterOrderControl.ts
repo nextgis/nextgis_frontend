@@ -1,4 +1,4 @@
-import { ImageryLayer, ImageryLayerCollection } from 'cesium';
+import type { ImageryLayer, ImageryLayerCollection } from 'cesium';
 
 const catalog: [ImageryLayerCollection, [ImageryLayer, number][]][] = [];
 

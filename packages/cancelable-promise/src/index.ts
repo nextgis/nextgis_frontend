@@ -4,8 +4,8 @@
  * @packageDocumentation
  * @module cancelable-promise
  */
-import { CancelablePromise } from './CancelablePromise';
 import { CancelError } from './CancelError';
+import { CancelablePromise } from './CancelablePromise';
 
 export { CancelError };
 

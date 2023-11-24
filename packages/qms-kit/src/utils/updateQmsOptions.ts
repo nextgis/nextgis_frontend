@@ -1,6 +1,5 @@
-import type { LayerAdaptersOptions, AdapterOptions } from '@nextgis/webmap';
-
 import type { QmsBasemap, QmsLayerType } from '../interfaces';
+import type { AdapterOptions, LayerAdaptersOptions } from '@nextgis/webmap';
 
 export const alias: { [key in QmsLayerType]: keyof LayerAdaptersOptions } = {
   tms: 'TILE',

@@ -1,13 +1,13 @@
 import { createQmsAdapter } from './utils/createQmsAdapter';
 
+import type { QmsOptions } from './interfaces';
 import type { Type } from '@nextgis/utils';
 import type {
-  WebMap,
-  StarterKit,
-  MainLayerAdapter,
   LayerAdapterCreators,
+  MainLayerAdapter,
+  StarterKit,
+  WebMap,
 } from '@nextgis/webmap';
-import type { QmsOptions } from './interfaces';
 
 export class QmsKit implements StarterKit {
   static utils = {

@@ -6,7 +6,8 @@
  */
 
 import { debounce } from '@nextgis/utils';
-import { Layer, Util, CRS } from 'leaflet';
+import { CRS, Layer, Util } from 'leaflet';
+
 import { ImageOverlay } from './ImageOverlay';
 
 import type { Map } from 'leaflet';

@@ -1,6 +1,8 @@
 import { TileLayer } from 'leaflet';
-import { TileLayer as TL } from './TileLayer';
+
 import { BaseAdapter } from '../BaseAdapter';
+
+import { TileLayer as TL } from './TileLayer';
 
 import type { MainLayerAdapter, TileAdapterOptions } from '@nextgis/webmap';
 import type { TileLayerOptions } from 'leaflet';

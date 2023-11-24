@@ -1,9 +1,11 @@
-import { TileAdapterOptions } from '@nextgis/webmap';
 import { CesiumTerrainProvider } from 'cesium';
 
-import { BaseAdapter } from './BaseAdapter';
 import { getDefaultTerrain } from '../utils/getDefaultTerrain';
 import { makeUrl } from '../utils/makeUrl';
+
+import { BaseAdapter } from './BaseAdapter';
+
+import type { TileAdapterOptions } from '@nextgis/webmap';
 
 type Layer = CesiumTerrainProvider;
 

@@ -1,4 +1,5 @@
 import { StateItem } from './StateItem';
+
 import type { WebMapEvents } from '../../interfaces/Events';
 import type { MapOptions } from '../../interfaces/MapOptions';
 

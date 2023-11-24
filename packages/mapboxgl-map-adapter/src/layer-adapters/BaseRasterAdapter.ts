@@ -1,6 +1,6 @@
-import type { Map } from 'maplibre-gl';
-import type { MainLayerAdapter, RasterAdapterOptions } from '@nextgis/webmap';
 import type { TLayer } from '../MapboxglMapAdapter';
+import type { MainLayerAdapter, RasterAdapterOptions } from '@nextgis/webmap';
+import type { Map } from 'maplibre-gl';
 
 let ID = 0;
 
@@ -12,7 +12,10 @@ export abstract class BaseRasterAdapter<
   map?: Map;
   protected readonly _layerId: string;
 
-  constructor(map: Map, public options: O) {
+  constructor(
+    map: Map,
+    public options: O,
+  ) {
     this.map = map;
     this._layerId = `layer-${ID++}`;
   }

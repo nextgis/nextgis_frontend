@@ -1,5 +1,7 @@
-import { Control, ControlOptions } from 'leaflet';
-import { AttributionControlOptions } from '@nextgis/webmap';
+import { Control } from 'leaflet';
+
+import type { AttributionControlOptions } from '@nextgis/webmap';
+import type { ControlOptions } from 'leaflet';
 
 export class AttributionControl extends Control.Attribution {
   // options: AttributionControlOptions

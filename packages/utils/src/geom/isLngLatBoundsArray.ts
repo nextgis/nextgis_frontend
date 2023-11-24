@@ -1,4 +1,4 @@
-import { LngLatBoundsArray } from '@nextgis/utils';
+import type { LngLatBoundsArray } from '@nextgis/utils';
 
 export function isLngLatBoundsArray(
   array: unknown,

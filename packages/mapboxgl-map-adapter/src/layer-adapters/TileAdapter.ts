@@ -1,17 +1,18 @@
 import { convertZoomLevel } from '../utils/convertZoomLevel';
 import { setupLayerTransformRequest } from '../utils/setupLayerTransformRequest';
+
 import { BaseRasterAdapter } from './BaseRasterAdapter';
 
 import type {
-  RasterSourceSpecification,
-  RasterLayerSpecification,
-  LayerSpecification,
-} from 'maplibre-gl';
-import type {
   MainLayerAdapter,
-  TileAdapterOptions,
   RasterAdapterOptions,
+  TileAdapterOptions,
 } from '@nextgis/webmap';
+import type {
+  LayerSpecification,
+  RasterLayerSpecification,
+  RasterSourceSpecification,
+} from 'maplibre-gl';
 
 type Layer = RasterLayerSpecification;
 

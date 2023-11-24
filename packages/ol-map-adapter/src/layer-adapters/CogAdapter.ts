@@ -1,17 +1,21 @@
-import GeoTIFF from 'ol/source/GeoTIFF';
 import TileLayer from 'ol/layer/WebGLTile';
+import GeoTIFF from 'ol/source/GeoTIFF';
 
-import { BaseAdapter } from './BaseAdapter';
 import { resolutionOptions } from '../utils/gerResolution';
 
+import { BaseAdapter } from './BaseAdapter';
+
+import type { MainLayerAdapter, RasterAdapterOptions } from '@nextgis/webmap';
 import type Map from 'ol/Map';
 import type { Options } from 'ol/source/GeoTIFF';
-import type { MainLayerAdapter, RasterAdapterOptions } from '@nextgis/webmap';
 
 export class CogAdapter extends BaseAdapter implements MainLayerAdapter {
   layer: any;
 
-  constructor(public map: Map, public options: RasterAdapterOptions) {
+  constructor(
+    public map: Map,
+    public options: RasterAdapterOptions,
+  ) {
     super(map, options);
   }
 

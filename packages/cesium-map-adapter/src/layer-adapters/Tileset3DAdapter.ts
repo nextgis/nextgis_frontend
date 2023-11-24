@@ -1,21 +1,23 @@
+import { debugLog } from '@nextgis/utils';
 import {
-  Color,
-  Matrix4,
   Cartesian3,
   Cartographic,
-  Cesium3DTileset,
   Cesium3DTileStyle,
+  Cesium3DTileset,
+  Color,
+  Matrix4,
   PointCloudShading,
 } from 'cesium';
-import { debugLog } from '@nextgis/utils';
+
 import { getBoundsFromBoundingSphere } from '../utils/getBoundsFromBoundingSphere';
 import { makeUrl } from '../utils/makeUrl';
 import { whenSampleTerrainMostDetailed } from '../utils/whenSampleTerrainMostDetailed';
+
 import { BaseAdapter } from './BaseAdapter';
 
-import type Resource from 'cesium/Source/Core/Resource';
 import type { LngLatBoundsArray } from '@nextgis/utils';
 import type { Tileset3DAdapterOptions } from '@nextgis/webmap';
+import type Resource from 'cesium/Source/Core/Resource';
 
 export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
   layer?: Cesium3DTileset;

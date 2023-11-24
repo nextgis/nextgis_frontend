@@ -1,6 +1,8 @@
 import { CancelError } from './CancelError';
-import { PromiseControl, PromiseControlOptions } from './PromiseControl';
+import { PromiseControl } from './PromiseControl';
 import { TimeoutError } from './TimeoutError';
+
+import type { PromiseControlOptions } from './PromiseControl';
 
 type Reject = (reason?: any) => void;
 type Resolve = (value?: any) => void;
@@ -160,7 +162,7 @@ export class CancelablePromise<T = any> implements Promise<T> {
     }).catch((er) => {
       if (er instanceof this.CancelError) {
         for (const v of values) {
-          const v_ = v as CancelablePromise
+          const v_ = v as CancelablePromise;
           if ('cancel' in v_) {
             v_.cancel();
           }

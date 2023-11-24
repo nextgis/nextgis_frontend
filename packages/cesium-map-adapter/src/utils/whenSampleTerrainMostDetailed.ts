@@ -1,9 +1,6 @@
-import {
-  sampleTerrainMostDetailed,
-  TerrainProvider,
-  Cartographic,
-  EllipsoidTerrainProvider,
-} from 'cesium';
+import { EllipsoidTerrainProvider, sampleTerrainMostDetailed } from 'cesium';
+
+import type { Cartographic, TerrainProvider } from 'cesium';
 
 export function whenSampleTerrainMostDetailed(
   terrainProvider: TerrainProvider,
