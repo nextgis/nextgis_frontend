@@ -1,5 +1,5 @@
 {
   "name": "Multiple NGW layers",
-  "description": "Add multiple resources (vector layers) from NGW cloud to a map using config. Click on the beige polygon layer to perform identification.",
+  "description": "Add multiple resources (vector layers) from NextGIS Web to a map using config. Click on the beige polygon layer to perform identification.",
   "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
 }

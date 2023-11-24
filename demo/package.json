@@ -59,7 +59,7 @@
     "build": "npm run dev -- --mode=production",
     "prod": "exit 0",
     "watch": "npm run dev -- --watch",
-    "docker": "docmypkg -r registry.nextgis.com -n code-nextgis -l"
+    "docker": "docmypkg -r harbor.nextgis.net -n frontend/code -l"
   },
   "repository": {
     "type": "git",
@@ -75,8 +75,8 @@
     "dist"
   ],
   "dockerpkg": {
-    "name": "code-nextgis",
-    "registry": "habor.nextgis.net"
+    "name": "frontend/code",
+    "registry": "harbor.nextgis.net"
   },
   "license": "MIT"
 }
