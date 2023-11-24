@@ -10,7 +10,12 @@ import type {
 } from '../interfaces';
 import type { ResourceCls, ResourceItem } from '@nextgis/ngw-connector';
 import type { Type } from '@nextgis/utils';
-import type { ImageAdapterOptions, MainLayerAdapter } from '@nextgis/webmap';
+import type {
+  GetLegendOptions,
+  ImageAdapterOptions,
+  LayerLegend,
+  MainLayerAdapter,
+} from '@nextgis/webmap';
 
 export async function createRasterAdapter({
   layerOptions,
@@ -67,7 +72,7 @@ export async function createRasterAdapter({
             ...layerOptions.adapterOptions,
             params: { resource: resourceId },
             layers: opt.layers || String(resourceId),
-            resourceId: resourceId,
+            resourceId,
           };
           if (
             layerOptions.adapterOptions &&
@@ -81,6 +86,26 @@ export async function createRasterAdapter({
       }
       addLayer(addOptions: any) {
         return super.addLayer({ ...this.options, ...addOptions });
+      }
+
+      async getLegend(options?: GetLegendOptions): Promise<LayerLegend[]> {
+        const ngwLegend = await connector.get('render.legend_symbols', {
+          params: { id: resourceId },
+          cache: true,
+          ...options,
+        });
+        const id = this.options.id;
+        if (id !== undefined) {
+          const legend: LayerLegend = {
+            layerId: id,
+            legend: ngwLegend.map(({ display_name, icon }) => ({
+              name: display_name,
+              symbol: icon,
+            })),
+          };
+          return [legend];
+        }
+        return [];
       }
 
       async getIdentificationIds(): Promise<number[]> {
