@@ -4,7 +4,7 @@
   "version": "1.2.0",
   "scripts": {
     "doc": "node ./node_modules/typedoc/bin/typedoc",
-    "docker": "docmypkg -r habor.nextgis.net -n code-api-nextgis -l -d ./docker"
+    "docker": "docmypkg -r harbor.nextgis.net -n frontend/code-api -l -d ./docker"
   },
   "devDependencies": {
     "docmypkg": "^0.0.1",
