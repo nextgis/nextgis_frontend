@@ -29,6 +29,7 @@ import type {
   WebmapResource,
 } from '@nextgis/ngw-connector';
 import type { LngLatBoundsArray, Type } from '@nextgis/utils';
+import type { LayerLegend } from '@nextgis/webmap';
 import type { RasterAdapterOptions, WebMap } from '@nextgis/webmap';
 import type StrictEventEmitter from 'strict-event-emitter-types';
 
@@ -185,6 +186,19 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
     throw new Error(
       'Webmap was not loaded correctly, it is impossible to extract bookmarks',
     );
+  }
+
+  async getLegend(): Promise<LayerLegend[]> {
+    const legends: LayerLegend[] = [];
+
+    let deps = this.getDependLayers();
+    deps = deps.sort((a, b) => b.id - a.id);
+    for (const d of deps) {
+      const layerLegend = await d.getLegend();
+      legends.push(...layerLegend);
+    }
+
+    return legends;
   }
 
   async getIdentificationIds(): Promise<number[]> {

@@ -10,9 +10,11 @@ import type { TreeGroup, TreeItem, TreeLayer } from './interfaces';
 import type { ItemOptions } from '@nextgis/item';
 import type NgwConnector from '@nextgis/ngw-connector';
 import type {
+  GetLegendOptions,
   ImageAdapterOptions,
   LayerAdapter,
   LayerAdapterDefinition,
+  LayerLegend,
   VectorAdapterOptions,
   WebMap,
 } from '@nextgis/webmap';
@@ -154,6 +156,30 @@ export class NgwWebmapItem extends Item<ItemOptions> {
     return this.layer;
   }
 
+  async getLegend(options?: GetLegendOptions): Promise<LayerLegend[]> {
+    const id = this.layer?.id;
+    if (id !== undefined) {
+      const connector = this.connector;
+      if (connector) {
+        const ngwLegend = await connector.get('render.legend_symbols', {
+          params: { id: this.item.resourceId },
+          cache: true,
+          ...options,
+        });
+        const legend: LayerLegend = {
+          layerId: id,
+          legend: ngwLegend.map(({ display_name, icon }) => ({
+            name: display_name,
+            symbol: icon,
+          })),
+        };
+        return [legend];
+      }
+    }
+
+    return [];
+  }
+
   protected getItemOptions(item: TreeGroup | TreeLayer): Record<string, any> {
     const transparency = item.item_type === 'layer' && item.layer_transparency;
     const opacity =
@@ -161,6 +187,7 @@ export class NgwWebmapItem extends Item<ItemOptions> {
     const options: Partial<ImageAdapterOptions> &
       Pick<VectorAdapterOptions, 'popupOptions'> = {
       visibility: false,
+      name: item.display_name,
       headers: this.options.headers,
       crossOrigin: this.options.crossOrigin,
       setViewDelay: this.options.setViewDelay,
