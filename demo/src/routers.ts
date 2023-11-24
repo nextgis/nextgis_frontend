@@ -1,6 +1,7 @@
 import VueRouter from 'vue-router';
-import MainPage from './MainPage.vue';
+
 import ExampleOutsidePage from './ExampleOutsidePage.vue';
+import MainPage from './MainPage.vue';
 
 export const router = new VueRouter({
   mode: 'history',

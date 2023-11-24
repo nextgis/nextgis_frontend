@@ -1,6 +1,8 @@
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Component, Prop, Vue } from 'vue-property-decorator';
+
 import SendToCodepen from '../../SendToCodepen/SendToCodepen.vue';
-import { Item, Package } from '../../../MainPage';
+
+import type { Item, Package } from '../../../MainPage';
 
 const changeHtmlMapAdapter: (
   html: string,

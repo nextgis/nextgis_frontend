@@ -1,6 +1,8 @@
+import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
+
 import codepenIcon from './images/codepen.svg';
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
-import { Item } from '../../MainPage';
+
+import type { Item } from '../../MainPage';
 
 interface PenData {
   html?: string;

@@ -1,6 +1,8 @@
-import { Vue, Component, Prop } from 'vue-property-decorator';
-import { Item } from '../../MainPage';
+import { Component, Prop, Vue } from 'vue-property-decorator';
+
 import { mdToHtml } from '../../services/mdToHtml';
+
+import type { Item } from '../../MainPage';
 
 @Component
 export class Readme extends Vue {

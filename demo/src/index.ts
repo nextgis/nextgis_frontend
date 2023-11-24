@@ -1,12 +1,12 @@
 import 'core-js';
 import Vue from 'vue';
-import store from './store';
-import { router } from './routers';
-import App from './App.vue';
+import VueHighlightJS from 'vue-highlightjs';
 import VueRouter from 'vue-router';
 
-import VueHighlightJS from 'vue-highlightjs';
+import App from './App.vue';
 import vuetify from './plugins/vuetify';
+import { router } from './routers';
+import store from './store';
 import '@mdi/font/css/materialdesignicons.css';
 import 'highlight.js/styles/default.css';
 import 'highlight.js/lib/languages/javascript';

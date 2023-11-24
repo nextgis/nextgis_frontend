@@ -1,7 +1,9 @@
 import Vue from 'vue';
+
 // @ts-ignore
 import Vuetify from 'vuetify/lib';
-import { Framework } from 'vuetify';
+
+import type { Framework } from 'vuetify';
 // import '@mdi/font/css/materialdesignicons.css';
 
 Vue.use(Vuetify);
