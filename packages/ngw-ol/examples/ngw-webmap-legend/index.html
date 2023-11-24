@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>NextGIS Web Vector Style Legends Integration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+      }
+
+      #map {
+        width: 75%;
+        height: 100%;
+      }
+
+      #legend {
+        width: 25%;
+        height: 100%;
+        overflow: auto;
+        padding: 10px;
+      }
+
+      .legend-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .legend-item img {
+        margin-right: 10px;
+      }
+    </style>
+
+    <script src="../../lib/ngw-ol.global.js"></script>
+  </head>
+
+  <body>
+    <div id="map"></div>
+    <div id="legend"></div>
+    <script>
+      NgwMap.create({
+        baseUrl: 'https://demo.nextgis.com',
+        target: 'map',
+        osm: true,
+        resources: [
+          { resource: 7120, id: 'webmap', fit: true, selectable: true },
+        ],
+      }).then((ngwMap) => {
+        const legendContainer = document.getElementById('legend');
+        const layer = ngwMap.getLayer('webmap');
+
+        // #1 Fetch and display the legend for all layers
+        ngwMap.getLegend().then((legend) => {
+          displayLegend(legend, legendContainer, ngwMap);
+        });
+
+        // #2 Alternate way to fetch legend for a specific layer
+        // Uncomment to use layer specific legend fetching
+        // layer.getLegend().then((legend) => {
+        //   displayLegend(legend, legendContainer, ngwMap);
+        // });
+
+        // #3 Fetching legends for dependent layers
+        // Uncomment to process legends for each dependent layer
+        // const webmapLayers = layer
+        //   .getDependLayers()
+        //   .sort((a, b) => b.id - a.id);
+        // for (const d of webmapLayers) {
+        //   const layerLegend = d.getLegend().then((legend) => {
+        //     displayLegend(legend, legendContainer, ngwMap);
+        //   });
+        // }
+      });
+
+      function displayLegend(legend, legendContainer, webMap) {
+        legendContainer.innerHTML = '';
+
+        legend.forEach((layerLegend) => {
+          const layerSection = document.createElement('div');
+          layerSection.classList.add('layer-section');
+
+          // Add a title for the layer
+          const layerTitle = document.createElement('h3');
+          console.log(webMap.getLayer(layerLegend.layerId));
+          layerTitle.textContent =
+            webMap.getLayer(layerLegend.layerId).options.name ||
+            `Layer ID: ${layerLegend.layerId}`;
+          layerSection.appendChild(layerTitle);
+
+          // Iterate through each LegendItem in the current LayerLegend
+          layerLegend.legend.forEach((item) => {
+            if (item.symbol.format === 'png') {
+              // Create an image element for the PNG symbol
+              const img = document.createElement('img');
+              img.src = `data:image/png;base64,${item.symbol.data}`;
+              img.alt = item.name;
+
+              // Create a label for the legend item
+              const label = document.createElement('span');
+              label.textContent = item.name;
+
+              // Append the image and label to the layer section
+              const itemContainer = document.createElement('div');
+              itemContainer.classList.add('legend-item');
+              itemContainer.appendChild(img);
+              itemContainer.appendChild(label);
+
+              layerSection.appendChild(itemContainer);
+            }
+          });
+
+          legendContainer.appendChild(layerSection);
+        });
+      }
+    </script>
+  </body>
+</html>
