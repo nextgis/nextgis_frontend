@@ -494,9 +494,9 @@ export class WebMapMain<
     data?: EmitStatusEventData,
   ): void {
     // ugly hack to disable type checking error
-    const _eventName = eventName as keyof WebMapEvents;
+    const _eventName = eventName as keyof E;
     this._eventsStatus[_eventName] = true;
-    this.emitter.emit(_eventName, data);
+    this.emitter.emit(_eventName as keyof WebMapEvents, data);
   }
 
   protected async _addLayerProviders(): Promise<void> {

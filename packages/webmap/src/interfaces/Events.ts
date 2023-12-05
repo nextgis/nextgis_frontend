@@ -1,6 +1,7 @@
 import type {
   LayerAdapter,
   OnLayerClickOptions,
+  OnLayerMouseOptions,
   OnLayerSelectOptions,
 } from './LayerAdapter';
 import type { DataLoadError, MapAdapter, MapClickEvent } from './MapAdapter';
@@ -19,66 +20,82 @@ export interface WebMapEvents extends MainMapEvents {
    * @eventProperty
    */
   'layer:preadd': LayerAdapter;
+  [key: `layer-${string | number}:preadd`]: LayerAdapter;
   /**
    * @eventProperty
    */
   'layer:add': LayerAdapter;
+  [key: `layer-${string | number}:add`]: LayerAdapter;
   /**
    * @eventProperty
    */
   'layer:preremove': LayerAdapter;
+  [key: `layer-${string | number}:preremove`]: LayerAdapter;
   /**
    * @eventProperty
    */
   'layer:remove': LayerAdapter;
+  [key: `layer-${string | number}:remove`]: LayerAdapter;
   /**
    * @eventProperty
    */
   'layer:preupdate': LayerAdapter;
+  [key: `layer-${string | number}:preupdate`]: LayerAdapter;
   /**
    * @eventProperty
    */
   'layer:updated': LayerAdapter;
+  [key: `layer-${string | number}:updated`]: LayerAdapter;
   /**
    * @eventProperty
    */
   'layer:preshow': LayerAdapter;
+  [key: `layer-${string | number}:preshow`]: LayerAdapter;
   /**
    * @eventProperty
    */
   'layer:show': LayerAdapter;
+  [key: `layer-${string | number}:show`]: LayerAdapter;
   /**
    * @eventProperty
    */
   'layer:prehide': LayerAdapter;
+  [key: `layer-${string | number}:prehide`]: LayerAdapter;
   /**
    * @eventProperty
    */
   'layer:hide': LayerAdapter;
+  [key: `layer-${string | number}:hide`]: LayerAdapter;
   /**
    * @eventProperty
    */
   'layer:pretoggle': LayerAdapter;
+  [key: `layer-${string | number}:pretoggle`]: LayerAdapter;
   /**
    * @eventProperty
    */
   'layer:toggle': LayerAdapter;
+  [key: `layer-${string | number}:toggle`]: LayerAdapter;
   /**
    * @eventProperty
    */
-  'layer:click': OnLayerClickOptions;
+  'layer:click': OnLayerMouseOptions;
+  [key: `layer-${string | number}:click`]: OnLayerMouseOptions;
   /**
    * @eventProperty
    */
-  'layer:mouseover': OnLayerClickOptions;
+  'layer:mouseover': OnLayerMouseOptions;
+  [key: `layer-${string | number}:mouseover`]: OnLayerMouseOptions;
   /**
    * @eventProperty
    */
-  'layer:mouseout': OnLayerClickOptions;
+  'layer:mouseout': OnLayerMouseOptions;
+  [key: `layer-${string | number}:mouseout`]: OnLayerMouseOptions;
   /**
    * @eventProperty
    */
   'layer:select': OnLayerSelectOptions;
+  [key: `layer-${string | number}:select`]: OnLayerMouseOptions;
   /**
    * @eventProperty
    */
