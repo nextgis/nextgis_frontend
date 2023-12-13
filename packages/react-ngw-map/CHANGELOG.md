@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.19.1](https://github.com/nextgis/nextgis_frontend/compare/v1.19.0...v1.19.1) (2023-12-13)
+
+**Note:** Version bump only for package @nextgis/react-ngw-map
+
+
+
+
+
 # [1.19.0](https://github.com/nextgis/nextgis_frontend/compare/v1.18.21...v1.19.0) (2023-11-24)
 
 **Note:** Version bump only for package @nextgis/react-ngw-map
