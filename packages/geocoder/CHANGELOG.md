@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.19.2](https://github.com/nextgis/nextgis_frontend/compare/v1.19.0...v1.19.2) (2023-12-13)
+
+
+### Bug Fixes
+
+* **geocoder:** set nominatim geocoder options ([2ae48c4](https://github.com/nextgis/nextgis_frontend/commit/2ae48c43e4a25b6301edd33fd3b62931cb9157f6))
+
+
+
+
+
 ## [1.19.1](https://github.com/nextgis/nextgis_frontend/compare/v1.19.0...v1.19.1) (2023-12-13)
 
 **Note:** Version bump only for package @nextgis/geocoder
