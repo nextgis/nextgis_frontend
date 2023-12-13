@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.19.3](https://github.com/nextgis/nextgis_frontend/compare/v1.19.2...v1.19.3) (2023-12-13)
+
+
+### Features
+
+* **react-ngw-map:** watch extent parameter ([1670182](https://github.com/nextgis/nextgis_frontend/commit/1670182f0ef7e2e8ac8f8da9a4de0553e114b408))
+
+
+
+
+
 ## [1.19.2](https://github.com/nextgis/nextgis_frontend/compare/v1.19.0...v1.19.2) (2023-12-13)
 
 **Note:** Version bump only for package @nextgis/react-ngw-map

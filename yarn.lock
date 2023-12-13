@@ -1546,11 +1546,11 @@ __metadata:
   dependencies:
     "@nextgis/build-tools": ^1.19.0
     "@nextgis/leaflet-map-adapter": ^1.19.2
-    "@nextgis/react-ngw-map": ^1.19.2
+    "@nextgis/react-ngw-map": ^1.19.3
   languageName: unknown
   linkType: soft
 
-"@nextgis/react-ngw-map@^1.19.2, @nextgis/react-ngw-map@workspace:packages/react-ngw-map":
+"@nextgis/react-ngw-map@^1.19.3, @nextgis/react-ngw-map@workspace:packages/react-ngw-map":
   version: 0.0.0-use.local
   resolution: "@nextgis/react-ngw-map@workspace:packages/react-ngw-map"
   dependencies:
@@ -1571,7 +1571,7 @@ __metadata:
   dependencies:
     "@nextgis/build-tools": ^1.19.0
     "@nextgis/mapboxgl-map-adapter": ^1.19.2
-    "@nextgis/react-ngw-map": ^1.19.2
+    "@nextgis/react-ngw-map": ^1.19.3
   languageName: unknown
   linkType: soft
 
@@ -1581,7 +1581,7 @@ __metadata:
   dependencies:
     "@nextgis/build-tools": ^1.19.0
     "@nextgis/ol-map-adapter": ^1.19.2
-    "@nextgis/react-ngw-map": ^1.19.2
+    "@nextgis/react-ngw-map": ^1.19.3
   languageName: unknown
   linkType: soft
 
