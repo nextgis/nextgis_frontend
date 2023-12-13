@@ -8,7 +8,7 @@ export function useMapElement(
   mapRef: MutableRefObject<HTMLElement | null>,
   props: MapContainerProps,
 ): NgwMap | null {
-  const { center, zoom } = props;
+  const { center, zoom, bounds, maxBounds, maxZoom } = props;
   const isReady = useRef(false);
   const [ngwMap, setNgwMap] = useState<NgwMap | null>(null);
 
@@ -26,10 +26,24 @@ export function useMapElement(
   }, [mapRef]);
 
   useEffect(() => {
-    if (ngwMap && isReady.current && center && zoom) {
-      ngwMap.setView({ center, zoom });
+    if (!ngwMap) return;
+
+    if (isReady.current) {
+      if (bounds) {
+        ngwMap.setView({ bounds });
+      }
+      else if (center && zoom) {
+        ngwMap.setView({ center, zoom });
+      }
     }
-  }, [ngwMap, center, zoom]);
+    if (maxBounds) {
+      ngwMap.setView({ maxBounds });
+    }
+    if (maxZoom) {
+      ngwMap.setView({ maxZoom });
+    }
+  }, [ngwMap, isReady.current, center, zoom, bounds, maxBounds, maxZoom]);
+
 
   useEffect(() => {
     return () => {
