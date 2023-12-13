@@ -1,6 +1,6 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import type {
   LayerAdapter,
-  OnLayerClickOptions,
   OnLayerMouseOptions,
   OnLayerSelectOptions,
 } from './LayerAdapter';
