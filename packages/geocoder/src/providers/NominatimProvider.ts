@@ -16,6 +16,9 @@ export class NominatimProvider extends BaseProvider {
 
   constructor(options?: BaseProviderOptions) {
     super(options);
+    if (options && options.searchUrl) {
+      this.searchUrl = options.searchUrl;
+    }
   }
 
   abort(): void {
