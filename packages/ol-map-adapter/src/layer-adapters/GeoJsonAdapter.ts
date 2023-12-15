@@ -17,10 +17,15 @@ import { labelStyleFunction, styleFunction } from '../utils/styleFunction';
 import { getFeature } from '../utils/utils';
 
 import { BaseAdapter } from './BaseAdapter';
+
+import type {
+  ForEachFeatureAtPixelCallback,
+  ForEachFeatureAtPixelOrderedCallback,
+  MapClickEvent,
+  MouseEventType,
+  UnselectCb,
+} from '../OlMapAdapter';
 import type { Paint } from '@nextgis/paint';
-
-
-
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type { LngLatArray, LngLatBoundsArray } from '@nextgis/utils';
 import type {
@@ -42,13 +47,6 @@ import type { Options as OverlayOptions } from 'ol/Overlay';
 import type Base from 'ol/layer/Base';
 import type { Pixel } from 'ol/pixel';
 import type { Style } from 'ol/style';
-import type {
-  ForEachFeatureAtPixelCallback,
-  ForEachFeatureAtPixelOrderedCallback,
-  MapClickEvent,
-  MouseEventType,
-  UnselectCb,
-} from '../OlMapAdapter';
 
 type MapBrowserPointerEvent = MapBrowserEvent<any>;
 type Layer = Base;
