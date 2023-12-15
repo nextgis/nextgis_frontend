@@ -343,12 +343,21 @@ export class GeoJsonAdapter
 
   private _updateTooltip(layerDef: Pick<LayerDef, 'feature' | 'layer'>) {
     const { feature, layer } = layerDef;
-    if (feature && layer && feature.properties && this.options.labelField) {
+    const { label, labelField, labelOnHover } = this.options;
+    if (layer) {
       layer.unbindTooltip();
-      const message = feature.properties[this.options.labelField];
-      if (message !== undefined) {
-        const permanent = !this.options.labelOnHover;
-
+      let message: string | undefined;
+      if (feature.properties && labelField) {
+        message = feature.properties[labelField];
+      } else if (label) {
+        message = label({
+          target: this,
+          ...layerDef,
+          ...createFeaturePositionOptions(feature),
+        });
+      }
+      if (message) {
+        const permanent = !labelOnHover;
         layer.bindTooltip(String(message), { permanent, sticky: false });
       }
     }
@@ -645,9 +654,9 @@ export class GeoJsonAdapter
   private _addMapListener() {
     const map = this.map;
     if (map) {
-      const { labelField, labelOnHover } = this.options;
+      const { label, labelField, labelOnHover } = this.options;
       this._addMapClickListener();
-      if (labelField && !labelOnHover) {
+      if ((labelField || label) && !labelOnHover) {
         map.on('zoomend', this.$updateTooltip);
         map.on('moveend', this.$updateTooltip);
       }
