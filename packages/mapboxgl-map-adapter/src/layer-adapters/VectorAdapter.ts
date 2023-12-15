@@ -870,14 +870,19 @@ export abstract class VectorAdapter<
 
   protected _openLabel(f: Feature, lngLat?: [number, number]): void {
     const map = this.map;
-    const { labelField } = this.options;
-    if (map && labelField) {
+    const { labelField, label } = this.options;
+    if (map && (labelField || label)) {
       const popupOpt: maplibregl.PopupOptions = {
         closeButton: false,
         closeOnClick: false,
         closeOnMove: this.options.labelOnHover,
       };
-      const text = f.properties && f.properties[labelField];
+      let text: string | undefined;
+      if (labelField) {
+        text = f.properties && f.properties[labelField];
+      } else if (label) {
+        text = label(this._createLayerOptions(f));
+      }
       if (text) {
         const isOpened = this._openedPopup.find((x) => x[0].id === f.id);
         if (!isOpened) {

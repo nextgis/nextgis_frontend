@@ -131,9 +131,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
         type: 'FeatureCollection',
         features: this._features,
       });
-      if (this.options.labelField) {
-        this._updateLabels();
-      }
+      this._updateLabels();
     }
   }
 
@@ -587,8 +585,8 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     this._removeAllPopup();
     const filtered = this._filteredFeatureIds || [];
     const features = this._features;
-    const { labelField, labelOnHover } = this.options;
-    if (labelField && !labelOnHover) {
+    const { labelField, label, labelOnHover } = this.options;
+    if ((labelField || label) && !labelOnHover) {
       for (const f of features) {
         const inFilter = filtered.length
           ? defined(f._featureFilterId) &&
