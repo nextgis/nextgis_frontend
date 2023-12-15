@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.19.4](https://github.com/nextgis/nextgis_frontend/compare/v1.19.3...v1.19.4) (2023-12-15)
+
+
+### Features
+
+* **mapboxgl-map-adapter:** implement vector layer label from callback ([1036906](https://github.com/nextgis/nextgis_frontend/commit/10369061ce3001f675bd750d567582ada60ca1a9))
+
+
+
+
+
 ## [1.19.2](https://github.com/nextgis/nextgis_frontend/compare/v1.19.0...v1.19.2) (2023-12-13)
 
 **Note:** Version bump only for package @nextgis/mapboxgl-map-adapter

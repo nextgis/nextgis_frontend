@@ -1,12 +1,12 @@
 {
   "name": "@nextgis/vuetify-ngw-components",
-  "version": "1.19.2",
+  "version": "1.19.4",
   "description": "Vuetify components for NGW Frontend",
   "main": "index.js",
   "module": "lib/vuetify-ngw-components.esm-bundler.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/leaflet-map-adapter": "^1.19.2",
+    "@nextgis/leaflet-map-adapter": "^1.19.4",
     "@nextgis/ngw-map": "^1.19.2",
     "@nextgis/utils": "^1.19.0",
     "vue": "^2.6.14",
