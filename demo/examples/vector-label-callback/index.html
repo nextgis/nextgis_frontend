@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Vector label</title>
+    <title>Vector label callback</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
       * {
@@ -19,7 +19,7 @@
       }
     </style>
 
-    <script src="../../lib/ngw-mapbox.global.js"></script>
+    <script src="../../../packages/ngw-leaflet/lib/ngw-leaflet.global.js"></script>
   </head>
 
   <body>
@@ -33,7 +33,17 @@
             resource: 4224,
             fit: true,
             adapterOptions: {
-              labelField: 'NAME',
+              // Custom label function for vector layer
+              label: ({ feature, getBounds, getCenter }) => {
+                // Constructing a label string with feature ID, name, bounding box, and center
+                return `#${feature.id} ${feature.properties.NAME}
+                BBOX: ${getBounds()
+                  .map((c) => c.toFixed(4))
+                  .join(' ')};
+                Center: ${getCenter()
+                  .map((c) => c.toFixed(4))
+                  .join(' ')}`;
+              },
             },
           },
         ],

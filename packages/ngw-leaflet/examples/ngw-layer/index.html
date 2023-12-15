@@ -30,11 +30,19 @@
         target: 'map',
         qmsId: 448,
       });
+
+      class MyLayerAdapter {
+        addLayer() {
+          console.log(1234);
+        }
+      }
+
       ngwMap
         .addNgwLayer({
-          resource: 4005,
+          resource: 5878,
           fit: true,
           // adapter: 'IMAGE', // IMAGE - default, TILE, GEOJSON and MVT for mapbox
+          layerAdapter: MyLayerAdapter
         })
         .then((layer) => {
           // The same as using the `fit` option
