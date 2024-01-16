@@ -509,7 +509,7 @@ export class GeoJsonAdapter
         layer,
         ...createFeaturePositionOptions(feature),
       };
-
+      // @ts-ignore
       layer.options.pane = this.pane;
       this._layers.push(def);
       let ok = true;
