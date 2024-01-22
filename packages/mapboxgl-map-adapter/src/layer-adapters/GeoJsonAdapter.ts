@@ -232,8 +232,8 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     return this.getBounds();
   }
 
-  getBounds(): LngLatBoundsArray {
-    return getFeatureBounds(this._features);
+  getBounds(): LngLatBoundsArray | undefined {
+    return this._features.length ? getFeatureBounds(this._features) : undefined;
   }
 
   protected async _beforeLayerLayer(sourceId: string): Promise<void> {
