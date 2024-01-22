@@ -1288,7 +1288,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/leaflet-map-adapter@^1.19.4, @nextgis/leaflet-map-adapter@workspace:packages/leaflet-map-adapter":
+"@nextgis/leaflet-map-adapter@^1.19.5, @nextgis/leaflet-map-adapter@workspace:packages/leaflet-map-adapter":
   version: 0.0.0-use.local
   resolution: "@nextgis/leaflet-map-adapter@workspace:packages/leaflet-map-adapter"
   dependencies:
@@ -1315,7 +1315,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/mapboxgl-map-adapter@^1.19.4, @nextgis/mapboxgl-map-adapter@workspace:packages/mapboxgl-map-adapter":
+"@nextgis/mapboxgl-map-adapter@^1.19.5, @nextgis/mapboxgl-map-adapter@workspace:packages/mapboxgl-map-adapter":
   version: 0.0.0-use.local
   resolution: "@nextgis/mapboxgl-map-adapter@workspace:packages/mapboxgl-map-adapter"
   dependencies:
@@ -1386,7 +1386,7 @@ __metadata:
   resolution: "@nextgis/ngw-leaflet@workspace:packages/ngw-leaflet"
   dependencies:
     "@nextgis/build-tools": ^1.19.0
-    "@nextgis/leaflet-map-adapter": ^1.19.4
+    "@nextgis/leaflet-map-adapter": ^1.19.5
     "@nextgis/ngw-map": ^1.19.2
     leaflet: 1.7.1
     leaflet.wms: ^0.2.0
@@ -1415,7 +1415,7 @@ __metadata:
   resolution: "@nextgis/ngw-mapbox@workspace:packages/ngw-mapbox"
   dependencies:
     "@nextgis/build-tools": ^1.19.0
-    "@nextgis/mapboxgl-map-adapter": ^1.19.4
+    "@nextgis/mapboxgl-map-adapter": ^1.19.5
     "@nextgis/ngw-map": ^1.19.2
     canvg: ^3.0.9
     maplibre-gl: ^3.3.1
@@ -1545,7 +1545,7 @@ __metadata:
   resolution: "@nextgis/react-ngw-leaflet@workspace:packages/react-ngw-leaflet"
   dependencies:
     "@nextgis/build-tools": ^1.19.0
-    "@nextgis/leaflet-map-adapter": ^1.19.4
+    "@nextgis/leaflet-map-adapter": ^1.19.5
     "@nextgis/react-ngw-map": ^1.19.3
   languageName: unknown
   linkType: soft
@@ -1570,7 +1570,7 @@ __metadata:
   resolution: "@nextgis/react-ngw-mapbox@workspace:packages/react-ngw-mapbox"
   dependencies:
     "@nextgis/build-tools": ^1.19.0
-    "@nextgis/mapboxgl-map-adapter": ^1.19.4
+    "@nextgis/mapboxgl-map-adapter": ^1.19.5
     "@nextgis/react-ngw-map": ^1.19.3
   languageName: unknown
   linkType: soft
@@ -1618,17 +1618,17 @@ __metadata:
   resolution: "@nextgis/vue-ngw-leaflet@workspace:packages/vue-ngw-leaflet"
   dependencies:
     "@nextgis/build-tools": ^1.19.0
-    "@nextgis/leaflet-map-adapter": ^1.19.4
-    "@nextgis/vue-ngw-map": ^1.19.4
+    "@nextgis/leaflet-map-adapter": ^1.19.5
+    "@nextgis/vue-ngw-map": ^1.19.5
   languageName: unknown
   linkType: soft
 
-"@nextgis/vue-ngw-map@^1.19.4, @nextgis/vue-ngw-map@workspace:packages/vue-ngw-map":
+"@nextgis/vue-ngw-map@^1.19.5, @nextgis/vue-ngw-map@workspace:packages/vue-ngw-map":
   version: 0.0.0-use.local
   resolution: "@nextgis/vue-ngw-map@workspace:packages/vue-ngw-map"
   dependencies:
     "@nextgis/build-tools": ^1.19.0
-    "@nextgis/leaflet-map-adapter": ^1.19.4
+    "@nextgis/leaflet-map-adapter": ^1.19.5
     "@nextgis/ngw-map": ^1.19.2
     "@nextgis/utils": ^1.19.0
   peerDependencies:
@@ -1644,8 +1644,8 @@ __metadata:
   resolution: "@nextgis/vue-ngw-mapbox@workspace:packages/vue-ngw-mapbox"
   dependencies:
     "@nextgis/build-tools": ^1.19.0
-    "@nextgis/mapboxgl-map-adapter": ^1.19.4
-    "@nextgis/vue-ngw-map": ^1.19.4
+    "@nextgis/mapboxgl-map-adapter": ^1.19.5
+    "@nextgis/vue-ngw-map": ^1.19.5
   languageName: unknown
   linkType: soft
 
@@ -1655,7 +1655,7 @@ __metadata:
   dependencies:
     "@nextgis/build-tools": ^1.19.0
     "@nextgis/ol-map-adapter": ^1.19.4
-    "@nextgis/vue-ngw-map": ^1.19.4
+    "@nextgis/vue-ngw-map": ^1.19.5
   languageName: unknown
   linkType: soft
 
@@ -1664,7 +1664,7 @@ __metadata:
   resolution: "@nextgis/vuetify-ngw-components@workspace:packages/vuetify-ngw-components"
   dependencies:
     "@nextgis/build-tools": ^1.19.0
-    "@nextgis/leaflet-map-adapter": ^1.19.4
+    "@nextgis/leaflet-map-adapter": ^1.19.5
     "@nextgis/ngw-map": ^1.19.2
     "@nextgis/utils": ^1.19.0
     vue: ^2.6.14

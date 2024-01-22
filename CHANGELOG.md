@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.19.5](https://github.com/nextgis/nextgis_frontend/compare/v1.19.4...v1.19.5) (2024-01-22)
+
+
+### Bug Fixes
+
+* **mapbpx-map-adapter:** geojson getBounds return undefined ([26e690a](https://github.com/nextgis/nextgis_frontend/commit/26e690a19aea9312f54e638ecca9710d54b84627))
+
+
+
+
+
 ## [1.19.4](https://github.com/nextgis/nextgis_frontend/compare/v1.19.3...v1.19.4) (2023-12-15)
 
 
