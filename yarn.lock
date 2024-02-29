@@ -758,7 +758,7 @@ __metadata:
 
 "@nextgis/build-tools@file:../build-tools::locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter":
   version: 1.19.0
-  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=22f357&locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter"
+  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=ee0c40&locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter"
   dependencies:
     "@babel/parser": ^7.24.0
     "@babel/types": ^7.24.0
@@ -788,13 +788,13 @@ __metadata:
     rollup-plugin-terser: ^7.0.2
     rollup-plugin-typescript2: ^0.36.0
     typescript: ~5.1
-  checksum: 313502247ebf3fbbdafbebe73e276a9c85c8d03b2cfe9a7792a5a09637fbafc442a9df7f3b2b8af1b7c7c78270edcda9571b85e0e963ce91cce2c368ef29dc1a
+  checksum: 4f7bd9b7fade8c11953f0c0e17b065db9b2d8980b1b0be5f40e639429acef07d3848387af8f3262f99e0a24470c130c796596e2dd27475b17f0a65b01732c6ef
   languageName: node
   linkType: hard
 
 "@nextgis/build-tools@file:../build-tools::locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium":
   version: 1.19.0
-  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=22f357&locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium"
+  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=ee0c40&locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium"
   dependencies:
     "@babel/parser": ^7.24.0
     "@babel/types": ^7.24.0
@@ -824,7 +824,7 @@ __metadata:
     rollup-plugin-terser: ^7.0.2
     rollup-plugin-typescript2: ^0.36.0
     typescript: ~5.1
-  checksum: 313502247ebf3fbbdafbebe73e276a9c85c8d03b2cfe9a7792a5a09637fbafc442a9df7f3b2b8af1b7c7c78270edcda9571b85e0e963ce91cce2c368ef29dc1a
+  checksum: 4f7bd9b7fade8c11953f0c0e17b065db9b2d8980b1b0be5f40e639429acef07d3848387af8f3262f99e0a24470c130c796596e2dd27475b17f0a65b01732c6ef
   languageName: node
   linkType: hard
 
@@ -1345,6 +1345,7 @@ __metadata:
     vue: ^2.6.14
     vue-class-component: ^7.2.6
     vue-property-decorator: ^9.1.2
+    vuex: ^3
     vuex-module-decorators: ^1.0.1
   languageName: unknown
   linkType: soft
@@ -12775,6 +12776,15 @@ __metadata:
     vue: ">=2"
     vuex: ">=3"
   checksum: 12a4587f4fb877d1748acfa5acb7d1f4163280535aa1eb501a89c7ddc5f601ad717269265e6054988f53210d5c164877139719b0b99f6f7876397ff87354f990
+  languageName: node
+  linkType: hard
+
+"vuex@npm:^3":
+  version: 3.6.2
+  resolution: "vuex@npm:3.6.2"
+  peerDependencies:
+    vue: ^2.0.0
+  checksum: 37915741ba9557024ea42579e2c8d81847ec699d07d8ea3aa673929f26fceba8c59e7e1e6a875fd3962e50018bc30f782f5ace34d83307ef228ad46a4df343da
   languageName: node
   linkType: hard
 

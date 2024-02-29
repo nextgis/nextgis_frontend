@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "stripInternal": true
+  },
+  "exclude": [
+    "tests",
+    "node_modules",
+    "@nextgis/build-tools",
+    "@nextgis/eslint-config",
+    "@nextgis/demo-app",
+  ]
+}

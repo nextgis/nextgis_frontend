@@ -1,8 +1,9 @@
-const path = require('path');
-const fs = require('fs');
-const findPackages = require('./findPackages');
+import fs from 'node:fs';
+import path from 'node:path';
 
-function checkBuild() {
+import findPackages from './findPackages.js';
+
+export default function checkBuild() {
   const libs = findPackages();
   const notValid = {};
   libs.forEach((x) => {
@@ -77,7 +78,3 @@ function checkTypes(lib) {
     }
   }
 }
-
-module.exports = (source, module) => {
-  return checkBuild(source, module);
-};

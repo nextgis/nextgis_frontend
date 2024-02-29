@@ -48,17 +48,27 @@ run();
 
 export default async function run() {
   const target = isSelfPackage;
+  let allTargets = [];
   if (target) {
-    await build(target);
-    await checkAllSizes([target]);
+    allTargets = [target];
   } else if (!targets.length) {
-    const allTargets = getTargets();
-    await buildAll(allTargets);
-    await checkAllSizes(allTargets);
+    allTargets = getTargets();
   } else {
-    await buildAll(fuzzyMatchTarget(targets, buildAllMatching));
-    await checkAllSizes(fuzzyMatchTarget(targets, buildAllMatching));
+    allTargets = fuzzyMatchTarget(targets, buildAllMatching);
   }
+  await buildAll(allTargets);
+
+  if (buildTypes) {
+    console.log();
+    console.log(chalk.bold(chalk.yellow(`Rolling up type definitions...`)));
+
+    await execa('npm', ['run', 'build-dts'], {
+      stdio: 'inherit',
+      cwd: rootPath,
+    });
+  }
+
+  await checkAllSizes(allTargets);
 }
 /**
  * Builds all the targets in parallel.

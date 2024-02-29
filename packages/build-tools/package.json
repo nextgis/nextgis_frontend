@@ -4,9 +4,6 @@
   "description": "Build system ",
   "type": "module",
   "dependencies": {
-    "@babel/parser": "^7.24.0",
-    "@babel/types": "^7.24.0",
-    "@microsoft/api-extractor": "^7.41.0",
     "@nextgis/eslint-config": "^1.19.0",
     "@rollup/plugin-alias": "^5.1.0",
     "@rollup/plugin-commonjs": "^25.0.7",

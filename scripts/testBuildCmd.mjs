@@ -1,5 +1,6 @@
-const chalk = require('chalk');
-const checkBuild = require('./testBuild');
+import chalk from 'chalk';
+
+import checkBuild from './testBuild.mjs';
 
 const notValid = Object.entries(checkBuild());
 if (notValid.length) {

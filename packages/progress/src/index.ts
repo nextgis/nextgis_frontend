@@ -2,8 +2,8 @@
  * @module progress
  */
 
-import { Progress } from './Progress';
+import type { Progress } from './Progress';
 
-export * from './ProgressEvents';
+export type * from './ProgressEvents';
 
 export default Progress;

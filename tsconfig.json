@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
+    "outDir": "temp",
     "sourceMap": false,
-    "target": "es2019",
+    "target": "es2016",
     "module": "esnext",
     "moduleResolution": "node",
     "allowJs": false,
@@ -12,7 +13,7 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "removeComments": false,
-    "lib": ["esnext", "dom"],
+    "lib": ["es2016", "dom"],
     "types": ["node"],
     "rootDir": ".",
 
@@ -20,6 +21,12 @@
 
     "emitDecoratorMetadata": true,
     "noImplicitReturns": false,
+
+    "newLine": "LF",
+    "useDefineForClassFields": false,
+
+    "isolatedModules": true,
+    "skipLibCheck": true,
 
     "paths": {
       "@nextgis/*": ["./packages/*/src/"]
