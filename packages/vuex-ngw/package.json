@@ -18,6 +18,7 @@
   },
   "buildOptions": {
     "name": "VuexNgw",
+    "tsbuild": true,
     "formats": [
       "esm-bundler",
       "cjs"

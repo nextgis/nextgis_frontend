@@ -1,3 +1,4 @@
+// @ts-check
 /*
 Based on https://github.com/vuejs/vue-next/blob/master/scripts/build.js
 
@@ -9,15 +10,25 @@ or "esm,cjs"):
 
 */
 
-const fs = require('fs-extra');
-const path = require('path');
-const chalk = require('chalk');
-const execa = require('execa');
-const { gzipSync } = require('zlib');
-const { compress } = require('brotli');
-const { getTargets, fuzzyMatchTarget } = require('./utils');
+import { existsSync } from 'node:fs';
+import fs from 'node:fs/promises';
+import { cpus } from 'node:os';
+import path from 'node:path';
+import { brotliCompressSync, gzipSync } from 'node:zlib';
 
-const args = require('minimist')(process.argv.slice(2));
+import chalk from 'chalk';
+import { execa, execaSync } from 'execa';
+import minimist from 'minimist';
+
+import {
+  directoryName,
+  fuzzyMatchTarget,
+  getTargets,
+  require,
+  rootPath,
+} from './utils.js';
+
+const args = minimist(process.argv.slice(2));
 const targets = args._;
 const watch = args.watch || args.w;
 const formats = args.formats || args.f || (watch && 'global');
@@ -28,44 +39,58 @@ const isRelease = args.release;
 const buildTypes = args.t || args.types || isRelease;
 const buildAllMatching = args.all || args.a;
 
-const commit = execa.sync('git', ['rev-parse', 'HEAD']).stdout.slice(0, 7);
+const commit = execaSync('git', ['rev-parse', 'HEAD']).stdout.slice(0, 7);
 const cwd = process.cwd();
 const isSelfPackage_ = cwd.match(/packages[\\, /](\D+)$/);
 const isSelfPackage = isSelfPackage_ && isSelfPackage_[0];
 
 run();
 
-async function run() {
-  if (isRelease) {
-    // remove build cache for release builds to avoid outdated enum values
-    await fs.remove(path.resolve(__dirname, '../node_modules/.rts2_cache'));
-  }
+export default async function run() {
   const target = isSelfPackage;
   if (target) {
     await build(target);
-    checkAllSizes([target]);
+    await checkAllSizes([target]);
   } else if (!targets.length) {
     const allTargets = getTargets();
     await buildAll(allTargets);
-    checkAllSizes(allTargets);
+    await checkAllSizes(allTargets);
   } else {
     await buildAll(fuzzyMatchTarget(targets, buildAllMatching));
-    checkAllSizes(fuzzyMatchTarget(targets, buildAllMatching));
+    await checkAllSizes(fuzzyMatchTarget(targets, buildAllMatching));
   }
 }
+/**
+ * Builds all the targets in parallel.
+ * @param {Array<string>} targets - An array of targets to build.
+ * @returns {Promise<void>} - A promise representing the build process.
+ */
 async function buildAll(targets) {
-  await runParallel(require('os').cpus().length, targets, build);
+  await runParallel(cpus().length, targets, build);
 }
 
+/**
+ * Runs iterator function in parallel.
+ * @template T - The type of items in the data source
+ * @param {number} maxConcurrency - The maximum concurrency.
+ * @param {Array<T>} source - The data source
+ * @param {(item: T) => Promise<void>} iteratorFn - The iteratorFn
+ * @returns {Promise<void[]>} - A Promise array containing all iteration results.
+ */
 async function runParallel(maxConcurrency, source, iteratorFn) {
+  /**@type {Promise<void>[]} */
   const ret = [];
+  /**@type {Promise<void>[]} */
   const executing = [];
+
   for (const item of source) {
-    const p = Promise.resolve().then(() => iteratorFn(item, source));
+    const p = Promise.resolve().then(() => iteratorFn(item));
     ret.push(p);
 
     if (maxConcurrency <= source.length) {
-      const e = p.then(() => executing.splice(executing.indexOf(e), 1));
+      const e = p.then(() => {
+        executing.splice(executing.indexOf(e), 1);
+      });
       executing.push(e);
       if (executing.length >= maxConcurrency) {
         await Promise.race(executing);
@@ -75,8 +100,10 @@ async function runParallel(maxConcurrency, source, iteratorFn) {
   return Promise.all(ret);
 }
 
+/**
+ * @param {string} target
+ */
 async function build(target) {
-  const rootPath = path.resolve(__dirname, '..', '..', '..');
   let pkgPath = `packages/${target}`;
   if (isSelfPackage) {
     pkgPath = `../../${target}`;
@@ -92,20 +119,20 @@ async function build(target) {
 
   // if building a specific format, do not remove lib.
   if (!formats) {
-    await fs.remove(`${pkgDir}/lib`);
+    await fs.rm(`${pkgDir}/lib`, { recursive: true, force: true });
   }
 
   const env =
     (pkg.buildOptions && pkg.buildOptions.env) ||
     (devOnly ? 'development' : 'production');
 
-  const config = path.join(__dirname, 'rollup.config.js');
+  const config = path.join(directoryName, './rollup.config.js');
 
   await execa(
     'rollup',
     [
       watch ? '-wc' : '-c',
-      `'${config}'`,
+      `${config}`,
       '--environment',
       [
         `COMMIT:${commit}`,
@@ -121,156 +148,48 @@ async function build(target) {
     ],
     { stdio: 'inherit', cwd: rootPath },
   );
-
-  if (buildTypes && pkg.types) {
-    console.log();
-    console.log(
-      chalk.bold(chalk.yellow(`Rolling up type definitions for ${target}...`)),
-    );
-
-    // build types
-    const { Extractor, ExtractorConfig } = require('@microsoft/api-extractor');
-
-    const reportFolder = path.resolve(rootPath, 'input');
-
-    const reportTempFolder = path.resolve(rootPath, 'temp');
-
-    const publicTrimmedFilePath = path.resolve(`${pkgPath}/lib/index.d.ts`);
-
-    const mainEntryPointFilePath = path.resolve(
-      pkgPath,
-      'lib',
-      isSelfPackage ? '' : 'packages',
-      target,
-      'src',
-      'index.d.ts',
-    );
-
-    const extractorConfig = ExtractorConfig.prepare({
-      packageJson: pkg,
-      packageJsonFullPath: pkgFullPath,
-      configObjectFullPath: pkgDir,
-      configObject: {
-        projectFolder: pkgDir,
-        mainEntryPointFilePath,
-        compiler: {
-          tsconfigFilePath: path.resolve(`${rootPath}/tsconfig.json`),
-          overrideTsconfig: {
-            include: [path.resolve(pkgPath, 'src')],
-          },
-        },
-        docModel: {
-          enabled: true,
-          apiJsonFilePath: `${reportFolder}/<unscopedPackageName>.api.json`,
-        },
-        tsdocMetadata: {
-          enabled: false,
-        },
-        dtsRollup: {
-          enabled: true,
-          publicTrimmedFilePath,
-        },
-        apiReport: {
-          enabled: true,
-          reportFolder,
-          reportTempFolder,
-          reportFileName: '<unscopedPackageName>.api.md',
-        },
-        messages: {
-          compilerMessageReporting: {
-            default: {
-              logLevel: 'warning',
-            },
-          },
-
-          extractorMessageReporting: {
-            default: {
-              logLevel: 'warning',
-              addToApiReportFile: true,
-            },
-
-            'ae-missing-release-tag': {
-              logLevel: 'none',
-            },
-          },
-
-          tsdocMessageReporting: {
-            default: {
-              logLevel: 'warning',
-            },
-            'tsdoc-undefined-tag': {
-              logLevel: 'none',
-            },
-            'tsdoc-unsupported-tag': {
-              logLevel: 'none',
-            },
-          },
-        },
-      },
-    });
-    try {
-      const extractorResult = Extractor.invoke(extractorConfig, {
-        localBuild: true,
-        showVerboseMessages: true,
-      });
-
-      if (extractorResult.succeeded) {
-        // concat additional d.ts to rolled-up dts
-        const typesDir = path.resolve(pkgDir, 'types');
-        if (await fs.access(typesDir)) {
-          const dtsPath = path.resolve(pkgDir, pkg.types);
-          const existing = await fs.readFile(dtsPath, 'utf-8');
-          const typeFiles = await fs.readdir(typesDir);
-          const toAdd = await Promise.all(
-            typeFiles.map((file) => {
-              return fs.readFile(path.resolve(typesDir, file), 'utf-8');
-            }),
-          );
-          await fs.writeFile(dtsPath, existing + '\n' + toAdd.join('\n'));
-        }
-        console.log(
-          chalk.bold(chalk.green(`API Extractor completed successfully.`)),
-        );
-      } else {
-        console.error(
-          `API Extractor completed with ${extractorResult.errorCount} errors` +
-            ` and ${extractorResult.warningCount} warnings`,
-        );
-        process.exitCode = 1;
-      }
-    } catch (er) {
-      console.log(chalk(er));
-    }
-
-    await fs.remove(`${pkgDir}/lib/packages`);
-  }
 }
 
-function checkAllSizes(targets) {
+/**
+ * @param {string[]} targets
+ */
+async function checkAllSizes(targets) {
   if (devOnly && watch) {
     return;
   }
   console.log();
   for (const target of targets) {
-    checkSize(target);
+    await checkSize(target);
   }
   console.log();
 }
 
-function checkSize(target) {
-  const pkgDir = path.resolve(`../${target}`);
-  checkFileSize(`${pkgDir}/lib/${target}.global.prod.js`);
+/**
+ * @param {string} target
+ */
+async function checkSize(target) {
+  const pkgDir = path.resolve(
+    rootPath,
+    'packages',
+    target,
+    'lib',
+    `${target}.global.prod.js`,
+  );
+  await checkFileSize(pkgDir);
 }
 
-function checkFileSize(filePath) {
-  if (!fs.existsSync(filePath)) {
+/**
+ * @param {string} filePath
+ */
+async function checkFileSize(filePath) {
+  if (!existsSync(filePath)) {
     return;
   }
-  const file = fs.readFileSync(filePath);
+  const file = await fs.readFile(filePath);
   const minSize = (file.length / 1024).toFixed(2) + 'kb';
   const gzipped = gzipSync(file);
   const gzippedSize = (gzipped.length / 1024).toFixed(2) + 'kb';
-  const compressed = compress(file);
+  const compressed = brotliCompressSync(file);
   const compressedSize = (compressed.length / 1024).toFixed(2) + 'kb';
   console.log(
     `${chalk.gray(

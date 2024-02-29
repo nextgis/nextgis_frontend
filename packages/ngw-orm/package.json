@@ -19,6 +19,7 @@
   },
   "buildOptions": {
     "name": "NgwOrm",
+    "tsbuild": true,
     "formats": [
       "esm-bundler",
       "esm-browser",

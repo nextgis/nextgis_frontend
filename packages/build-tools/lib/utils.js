@@ -1,7 +1,17 @@
-const fs = require('fs');
-const chalk = require('chalk');
+import fs from 'node:fs';
+import { createRequire } from 'node:module';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const getTargets = () =>
+import chalk from 'chalk';
+
+export const require = createRequire(import.meta.url);
+
+export const directoryName = path.dirname(fileURLToPath(import.meta.url));
+
+export const rootPath = path.resolve(directoryName, '..', '..', '..');
+
+export const getTargets = () =>
   fs.readdirSync('packages').filter((f) => {
     if (!fs.statSync(`packages/${f}`).isDirectory()) {
       return false;
@@ -13,9 +23,7 @@ const getTargets = () =>
     return true;
   });
 
-exports.getTargets = getTargets;
-
-exports.fuzzyMatchTarget = (partialTargets, includeAllMatching) => {
+export const fuzzyMatchTarget = (partialTargets, includeAllMatching) => {
   const matched = [];
   partialTargets.forEach((partialTarget) => {
     for (const target of getTargets()) {

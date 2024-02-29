@@ -1,15 +1,13 @@
 import { EventEmitter } from 'events';
 
-import {
-  WEBMAP_BASELAYER_ID_PREFIX,
-  fetchNgwLayerItems,
-} from '@nextgis/ngw-kit';
 import { fixUrlStr } from '@nextgis/utils';
 
 import { BookmarkItem } from './BookmarkItem';
 import { NgwWebmapItem } from './NgwWebmapItem';
 import { createOnFirstShowNgwAdapter } from './adapters/createOnFirstShowNgwAdapter';
+import { WEBMAP_BASELAYER_ID_PREFIX } from './constants';
 import { getNgwWebmapExtent } from './utils/fetchNgwExtent';
+import { fetchNgwLayerItems } from './utils/fetchNgwLayerItems';
 import { ngwApiToAdapterOptions } from './utils/ngwApiToAdapterOptions';
 import { updateImageParams } from './utils/utils';
 

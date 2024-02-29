@@ -1,29 +1,50 @@
+// @ts-check
 // based on https://github.com/vuejs/vue-next/blob/master/rollup.config.js
 
-import path from 'path';
-import ts from 'rollup-plugin-typescript2';
-import replace from '@rollup/plugin-replace';
+import assert from 'node:assert/strict';
+import path from 'node:path';
+
+import alias from '@rollup/plugin-alias';
+import commonJS from '@rollup/plugin-commonjs';
+import image from '@rollup/plugin-image';
 import json from '@rollup/plugin-json';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
+import replace from '@rollup/plugin-replace';
+import terser from '@rollup/plugin-terser';
+import autoprefixer from 'autoprefixer';
+import chalk from 'chalk';
+import cssnano from 'cssnano';
+import postcssUrl from 'postcss-url';
+import esbuild from 'rollup-plugin-esbuild';
+import polyfillNode from 'rollup-plugin-polyfill-node';
+import postcss from 'rollup-plugin-postcss';
+import ts from 'rollup-plugin-typescript2';
+
+import { require, rootPath } from './utils.js';
+
+/**
+ * @template T
+ * @template {keyof T} K
+ * @typedef { Omit<T, K> & Required<Pick<T, K>> } MarkRequired
+ */
+/** @typedef {'cjs' | 'esm-bundler' | 'global' | 'esm-browser'} PackageFormat */
+/** @typedef {MarkRequired<import('rollup').OutputOptions, 'file' | 'format'>} OutputOptions */
 
 if (!process.env.TARGET) {
   throw new Error('TARGET package must be specified via --environment flag.');
 }
 
-const rootPath = path.resolve(__dirname, '..', '..', '..');
+const masterVersion = require(path.resolve(rootPath, 'lerna.json')).version;
 
-const masterVersion = require('../../../lerna.json').version;
 const packagesDir = path.resolve(rootPath, 'packages');
 const packageDir = path.resolve(packagesDir, process.env.TARGET);
 
 const name = path.basename(packageDir);
-const resolve = (p) => path.resolve(packageDir, p);
+const resolve = (/** @type {string} */ p) => path.resolve(packageDir, p);
 const pkg = require(resolve(`package.json`));
 const packageOptions = pkg.buildOptions || {};
-const dependencies = getPeerDependencies(process.env.TARGET);
 
-// ensure TS checks only once for each build
-let hasTSChecked = false;
-
+/** @type {Record<PackageFormat, OutputOptions>} */
 const outputConfigs = {
   'esm-bundler': {
     file: resolve(`lib/${name}.esm-bundler.js`),
@@ -45,14 +66,18 @@ const outputConfigs = {
 
 const defaultFormats = ['esm-bundler', 'cjs'];
 const inlineFormats = process.env.FORMATS && process.env.FORMATS.split(',');
+const dependencies = getPeerDependencies(process.env.TARGET);
+
 const packageFormats =
   inlineFormats || packageOptions.formats || defaultFormats;
 const packageConfigs = process.env.PROD_ONLY
   ? []
-  : packageFormats.map((format) => createConfig(format, outputConfigs[format]));
+  : packageFormats.map((/** @type {PackageFormat} */ format) =>
+      createConfig(format, outputConfigs[format]),
+    );
 
 if (process.env.NODE_ENV === 'production') {
-  packageFormats.forEach((format) => {
+  packageFormats.forEach((/** @type {PackageFormat} */ format) => {
     if (packageOptions.prod === false) {
       return;
     }
@@ -67,23 +92,28 @@ if (process.env.NODE_ENV === 'production') {
 
 export default packageConfigs;
 
+/**
+ *
+ * @param {PackageFormat} format
+ * @param {OutputOptions} output
+ * @param {ReadonlyArray<import('rollup').Plugin>} plugins
+ * @returns {import('rollup').RollupOptions}
+ */
 function createConfig(format, output, plugins = []) {
   if (!output) {
-    console.log(require('chalk').yellow(`invalid format: "${format}"`));
+    console.log(chalk.yellow(`invalid format: "${format}"`));
     process.exit(1);
   }
 
-  output.sourcemap = true;
-  // output.sourcemap = !!process.env.SOURCE_MAP;
-  output.externalLiveBindings = false;
-  output.exports = 'auto';
-  output.banner = `/** Bundle of ${pkg.name}; version: ${pkg.version}; author: ${pkg.author} */`;
   const isProductionBuild =
     process.env.__DEV__ === 'false' || /\.prod\.js$/.test(output.file);
   const isBundlerESMBuild = /esm-bundler/.test(format);
   const isBrowserESMBuild = /esm-browser/.test(format);
-  const isNodeBuild = format === 'cjs';
+  const isCJSBuild = format === 'cjs';
   const isGlobalBuild = /global/.test(format);
+
+  const isBrowserBuild =
+    isGlobalBuild || isBrowserESMBuild || isBundlerESMBuild;
 
   const external =
     isGlobalBuild || isBrowserESMBuild
@@ -91,88 +121,199 @@ function createConfig(format, output, plugins = []) {
       : // Node / esm-bundler builds. Externalize everything.
         [...dependencies, 'vuetify/lib'];
 
-  let compilerOptions = {};
+  output.banner = `/** Bundle of ${pkg.name}; version: ${pkg.version}; author: ${pkg.author} */`;
+
+  output.exports = 'auto'; //: 'named'
+  if (isCJSBuild) {
+    output.esModule = true;
+  }
+  output.sourcemap = true;
+  output.externalLiveBindings = false;
+  // https://github.com/rollup/rollup/pull/5380
+  output.reexportProtoFromExternal = false;
 
   if (isGlobalBuild) {
     output.name = packageOptions.name;
-    compilerOptions = {
-      target: 'es5',
-      module: 'es2015',
-    };
   }
-
-  const shouldEmitDeclarations = process.env.TYPES != null && !hasTSChecked;
-  const tsPlugin = ts({
-    check: process.env.NODE_ENV === 'production' && !hasTSChecked,
-    tsconfig: path.resolve(rootPath, 'tsconfig.json'),
-    cacheRoot: path.resolve(rootPath, 'node_modules/.rts2_cache'),
-    tsconfigOverride: {
-      compilerOptions: {
-        sourceMap: output.sourcemap,
-        declaration: shouldEmitDeclarations,
-        declarationMap: shouldEmitDeclarations,
-        ...compilerOptions,
-      },
-      exclude: ['tests'],
-      include: [
-        resolve('src'),
-        path.resolve(packagesDir, 'global.d.ts'),
-        ...dependencies
-          .filter((e) => /^@nextgis\//.test(e))
-          .map((e) =>
-            path.resolve(packagesDir, e.replace('@nextgis/', ''), 'src'),
-          ),
-      ],
-    },
-  });
-  // we only need to check TS and generate declarations once for each build.
-  // it also seems to run into weird issues when checking multiple times
-  // during a single build.
-  hasTSChecked = true;
-
-  const entryFile = `src/index.ts`;
 
   output.globals = {};
 
-  const nodePlugins = [];
+  const entryFile = `src/index.ts`;
 
-  if (packageOptions.alias) {
+  function resolveDefine() {
+    /** @type {Record<string, string>} */
+    const replacements = {
+      __COMMIT__: `"${process.env.COMMIT}"`,
+      __VERSION__: `"${masterVersion}"`,
+      // If the build is expected to run directly in the browser (global / esm builds)
+      __BROWSER__: String(isBrowserBuild),
+      __GLOBAL__: String(isGlobalBuild),
+      __ESM_BUNDLER__: String(isBundlerESMBuild),
+      __ESM_BROWSER__: String(isBrowserESMBuild),
+      // is targeting Node (SSR)?
+      __CJS__: String(isCJSBuild),
+    };
+
+    if (!isBundlerESMBuild) {
+      // hard coded dev/prod builds
+      replacements.__DEV__ = String(!isProductionBuild);
+    }
+
+    // allow inline overrides like
+    Object.keys(replacements).forEach((key) => {
+      if (key in process.env) {
+        const value = process.env[key];
+        assert(typeof value === 'string');
+        replacements[key] = value;
+      }
+    });
+    return replacements;
+  }
+
+  // esbuild define is a bit strict and only allows literal json or identifiers
+  // so we still need replace plugin in some cases
+  function resolveReplace() {
+    /** @type {Record<string, string>} */
+    const replacements = {};
+
+    if (isBundlerESMBuild) {
+      Object.assign(replacements, {
+        // preserve to be handled by bundlers
+        __DEV__: `!!(process.env.NODE_ENV !== 'production')`,
+      });
+    }
+
+    if (Object.keys(replacements).length) {
+      return [replace({ values: replacements, preventAssignment: true })];
+    } else {
+      return [];
+    }
+  }
+
+  function resolveNodePlugins() {
+    const nodePlugins =
+      isGlobalBuild || isBrowserESMBuild
+        ? [
+            commonJS({
+              sourceMap: false,
+            }),
+            ...(format === 'cjs' ? [] : [polyfillNode()]),
+            nodeResolve({ preferBuiltins: true }),
+          ]
+        : [];
+
+    nodePlugins.push(image());
+
     nodePlugins.push(
-      require('@rollup/plugin-alias')({
-        entries: packageOptions.alias.map((x) => {
-          const find = new RegExp(x.find);
-          return { ...x, find };
-        }),
+      postcss({
+        extract: packageOptions.injectCss ? false : resolve(`lib/${name}.css`),
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        plugins: [postcssUrl({ url: 'inline' }), autoprefixer(), cssnano()],
       }),
     );
+
+    return nodePlugins;
   }
 
-  if (format !== 'cjs') {
-    nodePlugins.push(
-      ...[
-        require('@rollup/plugin-node-resolve').nodeResolve({
-          preferBuiltins: false,
-        }),
-        require('@rollup/plugin-commonjs')({
-          sourceMap: false,
-        }),
-      ],
+  function resolveCompiler() {
+    if (packageOptions.tsbuild) {
+      let compilerOptions = {};
+
+      if (isGlobalBuild) {
+        output.name = packageOptions.name;
+        compilerOptions = {
+          target: 'es5',
+          module: 'es2015',
+        };
+      }
+
+      return ts({
+        check: false,
+        tsconfig: path.resolve(rootPath, 'tsconfig.json'),
+        cacheRoot: path.resolve(rootPath, 'node_modules/.rts2_cache'),
+        tsconfigOverride: {
+          compilerOptions: {
+            sourceMap: output.sourcemap,
+            declaration: false,
+            declarationMap: false,
+            ...compilerOptions,
+          },
+          exclude: ['tests'],
+          include: [
+            resolve('src'),
+            path.resolve(packagesDir, 'global.d.ts'),
+            ...dependencies
+              .filter((e) => /^@nextgis\//.test(e))
+              .map((e) =>
+                path.resolve(packagesDir, e.replace('@nextgis/', ''), 'src'),
+              ),
+          ],
+        },
+      });
+    }
+    return esbuild({
+      tsconfig: path.resolve(rootPath, 'tsconfig.json'),
+      sourceMap: !!output.sourcemap,
+      minify: false,
+      target: isCJSBuild ? 'es2019' : 'es2015',
+      define: resolveDefine(),
+    });
+  }
+
+  const entries = dependencies
+    .filter((e) => /^@nextgis\//.test(e))
+    .map((e) => {
+      const packageName = e.replace('@nextgis/', '');
+      return [
+        {
+          find: new RegExp(`^${e}/lib/(.*)`),
+          replacement: path.resolve(packagesDir, packageName, 'lib', '$1'),
+        },
+        {
+          find: e,
+          replacement: path.resolve(
+            packagesDir,
+            packageName,
+            'src',
+            'index.ts',
+          ),
+        },
+      ];
+    })
+    .flat();
+
+  if (packageOptions.alias) {
+    entries.push(
+      ...packageOptions.alias.map(
+        (/** @type {{ find: string | RegExp; replacement: string; }} */ x) => {
+          const find = new RegExp(x.find);
+          return {
+            ...x,
+            replacement: path.resolve(rootPath, 'node_modules', x.replacement),
+            find,
+          };
+        },
+      ),
     );
   }
 
-  nodePlugins.push(require('@rollup/plugin-image')());
-  nodePlugins.push(
-    require('rollup-plugin-postcss')({
-      extract: packageOptions.injectCss ? false : resolve(`lib/${name}.css`),
-      plugins: [
-        require('postcss-url')({ url: 'inline' }),
-        require('autoprefixer'),
-        require('cssnano')(),
-      ],
-    }),
-  );
+  function ignoreCertainImports() {
+    const pattern = /^@nextgis\/[^/]+\/lib\//;
 
-  // nodePlugins.push(require('rollup-plugin-visualizer')());
+    return {
+      name: 'ignore-nextgis-lib-imports',
+      /**
+       * @param {string} source
+       */
+      resolveId(source) {
+        if (pattern.test(source)) {
+          return false;
+        }
+        return null;
+      },
+    };
+  }
 
   return {
     input: resolve(entryFile),
@@ -180,7 +321,9 @@ function createConfig(format, output, plugins = []) {
     // used alone.
     external: (id) => {
       if (!id.startsWith('.')) {
-        return external.some((x) => id.startsWith(x));
+        const isExt = external.some((x) => id.startsWith(x));
+
+        return !!isExt;
       }
       return false;
     },
@@ -188,24 +331,18 @@ function createConfig(format, output, plugins = []) {
       json({
         namedExports: false,
       }),
-      tsPlugin,
-      createReplacePlugin(
-        isProductionBuild,
-        isBundlerESMBuild,
-        isBrowserESMBuild,
-        // isBrowserBuild?
-        isGlobalBuild || isBrowserESMBuild || isBundlerESMBuild,
-        isGlobalBuild,
-        isNodeBuild,
-      ),
-      ...nodePlugins,
+      ignoreCertainImports(),
+      alias({
+        entries,
+      }),
+      ...resolveReplace(),
+      resolveCompiler(),
+      ...resolveNodePlugins(),
       ...plugins,
     ],
     output,
     onwarn: (msg, warn) => {
-      if (!/Circular/.test(msg)) {
-        // for ol build
-        if (msg.code === 'THIS_IS_UNDEFINED') return;
+      if (msg.code !== 'CIRCULAR_DEPENDENCY') {
         warn(msg);
       }
     },
@@ -216,59 +353,14 @@ function createConfig(format, output, plugins = []) {
   };
 }
 
-function createReplacePlugin(
-  isProduction,
-  isBundlerESMBuild,
-  isBrowserESMBuild,
-  isBrowserBuild,
-  isGlobalBuild,
-  isNodeBuild,
-) {
-  const replacements = {
-    __COMMIT__: `"${process.env.COMMIT}"`,
-    __VERSION__: `"${masterVersion}"`,
-    __DEV__: isBundlerESMBuild
-      ? // preserve to be handled by bundlers
-        `(process.env.NODE_ENV !== 'production')`
-      : // hard coded dev/prod builds
-        !isProduction,
-    // this is only used during Vue's internal tests
-    __TEST__: false,
-    // If the build is expected to run directly in the browser (global / esm builds)
-    __BROWSER__: isBrowserBuild,
-    __GLOBAL__: isGlobalBuild,
-    __ESM_BUNDLER__: isBundlerESMBuild,
-    __ESM_BROWSER__: isBrowserESMBuild,
-    // is targeting Node (SSR)?
-    __NODE_JS__: isNodeBuild,
-    __FEATURE_OPTIONS__: true,
-    __FEATURE_SUSPENSE__: true,
-    ...{
-      // 'styleInject(': `/*#__PURE__*/ styleInject(`,
-    },
-  };
-  // allow inline overrides like
-
-  Object.keys(replacements).forEach((key) => {
-    if (key in process.env) {
-      replacements[key] = process.env[key];
-    }
-  });
-  return replace({
-    preventAssignment: true,
-    values: replacements,
-  });
-}
-
-function createProductionConfig(format) {
+function createProductionConfig(/** @type {PackageFormat} */ format) {
   return createConfig(format, {
     file: resolve(`lib/${name}.${format}.prod.js`),
     format: outputConfigs[format].format,
   });
 }
 
-function createMinifiedConfig(format) {
-  const { terser } = require('rollup-plugin-terser');
+function createMinifiedConfig(/** @type {PackageFormat} */ format) {
   return createConfig(
     format,
     {
@@ -288,9 +380,13 @@ function createMinifiedConfig(format) {
   );
 }
 
+/**
+ * @param {string} target
+ * @param {Array<string>} deps
+ */
 function getPeerDependencies(target, deps = []) {
   const packageDir_ = path.resolve(packagesDir, target);
-  const resolve_ = (p) => path.resolve(packageDir_, p);
+  const resolve_ = (/** @type {string} */ p) => path.resolve(packageDir_, p);
   const pkg_ = require(resolve_(`package.json`));
 
   const dependencies = [

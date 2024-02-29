@@ -1,3 +1,5 @@
-exports.getAliases = require('./lib/aliases');
+import getAliases from './lib/aliases.js';
+import buildModule from './lib/build.js';
 
-exports.build = () => require('./lib/build');
+export { getAliases };
+export const build = () => buildModule;

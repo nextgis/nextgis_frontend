@@ -23,7 +23,7 @@
   },
   "scripts": {
     "clean": "rimraf ./lib",
-    "dev": "node ../build-tools/lib/build.js",
+    "dev": "node ../build-tools",
     "prod": "npm run dev -- --release",
     "lint": "eslint ./src/**/*.ts --fix --c ../../.eslintrc",
     "watch": "npm run dev -- --watch"

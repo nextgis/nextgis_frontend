@@ -10,15 +10,15 @@
 import 'leaflet/dist/leaflet.css';
 import './leaflet-style-override.css';
 
-import { Icon } from 'leaflet';
-import { NgwMap, NgwMapOptions } from '@nextgis/ngw-map';
 import LeafletMapAdapter from '@nextgis/leaflet-map-adapter';
-
+import { NgwMap } from '@nextgis/ngw-map';
+import { Icon } from 'leaflet';
 import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
 import iconUrl from 'leaflet/dist/images/marker-icon.png';
 import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
 
-import { Map } from 'leaflet';
+import type { NgwMapOptions } from '@nextgis/ngw-map';
+import type { Map } from 'leaflet';
 
 // @ts-ignore
 delete Icon.Default.prototype._getIconUrl;

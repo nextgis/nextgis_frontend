@@ -19,6 +19,7 @@
   },
   "buildOptions": {
     "name": "VuetifyNgwComponents",
+    "tsbuild": true,
     "formats": [
       "esm-bundler"
     ]

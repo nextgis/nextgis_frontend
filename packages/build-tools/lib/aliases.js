@@ -1,35 +1,33 @@
-const { join, resolve } = require('path');
-const { lstatSync, readdirSync, readFileSync, existsSync } = require('fs');
+import fs from 'node:fs';
+import path from 'node:path';
 
-const isDirectory = (source) => lstatSync(source).isDirectory();
+import { directoryName } from './utils.js';
 
-function generate(source = '', module = false) {
-  source = source || resolve(__dirname, '..', '..');
+const isDirectory = (source) => fs.lstatSync(source).isDirectory();
+
+export default function generate(source = '', moduleFlag = false) {
+  source = source || path.resolve(path.join(directoryName, '..', '..'));
   const items = {};
-  readdirSync(source).forEach((name) => {
-    const libPath = join(source, name);
+  fs.readdirSync(source).forEach((name) => {
+    const libPath = path.join(source, name);
     // find packages
     if (isDirectory(libPath)) {
-      const pkgPath = join(libPath, 'package.json');
-      if (existsSync(pkgPath)) {
-        const pkg = JSON.parse(readFileSync(pkgPath, 'utf8'));
+      const pkgPath = path.join(libPath, 'package.json');
+      if (fs.existsSync(pkgPath)) {
+        const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
 
-        if (module) {
+        if (moduleFlag) {
           if (pkg.module) {
-            const module = join(libPath, pkg.module);
-            if (existsSync(module)) {
-              items[pkg.name + '$'] = module;
+            const modulePath = path.join(libPath, pkg.module);
+            if (fs.existsSync(modulePath)) {
+              items[pkg.name + '$'] = modulePath;
             }
           }
         } else {
-          items[pkg.name + '$'] = join(libPath, '/src/index.ts');
+          items[pkg.name + '$'] = path.join(libPath, '/src/index.ts');
         }
       }
     }
   });
   return items;
 }
-
-module.exports = (source, module) => {
-  return generate(source, module);
-};

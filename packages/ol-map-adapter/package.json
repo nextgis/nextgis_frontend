@@ -27,7 +27,7 @@
   },
   "buildOptions": {
     "name": "OlMapAdapter",
-    "#alias": [
+    "alias": [
       {
         "find": "^(ol|ol(/.*))$",
         "replacement": "ol/src$2"

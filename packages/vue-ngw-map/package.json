@@ -21,6 +21,7 @@
   },
   "buildOptions": {
     "name": "VueNgwMap",
+    "tsbuild": true,
     "formats": [
       "esm-bundler"
     ]

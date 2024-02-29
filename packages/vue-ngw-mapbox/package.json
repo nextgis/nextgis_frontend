@@ -15,6 +15,7 @@
   "buildOptions": {
     "name": "VueNgwMapbox",
     "injectCss": true,
+    "tsbuild": true,
     "formats": [
       "esm-bundler"
     ]

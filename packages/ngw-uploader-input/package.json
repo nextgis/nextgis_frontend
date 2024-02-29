@@ -20,6 +20,7 @@
   },
   "buildOptions": {
     "name": "NgwUploaderInput",
+    "tsbuild": true,
     "formats": [
       "esm-bundler",
       "esm-browser",
