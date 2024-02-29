@@ -1,16 +1,18 @@
-import Vue, { VNode, CreateElement } from 'vue';
+import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import { propsBinder, findNgwMapParent } from '../utils';
 
+import { findNgwMapParent, propsBinder } from '../utils';
+
+import type VueNgwMap from './VueNgwMap';
+import type { NgwMap } from '@nextgis/ngw-map';
 import type {
   AdapterOptions,
-  LayerAdapters,
   LayerAdapter,
   LayerAdapterDefinition,
+  LayerAdapters,
 } from '@nextgis/webmap';
-import type { NgwMap } from '@nextgis/ngw-map';
-import type VueNgwMap from './VueNgwMap';
+import type { CreateElement, VNode } from 'vue';
 
 @Component
 export class VueNgwLayer extends Vue {

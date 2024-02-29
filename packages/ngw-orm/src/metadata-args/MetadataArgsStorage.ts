@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import type { ResourceMetadataArgs } from './ResourceMetadataArgs';
 import type { ColumnMetadataArgs } from './ColumnMetadataArgs';
+import type { ResourceMetadataArgs } from './ResourceMetadataArgs';
 
 /**
  * Storage all metadatas args of all available types: tables, columns etc.

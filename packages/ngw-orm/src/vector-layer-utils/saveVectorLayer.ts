@@ -1,7 +1,9 @@
 import { FEATURE_REQUEST_PARAMS } from '@nextgis/ngw-kit';
-import type { Connection } from '../connection/Connection';
-import type { VectorResourceToNgwOptions } from './vectorResourceToNgw';
+
 import { vectorResourceToNgw } from './vectorResourceToNgw';
+
+import type { VectorResourceToNgwOptions } from './vectorResourceToNgw';
+import type { Connection } from '../connection/Connection';
 
 export function saveVectorLayer(
   opt: VectorResourceToNgwOptions,

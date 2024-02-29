@@ -1,11 +1,12 @@
-import { useRef, useEffect, useState, useCallback } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+
 import { useNgwMapContext } from './context';
 import { useNgwControl } from './hooks/useNgwControl';
 
-import type { ReactNode, MutableRefObject } from 'react';
-import type { ControlOptions, CreateControlOptions } from '@nextgis/webmap';
 import type { ReactElementAttributes } from './interfaces';
+import type { ControlOptions, CreateControlOptions } from '@nextgis/webmap';
+import type { MutableRefObject, ReactNode } from 'react';
 
 interface MapControlProps
   extends ReactElementAttributes,
@@ -51,7 +52,7 @@ export function MapControl<P extends MapControlProps = MapControlProps>(
       if (id) el.id = id;
       if (className) el.className = className;
       if (style) {
-        for (let key in style) {
+        for (const key in style) {
           el.style[key] = (style as CSSStyleDeclaration)[key];
         }
       }

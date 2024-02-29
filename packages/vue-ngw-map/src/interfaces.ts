@@ -1,7 +1,6 @@
-import { MapAdapter } from '@nextgis/webmap';
-import { NgwMap, NgwMapOptions } from '@nextgis/ngw-map';
-
-import NgwConnector from '@nextgis/ngw-connector';
+import type NgwConnector from '@nextgis/ngw-connector';
+import type { NgwMap, NgwMapOptions } from '@nextgis/ngw-map';
+import type { MapAdapter } from '@nextgis/webmap';
 
 export interface VueNgwMapData<M = any> {
   ngwMap: NgwMap<M>;

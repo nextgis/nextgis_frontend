@@ -1,5 +1,4 @@
 import type { FindOneOptions } from './FindOneOptions';
-
 import type { Properties } from '@nextgis/properties-filter';
 
 /**

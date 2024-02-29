@@ -1,16 +1,18 @@
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
-import { NgwMap, LayerAdapter, WebMap } from '@nextgis/ngw-map';
-import {
-  ResourceAdapter,
-  NgwWebmapLayerAdapter,
+import { NgwMap, WebMap } from '@nextgis/ngw-map';
+import { debounce } from '@nextgis/utils';
+import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
+// @ts-ignore
+import { VBtn, VIcon, VTreeview } from 'vuetify/lib';
+
+import type {
   NgwWebmapItem,
+  NgwWebmapLayerAdapter,
+  ResourceAdapter,
   TreeGroup,
   TreeLayer,
 } from '@nextgis/ngw-kit';
-import { CreateElement, VNode, VNodeData } from 'vue';
-// @ts-ignore
-import { VTreeview, VBtn, VIcon } from 'vuetify/lib';
-import { debounce } from '@nextgis/utils';
+import type { LayerAdapter } from '@nextgis/ngw-map';
+import type { CreateElement, VNode, VNodeData } from 'vue';
 
 export interface VueTreeItem {
   id: string;
@@ -26,7 +28,8 @@ export class NgwLayersList extends Vue {
   @Prop({ type: Array }) include!: Array<ResourceAdapter | string>;
   @Prop({ type: Boolean, default: false }) hideWebmapRoot!: boolean;
   @Prop({ type: Boolean, default: false }) notOnlyNgwLayer!: boolean;
-  @Prop({ type: String, default: 'includeInNgwLayersList' }) layerIncludeProp!: string;
+  @Prop({ type: String, default: 'includeInNgwLayersList' })
+  layerIncludeProp!: string;
   @Prop({ type: Function }) showLayer!: (layer: NgwWebmapItem) => boolean;
   @Prop({ type: String, default: 'mdi-cancel' }) removeLayerIcon!: string;
   @Prop({ type: String, default: 'independent' }) selectionType!:
@@ -240,7 +243,9 @@ export class NgwLayersList extends Vue {
       } else if ('getNgwLayers' in this.webMap) {
         const ngwLayers = await (this.webMap as NgwMap).getNgwLayers();
         layersList = Object.keys(ngwLayers).map((x) => ngwLayers[x].layer);
-        const includedLayers = allLayers.filter((l) => l.options.props?.[this.layerIncludeProp])
+        const includedLayers = allLayers.filter(
+          (l) => l.options.props?.[this.layerIncludeProp],
+        );
         if (includedLayers.length) {
           layersList.push(...includedLayers);
         }

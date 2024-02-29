@@ -1,9 +1,11 @@
-const NgwUploader = require('@nextgis/ngw-uploader');
-const NgwConnector = require('@nextgis/ngw-connector');
 // const NgwUploader = require('../../lib/ngw-uploader.cjs');
 
 const fs = require('fs');
 const path = require('path');
+
+const NgwConnector = require('@nextgis/ngw-connector');
+const NgwUploader = require('@nextgis/ngw-uploader');
+
 const groupKeyname = 'ngw-uploader-node-example-group';
 const baseUrl = 'https://sandbox.nextgis.com';
 

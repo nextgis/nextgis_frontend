@@ -1,24 +1,24 @@
-import type {
-  ResourceIdKeynameDef,
-  ResourceItem,
-} from '@nextgis/ngw-connector';
-import type { Type } from '@nextgis/utils';
-
 // import { DeepPartial } from '../common/DeepPartial';
 
-import { Connection } from '../connection/Connection';
-import type { ConnectionOptions } from '../connection/ConnectionOptions';
-import { CannotExecuteResourceNotExistError } from '../error/CannotExecuteResourceNotExistError';
-import type { SyncOptions } from './SyncOptions';
-import { NgwResource } from '../decorator/NgwResource';
-import type { NgwResourceOptions } from '../options/NgwResourceOptions';
 import { getMetadataArgsStorage } from '..';
+import { Connection } from '../connection/Connection';
+import { NgwResource } from '../decorator/NgwResource';
+import { CannotExecuteResourceNotExistError } from '../error/CannotExecuteResourceNotExistError';
+
+import type { SyncOptions } from './SyncOptions';
+import type { ConnectionOptions } from '../connection/ConnectionOptions';
 import type { ResourceMetadataArgs } from '../metadata-args/ResourceMetadataArgs';
+import type { NgwResourceOptions } from '../options/NgwResourceOptions';
 import type {
   ToTypescript,
   ToTypescriptOptions,
 } from '../options/ToTypescriptOptions';
 import type { ValidateErrorType } from '../types/ValidateErrorType';
+import type {
+  ResourceIdKeynameDef,
+  ResourceItem,
+} from '@nextgis/ngw-connector';
+import type { Type } from '@nextgis/utils';
 
 // type QueryDeepPartialEntity<T> = DeepPartial<T>;
 // type InsertResult = any;

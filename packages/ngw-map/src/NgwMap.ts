@@ -1,67 +1,67 @@
-import type StrictEventEmitter from 'strict-event-emitter-types';
 import { EventEmitter } from 'events';
-import CancelablePromise from '@nextgis/cancelable-promise';
-import { defined, isObject, getIdentifyRadius } from '@nextgis/utils';
-import { WebMap } from '@nextgis/webmap';
-import type NgwConnector from '@nextgis/ngw-connector';
 
-import {
-  fetchNgwLayerFeatureCollection,
-  createNgwLayerAdapter,
-  fetchNgwLayerFeature,
-  fetchIdentifyGeoJson,
-  sendIdentifyRequest,
-  createIdentifyItem,
-  fetchNgwLayerItems,
-  fetchIdentifyItem,
-  fetchNgwLayerItem,
-  getIdentifyItems,
-  getCompanyLogo,
-  fetchNgwExtent,
-} from '@nextgis/ngw-kit';
-import { deprecatedWarn } from '@nextgis/utils';
+import CancelablePromise from '@nextgis/cancelable-promise';
 import { getIcon } from '@nextgis/icons';
+import {
+  createIdentifyItem,
+  createNgwLayerAdapter,
+  fetchIdentifyGeoJson,
+  fetchIdentifyItem,
+  fetchNgwExtent,
+  fetchNgwLayerFeature,
+  fetchNgwLayerFeatureCollection,
+  fetchNgwLayerItem,
+  fetchNgwLayerItems,
+  getCompanyLogo,
+  getIdentifyItems,
+  sendIdentifyRequest,
+} from '@nextgis/ngw-kit';
+import { defined, getIdentifyRadius, isObject } from '@nextgis/utils';
+import { deprecatedWarn } from '@nextgis/utils';
+import { WebMap } from '@nextgis/webmap';
 
 import { appendNgwResources } from './utils/appendNgwResources';
 import { prepareWebMapOptions } from './utils/prepareWebMapOptions';
 
-import type { JsonMap, FeatureProperties } from '@nextgis/utils';
+import type {
+  NgwIdentifyEvent,
+  NgwLayers,
+  NgwMapEvents,
+  NgwMapOptions,
+} from './interfaces';
+import type NgwConnector from '@nextgis/ngw-connector';
 import type {
   FeatureItem,
-  LayerFeature,
-  ResourceItem,
   FeatureLayersIdentify,
   FeatureLayersIdentifyItems,
+  LayerFeature,
+  ResourceItem,
 } from '@nextgis/ngw-connector';
 import type {
-  OnLayerMouseOptions,
-  ControlPosition,
-  MapClickEvent,
-  LayerAdapter,
-  WebMapEvents,
-  MapControls,
-  FitOptions,
-  LayerDef,
-  AdapterOptions,
-} from '@nextgis/webmap';
-import type {
-  NgwIdentify,
-  NgwWebmapItem,
-  ResourceAdapter,
   FetchNgwItemsOptions,
   NgwFeatureItemResponse,
   NgwFeatureRequestOptions,
+  NgwIdentify,
+  NgwWebmapItem,
+  ResourceAdapter,
 } from '@nextgis/ngw-kit';
-import type { Geometry, Feature, FeatureCollection } from 'geojson';
-import type { QmsAdapterOptions } from '@nextgis/qms-kit';
 import type { NgwLayerOptions } from '@nextgis/ngw-kit';
-import type {
-  NgwIdentifyEvent,
-  NgwMapOptions,
-  NgwMapEvents,
-  NgwLayers,
-} from './interfaces';
 import type { FetchNgwItemOptions } from '@nextgis/ngw-kit';
+import type { QmsAdapterOptions } from '@nextgis/qms-kit';
+import type { FeatureProperties, JsonMap } from '@nextgis/utils';
+import type {
+  AdapterOptions,
+  ControlPosition,
+  FitOptions,
+  LayerAdapter,
+  LayerDef,
+  MapClickEvent,
+  MapControls,
+  OnLayerMouseOptions,
+  WebMapEvents,
+} from '@nextgis/webmap';
+import type { Feature, FeatureCollection, Geometry } from 'geojson';
+import type StrictEventEmitter from 'strict-event-emitter-types';
 
 type PromiseGroup = 'select' | 'identify';
 

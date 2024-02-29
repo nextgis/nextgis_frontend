@@ -1,16 +1,16 @@
-import { createElement } from 'react';
-import { Icon } from 'leaflet';
-
+/* eslint-disable import/order */
 import MapAdapter from '@nextgis/leaflet-map-adapter';
 import { ReactNgwMap } from '@nextgis/react-ngw-map';
+import { Icon } from 'leaflet';
+import { createElement } from 'react';
+
+import type { MapContainerProps } from '@nextgis/react-ngw-map';
+import type { Map } from 'leaflet';
 
 import 'leaflet/dist/leaflet.css';
 import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
 import iconUrl from 'leaflet/dist/images/marker-icon.png';
 import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
-
-import type { Map } from 'leaflet';
-import type { MapContainerProps } from '@nextgis/react-ngw-map';
 
 delete (Icon.Default as any).prototype._getIconUrl;
 

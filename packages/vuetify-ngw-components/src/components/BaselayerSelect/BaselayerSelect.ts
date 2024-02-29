@@ -1,12 +1,12 @@
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
-import { CreateElement, VNode, VNodeData } from 'vue';
-
+import { debounce } from '@nextgis/utils';
 import { WebMap } from '@nextgis/webmap';
-import { LayerAdapter, MainLayerAdapter } from '@nextgis/ngw-map';
-import { ResourceAdapter } from '@nextgis/ngw-kit';
+import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
 // @ts-ignore
 import { VSelect } from 'vuetify/lib';
-import { debounce } from '@nextgis/utils';
+
+import type { ResourceAdapter } from '@nextgis/ngw-kit';
+import type { LayerAdapter, MainLayerAdapter } from '@nextgis/ngw-map';
+import type { CreateElement, VNode, VNodeData } from 'vue';
 
 export interface VueSelectItem {
   value: string | undefined;

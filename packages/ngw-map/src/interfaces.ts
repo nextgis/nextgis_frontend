@@ -1,17 +1,16 @@
-import type { Geometry } from 'geojson';
-import type { MapOptions, WebMapEvents, RuntimeParams } from '@nextgis/webmap';
+import type { NgwMap } from './NgwMap';
 import type NgwConnector from '@nextgis/ngw-connector';
 import type { Credentials } from '@nextgis/ngw-connector';
-import type { NgwMap } from './NgwMap';
-
 import type {
   CompanyLogoOptions,
+  IdentifyItem,
+  NgwIdentify,
   NgwLayerOptions,
   ResourceAdapter,
-  NgwIdentify,
-  IdentifyItem,
 } from '@nextgis/ngw-kit';
 import type { FeatureProperties } from '@nextgis/utils';
+import type { MapOptions, RuntimeParams, WebMapEvents } from '@nextgis/webmap';
+import type { Geometry } from 'geojson';
 
 export type NgwResourceDefinition = number | [number, string] | NgwLayerOptions;
 

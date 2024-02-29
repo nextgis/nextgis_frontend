@@ -1,11 +1,11 @@
-import { getDefaultControls } from '@nextgis/webmap';
-import { deepmerge } from '@nextgis/utils';
-import type { StarterKit, MapOptions } from '@nextgis/webmap';
 import NgwConnector from '@nextgis/ngw-connector';
-import { QmsKit } from '@nextgis/qms-kit';
 import { NgwKit } from '@nextgis/ngw-kit';
+import { QmsKit } from '@nextgis/qms-kit';
+import { deepmerge } from '@nextgis/utils';
+import { getDefaultControls } from '@nextgis/webmap';
 
 import type { NgwMapOptions } from '../interfaces';
+import type { MapOptions, StarterKit } from '@nextgis/webmap';
 
 export const OPTIONS: NgwMapOptions = {
   target: 'map',

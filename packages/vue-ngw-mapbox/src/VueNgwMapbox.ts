@@ -1,9 +1,10 @@
 import 'maplibre-gl/dist/maplibre-gl.css';
 
-import { Mixins, Prop, Component } from 'vue-property-decorator';
-import { VueNgwMap } from '@nextgis/vue-ngw-map';
-// import { NgwMap } from '@nextgis/ngw-map';
 import MapAdapter from '@nextgis/mapboxgl-map-adapter';
+import { VueNgwMap } from '@nextgis/vue-ngw-map';
+import { Component, Mixins, Prop } from 'vue-property-decorator';
+// import { NgwMap } from '@nextgis/ngw-map';
+
 import type { Map } from 'maplibre-gl';
 
 @Component

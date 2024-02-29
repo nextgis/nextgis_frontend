@@ -1,8 +1,8 @@
-import { useEffect, useState, useRef } from 'react';
 import { NgwMap } from '@nextgis/ngw-map';
+import { useEffect, useRef, useState } from 'react';
 
-import type { MutableRefObject } from 'react';
 import type { MapContainerProps } from '../interfaces';
+import type { MutableRefObject } from 'react';
 
 export function useMapElement(
   mapRef: MutableRefObject<HTMLElement | null>,
@@ -31,8 +31,7 @@ export function useMapElement(
     if (isReady.current) {
       if (bounds) {
         ngwMap.setView({ bounds });
-      }
-      else if (center && zoom) {
+      } else if (center && zoom) {
         ngwMap.setView({ center, zoom });
       }
     }
@@ -43,7 +42,6 @@ export function useMapElement(
       ngwMap.setView({ maxZoom });
     }
   }, [ngwMap, isReady.current, center, zoom, bounds, maxBounds, maxZoom]);
-
 
   useEffect(() => {
     return () => {

@@ -9,12 +9,13 @@
  */
 import 'maplibre-gl/dist/maplibre-gl.css';
 
-import { NgwMap, NgwMapOptions } from '@nextgis/ngw-map';
 import MapboxglMapAdapter from '@nextgis/mapboxgl-map-adapter';
+import { NgwMap } from '@nextgis/ngw-map';
 
-import type { Map } from 'maplibre-gl';
 import type { MapboxglMapAdapterOptions } from '@nextgis/mapboxgl-map-adapter';
-import type { ResourceAdapter, NgwLayerOptions } from '@nextgis/ngw-kit';
+import type { NgwLayerOptions, ResourceAdapter } from '@nextgis/ngw-kit';
+import type { NgwMapOptions } from '@nextgis/ngw-map';
+import type { Map } from 'maplibre-gl';
 
 class NgwMapbox extends NgwMap<Map, string[], any, MapboxglMapAdapterOptions> {
   constructor(options: NgwMapOptions) {

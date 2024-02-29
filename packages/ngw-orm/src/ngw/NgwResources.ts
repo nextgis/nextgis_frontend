@@ -1,9 +1,10 @@
-import type { ResourceCls, ResourceItem } from '@nextgis/ngw-connector';
-import type { BaseResource } from '../repository/BaseResource';
-import { ResourceGroup } from '../repository/ResourceGroup';
+import { LineLayer } from '../repository/LineLayer';
 import { PointLayer } from '../repository/PointLayer';
 import { PolygonLayer } from '../repository/PolygonLayer';
-import { LineLayer } from '../repository/LineLayer';
+import { ResourceGroup } from '../repository/ResourceGroup';
+
+import type { BaseResource } from '../repository/BaseResource';
+import type { ResourceCls, ResourceItem } from '@nextgis/ngw-connector';
 
 type GetClassItemCb = (item: ResourceItem) => typeof BaseResource;
 

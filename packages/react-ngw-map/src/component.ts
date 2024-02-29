@@ -1,6 +1,9 @@
-import { forwardRef, Ref, useImperativeHandle } from 'react';
+import { forwardRef, useImperativeHandle } from 'react';
+
 import { useNgwMapContext } from './context';
+
 import type { ElementHook } from './element';
+import type { Ref } from 'react';
 
 export function createWebMapComponent<E, P>(useElement: ElementHook<E, P>) {
   function WebMapComponent(props: P, ref: Ref<E>) {

@@ -3,11 +3,10 @@ import 'ol/ol.css';
 
 import MapAdapter from '@nextgis/ol-map-adapter';
 import { VueNgwMap } from '@nextgis/vue-ngw-map';
-import { NgwMap } from '@nextgis/ngw-map';
+import { Component, Mixins, Prop } from 'vue-property-decorator';
 
-import Map from 'ol/Map';
-
-import { Mixins, Prop, Component } from 'vue-property-decorator';
+import type { NgwMap } from '@nextgis/ngw-map';
+import type Map from 'ol/Map';
 
 @Component
 export class VueNgwOl extends Mixins<VueNgwMap<Map>>(VueNgwMap) {

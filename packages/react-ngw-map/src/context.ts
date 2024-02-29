@@ -1,4 +1,5 @@
 import { createContext, useContext } from 'react';
+
 import type { NgwMapContextInterface } from './interfaces';
 
 export const NgwMapContext = createContext<NgwMapContextInterface | null>(null);

@@ -1,8 +1,10 @@
-import type { FeatureProperties } from '@nextgis/utils';
 import { defined } from '@nextgis/utils';
-import type { FeatureItem } from '@nextgis/ngw-connector';
-import type { VectorLayer } from '../repository/VectorLayer';
+
 import { getMetadataArgsStorage } from '..';
+
+import type { VectorLayer } from '../repository/VectorLayer';
+import type { FeatureItem } from '@nextgis/ngw-connector';
+import type { FeatureProperties } from '@nextgis/utils';
 
 export function itemsToEntities(
   Resource: typeof VectorLayer,

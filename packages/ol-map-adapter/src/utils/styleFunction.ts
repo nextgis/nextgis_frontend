@@ -20,7 +20,6 @@ import type {
 import type { Feature } from 'geojson';
 import type OlFeature from 'ol/Feature';
 import type { Color } from 'ol/color';
-
 import type { Options as IconOptions } from 'ol/style/Icon';
 import type { Options as TextOptions } from 'ol/style/Text';
 

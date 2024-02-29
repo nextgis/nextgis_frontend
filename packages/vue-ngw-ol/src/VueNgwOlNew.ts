@@ -2,10 +2,11 @@
 import 'ol/ol.css';
 
 import MapAdapter from '@nextgis/ol-map-adapter';
-import { VueNgwMap, VueNgwMapData, VueNgwMapProps } from '@nextgis/vue-ngw-map';
-import { NgwMap } from '@nextgis/ngw-map';
+import { VueNgwMap } from '@nextgis/vue-ngw-map';
 
-import Map from 'ol/Map';
+import type { NgwMap } from '@nextgis/ngw-map';
+import type { VueNgwMapData, VueNgwMapProps } from '@nextgis/vue-ngw-map';
+import type Map from 'ol/Map';
 
 interface VueNgwMapDataOl extends VueNgwMapData {
   ngwMap: NgwMap<Map>;

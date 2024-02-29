@@ -1,10 +1,10 @@
-import { useCallback, useState, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { useNgwMapContext } from './context';
-
-import type { ReactNode } from 'react';
-import type { ControlOptions, ToggleControlOptions } from '@nextgis/webmap';
 import { useNgwControl } from './hooks/useNgwControl';
+
+import type { ControlOptions, ToggleControlOptions } from '@nextgis/webmap';
+import type { ReactNode } from 'react';
 
 interface MapControlProps extends ToggleControlOptions, ControlOptions {
   children?: ReactNode;
@@ -26,7 +26,6 @@ export function ToggleControl<P extends MapControlProps = MapControlProps>(
   useEffect(() => {
     setInstance(createControl());
   }, [createControl, position]);
-
 
   return null;
 }

@@ -1,12 +1,12 @@
-import { VNode, VNodeData, CreateElement } from 'vue';
-import { Prop, Vue, Watch } from 'vue-property-decorator';
 import { NgwMap } from '@nextgis/ngw-map';
 import Component from 'vue-class-component';
-import NgwConnector from '@nextgis/ngw-connector';
+import { Prop, Vue, Watch } from 'vue-property-decorator';
 
-import type { LngLatBoundsArray } from '@nextgis/utils';
+import type NgwConnector from '@nextgis/ngw-connector';
 import type { NgwMapOptions } from '@nextgis/ngw-map';
-import type { MapAdapter, Cursor } from '@nextgis/webmap';
+import type { LngLatBoundsArray } from '@nextgis/utils';
+import type { Cursor, MapAdapter } from '@nextgis/webmap';
+import type { CreateElement, VNode, VNodeData } from 'vue';
 
 @Component
 export class VueNgwMap<M = any> extends Vue {

@@ -1,10 +1,10 @@
-import type { MutableRefObject, ReactNode } from 'react';
 import type {
-  NgwMap,
-  LayerAdapter,
-  NgwMapOptions,
   ControlOptions,
+  LayerAdapter,
+  NgwMap,
+  NgwMapOptions,
 } from '@nextgis/ngw-map';
+import type { MutableRefObject, ReactNode } from 'react';
 
 export interface ControlledLayer {
   addLayer(layer: LayerAdapter): void;

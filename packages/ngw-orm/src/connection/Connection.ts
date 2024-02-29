@@ -1,18 +1,20 @@
+import NgwConnector from '@nextgis/ngw-connector';
+import { defined, objectAssign } from '@nextgis/utils';
+
+import { getMetadataArgsStorage } from '..';
+import { NgwResources } from '../ngw/NgwResources';
+
+import type { ConnectionOptions } from './ConnectionOptions';
+import type { DeepPartial } from '../common/DeepPartial';
+import type { ResourceMetadataArgs } from '../metadata-args/ResourceMetadataArgs';
+import type { BaseResource } from '../repository/BaseResource';
+import type { SyncOptions } from '../repository/SyncOptions';
+import type { ResourceSyncItem } from '../sync-items/ResourceSyncItem';
 import type {
-  ResourceItem,
   Resource,
   ResourceIdKeynameDef,
+  ResourceItem,
 } from '@nextgis/ngw-connector';
-import NgwConnector from '@nextgis/ngw-connector';
-import { objectAssign, defined } from '@nextgis/utils';
-import type { ConnectionOptions } from './ConnectionOptions';
-import type { SyncOptions } from '../repository/SyncOptions';
-import type { BaseResource } from '../repository/BaseResource';
-import { getMetadataArgsStorage } from '..';
-import type { ResourceMetadataArgs } from '../metadata-args/ResourceMetadataArgs';
-import type { DeepPartial } from '../common/DeepPartial';
-import type { ResourceSyncItem } from '../sync-items/ResourceSyncItem';
-import { NgwResources } from '../ngw/NgwResources';
 
 /**
  * Connection is a single NGW connection.

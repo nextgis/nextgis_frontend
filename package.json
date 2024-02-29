@@ -4,10 +4,11 @@
   "scripts": {
     "clean": "lerna run clean",
     "dev": "lerna run dev",
-    "prod": "node ./packages/build-tools/lib/build.js --release",
+    "prod": "npm run lint:eslint && node ./packages/build-tools/lib/build.js --release",
     "prod:each": "lerna run prod && npm run test:build",
     "build-dts": "npx tsc -p tsconfig.build.json && rollup -c ./packages/build-tools/lib/rollup.dts.config.js",
     "lint": "lerna run lint",
+    "lint:eslint": "eslint --fix --ext .js,.ts ./packages/**/src/**/*.ts",
     "demo": "yarn run examples && cd ./demo/ && yarn run build && yarn run docker",
     "examples": "node ./scripts/updateExamples.js",
     "test": "npm run karma -- --single-run --coverage",

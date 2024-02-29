@@ -1,4 +1,4 @@
-import type { PropertiesFilter, Properties } from '@nextgis/properties-filter';
+import type { Properties, PropertiesFilter } from '@nextgis/properties-filter';
 
 export type FindConditions<P extends Properties = Properties> =
   | PropertiesFilter<P>

@@ -1,6 +1,8 @@
 const path = require('path');
-const package = require('./package.json');
+
 const common = require('../build-tools/lib/webpack.config');
+
+const package = require('./package.json');
 
 const library = 'CesiumMapAdapter';
 

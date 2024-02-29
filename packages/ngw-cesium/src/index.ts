@@ -1,6 +1,8 @@
 import 'cesium/Build/Cesium/Widgets/widgets.css';
-import { NgwMap, NgwMapOptions } from '@nextgis/ngw-map';
 import MapAdapter from '@nextgis/cesium-map-adapter';
+import { NgwMap } from '@nextgis/ngw-map';
+
+import type { NgwMapOptions } from '@nextgis/ngw-map';
 
 class NgwCesium extends NgwMap {
   constructor(options: NgwMapOptions) {

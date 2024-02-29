@@ -5,6 +5,7 @@
 import 'reflect-metadata';
 
 import { getGlobalVariable } from '@nextgis/utils';
+
 import { MetadataArgsStorage } from './metadata-args/MetadataArgsStorage';
 
 export { Connection } from './connection/Connection';

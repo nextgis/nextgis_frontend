@@ -1,4 +1,4 @@
-import { createElement, useEffect, useRef, useMemo } from 'react';
+import { createElement, useEffect, useMemo, useRef } from 'react';
 
 import { NgwMapProvider } from './context';
 import { useMapElement } from './hooks/useMapElement';

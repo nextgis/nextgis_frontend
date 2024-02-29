@@ -1,25 +1,6 @@
 /* eslint-disable @typescript-eslint/member-ordering */
-import type {
-  Point,
-  Polygon,
-  Feature,
-  MultiPoint,
-  LineString,
-  MultiPolygon,
-  GeoJsonTypes,
-  MultiLineString,
-  GeoJsonProperties,
-} from 'geojson';
-import type { FilterOptions } from '@nextgis/webmap';
-import type { PropertiesFilter } from '@nextgis/properties-filter';
-import type { DeepPartial } from '@nextgis/utils';
-import type { GetNgwItemsOptions } from '@nextgis/ngw-kit';
-import { fetchNgwLayerItems, fetchNgwLayerItem } from '@nextgis/ngw-kit';
-import type {
-  GeometryType,
-  VectorLayerResourceItem,
-  FeatureLayerField,
-} from '@nextgis/ngw-connector';
+import { fetchNgwLayerItem, fetchNgwLayerItems } from '@nextgis/ngw-kit';
+
 // import { ResourceItem } from '@nextgis/ngw-connector';
 // import { objectAssign } from '@nextgis/utils';
 // import NgwConnector from '@nextgis/ngw-connector';
@@ -29,28 +10,50 @@ import type {
 // import { FindConditions } from '../find-options/FindConditions';
 // import { FindManyOptions } from '../find-options/FindManyOptions';
 // import { FindOneOptions } from '../find-options/FindOneOptions';
-import { getMetadataArgsStorage, Column } from '..';
-import type { VectorResourceSyncItem } from '../sync-items/VectorResourceSyncItem';
-import type { FindOneOptions } from '../find-options/FindOneOptions';
-import type { FindConditions } from '../find-options/FindConditions';
+import { Column, getMetadataArgsStorage } from '..';
 import { CannotExecuteNotConnectedError } from '../error/CannotExecuteNotConnectedError';
-import type { FindManyOptions } from '../find-options/FindManyOptions';
 import {
-  itemsToEntities,
   itemToEntity,
+  itemsToEntities,
 } from '../vector-layer-utils/itemsToEntities';
 import { saveVectorLayer } from '../vector-layer-utils/saveVectorLayer';
-import type { ObjectType } from '../common/ObjectType';
+import { toTypescript } from '../vector-layer-utils/toTypescript';
+
 import { BaseResource } from './BaseResource';
+
 import type { SyncOptions } from './SyncOptions';
 import type { UpdateOptions } from './UpdateOptions';
-import { toTypescript } from '../vector-layer-utils/toTypescript';
+import type { ObjectType } from '../common/ObjectType';
+import type { FindConditions } from '../find-options/FindConditions';
+import type { FindManyOptions } from '../find-options/FindManyOptions';
+import type { FindOneOptions } from '../find-options/FindOneOptions';
 import type {
   ToTypescript,
   ToTypescriptOptions,
 } from '../options/ToTypescriptOptions';
-import type { ValidateErrorType } from '../types/ValidateErrorType';
+import type { VectorResourceSyncItem } from '../sync-items/VectorResourceSyncItem';
 import type { VectorResourceUpdateItem } from '../sync-items/VectorResourceUpdateItem';
+import type { ValidateErrorType } from '../types/ValidateErrorType';
+import type {
+  FeatureLayerField,
+  GeometryType,
+  VectorLayerResourceItem,
+} from '@nextgis/ngw-connector';
+import type { GetNgwItemsOptions } from '@nextgis/ngw-kit';
+import type { PropertiesFilter } from '@nextgis/properties-filter';
+import type { DeepPartial } from '@nextgis/utils';
+import type { FilterOptions } from '@nextgis/webmap';
+import type {
+  Feature,
+  GeoJsonProperties,
+  GeoJsonTypes,
+  LineString,
+  MultiLineString,
+  MultiPoint,
+  MultiPolygon,
+  Point,
+  Polygon,
+} from 'geojson';
 // import { SyncOptions } from './SyncOptions';
 // import { Connection } from '../connection/Connection';
 // import { ConnectionOptions } from '../connection/ConnectionOptions';

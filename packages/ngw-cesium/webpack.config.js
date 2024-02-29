@@ -1,8 +1,11 @@
 const path = require('path');
+
 // const webpack = require('webpack');
-const package = require('./package.json');
-const common = require('../build-tools/lib/webpack.config');
 const CopywebpackPlugin = require('copy-webpack-plugin');
+
+const common = require('../build-tools/lib/webpack.config');
+
+const package = require('./package.json');
 
 const library = 'NgwCesium';
 
@@ -58,17 +61,17 @@ module.exports = (env, argv) => {
       patterns: [
         { from: path.join(cesiumSource, cesiumWorkers), to: 'Workers' },
       ],
-    })
+    }),
   );
   config.plugins.push(
     new CopywebpackPlugin({
       patterns: [{ from: path.join(cesiumSource, 'Assets'), to: 'Assets' }],
-    })
+    }),
   );
   config.plugins.push(
     new CopywebpackPlugin({
       patterns: [{ from: path.join(cesiumSource, 'Widgets'), to: 'Widgets' }],
-    })
+    }),
   );
   // config.plugins.push(
   //   new webpack.DefinePlugin({

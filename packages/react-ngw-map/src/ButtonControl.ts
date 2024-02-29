@@ -1,10 +1,10 @@
-import { useState, useEffect ,useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { useNgwMapContext } from './context';
-
-import type { ReactNode } from 'react';
-import type { ControlOptions, ButtonControlOptions } from '@nextgis/webmap';
 import { useNgwControl } from './hooks/useNgwControl';
+
+import type { ButtonControlOptions, ControlOptions } from '@nextgis/webmap';
+import type { ReactNode } from 'react';
 
 interface MapControlProps extends ButtonControlOptions, ControlOptions {
   children?: ReactNode;
@@ -21,7 +21,7 @@ export function ButtonControl<P extends MapControlProps = MapControlProps>(
   }, []);
 
   const [instance, setInstance] = useState(createControl);
-  useNgwControl({context, instance, position});
+  useNgwControl({ context, instance, position });
 
   useEffect(() => {
     setInstance(createControl());

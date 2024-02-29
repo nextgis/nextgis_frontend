@@ -7,12 +7,15 @@
  * @packageDocumentation
  * @module ngw-ol
  */
-import 'ol/ol.css';
-import Map from 'ol/Map';
-import '@nextgis/ol-map-adapter/lib/ol-map-adapter.css';
 
-import { NgwMap, NgwMapOptions } from '@nextgis/ngw-map';
+import { NgwMap } from '@nextgis/ngw-map';
 import OlMapAdapter from '@nextgis/ol-map-adapter';
+
+import type { NgwMapOptions } from '@nextgis/ngw-map';
+import type Map from 'ol/Map';
+
+import 'ol/ol.css';
+import '@nextgis/ol-map-adapter/lib/ol-map-adapter.css';
 
 class NgwOl extends NgwMap<Map> {
   constructor(options: NgwMapOptions) {

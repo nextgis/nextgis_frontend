@@ -1,11 +1,12 @@
-import type { GeoJsonProperties, Geometry } from 'geojson';
 import { prepareFieldsToNgw } from '@nextgis/ngw-kit';
-import type {
-  ResourceItem,
-  FeatureResource,
-  FeatureItem,
-} from '@nextgis/ngw-connector';
+
 import type { VectorLayer } from '../repository/VectorLayer';
+import type {
+  FeatureItem,
+  FeatureResource,
+  ResourceItem,
+} from '@nextgis/ngw-connector';
+import type { GeoJsonProperties, Geometry } from 'geojson';
 
 export interface VectorResourceToNgwOptions {
   resource: ResourceItem;
