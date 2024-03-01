@@ -11,6 +11,7 @@ A suite of frontend JavaScript libraries designed to accelerate the development 
 - [Live Examples & Documentation](https://code.nextgis.com)
 - [API Documentation](https://code-api.nextgis.com)
 - [GitHub Repository](https://github.com/nextgis/nextgis_frontend)
+- [Vue2 GitHub Repository](https://github.com/nextgis/nextgis_frontend_vue2)
 - [Related Article](https://nextgis.com/blog/nextgis-frontend)
 - [Tutorial Repository](https://github.com/nextgis/ngf-tutorial)
 - [NextGIS Official Website](https://nextgis.com)
@@ -84,15 +85,6 @@ Map-free tools for common purpose
 - [cache](https://github.com/nextgis/nextgis_frontend/tree/master/packages/cache) - caching for asynchronous functions;
 - [cancelable-promise](https://github.com/nextgis/nextgis_frontend/tree/master/packages/cancelable-promise) – a promise you can stop;
 - [dom](https://github.com/nextgis/nextgis_frontend/tree/master/packages/dom) – collection of libraries for working with the DOM;
-
-### Vue
-
-- [vue-ngw-leaflet](https://github.com/nextgis/nextgis_frontend/tree/master/packages/vue-ngw-leaflet) – integrate NextGIS Web maps into vue.js with leaflet adapter;
-- [vue-ngw-ol](https://github.com/nextgis/nextgis_frontend/tree/master/packages/vue-ngw-ol) – integrate NextGIS Web maps into vue.js with openlayers adapter;
-- [vue-ngw-mapbox](https://github.com/nextgis/nextgis_frontend/tree/master/packages/vue-ngw-mapbox) – integrate NextGIS Web maps into vue.js with mapbox-gl js adapter;
-- [vue-ngw-map](https://github.com/nextgis/nextgis_frontend/tree/master/packages/vue-ngw-map) – abstract plugin to integrate NextGIS Web maps into vue.js;
-- [vuetify-ngw-components](https://github.com/nextgis/nextgis_frontend/tree/master/packages/vuetify-ngw-components) – vuetify components for NextGIS Web Frontend
-- [vuex-ngw](https://github.com/nextgis/nextgis_frontend/tree/master/packages/vuex-ngw) – vuex store for NextGIS Web resources;
 
 ## Real-World Projects
 

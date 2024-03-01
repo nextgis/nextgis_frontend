@@ -1,7 +1,7 @@
 const findPackages = require('../scripts/findPackages');
 
 const allowPackages = findPackages().filter((x) => {
-  return  !x.name.includes('vue') && !x.name.includes('react') && !x.name.includes('cesium');
+  return !x.name.includes('react') && !x.name.includes('cesium');
 });
 const entryPoints = allowPackages.map((x) => x.path + '/src/index.ts');
 
