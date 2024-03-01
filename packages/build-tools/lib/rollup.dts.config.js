@@ -4,6 +4,8 @@ import { existsSync, readdirSync } from 'node:fs';
 
 import dts from 'rollup-plugin-dts';
 
+import { ignoreAssets } from './utils.js';
+
 if (!existsSync('temp/packages')) {
   console.warn(
     'no temp dts files found. run `tsc -p tsconfig.build.json` first.',
@@ -16,22 +18,6 @@ const targets = process.env.TARGETS ? process.env.TARGETS.split(',') : null;
 const targetPackages = targets
   ? packages.filter((pkg) => targets.includes(pkg))
   : packages;
-
-function ignoreAssets() {
-  const pattern = /\.(css|scss|png|jpg|jpeg|svg|woff|woff2|ttf)$/;
-  return {
-    name: 'ignore-assets',
-    /**
-     * @param {string} id
-     */
-    resolveId(id) {
-      if (pattern.test(id)) {
-        return false;
-      }
-      return null;
-    },
-  };
-}
 
 export default targetPackages.map(
   /** @returns {import('rollup').RollupOptions} */

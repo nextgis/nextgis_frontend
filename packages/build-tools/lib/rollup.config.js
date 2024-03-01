@@ -2,6 +2,7 @@
 // based on https://github.com/vuejs/vue-next/blob/master/rollup.config.js
 
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import path from 'node:path';
 
 import alias from '@rollup/plugin-alias';
@@ -20,7 +21,7 @@ import polyfillNode from 'rollup-plugin-polyfill-node';
 import postcss from 'rollup-plugin-postcss';
 import ts from 'rollup-plugin-typescript2';
 
-import { require, rootPath } from './utils.js';
+import { baseDirs, getPeerDependencies, require, rootPath } from './utils.js';
 
 /**
  * @template T
@@ -63,7 +64,6 @@ const outputConfigs = {
     format: `iife`,
   },
 };
-
 const defaultFormats = ['esm-bundler', 'cjs'];
 const inlineFormats = process.env.FORMATS && process.env.FORMATS.split(',');
 const dependencies = getPeerDependencies(process.env.TARGET);
@@ -119,7 +119,12 @@ function createConfig(format, output, plugins = []) {
     isGlobalBuild || isBrowserESMBuild
       ? []
       : // Node / esm-bundler builds. Externalize everything.
-        [...dependencies, 'vuetify/lib'];
+        [
+          ...dependencies,
+          ...(Array.isArray(packageOptions.externals)
+            ? packageOptions.externals
+            : []),
+        ];
 
   output.banner = `/** Bundle of ${pkg.name}; version: ${pkg.version}; author: ${pkg.author} */`;
 
@@ -261,43 +266,6 @@ function createConfig(format, output, plugins = []) {
     });
   }
 
-  const entries = dependencies
-    .filter((e) => /^@nextgis\//.test(e))
-    .map((e) => {
-      const packageName = e.replace('@nextgis/', '');
-      return [
-        {
-          find: new RegExp(`^${e}/lib/(.*)`),
-          replacement: path.resolve(packagesDir, packageName, 'lib', '$1'),
-        },
-        {
-          find: e,
-          replacement: path.resolve(
-            packagesDir,
-            packageName,
-            'src',
-            'index.ts',
-          ),
-        },
-      ];
-    })
-    .flat();
-
-  if (packageOptions.alias) {
-    entries.push(
-      ...packageOptions.alias.map(
-        (/** @type {{ find: string | RegExp; replacement: string; }} */ x) => {
-          const find = new RegExp(x.find);
-          return {
-            ...x,
-            replacement: path.resolve(rootPath, 'node_modules', x.replacement),
-            find,
-          };
-        },
-      ),
-    );
-  }
-
   function ignoreCertainImports() {
     const pattern = /^@nextgis\/[^/]+\/lib\//;
     return {
@@ -312,6 +280,41 @@ function createConfig(format, output, plugins = []) {
         return null;
       },
     };
+  }
+
+  const entries = dependencies
+    .filter((e) => /^@nextgis\//.test(e))
+    .flatMap((e) => {
+      const packageName = e.replace('@nextgis/', '');
+      return baseDirs
+        .filter((/** @type {string} */ baseDir) => {
+          return fs.existsSync(path.join(baseDir, packageName));
+        })
+        .flatMap((/** @type {string} */ baseDir) => [
+          {
+            find: new RegExp(`^${e}/lib/(.*)`),
+            replacement: path.join(baseDir, packageName, 'lib', '$1'),
+          },
+          {
+            find: e,
+            replacement: path.join(baseDir, packageName, 'src', 'index.ts'),
+          },
+        ]);
+    });
+
+  if (packageOptions.alias) {
+    entries.push(
+      ...packageOptions.alias.map(
+        (/** @type {{ find: string | RegExp; replacement: string; }} */ x) => {
+          const find = new RegExp(x.find);
+          return {
+            ...x,
+            replacement: path.resolve(rootPath, 'node_modules', x.replacement),
+            find,
+          };
+        },
+      ),
+    );
   }
 
   return {
@@ -377,28 +380,4 @@ function createMinifiedConfig(/** @type {PackageFormat} */ format) {
       }),
     ],
   );
-}
-
-/**
- * @param {string} target
- * @param {Array<string>} deps
- */
-function getPeerDependencies(target, deps = []) {
-  const packageDir_ = path.resolve(packagesDir, target);
-  const resolve_ = (/** @type {string} */ p) => path.resolve(packageDir_, p);
-  const pkg_ = require(resolve_(`package.json`));
-
-  const dependencies = [
-    ...Object.keys(pkg_.dependencies || {}),
-    ...Object.keys(pkg_.peerDependencies || {}),
-  ];
-  dependencies.forEach((e) => {
-    if (!deps.includes(e)) {
-      deps.push(e);
-      if (/^@nextgis\//.test(e)) {
-        getPeerDependencies(e.replace('@nextgis/', ''), deps);
-      }
-    }
-  });
-  return deps;
 }
