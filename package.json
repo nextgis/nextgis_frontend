@@ -8,7 +8,7 @@
     "prod:each": "lerna run prod && npm run test:build",
     "build-dts": "npx tsc -p tsconfig.build.json && rollup -c ./packages/build-tools/lib/rollup.dts.config.js",
     "lint": "lerna run lint",
-    "lint:eslint": "eslint --fix --ext .js,.ts ./packages/**/src/**/*.ts",
+    "lint:eslint": "eslint --fix ./packages/**/src/**/*.ts",
     "demo": "yarn run examples && cd ./demo/ && yarn run build && yarn run docker",
     "examples": "node ./scripts/updateExamples.js",
     "test": "npm run karma -- --single-run --coverage",

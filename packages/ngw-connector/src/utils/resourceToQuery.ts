@@ -9,7 +9,7 @@ const exclude = ['description'];
 
 /**
  * @remarks
- * https://docs.nextgis.ru/docs_ngweb_dev/doc/developer/resource.html#search-resources
+ * https://docs.nextgis.com/docs_ngweb_dev/doc/developer/resource.html#search-resources
  *
  * ```
  * { keyname, owner_user: { id }} > { keyname, owner_user__id }

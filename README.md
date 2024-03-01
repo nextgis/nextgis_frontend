@@ -16,15 +16,15 @@ A suite of frontend JavaScript libraries designed to accelerate the development 
 - [NextGIS Official Website](https://nextgis.com)
 - [NextGIS Web](https://nextgis.com/nextgis-web)
 - [Cloud Pricing Plans](https://nextgis.com/pricing-base)
-- [On-Premise Pricing](https://nextgis.ru/pricing)
+- [On-Premise Pricing](https://nextgis.com/pricing)
 - [Telegram Chat](https://t.me/nextgis_chat)
 
 ## Featured Examples
 
 - [Add layer from NextGIS Web](http://code.nextgis.com/demo-examples-ngw-layer)
 - [Add webmap from NextGIS Web](http://code.nextgis.com/demo-examples-ngw-webmap)
-- [Zoom to NGW layer feature, partial data load](https://code.nextgis.com/demo-examples-ngw-zoom-to-feature)
-- [Highlight features from NGW webmap](https://code.nextgis.com/demo-examples-webmap-identification)
+- [Zoom to NextGIS Web layer feature, partial data load](https://code.nextgis.com/demo-examples-ngw-zoom-to-feature)
+- [Highlight features from NextGIS Web webmap](https://code.nextgis.com/demo-examples-webmap-identification)
 - [Expression paint](https://code.nextgis.com/demo-examples-expression-paint-match)
 - [Layer properties filters](https://code.nextgis.com/demo-examples-ngw-layer-properties-filters)
 - [BBOX strategy for vector layer](https://code.nextgis.com/demo-examples-ngw-bbox-strategy)
@@ -70,8 +70,8 @@ Bricks for build custom Web GIS frontend
 
 Map-free libraries to interaction with NextGIS Web
 
-- [ngw-connector](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-connector) – module to interact with [NextGIS Web](http://docs.nextgis.ru/docs_ngweb_dev/doc/developer/toc.html) REST API;
-- [ngw-kit](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-kit) – build webmap with [NextGIS Web](http://nextgis.ru/nextgis-web/) instance. Lots of useful utilities for interacting with the NGW API;
+- [ngw-connector](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-connector) – module to interact with [NextGIS Web](http://docs.nextgis.com/docs_ngweb_dev/doc/developer/toc.html) REST API;
+- [ngw-kit](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-kit) – build webmap with [NextGIS Web](http://nextgis.com/nextgis-web/) instance. Lots of useful utilities for interacting with the NextGIS Web API;
 - [ngw-orm](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-orm) – NextGIS Web Object-Relational Mapping;
 - [ngw-uploader](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-uploader) – library providing tools for uploading data to [nextgis.com](http://nextgis.com/nextgis-com/) cloud;
 - [ngw-map](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-map) – abstract map to simplify work with NextGIS services;
@@ -87,23 +87,23 @@ Map-free tools for common purpose
 
 ### Vue
 
-- [vue-ngw-leaflet](https://github.com/nextgis/nextgis_frontend/tree/master/packages/vue-ngw-leaflet) – integrate NGW maps into vue.js with leaflet adapter;
-- [vue-ngw-ol](https://github.com/nextgis/nextgis_frontend/tree/master/packages/vue-ngw-ol) – integrate NGW maps into vue.js with openlayers adapter;
-- [vue-ngw-mapbox](https://github.com/nextgis/nextgis_frontend/tree/master/packages/vue-ngw-mapbox) – integrate NGW maps into vue.js with mapbox-gl js adapter;
-- [vue-ngw-map](https://github.com/nextgis/nextgis_frontend/tree/master/packages/vue-ngw-map) – abstract plugin to integrate NGW maps into vue.js;
-- [vuetify-ngw-components](https://github.com/nextgis/nextgis_frontend/tree/master/packages/vuetify-ngw-components) – vuetify components for NGW Frontend
-- [vuex-ngw](https://github.com/nextgis/nextgis_frontend/tree/master/packages/vuex-ngw) – vuex store for NGW resources;
+- [vue-ngw-leaflet](https://github.com/nextgis/nextgis_frontend/tree/master/packages/vue-ngw-leaflet) – integrate NextGIS Web maps into vue.js with leaflet adapter;
+- [vue-ngw-ol](https://github.com/nextgis/nextgis_frontend/tree/master/packages/vue-ngw-ol) – integrate NextGIS Web maps into vue.js with openlayers adapter;
+- [vue-ngw-mapbox](https://github.com/nextgis/nextgis_frontend/tree/master/packages/vue-ngw-mapbox) – integrate NextGIS Web maps into vue.js with mapbox-gl js adapter;
+- [vue-ngw-map](https://github.com/nextgis/nextgis_frontend/tree/master/packages/vue-ngw-map) – abstract plugin to integrate NextGIS Web maps into vue.js;
+- [vuetify-ngw-components](https://github.com/nextgis/nextgis_frontend/tree/master/packages/vuetify-ngw-components) – vuetify components for NextGIS Web Frontend
+- [vuex-ngw](https://github.com/nextgis/nextgis_frontend/tree/master/packages/vuex-ngw) – vuex store for NextGIS Web resources;
 
 ## Real-World Projects
 
 Explore how NextGIS frontend libraries are utilized in actual projects:
 
 - [nglink](https://github.com/nextgis/nglink) ([LIVE](https://show.nextgis.com)) – Server side - express.js with ngw-uploader; client - webpack, typescript, ngw-map.
-- [russia-history](https://github.com/nextgis/russia-history) – Russia history live web map ([LIVE](https://map.runivers.ru)). Mapbox-gl-js, NGW MTV api, layer load event listener. Webpacj and typescript.
-- [clear_horizon_frontend](https://github.com/nextgis/clear_horizon_frontend) – Clear horizon frontend. NGW auth system, leaflet typescript based webpack project.
+- [russia-history](https://github.com/nextgis/russia-history) – Russia history live web map ([LIVE](https://map.runivers.ru)). Mapbox-gl-js, NextGIS Web MTV api, layer load event listener. Webpacj and typescript.
+- [clear_horizon_frontend](https://github.com/nextgis/clear_horizon_frontend) – Clear horizon frontend. NextGIS Web auth system, leaflet typescript based webpack project.
 - [webpack-template](https://github.com/rendrom/nextgis-frontend-webpack-template) – Webpack based JavaScript template project.
 - [walrus-ais](https://github.com/nextgis/walrus-ais) – NgwMapbox map with React.
-- [wwf-oilspill](https://github.com/nextgis/wwf-oilspill) – Emergency situations with oil spills ([LIVE](http://nextgis.ru/demo/oilspill/build/)), minimal dependency typescript project with Leaflet.
+- [wwf-oilspill](https://github.com/nextgis/wwf-oilspill) – Emergency situations with oil spills ([LIVE](http://nextgis.com/demo/oilspill/build/)), minimal dependency typescript project with Leaflet.
 - [oralhistory](https://github.com/nextgis/oralhistory) ([LIVE](https://pastandnow.ru/)) – Typescript, Vuetify, Mapbox-gl-js and properties filter usage example.
 - [petro2020](https://github.com/rendrom/petro2020) ([LIVE](http://petro2020.igc.irk.ru/)). Native JavaScript for leaflet and Mapbox-gl-gs in one project.
 - [nextgisweb_viewer](https://github.com/nextgis/nextgisweb_viewer) – Service for viewing map resources from NextGIS Web ([LIVE](http://viewer.nextgis.com)). Vuetify, typescript (outdated).
@@ -205,7 +205,7 @@ ngwMap.onLoad().then(() => {
 });
 ```
 
-### Adding Layers from NGW
+### Adding Layers from NextGIS Web
 
 ```javascript
 // from resource id
@@ -222,7 +222,7 @@ The `resource` can be id or keyname.
 
 Examples
 
-[Add different NGW resource](http://code.nextgis.com/demo-examples-ngw-layers)
+[Add different NextGIS Web resource](http://code.nextgis.com/demo-examples-ngw-layers)
 
 ## Developer Guide
 
@@ -299,4 +299,4 @@ npm run karma # run karma test in watch mode for development
 
 Need to fix a bug or add a feature to NextGIS Frontend? We provide custom development and support for this software. [Contact us](http://nextgis.com/contact/) to discuss options!
 
-[![http://nextgis.com](https://nextgis.ru/img/nextgis.png)](http://nextgis.com)
+[![http://nextgis.com](https://nextgis.com/img/nextgis.png)](http://nextgis.com)

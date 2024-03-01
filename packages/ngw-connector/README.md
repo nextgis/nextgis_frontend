@@ -2,7 +2,7 @@
 
 ![size](https://img.shields.io/bundlephobia/minzip/@nextgis/ngw-connector) ![version](https://img.shields.io/npm/v/@nextgis/ngw-connector)
 
-A lightweight HTTP client optimized for use with [NextGIS Web](http://docs.nextgis.ru/docs_ngweb_dev/doc/developer/toc.html) API.
+A lightweight HTTP client optimized for use with [NextGIS Web](http://docs.nextgis.com/docs_ngweb_dev/doc/developer/toc.html) API.
 
 Make sure CORS is registered in the [NextGIS Web settings](https://docs.nextgis.com/docs_ngcom/source/CORS.html) to be able to send requests.
 
@@ -87,7 +87,7 @@ Check out the [API Documentation](https://code-api.nextgis.com/modules/ngw_conne
 
 ## NGW API
 
-[NextGIS Web API Doc](http://docs.nextgis.ru/docs_ngweb_dev/doc/developer/toc.html)
+[NextGIS Web API Doc](http://docs.nextgis.com/docs_ngweb_dev/doc/developer/toc.html)
 
 ```javascript
 ngwConnector.get(request_name, request_options, arguments);
@@ -225,4 +225,4 @@ ngwConnector.get(request_name, request_options, arguments);
 
 Need to fix a bug or add a feature to `@nextgis/ngw-connector`? We provide custom development and support for this software. [Contact us](http://nextgis.com/contact/) to discuss options!
 
-[![http://nextgis.com](https://nextgis.ru/img/nextgis.png)](http://nextgis.com)
+[![http://nextgis.com](https://nextgis.com/img/nextgis.png)](http://nextgis.com)

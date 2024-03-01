@@ -37,4 +37,4 @@ const webMap = new WebMap({
 webMap.addBaseLayer(createQmsAdapter({ webMap, qmsId: 3335 }));
 ```
 
-[![http://nextgis.com](https://nextgis.ru/img/nextgis.png)](http://nextgis.com)
+[![http://nextgis.com](https://nextgis.com/img/nextgis.png)](http://nextgis.com)

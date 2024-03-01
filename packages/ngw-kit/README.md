@@ -2,7 +2,7 @@
 
 ![size](https://img.shields.io/bundlephobia/minzip/@nextgis/ngw-kit) ![version](https://img.shields.io/npm/v/@nextgis/ngw-kit)
 
-Build [WebMap](../webmap/README.md) with [NextGIS Web](http://nextgis.ru/nextgis-web/) instance.
+Build [WebMap](../webmap/README.md) with [NextGIS Web](http://nextgis.com/nextgis-web/) instance.
 
 This library contains a WebMap plugin and utilities that allow you to interact with NextGIS Web.
 
@@ -67,4 +67,4 @@ Check out the [API Documentation](https://code-api.nextgis.com/modules/ngw_kit.h
 
 Need to fix a bug or add a feature to `@nextgis/ngw-kit`? We provide custom development and support for this software. [Contact us](http://nextgis.com/contact/) to discuss options!
 
-[![http://nextgis.com](https://nextgis.ru/img/nextgis.png)](http://nextgis.com)
+[![http://nextgis.com](https://nextgis.com/img/nextgis.png)](http://nextgis.com)
