@@ -4,6 +4,6 @@
   "ngwMaps": [
     "ngw-leaflet",
     "ngw-ol",
-    "ngw-mapbox"
+    "ngw-maplibre-gl"
   ]
 }

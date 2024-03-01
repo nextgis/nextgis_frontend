@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Vector adapter select</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body,
+      #map {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+
+    <script src="../../lib/ngw-maplibre-gl.global.js"></script>
+  </head>
+
+  <body>
+    <div id="map"></div>
+
+    <script>
+      const ngwMap = new NgwMap({
+        baseUrl: 'https://demo.nextgis.com',
+        target: 'map',
+        osm: true,
+      });
+
+      ngwMap
+        .addNgwLayer({
+          resource: 6114,
+          fit: true,
+          adapterOptions: {
+            multiselect: true,
+            unselectOnClick: false,
+            selectedPaint: { color: 'red' },
+          },
+        })
+        .then(() => {
+          ngwMap.emitter.on('layer:click', (e) => {
+            if (e.layer && e.layer.select) {
+              const idsForSelect = [e.feature.id];
+              if (ngwMap.keys.pressed('ctrl')) {
+                const alreadySelected = e.layer.getSelected();
+                idsForSelect.push(...alreadySelected.map((s) => s.feature.id));
+              }
+              e.layer.select(({ feature }) =>
+                idsForSelect.includes(feature.id),
+              );
+            }
+          });
+        });
+
+      ngwMap.addControl(ngwMap.createControl({onAdd: () => {
+        const info = document.createElement('div');
+        info.innerHTML = 'Press CTRL with click to add new feature in selection';
+        return info
+      }}, {bar: true}), 'top-right')
+    </script>
+  </body>
+</html>

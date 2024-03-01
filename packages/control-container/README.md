@@ -4,7 +4,7 @@
 
 This library allows placing control elements in the corners of the map container.
 
-Libraries such as `Leaflet` and `Mapbox GL JS` are already doing this,
+Libraries such as `Leaflet` and `Maplibre GL JS` are already doing this,
 but `Cesium` and `Openlayers` do not have similar functionality.
 
 ```text

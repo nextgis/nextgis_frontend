@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>GeoJSON select</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body,
+      #map {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+
+    <script src="../../lib/ngw-maplibre-gl.global.js"></script>
+  </head>
+
+  <body>
+    <div id="map"></div>
+    <script>
+      const bounds = [37.65972, 55.7299, 37.66735, 55.73278];
+
+      const adapterOptions = (resourceId, opt) => {
+        return Object.assign(
+          {
+            intersects: bounds,
+            selectable: true,
+            popupOnSelect: true,
+            popupOptions: {
+              createPopupContent: (e) => {
+                const element = document.createElement('table');
+                return ngwMap.connector
+                  .getResource(resourceId)
+                  .then((item) => {
+                    element.innerHTML = '<tbody>';
+                    // link properties field names with layer attributes names
+                    item.feature_layer.fields.forEach((x) => {
+                      if (x.grid_visibility) {
+                        const value = e.feature.properties[x.keyname];
+                        element.innerHTML +=
+                          '<tr><th>' +
+                          x.display_name +
+                          '</th><td>' +
+                          value +
+                          '</td></tr>';
+                      }
+                    });
+                    element.innerHTML += '</tbody>';
+                    return element;
+                  });
+              },
+            },
+          },
+          opt,
+        );
+      };
+
+      const ngwMap = new NgwMap({
+        baseUrl: 'https://demo.nextgis.com',
+        target: 'map',
+        bounds: bounds,
+        osm: true,
+      });
+
+      ngwMap.addNgwLayer({
+        id: 'building',
+        resource: 5300,
+        adapterOptions: adapterOptions(5300, {
+          unselectOnSecondClick: true,
+          paint: { color: 'brown' },
+          selectedPaint: { color: 'red' },
+        }),
+      });
+
+      ngwMap.addNgwLayer({
+        id: 'railway',
+        resource: 5304,
+        adapterOptions: adapterOptions(5304, {
+          paint: { color: 'green', weight: 3 },
+          selectedPaint: { color: 'limegreen', weight: 4 },
+        }),
+      });
+
+      const stationPaint = {
+        opacity: 1,
+        color: 'orange',
+        strokeColor: 'white',
+      };
+      ngwMap.addNgwLayer({
+        id: 'station',
+        resource: 5298,
+        adapterOptions: adapterOptions(5298, {
+          unselectOnClick: false,
+          paint: Object.assign({ radius: 6 }, stationPaint),
+          selectedPaint: Object.assign({ radius: 8 }, stationPaint),
+        }),
+      });
+
+      // If this example helped you, you can ★star★ our repository on github
+      // https://github.com/nextgis/nextgis_frontend
+    </script>
+  </body>
+</html>

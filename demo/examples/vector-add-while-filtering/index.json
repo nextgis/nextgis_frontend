@@ -1,5 +1,5 @@
 {
   "name": "Vector layer add data while filtering",
   "description": "Set the filter for the vector layer from the select in the top right corner. Try adding points by clicking on the colored buttons. If the color of the new point does not match the color of the selected filter, the point will be invisible.",
-  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"]
 }

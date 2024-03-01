@@ -1,5 +1,5 @@
 {
   "name": "Web map feature identification",
   "description": "Highlight and identify features on a Web map",
-  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"]
 }

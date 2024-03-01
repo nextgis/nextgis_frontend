@@ -5,7 +5,7 @@
  * The following adapters are available:
  * {@link https://github.com/nextgis/nextgis_frontend/tree/master/packages/leaflet-map-adapter | @nextgis/leaflet-map-adapter},
  * {@link https://github.com/nextgis/nextgis_frontend/tree/master/packages/ol-map-adapter | @nextgis/ol-map-adapter},
- * {@link https://github.com/nextgis/nextgis_frontend/tree/master/packages/mapboxgl-map-adapter | @nextgis/mapbox-map-adapter}
+ * {@link https://github.com/nextgis/nextgis_frontend/tree/master/packages/maplibre-gl-map-adapter | @nextgis/maplibre-gl-map-adapter}
  * and experimental {@link https://github.com/nextgis/nextgis_frontend/tree/master/packages/cesium-map-adapter | @nextgis/cesium-map-adapter}.
  *
  * @example
@@ -19,7 +19,7 @@
  * // import MapAdapter from '@nextgis/ol-map-adapter';
  * // OR
  * // import 'maplibre-gl/dist/maplibre-gl.css';
- * // import MapAdapter from '@nextgis/mapboxgl-map-adapter';
+ * // import MapAdapter from '@nextgis/maplibre-gl-map-adapter';
  *
  * const webMap = new WebMap({
  *   mapAdapter: new MapAdapter(),

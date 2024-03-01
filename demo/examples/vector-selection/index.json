@@ -1,5 +1,5 @@
 {
   "name": "Vector selection",
   "description": "Light up the star, illuminati!",
-  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"]
 }

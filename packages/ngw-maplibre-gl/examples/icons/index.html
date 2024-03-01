@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Shapes and color | Icons Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body,
+      #map {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+
+    <script src="../../lib/ngw-maplibre-gl.global.js"></script>
+    <script src="../../../icons/lib/icons.global.js"></script>
+  </head>
+
+  <body>
+    <div id="map"></div>
+    <script>
+      const data = [
+        [{ color: 'red', shape: 'circle' }, [81.9833, 53.0426]],
+        [{ color: 'red', shape: 'circle', size: 20 }, [81.9883, 53.0385]],
+        [{ color: 'red', shape: 'circle', size: 15 }, [81.994, 53.0333]],
+
+        [{ color: 'yellow', shape: 'marker', stroke: 0 }, [81.9535, 53.0265]],
+        [
+          { color: 'yellow', shape: 'marker', strokeColor: 'orange' },
+          [81.9566, 53.0236],
+        ],
+        [
+          { color: 'yellow', shape: 'marker', stroke: 2, strokeColor: 'red' },
+          [81.9603, 53.0202],
+        ],
+
+        [{ color: 'pink', shape: 'star' }, [81.977, 53.0143]],
+        [{ color: 'green', shape: 'brill' }, [81.9702, 53.0111]],
+        [{ color: 'blue', shape: 'rect' }, [81.9885, 53.0241]],
+        [{ color: 'black', shape: 'asterisk' }, [81.9588, 53.0304]],
+        [{ color: 'purple', shape: 'triangle' }, [81.9828, 53.0187]],
+        [{ color: 'rgb(52,169,95)', shape: 'plus' }, [81.9739, 53.0387]],
+        [{ color: '#800000', shape: 'minus' }, [81.9648, 53.0343]],
+      ];
+
+      NgwMap.create({
+        baseUrl: 'https://demo.nextgis.com',
+        target: 'map',
+        osm: true,
+        center: [81.973, 53.026],
+        zoom: 13,
+      }).then((ngwMap) => {
+        // create geojson features from data
+        const features = [];
+        for (let fry = 0; fry < data.length; fry++) {
+          features.push({
+            type: 'Feature',
+            properties: data[fry][0],
+            geometry: { type: 'Point', coordinates: data[fry][1] },
+          });
+        }
+        const geojson = {
+          type: 'FeatureCollection',
+          features: features,
+        };
+
+        function getPaint(feature) {
+          const prop = feature.properties;
+          return Icons.getIcon({
+            color: prop.color || 'blue',
+            shape: prop.shape || 'rect',
+            size: prop.size || 30,
+            stroke: prop.stroke,
+            strokeColor: prop.strokeColor || 'white',
+            rotate: prop.rotate,
+          });
+        }
+        getPaint.type = 'icon';
+
+        ngwMap.addGeoJsonLayer({
+          data: geojson,
+          paint: getPaint,
+        });
+      });
+    </script>
+  </body>
+</html>

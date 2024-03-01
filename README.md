@@ -47,7 +47,7 @@ Single-file bundles for rapid deployment of web-gis applications with NextGIS se
 
 - [ngw-leaflet](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-leaflet) – for [Leaflet](https://leafletjs.com/);
 - [ngw-ol](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-ol) – for [OpenLayers](https://openlayers.org/);
-- [ngw-mapbox](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-mapbox) – for [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/);
+- [ngw-maplibre-gl](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-maplibre-gl) – for [Maplibre GL JS](https://maplibre.org/maplibre-gl-js/docs/);
 
 ### Map development tools
 
@@ -55,7 +55,7 @@ Bricks for build custom Web GIS frontend
 
 - [webmap](https://github.com/nextgis/nextgis_frontend/tree/master/packages/webmap) – universal map constructor;
 - [leaflet-map-adapter](https://github.com/nextgis/nextgis_frontend/tree/master/packages/leaflet-map-adapter) – webmap adapter to use [Leaflet](https://leafletjs.com/) GIS framework;
-- [mapboxgl-map-adapter](https://github.com/nextgis/nextgis_frontend/tree/master/packages/mapboxgl-map-adapter) – webmap adapter to use [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/) framework;
+- [maplibre-gl-map-adapter](https://github.com/nextgis/nextgis_frontend/tree/master/packages/maplibre-gl-map-adapter) – webmap adapter to use [Maplibre GL JS](https://maplibre.org/maplibre-gl-js/docs/) framework;
 - [ol-map-adapter](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ol-map-adapter) – webmap adapter to use [OpenLayers](https://openlayers.org/) GIS framework;
 - [qms-kit](https://github.com/nextgis/nextgis_frontend/tree/master/packages/qms-kit) – build webmap with [NextGIS QMS](https://qms.nextgis.com/) baselayer;
 - [icons](https://github.com/nextgis/nextgis_frontend/tree/master/packages/icons) – simple svg icons pack to display on the map;
@@ -91,13 +91,13 @@ Map-free tools for common purpose
 Explore how NextGIS frontend libraries are utilized in actual projects:
 
 - [nglink](https://github.com/nextgis/nglink) ([LIVE](https://show.nextgis.com)) – Server side - express.js with ngw-uploader; client - webpack, typescript, ngw-map.
-- [russia-history](https://github.com/nextgis/russia-history) – Russia history live web map ([LIVE](https://map.runivers.ru)). Mapbox-gl-js, NextGIS Web MTV api, layer load event listener. Webpacj and typescript.
+- [russia-history](https://github.com/nextgis/russia-history) – Russia history live web map ([LIVE](https://map.runivers.ru)). Maplibre GL JS, NextGIS Web MTV api, layer load event listener. Webpacj and typescript.
 - [clear_horizon_frontend](https://github.com/nextgis/clear_horizon_frontend) – Clear horizon frontend. NextGIS Web auth system, leaflet typescript based webpack project.
 - [webpack-template](https://github.com/rendrom/nextgis-frontend-webpack-template) – Webpack based JavaScript template project.
-- [walrus-ais](https://github.com/nextgis/walrus-ais) – NgwMapbox map with React.
+- [walrus-ais](https://github.com/nextgis/walrus-ais) – NgwMaplibreGL map with React.
 - [wwf-oilspill](https://github.com/nextgis/wwf-oilspill) – Emergency situations with oil spills ([LIVE](http://nextgis.com/demo/oilspill/build/)), minimal dependency typescript project with Leaflet.
-- [oralhistory](https://github.com/nextgis/oralhistory) ([LIVE](https://pastandnow.ru/)) – Typescript, Vuetify, Mapbox-gl-js and properties filter usage example.
-- [petro2020](https://github.com/rendrom/petro2020) ([LIVE](http://petro2020.igc.irk.ru/)). Native JavaScript for leaflet and Mapbox-gl-gs in one project.
+- [oralhistory](https://github.com/nextgis/oralhistory) ([LIVE](https://pastandnow.ru/)) – Typescript, Vuetify, Maplibre GL JS and properties filter usage example.
+- [petro2020](https://github.com/rendrom/petro2020) ([LIVE](http://petro2020.igc.irk.ru/)). Native JavaScript for leaflet and Maplibre-gl-gs in one project.
 - [nextgisweb_viewer](https://github.com/nextgis/nextgisweb_viewer) – Service for viewing map resources from NextGIS Web ([LIVE](http://viewer.nextgis.com)). Vuetify, typescript (outdated).
 - [ngw_frontend_boilerplate](https://github.com/nextgis/ngw_frontend_boilerplate). Parcel build (outdated).
 
@@ -184,7 +184,7 @@ import MapAdapter from '@nextgis/leaflet-map-adapter';
 // import MapAdapter from '@nextgis/ol-map-adapter';
 // OR
 // import 'maplibre-gl/dist/maplibre-gl.css';
-// import MapAdapter from '@nextgis/mapboxgl-map-adapter';
+// import MapAdapter from '@nextgis/maplibre-gl-map-adapter';
 
 const ngwMap = new NgwMap(new MapAdapter(), {
   target: "map",

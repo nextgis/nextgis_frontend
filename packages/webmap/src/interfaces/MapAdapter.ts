@@ -108,7 +108,7 @@ export interface MapAdapter<M = any, L = any, C = any> {
    */
   isLoaded?: boolean;
   /**
-   * Original map object of GIS framework (Leaflet.Map, Openlayers.Map, Mapboxgl.Map or other)
+   * Original map object of GIS framework (Leaflet.Map, Openlayers.Map, MaplibreGL.Map or other)
    */
   map?: M;
   /**

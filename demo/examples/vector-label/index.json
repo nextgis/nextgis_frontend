@@ -1,6 +1,6 @@
 {
   "name": "Vector label",
   "description": "Show label by vector layer attributes",
-  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"],
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"],
   "tags": ["label", "tooltip"]
 }

@@ -1,5 +1,5 @@
 {
   "name": "NGW layer properties filters",
   "description": "Set the filter for NGW layer by features property with 'AND' and 'ANY' operations.",
-  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"]
 }

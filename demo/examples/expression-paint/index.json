@@ -1,5 +1,5 @@
 {
   "name": "Expression paint",
   "description": "Use expressions to set paint",
-  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"]
 }

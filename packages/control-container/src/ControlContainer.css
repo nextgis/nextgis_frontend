@@ -1,4 +1,3 @@
-/* https: //github.com/mapbox/mapbox-gl-js/blob/master/src/css/mapbox-gl.css */
 .webmap-ctrl-left,
 .webmap-ctrl-right,
 .webmap-ctrl-top-left,
@@ -163,28 +162,28 @@
 }
 
 .webmap-ctrl button.webmap-ctrl-zoom-out .webmap-ctrl-icon {
-  background-image: url('svg/mapboxgl-ctrl-zoom-out.svg');
+  background-image: url('svg/ctrl-zoom-out.svg');
 }
 
 .webmap-ctrl button.webmap-ctrl-zoom-in .webmap-ctrl-icon {
-  background-image: url('svg/mapboxgl-ctrl-zoom-in.svg');
+  background-image: url('svg/ctrl-zoom-in.svg');
 }
 
 @media (-ms-high-contrast: active) {
   .webmap-ctrl button.webmap-ctrl-zoom-out .webmap-ctrl-icon {
-    background-image: url('svg/mapboxgl-ctrl-zoom-out.svg');
+    background-image: url('svg/ctrl-zoom-out.svg');
   }
   .webmap-ctrl button.webmap-ctrl-zoom-in .webmap-ctrl-icon {
-    background-image: url('svg/mapboxgl-ctrl-zoom-in.svg');
+    background-image: url('svg/ctrl-zoom-in.svg');
   }
 }
 
 @media (-ms-high-contrast: black-on-white) {
   .webmap-ctrl button.webmap-ctrl-zoom-out .webmap-ctrl-icon {
-    background-image: url('svg/mapboxgl-ctrl-zoom-out.svg');
+    background-image: url('svg/ctrl-zoom-out.svg');
   }
   .webmap-ctrl button.webmap-ctrl-zoom-in .webmap-ctrl-icon {
-    background-image: url('svg/mapboxgl-ctrl-zoom-in.svg');
+    background-image: url('svg/ctrl-zoom-in.svg');
   }
 }
 

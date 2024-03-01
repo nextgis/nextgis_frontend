@@ -1,5 +1,5 @@
 {
   "name": "BBOX strategy for vector layer",
   "description": "Use BBOX strategy to show large vector data resource. Change the position of the map to update of the vector layer.",
-  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"]
 }

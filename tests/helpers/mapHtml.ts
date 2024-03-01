@@ -21,9 +21,9 @@ export const mapHtml = `
     }
 
     /*
-      Fix to remove WARN: 'This page appears to be missing CSS declarations for Mapbox GL JS...
+      Fix to remove WARN: 'This page appears to be missing CSS declarations for Maplibre GL JS...
     */
-    .mapboxgl-canary {
+    .maplibregl-canary {
       background-color: rgb(250, 128, 114)
     }
   </style>

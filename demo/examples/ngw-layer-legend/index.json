@@ -1,6 +1,6 @@
 {
   "name": "NextGIS Style Layer legend",
   "description": "Manually integrate a single NextGIS Web vector style layer into a map with an auto-generated legend.",
-  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"]
 }
 

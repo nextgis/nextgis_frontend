@@ -15,7 +15,7 @@ export interface MapOptions<M = any, C = any> extends ViewOptions {
   /**
    * The main initialization property of WebMap.
    * Determines the way of interaction with the selected GIS framework.
-   * Available: [Leaflet](leaflet-map-adapter); [Openlayers](ol-map-adapter); [MapboxGL](mapboxgl-map-adapter)
+   * Available: [Leaflet](leaflet-map-adapter); [Openlayers](ol-map-adapter); [MaplibreGL](maplibre-gl-map-adapter)
    */
   mapAdapter?: MapAdapter<M>;
 

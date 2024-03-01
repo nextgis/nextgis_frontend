@@ -1,5 +1,5 @@
 {
   "name": "GeoJSON data",
   "description": "",
-  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"]
 }

@@ -1,5 +1,5 @@
 {
   "name": "Vector layer mouse events",
   "description": "Various ways to track events on clicks and hovers on a vector layer",
-  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"]
 }

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Ngw Layer</title>
+    <title>NextGIS Web Layer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
       * {
@@ -41,7 +41,7 @@
         .addNgwLayer({
           resource: 5878,
           fit: true,
-          // adapter: 'IMAGE', // IMAGE - default, TILE, GEOJSON and MVT for mapbox
+          // adapter: 'IMAGE', // IMAGE - default, TILE, GEOJSON and MVT
           layerAdapter: MyLayerAdapter
         })
         .then((layer) => {

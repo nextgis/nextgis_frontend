@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Ngw layers properties filtering</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body,
+      #map {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+
+    <script src="../../lib/ngw-maplibre-gl.global.js"></script>
+  </head>
+
+  <body>
+    <div id="map"></div>
+    <script>
+      let amenityList = [];
+
+      const ngwMap = new NgwMap({
+        baseUrl: 'https://demo.nextgis.com/',
+        target: 'map',
+        qmsId: 448,
+      });
+
+      const filterFunction = (e) => {
+        return;
+      };
+
+      amenityList = ['cafe', 'restaurant'];
+
+      ngwMap.addNgwLayer({
+        resource: 1733,
+        adapter: 'GEOJSON',
+        fit: true,
+        adapterOptions: {
+          propertiesFilter: [['id', 'eq', 1]],
+          paint: { color: 'red', radius: 10 },
+        },
+      });
+
+      ngwMap.addNgwLayer({
+        resource: 1733,
+        adapter: 'GEOJSON',
+        fit: true,
+        adapterOptions: {
+          propertiesFilter: [
+            ['NAME', 'ilike', 'Papa John%'],
+            ['NAME', 'ilike', 'Papa Murph%'],
+          ],
+          paint: { color: 'blue', radius: 8 },
+        },
+      });
+
+      ngwMap.addNgwLayer({
+        resource: 1733,
+        adapter: 'GEOJSON',
+        fit: true,
+        adapterOptions: {
+          propertiesFilter: [
+            'any',
+            [
+              ['AMENITY', 'eq', 'restaurant'],
+              ['NAME', 'ilike', 'Subway%'],
+            ],
+            [
+              ['AMENITY', 'eq', 'cafe'],
+              [
+                'any',
+                ['NAME', 'ilike', 'Caribou%'],
+                ['NAME', 'ilike', 'Starbucks%'],
+              ],
+            ],
+          ],
+          paint: (e) => {
+            const name = e.properties.NAME.toLowerCase();
+            const color =
+              name.indexOf('subway') !== -1
+                ? 'green'
+                : name.indexOf('caribou') !== -1
+                ? 'orange'
+                : 'gray';
+            return { color: color, radius: 4 };
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

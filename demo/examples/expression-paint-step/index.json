@@ -1,1 +1,1 @@
-{"name":"Expression paint with step","description":"Use step expressions to set paint", "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]}
+{"name":"Expression paint with step","description":"Use step expressions to set paint", "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"]}

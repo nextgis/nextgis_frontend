@@ -3,7 +3,7 @@
   "description": "",
   "ngwMaps": [
     "ngw-leaflet",
-    "ngw-mapbox",
+    "ngw-maplibre-gl",
     "ngw-ol"
   ]
 }

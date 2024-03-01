@@ -1,6 +1,6 @@
 {
   "name": "Vector label callback",
   "description": "This example demonstrates the use of the 'label' option in a vector layer adapter. It showcases a callback function that returns a string to dynamically generate labels.",
-  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"],
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"],
   "tags": ["label", "tooltip"]
 }

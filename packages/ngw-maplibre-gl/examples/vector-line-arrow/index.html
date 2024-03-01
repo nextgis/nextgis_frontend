@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Line with mixed arrows</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      /* Basic styling for map and page layout */
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body,
+      #map {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+
+    <!-- External library scripts -->
+    <script src="../../lib/ngw-maplibre-gl.global.js"></script>
+    <script src="../../../icons/lib/icons.global.js"></script>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      // Initialize the map with configurations
+      NgwMap.create({
+        baseUrl: 'https://demo.nextgis.com',
+        osm: true,
+        resources: [
+          {
+            id: 'cafe',
+            resource: 1733,
+            fit: true,
+            adapterOptions: { limit: 10 },
+          },
+        ],
+      }).then((ngwMap) => {
+        // Extract point features once map is loaded
+        const points = ngwMap.getLayer('cafe');
+        if (points && points.getLayers) {
+          const layerItems = points.getLayers();
+          const features = layerItems.map((item) => item.feature);
+          const lines = {
+            type: 'FeatureCollection',
+            features: [],
+          };
+
+          // Create lines between point pairs
+          for (let i = 0; i < features.length; i += 2) {
+            const [start, end] = [i, i + 1].map(
+              (index) => features[index].geometry.coordinates,
+            );
+            if (start && end) {
+              const controlPoint = getControlPoint(start, end);
+              const arc = getArcPoints(start, end, controlPoint, 200);
+
+              // Push arc lines to feature collection
+              lines.features.push(createLineFeature(arc));
+              if (arc.length > 1) {
+                // Create and push arrow for the arc line to feature collection
+                const arrowLine = getArrowPoints(
+                  arc[arc.length - 1],
+                  arc[arc.length - 2],
+                  0.3,
+                );
+                lines.features.push(createLineFeature(arrowLine));
+
+                // Add SVG marker arrow
+                const beginAngle = bearing(arc[1], arc[0]);
+                ngwMap.addGeoJsonLayer({
+                  data: {
+                    type: 'Feature',
+                    properties: {},
+                    geometry: {
+                      type: 'Point',
+                      coordinates: arc[0],
+                    },
+                  },
+                  paint: Icons.getIcon({
+                    color: 'red',
+                    shape: 'triangle',
+                    size: 20,
+                    stroke: false,
+                    rotate: beginAngle,
+                  }),
+                });
+              }
+            }
+          }
+
+          // Add all lines to the map
+          if (lines.features.length) {
+            ngwMap.addGeoJsonLayer({
+              data: lines,
+              paint: { color: 'red', opacity: 1, weight: 3 },
+            });
+          }
+        }
+      });
+
+      // Convert degrees to radians
+      function toRadians(degrees) {
+        return (degrees * Math.PI) / 180;
+      }
+
+      // Convert radians to degrees
+      function toDegrees(radians) {
+        return (radians * 180) / Math.PI;
+      }
+
+      // Compute bearing between two coordinates
+      function bearing(start, end) {
+        startLat = toRadians(start[1]);
+        startLng = toRadians(start[0]);
+        destLat = toRadians(end[1]);
+        destLng = toRadians(end[0]);
+
+        y = Math.sin(destLng - startLng) * Math.cos(destLat);
+        x =
+          Math.cos(startLat) * Math.sin(destLat) -
+          Math.sin(startLat) * Math.cos(destLat) * Math.cos(destLng - startLng);
+        brng = Math.atan2(y, x);
+        brng = toDegrees(brng);
+        return (brng + 360) % 360;
+      }
+
+      // Calculate angle between two coordinates
+      function getAngle(end, prev) {
+        const dx = end[0] - prev[0];
+        const dy = end[1] - prev[1];
+        return Math.atan2(dy, dx);
+      }
+
+      // Generate arrow points for line ends
+      function getArrowPoints(
+        end,
+        prev,
+        length = 1,
+        deviationAngle = Math.PI / 6,
+      ) {
+        const dx = end[0] - prev[0];
+        const dy = end[1] - prev[1];
+        const angle = Math.atan2(dy, dx);
+        const arrowPoint1 = [
+          end[0] - length * Math.cos(angle - deviationAngle),
+          end[1] - length * Math.sin(angle - deviationAngle),
+        ];
+        const arrowPoint2 = [
+          end[0] - length * Math.cos(angle + deviationAngle),
+          end[1] - length * Math.sin(angle + deviationAngle),
+        ];
+        return [arrowPoint1, end, arrowPoint2];
+      }
+
+      // Get control point for bezier curve generation
+      function getControlPoint(start, end, bend = 0.5) {
+        const midPoint = [(start[0] + end[0]) / 2, (start[1] + end[1]) / 2];
+        const dx = end[0] - start[0];
+        const dy = end[1] - start[1];
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const angle = Math.atan2(dy, dx);
+        const offsetX = bend * distance * Math.sin(angle);
+        const offsetY = bend * distance * -Math.cos(angle);
+        return [midPoint[0] + offsetX, midPoint[1] + offsetY];
+      }
+
+      // Generate arc points for bezier curves
+      function getArcPoints(start, end, controlPoint, numPoints = 5) {
+        const points = [];
+        for (let i = 0; i <= numPoints; i++) {
+          const t = i / numPoints;
+          const x =
+            Math.pow(1 - t, 2) * start[0] +
+            2 * (1 - t) * t * controlPoint[0] +
+            t * t * end[0];
+          const y =
+            Math.pow(1 - t, 2) * start[1] +
+            2 * (1 - t) * t * controlPoint[1] +
+            t * t * end[1];
+          points.push([x, y]);
+        }
+        return points;
+      }
+
+      function createLineFeature(coordinates) {
+        return {
+          type: 'Feature',
+          properties: {},
+          geometry: { type: 'LineString', coordinates },
+        };
+      }
+    </script>
+  </body>
+</html>

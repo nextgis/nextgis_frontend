@@ -1,5 +1,5 @@
 {
   "name": "Icons from SVG",
   "description": "Integration and customization of user-defined SVG icons",
-  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"]
 }

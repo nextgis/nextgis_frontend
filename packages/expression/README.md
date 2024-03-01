@@ -2,7 +2,7 @@
 
 ![size](https://img.shields.io/bundlephobia/minzip/@nextgis/expression) ![version](https://img.shields.io/npm/v/@nextgis/expression)
 
-@nextgis/expression is a versatile library designed for executing actions on objects based on expressions inspired by the syntax of [Mapbox Style expressions](https://docs.mapbox.com/style-spec/reference/expressions/). These expressions are JSON-serializable, making them perfect for configurations, data processing, or any other kind of object manipulation.
+@nextgis/expression is a versatile library designed for executing actions on objects based on expressions inspired by the syntax of [Maplibre Style expressions](https://maplibre.org/maplibre-style-spec/expressions/). These expressions are JSON-serializable, making them perfect for configurations, data processing, or any other kind of object manipulation.
 
 ## Features
 
@@ -109,7 +109,7 @@ Expressions under the "Types" category are designed to work with and convert dat
 
 #### 'literal'
 
-[API](https://docs.mapbox.com/style-spec/reference/expressions/#literal)
+[API](https://maplibre.org/maplibre-style-spec/expressions/#types-literal)
 
 The literal expression provides a way to explicitly label a value as a raw constant, ensuring that it's interpreted as a literal instead of an expression. This can be especially useful in scenarios where there might be ambiguity.
 
@@ -122,7 +122,7 @@ console.log(evaluate(literalExpression)); // [10, 20, 30]
 
 #### 'array'
 
-[API](https://docs.mapbox.com/style-spec/reference/expressions/#array)
+[API](https://maplibre.org/maplibre-style-spec/expressions/#types-array)
 
 For defining arrays and specifying types within arrays.
 
@@ -213,7 +213,7 @@ The Lookup category of expressions allows users to access and modify specific pa
 
 #### 'at'
 
-[API](https://docs.mapbox.com/style-spec/reference/expressions/#at)
+[API](https://maplibre.org/maplibre-style-spec/expressions/#at)
 
 Fetches a value from an array using an index.
 
@@ -229,7 +229,7 @@ console.log(evaluate(['at', 2, ['get', 'values']], obj)); // 30
 
 #### 'get'
 
-[API](https://docs.mapbox.com/style-spec/reference/expressions/#get)
+[API](https://maplibre.org/maplibre-style-spec/expressions/#get)
 
 Retrieves the value of a property from an object.
 
@@ -253,7 +253,7 @@ console.log(evaluate(['get', 'nonexistent'], obj)) // null
 
 #### 'has'
 
-[API](https://docs.mapbox.com/style-spec/reference/expressions/#has)
+[API](https://maplibre.org/maplibre-style-spec/expressions/#has)
 
 ```javascript
 console.log(evaluate(['has', 'width'], { type: 'River', width: 30 })); // true
@@ -262,7 +262,7 @@ console.log(evaluate(['has', 'width', ['literal', { type: 'River', width: 30 }]]
 
 #### 'length'
 
-[API](https://docs.mapbox.com/style-spec/reference/expressions/#length)
+[API](https://maplibre.org/maplibre-style-spec/expressions/#length)
 
 Returns the length of a string or an array.
 
@@ -272,7 +272,7 @@ console.log(evaluate(['length', ['get', 'name']], { name: 'NextGIS' })); // 7
 
 #### 'in'
 
-[API](https://docs.mapbox.com/style-spec/reference/expressions/#in)
+[API](https://maplibre.org/maplibre-style-spec/expressions/#in)
 
 Checks if an element exists in an array.
 
@@ -284,7 +284,7 @@ console.log(evaluate(['in', 'blue', ['get', 'colors']], {
 
 #### 'index-of'
 
-[API](https://docs.mapbox.com/style-spec/reference/expressions/#index-of)
+[API](https://maplibre.org/maplibre-style-spec/expressions/#index-of)
 
 Returns the index of the first occurrence of a substring or an array element.
 
@@ -298,7 +298,7 @@ console.log(evaluate(['index-of', 'blue', ['get', 'colors']], obj)); // 1
 
 #### 'slice'
 
-[API](https://docs.mapbox.com/style-spec/reference/expressions/#slice)
+[API](https://maplibre.org/maplibre-style-spec/expressions/#slice)
 
 Returns a subsection of a string or an array.
 
@@ -316,7 +316,7 @@ The Decision category provides simple tools to make comparisons and decisions ba
 
 #### '!'
 
-[API](https://docs.mapbox.com/style-spec/reference/expressions/#!)
+[API](https://maplibre.org/maplibre-style-spec/expressions/#!)
 
 Returns the logical negation of the input.
 
@@ -328,7 +328,7 @@ console.log(evaluate(['!', true])); // false
 
 #### '!='
 
-[API](https://docs.mapbox.com/style-spec/reference/expressions/#!=)
+[API](https://maplibre.org/maplibre-style-spec/expressions/#!=)
 
 Checks if two values are not equal.
 
@@ -340,7 +340,7 @@ console.log(evaluate(['!=', ['get', 'type'], 'River'], { type: 'Stream' })); // 
 
 #### '<'
 
-[API](https://docs.mapbox.com/style-spec/reference/expressions/#<)
+[API](https://maplibre.org/maplibre-style-spec/expressions/#<)
 
 Checks if the first value is less than the second.
 
@@ -352,7 +352,7 @@ console.log(evaluate(['<', ['get', 'length'], 100], { length: 80 })); // true
 
 #### '<='
 
-[API](https://docs.mapbox.com/style-spec/reference/expressions/#<)
+[API](https://maplibre.org/maplibre-style-spec/expressions/#<)
 
 Checks if the first value is less than or equal to the second.
 
@@ -364,7 +364,7 @@ console.log(evaluate(['<=', ['get', 'length'], 100], { length: 100 })); // true
 
 #### '=='
 
-[API](https://docs.mapbox.com/style-spec/reference/expressions/#==)
+[API](https://maplibre.org/maplibre-style-spec/expressions/#==)
 
 Checks if two values are equal.
 
@@ -376,7 +376,7 @@ console.log(evaluate(['==', ['get', 'type'], 'River'], { type: 'River' })); // t
 
 #### '>='
 
-[API](https://docs.mapbox.com/style-spec/reference/expressions/#>=)
+[API](https://maplibre.org/maplibre-style-spec/expressions/#>=)
 
 Checks if the first value is greater than or equal to the second.
 
@@ -388,7 +388,7 @@ console.log(evaluate(['>=', ['get', 'width'], 50], { width: 60 })); // true
 
 #### '>'
 
-[API](https://docs.mapbox.com/style-spec/reference/expressions/#>)
+[API](https://maplibre.org/maplibre-style-spec/expressions/#>)
 
 Checks if the first value is greater than the second.
 
@@ -400,7 +400,7 @@ console.log(evaluate(['>', ['get', 'width'], 50], { width: 40 })); // false
 
 #### 'all'
 
-[API](https://docs.mapbox.com/style-spec/reference/expressions/#all)
+[API](https://maplibre.org/maplibre-style-spec/expressions/#all)
 
 Evaluates multiple conditions and returns true if all of them are true.
 
@@ -412,7 +412,7 @@ console.log(evaluate(['all', ['>', ['get', 'width'], 50], ['==', ['get', 'type']
 
 #### 'any'
 
-[API](https://docs.mapbox.com/style-spec/reference/expressions/#any)
+[API](https://maplibre.org/maplibre-style-spec/expressions/#any)
 
 Evaluates multiple conditions and returns true if at least one of them is true.
 
@@ -428,7 +428,7 @@ console.log(evaluate([
 
 #### 'case'
 
-[API](https://docs.mapbox.com/style-spec/reference/expressions/#case)
+[API](https://maplibre.org/maplibre-style-spec/expressions/#case)
 
 Evaluates each pair of conditions and values sequentially and returns the output of the first true condition. If none are true, it returns the value of the optional default case.
 
@@ -454,7 +454,7 @@ evaluate([
 
 #### 'match'
 
-[API](https://docs.mapbox.com/style-spec/reference/expressions/#match)
+[API](https://maplibre.org/maplibre-style-spec/expressions/#match)
 
 Matches an input with a series of cases, returning the output associated with the first matching case. If there's no match, a default value is returned.
 
@@ -477,7 +477,7 @@ Interpolation expressions allow you to create smooth transitions between values 
 
 #### 'step'
 
-[API](https://docs.mapbox.com/style-spec/reference/expressions/#step)
+[API](https://maplibre.org/maplibre-style-spec/expressions/#step)
 
 The step expression creates a stepped, piecewise-constant function. It's mainly used when you want to categorize your data into specific bins.
 
@@ -494,7 +494,7 @@ console.log(evaluate(['step', ['get', 'one'], 'low', 6, 'medium', 8, 'high'], pr
 
 #### 'interpolate'
 
-[API](https://docs.mapbox.com/style-spec/reference/expressions/#interpolate)
+[API](https://maplibre.org/maplibre-style-spec/expressions/#interpolate)
 
 The interpolate expression provides smooth transitions between pairs of input and output values.
 
@@ -557,7 +557,7 @@ console.log(evaluate([
 
 ### Math Expressions
 
-[API](https://docs.mapbox.com/style-spec/reference/expressions/#math)
+[API](https://maplibre.org/maplibre-style-spec/expressions/#math)
 
 The Math category includes a comprehensive set of mathematical operations to perform arithmetic, trigonometric, logarithmic, and other related calculations.
 

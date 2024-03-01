@@ -1,0 +1,5 @@
+{
+  "name": "Native paint for NGW MVT Layer",
+  "description": "Use maplibre-gl native style to paint MVT resource layer and its selection",
+  "ngwMaps": ["ngw-maplibre-gl"]
+}

@@ -1,5 +1,5 @@
 {
   "name": "WMS layer from NGW WMS",
   "description": "Show WMS layer or layers from NGW WMS service.",
-  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"]
 }

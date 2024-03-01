@@ -1,6 +1,6 @@
 {
   "name": "NGW TMS layer",
   "description": "Add a tile layer from NGW resource to the WebMap",
-  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"],
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"],
   "tags": ["tms", "tile"]
 }

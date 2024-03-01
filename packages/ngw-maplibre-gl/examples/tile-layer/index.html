@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Tile layer example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body,
+      #map {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+
+    <script src="../../lib/ngw-maplibre-gl.global.js"></script>
+  </head>
+
+  <body>
+    <div id="map"></div>
+    <script>
+      NgwMap.create({
+        baseUrl: 'https://demo.nextgis.com/',
+        target: 'map',
+        center: [104, 52],
+        zoom: 6,
+      }).then((ngwMap) => {
+        ngwMap.addLayer('TILE', {
+          url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+          attribution:
+            'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+          subdomains: ['a', 'b', 'c'],
+        });
+      });
+    </script>
+  </body>
+</html>

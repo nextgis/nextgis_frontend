@@ -1,0 +1,56 @@
+{
+  "name": "@nextgis/ngw-maplibre-gl",
+  "_priority": 10,
+  "version": "1.19.5",
+  "description": "Single-file bundle for rapid deployment of Maplibre GL JS based web-gis applications with NextGIS services",
+  "main": "lib/ngw-maplibre-gl.global.prod.js",
+  "module": "lib/ngw-maplibre-gl.esm-bundler.js",
+  "unpkg": "lib/ngw-maplibre-gl.global.prod.js",
+  "jsdelivr": "lib/ngw-maplibre-gl.global.prod.js",
+  "types": "lib/index.d.ts",
+  "dependencies": {
+    "@nextgis/maplibre-gl-map-adapter": "^1.19.5",
+    "@nextgis/ngw-map": "^1.19.2",
+    "canvg": "^3.x",
+    "maplibre-gl": "^3.x"
+  },
+  "devDependencies": {
+    "@nextgis/build-tools": "^1.19.0",
+    "maplibre-gl": "^3.3.1"
+  },
+  "buildOptions": {
+    "name": "NgwMaplibreGL",
+    "injectCss": true,
+    "formats": [
+      "esm-bundler",
+      "esm-browser",
+      "global"
+    ]
+  },
+  "scripts": {
+    "clean": "rimraf ./lib",
+    "dev": "node ../build-tools/lib/build.js",
+    "prod": "npm run dev -- --release",
+    "lint": "eslint ./src/**/*.ts --fix --c ../../.eslintrc",
+    "watch": "npm run dev -- --watch"
+  },
+  "keywords": [
+    "NextGIS",
+    "MAP"
+  ],
+  "author": "NextGIS",
+  "files": [
+    "index.js",
+    "lib"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-maplibre-gl#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nextgis/nextgis_frontend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nextgis/nextgis_frontend/issues"
+  },
+  "gitHead": "edc68033f914f6c95c4125b9738bba6d36e990b4"
+}

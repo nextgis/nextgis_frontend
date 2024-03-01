@@ -1,5 +1,5 @@
 {
   "name": "Tile layer",
   "description": "Add a tile layer to a Web map",
-  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"]
 }

@@ -1,5 +1,5 @@
 {
   "name": "Events",
   "description": "Press `A` to add a random layer to the map; `H` to hide all layers from the map; `S` to restore visibility of all layers; `R` to remove all layers from map and memory. All these actions will call of events from a list in top left coner of the map.",
-  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"]
 }

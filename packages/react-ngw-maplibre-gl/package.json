@@ -1,0 +1,47 @@
+{
+  "name": "@nextgis/react-ngw-maplibre-gl",
+  "version": "1.19.5",
+  "description": "React NextGIS Web map component for Maplibre GL JS",
+  "main": "lib/index.js",
+  "module": "lib/react-ngw-maplibre-gl.esm-bundler.js",
+  "types": "lib/index.d.ts",
+  "dependencies": {
+    "@nextgis/maplibre-gl-map-adapter": "^1.19.5",
+    "@nextgis/react-ngw-map": "^1.19.3"
+  },
+  "devDependencies": {
+    "@nextgis/build-tools": "^1.19.0"
+  },
+  "buildOptions": {
+    "name": "ReactNgwMaplibreGL",
+    "injectCss": true,
+    "formats": [
+      "esm-bundler"
+    ]
+  },
+  "scripts": {
+    "clean": "rimraf ./lib",
+    "dev": "node ../build-tools/lib/build.js",
+    "prod": "npm run dev -- --release",
+    "lint": "eslint ./src/**/*.ts --fix --c ../../.eslintrc",
+    "watch": "npm run dev -- --watch"
+  },
+  "keywords": [
+    "NextGIS",
+    "MAP"
+  ],
+  "author": "NextGIS",
+  "files": [
+    "index.js",
+    "lib"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/nextgis/nextgis_frontend/tree/master/packages/react-ngw-maplibre-gl#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nextgis/nextgis_frontend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nextgis/nextgis_frontend/issues"
+  }
+}

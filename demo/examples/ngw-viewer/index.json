@@ -1,5 +1,5 @@
 {
   "name": "Ngw viewer",
   "description": "Navigate the resource tree and open the allowed layers map preview",
-  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"]
 }

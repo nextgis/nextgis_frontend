@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Interpolate Expression Paint</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body,
+      #map {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+
+    <script src="../../lib/ngw-maplibre-gl.global.js"></script>
+  </head>
+
+  <body>
+    <div id="map"></div>
+    <script>
+      NgwMap.create({
+        baseUrl: 'https://demo.nextgis.com',
+        target: 'map',
+        osm: true,
+        resources: [
+          {
+            resource: 5152,
+            fit: true,
+            adapterOptions: {
+              paint: {
+                color: 'black',
+                fillOpacity: [
+                'interpolate',
+                ['linear'],
+                ['get', 'val'],
+                  6, 0.1,
+                  120, 0.6,
+                ],
+              },
+            },
+          },
+          {
+            resource: 5150,
+            fit: true,
+            adapterOptions: {
+              paint: {
+                color: [
+                'interpolate',
+                ['linear'],
+                ['get', 'val'],
+                  40, '#ed904d',
+                  60, '#e6e4f0',
+                  100, '#8e76b7',
+                ],
+                fillOpacity: 1,
+                stroke: true,
+                strokeColor: "black",
+                radius: 6,
+              },
+            },
+          },
+        ],
+      });
+    </script>
+  </body>
+</html>

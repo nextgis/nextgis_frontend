@@ -1,5 +1,5 @@
 {
   "name": "NextGIS Web Vector Style Legends Integration",
   "description": "Integrate symbols representing NextGIS Web vector style layers into map legends",
-  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"]
 }

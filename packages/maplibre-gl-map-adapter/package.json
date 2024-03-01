@@ -1,0 +1,62 @@
+{
+  "name": "@nextgis/maplibre-gl-map-adapter",
+  "version": "1.19.5",
+  "_priority": 16,
+  "description": "Webmap adapter to use Maplibre GL JS GIS framework.",
+  "main": "lib/maplibre-gl-map-adapter.global.prod.js",
+  "module": "lib/maplibre-gl-map-adapter.esm-bundler.js",
+  "unpkg": "lib/maplibre-gl-map-adapter.global.prod.js",
+  "jsdelivr": "lib/maplibre-gl-map-adapter.global.prod.js",
+  "types": "lib/index.d.ts",
+  "dependencies": {
+    "@nextgis/paint": "^1.19.0",
+    "@nextgis/properties-filter": "^1.19.0",
+    "@nextgis/webmap": "^1.19.2",
+    "@types/events": "^3.0.0",
+    "@types/polylabel": "^1.0.5",
+    "events": "*",
+    "polylabel": "^1.*"
+  },
+  "peerDependencies": {
+    "maplibre-gl": ">=2.0.0"
+  },
+  "optionalDependencies": {
+    "canvg": "^3.0.9"
+  },
+  "devDependencies": {
+    "@nextgis/build-tools": "^1.19.0"
+  },
+  "buildOptions": {
+    "name": "MaplibreGLMapAdapter",
+    "formats": [
+      "esm-bundler",
+      "esm-browser"
+    ]
+  },
+  "scripts": {
+    "clean": "rimraf ./lib",
+    "dev": "node ../build-tools/lib/build.js",
+    "prod": "npm run dev -- --release",
+    "lint": "eslint ./src/**/*.ts --fix --c ../../.eslintrc",
+    "watch": "npm run dev -- --watch"
+  },
+  "keywords": [
+    "NextGIS",
+    "MAP"
+  ],
+  "author": "NextGIS",
+  "files": [
+    "index.js",
+    "lib"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/nextgis/nextgis_frontend/tree/master/packages/leaflet-map-adapter#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nextgis/nextgis_frontend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nextgis/nextgis_frontend/issues"
+  },
+  "gitHead": "edc68033f914f6c95c4125b9738bba6d36e990b4"
+}

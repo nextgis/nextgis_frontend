@@ -1,5 +1,5 @@
 {
   "name": "NGW layer filtering",
   "description": "Set the filter for NGW layer by features propery.",
-  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"]
 }

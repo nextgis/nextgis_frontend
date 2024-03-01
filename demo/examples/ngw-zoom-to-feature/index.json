@@ -1,6 +1,6 @@
 {
   "name": "Zoom to NGW layer feature",
   "description": "Show how to set map view from any NGW layer feature.",
-  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"],
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"],
   "tags": ["zoom to", "go to", "fit", "paginate", "table", "list"]
 }

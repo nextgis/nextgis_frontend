@@ -1,5 +1,5 @@
 {
   "name": "Match paint for NGW MVT Layer",
   "description": "Use addNgwLayer to add MVT resources with attributes base paint",
-  "ngwMaps": ["ngw-mapbox"]
+  "ngwMaps": ["ngw-maplibre-gl"]
 }
