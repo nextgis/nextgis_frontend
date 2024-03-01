@@ -16,7 +16,7 @@
     "@nextgis/webmap": "^1.19.2",
     "@types/events": "^3.0.0",
     "@types/polylabel": "^1.0.5",
-    "events": "^3.3.0",
+    "events": "*",
     "polylabel": "^1.1.0"
   },
   "peerDependencies": {

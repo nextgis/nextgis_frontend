@@ -17,7 +17,7 @@
     "@types/color": "^3.0.2",
     "@types/events": "^3.0.0",
     "color": "^4.1.0",
-    "events": "^3.3.0",
+    "events": "*",
     "tus-js-client": "^2.3.0"
   },
   "devDependencies": {

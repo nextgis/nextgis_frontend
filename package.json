@@ -26,9 +26,9 @@
   "homepage": "https://code.nextgis.com",
   "repository": "https://github.com/nextgis/nextgis_frontend",
   "devDependencies": {
-    "@types/node": "^18.11.0",
+    "@types/node": "^20.11.24",
     "eslint-plugin-tsdoc": "^0.2.17",
-    "lerna": "^6.6.1",
+    "lerna": "^8.1.2",
     "lint-staged": "^13.0.3",
     "rimraf": "^3.0.2",
     "yorkie": "^2.0.0"

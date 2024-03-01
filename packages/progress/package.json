@@ -10,7 +10,7 @@
   "devDependencies": {
     "@nextgis/build-tools": "^1.19.0",
     "@types/events": "^3.0.0",
-    "events": "^3.3.0",
+    "events": "*",
     "strict-event-emitter-types": "^2.0.0"
   },
   "buildOptions": {

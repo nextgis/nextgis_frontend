@@ -4,8 +4,21 @@
 
 Plugin to integrate NGW maps into react with OpenLayers adapter
 
-```html
+```jsx
+import React from 'react';
+import { render } from 'react-dom';
+import ReactNgwMap from '@nextgis/react-ngw-ol';
 
+function App() {
+  return (
+    <ReactNgwMap
+      baseUrl="https://demo.nextgis.com"
+      resources={[{ resource: 6118, id: 'webmap', fit: true }]}
+    />
+  );
+}
+
+render(<App />, document.getElementById('app'));
 ```
 
 ## Commercial support

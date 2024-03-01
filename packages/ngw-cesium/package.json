@@ -12,7 +12,7 @@
     "@nextgis/ngw-map": "^1.19.2",
     "@types/events": "^3.0.0",
     "cesium": "1.96.0",
-    "events": "^3.3.0"
+    "events": "*"
   },
   "devDependencies": {
     "@nextgis/build-tools": "file:../build-tools"

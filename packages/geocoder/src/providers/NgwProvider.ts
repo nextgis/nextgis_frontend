@@ -198,8 +198,9 @@ export class NgwProvider extends BaseProvider<NgwProviderOptions> {
     let labelField: string | undefined = undefined;
 
     if (resourceItem.feature_layer) {
-      labelField = resourceItem.feature_layer.fields.find((f) => f.label_field)
-        ?.keyname;
+      labelField = resourceItem.feature_layer.fields.find(
+        (f) => f.label_field,
+      )?.keyname;
     }
 
     const meta = this.searchResources.find(

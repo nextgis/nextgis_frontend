@@ -15,11 +15,11 @@
     "@types/events": "^3.0.0",
     "@types/geojson": "^7946.0.8",
     "@types/leaflet": "^1.7.5",
-    "events": "^3.3.0",
-    "leaflet.wms": "^0.2.0"
+    "events": "*",
+    "leaflet.wms": "*"
   },
   "peerDependencies": {
-    "leaflet": ">=1.7.0"
+    "leaflet": ">=1.x"
   },
   "devDependencies": {
     "@nextgis/build-tools": "^1.19.0"

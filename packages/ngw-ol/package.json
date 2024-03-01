@@ -12,11 +12,12 @@
     "@nextgis/ngw-map": "^1.19.2",
     "@nextgis/ol-map-adapter": "^1.19.4",
     "@types/events": "^3.0.0",
-    "events": "^3.3.0",
-    "ol": "^6.15.1"
+    "events": "*",
+    "ol": "^6.x"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "^1.19.0"
+    "@nextgis/build-tools": "^1.19.0",
+    "ol": "^6.15.1"
   },
   "buildOptions": {
     "name": "NgwOl",
