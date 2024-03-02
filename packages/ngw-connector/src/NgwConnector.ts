@@ -545,6 +545,9 @@ export class NgwConnector {
     options: RequestOptions,
   ): CancelablePromise<any> {
     options.responseType = options.responseType || 'json';
+    if (options.signal && options.signal.aborted) {
+      return CancelablePromise.reject(new CancelablePromise.CancelError());
+    }
 
     const request = new CancelablePromise((resolve, reject, onCancel) => {
       if (this.user) {
@@ -572,7 +575,6 @@ export class NgwConnector {
         if (httpError instanceof CancelablePromise.CancelError) {
           // not need to handle cancel error because onCancel method is used
         } else {
-          // @ts-ignore
           if (__DEV__) {
             console.warn('DEV WARN', httpError);
           }
