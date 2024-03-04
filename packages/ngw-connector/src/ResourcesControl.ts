@@ -40,7 +40,8 @@ export class ResourcesControl {
     requestOptions?: RequestOptions<'GET'>,
   ): CancelablePromise<ResourceItem | undefined> {
     const cache = new Cache();
-    const forCache: { keyname?: string; id?: number } = {};
+    const forCache: { keyname?: string; display_name?: string; id?: number } =
+      {};
     const opt = { ...requestOptions, cache: false };
     if (typeof resource === 'string') {
       forCache.keyname = resource;
@@ -49,8 +50,13 @@ export class ResourcesControl {
     } else if (isObject(resource)) {
       if (resource.id !== undefined) {
         forCache.id = resource.id;
-      } else if (resource.keyname) {
-        forCache.keyname = resource.keyname;
+      } else {
+        if (resource.keyname) {
+          forCache.keyname = resource.keyname;
+        }
+        if (resource.display_name) {
+          forCache.display_name = resource.display_name;
+        }
       }
     }
     const makeRequest = () => {
@@ -63,7 +69,6 @@ export class ResourcesControl {
       }
       return CancelablePromise.resolve(undefined);
     };
-
     return cache.addFull('resource', makeRequest, forCache);
   }
 
