@@ -1,7 +1,3 @@
-/**
- * @module maplibre-gl-map-adapter
- */
-
 import { MaplibreGLMapAdapter } from './MaplibreGLMapAdapter';
 
 import type { MaplibreGLMapAdapterOptions } from './MaplibreGLMapAdapter';

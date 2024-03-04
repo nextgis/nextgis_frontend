@@ -1,7 +1,3 @@
-/**
- * @module utils
- */
-
 export * from './platform';
 
 export * from './applyMixins';

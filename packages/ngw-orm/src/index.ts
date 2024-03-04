@@ -1,7 +1,3 @@
-/**
- * @module ngw-orm
- */
-
 import 'reflect-metadata';
 
 import { getGlobalVariable } from '@nextgis/utils';

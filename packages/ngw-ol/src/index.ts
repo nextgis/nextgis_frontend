@@ -1,13 +1,3 @@
-/**
- * Single-file bundle for rapid deployment of {@link https://openlayers.org/ | OpenLayers }-based web-gis applications with NextGIS services
- *
- * @remarks
- * Styles images and other assets are already in bundle, you don't need to include anything except one JS file!
- *
- * @packageDocumentation
- * @module ngw-ol
- */
-
 import { NgwMap } from '@nextgis/ngw-map';
 import OlMapAdapter from '@nextgis/ol-map-adapter';
 

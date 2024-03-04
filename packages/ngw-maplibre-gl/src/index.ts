@@ -1,12 +1,3 @@
-/**
- * Single-file bundle for rapid deployment of {@link https://maplibre.org/maplibre-gl-js/docs/ | Maplibre GL JS } based web-gis applications with NextGIS services
- *
- * @remarks
- * Styles images and other assets are already in bundle, you don't need to include anything except one JS file!
- *
- * @packageDocumentation
- * @module ngw-maplibre-gl
- */
 import 'maplibre-gl/dist/maplibre-gl.css';
 
 import MaplibreGLMapAdapter from '@nextgis/maplibre-gl-map-adapter';

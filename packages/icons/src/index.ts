@@ -1,7 +1,3 @@
-/**
- * @module icons
- */
-
 import type { IconPaint } from '@nextgis/paint';
 
 const svgPath: { [name: string]: string | GetPathCallback } = {

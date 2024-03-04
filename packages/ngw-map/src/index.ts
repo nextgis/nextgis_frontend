@@ -1,7 +1,3 @@
-/**
- * @module ngw-map
- */
-
 import { NgwMap } from './NgwMap';
 
 import type { NgwMapOptions } from './interfaces';

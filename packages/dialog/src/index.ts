@@ -1,7 +1,3 @@
-/**
- * @module dialog
- */
-
 import { Dialog } from './dialog';
 
 import type { DialogAdapterOptions } from './interfaces';

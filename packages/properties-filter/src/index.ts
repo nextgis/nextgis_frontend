@@ -1,7 +1,3 @@
-/**
- * @module properties-filter
- */
-
 export {
   checkIfPropertyFilter,
   propertiesFilter,
