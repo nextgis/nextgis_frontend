@@ -30,7 +30,8 @@
     "name": "MaplibreGLMapAdapter",
     "formats": [
       "esm-bundler",
-      "esm-browser"
+      "esm-browser",
+      "global"
     ]
   },
   "scripts": {

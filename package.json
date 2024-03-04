@@ -21,6 +21,7 @@
     "publish": "npm run test:build && lerna publish from-package",
     "patch": "npm run test:build && lerna version patch --conventional-commits -m \"chore(release): publish %s\" --no-push --create-release github",
     "minor": "npm run test:build && lerna version minor --conventional-commits -m \"chore(release): publish %s\" --no-push --create-release github",
+    "major": "npm run test:build && lerna version major --conventional-commits -m \"chore(release): publish %s\" --no-push --create-release github",
     "prerelease": "npm run test:build && lerna version --conventional-commits --conventional-prerelease -m \"chore(release): publish %s\" --no-push --create-release github"
   },
   "homepage": "https://code.nextgis.com",
