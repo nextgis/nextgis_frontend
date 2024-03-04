@@ -1,5 +1,5 @@
-const { join, resolve } = require('path');
 const { lstatSync, readdirSync, readFileSync, existsSync } = require('fs');
+const { join, resolve } = require('path');
 
 const isDirectory = (source) => lstatSync(source).isDirectory();
 

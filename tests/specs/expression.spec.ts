@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+
 import { evaluate, isExpression } from '../../packages/expression/src';
 
 describe('Lookup Expressions', () => {

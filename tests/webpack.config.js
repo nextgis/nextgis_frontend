@@ -1,12 +1,10 @@
 const webpack = require('webpack');
 
 let alias = {};
-try {
-  const { getAliases } = require('../scripts/aliases');
-  alias = { ...alias, ...getAliases() };
-} catch (er) {
-  // ignore
-}
+
+const getAliases = require('../packages/build-tools/lib/aliases.cjs');
+
+alias = { ...alias, ...getAliases() };
 
 module.exports = (opt = { coverage: false }) => {
   const rules = [
@@ -37,6 +35,7 @@ module.exports = (opt = { coverage: false }) => {
       type: 'asset/resource',
     },
   ];
+
   if (opt.coverage) {
     rules.push({
       test: /\.ts$/,
@@ -48,6 +47,7 @@ module.exports = (opt = { coverage: false }) => {
       },
     });
   }
+
   return {
     mode: 'development',
     devtool: 'inline-source-map',
@@ -79,9 +79,6 @@ module.exports = (opt = { coverage: false }) => {
       },
     },
     plugins: [
-      new webpack.ProvidePlugin({
-        process: 'process/browser',
-      }),
       new webpack.DefinePlugin({
         __BROWSER__: true,
         __DEV__: true,

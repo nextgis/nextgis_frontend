@@ -1,8 +1,8 @@
-import { PointLayer, NgwResource, Column } from '../../../packages/ngw-orm/src';
+import { Column, NgwResource, PointLayer } from '../../../packages/ngw-orm/src';
 
 export interface ISandboxPointLayer {
-  test: string;
-  number: number;
+  test: string | null;
+  number: number | null;
 }
 
 @NgwResource({
