@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-alpha.0](https://github.com/nextgis/nextgis_frontend/compare/v1.19.5...v2.0.0-alpha.0) (2024-03-04)
+
+
+### Bug Fixes
+
+* **ngw-connector:** do not request if signal is aborted ([4386fff](https://github.com/nextgis/nextgis_frontend/commit/4386fff0b1889780148c0574703aaf5cb822e3b4))
+* **ngw-connector:** get one resource caching ([dd6952f](https://github.com/nextgis/nextgis_frontend/commit/dd6952ff7c1f407cdd2e7529ce7546b4373c1e0f))
+
+
+
+
+
 # [1.19.0](https://github.com/nextgis/nextgis_frontend/compare/v1.18.21...v1.19.0) (2023-11-24)
 
 

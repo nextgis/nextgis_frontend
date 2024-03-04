@@ -3,6 +3,43 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-alpha.0](https://github.com/nextgis/nextgis_frontend/compare/v1.19.5...v2.0.0-alpha.0) (2024-03-04)
+
+
+### Bug Fixes
+
+* **ngw-connector:** do not request if signal is aborted ([4386fff](https://github.com/nextgis/nextgis_frontend/commit/4386fff0b1889780148c0574703aaf5cb822e3b4))
+* **ngw-connector:** get one resource caching ([dd6952f](https://github.com/nextgis/nextgis_frontend/commit/dd6952ff7c1f407cdd2e7529ce7546b4373c1e0f))
+
+
+### Code Refactoring
+
+* rename mapbox to maplibre in library names and imports ([b43f93d](https://github.com/nextgis/nextgis_frontend/commit/b43f93d600dedd932b5f6e8dec1489044337b438))
+* **vue:** relocate vue-related libraries to nextgis_frontend_vue2 repo ([5140df2](https://github.com/nextgis/nextgis_frontend/commit/5140df2326547331178045112b3cef2a4c9f4bc5))
+
+
+### Features
+
+* get package dependencies from tsconfig paths ([ff5a70f](https://github.com/nextgis/nextgis_frontend/commit/ff5a70fd4b681b21bf194b0233b4f0e5c70aebf3))
+
+
+### BREAKING CHANGES
+
+* @nextgis/mapboxgl-map-adapter -> @nextgis/maplibre-gl-map-adapter
+* @nextgis/ngw-mapbox -> @nextgis/ngw-maplibre-gl
+* @nextgis/react-ngw-mapbox -> @nextgis/react-ngw-maplibre-gl
+* In various modules, imports of MapboxglMapAdapter and related types have been updated to their MaplibreGLMapAdapter equivalents.
+* **vue:** @nextgis/vue-ngw-leaflet -> @nextgis/vue2-ngw-leaflet
+* **vue:** @nextgis/vue-ngw-ol -> @nextgis/vue2-ngw-ol
+* **vue:** @nextgis/vue-ngw-mapbox -> @nextgis/vue2-ngw-maplibregl
+* **vue:** @nextgis/vue-ngw-map -> @nextgis/vue2-ngw-map
+* **vue:** @nextgis/vuetify-ngw-components -> @nextgis/vue2-ngw-vuetify
+* **vue:** @nextgis/vuex-ngw -> @nextgis/vue2-ngw-vuex
+
+
+
+
+
 ## [1.19.5](https://github.com/nextgis/nextgis_frontend/compare/v1.19.4...v1.19.5) (2024-01-22)
 
 
