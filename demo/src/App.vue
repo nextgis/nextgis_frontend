@@ -1,23 +1,7 @@
 <template>
-  <v-app id="inspire">
-    <router-view></router-view>
-  </v-app>
+  <router-view />
 </template>
 
-<script lang="ts">
-export { App as default } from "./App";
+<script setup lang="ts">
+import 'highlight.js/styles/a11y-light.css';
 </script>
-
-
-<style>
-* {
-  padding: 0;
-  margin: 0;
-}
-
-html,
-body {
-  width: 100%;
-  height: 100%;
-}
-</style>

@@ -1,13 +1,6 @@
 {
-  "extends": "../tsconfig.json",
+  "extends": "@quasar/app-vite/tsconfig-preset",
   "compilerOptions": {
-    "outDir": "dist",
-    "declaration": false,
-    "declarationMap": false,
-    "module": "ESNext",
-    "strict": false
-  },
-  "include": [
-    "./src"
-  ]
- }
+    "baseUrl": "."
+  }
+}

@@ -10,7 +10,7 @@
     "lint": "lerna run lint",
     "lint:eslint": "eslint --fix ./packages/**/src/**/*.ts",
     "demo": "yarn run examples && cd ./demo/ && yarn run build && yarn run docker",
-    "examples": "node ./scripts/updateExamples.js",
+    "examples": "node ./scripts/updateExamples.mjs",
     "test": "npm run karma -- --single-run --coverage",
     "test:build": "node ./scripts/testBuildCmd.mjs",
     "karma": "karma start tests/karma.conf.js",

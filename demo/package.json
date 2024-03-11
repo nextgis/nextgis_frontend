@@ -1,82 +1,49 @@
 {
   "name": "@nextgis/demo-app",
-  "version": "1.19.4",
-  "_priority": 1,
-  "description": "",
+  "version": "0.0.1",
+  "description": "Demo site for NextGIS Frontend libraries",
+  "productName": "demo-app",
+  "author": "NextGIS <info@nextgis.com>",
+  "type": "module",
   "private": true,
+  "_priority": 1,
+  "scripts": {
+    "lint": "eslint --ext .js,.ts,.vue ./",
+    "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
+    "test": "echo \"No test specified\" && exit 0",
+    "gen:examples": "node ./scripts/updateDemoExamples.js",
+    "start": "yarn gen:examples && quasar dev",
+    "build": "yarn gen:examples && quasar build"
+  },
   "dependencies": {
-    "@mdi/js": "^6.3.95",
-    "@nextgis/ngw-uploader": "^1.19.0",
-    "core-js": "^3.18.3",
-    "favicons": "^6.2.2",
-    "highlight.js": "^11.3.1",
-    "vue": "^2.6.14",
-    "vue-class-component": "^7.2.6",
-    "vue-highlightjs": "^1.3.3",
-    "vue-property-decorator": "^9.1.2",
-    "vue-router": "^3.5.2",
-    "vuetify": "^2.5.10",
-    "vuex": "^3.6.2",
-    "vuex-class": "^0.3.2",
-    "vuex-router-sync": "^5.0.0",
-    "vuex-type-helper": "^1.3.1"
+    "@quasar/extras": "^1.16.4",
+    "highlight.js": "~11.8.0",
+    "marked": "^12.0.1",
+    "marked-highlight": "^2.1.1",
+    "quasar": "^2.6.0",
+    "simple-code-editor": "^2.0.9",
+    "vue": "^3.4.18",
+    "vue-router": "^4.0.12"
   },
   "devDependencies": {
-    "@mdi/font": "^6.3.95",
-    "@nextgis/eslint-config": "^1.19.0",
-    "@types/lodash": "^4.14.176",
-    "@types/showdown": "^1.9.4",
-    "css-loader": "^6.4.0",
-    "docmypkg": "^0.0.1",
-    "eslint-webpack-plugin": "^3.0.1",
-    "favicons-webpack-plugin": "^5.0.2",
-    "file-loader": "^6.2.0",
-    "html-loader": "^2.1.2",
-    "html-webpack-plugin": "^5.4.0",
-    "mini-css-extract-plugin": "^2.4.2",
-    "rimraf": "^3.0.2",
-    "sass": "~1.32.13",
-    "sass-loader": "^12.2.0",
-    "showdown": "^1.9.1",
-    "showdown-highlight": "2.1.8",
-    "style-loader": "^3.3.0",
-    "ts-loader": "^9.2.6",
-    "typescript": "~5.1",
-    "url-loader": "^4.1.1",
-    "vue-loader": "^15.9.8",
-    "vue-style-loader": "^4.1.3",
-    "vue-template-compiler": "^2.6.14",
-    "vuetify-loader": "^1.7.3",
-    "webpack": "^5.59.1",
-    "webpack-bundle-analyzer": "^4.5.0",
-    "webpack-cli": "^4.9.1",
-    "webpack-dev-server": "^4.3.1"
+    "@quasar/app-vite": "^2.0.0-beta.5",
+    "@types/node": "^20.5.9",
+    "@typescript-eslint/eslint-plugin": "^6.6.0",
+    "@typescript-eslint/parser": "^6.6.0",
+    "autoprefixer": "^10.4.2",
+    "chalk": "^5.3.0",
+    "eslint": "^8.11.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-vue": "^9.0.0",
+    "prettier": "^3.0.3",
+    "typescript": "~5.3.0",
+    "vite-plugin-checker": "^0.6.4",
+    "vue-tsc": "^1.8.22"
   },
-  "scripts": {
-    "start": "webpack serve --progress --open --hot",
-    "clean": "rimraf ./dist",
-    "dev": "npm run clean && webpack --config ./webpack.config.js --progress",
-    "build": "npm run dev -- --mode=production",
-    "prod": "exit 0",
-    "watch": "npm run dev -- --watch",
-    "docker": "docmypkg -r harbor.nextgis.net -n frontend/code -l"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/nextgis/nextgis_frontend.git"
-  },
-  "keywords": [
-    "NextGIS",
-    "MAP",
-    "NGW"
-  ],
-  "author": "NextGIS",
-  "files": [
-    "dist"
-  ],
-  "dockerpkg": {
-    "name": "frontend/code",
-    "registry": "harbor.nextgis.net"
-  },
-  "license": "MIT"
+  "engines": {
+    "node": "^24 || ^22 || ^20 || ^18",
+    "npm": ">= 6.13.4",
+    "yarn": ">= 1.21.1"
+  }
 }

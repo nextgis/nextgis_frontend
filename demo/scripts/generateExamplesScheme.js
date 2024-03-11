@@ -1,14 +1,18 @@
-const { lstatSync, readdirSync, readFileSync, existsSync } = require('fs');
-const { join } = require('path');
+import { existsSync, lstatSync, readFileSync, readdirSync } from 'node:fs';
+import path from 'node:path';
+import { URL, fileURLToPath } from 'node:url';
 
-const pkgRoot = join(__dirname, '..', '..');
-
-console.log(pkgRoot);
+const pkgRoot = path.join(
+  fileURLToPath(new URL(import.meta.url)),
+  '..',
+  '..',
+  '..',
+);
 
 const isDirectory = (source) => lstatSync(source).isDirectory();
 
-const getPriority = (package) =>
-  package._priority !== undefined ? package._priority : 100;
+const getPriority = (pkg) =>
+  pkg._priority !== undefined ? pkg._priority : 100;
 
 function getIdFromPath(id) {
   id = id.replace(pkgRoot, '');
@@ -35,12 +39,12 @@ function replaceAbsolutePathToCdn(line, packages) {
 
       if (lineLibName) {
         for (let fry = 0; fry < packages.length; fry++) {
-          const package = packages[fry] && packages[fry].package;
-          const packageLibName = package.name.replace(/^@nextgis\//, '');
+          const pkg = packages[fry] && packages[fry].package;
+          const packageLibName = pkg.name.replace(/^@nextgis\//, '');
           if (packageLibName === lineLibName) {
             newLine =
               new Array(emptyCharsCount + 1).join(' ') +
-              `<script src="https://unpkg.com/${package.name}@${package.version}/${package.unpkg}"></script>`;
+              `<script src="https://unpkg.com/${pkg.name}@${pkg.version}/${pkg.unpkg}"></script>`;
           }
         }
       }
@@ -51,7 +55,7 @@ function replaceAbsolutePathToCdn(line, packages) {
   return line;
 }
 
-function prepareHtml(html, package, packages) {
+function prepareHtml(html, _pkg, packages) {
   const newHtml = [];
 
   // comment direct to lib script
@@ -64,7 +68,7 @@ function prepareHtml(html, package, packages) {
 
 function getReadme(libPath) {
   const readme = [];
-  const readmePath = join(libPath, 'README.md');
+  const readmePath = path.join(libPath, 'README.md');
   if (existsSync(readmePath)) {
     const readmeMd = readFileSync(readmePath, 'utf8');
     const id = getIdFromPath(libPath);
@@ -79,23 +83,23 @@ function getReadme(libPath) {
   return readme;
 }
 
-function getExamples(libPath, package, packages) {
-  const examplesPath = join(libPath, 'examples');
+function getExamples(libPath, pkg, packages) {
+  const examplesPath = path.join(libPath, 'examples');
   const examples = [];
   if (existsSync(examplesPath) && isDirectory(examplesPath)) {
     readdirSync(examplesPath)
-      .map((name) => join(examplesPath, name))
+      .map((name) => path.join(examplesPath, name))
       .filter(isDirectory)
       .forEach((examplePath) => {
         const id = getIdFromPath(examplePath);
         if (existsSync(examplePath) && isDirectory(examplePath)) {
-          const htmlPath = join(examplePath, 'index.html');
-          const metaPath = join(examplePath, 'index.json');
+          const htmlPath = path.join(examplePath, 'index.html');
+          const metaPath = path.join(examplePath, 'index.json');
           if (existsSync(htmlPath) && existsSync(metaPath)) {
             const meta = JSON.parse(readFileSync(metaPath, 'utf8'));
             const html = prepareHtml(
               readFileSync(htmlPath, 'utf8'),
-              package,
+              pkg,
               packages,
             );
 
@@ -130,7 +134,7 @@ function getExamples(libPath, package, packages) {
   return examples;
 }
 
-function generate() {
+export function generateExamples() {
   const items = [];
 
   // add global README
@@ -139,27 +143,26 @@ function generate() {
   items.push(readmeItem);
 
   const packages = [
-    // { libPath, package, name }
     {
-      libPath: join(pkgRoot, 'demo'),
+      libPath: path.join(pkgRoot, 'demo'),
       package: JSON.parse(
-        readFileSync(join(pkgRoot, 'demo', 'package.json'), 'utf8'),
+        readFileSync(path.join(pkgRoot, 'demo', 'package.json'), 'utf8'),
       ),
       name: 'demo',
     },
   ];
-  const packagesPath = join(pkgRoot, 'packages');
+  const packagesPath = path.join(pkgRoot, 'packages');
   readdirSync(packagesPath).forEach((name) => {
-    const libPath = join(packagesPath, name);
+    const libPath = path.join(packagesPath, name);
 
     // find packages
     if (isDirectory(libPath)) {
-      const packagePath = join(libPath, 'package.json');
+      const packagePath = path.join(libPath, 'package.json');
       if (existsSync(packagePath)) {
-        const package = JSON.parse(readFileSync(packagePath, 'utf8'));
+        const pkg = JSON.parse(readFileSync(packagePath, 'utf8'));
         packages.push({
           libPath,
-          package,
+          package: pkg,
           name,
         });
       }
@@ -170,18 +173,18 @@ function generate() {
     .sort((a, b) => {
       return getPriority(a.package) - getPriority(b.package);
     })
-    .forEach(({ libPath, package, name }) => {
+    .forEach(({ libPath, package: pkg, name }) => {
       let pages = [];
 
       pages = pages.concat(getReadme(libPath));
-      pages = pages.concat(getExamples(libPath, package, packages));
+      pages = pages.concat(getExamples(libPath, pkg, packages));
 
       if (pages.length) {
         const item = {
           name,
           id: getIdFromPath(libPath),
           children: pages,
-          priority: getPriority(package),
+          priority: getPriority(pkg),
         };
         items.push(item);
         // console.log(item.id);
@@ -200,7 +203,3 @@ function generate() {
   items.forEach((x) => log(x, 1));
   return items;
 }
-
-module.exports = generate;
-
-generate();
