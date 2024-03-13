@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-alpha.1](https://github.com/nextgis/nextgis_frontend/compare/v2.0.0-alpha.0...v2.0.0-alpha.1) (2024-03-13)
+
+
+### Features
+
+* **ol-map-adapter:** make compatible with ol v9 ([7f684d4](https://github.com/nextgis/nextgis_frontend/commit/7f684d4feff8ea7eced4ce45063612e60c30c021))
+
+
+
+
+
 # [2.0.0-alpha.0](https://github.com/nextgis/nextgis_frontend/compare/v1.19.5...v2.0.0-alpha.0) (2024-03-04)
 
 **Note:** Version bump only for package @nextgis/react-ngw-ol
