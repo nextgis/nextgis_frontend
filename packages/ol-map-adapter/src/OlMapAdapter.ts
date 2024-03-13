@@ -29,8 +29,8 @@ import type {
   MapOptions,
   ViewOptions,
 } from '@nextgis/webmap';
+import type { MapOptions as OlMapOptions } from 'ol/Map';
 import type MapBrowserEvent from 'ol/MapBrowserEvent';
-import type { MapOptions as OlMapOptions } from 'ol/PluggableMap';
 import type { ViewOptions as OlViewOptions } from 'ol/View';
 import type { FitOptions as OlFitOptions } from 'ol/View';
 import type Control from 'ol/control/Control';

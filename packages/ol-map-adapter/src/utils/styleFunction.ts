@@ -3,7 +3,6 @@ import { asArray } from 'ol/color';
 import { Fill, Stroke, Style, Text } from 'ol/style';
 import CircleStyle from 'ol/style/Circle';
 import Icon from 'ol/style/Icon';
-import IconAnchorUnits from 'ol/style/IconAnchorUnits';
 
 import { getFeature } from './utils';
 
@@ -116,10 +115,9 @@ export function styleFunction(
       if (svg) {
         const iconOptions: IconOptions = {
           src: 'data:image/svg+xml,' + encodeURIComponent(svg),
-          anchorXUnits: IconAnchorUnits.PIXELS,
-          anchorYUnits: IconAnchorUnits.PIXELS,
+          anchorXUnits: 'pixels',
+          anchorYUnits: 'pixels',
           anchor: paint.iconAnchor,
-          imgSize: paint.iconSize,
           rotation: paint.rotate,
         };
         style.image = new Icon(iconOptions);

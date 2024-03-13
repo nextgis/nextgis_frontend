@@ -15,12 +15,6 @@
   "buildOptions": {
     "name": "ReactNgwOl",
     "injectCss": true,
-    "alias": [
-      {
-        "find": "^(ol|ol(/.*))$",
-        "replacement": "ol/src$2"
-      }
-    ],
     "formats": [
       "esm-bundler"
     ]

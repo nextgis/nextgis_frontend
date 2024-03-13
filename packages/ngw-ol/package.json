@@ -13,21 +13,15 @@
     "@nextgis/ol-map-adapter": "^2.0.0-alpha.0",
     "@types/events": "^3.0.0",
     "events": "*",
-    "ol": "^6.x"
+    "ol": ">=6.0.0"
   },
   "devDependencies": {
     "@nextgis/build-tools": "^2.0.0-alpha.0",
-    "ol": "^6.15.1"
+    "ol": "^9.0.0"
   },
   "buildOptions": {
     "name": "NgwOl",
     "injectCss": true,
-    "alias": [
-      {
-        "find": "^(ol|ol(/.*))$",
-        "replacement": "ol/src$2"
-      }
-    ],
     "formats": [
       "esm-bundler",
       "esm-browser",

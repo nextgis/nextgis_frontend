@@ -266,7 +266,7 @@ function createConfig(format, output, plugins = []) {
     });
   }
 
-  function ignoreCertainImports() {
+  function ignoreLibImports() {
     const pattern = /^@nextgis\/[^/]+\/lib\//;
     return {
       name: 'ignore-nextgis-lib-imports',
@@ -333,7 +333,7 @@ function createConfig(format, output, plugins = []) {
       json({
         namedExports: false,
       }),
-      ignoreCertainImports(),
+      ignoreLibImports(),
       alias({
         entries,
       }),

@@ -6,7 +6,6 @@ import VectorSource from 'ol/source/Vector';
 import type { LngLatArray, LngLatBoundsArray } from '@nextgis/utils';
 import type { FeaturePosition } from '@nextgis/webmap';
 import type { Feature } from 'geojson';
-import type Geometry from 'ol/geom/Geometry';
 
 interface GetFeaturePositionOptions {
   feature: Feature | Feature[];
@@ -18,7 +17,7 @@ function featuresSource({
   feature,
   dataProjection,
   featureProjection,
-}: GetFeaturePositionOptions): VectorSource<Geometry> {
+}: GetFeaturePositionOptions): VectorSource {
   const olFeatures = new GeoJSON().readFeatures(
     {
       type: 'FeatureCollection',

@@ -27,12 +27,6 @@
   },
   "buildOptions": {
     "name": "OlMapAdapter",
-    "alias": [
-      {
-        "find": "^(ol|ol(/.*))$",
-        "replacement": "ol/src$2"
-      }
-    ],
     "formats": [
       "esm-bundler",
       "esm-browser",

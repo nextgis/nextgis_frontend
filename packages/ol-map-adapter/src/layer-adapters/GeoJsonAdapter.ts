@@ -355,7 +355,7 @@ export class GeoJsonAdapter
           const labelStyle = labelStyleFunction(type, {
             // ratio: this.options.ratio,
           });
-          labelStyle.getText().setText(text);
+          labelStyle.getText()?.setText(text);
           style.push(labelStyle);
         }
       }
