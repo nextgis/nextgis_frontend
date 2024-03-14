@@ -37,7 +37,7 @@
         target: 'map',
         qmsId: [448, qmsBaseLayerName],
         resources: [
-          { resource: 4119, id: webMapName, useBasemap: false, fit: true },
+          { resource: 6245, id: webMapName, useBasemap: false, fit: true },
         ],
         controls: ['ZOOM', 'ATTRIBUTION', 'ToggleBaseMap'],
         controlsOptions: {
@@ -59,7 +59,7 @@
           onClick: () => {
             const ngwLayer = ngwMap.getLayer(webMapName);
             const mapLayer = ngwLayer.layer.tree.getDescendants((x) => {
-              return x.item.display_name === 'Digital Elevation Model (DEM)';
+              return x.item.display_name === 'Land area';
             })[0];
             mapLayer.properties.set(
               'visibility',

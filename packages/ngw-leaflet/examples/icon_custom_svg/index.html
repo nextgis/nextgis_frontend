@@ -1,9 +1,11 @@
-
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <title>Interactive SVG Icon Map Example</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
     <style>
       * {
         margin: 0;
@@ -31,9 +33,8 @@
         baseUrl: 'https://demo.nextgis.com',
         target: 'map',
         qmsId: 529,
-        zoom: 13,
       }).then((ngwMap) => {
-        const svgResourceId = 6592;
+        const svgResourceId = 7011;
 
         // Fetching the SVG resource from the NGW
         ngwMap.connector.getResource(svgResourceId).then((res) => {
@@ -50,17 +51,14 @@
 
           // Once all SVGs are fetched, add them as layers on the map
           Promise.all(promises).then((icons) => {
-            // Add routes
-            ngwMap.addNgwLayer({
-              resource: 6587,
-            });
-            ngwMap.addNgwLayer({
-              resource: 6589,
-            });
+            // you can add layers without any styling like this
+            // ngwMap.addNgwLayer({
+            //   resource: 7010,
+            // });
 
-            // Add SVG icon layer for Metro
+            // Add SVG icon layer for cities
             ngwMap.addNgwLayer({
-              resource: 6585,
+              resource: 7008,
               fit: true,
               adapterOptions: {
                 paint: Icons.getIcon({
@@ -75,14 +73,26 @@
               },
             });
 
-            // Add SVG icon layer for NextGIS office
+            // Add SVG icon layer for lakes
             ngwMap.addNgwLayer({
-              id: 'office',
-              resource: 6583,
+              id: 'lakes',
+              resource: 7009,
               interactive: false,
               adapterOptions: {
                 paint: Icons.getIcon({
                   svg: icons[1],
+                  size: 20,
+                }),
+              },
+            });
+            // Add SVG icon layer for peaks
+            ngwMap.addNgwLayer({
+              id: 'lakes',
+              resource: 7010,
+              interactive: false,
+              adapterOptions: {
+                paint: Icons.getIcon({
+                  svg: icons[2],
                   size: 20,
                 }),
               },
