@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import 'highlight.js';
 import CodeEditor from 'simple-code-editor/CodeEditor.vue';
 import { computed } from 'vue';
 

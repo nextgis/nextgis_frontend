@@ -96,11 +96,11 @@ module.exports = {
         groups: [
           'builtin',
           'external',
+          'object',
           'internal',
           'parent',
           'sibling',
           'index',
-          'object',
           'type',
         ],
         pathGroups: [

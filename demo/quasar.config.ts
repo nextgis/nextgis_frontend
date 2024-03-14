@@ -3,7 +3,12 @@
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js
 
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
 import { configure } from 'quasar/wrappers';
+
+const dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default configure((/* ctx */) => {
   return {
@@ -39,7 +44,20 @@ export default configure((/* ctx */) => {
         node: 'node20',
       },
 
+      alias: {
+        'highlight.js/styles': path.join(
+          dirname,
+          'node_modules/highlight.js/styles',
+        ),
+        'highlight.js/lib': path.join(dirname, 'node_modules/highlight.js/lib'),
+        'highlight.js': path.join(
+          dirname,
+          'node_modules/highlight.js/lib/core',
+        ),
+      },
+
       gzip: true,
+      analyze: false,
 
       vueRouterMode: 'history', // available values: 'hash', 'history'
       // vueRouterBase,
