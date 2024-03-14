@@ -15,6 +15,5 @@
     "typescript",
     "vue"
   ],
-  "html.format.wrapAttributes": "force-expand-multiline",
   "typescript.tsdk": "node_modules/typescript/lib"
 }

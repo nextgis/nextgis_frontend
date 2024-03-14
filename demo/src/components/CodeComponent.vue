@@ -24,6 +24,7 @@ const html = computed({
     v-model="html"
     line-nums
     :header="false"
+    font-size="14px"
     theme="github"
     width="100%"
   ></CodeEditor>

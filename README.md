@@ -2,7 +2,7 @@
 
 ![Github lerna version](https://img.shields.io/github/lerna-json/v/nextgis/nextgis_frontend)
 
-[![NextGIS Code](https://raw.githubusercontent.com/nextgis/nextgis_frontend/master/demo/src/images/logo_96x96.png)](http://code.nextgis.com)
+[![NextGIS Code](https://raw.githubusercontent.com/nextgis/nextgis_frontend/master/demo/public/logo_96x96.png)](http://code.nextgis.com)
 
 A suite of frontend JavaScript libraries designed to accelerate the development of web-GIS applications using NextGIS software and services as a backend. NextGIS Frontend supports three major open-source GIS frameworks with unified interfaces.
 

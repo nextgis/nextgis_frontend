@@ -15,7 +15,7 @@ const props = defineProps({
 
 const { push } = useRouter();
 
-const search = ref<string>();
+const search = ref<string>('');
 const drawer = ref(true);
 const isLoading = ref(true);
 const items = ref<TreeNode[]>([]);
