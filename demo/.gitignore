@@ -36,4 +36,4 @@ yarn-error.log*
 # local .env files
 .env.local*
 
-examples.json
+./examples.json

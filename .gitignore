@@ -241,4 +241,4 @@ stats.html
 **/.yarn
 input
 
-**/examples.json
+demo/src/examples.json
