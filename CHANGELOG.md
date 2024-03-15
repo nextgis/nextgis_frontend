@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-alpha.2](https://github.com/nextgis/nextgis_frontend/compare/v2.0.0-alpha.0...v2.0.0-alpha.2) (2024-03-15)
+
+
+### Bug Fixes
+
+* **leaflet-map-adapter:** wms layer transparency default value ([a83ea5a](https://github.com/nextgis/nextgis_frontend/commit/a83ea5a821275f4b5273c818246a3249ec64e407))
+
+
+### Features
+
+* **ol-map-adapter:** make compatible with ol v9 ([2fced80](https://github.com/nextgis/nextgis_frontend/commit/2fced806891d8391282313849e7c6fd8eeee0661))
+
+
+
+
+
 # [2.0.0-alpha.1](https://github.com/nextgis/nextgis_frontend/compare/v2.0.0-alpha.0...v2.0.0-alpha.1) (2024-03-13)
 
 
