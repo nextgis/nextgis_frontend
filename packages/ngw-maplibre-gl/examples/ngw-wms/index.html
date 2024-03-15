@@ -1,35 +1,29 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta charset="utf-8" />
-
     <title>NGW WMS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-      * {
+      html, body, #map {
         margin: 0;
         padding: 0;
-      }
-
-      html,
-      body,
-      #map {
         width: 100%;
         height: 100%;
       }
     </style>
-
     <script src="../../lib/ngw-maplibre-gl.global.js"></script>
+    <!-- <script src="../../lib/ngw-maplibre-gl.global.js"></script> -->
   </head>
-
   <body>
     <div id="map"></div>
     <script>
       const ngwMap = new NgwMap({
         baseUrl: 'https://demo.nextgis.com',
         target: 'map',
+        bounds: [109.152, 52.382, 109.415, 52.543],
         resources: [
-          { resource: 4820, fit: true, adapterOptions: { layers: "S2A_20190520_RGB" } },
+          { resource: 4817, adapterOptions: { layers: 'S2A_20190520_RGB' } },
         ],
       });
     </script>

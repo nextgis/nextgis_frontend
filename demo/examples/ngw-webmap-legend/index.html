@@ -1,15 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta charset="utf-8" />
-    
     <title>NextGIS Web Vector Style Legends Integration</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
       * {
         box-sizing: border-box;
       }
-
       html,
       body {
         width: 100%;
@@ -18,33 +16,27 @@
         padding: 0;
         display: flex;
       }
-
       #map {
         width: 75%;
         height: 100%;
       }
-
       #legend {
         width: 25%;
         height: 100%;
         overflow: auto;
         padding: 10px;
       }
-
       .legend-item {
         display: flex;
         align-items: center;
         margin-bottom: 10px;
       }
-
       .legend-item img {
         margin-right: 10px;
       }
     </style>
-
     <script src="../../../packages/ngw-leaflet/lib/ngw-leaflet.global.js"></script>
   </head>
-
   <body>
     <div id="map"></div>
     <div id="legend"></div>

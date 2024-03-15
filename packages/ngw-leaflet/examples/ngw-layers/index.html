@@ -1,8 +1,7 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta charset="utf-8" />
-    
     <title>Ngw Layers Resources</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
@@ -10,7 +9,6 @@
         margin: 0;
         padding: 0;
       }
-
       html,
       body,
       #wrapper,
@@ -18,37 +16,29 @@
         width: 100%;
         height: 100%;
       }
-
       #wrapper {
         display: flex;
       }
-
       #layers {
         min-width: 280px;
         overflow: auto;
       }
-
       #layers > div {
         padding: 10px;
       }
-
       #layers > :nth-child(odd) {
         background: rgba(0, 0, 0, 0.1);
       }
-
       #layers label {
         font-weight: 700;
         margin-left: 3px;
       }
-
       .description {
         margin-left: 13px;
       }
     </style>
-
     <script src="../../lib/ngw-leaflet.global.js"></script>
   </head>
-
   <body>
     <div id="wrapper">
       <div id="layers"></div>

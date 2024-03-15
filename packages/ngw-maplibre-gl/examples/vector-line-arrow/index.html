@@ -5,20 +5,13 @@
     <title>Line with mixed arrows</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-      /* Basic styling for map and page layout */
-      * {
+      html, body, #map {
         margin: 0;
         padding: 0;
-      }
-      html,
-      body,
-      #map {
         width: 100%;
         height: 100%;
       }
     </style>
-
-    <!-- External library scripts -->
     <script src="../../lib/ngw-maplibre-gl.global.js"></script>
     <script src="../../../icons/lib/icons.global.js"></script>
   </head>
@@ -47,7 +40,6 @@
             type: 'FeatureCollection',
             features: [],
           };
-
           // Create lines between point pairs
           for (let i = 0; i < features.length; i += 2) {
             const [start, end] = [i, i + 1].map(

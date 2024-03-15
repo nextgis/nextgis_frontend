@@ -1,8 +1,7 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta charset="utf-8" />
-
     <title>Zoom to NGW layer feature</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
@@ -10,7 +9,6 @@
         margin: 0;
         padding: 0;
       }
-
       html,
       body,
       #wrapper,
@@ -18,41 +16,33 @@
         width: 100%;
         height: 100%;
       }
-
       #wrapper {
         display: flex;
       }
-
       #feature-list {
         min-width: 280px;
         overflow: auto;
       }
-
       #feature-list div {
         padding: 5px 10px;
       }
-
       .item-block {
         cursor: pointer;
       }
-
       .item-block:hover {
         background-color: lightgray;
       }
-
       .pagination-block-item {
         display: inline-block;
         cursor: pointer;
       }
     </style>
-    <!-- it's better not to do that in 2021, of course. Use a build system and ESM modules instead. -->
-    <!-- for examples it will pass -->
+    <!-- Note: For production environments, consider using a build system and ESM modules for better performance and maintainability.-->
+    <!-- This approach is suitable for demonstration purposes only. -->
     <script src="../../lib/ngw-maplibre-gl.global.js"></script>
     <script src="../../../ngw-connector/lib/ngw-connector.global.js"></script>
-
     <script src="../../../ngw-kit/lib/ngw-kit.global.js"></script>
   </head>
-
   <body>
     <div id="wrapper">
       <div id="feature-list">Loading features...</div>

@@ -1,88 +1,80 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Vector paint</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-    }
-
-    html,
-    body,
-    #map {
-      width: 100%;
-      height: 100%;
-    }
-  </style>
-
-  <script src="../../lib/ngw-leaflet.global.js"></script>
-</head>
-
-<body>
-  <div id='map'></div>
-  <script>
-    const properties = [
-      { id: 1 },
-      { id: 2, color: 'green', opacity: 0.5 },
-      { id: 3, color: 'red', stroke: true, fillOpacity: 0.5, fillColor: 'yellow' },
-      { id: 4, color: 'purple', strokeColor: '#c98b51', weight: 5 },
-      { id: 5, weight: 4, radius: 30, fill: false, strokeColor: 'rgba(10,150,100, 0.8)' }
-    ];
-
-    const layers = [
-      [
-        { type: 'Point', coordinates: [76.1, 25.5] },
-        { type: 'Point', coordinates: [76.3, 25.5] },
-        { type: 'Point', coordinates: [76.5, 25.5] },
-        { type: 'Point', coordinates: [76.7, 25.5] },
-        { type: 'Point', coordinates: [76.9, 25.5] }
-      ],
-      [
-        { type: 'LineString', coordinates: [[76.0, 25.4], [76.1, 25.3], [76.2, 25.4]] },
-        { type: 'LineString', coordinates: [[76.2, 25.3], [76.3, 25.4], [76.4, 25.3]] },
-        { type: 'LineString', coordinates: [[76.4, 25.4], [76.5, 25.3], [76.6, 25.4]] },
-        { type: 'LineString', coordinates: [[76.6, 25.3], [76.7, 25.4], [76.8, 25.3]] },
-        { type: 'LineString', coordinates: [[76.8, 25.4], [76.9, 25.3], [77.0, 25.4]] },
-      ],
-      [
-        { type: 'Polygon', coordinates: [[[76.0, 25.1], [76.1, 25.2], [76.2, 25.1], [76.0, 25.1]]] },
-        { type: 'Polygon', coordinates: [[[76.2, 25.2], [76.3, 25.1], [76.4, 25.2], [76.2, 25.2]]] },
-        { type: 'Polygon', coordinates: [[[76.4, 25.1], [76.5, 25.2], [76.6, 25.1], [76.4, 25.1]]] },
-        { type: 'Polygon', coordinates: [[[76.6, 25.2], [76.7, 25.1], [76.8, 25.2], [76.6, 25.2]]] },
-        { type: 'Polygon', coordinates: [[[76.8, 25.1], [76.9, 25.2], [77.0, 25.1], [76.8, 25.1]]] }
-      ]
-    ];
-
-    NgwMap.create({
-      target: 'map',
-      bounds: [76.0, 25.1, 77.0, 25.5]
-    }).then((ngwMap) => {
-
-      for (let fry = 0; fry < layers.length; fry++) {
-        const geometries = layers[fry];
-        const features = [];
-        for (let f = 0; f < geometries.length; f++) {
-          features.push({
-            type: 'Feature',
-            properties: properties[f],
-            geometry: geometries[f]
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Vector paint</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      html,
+      body,
+      #map {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+    <script src="../../lib/ngw-leaflet.global.js"></script>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      const properties = [
+        { id: 1 },
+        { id: 2, color: 'green', opacity: 0.5 },
+        { id: 3, color: 'red', stroke: true, fillOpacity: 0.5, fillColor: 'yellow' },
+        { id: 4, color: 'purple', strokeColor: '#c98b51', weight: 5 },
+        { id: 5, weight: 4, radius: 30, fill: false, strokeColor: 'rgba(10,150,100, 0.8)' }
+      ];
+      const layers = [
+        [
+          { type: 'Point', coordinates: [76.1, 25.5] },
+          { type: 'Point', coordinates: [76.3, 25.5] },
+          { type: 'Point', coordinates: [76.5, 25.5] },
+          { type: 'Point', coordinates: [76.7, 25.5] },
+          { type: 'Point', coordinates: [76.9, 25.5] }
+        ],
+        [
+          { type: 'LineString', coordinates: [[76.0, 25.4], [76.1, 25.3], [76.2, 25.4]] },
+          { type: 'LineString', coordinates: [[76.2, 25.3], [76.3, 25.4], [76.4, 25.3]] },
+          { type: 'LineString', coordinates: [[76.4, 25.4], [76.5, 25.3], [76.6, 25.4]] },
+          { type: 'LineString', coordinates: [[76.6, 25.3], [76.7, 25.4], [76.8, 25.3]] },
+          { type: 'LineString', coordinates: [[76.8, 25.4], [76.9, 25.3], [77.0, 25.4]] },
+        ],
+        [
+          { type: 'Polygon', coordinates: [[[76.0, 25.1], [76.1, 25.2], [76.2, 25.1], [76.0, 25.1]]] },
+          { type: 'Polygon', coordinates: [[[76.2, 25.2], [76.3, 25.1], [76.4, 25.2], [76.2, 25.2]]] },
+          { type: 'Polygon', coordinates: [[[76.4, 25.1], [76.5, 25.2], [76.6, 25.1], [76.4, 25.1]]] },
+          { type: 'Polygon', coordinates: [[[76.6, 25.2], [76.7, 25.1], [76.8, 25.2], [76.6, 25.2]]] },
+          { type: 'Polygon', coordinates: [[[76.8, 25.1], [76.9, 25.2], [77.0, 25.1], [76.8, 25.1]]] }
+        ]
+      ];
+      NgwMap.create({
+        target: 'map',
+        bounds: [76.0, 25.1, 77.0, 25.5],
+      }).then((ngwMap) => {
+        for (let fry = 0; fry < layers.length; fry++) {
+          const geometries = layers[fry];
+          const features = [];
+          for (let f = 0; f < geometries.length; f++) {
+            features.push({
+              type: 'Feature',
+              properties: properties[f],
+              geometry: geometries[f],
+            });
+          }
+          ngwMap.addGeoJsonLayer({
+            data: {
+              type: 'FeatureCollection',
+              features: features,
+            },
+            paint: (f) => {
+              return f.properties;
+            },
           });
         }
-        ngwMap.addGeoJsonLayer({
-          data: {
-            type: 'FeatureCollection',
-            features: features
-          },
-          paint: (f) => { return f.properties }
-        });
-      }
-    });
-  </script>
-</body>
-
+      });
+    </script>
+  </body>
 </html>

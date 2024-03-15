@@ -1,1 +1,9 @@
-{"name":"Expression paint with interpolate","description":"Use interpolate expressions to set paint", "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"]}
+{
+  "name": "Expression paint with interpolate",
+  "description": "Use interpolate expressions to set paint",
+  "ngwMaps": [
+    "ngw-leaflet",
+    "ngw-ol",
+    "ngw-maplibre-gl"
+  ]
+}

@@ -1,44 +1,32 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta charset="utf-8" />
-    
     <title>Ngw Viewer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-      * {
+      html, body, #map {
         margin: 0;
         padding: 0;
-      }
-
-      html,
-      body,
-      #wrap,
-      #map {
         width: 100%;
         height: 100%;
       }
-
       #wrap {
         display: flex;
       }
-
       #tree {
         width: 35%;
         min-width: 300px;
         overflow: auto;
       }
-
       .tree-container__item {
         padding-top: 0.3rem;
       }
-
       .tree-container__item-children {
         padding: 0;
         padding-top: 3px;
         padding-left: 15px;
       }
-
       .tree-container__item-btn {
         display: inline-block;
         width: 20px;
@@ -46,11 +34,9 @@
         cursor: pointer;
       }
     </style>
-
     <script src="../../lib/ngw-ol.global.js"></script>
     <script src="../../../ngw-kit/lib/ngw-kit.global.js"></script>
   </head>
-
   <body>
     <div id="wrap">
       <div id="tree"></div>
@@ -74,69 +60,69 @@
         osm: true,
       }).then((ngwMap) => {
         const connector = ngwMap.connector;
-        let cancelActivePreview = undefined;
+        let cancelActivePreview = null;
         updateTreeItems(tree, 0);
 
         function updateTreeItems(treeNode, resourceId) {
           const childBlock = document.createElement('div');
-          childBlock.innerHTML = 'loading...';
-          connector.getResourceChildren(resourceId).then((childItem) => {
-            childBlock.innerHTML = '';
-            for (const c of childItem) {
-              childBlock.appendChild(createTreeElement(c));
-            }
-          });
+          childBlock.textContent = 'loading...';
           treeNode.appendChild(childBlock);
+
+          connector.getResourceChildren(resourceId).then((childItem) => {
+            childBlock.textContent = '';
+            childItem.forEach((c) =>
+              childBlock.appendChild(createTreeElement(c)),
+            );
+          });
         }
 
         function createTreeElement(item) {
           const el = document.createElement('div');
           el.className = 'tree-container__item';
-          const groupToggler = document.createElement('span');
-          groupToggler.className = 'tree-container__item-btn';
+
+          // Group Toggler
+          const groupToggler = createToggler(item, el);
           el.appendChild(groupToggler);
+
+          // Resource Name
           const nameBlock = document.createElement('span');
-          nameBlock.innerHTML = item.resource.display_name;
+          nameBlock.textContent = item.resource.display_name;
           el.appendChild(nameBlock);
+
+          // Preview Button
+          if (allowedPreviewClsList.has(item.resource.cls)) {
+            const showBtn = document.createElement('span');
+            showBtn.className = 'tree-container__item-btn';
+            showBtn.textContent = '👁';
+            showBtn.addEventListener('click', () => resourcePreview(item));
+            el.insertBefore(showBtn, nameBlock);
+          }
+
+          return el;
+        }
+
+        function createToggler(item, parentElement) {
+          const toggler = document.createElement('span');
+          toggler.className = 'tree-container__item-btn';
+          toggler.innerHTML = '+';
 
           if (item.resource.children) {
             let isOpen = false;
-
             const childrenBlock = document.createElement('div');
             childrenBlock.className = 'tree-container__item-children';
-            el.appendChild(childrenBlock);
+            parentElement.appendChild(childrenBlock);
 
-            const updateIcon = () => {
-              groupToggler.innerHTML = isOpen ? '-' : '+';
-            };
-            updateIcon();
-
-            groupToggler.addEventListener('click', () => {
-              if (isOpen) {
-                childrenBlock.style.display = 'none';
-                isOpen = false;
-              } else {
-                if (childrenBlock.hasChildNodes()) {
-                  childrenBlock.style.display = 'block';
-                } else {
-                  updateTreeItems(childrenBlock, item.resource.id);
-                }
-                isOpen = true;
+            toggler.addEventListener('click', () => {
+              isOpen = !isOpen;
+              childrenBlock.style.display = isOpen ? 'block' : 'none';
+              if (isOpen && !childrenBlock.hasChildNodes()) {
+                updateTreeItems(childrenBlock, item.resource.id);
               }
-              updateIcon();
+              toggler.innerHTML = isOpen ? '-' : '+';
             });
           }
-          if (allowedPreviewClsList.indexOf(item.resource.cls) !== -1) {
-            const showBtn = document.createElement('span');
-            showBtn.className = 'tree-container__item-btn';
-            showBtn.innerHTML = '👁';
-            el.insertBefore(showBtn, nameBlock);
 
-            showBtn.addEventListener('click', () => {
-              resourcePreview(item);
-            });
-          }
-          return el;
+          return toggler;
         }
 
         function resourcePreview(item) {
@@ -147,11 +133,7 @@
             connector,
             resourceId: item.resource.id,
           }).then((bounds) => {
-            ngwMap.setView({
-              bounds,
-              maxBounds: bounds,
-            });
-
+            ngwMap.setView({ bounds, maxBounds: bounds });
             ngwMap.addNgwLayer({
               id: 'active-layer',
               resource: item.resource.id,

@@ -1,41 +1,31 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta charset="utf-8" />
-    
     <title>IP cameras map</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-      * {
+      html, body, #map {
         margin: 0;
         padding: 0;
-      }
-
-      html,
-      body,
-      #map {
         width: 100%;
         height: 100%;
       }
-
       .camera-panel {
         width: 250px;
         height: 250px;
         background: white;
       }
-
       .camera-title {
         position: absolute;
         color: white;
         z-index: 1;
       }
-
       .no-active-camera-block {
         line-height: 250px;
         text-align: center;
       }
     </style>
-
     <script src="../../../packages/ngw-leaflet/lib/ngw-leaflet.global.js"></script>
 
     <!-- Import Utils.degrees2Radian, Utils.meters2degrees and Utils.degrees2meters -->
@@ -102,7 +92,7 @@
               return cameraPanel;
             },
           },
-          { bar: true }
+          { bar: true },
         );
         // add control to the map
         ngwMap.addControl(cameraPanelControl, 'bottom-right');
@@ -134,15 +124,15 @@
           const props = feature.properties;
           const xy = Utils.degrees2meters.apply(
             this,
-            feature.geometry.coordinates
+            feature.geometry.coordinates,
           );
           const x = xy[0];
           const y = xy[1];
           const azimuth = Utils.degrees2Radian(
-            90 - (props.azimuth !== undefined ? props.azimuth : 90)
+            90 - (props.azimuth !== undefined ? props.azimuth : 90),
           );
           const angle = Utils.degrees2Radian(
-            props.angle !== undefined ? props.angle : 60
+            props.angle !== undefined ? props.angle : 60,
           );
           const focalLength =
             props.focalLength !== undefined ? props.focalLength : 300;
@@ -162,7 +152,7 @@
             ].map((x) => {
               return Utils.meters2degrees.apply(this, x);
             }),
-            [feature.geometry.coordinates]
+            [feature.geometry.coordinates],
           );
           return {
             type: 'Feature',

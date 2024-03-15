@@ -1,5 +1,0 @@
-{
-  "name": "Add layer from NextGIS Web",
-  "description": "Load image layer from NextGIS Web to the map",
-  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"]
-}

@@ -2,7 +2,6 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    
     <title>Select on hover</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
@@ -10,7 +9,6 @@
         margin: 0;
         padding: 0;
       }
-
       html,
       body,
       #wrapper,
@@ -19,31 +17,25 @@
         width: 100%;
         height: 100%;
       }
-
       #wrapper {
         display: flex;
       }
-
       #log {
         overflow: scroll;
         width: 400px;
         font-family: monospace;
       }
-
       #log :nth-child(-n + 3) {
         color: green;
       }
     </style>
-
     <script src="../../../packages/ngw-leaflet/lib/ngw-leaflet.global.js"></script>
   </head>
-
   <body>
     <div id="wrapper">
       <div id="map"></div>
       <div id="log"></div>
     </div>
-
     <script>
       const ID = 'layer-id';
       const logBlock = document.getElementById('log');

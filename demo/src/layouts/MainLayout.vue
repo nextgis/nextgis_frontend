@@ -125,18 +125,9 @@ onMounted(() => {
 
 <template>
   <q-layout>
-    <q-header
-      elevated
-      class="text-black"
-    >
+    <q-header elevated class="text-black">
       <q-toolbar>
-        <q-btn
-          flat
-          round
-          dense
-          @click="drawer = !drawer"
-          aria-label="Menu"
-        >
+        <q-btn flat round dense @click="drawer = !drawer" aria-label="Menu">
           <q-icon name="mdi-menu" />
         </q-btn>
         <LogoComponent />
@@ -153,11 +144,7 @@ onMounted(() => {
       </q-toolbar>
     </q-header>
 
-    <q-drawer
-      v-if="!isLoading"
-      v-model="drawer"
-      side="left"
-    >
+    <q-drawer v-if="!isLoading" v-model="drawer" side="left">
       <q-input
         dense
         standout
@@ -168,10 +155,7 @@ onMounted(() => {
         label="Search"
       >
         <template v-slot:append>
-          <q-icon
-            v-if="search === ''"
-            name="search"
-          />
+          <q-icon v-if="search === ''" name="search" />
           <q-icon
             v-else
             name="clear"
@@ -182,12 +166,12 @@ onMounted(() => {
       </q-input>
       <q-scroll-area style="width: 100%; height: calc(100% - 72px)">
         <q-tree
-          :selected="selected"
           v-model:expanded="expanded"
-          loading
-          :filter-method="filterMethod"
           :nodes="items"
+          :selected="selected"
           :filter="search"
+          :filter-method="filterMethod"
+          loading
           node-key="id"
           no-connectors
           @update:selected="handleSelected"

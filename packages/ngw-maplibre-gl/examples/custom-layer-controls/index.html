@@ -1,37 +1,31 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta charset="utf-8" />
-    
     <title>Custom layers control</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-      * {
+      html, body, #map {
         margin: 0;
         padding: 0;
-      }
-
-      html,
-      body,
-      #map {
         width: 100%;
         height: 100%;
       }
-
       .ngw-layers {
         background: white;
         padding: 5px;
       }
     </style>
-
     <script src="../../lib/ngw-maplibre-gl.global.js"></script>
   </head>
-
   <body>
     <div id="map"></div>
     <script>
+      // Define the names of the web map and base layer for easier reference
       const webMapName = 'webmap';
       const qmsBaseLayerName = 'qmsbasemap';
+
+      // Initialize the NextGIS web map
       const ngwMap = new NgwMap({
         baseUrl: 'https://demo.nextgis.com',
         target: 'map',
@@ -46,47 +40,47 @@
             position: 'top-right',
             html: 'B',
             title: 'Toggle base map',
-            onClick: function (a) {
+            onClick: function () {
               ngwMap.toggleLayer(qmsBaseLayerName);
             },
           },
         },
       });
+
+      // After map load, add custom controls
       ngwMap.onLoad().then(() => {
+        // Control to toggle DEM (Digital Elevation Model)
         const toggleHeatMapControl = ngwMap.createButtonControl({
           html: 'D',
           title: 'Toggle DEM',
           onClick: () => {
+            // Toggle visibility of the 'Land area' layer
             const ngwLayer = ngwMap.getLayer(webMapName);
-            const mapLayer = ngwLayer.layer.tree.getDescendants((x) => {
-              return x.item.display_name === 'Land area';
-            })[0];
+            const mapLayer = ngwLayer.layer.tree.getDescendants(
+              (x) => x.item.display_name === 'Land area',
+            )[0];
             mapLayer.properties.set(
               'visibility',
               !mapLayer.properties.get('visibility'),
             );
           },
         });
-
         ngwMap.addControl(toggleHeatMapControl, 'top-right');
 
-        // ngwMap.addControl('CONTROL', 'bottom-right', {control, options}) is same as:
-        // 1 const MyControl = ngwMap.createControl(control, options);
-        // 2 ngwMap.addControl(MyControl, 'bottom-right')
+        // Add a custom layer control to manage layer visibility
         ngwMap.addControl('CONTROL', 'bottom-right', {
           control: {
             onAdd: () => {
               const list = document.createElement('div');
               list.className = 'ngw-layers';
               const webmap = ngwMap.getLayer(webMapName);
-              // find all layer from ngw webmap tree
               webmap.layer.tree
                 .getDescendants()
                 .reverse()
                 .forEach((node) => {
                   if (node.item.item_type === 'layer') {
+                    // Create a checkbox for each layer
                     const layerElement = document.createElement('div');
-
                     const checkbox = document.createElement('input');
                     checkbox.id = 'layer-' + node.layer.id;
                     checkbox.checked = node.item.layer_enabled;
@@ -94,22 +88,21 @@
                     checkbox.addEventListener('click', () => {
                       node.properties.set('visibility', checkbox.checked);
                     });
-
                     const name = document.createElement('span');
                     name.innerHTML = node.item.display_name;
-
                     layerElement.appendChild(checkbox);
                     layerElement.appendChild(name);
                     list.appendChild(layerElement);
                   }
                 });
-              const visibility = webmap.layer.properties.property('visibility');
-              // listen any layer visibility change
-              visibility.emitter.on('change-tree', (data) => {
-                const itemId = data.item.layer.id;
-                const checkbox = list.querySelector('#layer-' + itemId);
-                checkbox.checked = data.value;
-              });
+              // Update checkboxes on visibility change
+              webmap.layer.properties
+                .property('visibility')
+                .emitter.on('change-tree', (data) => {
+                  const itemId = data.item.layer.id;
+                  const checkbox = list.querySelector('#layer-' + itemId);
+                  checkbox.checked = data.value;
+                });
               return list;
             },
           },
