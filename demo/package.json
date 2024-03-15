@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/demo-app",
-  "version": "0.0.1",
+  "version": "2.0.0",
   "description": "Demo site for NextGIS Frontend libraries",
   "productName": "demo-app",
   "author": "NextGIS <info@nextgis.com>",
