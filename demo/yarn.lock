@@ -502,7 +502,7 @@ __metadata:
     eslint-config-prettier: ^9.0.0
     eslint-plugin-import: ^2.29.1
     eslint-plugin-vue: ^9.0.0
-    highlight.js: ~11.8.0
+    highlight.js: 11.8.0
     marked: ^12.0.1
     marked-highlight: 2.0.6
     prettier: ^3.2.5
@@ -3480,17 +3480,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"highlight.js@npm:11.8.0":
+  version: 11.8.0
+  resolution: "highlight.js@npm:11.8.0"
+  checksum: d2578a57aee7315946ff19379053fd0a28b127baabf7617ab1d28d62cdc4eaf3d75053569cb8479a5afdc7a68f1ba9a6c1d612d8ae399b4b9aa43093b4fb6831
+  languageName: node
+  linkType: hard
+
 "highlight.js@npm:^11.8.0":
   version: 11.9.0
   resolution: "highlight.js@npm:11.9.0"
   checksum: 4043d31c5de9d27d13387d9a9e5e1939557254b7b85f0fab85d9cae0e420e131a3456ebf6148552020a1d8a216d671d583f2433d6c4de6179b8a66487a8325cb
-  languageName: node
-  linkType: hard
-
-"highlight.js@npm:~11.8.0":
-  version: 11.8.0
-  resolution: "highlight.js@npm:11.8.0"
-  checksum: d2578a57aee7315946ff19379053fd0a28b127baabf7617ab1d28d62cdc4eaf3d75053569cb8479a5afdc7a68f1ba9a6c1d612d8ae399b4b9aa43093b4fb6831
   languageName: node
   linkType: hard
 
