@@ -15,7 +15,7 @@
     "start": "yarn gen:examples && quasar dev",
     "build": "yarn gen:examples && quasar build",
     "serve": "quasar serve --history",
-    "docker": "yarn gen:examples && docmypkg -r harbor.nextgis.net -n frontend/code -l"
+    "docker": "yarn gen:examples && docmypkg -r harbor.nextgis.net -n frontend/code -l -d ./docker"
   },
   "dependencies": {
     "@quasar/extras": "^1.16.4",
