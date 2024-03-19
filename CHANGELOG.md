@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1](https://github.com/nextgis/nextgis_frontend/compare/v2.0.0...v2.0.1) (2024-03-19)
+
+
+### Bug Fixes
+
+* **react-ngw-map:** map control duplication ([c97e650](https://github.com/nextgis/nextgis_frontend/commit/c97e650f7435e4535c1ef09232a1f5695dd855c3))
+
+
+
+
+
 # [2.0.0](https://github.com/nextgis/nextgis_frontend/compare/v2.0.0-alpha.2...v2.0.0) (2024-03-19)
 
 
