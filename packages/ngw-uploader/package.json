@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/ngw-uploader",
-  "version": "2.0.0-alpha.2",
+  "version": "2.0.0",
   "_priority": 13,
   "description": "",
   "main": "index.js",
@@ -9,11 +9,11 @@
   "jsdelivr": "lib/ngw-uploader.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/cancelable-promise": "^2.0.0-alpha.2",
-    "@nextgis/dialog": "^2.0.0-alpha.2",
-    "@nextgis/expression": "^2.0.0-alpha.2",
-    "@nextgis/ngw-connector": "^2.0.0-alpha.2",
-    "@nextgis/utils": "^2.0.0-alpha.2",
+    "@nextgis/cancelable-promise": "^2.0.0",
+    "@nextgis/dialog": "^2.0.0",
+    "@nextgis/expression": "^2.0.0",
+    "@nextgis/ngw-connector": "^2.0.0",
+    "@nextgis/utils": "^2.0.0",
     "@types/color": "^3.0.2",
     "@types/events": "^3.0.0",
     "color": "^4.1.0",
@@ -21,7 +21,7 @@
     "tus-js-client": "^2.3.0"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "^2.0.0-alpha.2"
+    "@nextgis/build-tools": "^2.0.0"
   },
   "buildOptions": {
     "name": "NgwUploader",

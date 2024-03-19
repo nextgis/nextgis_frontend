@@ -1,20 +1,20 @@
 {
   "name": "@nextgis/react-ngw-map",
-  "version": "2.0.0-alpha.2",
+  "version": "2.0.0",
   "description": "Development tools",
   "main": "index.js",
   "module": "lib/react-ngw-map.esm-bundler.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/ngw-map": "^2.0.0-alpha.2",
-    "@nextgis/utils": "^2.0.0-alpha.2"
+    "@nextgis/ngw-map": "^2.0.0",
+    "@nextgis/utils": "^2.0.0"
   },
   "peerDependencies": {
     "react": "*",
     "react-dom": "*"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "^2.0.0-alpha.2",
+    "@nextgis/build-tools": "^2.0.0",
     "@types/react": "*",
     "@types/react-dom": "*"
   },
