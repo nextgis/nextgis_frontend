@@ -1,12 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta charset="utf-8" />
-    
     <title>Example</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-
     <script src="../../lib/ngw-connector.global.js"></script>
     <style>
       .mb {
@@ -19,10 +16,10 @@
   <body>
     <script>
       var connector = new NgwConnector({
-        baseUrl: "https://demo.nextgis.com",
+        baseUrl: 'https://demo.nextgis.com',
       });
       connector.connect().then(() => {
-        const request = connector.get("resource.collection", null, {
+        const request = connector.get('resource.collection', null, {
           id: 4005,
         });
         request.cancel();

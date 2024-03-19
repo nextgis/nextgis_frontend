@@ -1,63 +1,63 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="../../lib/ngw-connector.global.js"></script>
+    <style>
+      .mb {
+        display: block;
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <table id="table"></table>
 
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Example</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-  <script src="../../lib/ngw-connector.global.js"></script>
-  <style>
-    .mb {
-      display: block;
-      margin: 10px 0;
-    }
-  </style>
-</head>
-
-<body>
-
-  <table id="table"></table>
-
-  <script>
-    var table = document.getElementById('table');
-    var connector = new NgwConnector({ baseUrl: 'https://demo.nextgis.com' });
-    connector.get('resource.item', null, { id: 3988 }).then(function (item) {
-      var fields = item.feature_layer.fields;
-      var str = '<caption>' + item.resource.display_name + '</caption>';
-      str += '<thead><tr>';
-      fields.forEach(function (field) {
-        if (field.grid_visibility) {
-          str += '<th>' + field.display_name + '</th>';
-        }
+    <script>
+      const keyname = 'eat-here';
+      const table = document.getElementById('table');
+      const connector = new NgwConnector({
+        baseUrl: 'https://demo.nextgis.com',
       });
-      str += '</tr></thead>';
-
-      connector.get('feature_layer.feature.collection', null, {
-        id: 3988,
-        limit: 10,
-        fields: fields.map(function (x) { return x.keyname }).join(',')
-      }).then(function (store) {
-
-        str += '<tbody>';
-        store.forEach(function (row) {
-          str += '<tr>';
-          fields.forEach(function (field) {
+      connector.getResourceId('eat-here').then((id) => {
+        connector.get('resource.item', null, { id }).then((item) => {
+          const fields = item.feature_layer.fields;
+          let str = '<caption>' + item.resource.display_name + '</caption>';
+          str += '<thead><tr>';
+          fields.forEach((field) => {
             if (field.grid_visibility) {
-              str += '<td>' + row.fields[field.keyname] + '</td>';
+              str += '<th>' + field.display_name + '</th>';
             }
-          })
-          str += '</tr>';
+          });
+          str += '</tr></thead>';
+          connector
+            .get('feature_layer.feature.collection', null, {
+              id,
+              limit: 10,
+              fields: fields
+                .map((x) => {
+                  return x.keyname;
+                })
+                .join(','),
+            })
+            .then((store) => {
+              str += '<tbody>';
+              store.forEach((row) => {
+                str += '<tr>';
+                fields.forEach((field) => {
+                  if (field.grid_visibility) {
+                    str += '<td>' + row.fields[field.keyname] + '</td>';
+                  }
+                });
+                str += '</tr>';
+              });
+              str += '</tbody>';
+              table.innerHTML = str;
+            });
         });
-        str += '</tbody>';
-        table.innerHTML = str;
       });
-    });
-
-  </script>
-
-</body>
-
+    </script>
+  </body>
 </html>

@@ -1,20 +1,12 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta charset="utf-8" />
-    
+
     <title>Custom Input | Ngw Uploader Example</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <script
-      type="text/javascript"
-      src="../../../ngw-leaflet/lib/ngw-leaflet.global.js"
-    ></script>
-
-    <script
-      type="text/javascript"
-      src="../../lib/ngw-uploader.global.js"
-    ></script>
+    <script src="../../../ngw-leaflet/lib/ngw-leaflet.global.js"></script>
+    <script src="../../lib/ngw-uploader.global.js"></script>
     <style>
       * {
         margin: 0;
@@ -28,7 +20,7 @@
         height: 100%;
       }
 
-      #control-element {
+      .control-element {
         background: rgba(255, 255, 255, 0.8);
         padding: 10px;
       }
@@ -36,28 +28,29 @@
   </head>
 
   <body>
-    <div id="control-element">
-      <p>
-        Select GEOTIFF file (<a
-          href="https://demo.nextgis.com/resource/4004/export"
-          target="_blank"
-          >example</a
-        >)
-      </p>
-      <input id="resource-input" type="file" />
-      <div id="uploader"></div>
-      <p id="status"></p>
-    </div>
+    <template id="control-element">
+      <div class="control-element">
+        <p>
+          Select GEOTIFF file (<a
+            href="https://demo.nextgis.com/resource/4004/export"
+            target="_blank"
+            >example</a
+          >)
+        </p>
+        <input id="resource-input" type="file" />
+        <div id="uploader"></div>
+        <p id="status"></p>
+      </div>
+    </template>
     <div id="map"></div>
     <script>
-      const uploader = document.getElementById('uploader');
-      const statusUpload = document.getElementById('status');
-      const input = document.getElementById('resource-input');
+      const template = document.getElementById('control-element');
+      const element = document.importNode(template.content, true);
+
+      const uploader = element.querySelector('#uploader');
+      const statusUpload = element.querySelector('#status');
+      const input = element.querySelector('#resource-input');
       const baseUrl = 'https://sandbox.nextgis.com';
-
-      const element = document.getElementById('control-element');
-      element.parentNode.removeChild(element);
-
       const ngwUploader = new NgwUploader({
         baseUrl: baseUrl,
       });

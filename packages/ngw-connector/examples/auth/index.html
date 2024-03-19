@@ -1,49 +1,49 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="../../lib/ngw-connector.global.js"></script>
+  </head>
+  <body>
+    <p>Login status:</p>
+    <div id="login-status">loading...</div>
+    <p>Result:</p>
+    <div id="results">loading...</div>
 
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Example</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-  <script src="../../lib/ngw-connector.global.js"></script>
-</head>
-
-<body>
-  <p>Login status:</p>
-  <div id="login-status">loading...</div>
-  <p>Result:</p>
-  <div id="results">loading...</div>
-
-  <script>
-    const loginStatusElement = document.getElementById('login-status');
-    const resultElement = document.getElementById('results');
-    const appendResponse = function (toElement, resp) {
-      toElement.innerHTML = '';
-      toElement.appendChild(document.createElement('pre')).innerHTML = JSON.stringify(resp, null, 2);
-    }
-    const connector = new NgwConnector({
-      baseUrl: 'https://demo.nextgis.com',
-      auth: {
-        login: 'ngf_test',
-        password: 'ngf_test'
-      }
-    });
-    connector.get('resource.item', null, {
-      id: 4011
-    }).then(function (data) {
-      appendResponse(resultElement, data)
-    });
-    connector.emitter.on('login', function(data) {
-      appendResponse(loginStatusElement, data);
-    });
-    connector.emitter.on('error', function(data) {
-      appendResponse(resultElement, data);
-    });
-  </script>
-
-</body>
-
+    <script>
+      const loginStatusElement = document.getElementById('login-status');
+      const resultElement = document.getElementById('results');
+      const appendResponse = (toElement, resp) => {
+        toElement.innerHTML = '';
+        toElement.appendChild(document.createElement('pre')).innerHTML =
+          JSON.stringify(resp, null, 2);
+      };
+      const connector = new NgwConnector({
+        baseUrl: 'https://demo.nextgis.com',
+        auth: {
+          login: 'ngf_test',
+          password: 'ngf_test',
+        },
+      });
+      connector
+        .get('resource.item', null, {
+          id: 5248,
+        })
+        .then((data) => {
+          appendResponse(resultElement, data);
+        })
+        .catch((error) => {
+          appendResponse(resultElement, error);
+        });
+      connector.emitter.on('login', (data) => {
+        appendResponse(loginStatusElement, data);
+      });
+      connector.emitter.on('login:error', (data) => {
+        appendResponse(loginStatusElement, data);
+      });
+    </script>
+  </body>
 </html>

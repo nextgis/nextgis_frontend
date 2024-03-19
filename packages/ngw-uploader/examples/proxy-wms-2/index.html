@@ -1,21 +1,14 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta charset="utf-8" />
-    
     <title>Ngw Uploader Example</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <script
-      type="text/javascript"
-      src="../../lib/ngw-uploader.global.js"
-    ></script>
-
+    <script src="../../lib/ngw-uploader.global.js"></script>
     <style>
       #connect-wms {
         display: block;
       }
-
       #wms-url {
         width: 550px;
         margin: 1rem 0;
@@ -92,6 +85,8 @@
         },
       ];
 
+      const baseUrl = 'https://sandbox.nextgis.com';
+
       const wmsUrlsToConnect = document.getElementById('wms-urls-to-connect');
       const button = document.getElementById('connect-wms');
       const resultBlock = document.getElementById('result-block');
@@ -103,11 +98,16 @@
       const createWmsLayersBtn = document.getElementById('create-wms-layers');
 
       const ngwUploader = new NgwUploader({
-        baseUrl: 'https://sandbox.nextgis.com',
+        baseUrl,
       });
 
       ngwUploader.emitter.on('status:change', (evt) => {
-        statusUpload.innerHTML += '<li>' + evt.message + '</li>';
+        const li = document.createElement('li');
+        statusUpload.appendChild(li);
+        li.innerHTML = evt.message;
+        if (evt.data.id !== undefined) {
+          li.innerHTML += `&nbsp<a href="${baseUrl}/resource/${evt.data.id}" target="_blank">Open</a>`;
+        }
       });
 
       for (let fry = 0; fry < configs.length; fry++) {
@@ -138,11 +138,11 @@
             connectionPromises.push(connectionQuery);
           }
 
-          Promise.all(connectionPromises).then(onWmsConectionCreated);
+          Promise.all(connectionPromises).then(onWmsConnectionCreated);
         });
       };
 
-      function createConectLayerPromise(wmsData, id, title, vendorParams) {
+      function createConnectLayerPromise(wmsData, id, title, vendorParams) {
         return ngwUploader
           .createWmsConnectedLayer({
             id: wmsData.resource.id,
@@ -157,7 +157,7 @@
           });
       }
 
-      function onWmsConectionCreated(newWmsConnection) {
+      function onWmsConnectionCreated(newWmsConnection) {
         // update DOM, show list of conected WMS resources
         resultBlock.style.display = 'block';
         wmsConnectBlock.style.display = 'none';
@@ -167,7 +167,7 @@
           JSON.stringify(newWmsConnection, null, 2);
 
         createWmsLayersBtn.onclick = () => {
-          const conectLayerPromises = [];
+          const connectLayerPromises = [];
           for (let fry = 0; fry < newWmsConnection.length; fry++) {
             const wmsData = newWmsConnection[fry];
             const layers = wmsData.wmsclient_connection.capcache.layers;
@@ -179,8 +179,8 @@
               });
               if (exist) {
                 // Create conection with updating WMS parameters from config
-                conectLayerPromises.push(
-                  createConectLayerPromise(
+                connectLayerPromises.push(
+                  createConnectLayerPromise(
                     wmsData,
                     exist.id,
                     proxyLayer.name,
@@ -191,10 +191,10 @@
             }
           }
 
-          if (conectLayerPromises.length) {
+          if (connectLayerPromises.length) {
             createWmsLayersBtn.disabled = true;
 
-            Promise.all(conectLayerPromises).then((values) => {
+            Promise.all(connectLayerPromises).then((values) => {
               const layers = [];
               for (let fry = 0; fry < values.length; fry++) {
                 const layer = values[fry];
