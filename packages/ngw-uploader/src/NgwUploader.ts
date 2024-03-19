@@ -69,7 +69,7 @@ export class NgwUploader {
       throw new Error('Connector is not set yet');
     }
     if (typeof nameOrOptions === 'string') {
-      opt.name = nameOrOptions;
+      opt.displayName = nameOrOptions;
     } else {
       opt = nameOrOptions;
     }
@@ -193,7 +193,7 @@ export class NgwUploader {
 
   @evented({
     status: 'create-wms',
-    template: 'wms creation for resource ID {id}',
+    template: 'wms creation for resource ID {parentId}',
   })
   createWms(
     opt: CreateWmsOptions,
