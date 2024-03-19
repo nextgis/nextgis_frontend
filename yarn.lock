@@ -549,7 +549,7 @@ __metadata:
 
 "@nextgis/build-tools@file:../build-tools::locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter":
   version: 2.0.0
-  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=e60046&locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter"
+  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=2f2a40&locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter"
   dependencies:
     "@nextgis/eslint-config": ^2.0.0
     "@rollup/plugin-alias": ^5.1.0
@@ -576,13 +576,13 @@ __metadata:
     rollup-plugin-terser: ^7.0.2
     rollup-plugin-typescript2: ^0.36.0
     typescript: ~5.1
-  checksum: 6efe7b49704f2efc313923b09c05a38fa07d2a139c03e895b330c1ddf05a4dd4185882ada27ee804fd93442536bc4edbaa9e42cdb2a8356031f11a8555955faa
+  checksum: 1d40a463b1862be00648ae275efefdedc5d33d20fbe4f04ed8acee68b09bfc1070acd2a37d4bb6c0ed1f5924112e4b16dc825440200cd69d7f960c3b639b3850
   languageName: node
   linkType: hard
 
 "@nextgis/build-tools@file:../build-tools::locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium":
   version: 2.0.0
-  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=e60046&locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium"
+  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=2f2a40&locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium"
   dependencies:
     "@nextgis/eslint-config": ^2.0.0
     "@rollup/plugin-alias": ^5.1.0
@@ -609,7 +609,7 @@ __metadata:
     rollup-plugin-terser: ^7.0.2
     rollup-plugin-typescript2: ^0.36.0
     typescript: ~5.1
-  checksum: 6efe7b49704f2efc313923b09c05a38fa07d2a139c03e895b330c1ddf05a4dd4185882ada27ee804fd93442536bc4edbaa9e42cdb2a8356031f11a8555955faa
+  checksum: 1d40a463b1862be00648ae275efefdedc5d33d20fbe4f04ed8acee68b09bfc1070acd2a37d4bb6c0ed1f5924112e4b16dc825440200cd69d7f960c3b639b3850
   languageName: node
   linkType: hard
 
@@ -4838,12 +4838,12 @@ __metadata:
   linkType: hard
 
 "follow-redirects@npm:^1.15.4":
-  version: 1.15.5
-  resolution: "follow-redirects@npm:1.15.5"
+  version: 1.15.6
+  resolution: "follow-redirects@npm:1.15.6"
   peerDependenciesMeta:
     debug:
       optional: true
-  checksum: 5ca49b5ce6f44338cbfc3546823357e7a70813cecc9b7b768158a1d32c1e62e7407c944402a918ea8c38ae2e78266312d617dc68783fac502cbb55e1047b34ec
+  checksum: a62c378dfc8c00f60b9c80cab158ba54e99ba0239a5dd7c81245e5a5b39d10f0c35e249c3379eae719ff0285fff88c365dd446fab19dee771f1d76252df1bbf5
   languageName: node
   linkType: hard
 
@@ -10889,21 +10889,21 @@ __metadata:
 
 "typescript@patch:typescript@>=3 < 6#~builtin<compat/typescript>":
   version: 5.3.3
-  resolution: "typescript@patch:typescript@npm%3A5.3.3#~builtin<compat/typescript>::version=5.3.3&hash=85af82"
+  resolution: "typescript@patch:typescript@npm%3A5.3.3#~builtin<compat/typescript>::version=5.3.3&hash=e012d7"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: f61375590b3162599f0f0d5b8737877ac0a7bc52761dbb585d67e7b8753a3a4c42d9a554c4cc929f591ffcf3a2b0602f65ae3ce74714fd5652623a816862b610
+  checksum: 4e604a9e107ce0c23b16a2f8d79d0531d4d8fe9ebbb7a8c395c66998c39892f0e0a071ef0b0d4e66420a8ec2b8d6cfd9cdb29ba24f25b37cba072e9282376df9
   languageName: node
   linkType: hard
 
 "typescript@patch:typescript@~5.1#~builtin<compat/typescript>":
   version: 5.1.6
-  resolution: "typescript@patch:typescript@npm%3A5.1.6#~builtin<compat/typescript>::version=5.1.6&hash=85af82"
+  resolution: "typescript@patch:typescript@npm%3A5.1.6#~builtin<compat/typescript>::version=5.1.6&hash=5da071"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 21e88b0a0c0226f9cb9fd25b9626fb05b4c0f3fddac521844a13e1f30beb8f14e90bd409a9ac43c812c5946d714d6e0dee12d5d02dfc1c562c5aacfa1f49b606
+  checksum: f53bfe97f7c8b2b6d23cf572750d4e7d1e0c5fff1c36d859d0ec84556a827b8785077bc27676bf7e71fae538e517c3ecc0f37e7f593be913d884805d931bc8be
   languageName: node
   linkType: hard
 
