@@ -179,7 +179,7 @@ function createConfig(format, output, plugins = []) {
   // so we still need replace plugin in some cases
   function resolveReplace() {
     /** @type {Record<string, string>} */
-    const replacements = {};
+    const replacements = packageOptions.tsbuild ? resolveDefine() : {};
 
     if (isBundlerESMBuild) {
       Object.assign(replacements, {
