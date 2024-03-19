@@ -20,7 +20,7 @@ export function ButtonControl<P extends MapControlProps = MapControlProps>(
     return context.ngwMap.createButtonControl(props);
   }, []);
 
-  const [instance, setInstance] = useState(createControl);
+  const [instance, setInstance] = useState<Promise<unknown>>();
   useNgwControl({ context, instance, position });
 
   useEffect(() => {
