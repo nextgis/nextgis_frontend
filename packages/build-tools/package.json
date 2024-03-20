@@ -1,10 +1,10 @@
 {
   "name": "@nextgis/build-tools",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "description": "Build system ",
   "type": "module",
   "dependencies": {
-    "@nextgis/eslint-config": "^2.0.0",
+    "@nextgis/eslint-config": "^2.0.2",
     "@rollup/plugin-alias": "^5.1.0",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-image": "^3.0.3",
