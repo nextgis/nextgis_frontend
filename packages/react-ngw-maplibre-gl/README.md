@@ -2,7 +2,15 @@
 
 ![size](https://img.shields.io/bundlephobia/minzip/@nextgis/react-ngw-maplibre-gl) ![version](https://img.shields.io/npm/v/@nextgis/react-ngw-maplibre-gl)
 
-Plugin to integrate NextGIS Web maps into react with [Maplibre GL JS](https://maplibre.org/maplibre-gl-js/docs/) adapter
+Plugin to integrate NextGIS Web maps into React with [Maplibre GL JS](https://maplibre.org/maplibre-gl-js/docs/) adapter
+
+## Installation
+
+```bash
+npm install maplibre-gl @nextgis/react-ngw-maplibre-gl
+```
+
+## Usage
 
 ```jsx
 import React from 'react';

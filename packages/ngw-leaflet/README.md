@@ -48,9 +48,7 @@ We recommend linking to a specific version number `/ngw-leaflet@[version]`
 ### In Node.js
 
 ```bash
-$ npm install --save-dev @nextgis/ngw-leaflet
-# or
-$ yarn add @nextgis/ngw-leaflet
+npm install leaflet @nextgis/ngw-leaflet
 ```
 
 ## Usage

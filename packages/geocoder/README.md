@@ -47,9 +47,7 @@ We recommend linking to a specific version number `/geocoder@[version]`
 ### In Node.js
 
 ```bash
-$ npm install --save-dev @nextgis/geocoder
-# or
-$ yarn add @nextgis/geocoder
+npm install @nextgis/geocoder
 ```
 
 ## Usage

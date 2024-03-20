@@ -8,9 +8,7 @@ Use Webmap with NPM installation method for building large scale applications. I
 
 ```bash
 # latest stable
-$ npm install --save-dev @nextgis/webmap
-# or
-$ yarn add @nextgis/webmap
+npm install @nextgis/webmap
 ```
 
 ```javascript

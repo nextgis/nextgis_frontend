@@ -11,12 +11,6 @@ Just run the command:
 npm i -D @nextgis/eslint-config
 ```
 
-Or
-
-```bash
-yarn add -D @nextgis/eslint-config
-```
-
 Then create the `.eslintrc` in the root of your project and add the following content:
 
 ```javascripton
@@ -33,12 +27,6 @@ Install eslint loader for webpack
 
 ```bash
 npm i -D eslint-loader
-```
-
-Or
-
-```bash
-yarn add -D eslint-loader
 ```
 
 In your webpack configuration

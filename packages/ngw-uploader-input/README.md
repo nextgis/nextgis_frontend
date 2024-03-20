@@ -43,7 +43,7 @@ NPM is the recommended installation method when building large scale application
 
 ```bash
 # latest stable
-$ npm install @nextgis/ngw-uploader-input
+npm install @nextgis/ngw-uploader-input
 ```
 
 ```javascript

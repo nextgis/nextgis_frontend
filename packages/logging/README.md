@@ -39,9 +39,7 @@ We recommend linking to a specific version number `/logging@[version]`
 ### In Node.js
 
 ```bash
-$ npm install --save-dev @nextgis/logging
-# or
-$ yarn add @nextgis/logging
+npm install @nextgis/logging
 ```
 
 ## Usage

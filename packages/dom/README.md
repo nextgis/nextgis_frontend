@@ -8,9 +8,7 @@ Collection of libraries for working with the DOM.
 
 ```bash
 # latest stable
-$ npm install --save-dev @nextgis/dom
-# or
-$ yarn add @nextgis/dom
+npm install @nextgis/dom
 ```
 
 ## Usage

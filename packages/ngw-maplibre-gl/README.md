@@ -19,8 +19,8 @@ Simply download and include with a script tag, `NgwMaplibreGL` and `NgwMap` will
 
 <div id='map'></div>
 <script>
-  // var ngwMap = new NgwMaplibreGL({
-  var ngwMap = new NgwMap({
+  // const ngwMap = new NgwMaplibreGL({
+  const ngwMap = new NgwMap({
     baseUrl: 'https://demo.nextgis.com',
     target: 'map',
     qmsId: 448,
@@ -48,9 +48,7 @@ We recommend linking to a specific version number `/ngw-maplibre-gl@[version]`
 ### In Node.js
 
 ```bash
-$ npm install --save-dev @nextgis/ngw-maplibre-gl
-# or
-$ yarn add @nextgis/ngw-maplibre-gl
+npm install maplibre-gl @nextgis/ngw-maplibre-gl
 ```
 
 ## Usage

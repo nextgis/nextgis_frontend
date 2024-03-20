@@ -8,9 +8,7 @@ Utilities to simplify interaction with tree data structures
 
 ```bash
 # latest stable
-$ npm install --save-dev @nextgis/tree
-# or
-$ yarn add @nextgis/tree
+npm install @nextgis/tree
 ```
 
 General form for each tree function

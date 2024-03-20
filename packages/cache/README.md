@@ -55,9 +55,7 @@ We recommend linking to a specific version number `/cache@[version]`
 ### In Node.js
 
 ```bash
-$ npm install --save-dev @nextgis/cache
-# or
-$ yarn add @nextgis/cache
+npm install @nextgis/cache
 ```
 
 ## Usage

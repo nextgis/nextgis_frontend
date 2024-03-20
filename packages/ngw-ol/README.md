@@ -19,8 +19,8 @@ Simply download and include with a script tag, `NgwOl` and `NgwMap` will be regi
 
 <div id='map'></div>
 <script>
-  // var ngwMap = new NgwMap({
-  var ngwMap = new NgwOl({
+  // const ngwMap = new NgwOl({
+  const ngwMap = new NgwMap({
     baseUrl: 'https://demo.nextgis.com',
     target: 'map',
     qmsId: 448,
@@ -48,9 +48,7 @@ We recommend linking to a specific version number `/ngw-ol@[version]`
 ### In Node.js
 
 ```bash
-$ npm install --save-dev @nextgis/ngw-ol
-# or
-$ yarn add @nextgis/ngw-ol
+npm install ol @nextgis/ngw-ol
 ```
 
 ## Usage

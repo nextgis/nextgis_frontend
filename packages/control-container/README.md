@@ -19,9 +19,7 @@ but `Cesium` and `Openlayers` do not have similar functionality.
 
 ```bash
 # latest stable
-$ npm install --save-dev @nextgis/control-container
-# or
-$ yarn add @nextgis/control-container
+npm install @nextgis/control-container
 ```
 
 ## Usage

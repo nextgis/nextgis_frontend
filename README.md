@@ -153,11 +153,7 @@ We recommend linking to a specific `[version]` number that you can update manual
 ### Node.js Integration
 
 ```bash
-npm i -S @nextgis/[package]
-```
-
-```bash
-yarn add @nextgis/[package]
+npm install @nextgis/[package]
 ```
 
 then import the [package] in the project modules

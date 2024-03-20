@@ -41,9 +41,9 @@ import type {
   GeometryObject,
 } from 'geojson';
 import type {
+  FillLayerSpecification,
   FilterSpecification,
   LayerSpecification,
-  Layout,
   LegacyFilterSpecification,
   LngLatLike,
   Map,
@@ -54,6 +54,7 @@ import type {
 } from 'maplibre-gl';
 
 type Layer = VectorLayerSpecification;
+type Layout = FillLayerSpecification['layout'];
 
 export const operationsAliases: { [key in Operations]: string } = {
   gt: '>',
@@ -403,7 +404,7 @@ export abstract class VectorAdapter<
     name: string,
     type: VectorAdapterLayerType,
     filter?: any[],
-    layout?: Layout<any>,
+    layout?: Layout,
   ): Promise<void> {
     let mType: MaplibreGLLayerType | undefined;
     if (this.options.paint) {
@@ -414,7 +415,7 @@ export abstract class VectorAdapter<
     if (mType === undefined) {
       mType = maplibreGLTypeAlias[type];
     }
-    layout = (layout || this.options.layout || {}) as Layout<any>;
+    layout = (layout || this.options.layout || {}) as Layout;
     const layerOpt: Layer = {
       id: name,
       type: mType,

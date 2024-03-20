@@ -10,9 +10,7 @@ Use OlMapAdapter with NPM installation method for building large scale applicati
 
 ```bash
 # latest stable
-$ npm install --save-dev ol @nextgis/ol-map-adapter
-# or
-$ yarn add ol @nextgis/ol-map-adapter
+npm install ol @nextgis/ol-map-adapter
 ```
 
 ```javascript

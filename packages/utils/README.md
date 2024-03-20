@@ -54,9 +54,7 @@ We recommend linking to a specific version number `/utils@[version]`
 
 ```bash
 # latest stable
-$ npm install --save-dev @nextgis/ngw-connector
-# or
-$ yarn add @nextgis/ngw-connector
+npm install @nextgis/ngw-connector
 ```
 
 ## Usage

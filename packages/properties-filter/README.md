@@ -8,9 +8,7 @@ An auxiliary library that allows filtering objects by its properties using JSON-
 
 ```bash
 # latest stable
-$ npm install --save-dev @nextgis/properties-filter
-# or
-$ yarn add @nextgis/properties-filter
+npm install @nextgis/properties-filter
 ```
 
 ## Usage

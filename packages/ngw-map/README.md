@@ -10,9 +10,7 @@ Use NgwMap with NPM installation method for building large scale applications. I
 
 ```bash
 # latest stable
-$ npm install --save-dev @nextgis/ngw-map
-# or
-$ yarn add @nextgis/ngw-map
+npm install @nextgis/ngw-map
 ```
 
 ```javascript

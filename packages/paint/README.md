@@ -8,9 +8,7 @@ An auxiliary library for working with the style of vector layers
 
 ```bash
 # latest stable
-$ npm install --save-dev @nextgis/paint
-# or
-$ yarn add @nextgis/paint
+npm install @nextgis/paint
 ```
 
 ## Usage

@@ -43,9 +43,7 @@ We recommend linking to a specific version number `/ngw-connector@[version]`
 ### In Node.js
 
 ```bash
-$ npm install --save-dev @nextgis/ngw-connector
-# or
-$ yarn add @nextgis/ngw-connector
+npm install @nextgis/ngw-connector
 ```
 
 ## Usage

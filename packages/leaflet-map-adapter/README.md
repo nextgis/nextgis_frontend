@@ -7,9 +7,7 @@ WebMap adapter to use [Leaflet](https://leafletjs.com/) GIS framework.
 ## Install
 
 ```bash
-$ npm install --save-dev leaflet @nextgis/leaflet-map-adapter
-# or
-$ yarn add leaflet @nextgis/leaflet-map-adapter
+npm install leaflet @nextgis/leaflet-map-adapter
 ```
 
 ## Usage

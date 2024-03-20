@@ -10,9 +10,7 @@ Use Item with NPM installation method for building large scale applications. It 
 
 ```bash
 # latest stable
-$ npm install --save-dev @nextgis/item
-# or
-$ yarn add @nextgis/item
+npm install @nextgis/item
 ```
 
 ```javascript

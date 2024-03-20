@@ -11,9 +11,7 @@ Make sure CORS is registered in the [NextGIS Web settings](https://docs.nextgis.
 ## Install
 
 ```bash
-$ npm install --save-dev @nextgis/ngw-kit
-# or
-$ yarn add @nextgis/ngw-kit
+npm install @nextgis/ngw-kit
 ```
 
 ## Usage example

@@ -15,9 +15,7 @@
 
 ```bash
 # latest stable
-$ npm install --save-dev @nextgis/expression
-# or
-$ yarn add @nextgis/expression
+npm install @nextgis/expression
 ```
 
 ## Usage

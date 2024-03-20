@@ -44,9 +44,7 @@ We recommend linking to a specific version number `/progress@[version]`
 ### In Node.js
 
 ```bash
-$ npm install --save-dev @nextgis/progress
-# or
-$ yarn add @nextgis/progress
+npm install @nextgis/progress
 ```
 
 ## Usage

@@ -2,7 +2,15 @@
 
 ![size](https://img.shields.io/bundlephobia/minzip/@nextgis/react-ngw-leaflet) ![version](https://img.shields.io/npm/v/@nextgis/react-ngw-leaflet)
 
-Plugin to integrate NGW maps into react with leaflet adapter
+Plugin to integrate NGW maps into React with leaflet adapter
+
+## Installation
+
+```bash
+npm install leaflet @nextgis/react-ngw-leaflet
+```
+
+## Usage
 
 ```jsx
 import React from 'react';

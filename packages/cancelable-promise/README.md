@@ -43,9 +43,7 @@ We recommend linking to a specific version number `/cancelable-promise@[version]
 ### In Node.js
 
 ```bash
-$ npm install --save-dev @nextgis/cancelable-promise
-# or
-$ yarn add @nextgis/cancelable-promise
+npm install @nextgis/cancelable-promise
 ```
 
 ## Usage

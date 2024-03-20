@@ -47,9 +47,7 @@ We recommend linking to a specific version number `/area@[version]`
 ### In Node.js
 
 ```bash
-$ npm install --save-dev @nextgis/area
-# or
-$ yarn add @nextgis/area
+npm install @nextgis/area
 ```
 
 ## Usage

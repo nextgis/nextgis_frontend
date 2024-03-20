@@ -2,7 +2,15 @@
 
 ![size](https://img.shields.io/bundlephobia/minzip/@nextgis/react-ngw-ol) ![version](https://img.shields.io/npm/v/@nextgis/react-ngw-ol)
 
-Plugin to integrate NGW maps into react with OpenLayers adapter
+Plugin to integrate NGW maps into React with OpenLayers adapter
+
+## Installation
+
+```bash
+npm install ol @nextgis/react-ngw-ol
+```
+
+## Usage
 
 ```jsx
 import React from 'react';

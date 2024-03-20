@@ -38,7 +38,7 @@ NPM is the recommended installation method when building large scale application
 
 ```bash
 # latest stable
-$ npm install @nextgis/dialog
+npm install @nextgis/dialog
 ```
 
 ```javascript

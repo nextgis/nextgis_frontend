@@ -10,9 +10,7 @@ Use MaplibreGLMapAdapter with NPM installation method for building large scale a
 
 ```bash
 # latest stable
-$ npm install --save-dev maplibre-gl @nextgis/maplibre-gl-map-adapter
-# or
-$ yarn add maplibre-gl @nextgis/maplibre-gl-map-adapter
+npm install maplibre-gl @nextgis/maplibre-gl-map-adapter
 ```
 
 ```javascript

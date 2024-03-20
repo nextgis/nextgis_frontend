@@ -8,9 +8,7 @@ Use OlMapAdapter with NPM installation method for building large scale applicati
 
 ```bash
 # latest stable
-$ npm install --save-dev @nextgis/cesium-map-adapter
-# or
-$ yarn add @nextgis/cesium-map-adapter
+npm install @nextgis/cesium-map-adapter
 ```
 
 ```javascript
