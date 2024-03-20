@@ -9,7 +9,7 @@
   "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/utils": "^2.0.0",
-    "@types/geojson": "^7946.0.8"
+    "@types/geojson": "^7946.0.14"
   },
   "devDependencies": {
     "@nextgis/build-tools": "^2.0.0"

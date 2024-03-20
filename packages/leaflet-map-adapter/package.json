@@ -13,16 +13,17 @@
     "@nextgis/utils": "^2.0.0",
     "@nextgis/webmap": "^2.0.0",
     "@types/events": "^3.0.0",
-    "@types/geojson": "^7946.0.8",
+    "@types/geojson": "^7946.0.14",
     "@types/leaflet": "^1.7.5",
     "events": "*",
     "leaflet.wms": "*"
   },
   "peerDependencies": {
-    "leaflet": ">=1.x"
+    "leaflet": ">=1.5.0"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "^2.0.0"
+    "@nextgis/build-tools": "^2.0.0",
+    "leaflet": "1.7.1"
   },
   "buildOptions": {
     "name": "LeafletMapAdapter",

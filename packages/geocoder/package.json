@@ -13,7 +13,7 @@
     "@nextgis/ngw-kit": "^2.0.0",
     "@nextgis/utils": "^2.0.0",
     "@types/events": "^3.0.0",
-    "@types/geojson": "^7946.0.8",
+    "@types/geojson": "^7946.0.14",
     "events": "*"
   },
   "devDependencies": {

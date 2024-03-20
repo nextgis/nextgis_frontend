@@ -15,6 +15,7 @@
     "@nextgis/properties-filter": "^2.0.0",
     "@nextgis/webmap": "^2.0.0",
     "@types/events": "^3.0.0",
+    "@types/geojson": "^7946.0.14",
     "@types/polylabel": "^1.0.5",
     "events": "*",
     "polylabel": "^1.1.0"
@@ -23,7 +24,8 @@
     "ol": ">=6.0.0"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "^2.0.0"
+    "@nextgis/build-tools": "^2.0.0",
+    "ol": "^9.0.0"
   },
   "buildOptions": {
     "name": "OlMapAdapter",
