@@ -15,8 +15,7 @@
     "events": "*"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "^2.0.2",
-    "ol": "^9.0.0"
+    "@nextgis/build-tools": "^2.0.2"
   },
   "buildOptions": {
     "name": "NgwOl",
