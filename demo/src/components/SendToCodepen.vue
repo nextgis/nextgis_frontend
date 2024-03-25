@@ -98,35 +98,16 @@ const value = computed(() => {
 </script>
 
 <template>
-  <form
-    action="https://codepen.io/pen/define"
-    method="POST"
-    target="_blank"
-  >
-    <input
-      type="hidden"
-      name="data"
-      :value="value"
-    />
+  <form action="https://codepen.io/pen/define" method="POST" target="_blank">
+    <input type="hidden" name="data" :value="value" />
     <q-btn
       type="submit"
       flat
       round
       icon="mdi-codepen"
-      class="codepen-mover-button"
-      aria-label="Create New Pen with Prefilled Data"
+      title="Edit in Codepen"
     />
   </form>
 </template>
 
-<style>
-.codepen-mover-button:hover {
-  opacity: 1;
-}
-.codepen-mover-button {
-  position: absolute;
-  right: 0;
-  margin: 10px 30px;
-  opacity: 0.6;
-}
-</style>
+<style></style>

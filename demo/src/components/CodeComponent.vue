@@ -4,6 +4,7 @@ import { computed } from 'vue';
 
 const props = defineProps({
   modelValue: { type: String, required: true },
+  fontSize: { type: String, default: '14px' },
 });
 
 const emit = defineEmits(['update:modelValue']);
@@ -23,7 +24,7 @@ const html = computed({
     v-model="html"
     line-nums
     :header="false"
-    font-size="14px"
+    :font-size="fontSize"
     theme="github"
     width="100%"
   ></CodeEditor>
