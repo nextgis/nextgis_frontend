@@ -41,4 +41,22 @@ export class TileAdapter
       }
     }
   }
+
+  updateLayer(): void {
+    if (this.layer) {
+      // @ts-ignore read private property
+      const currentUrl = this.layer._url;
+      const timestamp = new Date().getTime();
+
+      const separator = currentUrl.includes('?') ? '&' : '?';
+
+      const newUrl =
+        currentUrl.replace(/(\?|&)timestamp=\d*/g, '') +
+        separator +
+        `timestamp=${timestamp}`;
+
+      this.layer.setUrl(newUrl);
+      this.layer.redraw();
+    }
+  }
 }
