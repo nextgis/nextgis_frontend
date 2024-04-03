@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/progress",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "Tracking the progress of asynchronous operations",
   "main": "index.js",
   "module": "lib/progress.esm-bundler.js",

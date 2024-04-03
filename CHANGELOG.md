@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/nextgis/nextgis_frontend/compare/v2.0.3...v2.1.0) (2024-04-03)
+
+
+### Bug Fixes
+
+* **leaflet-map-adapter:** min zoom behavior ([c02c30e](https://github.com/nextgis/nextgis_frontend/commit/c02c30ec7cb3fe37683544282d1ca78610a5cf15))
+* **leaflet-map-adapter:** minZoom behavior ([184dee7](https://github.com/nextgis/nextgis_frontend/commit/184dee7040298dae34fcbdb9f129daef0c0f9561))
+* **maplibre-gl-map-adapter:** getZoom method for zero level ([944428d](https://github.com/nextgis/nextgis_frontend/commit/944428d2d74f37636ad48d50096163dfd1ef1b79))
+* **webmap:** set zoom with bounds on init ([f97e5c4](https://github.com/nextgis/nextgis_frontend/commit/f97e5c447d561da116510a21744a47933569c1b2))
+
+
+### Features
+
+* **leaflet-map-adapter:** implement update tileLayer method ([0889a2e](https://github.com/nextgis/nextgis_frontend/commit/0889a2e6d134da2621c999e3fc6b7288379f786a))
+
+
+
+
+
 ## [2.0.3](https://github.com/nextgis/nextgis_frontend/compare/v2.0.2...v2.0.3) (2024-03-25)
 
 **Note:** Version bump only for package root

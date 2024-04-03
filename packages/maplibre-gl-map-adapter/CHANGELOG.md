@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/nextgis/nextgis_frontend/compare/v2.0.3...v2.1.0) (2024-04-03)
+
+
+### Bug Fixes
+
+* **maplibre-gl-map-adapter:** getZoom method for zero level ([944428d](https://github.com/nextgis/nextgis_frontend/commit/944428d2d74f37636ad48d50096163dfd1ef1b79))
+
+
+
+
+
 ## [2.0.2](https://github.com/nextgis/nextgis_frontend/compare/v2.0.1...v2.0.2) (2024-03-20)
 
 

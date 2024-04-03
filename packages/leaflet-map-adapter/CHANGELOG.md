@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/nextgis/nextgis_frontend/compare/v2.0.3...v2.1.0) (2024-04-03)
+
+
+### Bug Fixes
+
+* **leaflet-map-adapter:** min zoom behavior ([c02c30e](https://github.com/nextgis/nextgis_frontend/commit/c02c30ec7cb3fe37683544282d1ca78610a5cf15))
+* **leaflet-map-adapter:** minZoom behavior ([184dee7](https://github.com/nextgis/nextgis_frontend/commit/184dee7040298dae34fcbdb9f129daef0c0f9561))
+
+
+### Features
+
+* **leaflet-map-adapter:** implement update tileLayer method ([0889a2e](https://github.com/nextgis/nextgis_frontend/commit/0889a2e6d134da2621c999e3fc6b7288379f786a))
+
+
+
+
+
 ## [2.0.2](https://github.com/nextgis/nextgis_frontend/compare/v2.0.1...v2.0.2) (2024-03-20)
 
 
