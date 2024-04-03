@@ -549,6 +549,9 @@ export class WebMapMain<
       this.setView(center, zoom);
     } else if (bounds) {
       this.fitBounds(bounds);
+      if (zoom !== undefined) {
+        this.setZoom(zoom);
+      }
     }
   }
 
