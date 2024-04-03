@@ -70,7 +70,7 @@ webMap.emitter.on('move', onMapMove);
 
 ```
 
-Check out the [API Documentation](https://code-api.nextgis.com/modules/progress.html)
+Check out the [API Documentation](https://code-api.nextgis.com/modules/_nextgis_progress.html)
 
 ## Commercial support
 

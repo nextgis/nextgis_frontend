@@ -81,7 +81,7 @@ ngwConnector.getResources({ cls: 'vector_layer', parent__id: 0 }); // find resou
 ngwConnector.getResource({ display_name: 'My layer', parent__id: 0 }); // get first
 ```
 
-Check out the [API Documentation](https://code-api.nextgis.com/modules/ngw_connector.html)
+Check out the [API Documentation](https://code-api.nextgis.com/modules/_nextgis_ngw_connector.html)
 
 ## NGW API
 

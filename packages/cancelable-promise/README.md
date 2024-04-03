@@ -90,7 +90,7 @@ const promise = new CancelablePromise((resolve, reject, onCancel) => {
 promise.cancel();
 ```
 
-Check out the [API Documentation](https://code-api.nextgis.com/modules/cancelable_promise.html)
+Check out the [API Documentation](https://code-api.nextgis.com/modules/_nextgis_cancelable_promise.html)
 
 ## Commercial support
 

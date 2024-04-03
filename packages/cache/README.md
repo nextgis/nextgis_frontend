@@ -139,7 +139,7 @@ onAdd.catch((er) => {
 onAdd.cancel();
 ```
 
-Check out the [API Documentation](https://code-api.nextgis.com/modules/cache.html)
+Check out the [API Documentation](https://code-api.nextgis.com/modules/_nextgis_cache.html)
 
 ## Commercial support
 

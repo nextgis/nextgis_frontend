@@ -89,7 +89,7 @@ for await (const item of geocoderGenerator) {
 }
 ```
 
-Check out the [API Documentation](https://code-api.nextgis.com/modules/geocoder.html)
+Check out the [API Documentation](https://code-api.nextgis.com/modules/_nextgis_geocoder.html)
 
 ## Commercial support
 

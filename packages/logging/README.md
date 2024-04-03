@@ -59,7 +59,7 @@ logger.info('Hello NextGIS!');
 
 ```
 
-Check out the [API Documentation](https://code-api.nextgis.com/modules/logging.html)
+Check out the [API Documentation](https://code-api.nextgis.com/modules/_nextgis_logging.html)
 
 ## Commercial support
 

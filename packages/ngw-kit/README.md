@@ -59,7 +59,7 @@ getNgwLayerItems({
 }).then((items) => { ... });
 ```
 
-Check out the [API Documentation](https://code-api.nextgis.com/modules/ngw_kit.html)
+Check out the [API Documentation](https://code-api.nextgis.com/modules/_nextgis_ngw_kit.html)
 
 ## Commercial support
 

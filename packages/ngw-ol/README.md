@@ -64,7 +64,7 @@ const ngwMap = new NgwMap({
 });
 ```
 
-Check out the [API Documentation](https://code-api.nextgis.com/modules/ngw_map.html)
+Check out the [API Documentation](https://code-api.nextgis.com/modules/_nextgis_ngw_map.html)
 
 ## Commercial support
 
