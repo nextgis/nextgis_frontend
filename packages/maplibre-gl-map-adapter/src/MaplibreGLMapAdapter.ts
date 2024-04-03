@@ -279,9 +279,7 @@ export class MaplibreGLMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   getZoom(): number | undefined {
     if (this.map) {
       const zoom = this.map.getZoom();
-      if (zoom < 1) {
-        return undefined;
-      }
+
       return zoom ? zoom + 1 : undefined;
     }
   }
