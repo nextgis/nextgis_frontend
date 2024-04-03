@@ -1,0 +1,5 @@
+{
+  "name": "Initialize map",
+  "description": "Initialize map with default parameters",
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"]
+}

@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Initialize map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      html,
+      body,
+      .map {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        height: 100%;
+        gap: 1px;
+      }
+      .map-container {
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        position: relative;
+      }
+      .map-label {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background: rgba(255, 255, 255, 0.7);
+        padding: 5px;
+        font-size: 0.8em;
+        z-index: 9999;
+      }
+    </style>
+    <script src="../../../packages/ngw-leaflet/lib/ngw-leaflet.global.js"></script>
+  </head>
+  <body>
+    <div class="grid-container">
+      <div class="map-container">
+        <div class="map-label">Zoom: 10, Center: Paris</div>
+        <div id="map1" class="map"></div>
+      </div>
+      <div class="map-container">
+        <div class="map-label">Bounds: Venice</div>
+        <div id="map2" class="map"></div>
+      </div>
+      <div class="map-container">
+        <div class="map-label">Zoom: 12, MaxBounds: NYC</div>
+        <div id="map3" class="map"></div>
+      </div>
+      <div class="map-container">
+        <div class="map-label">Zoom: 11, Min/MaxZoom: 8/16, Center: Moscow</div>
+        <div id="map4" class="map"></div>
+      </div>
+      <div class="map-container">
+        <div class="map-label">Zoom: 14, MaxBounds: London</div>
+        <div id="map5" class="map"></div>
+      </div>
+      <div class="map-container">
+        <div class="map-label">World Overview Map</div>
+        <div id="map6" class="map"></div>
+      </div>
+    </div>
+    <script>
+      // Map 1: Initialization with specific zoom and center
+      NgwMap.create({
+        baseUrl: 'https://demo.nextgis.com',
+        target: 'map1',
+        osm: true,
+        zoom: 10,
+        center: [2.3522, 48.8566], // Paris, France
+      }).then(addMapControl);
+
+      // Map 2: Initialization with bounds
+      NgwMap.create({
+        baseUrl: 'https://demo.nextgis.com',
+        target: 'map2',
+        osm: true,
+        bounds: [12.34, 45.433, 12.376, 45.444], // Venice, Italy
+      }).then(addMapControl);
+
+      // Map 3: Initialization with maxBounds and zoom
+      NgwMap.create({
+        baseUrl: 'https://demo.nextgis.com',
+        target: 'map3',
+        osm: true,
+        zoom: 12,
+        center: [-74.006, 40.7128], // New York City, USA
+        maxBounds: [-75, 40, -73, 41], // Around New York City
+      }).then(addMapControl);
+
+      // Map 4: Initialization with minZoom and maxZoom
+      NgwMap.create({
+        baseUrl: 'https://demo.nextgis.com',
+        target: 'map4',
+        osm: true,
+        zoom: 11,
+        minZoom: 8,
+        maxZoom: 16,
+        center: [37.6173, 55.7558], // Moscow, Russia
+      }).then(addMapControl);
+
+      // Map 5: Initialization with zoom and maxBounds
+      NgwMap.create({
+        baseUrl: 'https://demo.nextgis.com',
+        target: 'map5',
+        osm: true,
+        zoom: 14,
+        center: [-0.1278, 51.5074], // London, UK
+        maxBounds: [-0.38, 51.28, 0.15, 51.74], // Greater London Area
+      }).then(addMapControl);
+
+      // Map 6: Initialization with bounds and maxZoom
+      NgwMap.create({
+        baseUrl: 'https://demo.nextgis.com',
+        target: 'map6',
+        osm: true,
+        zoom: 2, // Initial zoom level for a world overview
+        maxZoom: 2, // Prevent zooming in beyond the world overview
+      }).then(addMapControl);
+
+      function addMapControl(ngwMap) {
+        const zoomControl = ngwMap.createControl(
+          {
+            onAdd() {
+              const element = document.createElement('div');
+              const updateElement = () => {
+                const zoom = ngwMap.getZoom();
+                element.innerHTML = Math.round(zoom);
+              };
+              ngwMap.emitter.on('zoom', updateElement);
+              updateElement();
+              return element;
+            },
+          },
+          { bar: true },
+        );
+        ngwMap.addControl(zoomControl, 'top-right');
+      }
+    </script>
+  </body>
+</html>
