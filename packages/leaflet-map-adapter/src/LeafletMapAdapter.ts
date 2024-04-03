@@ -108,6 +108,8 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
           zoom,
           ...mapAdapterOptions,
         });
+
+      this._updateMinZoomForBounds();
       // create default pane
       const defPane = this.map.createPane('order-0');
       (this.map as any)._addUnselectCb = (def: UnselectDef) => {
@@ -355,7 +357,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     const map = this.map;
     if (container && map && window.ResizeObserver) {
       this._resizeObserver = new ResizeObserver(() => {
-        map.setMinZoom(map.getBoundsZoom(bounds));
+        this._updateMinZoomForBounds(bounds);
       });
       this._resizeObserver.observe(container);
     }
@@ -392,6 +394,20 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
             ),
           map,
         );
+      }
+    }
+  }
+
+  private _updateMinZoomForBounds(bounds?: LatLngBoundsExpression) {
+    const map = this.map;
+    if (map) {
+      const maxBounds = bounds ?? map.options.maxBounds;
+      if (maxBounds !== undefined) {
+        const minZoom = map.getBoundsZoom(maxBounds, true);
+        map.options.minZoom = minZoom;
+        if (map.getZoom() < minZoom) {
+          map.setZoom(minZoom);
+        }
       }
     }
   }
