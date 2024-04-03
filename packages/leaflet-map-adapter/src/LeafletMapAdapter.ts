@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
 
-import { Control, Map } from 'leaflet';
+import { Control, Map, latLng, latLngBounds } from 'leaflet';
 
 import { AttributionControl } from './controls/Attribution';
 import { createButtonControl } from './controls/createButtonControl';
@@ -32,7 +32,6 @@ import type {
   ControlPosition,
   FitBoundsOptions,
   GridLayer,
-  LatLngBoundsExpression,
   Layer,
   LeafletEvent,
   LeafletMouseEvent,
@@ -109,7 +108,8 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
           ...mapAdapterOptions,
         });
 
-      this._updateMinZoomForBounds();
+      this._updateMinZoomForBounds(minZoom);
+      this._watchSizeChangeToUpdateMinZoom();
       // create default pane
       const defPane = this.map.createPane('order-0');
       (this.map as any)._addUnselectCb = (def: UnselectDef) => {
@@ -180,20 +180,18 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
         if (maxBounds) {
           const b = arrayToBoundsExpression(maxBounds);
           map.setMaxBounds(b);
-          map.setMinZoom(map.getBoundsZoom(b));
-          this._watchSizeChangeToUpdateMinZoom(b);
+          this._updateMinZoomForBounds();
         } else {
           // @ts-ignore `null` works for unset maxBounds, but not in typing
           map.setMaxBounds(null);
-          this._stopWatchSizeChangeToUpdateMinZoom();
+          this._updateMinZoomForBounds();
         }
       }
       if (maxZoom !== undefined) {
         map.setMaxZoom(maxZoom);
       }
       if (minZoom !== undefined) {
-        this._stopWatchSizeChangeToUpdateMinZoom();
-        map.setMinZoom(minZoom);
+        this._updateMinZoomForBounds(minZoom);
       }
     }
   }
@@ -351,23 +349,19 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     this._unselectCb.push(cb);
   }
 
-  private _watchSizeChangeToUpdateMinZoom(bounds: LatLngBoundsExpression) {
+  private _watchSizeChangeToUpdateMinZoom() {
     this._stopWatchSizeChangeToUpdateMinZoom();
     const container = this.getContainer();
     const map = this.map;
     if (container && map && window.ResizeObserver) {
       this._resizeObserver = new ResizeObserver(() => {
-        this._updateMinZoomForBounds(bounds);
+        this._updateMinZoomForBounds();
       });
       this._resizeObserver.observe(container);
     }
   }
 
   private _stopWatchSizeChangeToUpdateMinZoom() {
-    const map = this.map;
-    if (map) {
-      map.setMinZoom(0);
-    }
     if (this._resizeObserver) {
       this._resizeObserver.disconnect();
       this._resizeObserver = undefined;
@@ -398,13 +392,23 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     }
   }
 
-  private _updateMinZoomForBounds(bounds?: LatLngBoundsExpression) {
+  private _updateMinZoomForBounds(zoom?: number) {
     const map = this.map;
     if (map) {
-      const maxBounds = bounds ?? map.options.maxBounds;
+      zoom = zoom ?? map.getMinZoom();
+      const defaultBounds = latLngBounds(
+        latLng(-90, -18000),
+        latLng(90, 18000),
+      );
+      const maxBounds = map.options.maxBounds ?? defaultBounds;
       if (maxBounds !== undefined) {
-        const minZoom = map.getBoundsZoom(maxBounds, true);
+        map.setMinZoom(0);
+        const boundsZoom = map.getBoundsZoom(maxBounds, true);
+        const minZoom = zoom < boundsZoom ? boundsZoom : zoom;
+
         map.options.minZoom = minZoom;
+        map.setMinZoom(minZoom);
+
         if (map.getZoom() < minZoom) {
           map.setZoom(minZoom);
         }
