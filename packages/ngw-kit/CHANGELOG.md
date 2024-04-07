@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.1](https://github.com/nextgis/nextgis_frontend/compare/v2.1.0...v2.1.1) (2024-04-07)
+
+
+### Features
+
+* **ngw-kit:** add geojson adapter customization ([7282ee4](https://github.com/nextgis/nextgis_frontend/commit/7282ee42562b81fa7b8b69ec3f605223c530b610))
+
+
+
+
+
 # [2.1.0](https://github.com/nextgis/nextgis_frontend/compare/v2.0.3...v2.1.0) (2024-04-03)
 
 **Note:** Version bump only for package @nextgis/ngw-kit
