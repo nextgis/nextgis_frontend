@@ -100,6 +100,7 @@ export interface NgwLayerOptions<
 > {
   resource: ResourceDefinition;
   id?: string;
+  Adapter?: Type<MainLayerAdapter>;
   adapter?: T;
   adapterOptions?: Partial<LayerAdaptersOptions[T] & AdapterOptions<A>>;
   fit?: boolean;

@@ -47,7 +47,7 @@ export async function createGeoJsonAdapter(
   const addLayerOptionsPriority = alop ?? true;
   const options = layerOptions as NgwLayerOptions<'GEOJSON'>;
   const GeoJsonAdapter: Type<VectorLayerAdapter> =
-    Adapter || webMap.mapAdapter.layerAdapters.GEOJSON;
+    Adapter || layerOptions.Adapter || webMap.mapAdapter.layerAdapters.GEOJSON;
 
   const _loadedIds: string[] = [];
   let _fullDataLoad = false;
