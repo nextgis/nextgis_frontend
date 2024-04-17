@@ -726,7 +726,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/leaflet-map-adapter@^2.1.0, @nextgis/leaflet-map-adapter@workspace:packages/leaflet-map-adapter":
+"@nextgis/leaflet-map-adapter@^2.2.0, @nextgis/leaflet-map-adapter@workspace:packages/leaflet-map-adapter":
   version: 0.0.0-use.local
   resolution: "@nextgis/leaflet-map-adapter@workspace:packages/leaflet-map-adapter"
   dependencies:
@@ -827,7 +827,7 @@ __metadata:
   resolution: "@nextgis/ngw-leaflet@workspace:packages/ngw-leaflet"
   dependencies:
     "@nextgis/build-tools": ^2.0.2
-    "@nextgis/leaflet-map-adapter": ^2.1.0
+    "@nextgis/leaflet-map-adapter": ^2.2.0
     "@nextgis/ngw-map": ^2.1.1
     leaflet: 1.7.1
     leaflet.wms: "*"
@@ -868,7 +868,7 @@ __metadata:
   dependencies:
     "@nextgis/build-tools": ^2.0.2
     "@nextgis/ngw-map": ^2.1.1
-    "@nextgis/ol-map-adapter": ^2.1.0
+    "@nextgis/ol-map-adapter": ^2.2.0
     "@types/events": ^3.0.0
     events: "*"
   languageName: unknown
@@ -918,7 +918,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/ol-map-adapter@^2.1.0, @nextgis/ol-map-adapter@workspace:packages/ol-map-adapter":
+"@nextgis/ol-map-adapter@^2.2.0, @nextgis/ol-map-adapter@workspace:packages/ol-map-adapter":
   version: 0.0.0-use.local
   resolution: "@nextgis/ol-map-adapter@workspace:packages/ol-map-adapter"
   dependencies:
@@ -986,7 +986,7 @@ __metadata:
   resolution: "@nextgis/react-ngw-leaflet@workspace:packages/react-ngw-leaflet"
   dependencies:
     "@nextgis/build-tools": ^2.0.2
-    "@nextgis/leaflet-map-adapter": ^2.1.0
+    "@nextgis/leaflet-map-adapter": ^2.2.0
     "@nextgis/react-ngw-map": ^2.1.1
   languageName: unknown
   linkType: soft
@@ -1021,7 +1021,7 @@ __metadata:
   resolution: "@nextgis/react-ngw-ol@workspace:packages/react-ngw-ol"
   dependencies:
     "@nextgis/build-tools": ^2.0.2
-    "@nextgis/ol-map-adapter": ^2.1.0
+    "@nextgis/ol-map-adapter": ^2.2.0
     "@nextgis/react-ngw-map": ^2.1.1
   languageName: unknown
   linkType: soft

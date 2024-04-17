@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/leaflet-map-adapter",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "_priority": 15,
   "description": "Webmap adapter to use Laeflet GIS framework",
   "main": "lib/leaflet-map-adapter.global.prod.js",

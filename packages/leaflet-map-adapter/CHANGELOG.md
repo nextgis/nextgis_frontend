@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0](https://github.com/nextgis/nextgis_frontend/compare/v2.1.1...v2.2.0) (2024-04-17)
+
+
+### Features
+
+* **leaflet-map-adapter:** abort image adapter request on map move ([24fa9ae](https://github.com/nextgis/nextgis_frontend/commit/24fa9aec332648a5319e963c40a51bf7bae9cbf2))
+
+
+
+
+
 # [2.1.0](https://github.com/nextgis/nextgis_frontend/compare/v2.0.3...v2.1.0) (2024-04-03)
 
 
