@@ -61,6 +61,7 @@ export class ImageLayer extends Layer {
   private _url?: string;
   private _currentUrl?: string;
   private _currentOverlay?: ImageOverlay;
+  private _loadedOverlay?: ImageOverlay;
 
   constructor(url: string, options: OverlayOptions) {
     super(options);
@@ -127,20 +128,23 @@ export class ImageLayer extends Layer {
     }
     this._currentUrl = url;
 
-    // Keep current image overlay in place until new one loads
-    // (inspired by esri.leaflet)
     const viewPortBuffer = this.options.viewPortBuffer || 0;
     const bounds = this._map.getBounds().pad(viewPortBuffer);
-
+    if (this._loadedOverlay) {
+      this._loadedOverlay.cancelLoad();
+      this._loadedOverlay.off('load');
+      this._loadedOverlay = undefined;
+    }
     const overlay = new ImageOverlay(url, bounds, {
       opacity: 0,
       pane: this.options.pane,
       headers: this.options.headers,
     });
     overlay.addTo(this._map);
-    if (this._currentOverlay) {
-      this._currentOverlay.cancelLoad();
-    }
+    this._loadedOverlay = overlay;
+
+    // Keep current image overlay in place until new one loads
+    // (inspired by esri.leaflet)
     overlay.once(
       'load',
       () => {
@@ -154,6 +158,7 @@ export class ImageLayer extends Layer {
         } else if (this._currentOverlay) {
           this._map.removeLayer(this._currentOverlay);
         }
+        this._loadedOverlay = undefined;
         this._currentOverlay = overlay;
         overlay.setOpacity(
           this.options.opacity !== undefined ? this.options.opacity : 1,

@@ -1,4 +1,4 @@
-import { ImageOverlay as LImageOverlay } from 'leaflet';
+import { ImageOverlay as LImageOverlay, Util } from 'leaflet';
 
 import { callAjax } from '../../utils/callAjax';
 
@@ -7,7 +7,7 @@ import type { ImageOverlayOptions, LatLngBoundsExpression } from 'leaflet';
 type IOptions = ImageOverlayOptions & { headers?: any };
 
 export class ImageOverlay extends LImageOverlay {
-  private _abort: (() => void)[] = [];
+  private _aborter?: () => void;
 
   constructor(
     imageUrl: string,
@@ -18,31 +18,34 @@ export class ImageOverlay extends LImageOverlay {
   }
 
   cancelLoad(): void {
-    if (this._abort) {
-      this._abort.forEach((x) => x());
-      this._abort = [];
+    if (this._aborter) {
+      this._aborter();
+      this._aborter = undefined;
     }
   }
 
   _initImage(): void {
-    // @ts-ignore
+    // @ts-expect-error extend private method
     super._initImage();
-    // @ts-ignore
-    const headers = this.options.headers;
+
+    const headers = (this.options as IOptions).headers;
+    // @ts-expect-error _image is a private property
+    const img: HTMLImageElement = this._image;
+    const src = img.src;
+
     if (headers) {
-      // @ts-ignore
-      const img: HTMLImageElement = this._image;
-      const src = img.src;
       img.src = '';
-      this._abort.push(
-        callAjax(
-          src,
-          (response) => {
-            img.src = response;
-          },
-          headers,
-        ),
+      this._aborter = callAjax(
+        src,
+        (response) => {
+          img.src = response;
+        },
+        headers,
       );
+    } else {
+      this._aborter = () => {
+        img.setAttribute('src', Util.emptyImageUrl);
+      };
     }
   }
 }
