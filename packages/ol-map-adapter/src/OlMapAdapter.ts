@@ -416,12 +416,15 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
       });
       const mouseEventEventToMapMouseEvent = (evt: MouseEvent) => {
         const pixel = [evt.x, evt.y];
-        const mapEvent = {
-          pixel,
-          coordinate: map.getCoordinateFromPixel(pixel),
-          ...evt,
-        };
-        return convertMapClickEvent(mapEvent);
+        const coordinate = map.getCoordinateFromPixel(pixel);
+        if (coordinate) {
+          const mapEvent = {
+            pixel,
+            coordinate,
+            ...evt,
+          };
+          return convertMapClickEvent(mapEvent);
+        }
       };
       viewport.addEventListener(
         'mouseout',
