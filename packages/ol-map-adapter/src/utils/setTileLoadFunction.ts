@@ -5,7 +5,7 @@ export function setTileLoadFunction(
   tile: Tile | ImageWrapper,
   src: string,
   headers: Record<string, any>,
-): void {
+): () => void {
   const xhr = new XMLHttpRequest();
   xhr.open('GET', src);
   xhr.responseType = 'arraybuffer';
@@ -23,4 +23,6 @@ export function setTileLoadFunction(
     tile.getImage().src = imageUrl;
   };
   xhr.send();
+
+  return () => xhr.abort();
 }
