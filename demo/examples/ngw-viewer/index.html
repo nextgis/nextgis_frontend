@@ -5,26 +5,32 @@
     <title>Ngw Viewer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-      html, body, #map {
+      html,
+      body {
+        height: 100%;
         margin: 0;
         padding: 0;
-        width: 100%;
-        height: 100%;
       }
       #wrap {
         display: flex;
+        height: 100%; /* This makes sure that #wrap takes full viewport height */
       }
       #tree {
         width: 35%;
         min-width: 300px;
         overflow: auto;
+        height: 100%; /* Ensure #tree takes up full height of the container */
+      }
+      #map {
+        flex-grow: 1; /* Takes the remaining space */
+        height: 100%; /* Full height */
       }
       .tree-container__item {
-        padding-top: 0.3rem;
+        padding: 2px;
       }
       .tree-container__item-children {
         padding: 0;
-        padding-top: 3px;
+
         padding-left: 15px;
       }
       .tree-container__item-btn {
@@ -90,7 +96,7 @@
           el.appendChild(nameBlock);
 
           // Preview Button
-          if (allowedPreviewClsList.has(item.resource.cls)) {
+          if (allowedPreviewClsList.includes(item.resource.cls)) {
             const showBtn = document.createElement('span');
             showBtn.className = 'tree-container__item-btn';
             showBtn.textContent = '👁';
