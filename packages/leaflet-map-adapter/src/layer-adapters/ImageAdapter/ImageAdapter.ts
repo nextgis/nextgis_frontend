@@ -1,6 +1,7 @@
 import { BaseAdapter } from '../BaseAdapter';
 
 import { ImageLayer } from './ImageLayer';
+import imageQueue from './imageQueue';
 
 import type { MainLayerAdapter } from '@nextgis/webmap';
 import type { ImageAdapterOptions } from '@nextgis/webmap';
@@ -10,6 +11,8 @@ export class ImageAdapter
   extends BaseAdapter<ImageAdapterOptions>
   implements MainLayerAdapter<Map>
 {
+  static queue = imageQueue;
+
   layer: any;
 
   addLayer(options: ImageAdapterOptions): any {

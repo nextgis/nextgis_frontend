@@ -1,6 +1,8 @@
-import { ImageOverlay as LImageOverlay, Util } from 'leaflet';
+import { ImageOverlay as LImageOverlay } from 'leaflet';
 
 import { callAjax } from '../../utils/callAjax';
+
+import imageQueue from './imageQueue';
 
 import type { ImageOverlayOptions, LatLngBoundsExpression } from 'leaflet';
 
@@ -31,21 +33,16 @@ export class ImageOverlay extends LImageOverlay {
     const headers = (this.options as IOptions).headers;
     // @ts-expect-error _image is a private property
     const img: HTMLImageElement = this._image;
-    const src = img.src;
 
-    if (headers) {
-      img.src = '';
-      this._aborter = callAjax(
-        src,
-        (response) => {
-          img.src = response;
-        },
-        headers,
-      );
-    } else {
-      this._aborter = () => {
-        img.setAttribute('src', Util.emptyImageUrl);
-      };
-    }
+    img.src = '';
+    // The queue is cleared in LeafletMapAdapter at each movestart and zoomstart event
+    imageQueue.add(() => {
+      const [promise, abortFunc] = callAjax(img.src, headers);
+      promise.then((imgUrl) => {
+        img.src = imgUrl;
+      });
+      this._aborter = abortFunc;
+      return promise;
+    });
   }
 }

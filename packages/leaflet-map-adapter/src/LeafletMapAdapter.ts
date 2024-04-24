@@ -378,6 +378,13 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
         map.on(e, () => this.emitter.emit(e, this), map);
       }
 
+      map.on('movestart', () => {
+        ImageAdapter.queue.abort();
+      });
+      map.on('zoomstart', () => {
+        ImageAdapter.queue.abort();
+      });
+
       for (const e of this._positionEvents) {
         map.on(
           e,

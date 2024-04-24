@@ -4,14 +4,9 @@ import { debounce } from '../../../utils/src';
 
 import { callAjax } from './callAjax';
 
-// import type { TileLayerOptionsExtended } from './TileAdapter/TileLayer';
-
 type Constructor = new (...args: any[]) => any;
 
-export function makeRemote<
-  TBase extends Constructor,
-  // O extends TileLayerOptionsExtended = TileLayerOptionsExtended
->(Base: TBase): TBase {
+export function makeRemote<TBase extends Constructor>(Base: TBase): TBase {
   return class RemoteTileLayer extends Base {
     constructor(...args: any[]) {
       super(...args);
@@ -32,15 +27,16 @@ export function makeRemote<
       const url = this.getTileUrl(coords);
 
       const tile = document.createElement('img');
-      (tile as any).abort = callAjax(
+      const [promise, abortFunc] = callAjax(
         url,
-        (response) => {
-          tile.src = response;
-          done(null, tile);
-        },
         // @ts-ignore
         this.options.headers,
       );
+      promise.then((response) => {
+        tile.src = response;
+        done(null, tile);
+      });
+      (tile as any).abort = abortFunc;
 
       if (this.options.crossOrigin || this.options.crossOrigin === '') {
         tile.crossOrigin =
