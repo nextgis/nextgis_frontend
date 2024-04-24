@@ -33,11 +33,11 @@ export class ImageOverlay extends LImageOverlay {
     const headers = (this.options as IOptions).headers;
     // @ts-expect-error _image is a private property
     const img: HTMLImageElement = this._image;
-
+    const src = img.src;
     img.src = '';
     // The queue is cleared in LeafletMapAdapter at each movestart and zoomstart event
     imageQueue.add(() => {
-      const [promise, abortFunc] = callAjax(img.src, headers);
+      const [promise, abortFunc] = callAjax(src, headers);
       promise.then((imgUrl) => {
         img.src = imgUrl;
       });
