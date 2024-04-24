@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.2](https://github.com/nextgis/nextgis_frontend/compare/v2.2.1...v2.2.2) (2024-04-24)
+
+
+### Bug Fixes
+
+* **leaflet-map-adapter:** image overlay src ([2e4a156](https://github.com/nextgis/nextgis_frontend/commit/2e4a1563fe931c24c35f1f042ddabedabf2270b1))
+
+
+
+
+
 ## [2.2.1](https://github.com/nextgis/nextgis_frontend/compare/v2.2.0...v2.2.1) (2024-04-24)
 
 
