@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.1](https://github.com/nextgis/nextgis_frontend/compare/v2.2.0...v2.2.1) (2024-04-24)
+
+
+### Features
+
+* **leaflet-map-adapter:** image adapter requests queue ([c8e43d6](https://github.com/nextgis/nextgis_frontend/commit/c8e43d694e6d4f1fa64652a47e47c72dab50d801))
+
+
+
+
+
 # [2.2.0](https://github.com/nextgis/nextgis_frontend/compare/v2.1.1...v2.2.0) (2024-04-17)
 
 

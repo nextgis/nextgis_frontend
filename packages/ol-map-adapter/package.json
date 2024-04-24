@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/ol-map-adapter",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "_priority": 16,
   "description": "",
   "main": "lib/ol-map-adapter.global.prod.js",
@@ -13,7 +13,7 @@
     "@nextgis/dom": "^2.0.2",
     "@nextgis/paint": "^2.1.0",
     "@nextgis/properties-filter": "^2.1.0",
-    "@nextgis/queue": "^2.1.0",
+    "@nextgis/queue": "^2.2.1",
     "@nextgis/webmap": "^2.1.0",
     "@types/events": "^3.0.0",
     "@types/geojson": "^7946.0.14",

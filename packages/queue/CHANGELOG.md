@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.1](https://github.com/nextgis/nextgis_frontend/compare/v2.2.0...v2.2.1) (2024-04-24)
+
+
+### Features
+
+* **queue:** add new library to manage concurrent asynchronous tasks ([db6ef12](https://github.com/nextgis/nextgis_frontend/commit/db6ef123cddad7c93642d3afadc17de703224d6e))
+
+
+
+
+
 # [2.1.0](https://github.com/nextgis/nextgis_frontend/compare/v2.0.3...v2.1.0) (2024-04-03)
 
 **Note:** Version bump only for package @nextgis/cache
