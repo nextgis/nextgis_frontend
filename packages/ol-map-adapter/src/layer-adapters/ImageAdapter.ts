@@ -1,3 +1,4 @@
+import Queue from '@nextgis/queue';
 import ImageLayer from 'ol/layer/Image';
 import CanvasImageLayerRenderer from 'ol/renderer/canvas/ImageLayer';
 import ImageWMS from 'ol/source/ImageWMS';
@@ -59,6 +60,7 @@ class CanvasILRendererExtended extends CanvasImageLayerRenderer {
 }
 
 export class ImageAdapter extends BaseAdapter implements MainLayerAdapter {
+  static queue = new Queue({ concurrency: 6, delay: 200 });
   layer: any;
 
   constructor(
@@ -80,35 +82,6 @@ export class ImageAdapter extends BaseAdapter implements MainLayerAdapter {
         projection: undefined,
         imageLoadFunction: this.constructImageLoadFunction(options),
       };
-
-      // const updateWmsParams = options.updateWmsParams;
-      // imageOptions.imageLoadFunction = (image, src) => {
-      //   const url = src.split('?')[0];
-      //   const query = src.split('?')[1];
-      //   const { resource, BBOX, WIDTH, HEIGHT, ...params } =
-      //     queryToObject(query);
-
-      //   const queryParams = {
-      //     resource,
-      //     bbox: BBOX,
-      //     width: WIDTH,
-      //     height: HEIGHT,
-      //     ...params,
-      //   };
-      //   const queryString = objectToQuery(
-      //     updateWmsParams ? updateWmsParams(queryParams) : params,
-      //   );
-      //   const headers = options.headers;
-
-      //   const _src = url + '?' + queryString;
-
-      //   if (headers) {
-      //     setTileLoadFunction(image, _src, headers);
-      //   } else {
-      //     // @ts-ignore
-      //     image.getImage().src = _src;
-      //   }
-      // };
 
       const layerOptions: BaseImageOptions<ImageWMS> = {
         opacity: options.opacity,
@@ -145,17 +118,8 @@ export class ImageAdapter extends BaseAdapter implements MainLayerAdapter {
     options: ImageAdapterOptions,
   ): ImageWMSOptions['imageLoadFunction'] {
     const updateWmsParams = options.updateWmsParams;
-    let _abortFunc: (() => void) | undefined = undefined;
-
-    const abort = () => {
-      if (_abortFunc) {
-        _abortFunc();
-        _abortFunc = undefined;
-      }
-    };
 
     return (image, src) => {
-      abort();
       const url = src.split('?')[0];
       const query = src.split('?')[1];
       const { resource, BBOX, WIDTH, HEIGHT, ...params } = queryToObject(query);
@@ -174,16 +138,10 @@ export class ImageAdapter extends BaseAdapter implements MainLayerAdapter {
 
       const _src = url + '?' + queryString;
 
-      if (headers) {
-        _abortFunc = setTileLoadFunction(image, _src, headers);
-      } else {
-        // @ts-ignore
-        image.getImage().src = _src;
-        _abortFunc = () => {
-          // @ts-ignore
-          image.getImage().src = '';
-        };
-      }
+      // The queue is cleared in OlMapAdapter at each movestart event
+      ImageAdapter.queue.add(() => {
+        return setTileLoadFunction(image, _src, headers);
+      });
     };
   }
 }

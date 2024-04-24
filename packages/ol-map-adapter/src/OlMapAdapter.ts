@@ -373,27 +373,6 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     return false;
   }
 
-  // requestGeomString(pixel: { top: number, left: number }, pixelRadius = 5) {
-  //   const { top, left } = pixel;
-  //   const olMap = this.map;
-  //   if (olMap) {
-  //     const bounds = boundingExtent([
-  //       olMap.getCoordinateFromPixel([
-  //         left - pixelRadius,
-  //         top - pixelRadius,
-  //       ]),
-  //       olMap.getCoordinateFromPixel([
-  //         left + pixelRadius,
-  //         top + pixelRadius,
-  //       ]),
-  //     ]);
-
-  //     return new WKT().writeGeometry(
-  //       Polygon.fromExtent(bounds)
-  //     );
-  //   }
-  // }
-
   private _emitMoveEndEvents(from: { zoom: number | undefined }) {
     if (this._isLoaded) {
       const zoom = this.getZoom();
@@ -451,6 +430,12 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
           this._emitPositionChangeEvent(x);
         });
       }
+
+      map.once('movestart', () => {
+        map.on('movestart', () => {
+          ImageAdapter.queue.abort();
+        });
+      });
     }
   }
 
