@@ -8,3 +8,4 @@ export * from './coordTransform';
 export * from './eachCoordinates';
 export * from './isLngLatBoundsArray';
 export * from './getIdentifyRadius';
+export * from './checkExtent';
