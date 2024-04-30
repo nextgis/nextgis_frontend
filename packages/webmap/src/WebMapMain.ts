@@ -1,7 +1,12 @@
 import { EventEmitter } from 'events';
 
 import CancelablePromise from '@nextgis/cancelable-promise';
-import { deepmerge, defined, getBoundsFeature } from '@nextgis/utils';
+import {
+  checkExtent,
+  deepmerge,
+  defined,
+  getBoundsFeature,
+} from '@nextgis/utils';
 import { deprecatedMapClick } from '@nextgis/utils';
 
 import { Keys } from './components/keys/Keys';
@@ -353,6 +358,7 @@ export class WebMapMain<
    * ```
    */
   fitBounds(bounds: LngLatBoundsArray, options?: FitOptions): this {
+    checkExtent(bounds);
     if (bounds.every((x) => defined(x))) {
       if (bounds[1] < -85.06) {
         bounds[1] = -85.06;
