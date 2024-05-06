@@ -14,8 +14,7 @@
     "leaflet.wms": "*"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "^2.0.2",
-    "leaflet": "1.7.1"
+    "@nextgis/build-tools": "^2.0.2"
   },
   "buildOptions": {
     "name": "NgwLeaflet",
