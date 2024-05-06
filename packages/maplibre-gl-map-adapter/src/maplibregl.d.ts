@@ -5,6 +5,9 @@ interface OnLayerClickLayer {
   _onLayerClick: (
     e: maplibregl.MapEventType['click'] & maplibregl.MapMouseEvent,
   ) => any;
+  _onLayerDoubleClick: (
+    e: maplibregl.MapEventType['dblclick'] & maplibregl.MapMouseEvent,
+  ) => any;
   options: {
     order?: number;
     unselectOnClick?: boolean;

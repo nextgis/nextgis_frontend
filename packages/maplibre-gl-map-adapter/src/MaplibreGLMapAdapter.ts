@@ -423,6 +423,32 @@ export class MaplibreGLMapAdapter implements MapAdapter<Map, TLayer, IControl> {
       this.emitter.emit('click', emitData);
     }
   }
+  onMapDoubleClick(evt: MapEventType['dblclick'] & MapMouseEvent): void {
+    const map = this.map;
+    const emitData = convertMapClickEvent(evt);
+    this.emitter.emit('predblclick', emitData);
+    if (map) {
+      const topFirst = map._onMapClickLayers.sort((a, b) => {
+        if (a.options && a.options.order && b.options && b.options.order) {
+          return b.options.order - a.options.order;
+        }
+        return 1;
+      });
+      let firstSelectedLayer: Feature | undefined = undefined;
+      for (const l of topFirst) {
+        let firstSelectedLayer_: Feature | undefined = undefined;
+        if (!firstSelectedLayer) {
+          firstSelectedLayer_ = l._onLayerDoubleClick(evt);
+        }
+
+        if (!firstSelectedLayer && firstSelectedLayer_) {
+          firstSelectedLayer = firstSelectedLayer_;
+        }
+      }
+
+      this.emitter.emit('dblclick', emitData);
+    }
+  }
 
   private _onMapLoad(cb?: () => any): Promise<Map> {
     return new Promise<Map>((resolve) => {
@@ -603,6 +629,9 @@ export class MaplibreGLMapAdapter implements MapAdapter<Map, TLayer, IControl> {
       _map.on('error', this._onMapError.bind(this));
       _map.on('click', (evt) => {
         this.onMapClick(evt);
+      });
+      _map.on('dblclick', (evt) => {
+        this.onMapDoubleClick(evt);
       });
 
       for (const e of this._universalEvents) {

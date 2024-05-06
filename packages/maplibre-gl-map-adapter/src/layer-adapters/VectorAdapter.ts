@@ -19,7 +19,7 @@ import type {
 } from '../interfaces';
 import type { IconPaint, Paint, PathPaint } from '@nextgis/paint';
 import type {
-  Operations,
+  Operation,
   PropertiesFilter,
   PropertyFilter,
 } from '@nextgis/properties-filter';
@@ -56,7 +56,7 @@ import type {
 type Layer = VectorLayerSpecification;
 type Layout = FillLayerSpecification['layout'];
 
-export const operationsAliases: { [key in Operations]: string } = {
+export const operationsAliases: { [key in Operation]: string } = {
   gt: '>',
   lt: '<',
   ge: '>=',
@@ -71,7 +71,7 @@ export const operationsAliases: { [key in Operations]: string } = {
   ilike: '==',
 };
 
-const reversOperations: { [key in Operations]: string } = {
+const reversOperations: { [key in Operation]: string } = {
   gt: operationsAliases.le,
   lt: operationsAliases.ge,
   ge: operationsAliases.lt,
@@ -325,19 +325,42 @@ export abstract class VectorAdapter<
     if (this.layer) {
       feature = this._getFeatureFromPoint(e);
       if (feature) {
-        const isSelected = this._featureSelect(feature, e.lngLat);
         if (this.options.onClick) {
-          this.options.onClick({
-            layer: this,
-            selected: isSelected,
-            event: convertMapClickEvent(e),
-            source: e,
-            ...this._createLayerOptions(feature),
-          });
+          this.options.onClick(this._createLayerClickOptions(e, feature));
         }
       }
     }
     return feature;
+  }
+  _onLayerDoubleClick(
+    e: MapLayerMouseEvent,
+  ): Feature<Geometry, GeoJsonProperties> | undefined {
+    e.preventDefault();
+    let feature: Feature | undefined;
+    const map = this.map;
+    if (!map) {
+      return;
+    }
+    if (this.layer) {
+      feature = this._getFeatureFromPoint(e);
+      if (feature) {
+        if (this.options.onDoubleClick) {
+          this.options.onDoubleClick(this._createLayerClickOptions(e, feature));
+        }
+      }
+    }
+    return feature;
+  }
+
+  protected _createLayerClickOptions(e: MapLayerMouseEvent, f: Feature) {
+    const isSelected = this._featureSelect(f, e.lngLat);
+    return {
+      layer: this,
+      selected: isSelected,
+      event: convertMapClickEvent(e),
+      source: e,
+      ...this._createLayerOptions(f),
+    };
   }
 
   protected _featureSelect(
