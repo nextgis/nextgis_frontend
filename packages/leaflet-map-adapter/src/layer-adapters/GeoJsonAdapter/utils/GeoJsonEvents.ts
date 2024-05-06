@@ -1,14 +1,16 @@
+import { DomEvent, type Layer } from 'leaflet';
+
 import { createMouseEvent } from '../../../utils/createMouseEvent';
 
 import type { GeoJsonAdapter } from '../GeoJsonAdapter';
 import type { OnLayerMouseOptions } from '@nextgis/webmap';
-import type { Layer } from 'leaflet';
 import type { LeafletEvent, LeafletMouseEvent } from 'leaflet';
 
 export class GeoJsonEvents {
   private layer: GeoJsonAdapter;
 
   private _onclick?: (e: LeafletMouseEvent) => void;
+  private _ondblclick?: (e: LeafletMouseEvent) => void;
   private _mouseout?: (e: LeafletMouseEvent) => void;
   private _mouseover?: (e: LeafletMouseEvent) => void;
 
@@ -17,7 +19,7 @@ export class GeoJsonEvents {
   }
 
   handleMouseEvents(layer: Layer) {
-    const { onClick, onLayerClick, onMouseOut, onMouseOver } =
+    const { onClick, onDoubleClick, onLayerClick, onMouseOut, onMouseOver } =
       this.layer.options;
     // TODO: remove backward compatibility for onLayerClick
     const onClick_ = onClick || onLayerClick;
@@ -31,6 +33,17 @@ export class GeoJsonEvents {
         });
       };
       layer.on('click', this._onclick, this);
+    }
+    if (onDoubleClick) {
+      this._ondblclick = (e: LeafletMouseEvent) => {
+        DomEvent.stopPropagation(e);
+        const selected = !!this.layer._getSelected(layer);
+        onDoubleClick({
+          selected,
+          ...this._createMouseEvent(e),
+        });
+      };
+      layer.on('dblclick', this._ondblclick, this);
     }
     if (onMouseOut) {
       this._mouseout = (e: LeafletMouseEvent) => {

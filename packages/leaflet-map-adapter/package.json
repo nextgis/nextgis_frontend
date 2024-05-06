@@ -15,7 +15,6 @@
     "@nextgis/webmap": "^2.1.0",
     "@types/events": "^3.0.0",
     "@types/geojson": "^7946.0.14",
-    "@types/leaflet": "^1.7.5",
     "events": "*",
     "leaflet.wms": "*"
   },
@@ -24,6 +23,7 @@
   },
   "devDependencies": {
     "@nextgis/build-tools": "^2.0.2",
+    "@types/leaflet": "^1.7.5",
     "leaflet": "1.7.1"
   },
   "buildOptions": {
