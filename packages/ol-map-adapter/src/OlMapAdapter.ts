@@ -39,7 +39,7 @@ import type { Extent } from 'ol/extent';
 import type Base from 'ol/layer/Base';
 import type { Pixel } from 'ol/pixel';
 
-export type MouseEventType = 'click' | 'hover';
+export type MouseEventType = 'click' | 'dblclick' | 'hover';
 
 type MapBrowserPointerEvent = MapBrowserEvent<any>;
 
@@ -317,16 +317,19 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     }
   }
 
-  onMapClick(evt: MapBrowserPointerEvent): void {
+  onMapClick(
+    evt: MapBrowserPointerEvent,
+    type: 'click' | 'dblclick' = 'click',
+  ): void {
     const emitData = convertMapClickEvent(evt);
-    this.emitter.emit('preclick', emitData);
-    const onFeature = this._callEachFeatureAtPixel(evt, 'click');
-    if (!onFeature) {
+    this.emitter.emit(`pre${type}`, emitData);
+    const onFeature = this._callEachFeatureAtPixel(evt, type);
+    if (!onFeature && type === 'click') {
       this._mapClickEvents.forEach((x) => {
         x(evt);
       });
     }
-    this.emitter.emit('click', emitData);
+    this.emitter.emit(type, emitData);
   }
 
   private getViewOptions(opt: ViewOptions): OlViewOptions {
@@ -388,6 +391,9 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
       const viewport = map.getViewport();
       map.on('click', (evt: BaseEvent | Event) => {
         this.onMapClick(evt as MapBrowserPointerEvent);
+      });
+      map.on('dblclick', (evt: BaseEvent | Event) => {
+        this.onMapClick(evt as MapBrowserPointerEvent, 'dblclick');
       });
       map.on('pointermove', (evt: MapBrowserPointerEvent) => {
         this.emitter.emit('mousemove', convertMapClickEvent(evt));

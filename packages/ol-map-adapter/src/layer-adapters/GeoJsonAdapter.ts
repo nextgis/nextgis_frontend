@@ -450,6 +450,14 @@ export class GeoJsonAdapter
           });
         }
       }
+      if (type === 'dblclick') {
+        if (this.options.onDoubleClick) {
+          this.options.onDoubleClick({
+            selected: isSelected,
+            ...featureMouseOptions,
+          });
+        }
+      }
       if (type === 'hover') {
         this._mouseOver = true;
         if (this.options.onMouseOver) {
