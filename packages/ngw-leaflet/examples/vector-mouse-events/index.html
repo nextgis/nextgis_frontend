@@ -58,6 +58,9 @@
             onClick: (e) => {
               log('click - from options');
             },
+            onDoubleClick: (e) => {
+              log('dblclick - from options');
+            },
             onMouseOver: (e) => {
               log('mouseover - from options');
             },
@@ -69,6 +72,9 @@
 
         ngwMap.emitter.on('layer-' + ID + ':click', (ev) => {
           log('click -- from specific layer emitter');
+        });
+        ngwMap.emitter.on('layer-' + ID + ':dblclick', (ev) => {
+          log('dblclick -- from specific layer emitter');
         });
 
         ngwMap.emitter.on('layer-' + ID + ':mouseover', (ev) => {
@@ -82,6 +88,11 @@
         ngwMap.emitter.on('layer:click', (ev) => {
           if (ev.layer.id === ID) {
             log('click --- from global emitter');
+          }
+        });
+        ngwMap.emitter.on('layer:dblclick', (ev) => {
+          if (ev.layer.id === ID) {
+            log('dblclick --- from global emitter');
           }
         });
         ngwMap.emitter.on('layer:mouseover', (ev) => {
