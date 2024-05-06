@@ -19,7 +19,7 @@
     "@types/geojson": "^7946.0.14",
     "@types/polylabel": "^1.0.5",
     "events": "*",
-    "polylabel": "^1.1.0"
+    "polylabel": "1.*"
   },
   "peerDependencies": {
     "ol": ">=6.0.0"
