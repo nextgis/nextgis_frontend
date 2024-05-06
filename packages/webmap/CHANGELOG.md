@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.3](https://github.com/nextgis/nextgis_frontend/compare/v2.2.2...v2.2.3) (2024-05-06)
+
+
+### Features
+
+* **ngw-map:** add extent check for fit bounds ([9703c2b](https://github.com/nextgis/nextgis_frontend/commit/9703c2b6164de824ce6305e0d3d0f7aecd24f90a))
+* **webmap:** add vector layer dblclick event ([38e105f](https://github.com/nextgis/nextgis_frontend/commit/38e105f087725a2723b0139d6c6f80a22b1f9737))
+
+
+
+
+
 # [2.1.0](https://github.com/nextgis/nextgis_frontend/compare/v2.0.3...v2.1.0) (2024-04-03)
 
 

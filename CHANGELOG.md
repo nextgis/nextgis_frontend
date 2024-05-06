@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.3](https://github.com/nextgis/nextgis_frontend/compare/v2.2.2...v2.2.3) (2024-05-06)
+
+
+### Features
+
+* **leaflet-map-adapter:** implement layer dblclick event ([244f85c](https://github.com/nextgis/nextgis_frontend/commit/244f85ca419125a1a998007557e8483569e50e51))
+* **maplibre-gl-map-adapter:** implement layer dblclick event ([3918901](https://github.com/nextgis/nextgis_frontend/commit/39189011646aa10ea82b2aae834a5d92a8d6325d))
+* **ngw-map:** add extent check for fit bounds ([9703c2b](https://github.com/nextgis/nextgis_frontend/commit/9703c2b6164de824ce6305e0d3d0f7aecd24f90a))
+* **ol-map-adapter:** implement layer dblclick event ([8dcf79b](https://github.com/nextgis/nextgis_frontend/commit/8dcf79bccc1dfa3b314cc5a583b8a906fc033f74))
+* **utils:** add checkExtent util ([4c660db](https://github.com/nextgis/nextgis_frontend/commit/4c660db18cfd325611539af523411ad708ed6102))
+* **webmap:** add vector layer dblclick event ([38e105f](https://github.com/nextgis/nextgis_frontend/commit/38e105f087725a2723b0139d6c6f80a22b1f9737))
+
+
+
+
+
 ## [2.2.2](https://github.com/nextgis/nextgis_frontend/compare/v2.2.1...v2.2.2) (2024-04-24)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.3](https://github.com/nextgis/nextgis_frontend/compare/v2.2.2...v2.2.3) (2024-05-06)
+
+
+### Features
+
+* **leaflet-map-adapter:** implement layer dblclick event ([244f85c](https://github.com/nextgis/nextgis_frontend/commit/244f85ca419125a1a998007557e8483569e50e51))
+
+
+
+
+
 ## [2.2.2](https://github.com/nextgis/nextgis_frontend/compare/v2.2.1...v2.2.2) (2024-04-24)
 
 

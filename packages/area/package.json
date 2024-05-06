@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/area",
-  "version": "2.1.0",
+  "version": "2.2.3",
   "description": "QGIS ellipsoidal area calculation reproduced in JavaScript",
   "main": "index.js",
   "module": "lib/area.esm-bundler.js",
@@ -8,7 +8,7 @@
   "jsdelivr": "lib/area.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/utils": "^2.1.0"
+    "@nextgis/utils": "^2.2.3"
   },
   "devDependencies": {
     "@nextgis/build-tools": "^2.0.2"
