@@ -84,6 +84,11 @@ export interface WebMapEvents extends MainMapEvents {
   /**
    * @eventProperty
    */
+  'layer:dblclick': OnLayerMouseOptions;
+  [key: `layer-${string | number}:dblclick`]: OnLayerMouseOptions;
+  /**
+   * @eventProperty
+   */
   'layer:mouseover': OnLayerMouseOptions;
   [key: `layer-${string | number}:mouseover`]: OnLayerMouseOptions;
   /**

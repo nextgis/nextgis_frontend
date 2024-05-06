@@ -367,6 +367,7 @@ export interface VectorAdapterOptions<
   heightOffset?: number;
 
   onClick?(opt: OnLayerMouseOptions<F, L>): void;
+  onDoubleClick?(opt: OnLayerMouseOptions<F, L>): void;
   onSelect?(opt: OnLayerSelectOptions<F, L>): void;
 
   /** Fired when the mouse enters the layer. */

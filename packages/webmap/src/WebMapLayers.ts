@@ -961,6 +961,11 @@ export class WebMapLayers<
     this._emitLayerEvent('layer:click', id || '', options);
     return Promise.resolve(options);
   }
+  private async _onLayerDoubleClick(options: OnLayerMouseOptions) {
+    const id = options.layer.id;
+    this._emitLayerEvent('layer:dblclick', id || '', options);
+    return Promise.resolve(options);
+  }
 
   private async _onLayerSelect(options: OnLayerSelectOptions) {
     this._emitLayerEvent('layer:select', options.layer.id || '', options);
@@ -972,16 +977,24 @@ export class WebMapLayers<
       onSelect,
       onLayerSelect,
       onClick,
+      onDoubleClick,
       onLayerClick,
       onMouseOut,
       onMouseOver,
     } = options;
     const onLayerClickFromOpt = onClick || onLayerClick;
+    const onLayerDblClickFromOpt = onDoubleClick || onLayerClick;
     options.onClick = (e) => {
       if (onLayerClickFromOpt) {
         onLayerClickFromOpt(e);
       }
       return this._onLayerClick(e);
+    };
+    options.onDoubleClick = (e) => {
+      if (onLayerDblClickFromOpt) {
+        onLayerDblClickFromOpt(e);
+      }
+      return this._onLayerDoubleClick(e);
     };
 
     options.onMouseOut = (e) => {
