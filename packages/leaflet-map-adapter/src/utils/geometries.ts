@@ -11,7 +11,7 @@ import type {
   GeoJsonObject,
   GeometryCollection,
 } from 'geojson';
-import type { LatLngBounds } from 'leaflet';
+import type { CircleMarkerOptions, LatLngBounds, PathOptions } from 'leaflet';
 
 export const typeAlias: {
   [key in GeoJsonGeometryTypes]: VectorAdapterLayerType;
@@ -28,7 +28,7 @@ export const typeAlias: {
 export const PAINT = {
   stroke: false,
   opacity: 1,
-};
+} as PathOptions & CircleMarkerOptions;
 
 export const backAliases: {
   [key in VectorAdapterLayerType]?: GeoJsonGeometryTypes[];

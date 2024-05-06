@@ -54,7 +54,9 @@ export class GeoJsonPaint {
     }
   }
 
-  preparePaint(paint: VectorAdapterLayerPaint): PathOptions {
+  preparePaint(
+    paint: VectorAdapterLayerPaint,
+  ): PathOptions & CircleMarkerOptions {
     if (paint.type !== 'get-paint') {
       const paintAliases: [keyof PathOptions, keyof PathPaint][] = [
         ['color', 'strokeColor'],
@@ -74,7 +76,7 @@ export class GeoJsonPaint {
             ]
           : paintAliases;
 
-      const readyPaint: PathOptions & CircleMarkerOptions = {};
+      const readyPaint = {} as PathOptions & CircleMarkerOptions;
 
       if ('radius' in paint && typeof paint.radius === 'number') {
         readyPaint.radius = paint.radius;
