@@ -69,6 +69,7 @@ const copy = async () => {
     <HtmlExampleHeaderComponent
       v-model="ngwMapAdapter"
       v-model:scrollAreaHeight="scrollAreaHeight"
+      :html="iframeHtml"
       :item="item"
       :dirt="dirt"
       @save="save"
@@ -91,6 +92,7 @@ const copy = async () => {
       <HtmlExampleHeaderComponent
         v-model="ngwMapAdapter"
         v-model:scrollAreaHeight="scrollAreaHeight"
+        :html="iframeHtml"
         :item="item"
         :dirt="dirt"
         @save="save"
