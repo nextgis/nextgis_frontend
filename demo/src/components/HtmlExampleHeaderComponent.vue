@@ -10,6 +10,7 @@ const props = defineProps({
   scrollAreaHeight: { type: String },
   dirt: Boolean,
   item: { type: Object as PropType<TreeNode>, required: true },
+  html: { type: String, required: true },
 });
 
 const emit = defineEmits([
@@ -111,7 +112,7 @@ onMounted(async () => {
             title="Copy code"
             @click="() => emit('copy')"
           />
-          <SendToCodepen class="col" :item="item" />
+          <SendToCodepen class="col" :item="item" :html="html" />
         </div>
       </div>
     </div>

@@ -25,6 +25,7 @@ interface PenData {
 
 const props = defineProps({
   item: { type: Object as PropType<TreeNode>, required: true },
+  html: { type: String, required: true },
 });
 
 const tabLeft = (text: string) => {
@@ -88,8 +89,8 @@ const parseHtml = (html: string): PenData => {
 };
 
 const value = computed(() => {
-  if (props.item.html) {
-    return JSON.stringify(parseHtml(props.item.html))
+  if (props.html) {
+    return JSON.stringify(parseHtml(props.html))
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&apos;');
   }

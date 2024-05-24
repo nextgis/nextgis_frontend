@@ -21,10 +21,10 @@ const ngwMapAdapter = ref<string>(
 );
 
 const html = ref<string>(props.item.html || '');
-const iframeHtml = ref<string>(html.value);
+const editableHtml = ref<string>(html.value);
 const scrollAreaHeight = ref('calc(100% - 90px)');
 
-const dirt = computed(() => html.value !== iframeHtml.value);
+const dirt = computed(() => html.value !== editableHtml.value);
 
 const changeAdapter = () => {
   const ngwMaps = unref(props.item.ngwMaps);
@@ -33,7 +33,7 @@ const changeAdapter = () => {
     const exist = ngwMaps.find((x) => x.name === adapter);
     if (exist) {
       html.value = changeHtmlMapAdapter(html.value, exist, ngwMaps);
-      iframeHtml.value = html.value;
+      editableHtml.value = html.value;
     }
   }
 };
@@ -41,12 +41,12 @@ const changeAdapter = () => {
 watch([ngwMapAdapter], changeAdapter);
 
 const save = () => {
-  iframeHtml.value = html.value;
+  editableHtml.value = html.value;
 };
 
 const copy = async () => {
   try {
-    await navigator.clipboard.writeText(iframeHtml.value);
+    await navigator.clipboard.writeText(editableHtml.value);
     $q.notify({
       color: 'positive',
       position: 'top',
@@ -69,6 +69,7 @@ const copy = async () => {
     <HtmlExampleHeaderComponent
       v-model="ngwMapAdapter"
       v-model:scrollAreaHeight="scrollAreaHeight"
+      :html="editableHtml"
       :item="item"
       :dirt="dirt"
       @save="save"
@@ -76,7 +77,7 @@ const copy = async () => {
     />
 
     <HtmlExampleIframeComponent
-      :html="iframeHtml"
+      :html="editableHtml"
       style="height: 400px; width: 100%"
     />
 
@@ -91,6 +92,7 @@ const copy = async () => {
       <HtmlExampleHeaderComponent
         v-model="ngwMapAdapter"
         v-model:scrollAreaHeight="scrollAreaHeight"
+        :html="editableHtml"
         :item="item"
         :dirt="dirt"
         @save="save"
@@ -102,7 +104,7 @@ const copy = async () => {
       </q-scroll-area>
     </div>
     <div class="col">
-      <HtmlExampleIframeComponent :html="iframeHtml" />
+      <HtmlExampleIframeComponent :html="editableHtml" />
     </div>
   </div>
 </template>
