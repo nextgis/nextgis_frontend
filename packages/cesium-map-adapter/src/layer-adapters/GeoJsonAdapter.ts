@@ -221,11 +221,11 @@ export class GeoJsonAdapter
           if (paint.type === 'pin') {
             promises.push(this._addPin(x, paint));
           } else if (paint.type === 'ellipsoid') {
-            const ellipsoidPaint3d = paint as Ellipsoid3DPaint;
+            const ellipsoidPaint3d = paint as Partial<Ellipsoid3DPaint>;
             promises.push(this._addEllipsoid(x, ellipsoidPaint3d));
           } else if (paint.type === 'sphere') {
-            const spherePaint3d = paint as Sphere3DPaint;
-            const spherePaint3dMerge = paint as Ellipsoid3DPaint;
+            const spherePaint3d = paint as Partial<Sphere3DPaint>;
+            const spherePaint3dMerge = paint as Partial<Sphere3DPaint>;
             const radius = spherePaint3d.radius;
             const ellipsoidPaint3d = {
               ...spherePaint3dMerge,
@@ -297,7 +297,10 @@ export class GeoJsonAdapter
     }
   }
 
-  private _addEllipsoid(obj: Feature, paint: Ellipsoid3DPaint): Promise<void> {
+  private _addEllipsoid(
+    obj: Feature,
+    paint: Partial<Ellipsoid3DPaint>,
+  ): Promise<void> {
     const source = this._source;
     if (!source) {
       return Promise.reject();
