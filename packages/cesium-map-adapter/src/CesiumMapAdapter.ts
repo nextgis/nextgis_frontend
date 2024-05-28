@@ -263,6 +263,23 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
   }
 
   getZoom(): number | undefined {
+    const viewer = this.map;
+    if (viewer) {
+      const cameraHeight = viewer.camera.positionCartographic.height;
+      const maxZoom = 22;
+      const minZoom = 0;
+
+      const maxHeight = 20000000; // Corresponds to zoom level 0 (approximately)
+      const minHeight = 100; // Corresponds to zoom level 22 (approximately)
+
+      const zoom =
+        maxZoom -
+        ((Math.log(cameraHeight) - Math.log(minHeight)) /
+          (Math.log(maxHeight) - Math.log(minHeight))) *
+          (maxZoom - minZoom);
+
+      return Math.max(minZoom, Math.min(maxZoom, zoom));
+    }
     return undefined;
   }
 
