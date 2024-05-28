@@ -16,7 +16,12 @@ import {
   getIdentifyItems,
   sendIdentifyRequest,
 } from '@nextgis/ngw-kit';
-import { defined, getIdentifyRadius, isObject } from '@nextgis/utils';
+import {
+  defined,
+  getCirclePolygonCoordinates,
+  getIdentifyRadius,
+  isObject,
+} from '@nextgis/utils';
 import { deprecatedWarn } from '@nextgis/utils';
 import { WebMap } from '@nextgis/webmap';
 
@@ -60,7 +65,7 @@ import type {
   OnLayerMouseOptions,
   WebMapEvents,
 } from '@nextgis/webmap';
-import type { Feature, FeatureCollection, Geometry } from 'geojson';
+import type { Feature, FeatureCollection, Geometry, Polygon } from 'geojson';
 import type StrictEventEmitter from 'strict-event-emitter-types';
 
 type PromiseGroup = 'select' | 'identify';
@@ -582,10 +587,35 @@ export class NgwMap<
     }
     const radius = getIdentifyRadius(center, zoom, pixelRadius);
 
+    let geom: Polygon | undefined;
+    if (this.options.highlightIdentification) {
+      const highlightOptions = this.options.highlightIdentification;
+      const highlightDuration =
+        typeof highlightOptions === 'number' ? highlightOptions : 1000;
+      const [lng, lat] = ev.lngLat;
+      geom = {
+        type: 'Polygon',
+        coordinates: [getCirclePolygonCoordinates(lng, lat, radius)],
+      };
+
+      const highlightIdentificationLayer = await this.addGeoJsonLayer({
+        data: {
+          type: 'Feature',
+          geometry: geom,
+        },
+      });
+      if (highlightDuration !== Infinity) {
+        setTimeout(() => {
+          this.removeLayer(highlightIdentificationLayer);
+        }, highlightDuration);
+      }
+    }
+
     const selectPromise = sendIdentifyRequest(ev, {
       layers: ids,
       connector: this.connector,
       radius,
+      geom,
     }).then((resp) => {
       const identify: NgwIdentify = {
         ...resp,

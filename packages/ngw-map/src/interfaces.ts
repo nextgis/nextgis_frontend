@@ -115,6 +115,8 @@ export interface NgwMapOptions<M = any, C = any> extends MapOptions<M, C> {
   runtimeParams?: RuntimeParams[];
 
   setViewDelay?: number;
+
+  highlightIdentification?: boolean | number;
 }
 
 export interface NgwMapEvents extends WebMapEvents {
