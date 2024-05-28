@@ -91,7 +91,16 @@ export class GeoJsonAdapter
     if (opt.data) {
       this.addData(opt.data);
     }
+
     return source;
+  }
+
+  removeLayer(): void {
+    const viewer = this.map;
+    if (viewer && this._source) {
+      viewer.dataSources.remove(this._source);
+      this.map.scene.requestRender();
+    }
   }
 
   beforeRemove() {
