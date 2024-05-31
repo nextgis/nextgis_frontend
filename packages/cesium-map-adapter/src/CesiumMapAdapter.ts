@@ -263,6 +263,23 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
   }
 
   getZoom(): number | undefined {
+    const viewer = this.map;
+    if (viewer) {
+      const cameraHeight = viewer.camera.positionCartographic.height;
+      const maxZoom = 22;
+      const minZoom = 0;
+
+      const maxHeight = 20000000; // Corresponds to zoom level 0 (approximately)
+      const minHeight = 100; // Corresponds to zoom level 22 (approximately)
+
+      const zoom =
+        maxZoom -
+        ((Math.log(cameraHeight) - Math.log(minHeight)) /
+          (Math.log(maxHeight) - Math.log(minHeight))) *
+          (maxZoom - minZoom);
+
+      return Math.max(minZoom, Math.min(maxZoom, zoom));
+    }
     return undefined;
   }
 
@@ -512,12 +529,23 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
           this.emitter.emit('preclick');
           const ct2 = e.position as Cartesian2;
           const scene = viewer.scene;
-          const ellipsoid = viewer.scene.globe.ellipsoid;
-          // Mouse over the globe to see the cartographic position
-          const cartesian = viewer.camera.pickEllipsoid(
-            new Cartesian3(ct2.x, ct2.y),
-            ellipsoid,
-          );
+          const globe = viewer.scene.globe;
+
+          let cartesian: Cartesian3 | undefined;
+
+          const ray = viewer.camera.getPickRay(ct2);
+          if (ray) {
+            // Use globe.pick to get the cartesian position on the terrain
+            cartesian = globe.pick(ray, scene);
+          } else {
+            cartesian = scene.pickPositionSupported
+              ? viewer.scene.pickPosition(ct2)
+              : viewer.camera.pickEllipsoid(
+                  new Cartesian3(ct2.x, ct2.y),
+                  viewer.scene.globe.ellipsoid,
+                );
+          }
+
           const top = scene.canvas.clientHeight - ct2.y;
           const clickData: CesiumAdapterMapClickEvent = {
             pixel: { left: ct2.x, top, bottom: ct2.y },
@@ -528,16 +556,8 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
               ...e,
             },
           };
-          if (viewer.scene.pickPositionSupported) {
-            const pickedPosition = viewer.scene.pickPosition(e.position);
-            if (pickedPosition) {
-              clickData.source.pickedPosition = pickedPosition;
-              const pickedPositionLngLat = cartesian3ToLngLat(pickedPosition);
-              clickData.source.pickedPositionLngLat = pickedPositionLngLat;
-              clickData.lngLat = pickedPositionLngLat;
-            }
-          }
-          const picked = viewer.scene.pick(e.position);
+
+          const picked = viewer.scene.pick(ct2);
           const isEntityPicked = picked && picked.id instanceof Entity;
           // Stop propagation for click event on any entry picked
           if (!isEntityPicked) {
