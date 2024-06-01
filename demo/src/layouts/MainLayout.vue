@@ -125,7 +125,7 @@ onMounted(() => {
 
 <template>
   <q-layout>
-    <q-header elevated class="text-black">
+    <q-header elevated class="text-black header__container-1">
       <q-toolbar>
         <q-btn flat round dense @click="drawer = !drawer" aria-label="Menu">
           <q-icon name="mdi-menu" />
@@ -207,3 +207,10 @@ onMounted(() => {
     </q-page-container>
   </q-layout>
 </template>
+
+<style lang="scss">
+.header__container-1 {
+    background-color: #e5eef7;
+    border-bottom: 1px solid #d3e3f2;
+}
+</style>
