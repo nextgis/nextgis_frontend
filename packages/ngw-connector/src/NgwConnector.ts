@@ -50,18 +50,17 @@ export class NgwConnector {
     ResourceNotFoundError,
   };
   id = ID++;
-
   emitter = new EventEmitter();
   user?: UserInfo;
-
   resources!: ResourcesControl;
-
+  cache: Cache;
   private routeStr = '/api/component/pyramid/route';
   private activeRequests: CancelablePromise[] = [];
   private requestTransform?: RequestTransformFunction | null;
 
   constructor(public options: NgwConnectorOptions) {
     const exist = findConnector(options);
+    this.cache = new Cache({ namespace: options.cacheId });
     if (exist) {
       return exist;
     } else {
@@ -71,13 +70,24 @@ export class NgwConnector {
       if (this.options.requestTransform) {
         this.requestTransform = this.options.requestTransform;
       }
-      this.resources = new ResourcesControl(this);
+      this.resources = new ResourcesControl({
+        connector: this,
+        cacheId: options.cacheId,
+      });
       addConnector(this);
     }
   }
 
   static create(options: NgwConnectorOptions): NgwConnector {
     return new this(options);
+  }
+
+  /**
+   * Clear the cache.
+   */
+  clearCache(): void {
+    this.cache.clean();
+    this.resources.cache.clean();
   }
 
   setRequestTransform(
@@ -111,7 +121,6 @@ export class NgwConnector {
    * ```
    */
   connect(): CancelablePromise<PyramidRoute> {
-    const cache = new Cache();
     const auth = this.options.auth;
     const makeConnect = () =>
       new CancelablePromise((resolve, reject) => {
@@ -136,7 +145,7 @@ export class NgwConnector {
         }
         return makeQuery();
       });
-    return cache.add('route', makeConnect, {
+    return this.cache.add('route', makeConnect, {
       id: this.id,
       auth,
       baseUrl: this.options.baseUrl,
@@ -164,8 +173,8 @@ export class NgwConnector {
     removeConnector(this);
     this.options.auth = undefined;
     this.user = undefined;
+    this.clearCache();
     this.emitter.emit('logout');
-    this.resources.cache.clean();
   }
 
   getUserInfo(
@@ -276,8 +285,7 @@ export class NgwConnector {
     const makeApiRequest = () =>
       apiRequest({ name, params, requestOptions, connector: this });
     if (requestOptions.cache && method === 'GET') {
-      const cache = new Cache<CancelablePromise<P[K]>>();
-      return cache.add(name, makeApiRequest, {
+      return this.cache.add(name, makeApiRequest, {
         params,
         ...objectRemoveEmpty({
           headers,

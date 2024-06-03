@@ -17,12 +17,22 @@ import type { Resource, ResourceItem } from './types/ResourceItem';
 import type { DeepPartial } from '@nextgis/utils';
 
 export class ResourcesControl {
-  cache = new Cache<
+  cache: Cache<
     CancelablePromise<ResourceItem | undefined>,
     { id?: number | string }
-  >();
+  >;
+  connector: NgwConnector;
 
-  constructor(private connector: NgwConnector) {}
+  constructor({
+    connector,
+    cacheId,
+  }: {
+    connector: NgwConnector;
+    cacheId?: string;
+  }) {
+    this.connector = connector;
+    this.cache = new Cache({ namespace: cacheId });
+  }
 
   // -------------------------------------------------------------------------
   // Resource Methods
@@ -39,7 +49,7 @@ export class ResourcesControl {
     resource: ResourceDefinition,
     requestOptions?: RequestOptions<'GET'>,
   ): CancelablePromise<ResourceItem | undefined> {
-    const cache = new Cache();
+    const cache = this.cache;
     const forCache: { keyname?: string; display_name?: string; id?: number } =
       {};
     const opt = { ...requestOptions, cache: false };
