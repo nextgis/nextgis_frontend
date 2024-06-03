@@ -1,7 +1,9 @@
 import { full, objectDeepEqual, objectRemoveEmpty } from '@nextgis/utils';
 
 type CacheValue<T> = T;
-type CacheMatchProps<T> = Record<keyof T, T[keyof T]>;
+type CacheMatchProps<T> = {
+  [P in keyof T]?: T[P];
+};
 
 interface CacheItem<T = any, O = any> {
   key: string;
