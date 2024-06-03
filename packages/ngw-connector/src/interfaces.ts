@@ -152,6 +152,7 @@ export interface NgwConnectorOptions {
   route?: string;
   auth?: Credentials;
   requestTransform?: RequestTransformFunction;
+  cacheId?: string;
 }
 
 export interface RequestHeaders {
