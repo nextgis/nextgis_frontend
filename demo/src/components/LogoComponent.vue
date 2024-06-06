@@ -77,7 +77,7 @@
         top: 18px;
         width: 130px;
         height: 17.69px;
-        vertical-align: middle;
+        vertical-align: text-top;
     }
     
     .logo-pic .logo-pic__item--dark , .logo-pic .logo-pic__item--light {
@@ -100,7 +100,7 @@
       width: 2px; 
       background-color: #aec8e0; /* Divider's color */
       margin: 0 10px; /* Divider's margins */
-      vertical-align: middle;
+      vertical-align: text-top;
     }
     
     /* Title "Frontend" */
@@ -113,7 +113,7 @@
         font-family: Ubuntu, Roboto, sans-serif;
         line-height: 1.2;
         letter-spacing: -.4px;
-        vertical-align: middle;
+        vertical-align: text-top;
     }
     
     /* Spacer to Git-icon */
