@@ -60,6 +60,11 @@ export type CreateWmsConnectedLayerOptions = ResourceCreateOptions &
 
 export interface NgwUploadOptions extends NgwConnectorOptions {
   connector?: NgwConnector;
+  /**
+   * Flag to indicate whether to use the TUS protocol for uploading files in chunks.
+   * @default true
+   * */
+  useTus?: boolean;
 }
 
 export interface RasterUploadResp {

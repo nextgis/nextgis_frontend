@@ -8,6 +8,7 @@
   "unpkg": "lib/ngw-uploader.global.prod.js",
   "jsdelivr": "lib/ngw-uploader.global.prod.js",
   "types": "lib/index.d.ts",
+  "type": "module",
   "dependencies": {
     "@nextgis/cancelable-promise": "^2.1.0",
     "@nextgis/dialog": "^2.0.2",
@@ -18,7 +19,7 @@
     "@types/events": "^3.0.0",
     "color": "^4.1.0",
     "events": "*",
-    "tus-js-client": "^2.3.0"
+    "tus-js-client": "^4.1.0"
   },
   "devDependencies": {
     "@nextgis/build-tools": "^2.0.2"

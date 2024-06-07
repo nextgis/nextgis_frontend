@@ -3,6 +3,7 @@ import { EventEmitter } from 'events';
 import CancelablePromise from '@nextgis/cancelable-promise';
 import NgwConnector from '@nextgis/ngw-connector';
 import { fixUrlStr, isObject } from '@nextgis/utils';
+import { Upload as TusUpload } from 'tus-js-client';
 
 import { createStyleName, nameFromOpt } from './utils/createName';
 import { createResourceOptions } from './utils/createResourceOptions';
@@ -32,23 +33,15 @@ import type {
   WmsClientLayer,
   WmsServerServiceLayer,
 } from '@nextgis/ngw-connector';
-import type { Upload } from 'tus-js-client';
 
 type FileType = File | Buffer | { file: File | Buffer; name: string };
-
-let TusUpload: typeof Upload | undefined;
-try {
-  const tus = require('tus-js-client');
-  TusUpload = tus.Upload;
-} catch (er) {
-  // console.log('tus not founded');
-}
 
 const DEFAULT_CHUNK_SIZE = 16 * 2 ** 20; // 16Mb
 
 export class NgwUploader {
   options: NgwUploadOptions = {
     baseUrl: '',
+    useTus: true,
   };
 
   emitter = new EventEmitter();
@@ -331,9 +324,8 @@ export class NgwUploader {
       };
       this.emitter.emit('status:change', eventProgress);
     };
-    const TU = TusUpload;
 
-    if (TU) {
+    if (this.options.useTus) {
       return connector.connect().then((routers) => {
         const endpoint = routers['file_upload.collection'];
 
@@ -353,7 +345,7 @@ export class NgwUploader {
           const baseUrl = connector.options.baseUrl || '';
           const url = baseUrl + endpoint[0];
 
-          const uploader = new TU(file as File, {
+          const uploader = new TusUpload(file as File, {
             endpoint: fixUrlStr(url),
             storeFingerprintForResuming: false,
             chunkSize: DEFAULT_CHUNK_SIZE,
