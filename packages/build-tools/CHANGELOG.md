@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/nextgis/nextgis_frontend/compare/v2.2.3...v2.3.0) (2024-06-07)
+
+
+### Bug Fixes
+
+* **build-tools:** fix rollup config to resolve node modules in browser ([4f9c6b6](https://github.com/nextgis/nextgis_frontend/commit/4f9c6b6d7ba2e04f4a3e7dc5a0fb3601ed5a3443))
+
+
+
+
+
 ## [2.0.2](https://github.com/nextgis/nextgis_frontend/compare/v2.0.1...v2.0.2) (2024-03-20)
 
 **Note:** Version bump only for package @nextgis/build-tools

@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/nextgis/nextgis_frontend/compare/v2.2.3...v2.3.0) (2024-06-07)
+
+
+### Bug Fixes
+
+* **cesium-map-adapter:** put mouse click on terrain ([fabb08a](https://github.com/nextgis/nextgis_frontend/commit/fabb08acab638f9bf20542f1d0904a62cae4a718))
+
+
+### Features
+
+* **cesium-map-adapter:** implement geojson adapter removeLayer method ([8151a19](https://github.com/nextgis/nextgis_frontend/commit/8151a198ff0bfd4ac8d305cd69a3733d39439d1a))
+* **cesium-map-adapter:** implement getZoom method ([96ab1c7](https://github.com/nextgis/nextgis_frontend/commit/96ab1c756c3db315f9c1070800d9d35f0e1d10f1))
+
+
+
+
+
 ## [2.2.3](https://github.com/nextgis/nextgis_frontend/compare/v2.2.2...v2.2.3) (2024-05-06)
 
 **Note:** Version bump only for package @nextgis/cesium-map-adapter

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/nextgis/nextgis_frontend/compare/v2.2.3...v2.3.0) (2024-06-07)
+
+
+### Features
+
+* **ngw-connector:** implement clearCache method ([17428b1](https://github.com/nextgis/nextgis_frontend/commit/17428b175ecf40b88ecc8fdfbfaf910fa0fc9fb1))
+
+
+
+
+
 ## [2.2.3](https://github.com/nextgis/nextgis_frontend/compare/v2.2.2...v2.2.3) (2024-05-06)
 
 **Note:** Version bump only for package @nextgis/ngw-connector

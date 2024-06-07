@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/nextgis/nextgis_frontend/compare/v2.2.3...v2.3.0) (2024-06-07)
+
+
+### Features
+
+* **ngw-map:** add identify highlight possibility ([40b3f90](https://github.com/nextgis/nextgis_frontend/commit/40b3f908637cadc764585bb41f39c1ece993ab2a))
+
+
+
+
+
 ## [2.2.3](https://github.com/nextgis/nextgis_frontend/compare/v2.2.2...v2.2.3) (2024-05-06)
 
 **Note:** Version bump only for package @nextgis/ngw-map

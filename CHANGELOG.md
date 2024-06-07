@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/nextgis/nextgis_frontend/compare/v2.2.3...v2.3.0) (2024-06-07)
+
+
+### Bug Fixes
+
+* **build-tools:** fix rollup config to resolve node modules in browser ([4f9c6b6](https://github.com/nextgis/nextgis_frontend/commit/4f9c6b6d7ba2e04f4a3e7dc5a0fb3601ed5a3443))
+* **cesium-map-adapter:** put mouse click on terrain ([fabb08a](https://github.com/nextgis/nextgis_frontend/commit/fabb08acab638f9bf20542f1d0904a62cae4a718))
+
+
+### Features
+
+* **cesium-map-adapter:** implement geojson adapter removeLayer method ([8151a19](https://github.com/nextgis/nextgis_frontend/commit/8151a198ff0bfd4ac8d305cd69a3733d39439d1a))
+* **cesium-map-adapter:** implement getZoom method ([96ab1c7](https://github.com/nextgis/nextgis_frontend/commit/96ab1c756c3db315f9c1070800d9d35f0e1d10f1))
+* **ngw-connector:** implement clearCache method ([17428b1](https://github.com/nextgis/nextgis_frontend/commit/17428b175ecf40b88ecc8fdfbfaf910fa0fc9fb1))
+* **ngw-map:** add identify highlight possibility ([40b3f90](https://github.com/nextgis/nextgis_frontend/commit/40b3f908637cadc764585bb41f39c1ece993ab2a))
+* **ngw-uploader:** add useTus option ([ef9e06f](https://github.com/nextgis/nextgis_frontend/commit/ef9e06f0f8235bd9a116a14fbaecea84872c5a2b))
+
+
+
+
+
 ## [2.2.3](https://github.com/nextgis/nextgis_frontend/compare/v2.2.2...v2.2.3) (2024-05-06)
 
 
