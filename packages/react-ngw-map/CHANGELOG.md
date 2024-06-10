@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.4.0](https://github.com/nextgis/nextgis_frontend/compare/v2.3.0...v2.4.0) (2024-06-10)
+
+
+### Bug Fixes
+
+* **react-ngw-map:** react strict mode improvement ([60e6a18](https://github.com/nextgis/nextgis_frontend/commit/60e6a187a4217c7609893ddf7e47286a1e054625))
+
+
+
+
+
 # [2.3.0](https://github.com/nextgis/nextgis_frontend/compare/v2.2.3...v2.3.0) (2024-06-07)
 
 **Note:** Version bump only for package @nextgis/react-ngw-map
