@@ -10,20 +10,22 @@ export function useMapElement(
 ): NgwMap | null {
   const { center, zoom, bounds, maxBounds, maxZoom } = props;
   const isReady = useRef(false);
+  const isStarting = useRef(false);
   const [ngwMap, setNgwMap] = useState<NgwMap | null>(null);
 
   useEffect(() => {
-    if (!mapRef.current || ngwMap) return;
-
+    if (isStarting.current || !mapRef.current || ngwMap) return;
+    isStarting.current = true;
     const newNgwMap = new NgwMap({
       target: mapRef.current,
       ...props,
     });
     newNgwMap.onLoad().then(() => {
       isReady.current = true;
+      isStarting.current = false;
     });
     setNgwMap(newNgwMap);
-  }, [mapRef]);
+  }, []);
 
   useEffect(() => {
     if (!ngwMap) return;
