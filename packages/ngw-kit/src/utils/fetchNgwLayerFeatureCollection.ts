@@ -7,9 +7,7 @@ import type { FeatureCollection, Geometry } from 'geojson';
 export function fetchNgwLayerFeatureCollection<
   G extends Geometry | null = Geometry,
   P extends FeatureProperties = FeatureProperties,
->(
-  options: FetchNgwItemsOptions<P>,
-): Promise<FeatureCollection<G, P>> {
+>(options: FetchNgwItemsOptions<P>): Promise<FeatureCollection<G, P>> {
   return fetchNgwLayerFeatures<G, P>(options).then((features) => {
     const featureCollection: FeatureCollection<G, P> = {
       type: 'FeatureCollection',

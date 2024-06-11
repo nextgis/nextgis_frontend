@@ -19,7 +19,6 @@ import type {
   TreeGroup,
   TreeLayer,
 } from './interfaces';
-
 import type { ItemOptions } from '@nextgis/item';
 import type {
   BaseRequestOptions,
@@ -378,7 +377,9 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
     return item;
   }
 
-  private async _getWebMapIds(options?: BaseRequestOptions): Promise<number[] | undefined> {
+  private async _getWebMapIds(
+    options?: BaseRequestOptions,
+  ): Promise<number[] | undefined> {
     const webMapItem = this.layer;
     if (webMapItem && webMapItem.item.item_type === 'root') {
       const layers = webMapItem.tree.getDescendants();
@@ -387,13 +388,15 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
         const item = x.item;
         if (item.item_type === 'layer') {
           const id = item.layer_style_id;
-          const promise = this.options.connector.getResource(id, options).then((y) => {
-            if (y) {
-              const parentId = Number(y.resource.parent.id);
-              item.parentId = parentId;
-              return parentId;
-            }
-          });
+          const promise = this.options.connector
+            .getResource(id, options)
+            .then((y) => {
+              if (y) {
+                const parentId = Number(y.resource.parent.id);
+                item.parentId = parentId;
+                return parentId;
+              }
+            });
           promises.push(promise);
         }
       }

@@ -16,10 +16,7 @@ import type { Resource, ResourceItem } from './types/ResourceItem';
 import type { DeepPartial } from '@nextgis/utils';
 
 export class ResourcesControl {
-  cache: Cache<
-    Promise<ResourceItem | undefined>,
-    { id?: number | string }
-  >;
+  cache: Cache<Promise<ResourceItem | undefined>, { id?: number | string }>;
   connector: NgwConnector;
 
   constructor({

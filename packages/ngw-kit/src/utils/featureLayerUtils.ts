@@ -82,9 +82,7 @@ export function createFeatureFieldFilterQueries<
   opt: FetchNgwItemsOptions<P> &
     Required<Pick<FetchNgwItemsOptions, 'filters'>>,
 ): Promise<FeatureItem<P, G>[]> {
-  const queries: Promise<FeatureItem<P, G>[]>[] = getQueries<G, P>(
-    opt,
-  );
+  const queries: Promise<FeatureItem<P, G>[]>[] = getQueries<G, P>(opt);
 
   return Promise.all(queries).then((itemsParts) => {
     // this list of ids used for optimization

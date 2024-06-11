@@ -26,11 +26,7 @@ export function fetchNgwLayerItem<
     ...params,
   };
   return options.connector
-    .get(
-      'feature_layer.feature.item',
-      options,
-      queryParams,
-    )
+    .get('feature_layer.feature.item', options, queryParams)
     .then((resp) => {
       return {
         ...resp,
