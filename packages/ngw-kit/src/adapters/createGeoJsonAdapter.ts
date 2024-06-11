@@ -17,7 +17,7 @@ import type {
   NgwFeatureRequestOptions,
   NgwLayerOptions,
 } from '../interfaces';
-import type CancelablePromise from '@nextgis/cancelable-promise';
+
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type { LngLatBoundsArray, Type } from '@nextgis/utils';
 import type {
@@ -52,7 +52,7 @@ export async function createGeoJsonAdapter(
   const _loadedIds: string[] = [];
   let _fullDataLoad = false;
   let _lastFilterArgs: FilterArgs | undefined;
-  let _dataPromise: CancelablePromise<FeatureCollection> | undefined;
+  let internalAbortController: AbortController | undefined;
 
   const resourceId = await resourceIdFromLayerOptions(options, connector);
 
@@ -67,21 +67,30 @@ export async function createGeoJsonAdapter(
     filterOpt?: NgwFeatureRequestOptions,
   ) => {
     abort();
+
+    internalAbortController = new AbortController();
+    const internalSignal = internalAbortController.signal;
+
+    if (filterOpt?.signal) {
+      filterOpt.signal.addEventListener('abort', internalAbortController.abort);
+    }
+    filterOpt = filterOpt || {};
+    filterOpt.signal = internalSignal;
+
     _lastFilterArgs = { filters, options: filterOpt };
-    _dataPromise = fetchNgwLayerFeatureCollection({
+    return fetchNgwLayerFeatureCollection({
       resourceId,
       filters,
       connector,
       cache: true,
       ...filterOpt,
     });
-    return await _dataPromise;
   };
   let removed = false;
   const abort = () => {
-    if (_dataPromise) {
-      _dataPromise.cancel();
-      _dataPromise = undefined;
+    if (internalAbortController) {
+      internalAbortController.abort();
+      internalAbortController = undefined;
     }
   };
 

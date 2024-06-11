@@ -6,7 +6,7 @@ import { BaseProvider } from './BaseProvider';
 import type { BaseProviderOptions } from './BaseProviderOptions';
 import type { ResultItem } from '../types/ResultItem';
 import type { SearchItem } from '../types/SearchItem';
-import type CancelablePromise from '@nextgis/cancelable-promise';
+
 import type {
   FeatureItem,
   NgwConnectorOptions,
@@ -148,7 +148,7 @@ export class NgwProvider extends BaseProvider<NgwProviderOptions> {
     }
   }
 
-  result(item: NgwSearchItem): CancelablePromise<ResultItem> {
+  result(item: NgwSearchItem): Promise<ResultItem> {
     const signal = this._makeSignal();
     const req = this.connector
       .get(

@@ -1,10 +1,8 @@
-import CancelablePromise from '@nextgis/cancelable-promise';
-
 import { createGeoJsonFeature } from './utils/featureLayerUtils';
 import { fetchNgwLayerItem } from './utils/fetchNgwLayerItem';
 
 import type NgwConnector from '@nextgis/ngw-connector';
-import type { FeatureItem } from '@nextgis/ngw-connector';
+import type { FeatureItem, RequestOptions } from '@nextgis/ngw-connector';
 import type { LngLatBoundsArray } from '@nextgis/utils';
 import type { Feature, Point } from 'geojson';
 
@@ -33,12 +31,12 @@ export class BookmarkItem {
     }
   }
 
-  extent(): CancelablePromise<LngLatBoundsArray> {
+  extent(opt?: RequestOptions<'GET'>): Promise<LngLatBoundsArray> {
     if (this._extent) {
-      return CancelablePromise.resolve(this._extent);
+      return Promise.resolve(this._extent);
     }
     return this.options.connector
-      .get('feature_layer.feature.item_extent', null, {
+      .get('feature_layer.feature.item_extent', opt, {
         id: this.resourceId,
         fid: this.item.id,
       })
@@ -50,9 +48,11 @@ export class BookmarkItem {
       });
   }
 
-  geoJson(): CancelablePromise<Feature<Point, any>> {
+  geoJson(
+    opt?: Pick<RequestOptions<'GET'>, 'cache' | 'signal'>,
+  ): Promise<Feature<Point, any>> {
     if (this.item.geom) {
-      return CancelablePromise.resolve(createGeoJsonFeature(this.item));
+      return Promise.resolve(createGeoJsonFeature(this.item));
     } else {
       return fetchNgwLayerItem({
         resourceId: this.resourceId,
@@ -61,6 +61,7 @@ export class BookmarkItem {
         geom: true,
         fields: null,
         extensions: null,
+        ...opt,
       }).then((onlyGeomItem) => {
         const geom = onlyGeomItem.geom;
         this.item.geom = geom;

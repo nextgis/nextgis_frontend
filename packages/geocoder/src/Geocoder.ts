@@ -1,5 +1,3 @@
-import CancelablePromise from '@nextgis/cancelable-promise';
-
 import { BaseGeocoder } from './BaseGeocoder';
 
 import type { GeocoderOptions } from './GeocoderOptions';
@@ -55,11 +53,11 @@ export class Geocoder extends BaseGeocoder<GeocoderOptions> {
     }
   }
 
-  result(item: SearchItem): CancelablePromise<any> {
+  result(item: SearchItem): Promise<any> {
     if (item.provider) {
       return item.provider.result(item);
     }
-    return CancelablePromise.resolve(undefined);
+    return Promise.resolve(undefined);
   }
 
   async *reverse(

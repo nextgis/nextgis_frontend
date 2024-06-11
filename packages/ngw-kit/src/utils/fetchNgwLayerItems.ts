@@ -8,7 +8,6 @@ import {
 import { prepareNgwFieldsToPropertiesFilter } from './prepareNgwFieldsToPropertiesFilter';
 
 import type { FetchNgwItemsOptions } from '../interfaces';
-import type CancelablePromise from '@nextgis/cancelable-promise';
 import type { FeatureItem } from '@nextgis/ngw-connector';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type { FeatureProperties } from '@nextgis/utils';
@@ -17,7 +16,7 @@ import type { Geometry } from 'geojson';
 export function fetchNgwLayerItems<
   G extends Geometry = Geometry,
   P extends FeatureProperties = FeatureProperties,
->(options: FetchNgwItemsOptions<P>): CancelablePromise<FeatureItem<P, G>[]> {
+>(options: FetchNgwItemsOptions<P>): Promise<FeatureItem<P, G>[]> {
   const filters = options.filters;
   if (filters) {
     return createFeatureFieldFilterQueries({
@@ -38,7 +37,7 @@ export function fetchNgwLayerItems<
         });
       }
       return data;
-    }) as CancelablePromise<FeatureItem<P, G>[]>;
+    }) as Promise<FeatureItem<P, G>[]>;
   } else {
     return fetchNgwLayerItemsRequest<G, P>(options);
   }

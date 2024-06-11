@@ -169,10 +169,15 @@ export type NgwExceptions =
   | 'nextgisweb.resource.exception.ResourceNotFound'
   | 'nextgisweb.core.exception.InsufficientPermissions';
 
+export interface BaseRequestOptions {
+  cache?: boolean;
+  signal?: AbortSignal;
+}
+
 export interface RequestOptions<
   M extends RequestMethods = RequestMethods,
   K extends keyof RequestItemsParamsMap = keyof RequestItemsParamsMap,
-> {
+> extends BaseRequestOptions {
   data?: any;
   file?: File;
   method?: M;

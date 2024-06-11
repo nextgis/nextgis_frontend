@@ -1,5 +1,3 @@
-import CancelablePromise from '@nextgis/cancelable-promise';
-
 import type {
   FetchNgwLayerExtentOptions,
   FetchNgwLayerItemExtentOptions,
@@ -31,11 +29,10 @@ export function fetchNgwLayerExtent({
   resourceId,
   connector,
   cache = true,
-}: FetchNgwLayerExtentOptions): CancelablePromise<
-  LngLatBoundsArray | undefined
-> {
+  signal,
+}: FetchNgwLayerExtentOptions): Promise<LngLatBoundsArray | undefined> {
   return connector
-    .get('layer.extent', { cache }, { id: resourceId })
+    .get('layer.extent', { cache, signal }, { id: resourceId })
     .then((resp) => {
       if (resp) {
         const { maxLat, maxLon, minLat, minLon } = resp.extent;
@@ -50,13 +47,12 @@ export function fetchNgwLayerItemExtent({
   featureId,
   connector,
   cache = true,
-}: FetchNgwLayerItemExtentOptions): CancelablePromise<
-  LngLatBoundsArray | undefined
-> {
+  signal,
+}: FetchNgwLayerItemExtentOptions): Promise<LngLatBoundsArray | undefined> {
   return connector
     .get(
       'feature_layer.feature.item_extent',
-      { cache },
+      { cache, signal },
       { id: resourceId, fid: featureId },
     )
     .then((resp) => {
@@ -70,12 +66,17 @@ export function fetchNgwLayerItemExtent({
 
 export function fetchNgwExtent(
   options: FetchNgwLayerExtentOptions,
-): CancelablePromise<LngLatBoundsArray | undefined> {
-  return options.connector.getResource(options.resourceId).then((resource) => {
-    if (resource) {
-      return fetchNgwResourceExtent(resource, options.connector, options);
-    }
-  });
+): Promise<LngLatBoundsArray | undefined> {
+  return options.connector
+    .getResource(options.resourceId, {
+      signal: options.signal,
+      cache: options.cache,
+    })
+    .then((resource) => {
+      if (resource) {
+        return fetchNgwResourceExtent(resource, options.connector, options);
+      }
+    });
 }
 
 /** @deprecated use {@link fetchNgwExtent} instead */
@@ -83,13 +84,13 @@ export function fetchNgwResourceExtent(
   item: ResourceItem,
   connector: NgwConnector,
   options?: FetchNgwLayerExtentOptions,
-): CancelablePromise<LngLatBoundsArray | undefined> {
+): Promise<LngLatBoundsArray | undefined> {
   if (item.webmap) {
-    return CancelablePromise.resolve(getNgwWebmapExtent(item.webmap));
+    return Promise.resolve(getNgwWebmapExtent(item.webmap));
   } else {
     const resource = item.resource;
     if (resource.cls && resource.cls.indexOf('style') !== -1) {
-      return connector.getResource(resource.parent.id).then((res) => {
+      return connector.getResource(resource.parent.id, options).then((res) => {
         if (res) {
           return fetchNgwLayerExtent({
             ...options,

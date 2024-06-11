@@ -1,7 +1,6 @@
 import { EventEmitter } from 'events';
 
 import Cache from '@nextgis/cache';
-import CancelablePromise from '@nextgis/cancelable-promise';
 import { objectRemoveEmpty } from '@nextgis/utils';
 import { fixUrlStr } from '@nextgis/utils';
 
@@ -55,7 +54,10 @@ export class NgwConnector {
   resources!: ResourcesControl;
   cache: Cache;
   private routeStr = '/api/component/pyramid/route';
-  private activeRequests: CancelablePromise[] = [];
+  private activeRequests: {
+    promise: Promise<unknown>;
+    abortController: AbortController;
+  }[] = [];
   private requestTransform?: RequestTransformFunction | null;
 
   constructor(public options: NgwConnectorOptions) {
@@ -120,10 +122,10 @@ export class NgwConnector {
    *   .catch((er) => console.log('Connection problem', er));
    * ```
    */
-  connect(): CancelablePromise<PyramidRoute> {
+  connect(): Promise<PyramidRoute> {
     const auth = this.options.auth;
     const makeConnect = () =>
-      new CancelablePromise((resolve, reject) => {
+      new Promise<PyramidRoute>((resolve, reject) => {
         const makeQuery = () => {
           return this.makeQuery<PyramidRoute>(this.routeStr, {}, {})
             .then((route) => {
@@ -156,10 +158,7 @@ export class NgwConnector {
    * Quick way to change NextGIS Web user.
    * @param credentials - New user credentials
    */
-  login(
-    credentials: Credentials,
-    options?: RequestOptions,
-  ): CancelablePromise<UserInfo> {
+  login(credentials: Credentials, options?: RequestOptions): Promise<UserInfo> {
     this.logout();
     addConnector(this);
     return this._login(credentials, options);
@@ -180,16 +179,15 @@ export class NgwConnector {
   getUserInfo(
     credentials?: Credentials,
     options?: RequestOptions,
-  ): CancelablePromise<UserInfo> {
+  ): Promise<UserInfo> {
     if (this.user && this.user.id) {
-      return CancelablePromise.resolve(this.user);
+      return Promise.resolve(this.user);
     }
     if (credentials) {
       this.options.auth = credentials;
     }
     const options_: RequestOptions = {
       headers: this.getAuthorizationHeaders(credentials),
-      // withCredentials: true
       ...options,
     };
 
@@ -231,8 +229,9 @@ export class NgwConnector {
 
   /** Stop all api requests */
   abort() {
-    for (const req of this.activeRequests) {
-      req.cancel();
+    for (const { abortController } of this.activeRequests) {
+      abortController.abort();
+
     }
     this.activeRequests = [];
   }
@@ -277,13 +276,14 @@ export class NgwConnector {
     name: K,
     params_: RequestItemsParams<K> = {},
     requestOptions: RequestOptions = {},
-  ): CancelablePromise<P[K]> {
+  ): Promise<P[K]> {
     const { method, headers, withCredentials, responseType } = requestOptions;
 
     params_ = requestOptions.params ?? params_;
     const params = objectRemoveEmpty(params_);
     const makeApiRequest = () =>
       apiRequest({ name, params, requestOptions, connector: this });
+
     if (requestOptions.cache && method === 'GET') {
       return this.cache.add(name, makeApiRequest, {
         params,
@@ -316,7 +316,7 @@ export class NgwConnector {
     name: K,
     options?: RequestOptions<'POST', K>,
     params?: RequestItemsParams<K>,
-  ): CancelablePromise<PostRequestItemsResponseMap[K]> {
+  ): Promise<PostRequestItemsResponseMap[K]> {
     options = options || {};
     options.method = 'POST';
     return this.apiRequest<K, PostRequestItemsResponseMap>(
@@ -336,7 +336,7 @@ export class NgwConnector {
     name: K,
     options?: RequestOptions<'GET', K> | undefined | null,
     params?: RequestItemsParams<K>,
-  ): CancelablePromise<GetRequestItemsResponseMap[K]> {
+  ): Promise<GetRequestItemsResponseMap[K]> {
     options = options || {};
     options.method = 'GET';
     return this.apiRequest<K, GetRequestItemsResponseMap>(
@@ -356,7 +356,7 @@ export class NgwConnector {
     name: K,
     options?: RequestOptions<'PATCH', K>,
     params?: RequestItemsParams<K>,
-  ): CancelablePromise<PatchRequestItemsResponseMap[K]> {
+  ): Promise<PatchRequestItemsResponseMap[K]> {
     options = options || {};
     options.method = 'PATCH';
     return this.apiRequest<K, PatchRequestItemsResponseMap>(
@@ -376,7 +376,7 @@ export class NgwConnector {
     name: K,
     options?: RequestOptions<'PUT', K>,
     params?: RequestItemsParams<K>,
-  ): CancelablePromise<PutRequestItemsResponseMap[K]> {
+  ): Promise<PutRequestItemsResponseMap[K]> {
     options = options || {};
     options.method = 'PUT';
     return this.apiRequest<K, PutRequestItemsResponseMap>(
@@ -396,7 +396,7 @@ export class NgwConnector {
     name: K,
     options?: RequestOptions<'DELETE', K> | undefined | null,
     params?: RequestItemsParams<K>,
-  ): CancelablePromise<DeleteRequestItemsResponseMap[K]> {
+  ): Promise<DeleteRequestItemsResponseMap[K]> {
     options = options || {};
     options.method = 'DELETE';
     return this.apiRequest<K, DeleteRequestItemsResponseMap>(
@@ -416,14 +416,14 @@ export class NgwConnector {
     url: string,
     params?: Params | null,
     options: RequestOptions = {},
-  ): CancelablePromise<R> {
+  ): Promise<R> {
     url = (this.options.baseUrl ? this.options.baseUrl : '') + url;
     if (url) {
       if (params) {
         url = template(url, params);
       }
       url = encodeURI(fixUrlStr(url));
-      return this._loadData(url, options);
+      return this._loadData<R>(url, options);
     } else {
       throw new Error('Empty `url` not allowed');
     }
@@ -439,7 +439,7 @@ export class NgwConnector {
   getResource(
     resource: ResourceDefinition,
     requestOptions?: RequestOptions<'GET'>,
-  ): CancelablePromise<ResourceItem | undefined> {
+  ): Promise<ResourceItem | undefined> {
     return this.resources.getOne(resource, requestOptions);
   }
 
@@ -449,7 +449,7 @@ export class NgwConnector {
   getResourceOrFail(
     resource: ResourceDefinition,
     requestOptions?: RequestOptions<'GET'>,
-  ): CancelablePromise<ResourceItem> {
+  ): Promise<ResourceItem> {
     return this.resources.getOneOrFail(resource, requestOptions);
   }
 
@@ -458,23 +458,21 @@ export class NgwConnector {
    */
   getResourceBy(
     resource: DeepPartial<Resource>,
-  ): CancelablePromise<ResourceItem | undefined> {
+  ): Promise<ResourceItem | undefined> {
     return this.resources.getOne(resource);
   }
 
   /**
    * @deprecated - use {@link getResource}
    */
-  getResourceByKeyname(
-    keyname: string,
-  ): CancelablePromise<ResourceItem | undefined> {
+  getResourceByKeyname(keyname: string): Promise<ResourceItem | undefined> {
     return this.resources.getOne(keyname);
   }
 
   /**
    * @deprecated - use {@link getResource}
    */
-  getResourceById(id: number): CancelablePromise<ResourceItem | undefined> {
+  getResourceById(id: number): Promise<ResourceItem | undefined> {
     return this.resources.getOne(id);
   }
 
@@ -484,7 +482,7 @@ export class NgwConnector {
   getResourceId(
     resource: ResourceDefinition,
     requestOptions?: RequestOptions<'GET'>,
-  ): CancelablePromise<number | undefined> {
+  ): Promise<number | undefined> {
     return this.resources.getId(resource, requestOptions);
   }
 
@@ -494,7 +492,7 @@ export class NgwConnector {
   getResourceIdOrFail(
     resource: ResourceDefinition,
     requestOptions?: RequestOptions<'GET'>,
-  ): CancelablePromise<number> {
+  ): Promise<number> {
     return this.resources.getIdOrFail(resource, requestOptions);
   }
 
@@ -504,7 +502,7 @@ export class NgwConnector {
   getResourcesBy(
     resource: DeepPartial<Resource>,
     requestOptions?: RequestOptions<'GET'>,
-  ): CancelablePromise<ResourceItem[]> {
+  ): Promise<ResourceItem[]> {
     return this.resources.getMany(resource, requestOptions);
   }
 
@@ -514,7 +512,7 @@ export class NgwConnector {
   getResourceParent(
     resource: ResourceDefinition,
     requestOptions?: RequestOptions<'GET'>,
-  ): CancelablePromise<ResourceItem | undefined> {
+  ): Promise<ResourceItem | undefined> {
     return this.resources.getParent(resource, requestOptions);
   }
 
@@ -524,7 +522,7 @@ export class NgwConnector {
   getResourceChildren(
     resource: ResourceDefinition,
     requestOptions?: GetChildrenOfOptions,
-  ): CancelablePromise<ResourceItem[]> {
+  ): Promise<ResourceItem[]> {
     return this.resources.getChildrenOf(resource, requestOptions);
   }
 
@@ -534,33 +532,44 @@ export class NgwConnector {
   updateResource(
     resource: ResourceIdKeynameDef,
     data: DeepPartial<ResourceItem>,
-  ): CancelablePromise<ResourceItem | undefined> {
+  ): Promise<ResourceItem | undefined> {
     return this.resources.update(resource, data);
   }
 
   /**
    * {@link ResourcesControl.delete}
    */
-  deleteResource(resource: ResourceIdKeynameDef): CancelablePromise<void> {
+  deleteResource(resource: ResourceIdKeynameDef): Promise<void> {
     return this.resources.delete(resource);
   }
 
   /**
    * @internal
    */
-  protected _loadData(
+  protected _loadData<R = unknown>(
     url: string,
     options: RequestOptions,
-  ): CancelablePromise<any> {
+  ): Promise<R> {
     options.responseType = options.responseType || 'json';
-    if (options.signal && options.signal.aborted) {
-      return CancelablePromise.reject(new CancelablePromise.CancelError());
+
+    const { signal: externalSignal } = options;
+
+    const internalAbortController = new AbortController();
+    const internalSignal = internalAbortController.signal;
+
+    // If the external signal aborts, also abort the internal signal
+    if (externalSignal) {
+      if (externalSignal.aborted) {
+        return Promise.reject(new Error('AbortError'));
+      }
+      externalSignal.addEventListener('abort', internalAbortController.abort);
     }
 
-    const request = new CancelablePromise((resolve, reject, onCancel) => {
+    options.signal = internalSignal;
+
+    const promise = new Promise<R>((resolve, reject) => {
       if (this.user) {
         options = options || {};
-        // options.withCredentials = true;
         options.headers = {
           ...this.getAuthorizationHeaders(),
           ...options.headers,
@@ -572,17 +581,30 @@ export class NgwConnector {
         url = transUrl;
         options = transOptions;
       }
-      loadData(url, resolve, options, reject, onCancel);
+
+      let runOnAbort: (() => void) | undefined = undefined;
+
+      loadData(url, resolve, options, reject, (handler: () => void) => {
+        runOnAbort = handler;
+      });
+
+      internalAbortController.signal.addEventListener('abort', () => {
+        if (runOnAbort !== undefined) {
+          runOnAbort();
+        }
+        externalSignal?.removeEventListener(
+          'abort',
+          internalAbortController.abort,
+        );
+      });
     })
       .then((resp) => {
-        this._cleanActiveRequests(request);
+        this._cleanActiveRequests(promise);
         return resp;
       })
       .catch((httpError) => {
-        this._cleanActiveRequests(request);
-        if (httpError instanceof CancelablePromise.CancelError) {
-          // not need to handle cancel error because onCancel method is used
-        } else {
+        this._cleanActiveRequests(promise);
+        if (httpError.name !== 'AbortError') {
           if (__DEV__) {
             console.warn('DEV WARN', httpError);
           }
@@ -591,24 +613,20 @@ export class NgwConnector {
             throw er;
           }
         }
+        throw httpError;
       });
-    if (
-      options.signal &&
-      typeof options.signal.addEventListener === 'function'
-    ) {
-      options.signal.addEventListener('abort', () => {
-        request.cancel();
-        this._cleanActiveRequests(request);
-      });
-    }
-    this.activeRequests.push(request);
-    return request;
+
+    this.activeRequests.push({
+      promise,
+      abortController: internalAbortController,
+    });
+    return promise;
   }
 
   private _login(
     credentials: Credentials,
     options?: RequestOptions,
-  ): CancelablePromise<UserInfo> {
+  ): Promise<UserInfo> {
     return this.getUserInfo(credentials, options)
       .then((data) => {
         this.user = data;
@@ -621,8 +639,10 @@ export class NgwConnector {
       });
   }
 
-  private _cleanActiveRequests(request: CancelablePromise) {
-    const activeRequestIndex = this.activeRequests.indexOf(request);
+  private _cleanActiveRequests(promise: Promise<unknown>) {
+    const activeRequestIndex = this.activeRequests.findIndex(
+      (req) => req.promise === promise,
+    );
     if (activeRequestIndex !== -1) {
       this.activeRequests.splice(activeRequestIndex, 1);
     }
