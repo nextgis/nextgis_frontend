@@ -41,163 +41,163 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/aix-ppc64@npm:0.20.2":
-  version: 0.20.2
-  resolution: "@esbuild/aix-ppc64@npm:0.20.2"
+"@esbuild/aix-ppc64@npm:0.21.4":
+  version: 0.21.4
+  resolution: "@esbuild/aix-ppc64@npm:0.21.4"
   conditions: os=aix & cpu=ppc64
   languageName: node
   linkType: hard
 
-"@esbuild/android-arm64@npm:0.20.2":
-  version: 0.20.2
-  resolution: "@esbuild/android-arm64@npm:0.20.2"
+"@esbuild/android-arm64@npm:0.21.4":
+  version: 0.21.4
+  resolution: "@esbuild/android-arm64@npm:0.21.4"
   conditions: os=android & cpu=arm64
   languageName: node
   linkType: hard
 
-"@esbuild/android-arm@npm:0.20.2":
-  version: 0.20.2
-  resolution: "@esbuild/android-arm@npm:0.20.2"
+"@esbuild/android-arm@npm:0.21.4":
+  version: 0.21.4
+  resolution: "@esbuild/android-arm@npm:0.21.4"
   conditions: os=android & cpu=arm
   languageName: node
   linkType: hard
 
-"@esbuild/android-x64@npm:0.20.2":
-  version: 0.20.2
-  resolution: "@esbuild/android-x64@npm:0.20.2"
+"@esbuild/android-x64@npm:0.21.4":
+  version: 0.21.4
+  resolution: "@esbuild/android-x64@npm:0.21.4"
   conditions: os=android & cpu=x64
   languageName: node
   linkType: hard
 
-"@esbuild/darwin-arm64@npm:0.20.2":
-  version: 0.20.2
-  resolution: "@esbuild/darwin-arm64@npm:0.20.2"
+"@esbuild/darwin-arm64@npm:0.21.4":
+  version: 0.21.4
+  resolution: "@esbuild/darwin-arm64@npm:0.21.4"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@esbuild/darwin-x64@npm:0.20.2":
-  version: 0.20.2
-  resolution: "@esbuild/darwin-x64@npm:0.20.2"
+"@esbuild/darwin-x64@npm:0.21.4":
+  version: 0.21.4
+  resolution: "@esbuild/darwin-x64@npm:0.21.4"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@esbuild/freebsd-arm64@npm:0.20.2":
-  version: 0.20.2
-  resolution: "@esbuild/freebsd-arm64@npm:0.20.2"
+"@esbuild/freebsd-arm64@npm:0.21.4":
+  version: 0.21.4
+  resolution: "@esbuild/freebsd-arm64@npm:0.21.4"
   conditions: os=freebsd & cpu=arm64
   languageName: node
   linkType: hard
 
-"@esbuild/freebsd-x64@npm:0.20.2":
-  version: 0.20.2
-  resolution: "@esbuild/freebsd-x64@npm:0.20.2"
+"@esbuild/freebsd-x64@npm:0.21.4":
+  version: 0.21.4
+  resolution: "@esbuild/freebsd-x64@npm:0.21.4"
   conditions: os=freebsd & cpu=x64
   languageName: node
   linkType: hard
 
-"@esbuild/linux-arm64@npm:0.20.2":
-  version: 0.20.2
-  resolution: "@esbuild/linux-arm64@npm:0.20.2"
+"@esbuild/linux-arm64@npm:0.21.4":
+  version: 0.21.4
+  resolution: "@esbuild/linux-arm64@npm:0.21.4"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"@esbuild/linux-arm@npm:0.20.2":
-  version: 0.20.2
-  resolution: "@esbuild/linux-arm@npm:0.20.2"
+"@esbuild/linux-arm@npm:0.21.4":
+  version: 0.21.4
+  resolution: "@esbuild/linux-arm@npm:0.21.4"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"@esbuild/linux-ia32@npm:0.20.2":
-  version: 0.20.2
-  resolution: "@esbuild/linux-ia32@npm:0.20.2"
+"@esbuild/linux-ia32@npm:0.21.4":
+  version: 0.21.4
+  resolution: "@esbuild/linux-ia32@npm:0.21.4"
   conditions: os=linux & cpu=ia32
   languageName: node
   linkType: hard
 
-"@esbuild/linux-loong64@npm:0.20.2":
-  version: 0.20.2
-  resolution: "@esbuild/linux-loong64@npm:0.20.2"
+"@esbuild/linux-loong64@npm:0.21.4":
+  version: 0.21.4
+  resolution: "@esbuild/linux-loong64@npm:0.21.4"
   conditions: os=linux & cpu=loong64
   languageName: node
   linkType: hard
 
-"@esbuild/linux-mips64el@npm:0.20.2":
-  version: 0.20.2
-  resolution: "@esbuild/linux-mips64el@npm:0.20.2"
+"@esbuild/linux-mips64el@npm:0.21.4":
+  version: 0.21.4
+  resolution: "@esbuild/linux-mips64el@npm:0.21.4"
   conditions: os=linux & cpu=mips64el
   languageName: node
   linkType: hard
 
-"@esbuild/linux-ppc64@npm:0.20.2":
-  version: 0.20.2
-  resolution: "@esbuild/linux-ppc64@npm:0.20.2"
+"@esbuild/linux-ppc64@npm:0.21.4":
+  version: 0.21.4
+  resolution: "@esbuild/linux-ppc64@npm:0.21.4"
   conditions: os=linux & cpu=ppc64
   languageName: node
   linkType: hard
 
-"@esbuild/linux-riscv64@npm:0.20.2":
-  version: 0.20.2
-  resolution: "@esbuild/linux-riscv64@npm:0.20.2"
+"@esbuild/linux-riscv64@npm:0.21.4":
+  version: 0.21.4
+  resolution: "@esbuild/linux-riscv64@npm:0.21.4"
   conditions: os=linux & cpu=riscv64
   languageName: node
   linkType: hard
 
-"@esbuild/linux-s390x@npm:0.20.2":
-  version: 0.20.2
-  resolution: "@esbuild/linux-s390x@npm:0.20.2"
+"@esbuild/linux-s390x@npm:0.21.4":
+  version: 0.21.4
+  resolution: "@esbuild/linux-s390x@npm:0.21.4"
   conditions: os=linux & cpu=s390x
   languageName: node
   linkType: hard
 
-"@esbuild/linux-x64@npm:0.20.2":
-  version: 0.20.2
-  resolution: "@esbuild/linux-x64@npm:0.20.2"
+"@esbuild/linux-x64@npm:0.21.4":
+  version: 0.21.4
+  resolution: "@esbuild/linux-x64@npm:0.21.4"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
-"@esbuild/netbsd-x64@npm:0.20.2":
-  version: 0.20.2
-  resolution: "@esbuild/netbsd-x64@npm:0.20.2"
+"@esbuild/netbsd-x64@npm:0.21.4":
+  version: 0.21.4
+  resolution: "@esbuild/netbsd-x64@npm:0.21.4"
   conditions: os=netbsd & cpu=x64
   languageName: node
   linkType: hard
 
-"@esbuild/openbsd-x64@npm:0.20.2":
-  version: 0.20.2
-  resolution: "@esbuild/openbsd-x64@npm:0.20.2"
+"@esbuild/openbsd-x64@npm:0.21.4":
+  version: 0.21.4
+  resolution: "@esbuild/openbsd-x64@npm:0.21.4"
   conditions: os=openbsd & cpu=x64
   languageName: node
   linkType: hard
 
-"@esbuild/sunos-x64@npm:0.20.2":
-  version: 0.20.2
-  resolution: "@esbuild/sunos-x64@npm:0.20.2"
+"@esbuild/sunos-x64@npm:0.21.4":
+  version: 0.21.4
+  resolution: "@esbuild/sunos-x64@npm:0.21.4"
   conditions: os=sunos & cpu=x64
   languageName: node
   linkType: hard
 
-"@esbuild/win32-arm64@npm:0.20.2":
-  version: 0.20.2
-  resolution: "@esbuild/win32-arm64@npm:0.20.2"
+"@esbuild/win32-arm64@npm:0.21.4":
+  version: 0.21.4
+  resolution: "@esbuild/win32-arm64@npm:0.21.4"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@esbuild/win32-ia32@npm:0.20.2":
-  version: 0.20.2
-  resolution: "@esbuild/win32-ia32@npm:0.20.2"
+"@esbuild/win32-ia32@npm:0.21.4":
+  version: 0.21.4
+  resolution: "@esbuild/win32-ia32@npm:0.21.4"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"@esbuild/win32-x64@npm:0.20.2":
-  version: 0.20.2
-  resolution: "@esbuild/win32-x64@npm:0.20.2"
+"@esbuild/win32-x64@npm:0.21.4":
+  version: 0.21.4
+  resolution: "@esbuild/win32-x64@npm:0.21.4"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
@@ -503,28 +503,28 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis/area@workspace:packages/area"
   dependencies:
-    "@nextgis/build-tools": ^2.0.2
-    "@nextgis/utils": ^2.2.3
+    "@nextgis/build-tools": ^2.3.0
+    "@nextgis/utils": ^2.3.0
   languageName: unknown
   linkType: soft
 
-"@nextgis/build-tools@^2.0.2, @nextgis/build-tools@workspace:packages/build-tools":
+"@nextgis/build-tools@^2.3.0, @nextgis/build-tools@workspace:packages/build-tools":
   version: 0.0.0-use.local
   resolution: "@nextgis/build-tools@workspace:packages/build-tools"
   dependencies:
     "@nextgis/eslint-config": ^2.0.2
     "@rollup/plugin-alias": ^5.1.0
-    "@rollup/plugin-commonjs": ^25.0.7
+    "@rollup/plugin-commonjs": ^26.0.1
     "@rollup/plugin-image": ^3.0.3
     "@rollup/plugin-json": ^6.1.0
     "@rollup/plugin-node-resolve": ^15.2.3
-    "@rollup/plugin-replace": ^5.0.5
+    "@rollup/plugin-replace": ^5.0.7
     "@rollup/plugin-terser": ^0.4.4
     "@types/cssnano": ^5.1.0
     autoprefixer: ^10.4.17
     chalk: ^5.3.0
     cssnano: ^6.0.5
-    esbuild: ^0.20.1
+    esbuild: ^0.21.4
     execa: ^8.0.1
     postcss: ^8.4.35
     postcss-url: ^10.1.3
@@ -542,22 +542,22 @@ __metadata:
   linkType: soft
 
 "@nextgis/build-tools@file:../build-tools::locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter":
-  version: 2.0.2
-  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=aeda08&locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter"
+  version: 2.3.0
+  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=69887b&locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter"
   dependencies:
     "@nextgis/eslint-config": ^2.0.2
     "@rollup/plugin-alias": ^5.1.0
-    "@rollup/plugin-commonjs": ^25.0.7
+    "@rollup/plugin-commonjs": ^26.0.1
     "@rollup/plugin-image": ^3.0.3
     "@rollup/plugin-json": ^6.1.0
     "@rollup/plugin-node-resolve": ^15.2.3
-    "@rollup/plugin-replace": ^5.0.5
+    "@rollup/plugin-replace": ^5.0.7
     "@rollup/plugin-terser": ^0.4.4
     "@types/cssnano": ^5.1.0
     autoprefixer: ^10.4.17
     chalk: ^5.3.0
     cssnano: ^6.0.5
-    esbuild: ^0.20.1
+    esbuild: ^0.21.4
     execa: ^8.0.1
     postcss: ^8.4.35
     postcss-url: ^10.1.3
@@ -570,27 +570,27 @@ __metadata:
     rollup-plugin-terser: ^7.0.2
     rollup-plugin-typescript2: ^0.36.0
     typescript: ~5.1
-  checksum: a96459abc4088728532611fe0bdb3333e48fd8c60261d15f45384f0c1f53986ee1f14cb62edb365699f2ae4fbb6da529952d014632d334fb23652aafb07b3270
+  checksum: 35e8005a04cd7629e35c3f43b0c7c13609d34f2434460b2687dda4107fe86ee76965adbc36b7cdbc8b1b9dfc6d295ee7d8dc7191479e38319196c70f46cca1ec
   languageName: node
   linkType: hard
 
 "@nextgis/build-tools@file:../build-tools::locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium":
-  version: 2.0.2
-  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=aeda08&locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium"
+  version: 2.3.0
+  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=69887b&locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium"
   dependencies:
     "@nextgis/eslint-config": ^2.0.2
     "@rollup/plugin-alias": ^5.1.0
-    "@rollup/plugin-commonjs": ^25.0.7
+    "@rollup/plugin-commonjs": ^26.0.1
     "@rollup/plugin-image": ^3.0.3
     "@rollup/plugin-json": ^6.1.0
     "@rollup/plugin-node-resolve": ^15.2.3
-    "@rollup/plugin-replace": ^5.0.5
+    "@rollup/plugin-replace": ^5.0.7
     "@rollup/plugin-terser": ^0.4.4
     "@types/cssnano": ^5.1.0
     autoprefixer: ^10.4.17
     chalk: ^5.3.0
     cssnano: ^6.0.5
-    esbuild: ^0.20.1
+    esbuild: ^0.21.4
     execa: ^8.0.1
     postcss: ^8.4.35
     postcss-url: ^10.1.3
@@ -603,37 +603,37 @@ __metadata:
     rollup-plugin-terser: ^7.0.2
     rollup-plugin-typescript2: ^0.36.0
     typescript: ~5.1
-  checksum: a96459abc4088728532611fe0bdb3333e48fd8c60261d15f45384f0c1f53986ee1f14cb62edb365699f2ae4fbb6da529952d014632d334fb23652aafb07b3270
+  checksum: 35e8005a04cd7629e35c3f43b0c7c13609d34f2434460b2687dda4107fe86ee76965adbc36b7cdbc8b1b9dfc6d295ee7d8dc7191479e38319196c70f46cca1ec
   languageName: node
   linkType: hard
 
-"@nextgis/cache@^2.2.3, @nextgis/cache@workspace:packages/cache":
+"@nextgis/cache@^2.3.0, @nextgis/cache@workspace:packages/cache":
   version: 0.0.0-use.local
   resolution: "@nextgis/cache@workspace:packages/cache"
   dependencies:
-    "@nextgis/build-tools": ^2.0.2
-    "@nextgis/utils": ^2.2.3
+    "@nextgis/build-tools": ^2.3.0
+    "@nextgis/utils": ^2.3.0
   languageName: unknown
   linkType: soft
 
-"@nextgis/cancelable-promise@^2.1.0, @nextgis/cancelable-promise@workspace:packages/cancelable-promise":
+"@nextgis/cancelable-promise@^2.3.0, @nextgis/cancelable-promise@workspace:packages/cancelable-promise":
   version: 0.0.0-use.local
   resolution: "@nextgis/cancelable-promise@workspace:packages/cancelable-promise"
   dependencies:
-    "@nextgis/build-tools": ^2.0.2
+    "@nextgis/build-tools": ^2.3.0
   languageName: unknown
   linkType: soft
 
-"@nextgis/cesium-map-adapter@^2.2.3, @nextgis/cesium-map-adapter@workspace:packages/cesium-map-adapter":
+"@nextgis/cesium-map-adapter@^2.3.0, @nextgis/cesium-map-adapter@workspace:packages/cesium-map-adapter":
   version: 0.0.0-use.local
   resolution: "@nextgis/cesium-map-adapter@workspace:packages/cesium-map-adapter"
   dependencies:
     "@nextgis/build-tools": "file:../build-tools"
-    "@nextgis/control-container": ^2.2.3
-    "@nextgis/dom": ^2.0.2
-    "@nextgis/paint": ^2.2.3
-    "@nextgis/utils": ^2.2.3
-    "@nextgis/webmap": ^2.2.3
+    "@nextgis/control-container": ^2.3.0
+    "@nextgis/dom": ^2.3.0
+    "@nextgis/paint": ^2.3.0
+    "@nextgis/utils": ^2.3.0
+    "@nextgis/webmap": ^2.3.0
     "@types/events": ^3.0.0
     events: "*"
   peerDependencies:
@@ -641,33 +641,33 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/control-container@^2.2.3, @nextgis/control-container@workspace:packages/control-container":
+"@nextgis/control-container@^2.3.0, @nextgis/control-container@workspace:packages/control-container":
   version: 0.0.0-use.local
   resolution: "@nextgis/control-container@workspace:packages/control-container"
   dependencies:
-    "@nextgis/build-tools": ^2.0.2
-    "@nextgis/dom": ^2.0.2
-    "@nextgis/utils": ^2.2.3
-    "@nextgis/webmap": ^2.2.3
+    "@nextgis/build-tools": ^2.3.0
+    "@nextgis/dom": ^2.3.0
+    "@nextgis/utils": ^2.3.0
+    "@nextgis/webmap": ^2.3.0
     "@types/events": ^3.0.0
     events: "*"
   languageName: unknown
   linkType: soft
 
-"@nextgis/dialog@^2.0.2, @nextgis/dialog@workspace:packages/dialog":
+"@nextgis/dialog@^2.3.0, @nextgis/dialog@workspace:packages/dialog":
   version: 0.0.0-use.local
   resolution: "@nextgis/dialog@workspace:packages/dialog"
   dependencies:
-    "@nextgis/build-tools": ^2.0.2
+    "@nextgis/build-tools": ^2.3.0
     dialog-polyfill: ^0.5.6
   languageName: unknown
   linkType: soft
 
-"@nextgis/dom@^2.0.2, @nextgis/dom@workspace:packages/dom":
+"@nextgis/dom@^2.3.0, @nextgis/dom@workspace:packages/dom":
   version: 0.0.0-use.local
   resolution: "@nextgis/dom@workspace:packages/dom"
   dependencies:
-    "@nextgis/build-tools": ^2.0.2
+    "@nextgis/build-tools": ^2.3.0
   languageName: unknown
   linkType: soft
 
@@ -685,11 +685,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/expression@^2.0.2, @nextgis/expression@workspace:packages/expression":
+"@nextgis/expression@^2.3.0, @nextgis/expression@workspace:packages/expression":
   version: 0.0.0-use.local
   resolution: "@nextgis/expression@workspace:packages/expression"
   dependencies:
-    "@nextgis/build-tools": ^2.0.2
+    "@nextgis/build-tools": ^2.3.0
   languageName: unknown
   linkType: soft
 
@@ -697,46 +697,46 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis/geocoder@workspace:packages/geocoder"
   dependencies:
-    "@nextgis/build-tools": ^2.0.2
-    "@nextgis/cancelable-promise": ^2.1.0
-    "@nextgis/ngw-connector": ^2.2.3
-    "@nextgis/ngw-kit": ^2.2.3
-    "@nextgis/utils": ^2.2.3
+    "@nextgis/build-tools": ^2.3.0
+    "@nextgis/cancelable-promise": ^2.3.0
+    "@nextgis/ngw-connector": ^2.4.0
+    "@nextgis/ngw-kit": ^2.4.0
+    "@nextgis/utils": ^2.3.0
     "@types/events": ^3.0.0
     "@types/geojson": ^7946.0.14
     events: "*"
   languageName: unknown
   linkType: soft
 
-"@nextgis/icons@^2.2.3, @nextgis/icons@workspace:packages/icons":
+"@nextgis/icons@^2.3.0, @nextgis/icons@workspace:packages/icons":
   version: 0.0.0-use.local
   resolution: "@nextgis/icons@workspace:packages/icons"
   dependencies:
-    "@nextgis/build-tools": ^2.0.2
-    "@nextgis/paint": ^2.2.3
+    "@nextgis/build-tools": ^2.3.0
+    "@nextgis/paint": ^2.3.0
   languageName: unknown
   linkType: soft
 
-"@nextgis/item@^2.2.3, @nextgis/item@workspace:packages/item":
+"@nextgis/item@^2.3.0, @nextgis/item@workspace:packages/item":
   version: 0.0.0-use.local
   resolution: "@nextgis/item@workspace:packages/item"
   dependencies:
-    "@nextgis/build-tools": ^2.0.2
-    "@nextgis/tree": ^2.2.3
+    "@nextgis/build-tools": ^2.3.0
+    "@nextgis/tree": ^2.3.0
     "@types/events": ^3.0.0
     events: "*"
   languageName: unknown
   linkType: soft
 
-"@nextgis/leaflet-map-adapter@^2.2.3, @nextgis/leaflet-map-adapter@workspace:packages/leaflet-map-adapter":
+"@nextgis/leaflet-map-adapter@^2.3.0, @nextgis/leaflet-map-adapter@workspace:packages/leaflet-map-adapter":
   version: 0.0.0-use.local
   resolution: "@nextgis/leaflet-map-adapter@workspace:packages/leaflet-map-adapter"
   dependencies:
-    "@nextgis/build-tools": ^2.0.2
-    "@nextgis/paint": ^2.2.3
-    "@nextgis/queue": ^2.2.1
-    "@nextgis/utils": ^2.2.3
-    "@nextgis/webmap": ^2.2.3
+    "@nextgis/build-tools": ^2.3.0
+    "@nextgis/paint": ^2.3.0
+    "@nextgis/queue": ^2.3.0
+    "@nextgis/utils": ^2.3.0
+    "@nextgis/webmap": ^2.3.0
     "@types/events": ^3.0.0
     "@types/geojson": ^7946.0.14
     "@types/leaflet": ^1.7.5
@@ -752,19 +752,19 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis/logging@workspace:packages/logging"
   dependencies:
-    "@nextgis/build-tools": ^2.0.2
-    "@nextgis/ngw-connector": ^2.2.3
+    "@nextgis/build-tools": ^2.3.0
+    "@nextgis/ngw-connector": ^2.4.0
   languageName: unknown
   linkType: soft
 
-"@nextgis/maplibre-gl-map-adapter@^2.2.3, @nextgis/maplibre-gl-map-adapter@workspace:packages/maplibre-gl-map-adapter":
+"@nextgis/maplibre-gl-map-adapter@^2.3.0, @nextgis/maplibre-gl-map-adapter@workspace:packages/maplibre-gl-map-adapter":
   version: 0.0.0-use.local
   resolution: "@nextgis/maplibre-gl-map-adapter@workspace:packages/maplibre-gl-map-adapter"
   dependencies:
-    "@nextgis/build-tools": ^2.0.2
-    "@nextgis/paint": ^2.2.3
-    "@nextgis/properties-filter": ^2.2.3
-    "@nextgis/webmap": ^2.2.3
+    "@nextgis/build-tools": ^2.3.0
+    "@nextgis/paint": ^2.3.0
+    "@nextgis/properties-filter": ^2.3.0
+    "@nextgis/webmap": ^2.3.0
     "@types/events": ^3.0.0
     "@types/geojson": ^7946.0.14
     "@types/polylabel": ^1.0.5
@@ -785,40 +785,40 @@ __metadata:
   resolution: "@nextgis/ngw-cesium@workspace:packages/ngw-cesium"
   dependencies:
     "@nextgis/build-tools": "file:../build-tools"
-    "@nextgis/cesium-map-adapter": ^2.2.3
-    "@nextgis/ngw-map": ^2.2.3
+    "@nextgis/cesium-map-adapter": ^2.3.0
+    "@nextgis/ngw-map": ^2.4.0
     "@types/events": ^3.0.0
     cesium: 1.96.0
     events: "*"
   languageName: unknown
   linkType: soft
 
-"@nextgis/ngw-connector@^2.2.3, @nextgis/ngw-connector@workspace:packages/ngw-connector":
+"@nextgis/ngw-connector@^2.4.0, @nextgis/ngw-connector@workspace:packages/ngw-connector":
   version: 0.0.0-use.local
   resolution: "@nextgis/ngw-connector@workspace:packages/ngw-connector"
   dependencies:
-    "@nextgis/build-tools": ^2.0.2
-    "@nextgis/cache": ^2.2.3
-    "@nextgis/cancelable-promise": ^2.1.0
-    "@nextgis/utils": ^2.2.3
+    "@nextgis/build-tools": ^2.3.0
+    "@nextgis/cache": ^2.3.0
+    "@nextgis/cancelable-promise": ^2.3.0
+    "@nextgis/utils": ^2.3.0
     "@types/events": ^3.0.0
     events: "*"
     form-data: ^4.0.0
   languageName: unknown
   linkType: soft
 
-"@nextgis/ngw-kit@^2.2.3, @nextgis/ngw-kit@workspace:packages/ngw-kit":
+"@nextgis/ngw-kit@^2.4.0, @nextgis/ngw-kit@workspace:packages/ngw-kit":
   version: 0.0.0-use.local
   resolution: "@nextgis/ngw-kit@workspace:packages/ngw-kit"
   dependencies:
-    "@nextgis/build-tools": ^2.0.2
-    "@nextgis/cancelable-promise": ^2.1.0
-    "@nextgis/item": ^2.2.3
-    "@nextgis/ngw-connector": ^2.2.3
-    "@nextgis/properties-filter": ^2.2.3
-    "@nextgis/qms-kit": ^2.2.3
-    "@nextgis/utils": ^2.2.3
-    "@nextgis/webmap": ^2.2.3
+    "@nextgis/build-tools": ^2.3.0
+    "@nextgis/cancelable-promise": ^2.3.0
+    "@nextgis/item": ^2.3.0
+    "@nextgis/ngw-connector": ^2.4.0
+    "@nextgis/properties-filter": ^2.3.0
+    "@nextgis/qms-kit": ^2.3.0
+    "@nextgis/utils": ^2.3.0
+    "@nextgis/webmap": ^2.3.0
     "@types/events": ^3.0.0
     events: "*"
     strict-event-emitter-types: ^2.0.0
@@ -829,24 +829,24 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis/ngw-leaflet@workspace:packages/ngw-leaflet"
   dependencies:
-    "@nextgis/build-tools": ^2.0.2
-    "@nextgis/leaflet-map-adapter": ^2.2.3
-    "@nextgis/ngw-map": ^2.2.3
+    "@nextgis/build-tools": ^2.3.0
+    "@nextgis/leaflet-map-adapter": ^2.3.0
+    "@nextgis/ngw-map": ^2.4.0
     leaflet.wms: "*"
   languageName: unknown
   linkType: soft
 
-"@nextgis/ngw-map@^2.2.3, @nextgis/ngw-map@workspace:packages/ngw-map":
+"@nextgis/ngw-map@^2.4.0, @nextgis/ngw-map@workspace:packages/ngw-map":
   version: 0.0.0-use.local
   resolution: "@nextgis/ngw-map@workspace:packages/ngw-map"
   dependencies:
-    "@nextgis/build-tools": ^2.0.2
-    "@nextgis/icons": ^2.2.3
-    "@nextgis/ngw-connector": ^2.2.3
-    "@nextgis/ngw-kit": ^2.2.3
-    "@nextgis/qms-kit": ^2.2.3
-    "@nextgis/utils": ^2.2.3
-    "@nextgis/webmap": ^2.2.3
+    "@nextgis/build-tools": ^2.3.0
+    "@nextgis/icons": ^2.3.0
+    "@nextgis/ngw-connector": ^2.4.0
+    "@nextgis/ngw-kit": ^2.4.0
+    "@nextgis/qms-kit": ^2.3.0
+    "@nextgis/utils": ^2.3.0
+    "@nextgis/webmap": ^2.3.0
     "@types/events": ^3.0.0
     events: "*"
     strict-event-emitter-types: ^2.0.0
@@ -857,9 +857,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis/ngw-maplibre-gl@workspace:packages/ngw-maplibre-gl"
   dependencies:
-    "@nextgis/build-tools": ^2.0.2
-    "@nextgis/maplibre-gl-map-adapter": ^2.2.3
-    "@nextgis/ngw-map": ^2.2.3
+    "@nextgis/build-tools": ^2.3.0
+    "@nextgis/maplibre-gl-map-adapter": ^2.3.0
+    "@nextgis/ngw-map": ^2.4.0
   languageName: unknown
   linkType: soft
 
@@ -867,9 +867,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis/ngw-ol@workspace:packages/ngw-ol"
   dependencies:
-    "@nextgis/build-tools": ^2.0.2
-    "@nextgis/ngw-map": ^2.2.3
-    "@nextgis/ol-map-adapter": ^2.2.3
+    "@nextgis/build-tools": ^2.3.0
+    "@nextgis/ngw-map": ^2.4.0
+    "@nextgis/ol-map-adapter": ^2.3.0
     "@types/events": ^3.0.0
     events: "*"
   languageName: unknown
@@ -879,11 +879,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis/ngw-orm@workspace:packages/ngw-orm"
   dependencies:
-    "@nextgis/build-tools": ^2.0.2
-    "@nextgis/ngw-connector": ^2.2.3
-    "@nextgis/ngw-kit": ^2.2.3
-    "@nextgis/utils": ^2.2.3
-    "@nextgis/webmap": ^2.2.3
+    "@nextgis/build-tools": ^2.3.0
+    "@nextgis/ngw-connector": ^2.4.0
+    "@nextgis/ngw-kit": ^2.4.0
+    "@nextgis/utils": ^2.3.0
+    "@nextgis/webmap": ^2.3.0
     reflect-metadata: ^0.1.13
   languageName: unknown
   linkType: soft
@@ -892,44 +892,44 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis/ngw-uploader-input@workspace:packages/ngw-uploader-input"
   dependencies:
-    "@nextgis/build-tools": ^2.0.2
-    "@nextgis/dialog": ^2.0.2
-    "@nextgis/ngw-connector": ^2.2.3
-    "@nextgis/ngw-uploader": ^2.2.3
+    "@nextgis/build-tools": ^2.3.0
+    "@nextgis/dialog": ^2.3.0
+    "@nextgis/ngw-connector": ^2.4.0
+    "@nextgis/ngw-uploader": ^2.4.0
     "@types/events": ^3.0.0
     events: "*"
   languageName: unknown
   linkType: soft
 
-"@nextgis/ngw-uploader@^2.2.3, @nextgis/ngw-uploader@workspace:packages/ngw-uploader":
+"@nextgis/ngw-uploader@^2.4.0, @nextgis/ngw-uploader@workspace:packages/ngw-uploader":
   version: 0.0.0-use.local
   resolution: "@nextgis/ngw-uploader@workspace:packages/ngw-uploader"
   dependencies:
-    "@nextgis/build-tools": ^2.0.2
-    "@nextgis/cancelable-promise": ^2.1.0
-    "@nextgis/dialog": ^2.0.2
-    "@nextgis/expression": ^2.0.2
-    "@nextgis/ngw-connector": ^2.2.3
-    "@nextgis/utils": ^2.2.3
+    "@nextgis/build-tools": ^2.3.0
+    "@nextgis/cancelable-promise": ^2.3.0
+    "@nextgis/dialog": ^2.3.0
+    "@nextgis/expression": ^2.3.0
+    "@nextgis/ngw-connector": ^2.4.0
+    "@nextgis/utils": ^2.3.0
     "@types/color": ^3.0.2
     "@types/events": ^3.0.0
     color: ^4.1.0
     events: "*"
-    tus-js-client: ^2.3.0
+    tus-js-client: ^4.1.0
   languageName: unknown
   linkType: soft
 
-"@nextgis/ol-map-adapter@^2.2.3, @nextgis/ol-map-adapter@workspace:packages/ol-map-adapter":
+"@nextgis/ol-map-adapter@^2.3.0, @nextgis/ol-map-adapter@workspace:packages/ol-map-adapter":
   version: 0.0.0-use.local
   resolution: "@nextgis/ol-map-adapter@workspace:packages/ol-map-adapter"
   dependencies:
-    "@nextgis/build-tools": ^2.0.2
-    "@nextgis/control-container": ^2.2.3
-    "@nextgis/dom": ^2.0.2
-    "@nextgis/paint": ^2.2.3
-    "@nextgis/properties-filter": ^2.2.3
-    "@nextgis/queue": ^2.2.1
-    "@nextgis/webmap": ^2.2.3
+    "@nextgis/build-tools": ^2.3.0
+    "@nextgis/control-container": ^2.3.0
+    "@nextgis/dom": ^2.3.0
+    "@nextgis/paint": ^2.3.0
+    "@nextgis/properties-filter": ^2.3.0
+    "@nextgis/queue": ^2.3.0
+    "@nextgis/webmap": ^2.3.0
     "@types/events": ^3.0.0
     "@types/geojson": ^7946.0.14
     "@types/polylabel": ^1.0.5
@@ -941,13 +941,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/paint@^2.2.3, @nextgis/paint@workspace:packages/paint":
+"@nextgis/paint@^2.3.0, @nextgis/paint@workspace:packages/paint":
   version: 0.0.0-use.local
   resolution: "@nextgis/paint@workspace:packages/paint"
   dependencies:
-    "@nextgis/build-tools": ^2.0.2
-    "@nextgis/expression": ^2.0.2
-    "@nextgis/properties-filter": ^2.2.3
+    "@nextgis/build-tools": ^2.3.0
+    "@nextgis/expression": ^2.3.0
+    "@nextgis/properties-filter": ^2.3.0
     "@types/geojson": ^7946.0.14
   languageName: unknown
   linkType: soft
@@ -956,38 +956,38 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis/progress@workspace:packages/progress"
   dependencies:
-    "@nextgis/build-tools": ^2.0.2
+    "@nextgis/build-tools": ^2.3.0
     "@types/events": ^3.0.0
     events: "*"
     strict-event-emitter-types: ^2.0.0
   languageName: unknown
   linkType: soft
 
-"@nextgis/properties-filter@^2.2.3, @nextgis/properties-filter@workspace:packages/properties-filter":
+"@nextgis/properties-filter@^2.3.0, @nextgis/properties-filter@workspace:packages/properties-filter":
   version: 0.0.0-use.local
   resolution: "@nextgis/properties-filter@workspace:packages/properties-filter"
   dependencies:
-    "@nextgis/build-tools": ^2.0.2
-    "@nextgis/utils": ^2.2.3
+    "@nextgis/build-tools": ^2.3.0
+    "@nextgis/utils": ^2.3.0
     "@types/geojson": ^7946.0.14
   languageName: unknown
   linkType: soft
 
-"@nextgis/qms-kit@^2.2.3, @nextgis/qms-kit@workspace:packages/qms-kit":
+"@nextgis/qms-kit@^2.3.0, @nextgis/qms-kit@workspace:packages/qms-kit":
   version: 0.0.0-use.local
   resolution: "@nextgis/qms-kit@workspace:packages/qms-kit"
   dependencies:
-    "@nextgis/build-tools": ^2.0.2
-    "@nextgis/utils": ^2.2.3
-    "@nextgis/webmap": ^2.2.3
+    "@nextgis/build-tools": ^2.3.0
+    "@nextgis/utils": ^2.3.0
+    "@nextgis/webmap": ^2.3.0
   languageName: unknown
   linkType: soft
 
-"@nextgis/queue@^2.2.1, @nextgis/queue@workspace:packages/queue":
+"@nextgis/queue@^2.3.0, @nextgis/queue@workspace:packages/queue":
   version: 0.0.0-use.local
   resolution: "@nextgis/queue@workspace:packages/queue"
   dependencies:
-    "@nextgis/build-tools": ^2.0.2
+    "@nextgis/build-tools": ^2.3.0
   languageName: unknown
   linkType: soft
 
@@ -995,19 +995,19 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis/react-ngw-leaflet@workspace:packages/react-ngw-leaflet"
   dependencies:
-    "@nextgis/build-tools": ^2.0.2
-    "@nextgis/leaflet-map-adapter": ^2.2.3
-    "@nextgis/react-ngw-map": ^2.2.3
+    "@nextgis/build-tools": ^2.3.0
+    "@nextgis/leaflet-map-adapter": ^2.3.0
+    "@nextgis/react-ngw-map": ^2.4.0
   languageName: unknown
   linkType: soft
 
-"@nextgis/react-ngw-map@^2.2.3, @nextgis/react-ngw-map@workspace:packages/react-ngw-map":
+"@nextgis/react-ngw-map@^2.4.0, @nextgis/react-ngw-map@workspace:packages/react-ngw-map":
   version: 0.0.0-use.local
   resolution: "@nextgis/react-ngw-map@workspace:packages/react-ngw-map"
   dependencies:
-    "@nextgis/build-tools": ^2.0.2
-    "@nextgis/ngw-map": ^2.2.3
-    "@nextgis/utils": ^2.2.3
+    "@nextgis/build-tools": ^2.3.0
+    "@nextgis/ngw-map": ^2.4.0
+    "@nextgis/utils": ^2.3.0
     "@types/react": "*"
     "@types/react-dom": "*"
   peerDependencies:
@@ -1020,9 +1020,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis/react-ngw-maplibre-gl@workspace:packages/react-ngw-maplibre-gl"
   dependencies:
-    "@nextgis/build-tools": ^2.0.2
-    "@nextgis/maplibre-gl-map-adapter": ^2.2.3
-    "@nextgis/react-ngw-map": ^2.2.3
+    "@nextgis/build-tools": ^2.3.0
+    "@nextgis/maplibre-gl-map-adapter": ^2.3.0
+    "@nextgis/react-ngw-map": ^2.4.0
   languageName: unknown
   linkType: soft
 
@@ -1030,19 +1030,19 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis/react-ngw-ol@workspace:packages/react-ngw-ol"
   dependencies:
-    "@nextgis/build-tools": ^2.0.2
-    "@nextgis/ol-map-adapter": ^2.2.3
-    "@nextgis/react-ngw-map": ^2.2.3
+    "@nextgis/build-tools": ^2.3.0
+    "@nextgis/ol-map-adapter": ^2.3.0
+    "@nextgis/react-ngw-map": ^2.4.0
   languageName: unknown
   linkType: soft
 
-"@nextgis/tree@^2.2.3, @nextgis/tree@workspace:packages/tree":
+"@nextgis/tree@^2.3.0, @nextgis/tree@workspace:packages/tree":
   version: 0.0.0-use.local
   resolution: "@nextgis/tree@workspace:packages/tree"
   dependencies:
-    "@nextgis/build-tools": ^2.0.2
-    "@nextgis/properties-filter": ^2.2.3
-    "@nextgis/utils": ^2.2.3
+    "@nextgis/build-tools": ^2.3.0
+    "@nextgis/properties-filter": ^2.3.0
+    "@nextgis/utils": ^2.3.0
   languageName: unknown
   linkType: soft
 
@@ -1050,29 +1050,29 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis/url-runtime-params@workspace:packages/url-runtime-params"
   dependencies:
-    "@nextgis/build-tools": ^2.0.2
-    "@nextgis/webmap": ^2.2.3
+    "@nextgis/build-tools": ^2.3.0
+    "@nextgis/webmap": ^2.3.0
   languageName: unknown
   linkType: soft
 
-"@nextgis/utils@^2.2.3, @nextgis/utils@workspace:packages/utils":
+"@nextgis/utils@^2.3.0, @nextgis/utils@workspace:packages/utils":
   version: 0.0.0-use.local
   resolution: "@nextgis/utils@workspace:packages/utils"
   dependencies:
-    "@nextgis/build-tools": ^2.0.2
+    "@nextgis/build-tools": ^2.3.0
     "@types/geojson": ^7946.0.14
   languageName: unknown
   linkType: soft
 
-"@nextgis/webmap@^2.2.3, @nextgis/webmap@workspace:packages/webmap":
+"@nextgis/webmap@^2.3.0, @nextgis/webmap@workspace:packages/webmap":
   version: 0.0.0-use.local
   resolution: "@nextgis/webmap@workspace:packages/webmap"
   dependencies:
-    "@nextgis/build-tools": ^2.0.2
-    "@nextgis/cancelable-promise": ^2.1.0
-    "@nextgis/paint": ^2.2.3
-    "@nextgis/properties-filter": ^2.2.3
-    "@nextgis/utils": ^2.2.3
+    "@nextgis/build-tools": ^2.3.0
+    "@nextgis/cancelable-promise": ^2.3.0
+    "@nextgis/paint": ^2.3.0
+    "@nextgis/properties-filter": ^2.3.0
+    "@nextgis/utils": ^2.3.0
     "@types/events": ^3.0.0
     "@types/geojson": ^7946.0.14
     events: "*"
@@ -1583,14 +1583,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/plugin-commonjs@npm:^25.0.7":
-  version: 25.0.7
-  resolution: "@rollup/plugin-commonjs@npm:25.0.7"
+"@rollup/plugin-commonjs@npm:^26.0.1":
+  version: 26.0.1
+  resolution: "@rollup/plugin-commonjs@npm:26.0.1"
   dependencies:
     "@rollup/pluginutils": ^5.0.1
     commondir: ^1.0.1
     estree-walker: ^2.0.2
-    glob: ^8.0.3
+    glob: ^10.4.1
     is-reference: 1.2.1
     magic-string: ^0.30.3
   peerDependencies:
@@ -1598,7 +1598,7 @@ __metadata:
   peerDependenciesMeta:
     rollup:
       optional: true
-  checksum: 052e11839a9edc556eda5dcc759ab816dcc57e9f0f905a1e6e14fff954eaa6b1e2d0d544f5bd18d863993c5eba43d8ac9c19d9bb53b1c3b1213f32cfc9d50b2e
+  checksum: 88d1349cc2cda4ad6193cce901356e4c14a830497fc01c91f38c94a871b203ffe657b29c9a98cd16787e3a6a8b45169dd0b471cb36d26d645478a177c958779a
   languageName: node
   linkType: hard
 
@@ -1666,9 +1666,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/plugin-replace@npm:^5.0.5":
-  version: 5.0.5
-  resolution: "@rollup/plugin-replace@npm:5.0.5"
+"@rollup/plugin-replace@npm:^5.0.7":
+  version: 5.0.7
+  resolution: "@rollup/plugin-replace@npm:5.0.7"
   dependencies:
     "@rollup/pluginutils": ^5.0.1
     magic-string: ^0.30.3
@@ -1677,7 +1677,7 @@ __metadata:
   peerDependenciesMeta:
     rollup:
       optional: true
-  checksum: 5559b48fa098a842ddb3a25b23d9902d75496bed807d4cabac304bb7e75b06374ad4a44f7871ddcd1bfcf23e6015a0274d44564b42af54c722af0a514c247ec1
+  checksum: 67985e3f4056b92a5f6847b9ddf5b8e9aaecefa0e20b96751dcd63c3ca1f907dadad2940f270867dab2e24bc27da6b0e82f0ce6bb20309aa3465869a9d2e3f13
   languageName: node
   linkType: hard
 
@@ -4349,33 +4349,33 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.20.1":
-  version: 0.20.2
-  resolution: "esbuild@npm:0.20.2"
+"esbuild@npm:^0.21.4":
+  version: 0.21.4
+  resolution: "esbuild@npm:0.21.4"
   dependencies:
-    "@esbuild/aix-ppc64": 0.20.2
-    "@esbuild/android-arm": 0.20.2
-    "@esbuild/android-arm64": 0.20.2
-    "@esbuild/android-x64": 0.20.2
-    "@esbuild/darwin-arm64": 0.20.2
-    "@esbuild/darwin-x64": 0.20.2
-    "@esbuild/freebsd-arm64": 0.20.2
-    "@esbuild/freebsd-x64": 0.20.2
-    "@esbuild/linux-arm": 0.20.2
-    "@esbuild/linux-arm64": 0.20.2
-    "@esbuild/linux-ia32": 0.20.2
-    "@esbuild/linux-loong64": 0.20.2
-    "@esbuild/linux-mips64el": 0.20.2
-    "@esbuild/linux-ppc64": 0.20.2
-    "@esbuild/linux-riscv64": 0.20.2
-    "@esbuild/linux-s390x": 0.20.2
-    "@esbuild/linux-x64": 0.20.2
-    "@esbuild/netbsd-x64": 0.20.2
-    "@esbuild/openbsd-x64": 0.20.2
-    "@esbuild/sunos-x64": 0.20.2
-    "@esbuild/win32-arm64": 0.20.2
-    "@esbuild/win32-ia32": 0.20.2
-    "@esbuild/win32-x64": 0.20.2
+    "@esbuild/aix-ppc64": 0.21.4
+    "@esbuild/android-arm": 0.21.4
+    "@esbuild/android-arm64": 0.21.4
+    "@esbuild/android-x64": 0.21.4
+    "@esbuild/darwin-arm64": 0.21.4
+    "@esbuild/darwin-x64": 0.21.4
+    "@esbuild/freebsd-arm64": 0.21.4
+    "@esbuild/freebsd-x64": 0.21.4
+    "@esbuild/linux-arm": 0.21.4
+    "@esbuild/linux-arm64": 0.21.4
+    "@esbuild/linux-ia32": 0.21.4
+    "@esbuild/linux-loong64": 0.21.4
+    "@esbuild/linux-mips64el": 0.21.4
+    "@esbuild/linux-ppc64": 0.21.4
+    "@esbuild/linux-riscv64": 0.21.4
+    "@esbuild/linux-s390x": 0.21.4
+    "@esbuild/linux-x64": 0.21.4
+    "@esbuild/netbsd-x64": 0.21.4
+    "@esbuild/openbsd-x64": 0.21.4
+    "@esbuild/sunos-x64": 0.21.4
+    "@esbuild/win32-arm64": 0.21.4
+    "@esbuild/win32-ia32": 0.21.4
+    "@esbuild/win32-x64": 0.21.4
   dependenciesMeta:
     "@esbuild/aix-ppc64":
       optional: true
@@ -4425,7 +4425,7 @@ __metadata:
       optional: true
   bin:
     esbuild: bin/esbuild
-  checksum: bc88050fc1ca5c1bd03648f9979e514bdefb956a63aa3974373bb7b9cbac0b3aac9b9da1b5bdca0b3490e39d6b451c72815dbd6b7d7f978c91fbe9c9e9aa4e4c
+  checksum: e96ae5f15d9cad72a94d36be3cbf37bd73d5614c6c0cc6398036ee9a9b9327a1eee41a4099e536e52f1280f7d8dc7e86eb8f71d348cac4b526a6234cf8d754ab
   languageName: node
   linkType: hard
 
@@ -5287,6 +5287,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"glob@npm:^10.4.1":
+  version: 10.4.1
+  resolution: "glob@npm:10.4.1"
+  dependencies:
+    foreground-child: ^3.1.0
+    jackspeak: ^3.1.2
+    minimatch: ^9.0.4
+    minipass: ^7.1.2
+    path-scurry: ^1.11.1
+  bin:
+    glob: dist/esm/bin.mjs
+  checksum: 5d33c686c80bf6877f4284adf99a8c3cbb2a6eccbc92342943fe5d4b42c01d78c1881f2223d950c92a938d0f857e12e37b86a8e5483ab2141822e053b67d0dde
+  languageName: node
+  linkType: hard
+
 "glob@npm:^7.1.3":
   version: 7.2.3
   resolution: "glob@npm:7.2.3"
@@ -5301,7 +5316,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:^8.0.1, glob@npm:^8.0.3":
+"glob@npm:^8.0.1":
   version: 8.1.0
   resolution: "glob@npm:8.1.0"
   dependencies:
@@ -5378,7 +5393,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graceful-fs@npm:4.2.11, graceful-fs@npm:^4.1.11, graceful-fs@npm:^4.1.15, graceful-fs@npm:^4.1.2, graceful-fs@npm:^4.1.6, graceful-fs@npm:^4.2.0, graceful-fs@npm:^4.2.6":
+"graceful-fs@npm:4.2.11, graceful-fs@npm:^4.1.11, graceful-fs@npm:^4.1.15, graceful-fs@npm:^4.1.2, graceful-fs@npm:^4.1.6, graceful-fs@npm:^4.2.0, graceful-fs@npm:^4.2.4, graceful-fs@npm:^4.2.6":
   version: 4.2.11
   resolution: "graceful-fs@npm:4.2.11"
   checksum: ac85f94da92d8eb6b7f5a8b20ce65e43d66761c55ce85ac96df6865308390da45a8d3f0296dd3a663de65d30ba497bd46c696cc1e248c72b13d6d567138a4fc7
@@ -6210,6 +6225,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jackspeak@npm:^3.1.2":
+  version: 3.4.0
+  resolution: "jackspeak@npm:3.4.0"
+  dependencies:
+    "@isaacs/cliui": ^8.0.2
+    "@pkgjs/parseargs": ^0.11.0
+  dependenciesMeta:
+    "@pkgjs/parseargs":
+      optional: true
+  checksum: 350f6f311018bb175ffbe736b19c26ac0b134bb5a17a638169e89594eb0c24ab1c658ab3a2fda24ff63b3b19292e1a5ec19d2255bc526df704e8168d392bef85
+  languageName: node
+  linkType: hard
+
 "jake@npm:^10.8.5":
   version: 10.8.7
   resolution: "jake@npm:10.8.7"
@@ -6254,10 +6282,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"js-base64@npm:^2.6.1":
-  version: 2.6.4
-  resolution: "js-base64@npm:2.6.4"
-  checksum: 5f4084078d6c46f8529741d110df84b14fac3276b903760c21fa8cc8521370d607325dfe1c1a9fbbeaae1ff8e602665aaeef1362427d8fef704f9e3659472ce8
+"js-base64@npm:^3.7.2":
+  version: 3.7.7
+  resolution: "js-base64@npm:3.7.7"
+  checksum: d1b02971db9dc0fd35baecfaf6ba499731fb44fe3373e7e1d6681fbd3ba665f29e8d9d17910254ef8104e2cb8b44117fe4202d3dc54c7cafe9ba300fe5433358
   languageName: node
   linkType: hard
 
@@ -6837,6 +6865,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lru-cache@npm:^10.2.0":
+  version: 10.2.2
+  resolution: "lru-cache@npm:10.2.2"
+  checksum: 98e8fc93691c546f719a76103ef2bee5a3ac823955c755a47641ec41f8c7fafa1baeaba466937cc1cbfa9cfd47e03536d10e2db3158a64ad91ff3a58a32c893e
+  languageName: node
+  linkType: hard
+
 "lru-cache@npm:^6.0.0":
   version: 6.0.0
   resolution: "lru-cache@npm:6.0.0"
@@ -7159,6 +7194,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"minimatch@npm:^9.0.4":
+  version: 9.0.4
+  resolution: "minimatch@npm:9.0.4"
+  dependencies:
+    brace-expansion: ^2.0.1
+  checksum: cf717f597ec3eed7dabc33153482a2e8d49f4fd3c26e58fd9c71a94c5029a0838728841b93f46bf1263b65a8010e2ee800d0dc9b004ab8ba8b6d1ec07cc115b5
+  languageName: node
+  linkType: hard
+
 "minimatch@npm:~3.0.4":
   version: 3.0.8
   resolution: "minimatch@npm:3.0.8"
@@ -7283,6 +7327,13 @@ __metadata:
   version: 7.0.4
   resolution: "minipass@npm:7.0.4"
   checksum: 87585e258b9488caf2e7acea242fd7856bbe9a2c84a7807643513a338d66f368c7d518200ad7b70a508664d408aa000517647b2930c259a8b1f9f0984f344a21
+  languageName: node
+  linkType: hard
+
+"minipass@npm:^7.1.2":
+  version: 7.1.2
+  resolution: "minipass@npm:7.1.2"
+  checksum: 2bfd325b95c555f2b4d2814d49325691c7bee937d753814861b0b49d5edcda55cbbf22b6b6a60bb91eddac8668771f03c5ff647dcd9d0f798e9548b9cdc46ee3
   languageName: node
   linkType: hard
 
@@ -8245,6 +8296,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"path-scurry@npm:^1.11.1":
+  version: 1.11.1
+  resolution: "path-scurry@npm:1.11.1"
+  dependencies:
+    lru-cache: ^10.2.0
+    minipass: ^5.0.0 || ^6.0.2 || ^7.0.0
+  checksum: 890d5abcd593a7912dcce7cf7c6bf7a0b5648e3dee6caf0712c126ca0a65c7f3d7b9d769072a4d1baf370f61ce493ab5b038d59988688e0c5f3f646ee3c69023
+  languageName: node
+  linkType: hard
+
 "path-type@npm:^3.0.0":
   version: 3.0.0
   resolution: "path-type@npm:3.0.0"
@@ -9168,13 +9229,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"proper-lockfile@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "proper-lockfile@npm:2.0.1"
+"proper-lockfile@npm:^4.1.2":
+  version: 4.1.2
+  resolution: "proper-lockfile@npm:4.1.2"
   dependencies:
-    graceful-fs: ^4.1.2
-    retry: ^0.10.0
-  checksum: 3cadc4fb7139e521df5ef63b54693fa26b22ad130728f32e768c4a360791ba3ba294b0ad389388ba91db89e34895ecad16a67a02202302cb7e42216f3c906526
+    graceful-fs: ^4.2.4
+    retry: ^0.12.0
+    signal-exit: ^3.0.2
+  checksum: 00078ee6a61c216a56a6140c7d2a98c6c733b3678503002dc073ab8beca5d50ca271de4c85fca13b9b8ee2ff546c36674d1850509b84a04a5d0363bcb8638939
   languageName: node
   linkType: hard
 
@@ -9538,13 +9600,6 @@ __metadata:
     onetime: ^5.1.0
     signal-exit: ^3.0.2
   checksum: f877dd8741796b909f2a82454ec111afb84eb45890eb49ac947d87991379406b3b83ff9673a46012fca0d7844bb989f45cc5b788254cf1a39b6b5a9659de0630
-  languageName: node
-  linkType: hard
-
-"retry@npm:^0.10.0":
-  version: 0.10.1
-  resolution: "retry@npm:0.10.1"
-  checksum: 133ef7c2028bcb09544a6fb9bed9f8266fffeaf72c855f73c2918ace9ef2abd7ccba03744564bcd1a8e948ed70518f8970852f46e649f9e3db6fefb0148cda35
   languageName: node
   linkType: hard
 
@@ -10796,18 +10851,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tus-js-client@npm:^2.3.0":
-  version: 2.3.2
-  resolution: "tus-js-client@npm:2.3.2"
+"tus-js-client@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "tus-js-client@npm:4.1.0"
   dependencies:
     buffer-from: ^1.1.2
     combine-errors: ^3.0.3
     is-stream: ^2.0.0
-    js-base64: ^2.6.1
+    js-base64: ^3.7.2
     lodash.throttle: ^4.1.1
-    proper-lockfile: ^2.0.1
+    proper-lockfile: ^4.1.2
     url-parse: ^1.5.7
-  checksum: cdd2fccbf1cceeba73b7c2c41e4c655fa5f5f502b1c1a48aa171db3719eaa4277c01abc81e6b039e8d7337578e4348319d95b79111dd1a6d3d7451fc4e508e66
+  checksum: 64f4806b3b8e3057e666259d8b974dee37f86097bb981d44eb34a2fb4e3bbb7bee6078f290229ba8f0964da18c9f676de3abe727ac7c611589acaeea6f787a3f
   languageName: node
   linkType: hard
 

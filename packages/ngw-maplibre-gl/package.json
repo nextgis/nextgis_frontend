@@ -1,7 +1,7 @@
 {
   "name": "@nextgis/ngw-maplibre-gl",
   "_priority": 10,
-  "version": "2.2.3",
+  "version": "2.4.0",
   "description": "Single-file bundle for rapid deployment of Maplibre GL JS based web-gis applications with NextGIS services",
   "main": "lib/ngw-maplibre-gl.global.prod.js",
   "module": "lib/ngw-maplibre-gl.esm-bundler.js",
@@ -9,11 +9,11 @@
   "jsdelivr": "lib/ngw-maplibre-gl.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/maplibre-gl-map-adapter": "^2.2.3",
-    "@nextgis/ngw-map": "^2.2.3"
+    "@nextgis/maplibre-gl-map-adapter": "^2.3.0",
+    "@nextgis/ngw-map": "^2.4.0"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "^2.0.2"
+    "@nextgis/build-tools": "^2.3.0"
   },
   "buildOptions": {
     "name": "NgwMaplibreGL",

@@ -131,7 +131,6 @@ onMounted(() => {
           <q-icon name="mdi-menu" />
         </q-btn>
         <LogoComponent />
-        <q-toolbar-title class="">Frontend</q-toolbar-title>
 
         <q-btn
           flat

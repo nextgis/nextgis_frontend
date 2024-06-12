@@ -23,7 +23,7 @@ export function apiRequest<
 >(opt: ApiRequestOptions<K>): CancelablePromise<P[K]> {
   const params = opt.params;
   return new CancelablePromise((resolve, reject) => {
-    opt.connector
+    return opt.connector
       .connect()
       .then((apiItems) => {
         let apiItem = apiItems && apiItems[opt.name];

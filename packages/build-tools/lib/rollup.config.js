@@ -203,7 +203,10 @@ function createConfig(format, output, plugins = []) {
               sourceMap: false,
             }),
             ...(format === 'cjs' ? [] : [polyfillNode()]),
-            nodeResolve({ preferBuiltins: true }),
+            nodeResolve({
+              preferBuiltins: false,
+              browser: true,
+            }),
           ]
         : [];
 

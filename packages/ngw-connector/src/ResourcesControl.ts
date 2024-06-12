@@ -79,7 +79,10 @@ export class ResourcesControl {
       }
       return CancelablePromise.resolve(undefined);
     };
-    return cache.addFull('resource', makeRequest, forCache);
+    if (requestOptions?.cache) {
+      return cache.addFull('resource', makeRequest, forCache);
+    }
+    return makeRequest();
   }
 
   getOneOrFail(
@@ -283,17 +286,19 @@ export class ResourcesControl {
   ): CancelablePromise<ResourceItem | undefined> {
     const promise = () =>
       this.connector.get('resource.item', requestOptions, { id });
-
-    return this.cache
-      .add('resource.item', promise, {
-        id,
-      })
-      .catch((er) => {
-        if (!(er instanceof ResourceNotFoundError)) {
-          throw er;
-        }
-        return undefined;
-      });
+    if (requestOptions?.cache) {
+      return this.cache
+        .add('resource.item', promise, {
+          id,
+        })
+        .catch((er) => {
+          if (!(er instanceof ResourceNotFoundError)) {
+            throw er;
+          }
+          return undefined;
+        });
+    }
+    return promise();
   }
 
   private _fetchResourceBy(
