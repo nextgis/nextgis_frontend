@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { getHtmlSearchTags } from 'src/utils/searchTags';
-import { computed, onMounted, ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { computed, onMounted, ref, watch } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
 import HtmlExampleComponent from 'components/HtmlExampleComponent.vue';
 import LogoComponent from 'components/LogoComponent.vue';
@@ -13,7 +13,8 @@ const props = defineProps({
   id: String,
 });
 
-const { push } = useRouter();
+const router = useRouter();
+const route = useRoute();
 
 const search = ref<string>('');
 const drawer = ref(true);
@@ -64,7 +65,7 @@ const prepareItem = ({ name, ...conf }: Item) => {
 const setSelected = (pageId?: string | null) => {
   if (pageId) {
     selected.value = pageId;
-    push(`/${selected.value}`);
+    router.push({ path: `/${selected.value}` });
   }
 };
 
@@ -120,6 +121,13 @@ const build = async () => {
 
 onMounted(() => {
   build();
+});
+
+watch(route, (newRoute) => {
+  const newId = newRoute.params.id;
+  if (newId) {
+    selected.value = Array.isArray(newId) ? newId[0] : newId.toString();
+  }
 });
 </script>
 
