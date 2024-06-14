@@ -188,6 +188,10 @@ export interface RequestOptions<
   signal?: AbortSignal;
   params?: RequestItemsParams<K>;
   onProgress?: (percentComplete: number, event: ProgressEvent) => void;
+
+  cacheName?: string;
+  /** Use to override default cache props */
+  cacheProps?: Record<string, unknown>;
 }
 
 export type RequestItemAdditionalParams = { [name: string]: any } & {
