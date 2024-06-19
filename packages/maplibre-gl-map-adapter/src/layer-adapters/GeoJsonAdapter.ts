@@ -60,6 +60,13 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   ) {
     super(map, options);
     this.source = this._sourceId;
+    if (this.options.featureIdName) {
+      this.featureIdName = this.options.featureIdName;
+    } else if (this.options.source) {
+      this.featureIdName = '$id';
+    } else {
+      this.featureIdName = 'fid';
+    }
   }
 
   async addLayer(options: GeoJsonAdapterOptions): Promise<TLayer> {
@@ -290,56 +297,9 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     feature: Feature | Feature[],
     opt?: { silent: boolean },
   ): Feature[] {
-    let selectedFeatureIds = this._selectedFeatureIds || [];
-    if (this.options && !this.options.multiselect) {
-      selectedFeatureIds = [];
-    }
-    let features: Feature[] = [];
-    if (Array.isArray(feature)) {
-      features = feature;
-    } else {
-      features = [feature];
-    }
-    features.forEach((f) => {
-      const id = this._getFeatureFilterId(f);
-      if (id !== undefined) {
-        selectedFeatureIds.push(id);
-      }
-    });
-    this._selectProperties = undefined;
-    this._selectedFeatureIds = selectedFeatureIds;
-    this._updateFilter(opt);
-    return features;
-  }
 
-  protected _unselectFeature(
-    feature?: Feature | Feature[],
-    opt?: EventOptions,
-  ): void {
-    if (feature) {
-      let features: Feature[] = [];
-      if (Array.isArray(feature)) {
-        features = feature;
-      } else {
-        features = [feature];
-      }
-      if (features.length) {
-        for (const f of features) {
-          const id = this._getFeatureFilterId(f);
-          const selected = this._selectedFeatureIds;
-          if (selected && id !== undefined) {
-            const index = selected.indexOf(id);
-            if (index !== -1) {
-              selected.splice(index, 1);
-            }
-          }
-          this._removeFeaturePopup(f, true);
-        }
-      }
-    } else {
-      this._selectedFeatureIds = false;
-    }
     this._updateFilter(opt);
+    return this._setFeatureIdsSelected(feature);
   }
 
   protected _updateFilter(opt: EventOptions = {}): void {
