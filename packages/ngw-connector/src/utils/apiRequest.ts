@@ -53,7 +53,6 @@ export async function apiRequest<
 
       // Handle paramList if present: transform it into query string format
       if (Array.isArray(paramList)) {
-        delete params.paramList;
         paramList.forEach(([key, value]) => {
           paramArray.push(`${key}=${value}`);
         });

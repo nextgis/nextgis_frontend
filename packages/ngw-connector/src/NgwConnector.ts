@@ -399,7 +399,8 @@ export class NgwConnector {
     }
 
     if (params) {
-      url = template(url, params);
+      const { paramList, ...restParams } = params;
+      url = template(url, restParams);
     }
     url = encodeURI(fixUrlStr(url));
 
