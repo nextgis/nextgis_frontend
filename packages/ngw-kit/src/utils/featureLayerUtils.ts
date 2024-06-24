@@ -75,7 +75,7 @@ export function updateItemRequestParam<
 
 // NGW REST API is not able to filtering by combined queries
 // therefore the filter is divided into several requests
-export function createFeatureFieldFilterQueries<
+export async function createFeatureFieldFilterQueries<
   G extends Geometry = Geometry,
   P extends { [field: string]: any } = { [field: string]: any },
 >(
@@ -84,25 +84,24 @@ export function createFeatureFieldFilterQueries<
 ): Promise<FeatureItem<P, G>[]> {
   const queries: Promise<FeatureItem<P, G>[]>[] = getQueries<G, P>(opt);
 
-  return Promise.all(queries).then((itemsParts) => {
-    // this list of ids used for optimization
-    const ids: number[] = [];
-    const items: FeatureItem<P, G>[] = [];
-    for (const part of itemsParts) {
-      for (const item of part) {
-        if (!ids.includes(item.id)) {
-          items.push(item);
-          ids.push(item.id);
-        }
+  const itemsParts = await Promise.all(queries);
+  // this list of ids used for optimization
+  const ids: number[] = [];
+  const items: FeatureItem<P, G>[] = [];
+  for (const part of itemsParts) {
+    for (const item of part) {
+      if (!ids.includes(item.id)) {
+        items.push(item);
+        ids.push(item.id);
       }
     }
-    const offset = opt.offset !== undefined ? opt.offset : 0;
-    const limit = opt.limit !== undefined ? opt.limit : items.length;
-    if (opt.offset || opt.limit) {
-      return items.splice(offset, limit);
-    }
-    return items;
-  });
+  }
+  const offset = opt.offset !== undefined ? opt.offset : 0;
+  const limit = opt.limit !== undefined ? opt.limit : items.length;
+  if (opt.offset || opt.limit) {
+    return items.splice(offset, limit);
+  }
+  return items;
 }
 
 function createParam(pf: PropertyFilter): [string, any] {
