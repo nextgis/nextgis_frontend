@@ -135,6 +135,8 @@ function getQueries<
 ): CancelablePromise<FeatureItem<P, G>[]>[] {
   const { filters } = opt;
 
+  const paramList = opt.paramList ?? [];
+
   const logic = typeof filters[0] === 'string' ? filters[0] : 'all';
 
   const filters_ = filters.filter((x) => Array.isArray(x)) as PropertyFilter[];
@@ -145,7 +147,7 @@ function getQueries<
         _queries.push(
           fetchNgwLayerItemsRequest<G, P>({
             ...opt,
-            paramList: [..._parentAllParams, createParam(f)],
+            paramList: [..._parentAllParams, ...paramList, createParam(f)],
           }),
         );
       } else {
@@ -185,7 +187,7 @@ function getQueries<
       _queries.push(
         fetchNgwLayerItemsRequest<G, P>({
           ...opt,
-          paramList: [..._parentAllParams, ...filters],
+          paramList: [..._parentAllParams, ...paramList, ...filters],
         }),
       );
     }
