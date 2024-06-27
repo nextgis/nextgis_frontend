@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.1](https://github.com/nextgis/nextgis_frontend/compare/v2.4.0...v2.4.1) (2024-06-27)
+
+
+### Bug Fixes
+
+* **ngw-kit:** propagate paramList in fetchNgwLayerItems ([3a8afc9](https://github.com/nextgis/nextgis_frontend/commit/3a8afc9deb5a2bd4c6f0c76b130ce33e9181ea18))
+
+
+
+
+
 # [2.4.0](https://github.com/nextgis/nextgis_frontend/compare/v2.3.0...v2.4.0) (2024-06-10)
 
 
