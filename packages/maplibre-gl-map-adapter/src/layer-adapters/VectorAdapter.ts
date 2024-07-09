@@ -118,7 +118,7 @@ export abstract class VectorAdapter<
 {
   selected = false;
   map?: Map;
-  protected featureIdName = 'id';
+  protected featureIdName = '$id';
   protected _types: VectorAdapterLayerType[] = ['polygon', 'point', 'line'];
   protected readonly _sourceId: string;
   protected readonly _selectionName: string;
@@ -139,14 +139,6 @@ export abstract class VectorAdapter<
     this._sourceId = this.options.source
       ? (this.options.source as string)
       : `source-${this._layerId}`;
-
-    if (this.options.featureIdName) {
-      this.featureIdName = this.options.featureIdName;
-    } else if (this.options.source) {
-      this.featureIdName = '$id';
-    } else {
-      this.featureIdName = 'fid';
-    }
 
     this._selectionName = this._layerId + '-highlighted';
     this.$onLayerMouseLeave = this._onLayerMouseLeave.bind(this);
@@ -236,22 +228,21 @@ export abstract class VectorAdapter<
   }
 
   unselect(): void {
-    if (this.options.selectable) {
-      this._selectProperties = undefined;
-      this._updateFilter();
-      this.selected = false;
-      const { onSelect, onLayerSelect } = this.options;
-      const onSelect_ = onSelect || onLayerSelect;
-      if (onSelect_) {
-        onSelect_({
-          layer: this,
-          features: undefined,
-          type: 'api',
-          ...createFeaturePositionOptions([]),
-        });
-      }
-      this._removeAllPopup();
+    this._selectProperties = undefined;
+    this._selectedFeatureIds = [];
+    this._updateFilter();
+    this.selected = false;
+    const { onSelect, onLayerSelect } = this.options;
+    const onSelect_ = onSelect || onLayerSelect;
+    if (onSelect_) {
+      onSelect_({
+        layer: this,
+        features: undefined,
+        type: 'api',
+        ...createFeaturePositionOptions([]),
+      });
     }
+    this._removeAllPopup();
   }
 
   beforeRemove(): void {
@@ -674,11 +665,33 @@ export abstract class VectorAdapter<
     }
   }
 
+  protected _setFeatureIdsSelected(feature: Feature | Feature[]) {
+    let selectedFeatureIds = this._selectedFeatureIds || [];
+    if (this.options && !this.options.multiselect) {
+      selectedFeatureIds = [];
+    }
+    let features: Feature[] = [];
+    if (Array.isArray(feature)) {
+      features = feature;
+    } else {
+      features = [feature];
+    }
+    features.forEach((f) => {
+      const id = this._getFeatureFilterId(f);
+      if (id !== undefined) {
+        selectedFeatureIds.push(id);
+      }
+    });
+    this._selectProperties = undefined;
+    this._selectedFeatureIds = selectedFeatureIds;
+    return features;
+  }
+
   protected _selectFeature(
     feature: Feature | Feature[],
     opt?: { silent: boolean },
   ): Feature[] {
-    const features = Array.isArray(feature) ? feature : [feature];
+    const features = this._setFeatureIdsSelected(feature);
     this.select([
       [
         this.featureIdName,
@@ -688,14 +701,38 @@ export abstract class VectorAdapter<
         ),
       ],
     ]);
-    return [];
+    return features;
   }
 
   protected _unselectFeature(
-    feature: Feature | Feature[],
-    opt?: { silent: boolean },
+    feature?: Feature | Feature[],
+    opt?: EventOptions,
   ): void {
-    // ignore
+    if (feature) {
+      let features: Feature[] = [];
+      if (Array.isArray(feature)) {
+        features = feature;
+      } else {
+        features = [feature];
+      }
+      if (features.length) {
+        for (const f of features) {
+          const id = this._getFeatureFilterId(f);
+          const selected = this._selectedFeatureIds;
+          if (selected && id !== undefined) {
+            const index = selected.indexOf(id);
+            if (index !== -1) {
+              selected.splice(index, 1);
+            }
+          }
+          this._removeFeaturePopup(f, true);
+        }
+      }
+    } else {
+      this._selectedFeatureIds = false;
+    }
+    this._selectProperties = undefined;
+    this._updateFilter(opt);
   }
 
   protected _getAdditionalLayerOptions(): Record<string, unknown> {
