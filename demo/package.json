@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/demo-app",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Demo site for NextGIS Frontend libraries",
   "productName": "demo-app",
   "author": "NextGIS <info@nextgis.com>",
@@ -18,14 +18,14 @@
     "docker": "yarn gen:examples && docmypkg -r harbor.nextgis.net -n frontend/code -l -d ./docker"
   },
   "dependencies": {
-    "@quasar/extras": "^1.16.4",
+    "@quasar/extras": "^1.16.12",
     "highlight.js": "11.8.0",
     "marked": "^12.0.1",
     "marked-highlight": "2.0.6",
-    "quasar": "^2.15.1",
+    "quasar": "^2.16.5",
     "simple-code-editor": "^2.0.9",
-    "vue": "^3.4.21",
-    "vue-router": "^4.3.0"
+    "vue": "^3.4.31",
+    "vue-router": "^4.4.0"
   },
   "overrides": {
     "simple-code-editor": {
@@ -33,7 +33,7 @@
     }
   },
   "devDependencies": {
-    "@quasar/app-vite": "^2.0.0-beta.8",
+    "@quasar/app-vite": "^2.0.0-beta.14",
     "@types/node": "^20.12.7",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "@typescript-eslint/parser": "^7.2.0",
