@@ -9,8 +9,6 @@ interface CacheItem<T = any, O = any> {
   key: string;
   value: CacheValue<T>;
   props?: CacheMatchProps<O>;
-  /** @deprecated use {@link CacheItem.props} instead */
-  options?: CacheMatchProps<O>;
 }
 
 export interface CacheOptions {
@@ -38,8 +36,8 @@ export interface CacheOptions {
  * ```javascript
  * let COUNTER = 0;
  * const createPromise = () => new Promise((res) => {
- *   COUNTER++
- *   setTimeout(() => res('Ok'), 300)
+ *   COUNTER++;
+ *   setTimeout(() => res('Ok'), 300);
  * });
  *
  * const cache = new Cache();
@@ -96,8 +94,7 @@ export class Cache<
    * // somewhere else in the code
    * const item = await cache.addFull('foo', getItemFunc).then((resp) => {
    *   console.log(resp); // 'New item'
-   * })
-   *
+   * });
    * ```
    */
   addFull(
@@ -129,8 +126,6 @@ export class Cache<
         key,
         value,
         props: props_,
-        // TODO: remove backward compatibility use only props
-        options: props_,
       };
       if (onlyFull && !full(value)) {
         return value;
@@ -159,10 +154,7 @@ export class Cache<
 
   match(key: string, props?: CacheMatchProps<O>): CacheValue<V> | undefined {
     const cacheRecord = this._find(key, props);
-
-    if (cacheRecord) {
-      return cacheRecord.value;
-    }
+    return cacheRecord?.value;
   }
 
   matchAll(key?: string, props?: CacheMatchProps<O>): CacheValue<V>[] {
@@ -177,15 +169,16 @@ export class Cache<
   delete(item: CacheItem): void;
   delete(key: string, props?: CacheMatchProps<O>): void;
   delete(keyOrItem: string | CacheItem, props?: CacheMatchProps<O>): void {
-    let exist: CacheItem[] = [];
-    if (typeof keyOrItem === 'string') {
-      exist = this.cache.filter((x) => this._filter(x, keyOrItem, props));
-    } else {
-      exist.push(keyOrItem);
-    }
-    for (const e of exist) {
-      const index = this.cache.indexOf(e);
-      this.cache.splice(index, 1);
+    const itemsToDelete =
+      typeof keyOrItem === 'string'
+        ? this.cache.filter((x) => this._filter(x, keyOrItem, props))
+        : [keyOrItem];
+
+    for (const item of itemsToDelete) {
+      const index = this.cache.indexOf(item);
+      if (index !== -1) {
+        this.cache.splice(index, 1);
+      }
     }
   }
 
@@ -201,14 +194,10 @@ export class Cache<
     key: string,
     props?: CacheMatchProps<O>,
   ): boolean {
-    if (item.key === key) {
-      if (props) {
-        // TODO: remove backward compatibility
-        const itemProps = item.props || item.options;
-        return objectDeepEqual(itemProps || {}, objectRemoveEmpty(props));
-      }
-      return true;
-    }
-    return false;
+    if (item.key !== key) return false;
+    if (!props) return true;
+
+    const itemProps = item.props;
+    return objectDeepEqual(itemProps || {}, objectRemoveEmpty(props));
   }
 }
