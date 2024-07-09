@@ -10,6 +10,7 @@ import {
   findConnector,
   removeConnector,
 } from './activeConnectors';
+import { AbortError } from './errors/AbortError';
 import { InsufficientPermissionsError } from './errors/InsufficientPermissionsError';
 import { NgwError } from './errors/NgwError';
 import { ResourceNotFoundError } from './errors/ResourceNotFoundError';
@@ -40,7 +41,6 @@ import type {
 import type { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
 import type { Resource, ResourceItem } from './types/ResourceItem';
 import type { DeepPartial } from '@nextgis/utils';
-import { AbortError } from './errors/AbortError';
 
 let ID = 0;
 let REQUEST_ID = 0;
@@ -55,6 +55,7 @@ export class NgwConnector {
   user?: UserInfo;
   resources!: ResourcesControl;
   cache: Cache;
+  withCredentials?: boolean = undefined;
   private routeStr = '/api/component/pyramid/route';
   private activeRequests: {
     [requestId: number]: AbortController;
@@ -67,11 +68,15 @@ export class NgwConnector {
     if (exist) {
       return exist;
     } else {
-      if (this.options.route) {
-        this.routeStr = this.options.route;
+      const { route, requestTransform, withCredentials } = this.options;
+      if (route) {
+        this.routeStr = route;
       }
-      if (this.options.requestTransform) {
-        this.requestTransform = this.options.requestTransform;
+      if (requestTransform) {
+        this.requestTransform = requestTransform;
+      }
+      if (withCredentials !== undefined) {
+        this.withCredentials = withCredentials;
       }
       this.resources = new ResourcesControl({
         connector: this,
@@ -403,6 +408,8 @@ export class NgwConnector {
       url = template(url, restParams);
     }
     url = encodeURI(fixUrlStr(url));
+
+    options = { withCredentials: this.withCredentials, ...options };
 
     const {
       cache,

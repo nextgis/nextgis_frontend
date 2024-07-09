@@ -60,6 +60,7 @@ type ItemOptionsToExtend = Pick<
   | 'ratio'
   | 'order'
   | 'headers'
+  | 'withCredentials'
   | 'setViewDelay'
 > &
   Pick<VectorAdapterOptions, 'popupOptions'>;

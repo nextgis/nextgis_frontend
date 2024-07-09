@@ -6,7 +6,10 @@ import imageQueue from './imageQueue';
 
 import type { ImageOverlayOptions, LatLngBoundsExpression } from 'leaflet';
 
-type IOptions = ImageOverlayOptions & { headers?: any };
+type IOptions = ImageOverlayOptions & {
+  headers?: any;
+  withCredentials?: boolean;
+};
 
 export class ImageOverlay extends LImageOverlay {
   private _aborter?: () => void;
@@ -30,14 +33,18 @@ export class ImageOverlay extends LImageOverlay {
     // @ts-expect-error extend private method
     super._initImage();
 
-    const headers = (this.options as IOptions).headers;
+    const { headers, withCredentials } = this.options as IOptions;
     // @ts-expect-error _image is a private property
     const img: HTMLImageElement = this._image;
     const src = img.src;
     img.src = '';
     // The queue is cleared in LeafletMapAdapter at each movestart and zoomstart event
     imageQueue.add(() => {
-      const [promise, abortFunc] = callAjax(src, headers);
+      const [promise, abortFunc] = callAjax({
+        src,
+        headers,
+        withCredentials,
+      });
       promise.then((imgUrl) => {
         img.src = imgUrl;
       });

@@ -26,8 +26,12 @@ export class WmsAdapter
         ...options.nativeOptions,
       };
       let layer;
-      if (opt.headers) {
-        layer = new WMS(url, { ...layerOptions, headers: opt.headers });
+      if (opt.headers || opt.withCredentials) {
+        layer = new WMS(url, {
+          ...layerOptions,
+          headers: opt.headers,
+          withCredentials: opt.withCredentials,
+        });
       } else {
         layer = new TileLayer.WMS(url, layerOptions);
       }

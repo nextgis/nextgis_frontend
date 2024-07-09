@@ -28,10 +28,11 @@ export class TileAdapter
           tileLayerOptions.subdomains = opt.subdomains;
         }
         let layer;
-        if (opt.headers) {
+        if (opt.headers || opt.withCredentials) {
           layer = new TL(url, {
             ...tileLayerOptions,
             headers: opt.headers,
+            withCredentials: opt.withCredentials,
             setViewDelay: opt.setViewDelay,
           });
         } else {

@@ -1,11 +1,17 @@
 import type ImageWrapper from 'ol/Image';
 import type Tile from 'ol/Tile';
 
-export function setTileLoadFunction(
-  tile: Tile | ImageWrapper,
-  src: string,
-  headers?: Record<string, any>,
-): [Promise<void>, () => void] {
+export function setTileLoadFunction({
+  tile,
+  src,
+  headers,
+  withCredentials,
+}: {
+  tile: Tile | ImageWrapper;
+  src: string;
+  headers?: Record<string, any>;
+  withCredentials?: boolean;
+}): [Promise<void>, () => void] {
   let abort = () => {
     //
   };
@@ -18,7 +24,9 @@ export function setTileLoadFunction(
     for (const h in headers) {
       xhr.setRequestHeader(h, headers[h]);
     }
-
+    if (withCredentials) {
+      xhr.withCredentials = withCredentials;
+    }
     xhr.onload = function () {
       const arrayBufferView = new Uint8Array(this.response);
       const blob = new Blob([arrayBufferView], { type: 'image/png' });

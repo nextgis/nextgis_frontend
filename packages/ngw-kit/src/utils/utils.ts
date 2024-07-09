@@ -52,6 +52,9 @@ export function createNgwLayerAdapter(
   if (headers) {
     options.headers = headers;
   }
+  if (connector.withCredentials !== undefined) {
+    options.withCredentials = connector.withCredentials;
+  }
 
   return createAsyncAdapter(options, webMap, connector);
 }

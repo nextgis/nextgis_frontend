@@ -43,12 +43,17 @@ export class WmsAdapter extends BaseAdapter implements MainLayerAdapter {
             height: HEIGHT,
           }),
         );
-        const headers = options.headers;
+        const { headers, withCredentials } = options;
         const _src = url + '?' + queryString;
-        if (headers) {
-          setTileLoadFunction(image, _src, headers);
+        if (headers || withCredentials) {
+          setTileLoadFunction({
+            tile: image,
+            src: _src,
+            headers,
+            withCredentials,
+          });
         } else {
-          // @ts-ignore
+          // @ts-expect-error Property 'getImage' does not exist on type 'Tile'.
           image.getImage().src = _src;
         }
       };

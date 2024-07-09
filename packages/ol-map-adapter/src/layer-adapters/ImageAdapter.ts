@@ -134,13 +134,18 @@ export class ImageAdapter extends BaseAdapter implements MainLayerAdapter {
       const queryString = objectToQuery(
         updateWmsParams ? updateWmsParams(queryParams) : params,
       );
-      const headers = options.headers;
+      const { headers, withCredentials } = options;
 
       const _src = url + '?' + queryString;
 
       // The queue is cleared in OlMapAdapter at each movestart event
       ImageAdapter.queue.add(() => {
-        return setTileLoadFunction(image, _src, headers);
+        return setTileLoadFunction({
+          tile: image,
+          src: _src,
+          headers,
+          withCredentials,
+        });
       });
     };
   }
