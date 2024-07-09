@@ -388,78 +388,79 @@ export class NgwConnector {
    * @param params - Query params
    * @param options - Request options
    */
-  makeQuery<R = unknown>(
+  async makeQuery<R = unknown>(
     url: string,
     params?: Params | null,
     options: RequestOptions = {},
   ): Promise<R> {
     url = (this.options.baseUrl ? this.options.baseUrl : '') + url;
-    if (url) {
-      if (params) {
-        url = template(url, params);
-      }
-      url = encodeURI(fixUrlStr(url));
-
-      const { signal: externalSignal } = options;
-
-      const internalAbortController = new AbortController();
-      const internalSignal = internalAbortController.signal;
-
-      // If the external signal aborts, also abort the internal signal
-      if (externalSignal) {
-        if (externalSignal.aborted) {
-          return Promise.reject(new AbortError());
-        }
-        externalSignal.addEventListener('abort', () => {
-          internalAbortController.abort();
-        });
-      }
-
-      options.signal = internalSignal;
-
-      const createPromise = () => {
-        const id = REQUEST_ID++;
-        this.activeRequests[id] = internalAbortController;
-        return this._loadData<R>(url, options).finally(() =>
-          this._cleanActiveRequest(id),
-        );
-      };
-
-      const {
-        method = 'GET',
-        headers,
-        cacheName,
-        cacheProps,
-        responseType,
-        withCredentials,
-      } = options;
-
-      if (options.cache && method === 'GET') {
-        const cacheOptions = cacheProps
-          ? cacheProps
-          : {
-              ...objectRemoveEmpty({
-                headers,
-                withCredentials,
-                responseType,
-                baseUrl: this.options.baseUrl,
-                userId: this.user?.id,
-              }),
-              params,
-            };
-
-        return this.cache.add(
-          cacheName || url,
-          createPromise,
-          cacheOptions,
-          false,
-        );
-      }
-
-      return createPromise();
-    } else {
+    if (!url) {
       throw new Error('Empty `url` not allowed');
     }
+
+    if (params) {
+      url = template(url, params);
+    }
+    url = encodeURI(fixUrlStr(url));
+
+    const {
+      cache,
+      signal: externalSignal,
+      method = 'GET',
+      headers,
+      cacheName,
+      cacheProps,
+      responseType,
+      withCredentials,
+    } = options;
+
+    const internalAbortController = new AbortController();
+    const internalSignal = internalAbortController.signal;
+
+    // If the external signal aborts, also abort the internal signal
+    if (externalSignal) {
+      if (externalSignal.aborted) {
+        throw new AbortError();
+      }
+      externalSignal.addEventListener('abort', () => {
+        internalAbortController.abort();
+      });
+    }
+
+    options.signal = internalSignal;
+
+    const createPromise = async () => {
+      const id = REQUEST_ID++;
+      this.activeRequests[id] = internalAbortController;
+      try {
+        return this._loadData<R>(url, options);
+      } finally {
+        this._cleanActiveRequest(id);
+      }
+    };
+
+    if (cache && method === 'GET') {
+      const cacheOptions = cacheProps
+        ? cacheProps
+        : {
+            ...objectRemoveEmpty({
+              headers,
+              withCredentials,
+              responseType,
+              baseUrl: this.options.baseUrl,
+              userId: this.user?.id,
+            }),
+            params,
+          };
+      return this.cache.add(
+        cacheName || url,
+        createPromise,
+        cacheOptions,
+        false,
+      );
+    }
+
+    return createPromise();
   }
 
   // -------------------------------------------------------------------------
@@ -610,6 +611,7 @@ export class NgwConnector {
         if (runOnAbort !== undefined) {
           runOnAbort();
         }
+        reject(new AbortError());
       });
     }).catch((httpError) => {
       if (httpError.name !== 'AbortError') {
