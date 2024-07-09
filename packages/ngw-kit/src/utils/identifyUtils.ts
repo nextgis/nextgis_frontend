@@ -1,4 +1,3 @@
-import CancelablePromise from '@nextgis/cancelable-promise';
 import {
   degrees2meters,
   deprecatedMapClick,
@@ -94,7 +93,7 @@ export function fetchIdentifyGeoJson<
   P extends JsonMap = JsonMap,
 >(
   options: GetIdentifyGeoJsonOptions,
-): CancelablePromise<Feature<G, P> | undefined> {
+): Promise<Feature<G, P> | undefined> {
   const { connector, identify, requestOptions } = options;
   for (const l in identify) {
     const id = Number(l);
@@ -105,7 +104,7 @@ export function fetchIdentifyGeoJson<
 
         if (withGeom && withGeom.geom) {
           const geom = withGeom.geom as Geometry;
-          return CancelablePromise.resolve(
+          return Promise.resolve(
             createGeoJsonFeature({
               ...withGeom,
               geom,
@@ -120,7 +119,7 @@ export function fetchIdentifyGeoJson<
   if (params && params.length) {
     return fetchNgwLayerFeature({ ...requestOptions, connector, ...params[0] });
   }
-  return CancelablePromise.resolve(undefined);
+  return Promise.resolve(undefined);
 }
 
 export function fetchIdentifyItem<
@@ -128,7 +127,7 @@ export function fetchIdentifyItem<
   P extends FeatureProperties = FeatureProperties,
 >(
   options: GetIdentifyGeoJsonOptions<P>,
-): CancelablePromise<NgwFeatureItemResponse<P, G> | undefined> {
+): Promise<NgwFeatureItemResponse<P, G> | undefined> {
   const { connector, identify } = options;
 
   const params = getIdentifyItems(identify);
@@ -139,7 +138,7 @@ export function fetchIdentifyItem<
       ...params[0],
     });
   }
-  return CancelablePromise.resolve(undefined);
+  return Promise.resolve(undefined);
 }
 
 /**
@@ -150,13 +149,13 @@ export function getIdentifyGeoJson<
   P extends JsonMap = JsonMap,
 >(
   options: GetIdentifyGeoJsonOptions,
-): CancelablePromise<Feature<G, P> | undefined> {
+): Promise<Feature<G, P> | undefined> {
   return fetchIdentifyGeoJson(options);
 }
 
 export function featureLayerIdentify(
   options: FeatureLayerIdentifyOptions,
-): CancelablePromise<FeatureLayersIdentify> {
+): Promise<FeatureLayersIdentify> {
   const { geom, signal, cache, layers } = options;
 
   const wkt = typeof geom === 'string' ? geom : convertGeomToWKT(geom);
@@ -213,13 +212,13 @@ function getPolygonCoordinates(
 export function sendIdentifyRequest(
   ev: MapClickEvent,
   options: IdentifyRequestOptions,
-): CancelablePromise<FeatureLayersIdentify> {
+): Promise<FeatureLayersIdentify> {
   deprecatedMapClick(ev);
   const [lng, lat] = ev.lngLat;
-  const { geom, radius, signal, cache } = options;
+  const { geom, radius } = options;
   const geom_ = geom ?? getCirclePolygonCoordinates(lng, lat, radius);
 
-  return featureLayerIdentify({ ...options, geom: geom_, signal, cache });
+  return featureLayerIdentify({ ...options, geom: geom_ });
 }
 
 export function createIdentifyItem<

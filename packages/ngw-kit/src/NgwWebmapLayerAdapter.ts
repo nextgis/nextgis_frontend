@@ -19,9 +19,10 @@ import type {
   TreeGroup,
   TreeLayer,
 } from './interfaces';
-import type CancelablePromise from '@nextgis/cancelable-promise';
+
 import type { ItemOptions } from '@nextgis/item';
 import type {
+  BaseRequestOptions,
   BasemapWebmap,
   ResourceItem,
   WebmapResource,
@@ -152,58 +153,61 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
     }
   }
 
-  fetchBookmarks(): CancelablePromise<BookmarkItem[]> {
+  fetchBookmarks(options: BaseRequestOptions): Promise<BookmarkItem[]> {
     const bookmarkResId = this.getBookmarksResourceId();
     const connector = this.options.connector;
     if (bookmarkResId) {
-      return connector.getResourceOrFail(bookmarkResId).then((item) => {
-        const labelField = item.feature_layer?.fields.find(
-          (x) => x.label_field,
-        );
-        const keyname = labelField && labelField.keyname;
-        return fetchNgwLayerItems({
-          connector,
-          resourceId: bookmarkResId,
-          geom: false,
-          fields: keyname ? [keyname] : undefined,
-        }).then((items) => {
-          const bookmarks: BookmarkItem[] = [];
-          for (const i of items) {
-            const bookmark = new BookmarkItem({
-              item: i,
-              resourceId: bookmarkResId,
-              labelField: keyname,
-              connector,
-            });
-            bookmarks.push(bookmark);
-          }
-          return bookmarks;
+      return connector
+        .getResourceOrFail(bookmarkResId, options)
+        .then((item) => {
+          const labelField = item.feature_layer?.fields.find(
+            (x) => x.label_field,
+          );
+          const keyname = labelField && labelField.keyname;
+          return fetchNgwLayerItems({
+            connector,
+            resourceId: bookmarkResId,
+            geom: false,
+            fields: keyname ? [keyname] : undefined,
+            ...options,
+          }).then((items) => {
+            const bookmarks: BookmarkItem[] = [];
+            for (const i of items) {
+              const bookmark = new BookmarkItem({
+                item: i,
+                resourceId: bookmarkResId,
+                labelField: keyname,
+                connector,
+              });
+              bookmarks.push(bookmark);
+            }
+            return bookmarks;
+          });
         });
-      });
     }
     throw new Error(
       'Webmap was not loaded correctly, it is impossible to extract bookmarks',
     );
   }
 
-  async getLegend(): Promise<LayerLegend[]> {
+  async getLegend(options?: BaseRequestOptions): Promise<LayerLegend[]> {
     const legends: LayerLegend[] = [];
 
     let deps = this.getDependLayers();
     deps = deps.sort((a, b) => b.id - a.id);
     for (const d of deps) {
-      const layerLegend = await d.getLegend();
+      const layerLegend = await d.getLegend(options);
       legends.push(...layerLegend);
     }
 
     return legends;
   }
 
-  async getIdentificationIds(): Promise<number[]> {
+  async getIdentificationIds(options?: BaseRequestOptions): Promise<number[]> {
     const visibleLayers: number[] = [];
     let ids = this._webmapLayersIds;
     if (!ids) {
-      ids = await this._getWebMapIds();
+      ids = await this._getWebMapIds(options);
       this._webmapLayersIds = ids;
     }
     if (ids && ids.length) {
@@ -374,16 +378,16 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
     return item;
   }
 
-  private async _getWebMapIds(): Promise<number[] | undefined> {
+  private async _getWebMapIds(options?: BaseRequestOptions): Promise<number[] | undefined> {
     const webMapItem = this.layer;
     if (webMapItem && webMapItem.item.item_type === 'root') {
       const layers = webMapItem.tree.getDescendants();
-      const promises: Array<CancelablePromise<any>> = [];
+      const promises: Array<Promise<any>> = [];
       for (const x of layers) {
         const item = x.item;
         if (item.item_type === 'layer') {
           const id = item.layer_style_id;
-          const promise = this.options.connector.getResource(id).then((y) => {
+          const promise = this.options.connector.getResource(id, options).then((y) => {
             if (y) {
               const parentId = Number(y.resource.parent.id);
               item.parentId = parentId;

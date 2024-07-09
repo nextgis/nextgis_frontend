@@ -1,6 +1,5 @@
 import type { ResultItem } from './ResultItem';
 import type { BaseProvider } from '../providers/BaseProvider';
-import type CancelablePromise from '@nextgis/cancelable-promise';
 import type { LngLatBoundsArray } from '@nextgis/utils';
 import type { GeoJsonObject } from 'geojson';
 
@@ -43,5 +42,5 @@ export interface SearchItem {
   /**
    * An optional function that can be called to retrieve detailed result for this search item.
    */
-  result?: () => CancelablePromise<ResultItem>;
+  result?: () => Promise<ResultItem>;
 }

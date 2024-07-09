@@ -1,5 +1,4 @@
 import Cache from '@nextgis/cache';
-import CancelablePromise from '@nextgis/cancelable-promise';
 import { defined } from '@nextgis/utils';
 
 import { ResourceNotFoundError } from './errors/ResourceNotFoundError';
@@ -18,7 +17,7 @@ import type { DeepPartial } from '@nextgis/utils';
 
 export class ResourcesControl {
   cache: Cache<
-    CancelablePromise<ResourceItem | undefined>,
+    Promise<ResourceItem | undefined>,
     { id?: number | string }
   >;
   connector: NgwConnector;
@@ -48,7 +47,7 @@ export class ResourcesControl {
   getOne(
     resource: ResourceDefinition,
     requestOptions?: RequestOptions<'GET'>,
-  ): CancelablePromise<ResourceItem | undefined> {
+  ): Promise<ResourceItem | undefined> {
     const cache = this.cache;
     const forCache: { keyname?: string; display_name?: string; id?: number } =
       {};
@@ -77,7 +76,7 @@ export class ResourcesControl {
       } else if (isObject(resource)) {
         return this._fetchResourceBy(resource, opt);
       }
-      return CancelablePromise.resolve(undefined);
+      return Promise.resolve(undefined);
     };
     if (requestOptions?.cache) {
       return cache.addFull('resource', makeRequest, forCache);
@@ -88,7 +87,7 @@ export class ResourcesControl {
   getOneOrFail(
     resource: ResourceDefinition,
     requestOptions?: RequestOptions<'GET'>,
-  ): CancelablePromise<ResourceItem> {
+  ): Promise<ResourceItem> {
     return this.getOne(resource, requestOptions).then((res) => {
       if (res) {
         return res;
@@ -110,9 +109,9 @@ export class ResourcesControl {
   getId(
     resource: ResourceDefinition,
     requestOptions?: RequestOptions<'GET'>,
-  ): CancelablePromise<number | undefined> {
+  ): Promise<number | undefined> {
     if (typeof resource === 'number') {
-      return CancelablePromise.resolve(resource);
+      return Promise.resolve(resource);
     } else if (typeof resource === 'string' || isObject(resource)) {
       return this.getOne(resource, requestOptions).then((res) => {
         if (res) {
@@ -120,7 +119,7 @@ export class ResourcesControl {
         }
       });
     }
-    return CancelablePromise.resolve(undefined);
+    return Promise.resolve(undefined);
   }
 
   /**
@@ -134,7 +133,7 @@ export class ResourcesControl {
   getIdOrFail(
     resource: ResourceDefinition,
     requestOptions?: RequestOptions<'GET'>,
-  ): CancelablePromise<number> {
+  ): Promise<number> {
     return this.getId(resource, requestOptions).then((resp) => {
       if (resp === undefined) {
         throw new Error();
@@ -146,7 +145,7 @@ export class ResourcesControl {
   getMany(
     resource: DeepPartial<Resource>,
     requestOptions?: RequestOptions<'GET'>,
-  ): CancelablePromise<ResourceItem[]> {
+  ): Promise<ResourceItem[]> {
     return this._resourceCacheFilter(resource).then((items) => {
       if (!items.length) {
         const query: Record<string, unknown> = {};
@@ -163,7 +162,7 @@ export class ResourcesControl {
           .then((resources) => {
             if (resources) {
               for (const x of resources) {
-                this.cache.add('resource.item', CancelablePromise.resolve(x), {
+                this.cache.add('resource.item', Promise.resolve(x), {
                   id: x.resource.id,
                 });
               }
@@ -178,19 +177,19 @@ export class ResourcesControl {
   getParent(
     resource: ResourceDefinition,
     requestOptions?: RequestOptions<'GET'>,
-  ): CancelablePromise<ResourceItem | undefined> {
+  ): Promise<ResourceItem | undefined> {
     return this.getOne(resource, requestOptions).then((child) => {
       if (child) {
         return this.getOne(child.resource.parent.id, requestOptions);
       }
-      return CancelablePromise.resolve(undefined);
+      return Promise.resolve(undefined);
     });
   }
 
   getChildrenOf(
     resource: ResourceDefinition,
     requestOptions?: GetChildrenOfOptions,
-  ): CancelablePromise<ResourceItem[]> {
+  ): Promise<ResourceItem[]> {
     return this.getIdOrFail(resource).then((parent) =>
       this._getChildrenOf(parent, requestOptions),
     );
@@ -199,7 +198,7 @@ export class ResourcesControl {
   update(
     resource: ResourceDefinition,
     data: DeepPartial<ResourceItem>,
-  ): CancelablePromise<ResourceItem | undefined> {
+  ): Promise<ResourceItem | undefined> {
     return this.getId(resource).then((id) => {
       if (id !== undefined) {
         return this.connector.put('resource.item', { data }, { id });
@@ -211,7 +210,7 @@ export class ResourcesControl {
    * Fast way to delete resource from NGW and clean cache.
    * @param resource - Resource definition
    */
-  delete(resource: ResourceDefinition): CancelablePromise<void> {
+  delete(resource: ResourceDefinition): Promise<void> {
     return this.getId(resource).then((id) => {
       if (id !== undefined) {
         return this.connector.delete('resource.item', null, { id }).then(() => {
@@ -226,7 +225,7 @@ export class ResourcesControl {
     parent: ResourceDefinition,
     requestOptions?: GetChildrenOfOptions,
     _items: ResourceItem[] = [],
-  ): CancelablePromise<ResourceItem[]> {
+  ): Promise<ResourceItem[]> {
     return this.connector
       .get(
         'resource.collection',
@@ -238,7 +237,7 @@ export class ResourcesControl {
       .then((items) => {
         const recursivePromises = [];
         for (const item of items) {
-          this.cache.add('resource.item', CancelablePromise.resolve(item), {
+          this.cache.add('resource.item', Promise.resolve(item), {
             id: item.resource.id,
           });
           _items.push(item);
@@ -249,7 +248,7 @@ export class ResourcesControl {
           }
         }
         if (recursivePromises.length) {
-          return CancelablePromise.all(recursivePromises).then(() => {
+          return Promise.all(recursivePromises).then(() => {
             return _items;
           });
         }
@@ -283,7 +282,7 @@ export class ResourcesControl {
   private _fetchResourceById(
     id: number,
     requestOptions?: RequestOptions<'GET'>,
-  ): CancelablePromise<ResourceItem | undefined> {
+  ): Promise<ResourceItem | undefined> {
     const promise = () =>
       this.connector.get('resource.item', requestOptions, { id });
     if (requestOptions?.cache) {
@@ -304,7 +303,7 @@ export class ResourcesControl {
   private _fetchResourceBy(
     resource: DeepPartial<Resource>,
     requestOptions?: RequestOptions<'GET'>,
-  ): CancelablePromise<ResourceItem | undefined> {
+  ): Promise<ResourceItem | undefined> {
     return this.getMany(resource, requestOptions).then((resources) => {
       return resources[0];
     });
@@ -312,8 +311,8 @@ export class ResourcesControl {
 
   private _resourceCacheFilter(
     resource: DeepPartial<Resource>,
-  ): CancelablePromise<ResourceItem[]> {
-    return CancelablePromise.all(this.cache.matchAll('resource.item')).then(
+  ): Promise<ResourceItem[]> {
+    return Promise.all(this.cache.matchAll('resource.item')).then(
       (resources) => {
         const items: ResourceItem[] = [];
         resources.filter((x) => {

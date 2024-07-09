@@ -1,6 +1,5 @@
 import { EventEmitter } from 'events';
 
-import CancelablePromise from '@nextgis/cancelable-promise';
 import NgwConnector from '@nextgis/ngw-connector';
 import { fixUrlStr, isObject } from '@nextgis/utils';
 import { Upload as TusUpload } from 'tus-js-client';
@@ -25,7 +24,7 @@ import type {
   RasterUploadOptions,
   VectorUploadOptions,
 } from './interfaces';
-import type { ResourceCls } from '@nextgis/ngw-connector';
+import type { RequestOptions, ResourceCls } from '@nextgis/ngw-connector';
 import type { CreatedResource, ResourceItem } from '@nextgis/ngw-connector';
 import type {
   FileMeta,
@@ -57,7 +56,7 @@ export class NgwUploader {
   createGroup(
     nameOrOptions: string | GroupOptions,
     opt: GroupOptions = {},
-  ): CancelablePromise<CreatedResource> {
+  ): Promise<CreatedResource> {
     if (!this.connector) {
       throw new Error('Connector is not set yet');
     }
@@ -137,16 +136,12 @@ export class NgwUploader {
   }
 
   @evented({ status: 'create-vector', template: 'vector creation' })
-  createVector(
-    options: CreateVectorOptions,
-  ): CancelablePromise<CreatedResource> {
+  createVector(options: CreateVectorOptions): Promise<CreatedResource> {
     return this._createResource('vector_layer', options);
   }
 
   @evented({ status: 'create-raster', template: 'raster creation' })
-  createRaster(
-    options: CreateRasterOptions,
-  ): CancelablePromise<CreatedResource> {
+  createRaster(options: CreateRasterOptions): Promise<CreatedResource> {
     return this._createResource('raster_layer', options);
   }
 
@@ -157,7 +152,7 @@ export class NgwUploader {
   createStyle(
     opt: CreateStyleOptions,
     name?: string | number,
-  ): CancelablePromise<CreatedRes> {
+  ): Promise<CreatedRes> {
     if (!this.connector) {
       throw new Error('Connector is not set yet');
     }
@@ -191,7 +186,7 @@ export class NgwUploader {
   createWms(
     opt: CreateWmsOptions,
     name?: string,
-  ): CancelablePromise<CreatedResource> | undefined {
+  ): Promise<CreatedResource> | undefined {
     let layers: WmsServerServiceLayer[] = opt.layers || [
       {
         keyname: [opt.keyname, 'image1'].filter(Boolean).join('-'),
@@ -233,7 +228,7 @@ export class NgwUploader {
   createWmsConnection(
     opt: CreateWmsConnectionOptions,
     name?: string,
-  ): CancelablePromise<CreatedResource> | undefined {
+  ): Promise<CreatedResource> | undefined {
     const { url, password, username, version, capcache } = opt;
 
     const wmsclient_connection: WmsClientConnection = {
@@ -266,7 +261,7 @@ export class NgwUploader {
   createWmsConnectedLayer(
     opt: CreateWmsConnectedLayerOptions,
     name?: string,
-  ): CancelablePromise<CreatedResource> | undefined {
+  ): Promise<CreatedResource> | undefined {
     const { id, vendor_params, imgformat, srs, connection } = opt;
     const wmslayers =
       opt.wmslayers && Array.isArray(opt.wmslayers)
@@ -303,7 +298,7 @@ export class NgwUploader {
   fileUpload(
     file: FileType,
     options: FileUploadOptions = {},
-  ): CancelablePromise<FileMeta> {
+  ): Promise<FileMeta> {
     const connector = this.connector;
     if (!connector) {
       throw new Error('Connector is not set yet');
@@ -337,7 +332,7 @@ export class NgwUploader {
           file = file.file;
         }
 
-        return new CancelablePromise<FileMeta>((resolve, reject, onCancel) => {
+        return new Promise<FileMeta>((resolve, reject) => {
           const headers = connector.getAuthorizationHeaders() as Record<
             string,
             string
@@ -379,9 +374,9 @@ export class NgwUploader {
             },
           });
           uploader.start();
-          onCancel(() => {
-            uploader.abort();
-          });
+          if (options.signal) {
+            options.signal.addEventListener('abort', uploader.abort);
+          }
         });
       });
     } else {
@@ -411,14 +406,15 @@ export class NgwUploader {
     meta: FileMeta,
     name: string,
     options: RasterUploadOptions,
-  ): CancelablePromise<CreatedResource> | undefined {
+  ): Promise<CreatedResource> | undefined {
     return this.createRaster({ source: meta, display_name: name, ...options });
   }
 
   getResource(
     id: number,
-  ): CancelablePromise<ResourceItem | undefined> | undefined {
-    return this.connector && this.connector.getResource(id);
+    requestOptions?: RequestOptions<'GET'>,
+  ): Promise<ResourceItem | undefined> | undefined {
+    return this.connector && this.connector.getResource(id, requestOptions);
   }
 
   protected async _initialize() {
@@ -434,7 +430,7 @@ export class NgwUploader {
   private _createResource(
     cls: ResourceCls,
     opt: CreateRasterOptions,
-  ): CancelablePromise<CreatedResource> {
+  ): Promise<CreatedResource> {
     if (!this.connector) {
       throw new Error('Connector is not set yet');
     }

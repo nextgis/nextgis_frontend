@@ -1,6 +1,5 @@
 import { EventEmitter } from 'events';
 
-import CancelablePromise from '@nextgis/cancelable-promise';
 import {
   checkExtent,
   deepmerge,
@@ -99,7 +98,7 @@ export class WebMapMain<
   private _mapState: StateItem[] = [];
   private _extent?: LngLatBoundsArray;
   private readonly _eventsStatus: { [key in keyof E]?: boolean } = {};
-  private _coordFromMapClickPromise?: CancelablePromise<LngLatArray>;
+  private _coordFromMapClickAbort?: () => void;
 
   private readonly _mapEvents: {
     [key in keyof MainMapEvents]?: (...args: any[]) => void;
@@ -462,37 +461,35 @@ export class WebMapMain<
   }
 
   stopGetCoordFromMapClick(): void {
-    if (this._coordFromMapClickPromise) {
-      this._coordFromMapClickPromise.cancel();
+    if (this._coordFromMapClickAbort) {
+      this._coordFromMapClickAbort();
+      this._coordFromMapClickAbort = undefined;
     }
   }
 
-  getCoordFromMapClick(): CancelablePromise<LngLatArray> {
-    if (!this._coordFromMapClickPromise) {
-      this._coordFromMapClickPromise = new CancelablePromise(
-        (resolve, reject, onCancel) => {
-          const cursor: Cursor = this.getCursor() || 'grab';
-          this._removeEventListeners({ include: ['click'] });
-          this.setCursor('crosshair');
-          const onCancel_ = (): void => {
-            this.setCursor(cursor);
-            this._addEventsListeners({ include: ['click'] });
-            this.mapAdapter.emitter.off('click', onMapClick);
-            this._coordFromMapClickPromise = undefined;
-          };
-          const onMapClick = (e: MapClickEvent) => {
-            onCancel_();
-            deprecatedMapClick(e);
-            resolve(e.lngLat);
-          };
-          this.mapAdapter.emitter.once('click', onMapClick);
-          onCancel(onCancel_);
-        },
-      );
+  getCoordFromMapClick(): Promise<LngLatArray> {
+    if (!this._coordFromMapClickAbort) {
+      return new Promise((resolve, reject) => {
+        const cursor: Cursor = this.getCursor() || 'grab';
+        this._removeEventListeners({ include: ['click'] });
+        this.setCursor('crosshair');
+        const onCancel_ = (): void => {
+          this.setCursor(cursor);
+          this._addEventsListeners({ include: ['click'] });
+          this.mapAdapter.emitter.off('click', onMapClick);
+          this._coordFromMapClickAbort = undefined;
+        };
+        const onMapClick = (e: MapClickEvent) => {
+          onCancel_();
+          deprecatedMapClick(e);
+          resolve(e.lngLat);
+        };
+        this.mapAdapter.emitter.once('click', onMapClick);
+        this._coordFromMapClickAbort = onCancel_;
+      });
     } else {
       return this.getCoordFromMapClick();
     }
-    return this._coordFromMapClickPromise;
   }
 
   protected _emitStatusEvent(

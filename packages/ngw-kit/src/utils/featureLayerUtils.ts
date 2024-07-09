@@ -1,4 +1,3 @@
-import CancelablePromise from '@nextgis/cancelable-promise';
 import { isPropertyFilter } from '@nextgis/properties-filter';
 import {
   defined,
@@ -82,12 +81,12 @@ export function createFeatureFieldFilterQueries<
 >(
   opt: FetchNgwItemsOptions<P> &
     Required<Pick<FetchNgwItemsOptions, 'filters'>>,
-): CancelablePromise<FeatureItem<P, G>[]> {
-  const queries: CancelablePromise<FeatureItem<P, G>[]>[] = getQueries<G, P>(
+): Promise<FeatureItem<P, G>[]> {
+  const queries: Promise<FeatureItem<P, G>[]>[] = getQueries<G, P>(
     opt,
   );
 
-  return CancelablePromise.all(queries).then((itemsParts) => {
+  return Promise.all(queries).then((itemsParts) => {
     // this list of ids used for optimization
     const ids: number[] = [];
     const items: FeatureItem<P, G>[] = [];
@@ -130,9 +129,9 @@ function getQueries<
 >(
   opt: FetchNgwItemsOptions<P> &
     Required<Pick<FetchNgwItemsOptions, 'filters'>>,
-  _queries: CancelablePromise<FeatureItem<P, G>[]>[] = [],
+  _queries: Promise<FeatureItem<P, G>[]>[] = [],
   _parentAllParams: [string, any][] = [],
-): CancelablePromise<FeatureItem<P, G>[]>[] {
+): Promise<FeatureItem<P, G>[]>[] {
   const { filters } = opt;
 
   const paramList = opt.paramList ?? [];
@@ -206,7 +205,7 @@ function createWktFromCoordArray(coord: LngLatArray[]): string {
 export function fetchNgwLayerItemsRequest<
   G extends Geometry = Geometry,
   P extends { [field: string]: any } = { [field: string]: any },
->(options: FetchNgwItemsOptions<P>): CancelablePromise<FeatureItem<P, G>[]> {
+>(options: FetchNgwItemsOptions<P>): Promise<FeatureItem<P, G>[]> {
   const params: FeatureRequestParams & RequestItemAdditionalParams = {
     ...FEATURE_REQUEST_PARAMS,
   };
@@ -263,5 +262,5 @@ export function fetchNgwLayerItemsRequest<
     'feature_layer.feature.collection',
     { cache, signal },
     reqParams,
-  ) as CancelablePromise<FeatureItem<P, G>[]>;
+  ) as Promise<FeatureItem<P, G>[]>;
 }

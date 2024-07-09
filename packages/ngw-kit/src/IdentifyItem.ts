@@ -1,5 +1,3 @@
-import CancelablePromise from '@nextgis/cancelable-promise';
-
 import { fetchNgwLayerItem, fetchNgwLayerItemExtent } from '.';
 
 import type { IdentifyItemOptions, NgwFeatureItemResponse } from '.';
@@ -8,6 +6,7 @@ import type {
   FeatureItemExtensions,
   FeatureResource,
   LayerFeature,
+  RequestOptions,
   VectorLayerResourceItem,
 } from '@nextgis/ngw-connector';
 import type NgwConnector from '@nextgis/ngw-connector';
@@ -46,9 +45,9 @@ export class IdentifyItem<
 
   identify(
     options: Partial<FetchNgwItemOptions<F>> = {},
-  ): CancelablePromise<NgwFeatureItemResponse<F, G>> {
+  ): Promise<NgwFeatureItemResponse<F, G>> {
     if (this._item) {
-      return CancelablePromise.resolve(this._item);
+      return Promise.resolve(this._item);
     }
     return fetchNgwLayerItem<G, F>({
       connector: this.connector,
@@ -65,32 +64,35 @@ export class IdentifyItem<
     });
   }
 
-  resource(): CancelablePromise<FeatureResource> {
+  resource(opt?: RequestOptions<'GET'>): Promise<FeatureResource> {
     if (this._resource) {
-      return CancelablePromise.resolve(this._resource.feature_layer);
+      return Promise.resolve(this._resource.feature_layer);
     }
-    return this.connector.getResource(this.layerId).then((resp) => {
+    return this.connector.getResource(this.layerId, opt).then((resp) => {
       this._resource = resp as VectorLayerResourceItem;
       return this._resource.feature_layer;
     });
   }
 
-  getBounds(): CancelablePromise<LngLatBoundsArray | undefined> {
+  getBounds(
+    opt?: Pick<RequestOptions<'GET'>, 'cache' | 'signal'>,
+  ): Promise<LngLatBoundsArray | undefined> {
     if (this._extent) {
-      return CancelablePromise.resolve(this._extent);
+      return Promise.resolve(this._extent);
     }
     return fetchNgwLayerItemExtent({
       connector: this.connector,
       featureId: this.id,
       resourceId: this.layerId,
+      ...opt,
     });
   }
 
-  geojson(): CancelablePromise<Feature<G, F>> {
+  geojson(options: Partial<FetchNgwItemOptions<F>>): Promise<Feature<G, F>> {
     if (this._geojson) {
-      return CancelablePromise.resolve(this._geojson);
+      return Promise.resolve(this._geojson);
     }
-    return this.identify().then((resp) => {
+    return this.identify(options).then((resp) => {
       return resp.toGeojson().then((geojson) => {
         this._geojson = geojson;
         return geojson;

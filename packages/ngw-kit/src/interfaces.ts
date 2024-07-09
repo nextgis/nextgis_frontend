@@ -1,4 +1,3 @@
-import type CancelablePromise from '@nextgis/cancelable-promise';
 import type NgwConnector from '@nextgis/ngw-connector';
 import type {
   FeatureItem,
@@ -305,6 +304,7 @@ export interface NgwFeatureRequestOptions<
   geom?: boolean;
   geomFormat?: GeomFormat;
   srs?: number;
+  signal?: AbortSignal;
 }
 
 export interface GetNgwItemOptions extends FetchNgwLayerExtentOptions {
@@ -368,7 +368,7 @@ export interface NgwFeatureItemResponse<
    * @remarks
    * if geometry is not available (see {@link NgwFeatureRequestOptions.geom}), this method will return it anyway
    */
-  toGeojson(): CancelablePromise<Feature<G, F>>;
+  toGeojson(): Promise<Feature<G, F>>;
 }
 
 export interface IdentifyItemOptions {
@@ -380,4 +380,5 @@ export interface FetchNgwLayerCountOptions {
   connector: NgwConnector;
   resourceId: number;
   cache?: boolean;
+  signal?: AbortSignal;
 }

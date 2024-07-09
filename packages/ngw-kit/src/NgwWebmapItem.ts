@@ -163,7 +163,6 @@ export class NgwWebmapItem extends Item<ItemOptions> {
       if (connector) {
         const ngwLegend = await connector.get('render.legend_symbols', {
           params: { id: this.item.resourceId },
-          cache: true,
           ...options,
         });
         const legend: LayerLegend = {

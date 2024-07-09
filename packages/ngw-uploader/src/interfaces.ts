@@ -36,6 +36,7 @@ export interface ResourceCreateOptions {
 export interface FileUploadOptions extends ResourceCreateOptions {
   onProgress?: (percentComplete: number) => void;
   put?: boolean;
+  signal?: AbortSignal;
 }
 
 export type GroupOptions = ResourceCreateOptions;

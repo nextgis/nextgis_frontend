@@ -1,5 +1,3 @@
-import CancelablePromise from '@nextgis/cancelable-promise';
-
 import { defined } from '../../../utils/src';
 
 import type NgwConnector from '@nextgis/ngw-connector';
@@ -13,6 +11,8 @@ export interface MapFeatureDisplayNameOptions {
    */
   resourceId?: number;
   fields: string[];
+  signal?: AbortSignal;
+  cache?: boolean;
 }
 
 export function mapFeatureDisplayName({
@@ -20,23 +20,25 @@ export function mapFeatureDisplayName({
   resource,
   resourceId,
   fields,
-}: MapFeatureDisplayNameOptions): CancelablePromise<string[]> {
+  signal,
+  cache,
+}: MapFeatureDisplayNameOptions): Promise<string[]> {
   const id = resource || resourceId;
   if (!defined(id)) {
     throw new Error(
       'The `resource` or `resourceId` is required option for mapFeatureDisplayName function',
     );
   }
-  return connector.getResource(id).then((res) => {
+  return connector.getResource(id, { signal, cache }).then((res) => {
     const featureLayer = res && res.feature_layer;
     if (featureLayer) {
-      return CancelablePromise.resolve(
+      return Promise.resolve(
         fields.map((x) => {
           const alias = featureLayer.fields.find((y) => y.keyname === x);
           return alias ? alias.display_name : x;
         }),
       );
     }
-    return CancelablePromise.resolve(fields);
+    return Promise.resolve(fields);
   });
 }

@@ -3,7 +3,6 @@ import { defined } from '@nextgis/utils';
 import { fetchNgwLayerItems } from './fetchNgwLayerItems';
 
 import type { FetchNgwItemsOptions } from '../interfaces';
-import type CancelablePromise from '@nextgis/cancelable-promise';
 import type { FeatureProperties } from '@nextgis/utils';
 
 export interface MapSelectNgwLayerDistinctOptions<
@@ -16,7 +15,7 @@ export function selectNgwLayerDistinct<
   P extends FeatureProperties = FeatureProperties,
 >(
   options: MapSelectNgwLayerDistinctOptions<P>,
-): CancelablePromise<Record<keyof P, unknown[]>> {
+): Promise<Record<keyof P, unknown[]>> {
   const fields = options.fields;
   if (!fields) {
     throw new Error(

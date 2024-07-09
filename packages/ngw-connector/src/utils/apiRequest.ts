@@ -1,5 +1,3 @@
-import CancelablePromise from '@nextgis/cancelable-promise';
-
 import { template } from './template';
 
 import type { NgwConnector } from '../NgwConnector';
@@ -20,9 +18,9 @@ interface ApiRequestOptions<K extends keyof RequestItemsParamsMap> {
 export function apiRequest<
   K extends keyof RequestItemsParamsMap,
   P extends RequestItemKeys = RequestItemKeys,
->(opt: ApiRequestOptions<K>): CancelablePromise<P[K]> {
+>(opt: ApiRequestOptions<K>): Promise<P[K]> {
   const params = opt.params;
-  return new CancelablePromise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     return opt.connector
       .connect()
       .then((apiItems) => {

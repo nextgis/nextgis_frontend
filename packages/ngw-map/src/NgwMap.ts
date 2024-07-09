@@ -1,6 +1,5 @@
 import { EventEmitter } from 'events';
 
-import CancelablePromise from '@nextgis/cancelable-promise';
 import { getIcon } from '@nextgis/icons';
 import {
   createIdentifyItem,
@@ -104,7 +103,10 @@ export class NgwMap<
   protected _ngwLayers: NgwLayers = {};
   private $$selectFromNgwRaster?: (ev: MapClickEvent) => void;
   private $$selectFromNgwVector?: (ev: OnLayerMouseOptions) => void;
-  private _promises: Record<PromiseGroup, CancelablePromise[]> = {
+  private _promises: Record<
+    PromiseGroup,
+    [Promise<unknown>, AbortController][]
+  > = {
     select: [],
     identify: [],
   };
@@ -244,9 +246,7 @@ export class NgwMap<
   fetchNgwLayerItem<
     G extends Geometry = Geometry,
     P extends FeatureProperties = FeatureProperties,
-  >(
-    options: Omit<FetchNgwItemOptions<P>, 'connector'>,
-  ): CancelablePromise<FeatureItem> {
+  >(options: Omit<FetchNgwItemOptions<P>, 'connector'>): Promise<FeatureItem> {
     return fetchNgwLayerItem<G, P>({
       connector: this.connector,
       ...options,
@@ -258,7 +258,7 @@ export class NgwMap<
     G extends Geometry = Geometry,
   >(
     options: Omit<FetchNgwItemsOptions<F>, 'connector'>,
-  ): CancelablePromise<FeatureItem<F, G>[]> {
+  ): Promise<FeatureItem<F, G>[]> {
     return fetchNgwLayerItems<G, F>({
       connector: this.connector,
       ...options,
@@ -270,7 +270,7 @@ export class NgwMap<
     P extends FeatureProperties = FeatureProperties,
   >(
     options: Omit<FetchNgwItemOptions<P>, 'connector'>,
-  ): CancelablePromise<Feature<G, P>> {
+  ): Promise<Feature<G, P>> {
     return fetchNgwLayerFeature<G, P>({
       connector: this.connector,
       ...options,
@@ -282,7 +282,7 @@ export class NgwMap<
     P extends FeatureProperties = FeatureProperties,
   >(
     options: Omit<FetchNgwItemsOptions<P>, 'connector'>,
-  ): CancelablePromise<FeatureCollection<G, P>> {
+  ): Promise<FeatureCollection<G, P>> {
     return fetchNgwLayerFeatureCollection({
       connector: this.connector,
       ...options,
@@ -296,32 +296,43 @@ export class NgwMap<
     identify: NgwIdentify,
     requestOptions?: NgwFeatureRequestOptions,
     // multiple = false
-  ): CancelablePromise<NgwFeatureItemResponse<P, G> | undefined> {
+  ): Promise<NgwFeatureItemResponse<P, G> | undefined> {
+    const abortController = new AbortController();
+    const abortSignal = abortController.signal;
+
+    if (requestOptions?.signal) {
+      requestOptions.signal.addEventListener('abort', abortController.abort);
+    }
+    requestOptions = requestOptions || {};
+    requestOptions.signal = abortSignal;
+
     const promise = fetchIdentifyItem<G, P>({
       identify,
       connector: this.connector,
       requestOptions,
       // multiple,
     });
-
-    this._addPromise('identify', promise);
+    this._addPromise('identify', promise, abortController);
     return promise;
   }
 
   fetchIdentifyGeoJson(
     identify: NgwIdentify,
     multiple = false,
-  ): CancelablePromise<Feature | undefined> {
+  ): Promise<Feature | undefined> {
+    const abortController = new AbortController();
+
     const promise = fetchIdentifyGeoJson({
       identify,
       connector: this.connector,
       multiple,
+      requestOptions: { signal: abortController.signal },
     });
     if (promise && 'then' in promise) {
-      this._addPromise('identify', promise);
+      this._addPromise('identify', promise, abortController);
       return promise;
     } else {
-      return CancelablePromise.resolve(promise);
+      return Promise.resolve(promise);
     }
   }
 
@@ -331,7 +342,7 @@ export class NgwMap<
   getIdentifyGeoJson(
     identify: NgwIdentify,
     multiple = false,
-  ): CancelablePromise<Feature | undefined> {
+  ): Promise<Feature | undefined> {
     return this.fetchIdentifyGeoJson(identify, multiple);
   }
 
@@ -474,9 +485,7 @@ export class NgwMap<
   getNgwLayerItem<
     G extends Geometry = Geometry,
     P extends FeatureProperties = FeatureProperties,
-  >(
-    options: Omit<FetchNgwItemOptions<P>, 'connector'>,
-  ): CancelablePromise<FeatureItem> {
+  >(options: Omit<FetchNgwItemOptions<P>, 'connector'>): Promise<FeatureItem> {
     return this.fetchNgwLayerItem<G, P>(options);
   }
 
@@ -488,7 +497,7 @@ export class NgwMap<
     G extends Geometry = Geometry,
   >(
     options: Omit<FetchNgwItemsOptions<F>, 'connector'>,
-  ): CancelablePromise<FeatureItem<F, G>[]> {
+  ): Promise<FeatureItem<F, G>[]> {
     return this.fetchNgwLayerItems<F, G>(options);
   }
 
@@ -500,7 +509,7 @@ export class NgwMap<
     P extends FeatureProperties = FeatureProperties,
   >(
     options: Omit<FetchNgwItemOptions<P>, 'connector'>,
-  ): CancelablePromise<Feature<G, P>> {
+  ): Promise<Feature<G, P>> {
     return this.fetchNgwLayerFeature<G, P>(options);
   }
 
@@ -510,9 +519,7 @@ export class NgwMap<
   getNgwLayerFeatures<
     G extends Geometry | null = Geometry,
     P extends JsonMap = JsonMap,
-  >(
-    options: FetchNgwItemsOptions<P>,
-  ): CancelablePromise<FeatureCollection<G, P>> {
+  >(options: FetchNgwItemsOptions<P>): Promise<FeatureCollection<G, P>> {
     return this.fetchNgwLayerFeatures(options);
   }
 
@@ -528,7 +535,7 @@ export class NgwMap<
     args.forEach((name) => {
       const group = this._promises[name];
       if (group) {
-        group.forEach((x) => x.cancel());
+        group.forEach((x) => x[1].abort());
         this._promises[name] = [];
       }
     });
@@ -610,12 +617,13 @@ export class NgwMap<
         }, highlightDuration);
       }
     }
-
+    const abortController = new AbortController();
     const selectPromise = sendIdentifyRequest(ev, {
       layers: ids,
       connector: this.connector,
       radius,
       geom,
+      signal: abortController.signal,
     }).then((resp) => {
       const identify: NgwIdentify = {
         ...resp,
@@ -627,22 +635,26 @@ export class NgwMap<
       this._emitStatusEvent('ngw:select', identifyEvent);
       return identifyEvent;
     });
-    this._addPromise('select', selectPromise);
+    this._addPromise('select', selectPromise, abortController);
     return selectPromise;
   }
 
-  private _addPromise(groupName: PromiseGroup, promise: CancelablePromise) {
+  private _addPromise(
+    groupName: PromiseGroup,
+    promise: Promise<unknown>,
+    abortController: AbortController,
+  ) {
     const group = this._promises[groupName];
-    if (group && group.indexOf(promise) === -1) {
+    if (group && group.findIndex((g) => g[0] === promise) === -1) {
       const removeFromGroup = () => {
-        const index = group.indexOf(promise);
+        const index = group.findIndex((g) => g[0] === promise);
         if (index !== -1) {
           group.splice(index, 1);
         }
       };
       promise.then(removeFromGroup);
       promise.catch(removeFromGroup);
-      group.push(promise);
+      group.push([promise, abortController]);
     }
   }
 
