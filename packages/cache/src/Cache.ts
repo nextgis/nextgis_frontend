@@ -119,13 +119,13 @@ export class Cache<
       } else {
         value = valueToSet;
       }
-      const props_ =
+      const nonEmptyProps =
         props && JSON.parse(JSON.stringify(objectRemoveEmpty(props)));
 
       const cacheItem: CacheItem<V, O> = {
         key,
         value,
-        props: props_,
+        props: nonEmptyProps,
       };
       if (onlyFull && !full(value)) {
         return value;
@@ -134,7 +134,6 @@ export class Cache<
       if (value instanceof Promise) {
         value.catch((er) => {
           this.delete(key, props);
-          throw er;
         });
         if (onlyFull) {
           value.then((x) => {
