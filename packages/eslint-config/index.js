@@ -80,6 +80,11 @@ module.exports = {
       1,
       {
         args: 'none',
+        destructuredArrayIgnorePattern: '^_',
+        vars: 'all',
+        ignoreRestSiblings: true,
+        varsIgnorePattern: '^_',
+        argsIgnorePattern: '^_',
       },
     ],
     '@typescript-eslint/explicit-member-accessibility': [
