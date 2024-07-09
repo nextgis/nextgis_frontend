@@ -45,10 +45,9 @@ export class ResourcesControl {
     resource: ResourceDefinition,
     requestOptions?: RequestOptions<'GET'>,
   ): Promise<ResourceItem | undefined> {
-    const cache = this.cache;
     const forCache: { keyname?: string; display_name?: string; id?: number } =
       {};
-    const opt = { ...requestOptions, cache: false };
+    const opt = { ...requestOptions };
     if (typeof resource === 'string') {
       forCache.keyname = resource;
     } else if (typeof resource === 'number') {
@@ -65,20 +64,15 @@ export class ResourcesControl {
         }
       }
     }
-    const makeRequest = () => {
-      if (typeof resource === 'string') {
-        return this._fetchResourceBy({ keyname: resource }, opt);
-      } else if (typeof resource === 'number') {
-        return this._fetchResourceById(resource, opt);
-      } else if (isObject(resource)) {
-        return this._fetchResourceBy(resource, opt);
-      }
-      return Promise.resolve(undefined);
-    };
-    if (requestOptions?.cache) {
-      return cache.addFull('resource', makeRequest, forCache);
+
+    if (typeof resource === 'string') {
+      return this._fetchResourceBy({ keyname: resource }, opt);
+    } else if (typeof resource === 'number') {
+      return this._fetchResourceById(resource, opt);
+    } else if (isObject(resource)) {
+      return this._fetchResourceBy(resource, opt);
     }
-    return makeRequest();
+    return Promise.resolve(undefined);
   }
 
   getOneOrFail(
@@ -157,7 +151,7 @@ export class ResourcesControl {
             ...query,
           })
           .then((resources) => {
-            if (resources) {
+            if (requestOptions?.cache && resources) {
               for (const x of resources) {
                 this.cache.add('resource.item', Promise.resolve(x), {
                   id: x.resource.id,
@@ -224,19 +218,17 @@ export class ResourcesControl {
     _items: ResourceItem[] = [],
   ): Promise<ResourceItem[]> {
     return this.connector
-      .get(
-        'resource.collection',
-        { cache: true, ...requestOptions },
-        {
-          parent,
-        },
-      )
+      .get('resource.collection', requestOptions, {
+        parent,
+      })
       .then((items) => {
         const recursivePromises = [];
         for (const item of items) {
-          this.cache.add('resource.item', Promise.resolve(item), {
-            id: item.resource.id,
-          });
+          if (requestOptions?.cache) {
+            this.cache.add('resource.item', Promise.resolve(item), {
+              id: item.resource.id,
+            });
+          }
           _items.push(item);
           if (requestOptions?.recursive && item.resource.children) {
             recursivePromises.push(
@@ -257,7 +249,7 @@ export class ResourcesControl {
     const all = this.cache.all();
     const toDelete: typeof all = [];
     for (const c of all) {
-      const cid = c.options && c.options.id;
+      const cid = c.props?.id;
       if (['resource.item', 'resource'].includes(c.key) && cid !== undefined) {
         if (typeof cid === 'number') {
           if (cid === id) {
@@ -280,21 +272,7 @@ export class ResourcesControl {
     id: number,
     requestOptions?: RequestOptions<'GET'>,
   ): Promise<ResourceItem | undefined> {
-    const promise = () =>
-      this.connector.get('resource.item', requestOptions, { id });
-    if (requestOptions?.cache) {
-      return this.cache
-        .add('resource.item', promise, {
-          id,
-        })
-        .catch((er) => {
-          if (!(er instanceof ResourceNotFoundError)) {
-            throw er;
-          }
-          return undefined;
-        });
-    }
-    return promise();
+    return this.connector.get('resource.item', requestOptions, { id });
   }
 
   private _fetchResourceBy(

@@ -40,8 +40,10 @@ import type {
 import type { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
 import type { Resource, ResourceItem } from './types/ResourceItem';
 import type { DeepPartial } from '@nextgis/utils';
+import { AbortError } from './errors/AbortError';
 
 let ID = 0;
+let REQUEST_ID = 0;
 
 export class NgwConnector {
   static errors = {
@@ -55,9 +57,8 @@ export class NgwConnector {
   cache: Cache;
   private routeStr = '/api/component/pyramid/route';
   private activeRequests: {
-    promise: Promise<unknown>;
-    abortController: AbortController;
-  }[] = [];
+    [requestId: number]: AbortController;
+  } = {};
   private requestTransform?: RequestTransformFunction | null;
 
   constructor(public options: NgwConnectorOptions) {
@@ -122,36 +123,28 @@ export class NgwConnector {
    *   .catch((er) => console.log('Connection problem', er));
    * ```
    */
-  connect(): Promise<PyramidRoute> {
+  async connect(): Promise<PyramidRoute> {
     const auth = this.options.auth;
-    const makeConnect = () =>
-      new Promise<PyramidRoute>((resolve, reject) => {
-        const makeQuery = () => {
-          return this.makeQuery<PyramidRoute>(this.routeStr, {}, {})
-            .then((route) => {
-              resolve(route);
-            })
-            .catch((er) => {
-              reject(er);
-            });
-        };
-        if (auth) {
-          const { login, password } = auth;
-          if (login && password) {
-            return this._login({ login, password })
-              .then(() => {
-                return makeQuery();
-              })
-              .catch((er) => reject(er));
-          }
-        }
-        return makeQuery();
-      });
-    return this.cache.add('route', makeConnect, {
-      id: this.id,
-      auth,
-      baseUrl: this.options.baseUrl,
-    });
+
+    if (auth) {
+      const { login, password } = auth;
+      if (login && password) {
+        await this._login({ login, password });
+      }
+    }
+    return await this.makeQuery<PyramidRoute>(
+      this.routeStr,
+      {},
+      {
+        cacheName: 'route',
+        cache: true,
+        cacheProps: {
+          id: this.id,
+          auth,
+          baseUrl: this.options.baseUrl,
+        },
+      },
+    );
   }
 
   /**
@@ -176,12 +169,12 @@ export class NgwConnector {
     this.emitter.emit('logout');
   }
 
-  getUserInfo(
+  async getUserInfo(
     credentials?: Credentials,
     options?: RequestOptions,
   ): Promise<UserInfo> {
     if (this.user && this.user.id) {
-      return Promise.resolve(this.user);
+      return this.user;
     }
     if (credentials) {
       this.options.auth = credentials;
@@ -208,7 +201,7 @@ export class NgwConnector {
     const client = this.makeClientId(credentials);
     if (client) {
       return {
-        Authorization: 'Basic ' + client,
+        Authorization: `Basic ${client}`,
       };
     }
   }
@@ -217,26 +210,27 @@ export class NgwConnector {
     credentials = credentials || this.options.auth;
     if (credentials) {
       const { login, password } = credentials;
-      const str = unescape(encodeURIComponent(`${login}:${password}`));
-      // @ts-ignore
+      const str = `${login}:${password}`;
+      const encodedStr = encodeURIComponent(str);
+
       if (__BROWSER__) {
-        return window.btoa(str);
+        return window.btoa(encodedStr);
       } else {
-        return Buffer.from(str).toString('base64');
+        return Buffer.from(encodedStr).toString('base64');
       }
     }
   }
 
   /** Stop all api requests */
   abort() {
-    for (const { abortController } of this.activeRequests) {
+    for (const abortController of Object.values(this.activeRequests)) {
       abortController.abort();
     }
-    this.activeRequests = [];
+    this.activeRequests = {};
   }
 
   getActiveApiRequests() {
-    return [...this.activeRequests];
+    return { ...this.activeRequests };
   }
 
   /**
@@ -276,26 +270,9 @@ export class NgwConnector {
     params_: RequestItemsParams<K> = {},
     requestOptions: RequestOptions = {},
   ): Promise<P[K]> {
-    const { method, headers, withCredentials, responseType } = requestOptions;
-
     params_ = requestOptions.params ?? params_;
     const params = objectRemoveEmpty(params_);
-    const makeApiRequest = () =>
-      apiRequest({ name, params, requestOptions, connector: this });
-
-    if (requestOptions.cache && method === 'GET') {
-      return this.cache.add(name, makeApiRequest, {
-        params,
-        ...objectRemoveEmpty({
-          headers,
-          withCredentials,
-          responseType,
-          baseUrl: this.options.baseUrl,
-          userId: this.user?.id,
-        }),
-      });
-    }
-    return makeApiRequest();
+    return apiRequest({ name, params, requestOptions, connector: this });
   }
 
   /**
@@ -422,7 +399,64 @@ export class NgwConnector {
         url = template(url, params);
       }
       url = encodeURI(fixUrlStr(url));
-      return this._loadData<R>(url, options);
+
+      const { signal: externalSignal } = options;
+
+      const internalAbortController = new AbortController();
+      const internalSignal = internalAbortController.signal;
+
+      // If the external signal aborts, also abort the internal signal
+      if (externalSignal) {
+        if (externalSignal.aborted) {
+          return Promise.reject(new AbortError());
+        }
+        externalSignal.addEventListener('abort', () => {
+          internalAbortController.abort();
+        });
+      }
+
+      options.signal = internalSignal;
+
+      const createPromise = () => {
+        const id = REQUEST_ID++;
+        this.activeRequests[id] = internalAbortController;
+        return this._loadData<R>(url, options).finally(() =>
+          this._cleanActiveRequest(id),
+        );
+      };
+
+      const {
+        method = 'GET',
+        headers,
+        cacheName,
+        cacheProps,
+        responseType,
+        withCredentials,
+      } = options;
+
+      if (options.cache && method === 'GET') {
+        const cacheOptions = cacheProps
+          ? cacheProps
+          : {
+              ...objectRemoveEmpty({
+                headers,
+                withCredentials,
+                responseType,
+                baseUrl: this.options.baseUrl,
+                userId: this.user?.id,
+              }),
+              params,
+            };
+
+        return this.cache.add(
+          cacheName || url,
+          createPromise,
+          cacheOptions,
+          false,
+        );
+      }
+
+      return createPromise();
     } else {
       throw new Error('Empty `url` not allowed');
     }
@@ -551,22 +585,7 @@ export class NgwConnector {
   ): Promise<R> {
     options.responseType = options.responseType || 'json';
 
-    const { signal: externalSignal } = options;
-
-    const internalAbortController = new AbortController();
-    const internalSignal = internalAbortController.signal;
-
-    // If the external signal aborts, also abort the internal signal
-    if (externalSignal) {
-      if (externalSignal.aborted) {
-        return Promise.reject(new Error('AbortError'));
-      }
-      externalSignal.addEventListener('abort', internalAbortController.abort);
-    }
-
-    options.signal = internalSignal;
-
-    const promise = new Promise<R>((resolve, reject) => {
+    return new Promise<R>((resolve, reject) => {
       if (this.user) {
         options = options || {};
         options.headers = {
@@ -587,64 +606,42 @@ export class NgwConnector {
         runOnAbort = handler;
       });
 
-      internalAbortController.signal.addEventListener('abort', () => {
+      options.signal?.addEventListener('abort', () => {
         if (runOnAbort !== undefined) {
           runOnAbort();
         }
-        externalSignal?.removeEventListener(
-          'abort',
-          internalAbortController.abort,
-        );
       });
-    })
-      .then((resp) => {
-        this._cleanActiveRequests(promise);
-        return resp;
-      })
-      .catch((httpError) => {
-        this._cleanActiveRequests(promise);
-        if (httpError.name !== 'AbortError') {
-          if (__DEV__) {
-            console.warn('DEV WARN', httpError);
-          }
-          const er = this._handleHttpError(httpError);
-          if (er) {
-            throw er;
-          }
+    }).catch((httpError) => {
+      if (httpError.name !== 'AbortError') {
+        if (__DEV__) {
+          console.warn('DEV WARN', httpError);
         }
-        throw httpError;
-      });
-
-    this.activeRequests.push({
-      promise,
-      abortController: internalAbortController,
+        const er = this._handleHttpError(httpError);
+        if (er) {
+          throw er;
+        }
+      }
+      throw httpError;
     });
-    return promise;
   }
 
-  private _login(
+  private async _login(
     credentials: Credentials,
     options?: RequestOptions,
   ): Promise<UserInfo> {
-    return this.getUserInfo(credentials, options)
-      .then((data) => {
-        this.user = data;
-        this.emitter.emit('login', data);
-        return data;
-      })
-      .catch((er) => {
-        this.emitter.emit('login:error', er);
-        throw er;
-      });
+    try {
+      const data = await this.getUserInfo(credentials, options);
+      this.user = data;
+      this.emitter.emit('login', data);
+      return data;
+    } catch (er) {
+      this.emitter.emit('login:error', er);
+      throw er;
+    }
   }
 
-  private _cleanActiveRequests(promise: Promise<unknown>) {
-    const activeRequestIndex = this.activeRequests.findIndex(
-      (req) => req.promise === promise,
-    );
-    if (activeRequestIndex !== -1) {
-      this.activeRequests.splice(activeRequestIndex, 1);
-    }
+  private _cleanActiveRequest(requestId: number) {
+    delete this.activeRequests[requestId];
   }
 
   private _handleHttpError(er: Error) {
