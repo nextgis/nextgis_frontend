@@ -27,13 +27,13 @@
   "homepage": "https://code.nextgis.com",
   "repository": "https://github.com/nextgis/nextgis_frontend",
   "devDependencies": {
-    "@types/node": "^20.12.7",
-    "lerna": "^8.1.2",
+    "@types/node": "^20.14.10",
+    "lerna": "^8.1.6",
     "rimraf": "^3.0.2"
   },
   "license": "MIT",
   "workspaces": [
     "packages/*"
   ],
-  "packageManager": "yarn@3.5.0+sha256.e4fc5f94867cd0b492fb0a644f14e7b47c4387bc75d46b56e86db6d0f1a6cb97"
+  "packageManager": "yarn@3.6.3+sha256.08ead1821a257416e6f217e89365425bf4b6d2430c3279318bedcec1a245fff5"
 }
