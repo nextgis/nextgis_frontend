@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "@nextgis/build-tools": "^2.3.0",
-    "ol": "^9.1.0"
+    "ol": "^9.2.4"
   },
   "buildOptions": {
     "name": "OlMapAdapter",

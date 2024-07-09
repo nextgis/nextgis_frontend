@@ -44,6 +44,7 @@ import type { FeatureLike } from 'ol/Feature';
 import type Map from 'ol/Map';
 import type MapBrowserEvent from 'ol/MapBrowserEvent';
 import type { Options as OverlayOptions } from 'ol/Overlay';
+import type { Geometry } from 'ol/geom';
 import type Base from 'ol/layer/Base';
 import type { Pixel } from 'ol/pixel';
 import type { Style } from 'ol/style';
@@ -53,7 +54,7 @@ type Layer = Base;
 type Layers = LayerDefinition<Feature, Layer>;
 type OpenedPopup = [OlFeature<any>, Overlay, PopupOnCloseFunction[]];
 
-type VectorLayerType = VectorSource<any>;
+type VectorLayerType = OlFeature<Geometry>;
 
 export class GeoJsonAdapter
   extends BaseAdapter
