@@ -139,6 +139,8 @@ export interface AdapterOptions<
 
   headers?: Record<string, any>;
 
+  withCredentials?: boolean;
+
   /**
    * Experimental option to set the map loading delay when changing position
    */

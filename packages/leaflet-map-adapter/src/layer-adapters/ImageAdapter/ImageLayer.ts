@@ -23,6 +23,7 @@ interface OverlayOptions {
   zIndex?: number;
   pane?: string;
   headers?: any;
+  withCredentials?: boolean;
   viewPortBuffer?: number;
   setViewDelay?: number;
 }
@@ -53,6 +54,7 @@ export class ImageLayer extends Layer {
     minZoom: 0,
     pane: 'tilePane',
     headers: null,
+    withCredentials: false,
     viewPortBuffer: 0,
     setViewDelay: 100,
   };
@@ -139,6 +141,7 @@ export class ImageLayer extends Layer {
       opacity: 0,
       pane: this.options.pane,
       headers: this.options.headers,
+      withCredentials: this.options.withCredentials,
     });
     overlay.addTo(this._map);
     this._loadedOverlay = overlay;

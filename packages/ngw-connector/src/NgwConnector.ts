@@ -54,6 +54,7 @@ export class NgwConnector {
   user?: UserInfo;
   resources!: ResourcesControl;
   cache: Cache;
+  withCredentials?: boolean = undefined;
   private routeStr = '/api/component/pyramid/route';
   private activeRequests: CancelablePromise[] = [];
   private requestTransform?: RequestTransformFunction | null;
@@ -64,11 +65,15 @@ export class NgwConnector {
     if (exist) {
       return exist;
     } else {
-      if (this.options.route) {
-        this.routeStr = this.options.route;
+      const { route, requestTransform, withCredentials } = this.options;
+      if (route) {
+        this.routeStr = route;
       }
-      if (this.options.requestTransform) {
-        this.requestTransform = this.options.requestTransform;
+      if (requestTransform) {
+        this.requestTransform = requestTransform;
+      }
+      if (withCredentials !== undefined) {
+        this.withCredentials = withCredentials;
       }
       this.resources = new ResourcesControl({
         connector: this,
@@ -278,6 +283,10 @@ export class NgwConnector {
     params_: RequestItemsParams<K> = {},
     requestOptions: RequestOptions = {},
   ): CancelablePromise<P[K]> {
+    requestOptions = {
+      withCredentials: this.withCredentials,
+      ...requestOptions,
+    };
     const { method, headers, withCredentials, responseType } = requestOptions;
 
     params_ = requestOptions.params ?? params_;

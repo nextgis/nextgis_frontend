@@ -1,7 +1,12 @@
-export function callAjax(
-  src: string,
-  headers: Record<string, any>,
-): [Promise<string>, () => void] {
+export function callAjax({
+  src,
+  headers,
+  withCredentials,
+}: {
+  src: string;
+  headers?: Record<string, any>;
+  withCredentials?: boolean;
+}): [Promise<string>, () => void] {
   let abortFunc = () => {
     // void
   };
@@ -11,6 +16,9 @@ export function callAjax(
     xhr.responseType = 'arraybuffer';
     for (const h in headers) {
       xhr.setRequestHeader(h, headers[h]);
+    }
+    if (withCredentials) {
+      xhr.withCredentials = withCredentials;
     }
     xhr.onload = function () {
       const arrayBufferView = new Uint8Array(this.response);

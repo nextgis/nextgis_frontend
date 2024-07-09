@@ -229,35 +229,40 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
   }
 
   protected async _getWebMapLayerItem(): Promise<NgwWebmapItem | undefined> {
-    if (this.resourceId) {
-      const webmap = await this.getWebMapConfig(this.resourceId);
-      if (webmap && webmap.root_item) {
-        return new Promise<NgwWebmapItem>((resolve) => {
-          const options: ItemOptions = {};
-          if (this.options.connector && this.options.connector.options.auth) {
-            const headers = this.options.connector.getAuthorizationHeaders();
-            if (headers) {
-              options.headers = headers;
-            }
-          }
-          options.setViewDelay = this.options.setViewDelay;
-          options.order = this.options.order;
-          options.ratio = this.options.ratio;
-          options.crossOrigin = this.options.crossOrigin;
-          options.minZoom = this.options.minZoom;
-          options.maxZoom = this.options.maxZoom;
-          options.drawOrderEnabled = webmap.draw_order_enabled;
-          options.popupOptions = this.options.popupOptions;
-          const layer = new this.NgwWebmapItem(
-            this.options.webMap,
-            webmap.root_item,
-            options,
-            this.options.connector,
-          );
-          layer.emitter.on('init', () => resolve(layer));
-        });
-      }
+    if (!this.resourceId) {
+      return undefined;
     }
+
+    const webmap = await this.getWebMapConfig(this.resourceId);
+    if (!webmap || !webmap.root_item) {
+      return undefined;
+    }
+
+    return new Promise<NgwWebmapItem>((resolve) => {
+      const connector = this.options.connector;
+      const headers = connector?.options.auth
+        ? connector.getAuthorizationHeaders()
+        : undefined;
+      const withCredentials = connector.withCredentials;
+
+      const options: ItemOptions = {
+        ...this.options,
+        withCredentials,
+        headers,
+        drawOrderEnabled: webmap.draw_order_enabled,
+      };
+
+      const layer = new this.NgwWebmapItem(
+        this.options.webMap,
+        webmap.root_item,
+        options,
+        connector,
+      );
+
+      layer.emitter.on('init', () => {
+        resolve(layer);
+      });
+    });
   }
 
   private async getWebMapConfig(id: number) {

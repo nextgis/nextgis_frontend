@@ -34,10 +34,10 @@ export class TileAdapter extends BaseAdapter implements MainLayerAdapter {
       xyzOpt.crossOrigin = options.crossOrigin;
     }
     const source = new XYZ(xyzOpt);
-    const headers = options.headers;
-    if (headers) {
+    const { headers, withCredentials } = options;
+    if (headers || withCredentials) {
       source.setTileLoadFunction((tile, src) => {
-        setTileLoadFunction(tile, src, headers);
+        setTileLoadFunction({ tile, src, headers, withCredentials });
       });
     }
     const layer = new TileLayer({

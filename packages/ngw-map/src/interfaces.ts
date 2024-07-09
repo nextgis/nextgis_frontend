@@ -26,6 +26,11 @@ export interface NgwMapOptions<M = any, C = any> extends MapOptions<M, C> {
    */
   auth?: Credentials;
   /**
+   * Indicates whether to include cookies in cross-site Access-Control requests.
+   * Note that setting this property has no effect on same-origin requests.
+   */
+  withCredentials?: boolean;
+  /**
    * Id number of webmap resource from NextGIS Web.
    * If specified through an array,
    * the first element will be the webmapId from NGW,

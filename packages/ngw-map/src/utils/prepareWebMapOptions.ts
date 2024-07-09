@@ -36,6 +36,7 @@ export function prepareWebMapOptions(options: NgwMapOptions): MapOptions {
     options.connector = new NgwConnector({
       baseUrl: options.baseUrl || '',
       auth: options.auth,
+      withCredentials: options.withCredentials,
     });
   } else if (options.connector) {
     options.baseUrl = options.connector.options.baseUrl;

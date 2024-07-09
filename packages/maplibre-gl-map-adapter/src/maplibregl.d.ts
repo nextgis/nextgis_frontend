@@ -20,9 +20,7 @@ declare namespace maplibregl {
     transformRequests: ((
       url: string,
       resourceType?: ResourceTypeEnum,
-    ) =>
-      | { url: string; headers: Record<string, any> | undefined }
-      | undefined)[];
+    ) => RequestParameters | undefined)[];
     _onMapClickLayers: OnLayerClickLayer[];
     _addUnselectCb: (args: () => void) => void;
   }

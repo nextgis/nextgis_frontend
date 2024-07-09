@@ -188,9 +188,7 @@ export class NgwWebmapItem extends Item<ItemOptions> {
       Pick<VectorAdapterOptions, 'popupOptions'> = {
       visibility: false,
       name: item.display_name,
-      headers: this.options.headers,
-      crossOrigin: this.options.crossOrigin,
-      setViewDelay: this.options.setViewDelay,
+      ...this.options,
       params: { resource: this.item.resourceId, item: this.item },
     };
     if (this.options.order) {
@@ -212,9 +210,8 @@ export class NgwWebmapItem extends Item<ItemOptions> {
 
       Object.assign(options, {
         updateWmsParams: item.updateWmsParams,
+        ...this.options,
         url: item.url,
-        headers: this.options.headers,
-        ratio: this.options.ratio,
         maxZoom,
         minZoom,
         minScale: item.layer_min_scale_denom,

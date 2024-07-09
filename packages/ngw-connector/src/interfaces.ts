@@ -137,8 +137,18 @@ export interface DeleteRequestItemsResponseMap extends RequestItemKeys {
   'feature_layer.feature.item': any;
 }
 
+/**
+ * User credentials for authorization.
+ */
 export interface Credentials {
+  /**
+   * The login username for the user.
+   */
   login: string;
+
+  /**
+   * The password for the user.
+   */
   password: string;
 }
 
@@ -148,10 +158,37 @@ export type RequestTransformFunction = (
 ) => [url: string, options: RequestOptions];
 
 export interface NgwConnectorOptions {
+  /**
+   * The base URL of the NextGIS Web (NGW) server.
+   * Example: "https://demo.nextgis.com"
+   */
   baseUrl?: string;
+  /**
+   * The API route path to use for requests.
+   * If not specified, the default route "/api/component/pyramid/route" will be used.
+   */
   route?: string;
+  /**
+   * User credentials for authorization in NGW.
+   * These credentials will be used for authentication in NGW requests.
+   */
   auth?: Credentials;
+  /**
+   * Indicates whether to include credentials such as cookies, authentication headers,
+   * or TLS client certificates in cross-site Access-Control requests.
+   * Setting this property ensures that cookies from another domain are used in the requests.
+   * Note that setting this property has no effect on same-origin requests.
+   */
+  withCredentials?: boolean;
+  /**
+   * A function to transform the request before sending it.
+   * This function can be used to modify the URL, headers, or other options.
+   */
   requestTransform?: RequestTransformFunction;
+  /**
+   * Identifier for caching requests.
+   * This can be used to segregate cached data for different connectors.
+   */
   cacheId?: string;
 }
 
@@ -169,20 +206,84 @@ export type NgwExceptions =
   | 'nextgisweb.resource.exception.ResourceNotFound'
   | 'nextgisweb.core.exception.InsufficientPermissions';
 
+export interface BaseRequestOptions {
+  cache?: boolean;
+  signal?: AbortSignal;
+}
+
+/**
+ * Options for configuring requests to NGW.
+ */
 export interface RequestOptions<
   M extends RequestMethods = RequestMethods,
   K extends keyof RequestItemsParamsMap = keyof RequestItemsParamsMap,
-> {
+> extends BaseRequestOptions {
+  /**
+   * Data to be sent as the request body.
+   * Typically used with POST, PUT, or PATCH requests.
+   */
   data?: any;
+
+  /**
+   * File to be sent in the request.
+   */
   file?: File;
+
+  /**
+   * HTTP method to be used for the request.
+   * Example: 'GET', 'POST', 'PUT', 'PATCH', 'DELETE'
+   */
   method?: M;
+
+  /**
+   * HTTP headers to be included in the request.
+   */
   headers?: RequestHeaders;
+
+  /**
+   * Indicates whether to include credentials such as cookies, authentication headers,
+   * or TLS client certificates in cross-site Access-Control requests.
+   */
   withCredentials?: boolean;
+
+  /**
+   * The type of data that the server will respond with.
+   * Can be either 'json' or 'blob'.
+   */
   responseType?: 'json' | 'blob';
+
+  /**
+   * Whether to cache the request.
+   * When set to true, the response will be stored in the cache.
+   */
   cache?: boolean;
+
+  /**
+   * Signal object that allows you to communicate with a DOM request (such as fetch) and abort it if desired via an AbortController.
+   */
   signal?: AbortSignal;
+
+  /**
+   * Parameters to be included in the request URL.
+   */
   params?: RequestItemsParams<K>;
+
+  /**
+   * A function to be called to monitor the progress of the request.
+   * @param percentComplete - The percentage of the request that has been completed.
+   * @param event - The progress event.
+   */
   onProgress?: (percentComplete: number, event: ProgressEvent) => void;
+
+  /**
+   * Name to use for caching the request.
+   */
+  cacheName?: string;
+
+  /**
+   * Properties to override default cache behavior.
+   */
+  cacheProps?: Record<string, unknown>;
 }
 
 export type RequestItemAdditionalParams = { [name: string]: any } & {

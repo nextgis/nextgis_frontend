@@ -88,8 +88,8 @@ export async function createAsyncAdapter(
 
       const adapterOptions: GetClassAdapterOptions = {
         layerOptions,
-        webMap,
         connector,
+        webMap,
         item,
       };
 

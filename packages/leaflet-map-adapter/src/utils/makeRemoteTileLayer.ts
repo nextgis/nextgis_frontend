@@ -11,9 +11,8 @@ export function makeRemote<TBase extends Constructor>(Base: TBase): TBase {
     constructor(...args: any[]) {
       super(...args);
       if (this.options.setViewDelay) {
-        // @ts-ignore
         this._update = debounce((...a: any[]) => {
-          // @ts-ignore
+          // @ts-expect-error Property '_update' does not exist on type 'GridLayer'.
           GridLayer.prototype._update.call(this, ...a);
         }, this.options.setViewDelay);
       }
@@ -23,15 +22,14 @@ export function makeRemote<TBase extends Constructor>(Base: TBase): TBase {
       coords: Record<string, unknown>,
       done: (error: any, tile: HTMLImageElement) => void,
     ): HTMLImageElement {
-      // @ts-ignore
-      const url = this.getTileUrl(coords);
+      const src = this.getTileUrl(coords);
 
       const tile = document.createElement('img');
-      const [promise, abortFunc] = callAjax(
-        url,
-        // @ts-ignore
-        this.options.headers,
-      );
+      const [promise, abortFunc] = callAjax({
+        src,
+        withCredentials: this.options.withCredentials,
+        headers: this.options.headers,
+      });
       promise.then((response) => {
         tile.src = response;
         done(null, tile);
@@ -50,9 +48,8 @@ export function makeRemote<TBase extends Constructor>(Base: TBase): TBase {
     }
 
     _abortLoading() {
-      // @ts-ignore
       const tiles = this._tiles;
-      // @ts-ignore
+
       const tileZoom = this._tileZoom;
       for (const i in tiles) {
         if (tiles[i].coords.z !== tileZoom) {

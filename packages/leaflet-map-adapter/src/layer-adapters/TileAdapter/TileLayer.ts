@@ -5,7 +5,8 @@ import { makeRemote } from '../../utils/makeRemoteTileLayer';
 import type { TileLayerOptions } from 'leaflet';
 
 export type TileLayerOptionsExtended = TileLayerOptions & {
-  headers: Record<string, any>;
+  headers?: Record<string, any>;
+  withCredentials?: boolean;
   setViewDelay?: number;
 };
 

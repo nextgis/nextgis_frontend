@@ -37,11 +37,13 @@ export class TileAdapter<O extends RasterAdapterOptions = TileAdapterOptions>
       } else {
         tiles.push(options.url);
       }
-      if (options.headers) {
+      const { headers, withCredentials } = options;
+      if (headers || withCredentials) {
         setupLayerTransformRequest({
           map: this.map,
           url: options.url,
-          headers: options.headers,
+          headers,
+          withCredentials,
         });
       }
 

@@ -106,6 +106,7 @@ export interface NgwLayerOptions<
   fit?: boolean;
   meta?: P;
   headers?: any;
+  withCredentials?: boolean;
   simplification?: number;
   /**
    * Parameter for `TILE` and `IMAGE` adapters to say NGW what will be returned if there is no data to render.
