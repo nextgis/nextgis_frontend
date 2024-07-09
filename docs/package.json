@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "docmypkg": "^0.0.1",
-    "typedoc": "^0.25.1"
+    "typedoc": "^0.26.3"
   },
   "license": "MIT",
   "packageManager": "yarn@3.6.3"
