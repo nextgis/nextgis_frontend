@@ -6,7 +6,6 @@ import { BaseProvider } from './BaseProvider';
 import type { BaseProviderOptions } from './BaseProviderOptions';
 import type { ResultItem } from '../types/ResultItem';
 import type { SearchItem } from '../types/SearchItem';
-
 import type {
   FeatureItem,
   NgwConnectorOptions,

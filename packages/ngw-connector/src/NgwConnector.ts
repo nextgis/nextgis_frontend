@@ -231,7 +231,6 @@ export class NgwConnector {
   abort() {
     for (const { abortController } of this.activeRequests) {
       abortController.abort();
-
     }
     this.activeRequests = [];
   }

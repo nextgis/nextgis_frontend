@@ -375,7 +375,9 @@ export class NgwUploader {
           });
           uploader.start();
           if (options.signal) {
-            options.signal.addEventListener('abort', uploader.abort);
+            options.signal.addEventListener('abort', () => {
+              uploader.abort();
+            });
           }
         });
       });

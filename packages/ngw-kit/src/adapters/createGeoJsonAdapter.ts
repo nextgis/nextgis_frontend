@@ -17,7 +17,6 @@ import type {
   NgwFeatureRequestOptions,
   NgwLayerOptions,
 } from '../interfaces';
-
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type { LngLatBoundsArray, Type } from '@nextgis/utils';
 import type {

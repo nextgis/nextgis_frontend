@@ -7,7 +7,7 @@ export interface UploadFeatureAttachmentOptions {
 
 export function uploadFeatureAttachment(
   options: GetNgwItemOptions & UploadFeatureAttachmentOptions,
-): IdOnly {
+): Promise<IdOnly> {
   return options.connector
     .post('file_upload.upload', {
       file: options.file,
@@ -30,7 +30,7 @@ export function deleteFeatureAttachment(
 
 export function addFeatureAttachment(
   options: GetNgwItemOptions & { fileMeta: FileMeta },
-): IdOnly {
+): Promise<IdOnly> {
   const meta = options.fileMeta;
   return options.connector.post(
     'feature_attachment.collection',

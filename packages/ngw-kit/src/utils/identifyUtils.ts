@@ -91,9 +91,7 @@ function createParamsFromFeatures(
 export function fetchIdentifyGeoJson<
   G extends Geometry = Geometry,
   P extends JsonMap = JsonMap,
->(
-  options: GetIdentifyGeoJsonOptions,
-): Promise<Feature<G, P> | undefined> {
+>(options: GetIdentifyGeoJsonOptions): Promise<Feature<G, P> | undefined> {
   const { connector, identify, requestOptions } = options;
   for (const l in identify) {
     const id = Number(l);
@@ -147,9 +145,7 @@ export function fetchIdentifyItem<
 export function getIdentifyGeoJson<
   G extends Geometry = Geometry,
   P extends JsonMap = JsonMap,
->(
-  options: GetIdentifyGeoJsonOptions,
-): Promise<Feature<G, P> | undefined> {
+>(options: GetIdentifyGeoJsonOptions): Promise<Feature<G, P> | undefined> {
   return fetchIdentifyGeoJson(options);
 }
 
