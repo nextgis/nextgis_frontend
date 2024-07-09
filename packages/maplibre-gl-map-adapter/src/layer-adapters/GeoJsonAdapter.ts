@@ -297,9 +297,9 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     feature: Feature | Feature[],
     opt?: { silent: boolean },
   ): Feature[] {
-
+    const features = this._setFeatureIdsSelected(feature);
     this._updateFilter(opt);
-    return this._setFeatureIdsSelected(feature);
+    return features;
   }
 
   protected _updateFilter(opt: EventOptions = {}): void {
