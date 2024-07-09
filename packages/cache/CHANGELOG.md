@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.0](https://github.com/nextgis/nextgis_frontend/compare/v2.4.1...v3.0.0-alpha.0) (2024-07-09)
+
+
+### Features
+
+* **cache:** do not throw an error outside ([490169d](https://github.com/nextgis/nextgis_frontend/commit/490169daa19b395416fa5b984eeaccf9914a5119))
+
+
+
+
+
 # [2.3.0](https://github.com/nextgis/nextgis_frontend/compare/v2.2.3...v2.3.0) (2024-06-07)
 
 **Note:** Version bump only for package @nextgis/cache

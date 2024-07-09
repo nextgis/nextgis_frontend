@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.0](https://github.com/nextgis/nextgis_frontend/compare/v2.4.1...v3.0.0-alpha.0) (2024-07-09)
+
+
+### Bug Fixes
+
+* clear code and types ([fdb77d7](https://github.com/nextgis/nextgis_frontend/commit/fdb77d7a71b0cf3859f01c792148550c2eadcc3e))
+* **ngw-connector:** throw an AbortError ([2c5ce44](https://github.com/nextgis/nextgis_frontend/commit/2c5ce445f51b4214d3daaffaf0a691152a52f705))
+* **ngw-connector:** use paramList for caching ([3f4284d](https://github.com/nextgis/nextgis_frontend/commit/3f4284ddf773c37fba16b506e982af8c66346e65))
+
+
+### Features
+
+* drop CancelablePromise usage ([7302649](https://github.com/nextgis/nextgis_frontend/commit/7302649869080fca52e8aca23c4ea51e676857d5))
+* **ngw-connector:** rewrite cache and abort mechanics ([3a0982c](https://github.com/nextgis/nextgis_frontend/commit/3a0982c468fc62a4105b4976de4d7749cd5a144f))
+
+
+### BREAKING CHANGES
+
+* The CancelablePromise is no longer used in frontend libraries. Asynchronous functions no longer return a .cancel() method. Instead, to cancel a request, use the signal from AbortController, which is passed as an argument.
+
+
+
+
+
 # [2.4.0](https://github.com/nextgis/nextgis_frontend/compare/v2.3.0...v2.4.0) (2024-06-10)
 
 

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.0](https://github.com/nextgis/nextgis_frontend/compare/v2.4.1...v3.0.0-alpha.0) (2024-07-09)
+
+
+### Features
+
+* drop CancelablePromise usage ([7302649](https://github.com/nextgis/nextgis_frontend/commit/7302649869080fca52e8aca23c4ea51e676857d5))
+
+
+### BREAKING CHANGES
+
+* The CancelablePromise is no longer used in frontend libraries. Asynchronous functions no longer return a .cancel() method. Instead, to cancel a request, use the signal from AbortController, which is passed as an argument.
+
+
+
+
+
 ## [2.4.1](https://github.com/nextgis/nextgis_frontend/compare/v2.4.0...v2.4.1) (2024-06-27)
 
 **Note:** Version bump only for package @nextgis/ngw-map

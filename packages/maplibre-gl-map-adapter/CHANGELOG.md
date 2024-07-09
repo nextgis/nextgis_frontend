@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.0](https://github.com/nextgis/nextgis_frontend/compare/v2.4.1...v3.0.0-alpha.0) (2024-07-09)
+
+
+### Bug Fixes
+
+* **maplibre-gl-map-adapter:** fix geojson adapter select feature method ([e5b09d1](https://github.com/nextgis/nextgis_frontend/commit/e5b09d1c8e5fe606c7d6cecea731174d5d5852a6))
+
+
+### Features
+
+* **maplibre-gl-map-adapter:** implement feature select and unselect ([2c0cfd7](https://github.com/nextgis/nextgis_frontend/commit/2c0cfd78938ccafa67d8019ce0be7250ec3a14d6))
+
+
+
+
+
 # [2.3.0](https://github.com/nextgis/nextgis_frontend/compare/v2.2.3...v2.3.0) (2024-06-07)
 
 **Note:** Version bump only for package @nextgis/maplibre-gl-map-adapter
