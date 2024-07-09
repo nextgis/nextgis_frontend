@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/dialog",
-  "version": "3.0.0-alpha.0",
+  "version": "3.0.0-alpha.1",
   "description": "Modal window management",
   "main": "lib/dialog.global.prod.js",
   "module": "lib/dialog.esm-bundler.js",
@@ -11,7 +11,7 @@
     "dialog-polyfill": "^0.5.6"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "^3.0.0-alpha.0"
+    "@nextgis/build-tools": "^3.0.0-alpha.1"
   },
   "buildOptions": {
     "name": "Dialog",
