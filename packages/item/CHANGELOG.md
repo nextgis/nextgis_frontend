@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.5.0](https://github.com/nextgis/nextgis_frontend/compare/v2.4.1...v2.5.0) (2024-07-09)
+
+
+### Features
+
+* add withCredentials option ([139aad5](https://github.com/nextgis/nextgis_frontend/commit/139aad5e5adfda5b89be62ab106967f8a3a981f3))
+
+
+
+
+
 # [2.3.0](https://github.com/nextgis/nextgis_frontend/compare/v2.2.3...v2.3.0) (2024-06-07)
 
 **Note:** Version bump only for package @nextgis/item
