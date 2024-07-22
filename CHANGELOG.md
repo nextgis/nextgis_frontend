@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.19.6](https://github.com/nextgis/nextgis_frontend/compare/v1.19.5...v1.19.6) (2024-07-22)
+
+
+### Bug Fixes
+
+* **ngw-connector:** Check for null fields in updateItemRequestParam ([3715fe1](https://github.com/nextgis/nextgis_frontend/commit/3715fe105c8d81558ba1908723b937ce7e8034f5))
+
+
+### Features
+
+* **ngw-connector:** add route client query param ([185428c](https://github.com/nextgis/nextgis_frontend/commit/185428c80fd8836fdb994a092164538e2973c2b6))
+
+
+
+
+
 ## [1.19.5](https://github.com/nextgis/nextgis_frontend/compare/v1.19.4...v1.19.5) (2024-01-22)
 
 
