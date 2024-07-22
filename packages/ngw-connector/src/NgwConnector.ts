@@ -5,6 +5,8 @@ import CancelablePromise from '@nextgis/cancelable-promise';
 import { objectRemoveEmpty } from '@nextgis/utils';
 import { fixUrlStr } from '@nextgis/utils';
 
+import pkg from '../package.json';
+
 import { ResourcesControl } from './ResourcesControl';
 import {
   addConnector,
@@ -55,6 +57,8 @@ export class NgwConnector {
   resources!: ResourcesControl;
   cache: Cache;
   withCredentials?: boolean = undefined;
+
+  private client = `NextGIS-NGW-Connector/${pkg.version}`;
   private routeStr = '/api/component/pyramid/route';
   private activeRequests: CancelablePromise[] = [];
   private requestTransform?: RequestTransformFunction | null;
@@ -130,7 +134,8 @@ export class NgwConnector {
     const makeConnect = () =>
       new CancelablePromise((resolve, reject) => {
         const makeQuery = () => {
-          return this.makeQuery<PyramidRoute>(this.routeStr, {}, {})
+          const routeUrl = `${this.routeStr}?client=${this.client}`;
+          return this.makeQuery<PyramidRoute>(routeUrl.toString(), {}, {})
             .then((route) => {
               resolve(route);
             })
