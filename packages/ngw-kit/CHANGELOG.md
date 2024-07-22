@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.1](https://github.com/nextgis/nextgis_frontend/compare/v2.5.0...v2.5.1) (2024-07-22)
+
+
+### Bug Fixes
+
+* **ngw-kit:** check for null fields in ItemRequestParam ([e6dfd4b](https://github.com/nextgis/nextgis_frontend/commit/e6dfd4b4fd0947eefcceaa3923991c2e6fbe6f5b))
+
+
+
+
+
 # [2.5.0](https://github.com/nextgis/nextgis_frontend/compare/v2.4.1...v2.5.0) (2024-07-09)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/ngw-kit",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "_priority": 20,
   "description": "This library contains a plugin, a set of utilities and adapters that allow you to interact with NextGIS Web",
   "main": "index.js",
@@ -12,7 +12,7 @@
   "dependencies": {
     "@nextgis/cancelable-promise": "^2.5.0",
     "@nextgis/item": "^2.5.0",
-    "@nextgis/ngw-connector": "^2.5.0",
+    "@nextgis/ngw-connector": "^2.5.1",
     "@nextgis/properties-filter": "^2.5.0",
     "@nextgis/qms-kit": "^2.5.0",
     "@nextgis/utils": "^2.5.0",

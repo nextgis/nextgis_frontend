@@ -1,13 +1,13 @@
 {
   "name": "@nextgis/react-ngw-maplibre-gl",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "description": "React NextGIS Web map component for Maplibre GL JS",
   "main": "lib/index.js",
   "module": "lib/react-ngw-maplibre-gl.esm-bundler.js",
   "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/maplibre-gl-map-adapter": "^2.5.0",
-    "@nextgis/react-ngw-map": "^2.5.0"
+    "@nextgis/react-ngw-map": "^2.5.1"
   },
   "devDependencies": {
     "@nextgis/build-tools": "^2.5.0"

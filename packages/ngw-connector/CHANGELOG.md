@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.1](https://github.com/nextgis/nextgis_frontend/compare/v2.5.0...v2.5.1) (2024-07-22)
+
+
+### Features
+
+* **ngw-connector:** add route client query param ([efdc5b5](https://github.com/nextgis/nextgis_frontend/commit/efdc5b5869512f85b6a01ce5492292e756d03266))
+
+
+
+
+
 # [2.5.0](https://github.com/nextgis/nextgis_frontend/compare/v2.4.1...v2.5.0) (2024-07-09)
 
 
