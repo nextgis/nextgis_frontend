@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.2](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.1...v3.0.0-alpha.2) (2024-07-22)
+
+
+### Features
+
+* **ngw-connector:** add route client query param ([c665eb5](https://github.com/nextgis/nextgis_frontend/commit/c665eb56f5e6fef57160e6a6a7657a04b92f5868))
+
+
+
+
+
 # [3.0.0-alpha.1](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.0...v3.0.0-alpha.1) (2024-07-09)
 
 

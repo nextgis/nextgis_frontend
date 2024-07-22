@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.2](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.1...v3.0.0-alpha.2) (2024-07-22)
+
+
+### Bug Fixes
+
+* **ngw-kit:** check for null fields in ItemRequestParam ([669853d](https://github.com/nextgis/nextgis_frontend/commit/669853d1cc18d9c6115ba3435b06db3a7a924db9))
+
+
+
+
+
 # [3.0.0-alpha.1](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.0...v3.0.0-alpha.1) (2024-07-09)
 
 
