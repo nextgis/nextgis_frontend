@@ -4,6 +4,8 @@ import Cache from '@nextgis/cache';
 import { objectRemoveEmpty } from '@nextgis/utils';
 import { fixUrlStr } from '@nextgis/utils';
 
+import pkg from '../package.json';
+
 import { ResourcesControl } from './ResourcesControl';
 import {
   addConnector,
@@ -56,6 +58,8 @@ export class NgwConnector {
   resources!: ResourcesControl;
   cache: Cache;
   withCredentials?: boolean = undefined;
+
+  private client = `NextGIS-NGW-Connector/${pkg.version}`;
   private routeStr = '/api/component/pyramid/route';
   private activeRequests: {
     [requestId: number]: AbortController;
@@ -137,8 +141,9 @@ export class NgwConnector {
         await this._login({ login, password });
       }
     }
+    const routeUrl = `${this.routeStr}?client=${this.client}`;
     return await this.makeQuery<PyramidRoute>(
-      this.routeStr,
+      routeUrl,
       {},
       {
         cacheName: 'route',
