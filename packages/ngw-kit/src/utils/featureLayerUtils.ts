@@ -53,7 +53,7 @@ export function updateItemRequestParam<
     params.extensions = extensionsStr;
   }
 
-  if (fields !== undefined) {
+  if (fields !== undefined && fields !== null) {
     params.fields = Array.isArray(fields) ? fields.join(',') : '';
   }
   if (geom !== undefined) {
