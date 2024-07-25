@@ -9,7 +9,6 @@
     "allowJs": false,
     "strict": true,
     "noUnusedLocals": true,
-    "experimentalDecorators": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "removeComments": false,
@@ -19,7 +18,6 @@
 
     "jsx": "react",
 
-    "emitDecoratorMetadata": true,
     "noImplicitReturns": false,
 
     "newLine": "LF",

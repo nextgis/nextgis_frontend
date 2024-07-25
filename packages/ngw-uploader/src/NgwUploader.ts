@@ -80,21 +80,19 @@ export class NgwUploader {
   }
 
   @onLoad()
-  uploadRaster<F extends FileType = FileType>(
+  async uploadRaster<F extends FileType = FileType>(
     file: F,
     options: RasterUploadOptions,
   ): Promise<CreatedRes> {
-    return this.fileUpload(file, options).then((source) => {
-      return this.createRaster({
-        source,
-        ...options,
-      }).then((newRes) => {
-        return this.createStyle({
-          ...options.style,
-          displayName: createStyleName({ source, ...options }, options.style),
-          parentId: newRes.id,
-        });
-      });
+    const source = await this.fileUpload(file, options);
+    const newRes = await this.createRaster({
+      source,
+      ...options,
+    });
+    return await this.createStyle({
+      ...options.style,
+      displayName: createStyleName({ source, ...options }, options.style),
+      parentId: newRes.id,
     });
   }
 

@@ -2,6 +2,7 @@ import { template } from './template';
 
 import type { NgwUploader } from '../NgwUploader';
 import type { AvailableStatus, EmitterStatus } from '../interfaces';
+import type { CreatedResource } from '@nextgis/ngw-connector';
 
 /**
  * decorator to emit events on start end and error for async methods
@@ -10,15 +11,12 @@ export function evented(options?: {
   status: AvailableStatus;
   template?: string;
 }) {
-  return function (
-    target: NgwUploader,
-    propertyKey: string,
-    descriptor: PropertyDescriptor,
-  ): PropertyDescriptor {
-    const originalMethod = descriptor.value;
-
-    descriptor.value = function (this: NgwUploader, ...args: any[]) {
-      let message = propertyKey;
+  return function actualDecorator(
+    originalMethod: any,
+    context: ClassMethodDecoratorContext,
+  ) {
+    function replacementMethod(this: NgwUploader, ...args: any[]) {
+      let message = context.name as string;
       if (options) {
         if (options.template && typeof args[0] === 'object') {
           message = template(options.template, args[0]);
@@ -27,7 +25,7 @@ export function evented(options?: {
         const eventBegin: EmitterStatus = {
           status: options.status,
           state: 'begin',
-          message: message + ' start',
+          message: `${message} start`,
           data: args[0],
         };
         this.emitter.emit('status:change', eventBegin);
@@ -38,40 +36,35 @@ export function evented(options?: {
             const eventEnd: EmitterStatus = {
               status: options.status,
               state: 'end',
-              message: message + ' finish',
+              message: `${message} finish`,
               data: resp,
             };
             this.emitter.emit('status:change', eventEnd);
             return resp;
           })
-          .catch((er: any) => {
+          .catch((err: any) => {
             const eventError: EmitterStatus = {
               status: options.status,
               state: 'error',
-              message: message + ' error',
-              data: er,
+              message: `${message} error`,
+              data: err,
             };
             this.emitter.emit('status:change', eventError);
-            throw er;
+            throw err;
           });
       }
-    };
-    return descriptor;
+    }
+
+    return replacementMethod;
   };
 }
 
-/**
- * decorator to run action only after application is load
- */
 export function onLoad() {
-  return function (
-    target: NgwUploader,
-    propertyKey: string,
-    descriptor: PropertyDescriptor,
-  ): PropertyDescriptor {
-    const originalMethod = descriptor.value;
-
-    descriptor.value = function (this: NgwUploader, ...args: any[]) {
+  return function actualDecorator(originalMethod: any) {
+    function replacementMethod(
+      this: NgwUploader,
+      ...args: any[]
+    ): Promise<CreatedResource> {
       return new Promise((resolve, reject) => {
         if (this.isLoaded) {
           originalMethod.apply(this, args).then(resolve).catch(reject);
@@ -81,7 +74,8 @@ export function onLoad() {
           });
         }
       });
-    };
-    return descriptor;
+    }
+
+    return replacementMethod;
   };
 }

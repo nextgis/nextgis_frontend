@@ -19,7 +19,6 @@ import postcssUrl from 'postcss-url';
 import esbuild from 'rollup-plugin-esbuild';
 import polyfillNode from 'rollup-plugin-polyfill-node';
 import postcss from 'rollup-plugin-postcss';
-import ts from 'rollup-plugin-typescript2';
 
 import { baseDirs, getPeerDependencies, require, rootPath } from './utils.js';
 
@@ -225,41 +224,6 @@ function createConfig(format, output, plugins = []) {
   }
 
   function resolveCompiler() {
-    if (packageOptions.tsbuild) {
-      let compilerOptions = {};
-
-      if (isGlobalBuild) {
-        output.name = packageOptions.name;
-        compilerOptions = {
-          target: 'es5',
-          module: 'es2015',
-        };
-      }
-
-      return ts({
-        check: false,
-        tsconfig: path.resolve(rootPath, 'tsconfig.json'),
-        cacheRoot: path.resolve(rootPath, 'node_modules/.rts2_cache'),
-        tsconfigOverride: {
-          compilerOptions: {
-            sourceMap: output.sourcemap,
-            declaration: false,
-            declarationMap: false,
-            ...compilerOptions,
-          },
-          exclude: ['tests'],
-          include: [
-            resolve('src'),
-            path.resolve(packagesDir, 'global.d.ts'),
-            ...dependencies
-              .filter((e) => /^@nextgis\//.test(e))
-              .map((e) =>
-                path.resolve(packagesDir, e.replace('@nextgis/', ''), 'src'),
-              ),
-          ],
-        },
-      });
-    }
     return esbuild({
       tsconfig: path.resolve(rootPath, 'tsconfig.json'),
       sourceMap: !!output.sourcemap,
