@@ -229,12 +229,12 @@ export class NgwConnector {
     credentials = credentials || this.options.auth;
     if (credentials) {
       const { login, password } = credentials;
-      const str = unescape(encodeURIComponent(`${login}:${password}`));
-      // @ts-ignore
+      const encodedStr = [login, password].map(encodeURIComponent).join(':');
+
       if (__BROWSER__) {
-        return window.btoa(str);
+        return window.btoa(encodedStr);
       } else {
-        return Buffer.from(str).toString('base64');
+        return Buffer.from(encodedStr).toString('base64');
       }
     }
   }
