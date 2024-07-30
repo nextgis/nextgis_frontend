@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.2](https://github.com/nextgis/nextgis_frontend/compare/v2.5.1...v2.5.2) (2024-07-30)
+
+
+### Bug Fixes
+
+* **ngw-connector:** resolve authorization escaping ([5a09c8b](https://github.com/nextgis/nextgis_frontend/commit/5a09c8b7f2b7fcc924274fb0ebe51c4d6af17cf9))
+
+
+
+
+
 ## [2.5.1](https://github.com/nextgis/nextgis_frontend/compare/v2.5.0...v2.5.1) (2024-07-22)
 
 
