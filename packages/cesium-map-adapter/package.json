@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/cesium-map-adapter",
-  "version": "3.0.0-alpha.1",
+  "version": "3.0.0-alpha.3",
   "private": true,
   "description": "",
   "main": "lib/cesium-map-adapter.js",
@@ -8,11 +8,11 @@
   "unpkg": "lib/cesium-map-adapter.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/control-container": "^3.0.0-alpha.1",
-    "@nextgis/dom": "^3.0.0-alpha.1",
-    "@nextgis/paint": "^3.0.0-alpha.1",
-    "@nextgis/utils": "^3.0.0-alpha.1",
-    "@nextgis/webmap": "^3.0.0-alpha.1",
+    "@nextgis/control-container": "^3.0.0-alpha.3",
+    "@nextgis/dom": "^3.0.0-alpha.3",
+    "@nextgis/paint": "^3.0.0-alpha.3",
+    "@nextgis/utils": "^3.0.0-alpha.3",
+    "@nextgis/webmap": "^3.0.0-alpha.3",
     "@types/events": "^3.0.0",
     "events": "*"
   },
