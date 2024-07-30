@@ -1,4 +1,5 @@
 import { template } from './template';
+
 import type { NgwConnector } from '../NgwConnector';
 import type {
   RequestItemKeys,
