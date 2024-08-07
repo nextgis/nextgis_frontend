@@ -1,8 +1,10 @@
-export interface StateData {
-  state: { url: string; type?: 'remove'; params?: { [name: string]: string } };
+export interface StateData<P extends Params = Params> {
+  state: {
+    url: string;
+    type?: 'remove';
+    params?: { [name in keyof P]: string };
+  };
   url: string;
 }
 
-export interface Params {
-  [paramName: string]: any;
-}
+export type Params = Record<string, any>;

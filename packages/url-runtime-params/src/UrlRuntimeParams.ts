@@ -1,84 +1,68 @@
 import type { Params, StateData } from './interfaces';
 import type { RuntimeParams } from '@nextgis/webmap';
 
-export class UrlRuntimeParams implements RuntimeParams {
-  private _params: Params = {};
+export class UrlRuntimeParams<P extends Params = Params>
+  implements RuntimeParams<P>
+{
+  private _params = {} as P;
 
-  get(name: string): any {
+  get(name: keyof P): string {
     return this.params()[name];
   }
 
-  params(): Record<string, string> {
-    // if (this._params) {
-    //   return this._params;
-    // }
-    const href = window.location.href.replace(/#$/, '');
+  params(): P {
     const params: Params = {};
-    href.replace(/[?&]+(\w+)([^&]*)/gi, function (m, key) {
-      params[key] = true;
-      return ''; // does not matter
+    const searchParams = new URLSearchParams(window.location.search);
+    searchParams.forEach((value, key) => {
+      params[key] = value || true;
     });
-    href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
-      params[key] = decodeURIComponent(value);
-      return ''; // does not matter
-    });
-    this._params = params;
-    return params;
+    this._params = params as P;
+    return this._params;
   }
 
-  set(name: string, value: string): StateData {
-    if (value) {
-      let search: string;
-      const urlComponent = encodeURIComponent(value);
-      const existUrlParam = this.get(name);
-      if (existUrlParam) {
-        search = location.search.replace(
-          new RegExp('([?|&]' + name + '=)' + '(.+?)(&|$)'),
-          '$1' + urlComponent + '$3',
-        );
-      } else if (location.search.length) {
-        search = location.search + '&' + name + '=' + urlComponent;
-      } else {
-        search = '?' + name + '=' + urlComponent;
-      }
-      const params: Params = {};
-      params[name] = value;
-      this._params[name] = value;
-      const data: StateData = { state: { url: search, params }, url: search };
-      this._pushState(data);
-      return data;
-    } else {
-      return this.remove(name);
-    }
+  set(key: keyof P, value: string): StateData<P> {
+    return this.update({ [key]: value } as Partial<P>);
   }
 
-  remove(name: string): StateData {
-    const sourceUrl = location.search;
-    let rtn = sourceUrl.split('?')[0];
-    let param: string;
-    let paramsArr: string[];
-    const queryString =
-      sourceUrl.indexOf('?') !== -1 ? sourceUrl.split('?')[1] : '';
-    if (queryString !== '') {
-      paramsArr = queryString.split('&');
-      for (let i = paramsArr.length - 1; i >= 0; i -= 1) {
-        param = paramsArr[i].split('=')[0];
-        if (param === name) {
-          paramsArr.splice(i, 1);
-        }
+  update(params: Partial<P>): StateData<P> {
+    let searchParams = new URLSearchParams(location.search);
+
+    Object.keys(params).forEach((key) => {
+      const value = params[key as keyof P];
+      if (value !== undefined && value !== null) {
+        searchParams.set(key, String(value));
+        this._params[key as keyof P] = value;
       }
-      rtn = rtn + '?' + paramsArr.join('&');
-    }
+    });
 
-    delete this._params[name];
-
-    const data: StateData = { state: { url: rtn, type: 'remove' }, url: rtn };
+    const search = '?' + searchParams.toString();
+    const data: StateData<P> = {
+      state: { url: search, params: this._params },
+      url: search,
+    };
     this._pushState(data);
 
     return data;
   }
 
-  private _pushState(data: StateData): void {
+  remove(name: string): StateData<P> {
+    let searchParams = new URLSearchParams(location.search);
+
+    searchParams.delete(name);
+    const search = searchParams.toString() ? '?' + searchParams.toString() : '';
+
+    delete this._params[name];
+
+    const data: StateData<P> = {
+      state: { url: search, type: 'remove' },
+      url: search,
+    };
+    this._pushState(data);
+
+    return data;
+  }
+
+  private _pushState(data: StateData<P>): void {
     if (history) {
       history.replaceState(null, document.title, data.url);
     }

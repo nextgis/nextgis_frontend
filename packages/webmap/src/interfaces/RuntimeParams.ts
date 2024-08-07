@@ -1,6 +1,8 @@
-export interface RuntimeParams {
-  params(): { [paramName: string]: any };
-  get(name: string): any;
-  set(name: string, value: any): void;
-  remove(name: string): void;
+type Params = Record<string ,any>
+
+export interface RuntimeParams<P extends Params= Params, K = keyof P> {
+  params(): P;
+  get(name: K): any;
+  set(name: K, value: any): void;
+  remove(name: K): void;
 }
