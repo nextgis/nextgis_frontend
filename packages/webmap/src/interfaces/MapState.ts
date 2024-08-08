@@ -1,10 +1,10 @@
 import type { WebMapEvents } from './Events';
 
 export interface MapStateItem<V = any> {
-  event: keyof WebMapEvents;
+  event: (keyof WebMapEvents)[];
   name: string;
   getValue: () => V;
-  toString: (data: V) => string;
+  toString: () => string | undefined;
   parse: (str: string) => V;
 }
 

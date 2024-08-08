@@ -9,8 +9,8 @@ import {
 import { deprecatedMapClick } from '@nextgis/utils';
 
 import { Keys } from './components/keys/Keys';
-import { CenterState } from './components/mapStates/CenterState';
-import { ZoomState } from './components/mapStates/ZoomState';
+import { BoundState, CenterState, ZoomState } from './components/mapStates';
+
 import { clearObject } from './utils/clearObject';
 
 import type { StateItem } from './components/mapStates/StateItem';
@@ -87,15 +87,15 @@ export class WebMapMain<
   readonly runtimeParams: RuntimeParams[] = [];
 
   getPaintFunctions = WebMapMain.getPaintFunctions;
-  mapState: Type<StateItem>[] = [CenterState, ZoomState];
+  mapStateItems: Type<StateItem>[] = [CenterState, ZoomState, BoundState];
   id = ID++;
 
   /**
    * From runtime params
    */
+  readonly mapState: StateItem[] = [];
   protected _initMapState: Record<string, any> = {};
   protected readonly _starterKits: StarterKit[];
-  private _mapState: StateItem[] = [];
   private _extent?: LngLatBoundsArray;
   private readonly _eventsStatus: { [key in keyof E]?: boolean } = {};
   private _coordFromMapClickAbort?: () => void;
@@ -137,7 +137,7 @@ export class WebMapMain<
    */
   async create(): Promise<this> {
     if (!this.getEventStatus('create')) {
-      await this._setInitMapState(this.mapState);
+      await this._setInitMapState(this.mapStateItems);
       await this._setupMap();
       this._emitStatusEvent('create', this);
     }
@@ -159,17 +159,25 @@ export class WebMapMain<
     }
   }
 
-  getState(): Record<string, any> {
+  mapStateWithFunc(func: (x: any) => any): Record<string, any> {
     const state: Record<string, any> = {};
-    this._mapState.forEach((x) => {
-      state[x.name] = x.getValue();
+    this.mapState.forEach((x) => {
+      state[x.name] = func(x);
     });
     return state;
   }
 
+  getStateAsString(): Record<string, any> {
+    return this.mapStateWithFunc((x) => x.toString());
+  }
+
+  getState(): Record<string, any> {
+    return this.mapStateWithFunc((x) => x.getValue());
+  }
+
   getRuntimeParams(): Record<string, any> {
     const state: Record<string, any> = {};
-    this._mapState.forEach((x) => {
+    this.mapState.forEach((x) => {
       for (const r of this.runtimeParams) {
         const val = r.get(x.name);
         if (val !== undefined) {
@@ -561,12 +569,11 @@ export class WebMapMain<
   private _setInitMapState(states: Type<StateItem>[]): void {
     for (const X of states) {
       const state = new X(this);
-      this._mapState.push(state);
+      this.mapState.push(state);
       for (const r of this.runtimeParams) {
         const str = r.get(state.name);
         if (str !== undefined) {
           const val = state.parse(str);
-          // state.setValue(val);
           this._initMapState[state.name] = val;
           Object.defineProperty(this.options, state.name, {
             value: val,
@@ -597,16 +604,19 @@ export class WebMapMain<
     if (opt && opt.include) {
       events = events.filter((x) => opt.include.includes(x));
     }
+
     events.forEach((x) => {
       this._mapEvents[x] = (data): void => {
         if (this.runtimeParams.length) {
-          const mapStatusEvent = this._mapState.find((y) => y.event === x);
-          if (mapStatusEvent) {
-            const value = mapStatusEvent.toString(mapStatusEvent.getValue());
+          const mapStatusEvents = this.mapState.filter((y) =>
+            y.event.includes(x),
+          );
+          mapStatusEvents.forEach((mapStatusEvent) => {
+            const value = mapStatusEvent.toString();
             this.runtimeParams.forEach((r) => {
               r.set(mapStatusEvent.name, value);
             });
-          }
+          });
         }
         if (this._eventsStatus) {
           this.emitter.emit(x, data);

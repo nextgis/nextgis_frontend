@@ -5,7 +5,7 @@ import type { MapOptions } from '../../interfaces/MapOptions';
 
 export class ZoomState extends StateItem<number> {
   name: keyof MapOptions = 'zoom';
-  event: keyof WebMapEvents = 'zoomend';
+  event: (keyof WebMapEvents)[] = ['zoomend'];
   getValue(): number | undefined {
     const zoom = this.webMap.getZoom();
     return zoom !== undefined ? Math.round(zoom) : undefined;
@@ -13,8 +13,8 @@ export class ZoomState extends StateItem<number> {
   setValue(val: number): void {
     this.webMap.setZoom(val);
   }
-  toString(val: number): string {
-    return String(val);
+  toString(): string  | undefined{
+    return String(this.getValue());
   }
   parse(str: string): number {
     return Number(str);
