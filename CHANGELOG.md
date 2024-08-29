@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.4](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.3...v3.0.0-alpha.4) (2024-08-29)
+
+
+### Features
+
+* implement update layer with params ([d5354dd](https://github.com/nextgis/nextgis_frontend/commit/d5354dd6af335e8b1e23e2009c5d257b7713d424))
+* **url-runtime-params:** add update method and type safety url params ([8db04df](https://github.com/nextgis/nextgis_frontend/commit/8db04dfff6b6ebeb2cde9b51f96137d0e4df8145))
+* **utils:** add updateUrlParams util ([226c894](https://github.com/nextgis/nextgis_frontend/commit/226c8941c7fddc9e245c02bf80e69dce04e24d94))
+* **webmap:** add new default map StateItem ([0ed256a](https://github.com/nextgis/nextgis_frontend/commit/0ed256a9ba6c87772bb8eafaaa492aa7a4f7e6d5))
+
+
+### BREAKING CHANGES
+
+* **webmap:** State item event is now an array
+* **url-runtime-params:** Setting an empty parameter no longer removes the property from the URL
+
+
+
+
+
 # [3.0.0-alpha.3](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.2...v3.0.0-alpha.3) (2024-07-30)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.4](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.3...v3.0.0-alpha.4) (2024-08-29)
+
+
+### Features
+
+* **utils:** add updateUrlParams util ([226c894](https://github.com/nextgis/nextgis_frontend/commit/226c8941c7fddc9e245c02bf80e69dce04e24d94))
+
+
+
+
+
 # [3.0.0-alpha.3](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.2...v3.0.0-alpha.3) (2024-07-30)
 
 **Note:** Version bump only for package @nextgis/utils

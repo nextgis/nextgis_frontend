@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.4](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.3...v3.0.0-alpha.4) (2024-08-29)
+
+
+### Features
+
+* implement update layer with params ([d5354dd](https://github.com/nextgis/nextgis_frontend/commit/d5354dd6af335e8b1e23e2009c5d257b7713d424))
+
+
+
+
+
 # [3.0.0-alpha.3](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.2...v3.0.0-alpha.3) (2024-07-30)
 
 **Note:** Version bump only for package @nextgis/leaflet-map-adapter
