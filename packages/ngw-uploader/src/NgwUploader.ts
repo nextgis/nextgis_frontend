@@ -79,7 +79,7 @@ export class NgwUploader {
     });
   }
 
-  @onLoad()
+  @onLoad
   async uploadRaster<F extends FileType = FileType>(
     file: F,
     options: RasterUploadOptions,
@@ -96,7 +96,7 @@ export class NgwUploader {
     });
   }
 
-  @onLoad()
+  @onLoad
   uploadVector<F extends FileType = FileType>(
     file: F,
     options: VectorUploadOptions,
