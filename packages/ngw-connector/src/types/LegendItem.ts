@@ -1,16 +1,26 @@
 /**
- * Represents an item in a legend, with a name and an associated symbol.
+ * Represents an item in a legend, with additional rendering and indexing information.
  */
 export interface LegendItem {
   /**
-   * The name of the legend item.
+   * The index of the legend item.
    */
-  name: string;
+  index: number;
+
+  /**
+   * A flag indicating whether this legend item should be rendered.
+   */
+  render: boolean | null;
+
+  /**
+   * The display name of the legend item.
+   */
+  display_name: string;
 
   /**
    * The symbol associated with this legend item.
    */
-  symbol: LegendItemSymbol;
+  icon: LegendItemSymbol;
 }
 
 /**
@@ -29,6 +39,9 @@ export interface LegendItemSymbol {
   data: string;
 }
 
+/**
+ * Represents a legend for a specific layer.
+ */
 export interface LayerLegend {
   layerId: string;
   legend: LegendItem[];

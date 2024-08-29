@@ -23,14 +23,10 @@ import type {
   FilterOptions,
   GeoJsonAdapterOptions,
   LayerAdapter,
+  UpdateLayerAdapterOptions,
   VectorLayerAdapter,
 } from '@nextgis/webmap';
 import type { FeatureCollection } from 'geojson';
-
-interface FilterArgs {
-  filters?: PropertiesFilter;
-  options?: FilterOptions;
-}
 
 export async function createGeoJsonAdapter(
   props: GetClassAdapterOptions,
@@ -50,7 +46,7 @@ export async function createGeoJsonAdapter(
 
   const _loadedIds: string[] = [];
   let _fullDataLoad = false;
-  let _lastFilterArgs: FilterArgs | undefined;
+  let _lastFilterArgs: UpdateLayerAdapterOptions | undefined;
   let internalAbortController: AbortController | undefined;
 
   const resourceId = await resourceIdFromLayerOptions(options, connector);
@@ -184,8 +180,8 @@ export async function createGeoJsonAdapter(
       return fetchNgwLayerCount({ connector, resourceId, cache: true });
     }
 
-    async updateLayer(filterArgs?: FilterArgs) {
-      filterArgs = filterArgs || _lastFilterArgs || {};
+    async updateLayer(opt?: UpdateLayerAdapterOptions) {
+      const filterArgs = opt || _lastFilterArgs || {};
       if (this.options.strategy?.startsWith('BBOX')) {
         await webMap.onLoad('create');
         filterArgs.options = filterArgs.options || {};

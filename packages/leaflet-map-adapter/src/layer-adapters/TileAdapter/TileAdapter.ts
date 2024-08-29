@@ -1,10 +1,15 @@
+import { updateUrlParams } from '@nextgis/utils';
 import { TileLayer } from 'leaflet';
 
 import { BaseAdapter } from '../BaseAdapter';
 
 import { TileLayer as TL } from './TileLayer';
 
-import type { MainLayerAdapter, TileAdapterOptions } from '@nextgis/webmap';
+import type {
+  MainLayerAdapter,
+  TileAdapterOptions,
+  UpdateLayerAdapterOptions,
+} from '@nextgis/webmap';
 import type { TileLayerOptions } from 'leaflet';
 
 export class TileAdapter
@@ -43,20 +48,13 @@ export class TileAdapter
     }
   }
 
-  updateLayer(): void {
+  updateLayer(options?: UpdateLayerAdapterOptions) {
     if (this.layer) {
-      // @ts-ignore read private property
+      // @ts-expect-error the _url is private method
       const currentUrl = this.layer._url;
-      const timestamp = new Date().getTime();
-
-      const separator = currentUrl.includes('?') ? '&' : '?';
-
-      const newUrl =
-        currentUrl.replace(/(\?|&)timestamp=\d*/g, '') +
-        separator +
-        `timestamp=${timestamp}`;
-
-      this.layer.setUrl(newUrl);
+      if (options?.params) {
+        this.layer.setUrl(updateUrlParams(currentUrl, options.params));
+      }
       this.layer.redraw();
     }
   }

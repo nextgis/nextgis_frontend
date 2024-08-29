@@ -1,5 +1,5 @@
-import type { LayerLegend } from './LegendItem';
 import type { MapClickEvent } from './MapAdapter';
+import type { LayerLegend } from '../../../ngw-connector/src/types/LegendItem';
 import type { Paint } from '@nextgis/paint';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type {
@@ -425,7 +425,7 @@ export interface WmsAdapterOptions extends RasterAdapterOptions {
   tileSize?: number;
   updateWmsParams?: (obj: {
     [paramName: string]: any;
-  }) => Record<string, unknown>;
+  }) => Record<string, string>;
   transparent?: boolean;
 }
 
@@ -526,6 +526,12 @@ export interface GetLegendOptions {
   cache?: boolean;
 }
 
+export interface UpdateLayerAdapterOptions {
+  params?: Record<string, string | undefined>;
+  filters?: PropertiesFilter;
+  options?: FilterOptions;
+}
+
 export interface MainLayerAdapter<
   M = any,
   L = any,
@@ -539,7 +545,7 @@ export interface MainLayerAdapter<
   map?: M;
 
   addLayer(options: O): L | Promise<L> | undefined;
-  updateLayer?(): void;
+  updateLayer?(options?: UpdateLayerAdapterOptions): void;
   removeLayer?(): void;
   beforeRemove?(): void;
 

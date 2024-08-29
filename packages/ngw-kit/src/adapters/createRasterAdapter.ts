@@ -8,19 +8,69 @@ import type {
   NgwLayerAdapterType,
   ResourceAdapter,
 } from '../interfaces';
-import type { ResourceCls, ResourceItem } from '@nextgis/ngw-connector';
+import type {
+  LayerLegend,
+  LegendItem,
+  ResourceCls,
+  ResourceItem,
+} from '@nextgis/ngw-connector';
 import type { Type } from '@nextgis/utils';
 import type {
   GetLegendOptions,
   ImageAdapterOptions,
-  LayerLegend,
   MainLayerAdapter,
 } from '@nextgis/webmap';
 
+export type LegendSymbols = {
+  [symbolIndex: number]: boolean | null;
+};
+
+class Legend implements LayerLegend {
+  layerId: string;
+  legend: LegendItem[];
+
+  onSymbolRenderChange?: (indexes: number[]) => void;
+
+  constructor({
+    layerId,
+    legend,
+    onSymbolRenderChange,
+  }: LayerLegend & { onSymbolRenderChange?: (indexes: number[]) => void }) {
+    this.layerId = layerId;
+    this.legend = this.createLegend(legend);
+    this.onSymbolRenderChange = onSymbolRenderChange;
+  }
+
+  createLegend(items: LegendItem[]): LegendItem[] {
+    return items.map((params) => ({
+      ...params,
+      /** @deprecated use display_name instead */
+      name: params.display_name,
+      /** @deprecated use icon instead */
+      symbol: params.icon,
+    }));
+  }
+
+  setSymbolRender(symbolIndex: number, status: boolean): void {
+    const legendItem = this.legend.find((l) => l.index === symbolIndex);
+    if (legendItem) {
+      const render = legendItem.render;
+      if (render !== status) {
+        legendItem.render = status;
+        if (this.onSymbolRenderChange) {
+          this.onSymbolRenderChange(
+            this.legend.filter((l) => l.render).map((l) => l.index),
+          );
+        }
+      }
+    }
+  }
+}
+
 export async function createRasterAdapter({
   layerOptions,
-  webMap,
   connector,
+  webMap,
   item,
 }: GetClassAdapterOptions): Promise<Type<MainLayerAdapter> | undefined> {
   const resourceCls = item.resource.cls;
@@ -52,9 +102,11 @@ export async function createRasterAdapter({
       connector,
     );
     return class RasterAdapter extends AdapterClass implements ResourceAdapter {
-      // options = {};
       item?: ResourceItem = item;
       resourceId = resourceId;
+
+      private _blocked = false;
+      private _layerVisibility?: boolean;
 
       constructor(
         public map: any,
@@ -84,28 +136,24 @@ export async function createRasterAdapter({
           this.options = { ...this.options, ...layerAdapterOptions };
         }
       }
+
       addLayer(addOptions: any) {
         return super.addLayer({ ...this.options, ...addOptions });
       }
 
-      async getLegend(options?: GetLegendOptions): Promise<LayerLegend[]> {
-        const ngwLegend = await connector.get('render.legend_symbols', {
-          params: { id: resourceId },
-          cache: true,
-          ...options,
-        });
-        const id = this.options.id;
-        if (id !== undefined) {
-          const legend: LayerLegend = {
-            layerId: id,
-            legend: ngwLegend.map(({ display_name, icon }) => ({
-              name: display_name,
-              symbol: icon,
-            })),
-          };
-          return [legend];
+      showLayer(): void {
+        this._layerVisibility = true;
+        if (this.layer) {
+          if (!this._blocked) {
+            webMap.mapAdapter.showLayer(this.layer);
+          }
         }
-        return [];
+      }
+      hideLayer(): void {
+        this._layerVisibility = false;
+        if (this.layer) {
+          webMap.mapAdapter.hideLayer(this.layer);
+        }
       }
 
       async getIdentificationIds(): Promise<number[]> {
@@ -120,9 +168,75 @@ export async function createRasterAdapter({
         }
         return [];
       }
-      // beforeRemove() {
 
-      // }
+      async getLegend(options?: GetLegendOptions): Promise<Legend[]> {
+        const id = this.options.id;
+        if (id !== undefined) {
+          const ngwLegend = await connector.get('render.legend_symbols', {
+            params: { id: resourceId },
+            cache: true,
+            ...options,
+          });
+          const legend = new Legend({
+            layerId: id,
+            legend: ngwLegend,
+            onSymbolRenderChange: this._setLegendSymbol.bind(this),
+          });
+          return [legend];
+        }
+        return [];
+      }
+
+      private _hideLayer(): void {
+        if (this.options.id) {
+          webMap.mapAdapter.hideLayer(this.layer);
+        }
+      }
+
+      private _showLayer(): void {
+        if (this.options.id) {
+          if (this._layerVisibility) {
+            webMap.showLayer(this.options.id, { silent: true });
+          }
+        }
+      }
+
+      private _setLegendSymbol(renderIndexes: number[]): void {
+        const intervals = this._consolidateIntervals(renderIndexes);
+        if (!intervals.length) {
+          this._hideLayer();
+          this._blocked = true;
+        } else {
+          this._blocked = false;
+          this._showLayer();
+        }
+        if (this.updateLayer) {
+          this.updateLayer({
+            params: {
+              [`symbols[${resourceId}]`]: intervals.join(',') || undefined,
+            },
+          });
+        }
+      }
+
+      private _consolidateIntervals(symbols: number[]): string[] {
+        const sortedSymbols = symbols.slice().sort((a, b) => a - b);
+        const intervals: string[] = [];
+        let start = sortedSymbols[0];
+        let end = start;
+
+        for (let i = 1; i <= sortedSymbols.length; i++) {
+          if (sortedSymbols[i] === end + 1) {
+            end = sortedSymbols[i];
+          } else {
+            intervals.push(start === end ? `${start}` : `${start}-${end}`);
+            start = sortedSymbols[i];
+            end = start;
+          }
+        }
+
+        return intervals;
+      }
     };
   } else {
     throw new Error(adapter + ' not supported yet. Only TILE');

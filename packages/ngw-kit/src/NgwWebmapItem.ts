@@ -8,13 +8,13 @@ import { setScaleRatio } from './utils/utils';
 
 import type { TreeGroup, TreeItem, TreeLayer } from './interfaces';
 import type { ItemOptions } from '@nextgis/item';
+import type { LayerLegend } from '@nextgis/ngw-connector';
 import type NgwConnector from '@nextgis/ngw-connector';
 import type {
   GetLegendOptions,
   ImageAdapterOptions,
   LayerAdapter,
   LayerAdapterDefinition,
-  LayerLegend,
   VectorAdapterOptions,
   WebMap,
 } from '@nextgis/webmap';
@@ -167,9 +167,12 @@ export class NgwWebmapItem extends Item<ItemOptions> {
         });
         const legend: LayerLegend = {
           layerId: id,
-          legend: ngwLegend.map(({ display_name, icon }) => ({
-            name: display_name,
-            symbol: icon,
+          legend: ngwLegend.map((legend) => ({
+            /** @deprecated use display_name instead */
+            name: legend.display_name,
+            /** @deprecated use icon instead */
+            symbol: legend.icon,
+            ...legend,
           })),
         };
         return [legend];

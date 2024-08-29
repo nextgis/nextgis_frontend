@@ -9,7 +9,11 @@ import { objectToQuery, queryToObject } from '../utils/utils';
 
 import { BaseAdapter } from './BaseAdapter';
 
-import type { ImageAdapterOptions, MainLayerAdapter } from '@nextgis/webmap';
+import type {
+  ImageAdapterOptions,
+  MainLayerAdapter,
+  UpdateLayerAdapterOptions,
+} from '@nextgis/webmap';
 import type Map from 'ol/Map';
 import type { Extent } from 'ol/extent';
 import type { Options as BaseImageOptions } from 'ol/layer/BaseImage';
@@ -59,9 +63,12 @@ class CanvasILRendererExtended extends CanvasImageLayerRenderer {
   }
 }
 
-export class ImageAdapter extends BaseAdapter implements MainLayerAdapter {
+export class ImageAdapter
+  extends BaseAdapter<ImageLayer<ImageWMS>>
+  implements MainLayerAdapter
+{
   static queue = new Queue({ concurrency: 6, delay: 200 });
-  layer: any;
+  layer?: ImageLayer<ImageWMS>;
 
   constructor(
     public map: Map,
@@ -111,6 +118,16 @@ export class ImageAdapter extends BaseAdapter implements MainLayerAdapter {
         this.layer = layer;
       }
       return this.layer;
+    }
+  }
+
+  updateLayer(options?: UpdateLayerAdapterOptions): void {
+    if (this.layer) {
+      if (options?.params) {
+        this.layer.getSource()?.updateParams(options.params);
+      } else {
+        this.layer.getSource()?.refresh();
+      }
     }
   }
 

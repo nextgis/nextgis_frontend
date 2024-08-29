@@ -1,3 +1,5 @@
+import { updateUrlParams } from '@nextgis/utils';
+
 import { convertZoomLevel } from '../utils/convertZoomLevel';
 import { setupLayerTransformRequest } from '../utils/setupLayerTransformRequest';
 
@@ -7,11 +9,13 @@ import type {
   MainLayerAdapter,
   RasterAdapterOptions,
   TileAdapterOptions,
+  UpdateLayerAdapterOptions,
 } from '@nextgis/webmap';
 import type {
   LayerSpecification,
   RasterLayerSpecification,
   RasterSourceSpecification,
+  RasterTileSource,
 } from 'maplibre-gl';
 
 type Layer = RasterLayerSpecification;
@@ -83,6 +87,19 @@ export class TileAdapter<O extends RasterAdapterOptions = TileAdapterOptions>
       this.layer = [this._layerId];
       this.updateOpacity();
       return this.layer;
+    }
+  }
+
+  updateLayer(options?: UpdateLayerAdapterOptions): void {
+    const source = this.map?.getSource(
+      this._layerId + '_source',
+    ) as RasterTileSource;
+    if (source) {
+      const params = options?.params;
+
+      source.setTiles(
+        source.tiles.map((t) => updateUrlParams(t, params || {})),
+      );
     }
   }
 }

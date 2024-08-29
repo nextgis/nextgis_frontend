@@ -44,7 +44,6 @@ import type { FeatureLike } from 'ol/Feature';
 import type Map from 'ol/Map';
 import type MapBrowserEvent from 'ol/MapBrowserEvent';
 import type { Options as OverlayOptions } from 'ol/Overlay';
-import type { Geometry } from 'ol/geom';
 import type Base from 'ol/layer/Base';
 import type { Pixel } from 'ol/pixel';
 import type { Style } from 'ol/style';
@@ -54,13 +53,13 @@ type Layer = Base;
 type Layers = LayerDefinition<Feature, Layer>;
 type OpenedPopup = [OlFeature<any>, Overlay, PopupOnCloseFunction[]];
 
-type VectorLayerType = OlFeature<Geometry>;
+type VectorLayerType = VectorLayer<VectorSource>;
 
 export class GeoJsonAdapter
-  extends BaseAdapter
+  extends BaseAdapter<VectorLayerType>
   implements VectorLayerAdapter<Map, Layer, GeoJsonAdapterOptions>
 {
-  layer?: VectorLayer<VectorLayerType>;
+  layer?: VectorLayerType;
   paint?: Paint;
   selectedPaint?: Paint;
   selected = false;
@@ -99,7 +98,7 @@ export class GeoJsonAdapter
     ) as ForEachFeatureAtPixelOrderedCallback[];
   }
 
-  addLayer(options: GeoJsonAdapterOptions): VectorLayer<VectorLayerType> {
+  addLayer(options: GeoJsonAdapterOptions): VectorLayerType {
     Object.assign(this.options, options);
     this.paint = options.paint;
 
@@ -371,7 +370,7 @@ export class GeoJsonAdapter
     this._styleCache = {};
     if (this.layer) {
       const source = this.layer.getSource();
-      if (source) {
+      if (source && source.getFeatures) {
         const features = source.getFeatures();
         for (const f of features) {
           const style = this._getFeatureStyle(f, paint, this.options.type);

@@ -84,7 +84,7 @@
 
           // Add a title for the layer
           const layerTitle = document.createElement('h3');
-          console.log(webMap.getLayer(layerLegend.layerId));
+
           layerTitle.textContent =
             webMap.getLayer(layerLegend.layerId).options.name ||
             `Layer ID: ${layerLegend.layerId}`;

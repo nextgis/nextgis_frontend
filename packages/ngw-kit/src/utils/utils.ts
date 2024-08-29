@@ -15,8 +15,9 @@ export function updateImageParams(
   params: Record<string, any>,
   resourceId: number | number[],
 ): Record<string, any> {
-  const { bbox, width, height, nd } = params;
+  const { bbox, width, height, nd, ...rest } = params;
   return {
+    ...rest,
     resource: Array.isArray(resourceId) ? resourceId.join(',') : resourceId,
     extent: bbox,
     size: width + ',' + height,

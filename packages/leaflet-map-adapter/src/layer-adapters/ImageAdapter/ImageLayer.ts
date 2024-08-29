@@ -59,7 +59,7 @@ export class ImageLayer extends Layer {
     setViewDelay: 100,
   };
 
-  private wmsParams: any;
+  wmsParams: Record<string, string>;
   private _url?: string;
   private _currentUrl?: string;
   private _currentOverlay?: ImageOverlay;
@@ -81,7 +81,11 @@ export class ImageLayer extends Layer {
       }
     }
     Util.setOptions(this, opts);
-    this.wmsParams = Util.extend({}, this.defaultWmsParams, params);
+    this.wmsParams = Util.extend(
+      {},
+      this.defaultWmsParams,
+      params?.params ?? {},
+    );
   }
 
   setParams(params: Record<string, any>): void {

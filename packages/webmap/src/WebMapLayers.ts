@@ -27,13 +27,13 @@ import type {
   TileAdapterOptions,
   VectorLayerAdapter,
 } from './interfaces/LayerAdapter';
-import type { LayerLegend } from './interfaces/LegendItem';
 import type { FitOptions } from './interfaces/MapAdapter';
 import type {
   GetAttributionsOptions,
   MapOptions,
   ToggleLayerOptions,
 } from './interfaces/MapOptions';
+import type { LayerLegend } from '../../ngw-connector/src/types/LegendItem';
 import type { Paint } from '@nextgis/paint';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type { FeatureProperties, TileJson, Type } from '@nextgis/utils';
@@ -619,11 +619,14 @@ export class WebMapLayers<
     return Promise.resolve();
   }
 
-  updateLayer(layerDef: LayerDef): Promise<void> {
+  updateLayer(
+    layerDef: LayerDef,
+    options?: { params?: Record<string, string> },
+  ): Promise<void> {
     const layer = this.getLayer(layerDef);
     if (layer) {
       if (layer.updateLayer) {
-        return Promise.resolve(layer.updateLayer());
+        return Promise.resolve(layer.updateLayer(options));
       } else if (this.isLayerVisible(layer)) {
         return this.hideLayer(layer, { silent: true }).then(() => {
           return this.showLayer(layer, { silent: true });

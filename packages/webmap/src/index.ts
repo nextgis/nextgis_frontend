@@ -19,7 +19,6 @@ export * from './interfaces/BaseTypes';
 export * from './interfaces/MapOptions';
 export * from './interfaces/MapAdapter';
 export * from './interfaces/MapControl';
-export * from './interfaces/LegendItem';
 export * from './interfaces/StarterKit';
 export * from './interfaces/LayerAdapter';
 export * from './interfaces/RuntimeParams';

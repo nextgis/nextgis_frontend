@@ -368,7 +368,8 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
         for (const e of orderedFeatures) {
           const stop = e[1](evt.pixel, evt, type);
           if (stop) {
-            return !!'on feature';
+            // on feature
+            return true;
           }
         }
       }

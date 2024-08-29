@@ -1,11 +1,15 @@
+import { type Map, Util } from 'leaflet';
+
 import { BaseAdapter } from '../BaseAdapter';
 
 import { ImageLayer } from './ImageLayer';
 import imageQueue from './imageQueue';
 
-import type { MainLayerAdapter } from '@nextgis/webmap';
+import type {
+  MainLayerAdapter,
+  UpdateLayerAdapterOptions,
+} from '@nextgis/webmap';
 import type { ImageAdapterOptions } from '@nextgis/webmap';
-import type { Map } from 'leaflet';
 
 export class ImageAdapter
   extends BaseAdapter<ImageAdapterOptions>
@@ -13,7 +17,7 @@ export class ImageAdapter
 {
   static queue = imageQueue;
 
-  layer: any;
+  layer?: ImageLayer;
 
   addLayer(options: ImageAdapterOptions): any {
     const url = options && options.url;
@@ -39,6 +43,15 @@ export class ImageAdapter
         };
       }
       return this.layer;
+    }
+  }
+
+  updateLayer(options?: UpdateLayerAdapterOptions): void {
+    if (this.layer) {
+      const params = options?.params || {};
+
+      Util.extend(this.layer.wmsParams, params);
+      this.layer.update();
     }
   }
 }

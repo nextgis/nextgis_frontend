@@ -23,11 +23,11 @@ import type { ItemOptions } from '@nextgis/item';
 import type {
   BaseRequestOptions,
   BasemapWebmap,
+  LayerLegend,
   ResourceItem,
   WebmapResource,
 } from '@nextgis/ngw-connector';
 import type { LngLatBoundsArray, Type } from '@nextgis/utils';
-import type { LayerLegend } from '@nextgis/webmap';
 import type { RasterAdapterOptions, WebMap } from '@nextgis/webmap';
 import type StrictEventEmitter from 'strict-event-emitter-types';
 

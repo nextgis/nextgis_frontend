@@ -1,4 +1,5 @@
 import type { FeatureItem, FeatureLayersIdentify } from './types/FeatureLayer';
+import type { LegendItem } from './types/LegendItem';
 import type { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
 import type {
   FeatureLayerField,
@@ -30,16 +31,6 @@ export interface SrsItem {
   display_name: string;
   id: number;
   wkt: string;
-}
-
-interface Icon {
-  format: string;
-  data: string;
-}
-
-export interface RenderLegendSymbol {
-  display_name: string;
-  icon: Icon;
 }
 
 export interface FeatureLayerCount {
@@ -107,7 +98,7 @@ export interface GetRequestItemsResponseMap extends RequestItemKeys {
   'feature_layer.feature.count': FeatureLayerCount;
   'pyramid.company_logo': string;
   'spatial_ref_sys.collection': SrsItem[];
-  'render.legend_symbols': RenderLegendSymbol[];
+  'render.legend_symbols': LegendItem[];
 }
 
 export interface IdOnly {
