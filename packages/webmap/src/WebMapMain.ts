@@ -10,7 +10,6 @@ import { deprecatedMapClick } from '@nextgis/utils';
 
 import { Keys } from './components/keys/Keys';
 import { BoundState, CenterState, ZoomState } from './components/mapStates';
-
 import { clearObject } from './utils/clearObject';
 
 import type { StateItem } from './components/mapStates/StateItem';

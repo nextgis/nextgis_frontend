@@ -25,7 +25,7 @@ export class UrlRuntimeParams<P extends Params = Params>
   }
 
   update(params: Partial<P>): StateData<P> {
-    let searchParams = new URLSearchParams(location.search);
+    const searchParams = new URLSearchParams(location.search);
 
     Object.keys(params).forEach((key) => {
       const value = params[key as keyof P];
@@ -46,7 +46,7 @@ export class UrlRuntimeParams<P extends Params = Params>
   }
 
   remove(name: string): StateData<P> {
-    let searchParams = new URLSearchParams(location.search);
+    const searchParams = new URLSearchParams(location.search);
 
     searchParams.delete(name);
     const search = searchParams.toString() ? '?' + searchParams.toString() : '';

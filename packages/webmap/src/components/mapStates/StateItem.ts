@@ -1,6 +1,5 @@
 import type { WebMap } from '../../WebMap';
-import { WebMapEvents } from '../../interfaces/Events';
-
+import type { WebMapEvents } from '../../interfaces/Events';
 import type { MapOptions } from '../../interfaces/MapOptions';
 import type { MapStateItem } from '../../interfaces/MapState';
 

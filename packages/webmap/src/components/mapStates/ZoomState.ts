@@ -13,7 +13,7 @@ export class ZoomState extends StateItem<number> {
   setValue(val: number): void {
     this.webMap.setZoom(val);
   }
-  toString(): string  | undefined{
+  toString(): string | undefined {
     return String(this.getValue());
   }
   parse(str: string): number {
