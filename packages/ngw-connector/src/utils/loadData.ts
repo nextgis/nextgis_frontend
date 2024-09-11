@@ -77,23 +77,6 @@ if (__BROWSER__) {
       processingResponse();
     };
 
-    // xhr.onreadystatechange = () => {
-    //   if (
-    //     (xhr.readyState === 4 && xhr.status === 200) ||
-    //     (xhr.readyState === 3 && xhr.status === 201)
-    //   ) {
-    //     processingResponse();
-    //   } else if (xhr.readyState === 3 && xhr.status === 400) {
-    //     processingResponse();
-    //   } else if (xhr.readyState === 4 && xhr.status === 500) {
-    //     processingResponse();
-    //   } else if (xhr.readyState === 4 && xhr.status === 401) {
-    //     error(xhr.statusText);
-    //   } else if (xhr.readyState === 4) {
-    //     error('request error');
-    //   }
-    // };
-
     xhr.onerror = (er) => {
       if (xhr.status === 0) {
         error(new NetworkError(url));

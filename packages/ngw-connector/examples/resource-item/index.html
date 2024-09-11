@@ -9,13 +9,19 @@
   </head>
   <body>
     <script>
-      var element = document.getElementById('results');
-      var connector = new NgwConnector({ baseUrl: 'https://demo.nextgis.com' });
-      connector.get('resource.item', null, { id: 5248 }).then(function (data) {
-        console.log(data);
-        document.body.appendChild(document.createElement('pre')).innerHTML =
-          JSON.stringify(data, null, 2);
+      const element = document.getElementById('results');
+      const connector = new NgwConnector({
+        baseUrl: 'https://demo.nextgis.com',
       });
+
+      connector
+        .route('resource.item', { id: 5248 })
+        .get()
+        .then(function (data) {
+          console.log(data);
+          document.body.appendChild(document.createElement('pre')).innerHTML =
+            JSON.stringify(data, null, 2);
+        });
     </script>
   </body>
 </html>

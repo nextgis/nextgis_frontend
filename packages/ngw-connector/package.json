@@ -51,5 +51,8 @@
     "type": "git",
     "url": "git://github.com/nextgis/nextgis_frontend.git"
   },
+  "engines": {
+    "node": ">=18.20.4"
+  },
   "gitHead": "edc68033f914f6c95c4125b9738bba6d36e990b4"
 }

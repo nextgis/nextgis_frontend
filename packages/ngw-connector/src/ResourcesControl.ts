@@ -7,6 +7,7 @@ import { resourceCompare } from './utils/resourceCompare';
 import { resourceToQuery } from './utils/resourceToQuery';
 
 import type { NgwConnector } from './NgwConnector';
+import type { NgwConnectorExtended } from './NgwConnectorExtended';
 import type {
   GetChildrenOfOptions,
   RequestOptions,
@@ -17,13 +18,13 @@ import type { DeepPartial } from '@nextgis/utils';
 
 export class ResourcesControl {
   cache: Cache<Promise<ResourceItem | undefined>, { id?: number | string }>;
-  connector: NgwConnector;
+  connector: NgwConnectorExtended;
 
   constructor({
     connector,
     cacheId,
   }: {
-    connector: NgwConnector;
+    connector: NgwConnectorExtended;
     cacheId?: string;
   }) {
     this.connector = connector;

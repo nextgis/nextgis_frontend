@@ -28,10 +28,9 @@
           password: 'ngf_test',
         },
       });
-      connector
-        .get('resource.item', null, {
-          id: 5248,
-        })
+      connector.connect();
+      connector.route('resource.item', 7678)
+        .get()
         .then((data) => {
           appendResponse(resultElement, data);
         })

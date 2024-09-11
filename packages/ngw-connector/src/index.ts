@@ -1,4 +1,4 @@
-import { NgwConnector } from './NgwConnector';
+import { NgwConnectorExtended } from './NgwConnectorExtended';
 
 export * from './interfaces';
 export * from './types/ResourceItem';
@@ -7,4 +7,4 @@ export * from './types/RequestItemsParamsMap';
 export * from './types/ResourceStore';
 export * from './types/LegendItem';
 
-export default NgwConnector;
+export default NgwConnectorExtended;
