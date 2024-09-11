@@ -1,5 +1,11 @@
-export function objectRemoveEmpty<T extends Record<any, any>>(obj: T): T {
-  const newObj: Record<any, any> = {} as T;
+type NoUndefinedField<T> = {
+  [P in keyof T]: Exclude<T[P], undefined>;
+};
+
+export function objectRemoveEmpty<T extends Record<any, any>>(
+  obj: T,
+): NoUndefinedField<T> {
+  const newObj: Record<any, any> = {};
   Object.keys(obj).forEach((key) => {
     if (!(obj[key] instanceof Array) && obj[key] === Object(obj[key])) {
       newObj[key] = objectRemoveEmpty(obj[key]);
@@ -7,5 +13,5 @@ export function objectRemoveEmpty<T extends Record<any, any>>(obj: T): T {
       newObj[key] = obj[key];
     }
   });
-  return newObj;
+  return newObj as NoUndefinedField<T>;
 }
