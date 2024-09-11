@@ -3,7 +3,7 @@ import { forwardRef, useImperativeHandle } from 'react';
 import { useNgwMapContext } from './context';
 
 import type { ElementHook } from './element';
-import type { Ref } from 'react';
+import type { ForwardRefRenderFunction, PropsWithoutRef, Ref } from 'react';
 
 export function createWebMapComponent<E, P>(useElement: ElementHook<E, P>) {
   function WebMapComponent(props: P, ref: Ref<E>) {
@@ -14,5 +14,7 @@ export function createWebMapComponent<E, P>(useElement: ElementHook<E, P>) {
     return null;
   }
 
-  return forwardRef(WebMapComponent);
+  return forwardRef(
+    WebMapComponent as ForwardRefRenderFunction<E, PropsWithoutRef<P>>,
+  );
 }

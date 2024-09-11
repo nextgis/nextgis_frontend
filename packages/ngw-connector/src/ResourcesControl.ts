@@ -6,7 +6,6 @@ import { isObject } from './utils/isObject';
 import { resourceCompare } from './utils/resourceCompare';
 import { resourceToQuery } from './utils/resourceToQuery';
 
-import type { NgwConnector } from './NgwConnector';
 import type { NgwConnectorExtended } from './NgwConnectorExtended';
 import type {
   GetChildrenOfOptions,
