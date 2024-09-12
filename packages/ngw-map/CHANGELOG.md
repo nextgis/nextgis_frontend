@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.3](https://github.com/nextgis/nextgis_frontend/compare/v2.5.2...v2.5.3) (2024-09-12)
+
+
+### Bug Fixes
+
+* **ngw-kit:** prevent NgwWebmapLayerAdapter extra requests ([5f642ac](https://github.com/nextgis/nextgis_frontend/commit/5f642ace6b974fb8b2f44a6bbdd539b0e10184b0))
+
+
+
+
+
 ## [2.5.2](https://github.com/nextgis/nextgis_frontend/compare/v2.5.1...v2.5.2) (2024-07-30)
 
 **Note:** Version bump only for package @nextgis/ngw-map
