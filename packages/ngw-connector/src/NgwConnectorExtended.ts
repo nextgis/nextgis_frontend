@@ -33,6 +33,10 @@ export class NgwConnectorExtended extends NgwConnector {
     });
   }
 
+  static create(options: NgwConnectorOptions): NgwConnectorExtended {
+    return new this(options);
+  }
+
   /**
    * Clear the cache.
    */

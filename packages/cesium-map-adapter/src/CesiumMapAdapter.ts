@@ -111,10 +111,6 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
       //   Camera.DEFAULT_VIEW_FACTOR = 0;
       // }
 
-      // This layer will be removed immediately.
-      // Needed to avoid BING api loading on start
-      const defaultImageryProvider = new GridImageryProvider({});
-
       const viewer = new Viewer(this.options.target, {
         animation: false,
         baseLayerPicker: false,
@@ -134,7 +130,7 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
         sceneMode: SceneMode.SCENE3D,
         // terrainProvider: createWorldTerrain()
         terrainProvider: ellipsoidProvider,
-        imageryProvider: defaultImageryProvider,
+        baseLayer: false,
         // mapProjection: new Cesium.WebMercatorProjection()
         // contextOptions: { requestWebgl2: true }
       });

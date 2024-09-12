@@ -12,11 +12,10 @@ type Layer = CesiumTerrainProvider;
 export class TerrainAdapter extends BaseAdapter<TileAdapterOptions, Layer> {
   private _layer?: Layer;
 
-  addLayer(opt: TileAdapterOptions): CesiumTerrainProvider {
+  async addLayer(opt: TileAdapterOptions): Promise<CesiumTerrainProvider> {
     this.options = { ...this.options, ...opt };
     const url = makeUrl(this.options.url, this.options.headers);
-    const layer = new CesiumTerrainProvider({
-      url,
+    const layer = await CesiumTerrainProvider.fromUrl(url, {
       requestVertexNormals: true,
       credit: opt.attribution,
     });

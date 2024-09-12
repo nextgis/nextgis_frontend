@@ -28,11 +28,11 @@ export class Model3DAdapter extends BaseAdapter<Model3DOptions, Layer> {
     this.watchHeight();
   };
 
-  addLayer(opt: Model3DOptions): Model {
+  async addLayer(opt: Model3DOptions): Promise<Model> {
     this.options = { ...this.options, ...opt };
     const url = makeUrl(this.options.url, this.options.headers);
     this.options = { ...opt };
-    this._layer = Model.fromGltf({
+    this._layer = await Model.fromGltfAsync({
       url,
       show: false,
       modelMatrix: this._getModelMatrix(),

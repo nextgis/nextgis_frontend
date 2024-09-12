@@ -17,7 +17,7 @@ import { BaseAdapter } from './BaseAdapter';
 
 import type { LngLatBoundsArray } from '@nextgis/utils';
 import type { Tileset3DAdapterOptions } from '@nextgis/webmap';
-import type Resource from 'cesium/Source/Core/Resource';
+import type { Resource } from 'cesium';
 
 export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
   layer?: Cesium3DTileset;
@@ -96,11 +96,12 @@ export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
     // }
     options.maximumScreenSpaceError = maximumScreenSpaceError || 1;
 
-    const layer = new Cesium3DTileset(options);
-    layer.show = false;
-
     try {
-      const tileset = await layer.readyPromise;
+      const tileset = await Cesium3DTileset.fromUrl(url, {
+        show: false,
+        ...options,
+      });
+
       this.layer = tileset;
 
       this._extent = this._calculateExtent();

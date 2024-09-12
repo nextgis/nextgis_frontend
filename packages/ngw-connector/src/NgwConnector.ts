@@ -73,10 +73,6 @@ export class NgwConnector {
     }
   }
 
-  static create(options: NgwConnectorOptions): NgwConnector {
-    return new this(options);
-  }
-
   /**
    * Clear the cache.
    */
