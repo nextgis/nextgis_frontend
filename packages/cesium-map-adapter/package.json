@@ -20,6 +20,7 @@
     "cesium": "*"
   },
   "devDependencies": {
+    "cesium": "1.121.1",
     "@nextgis/build-tools": "file:../build-tools"
   },
   "scripts": {
