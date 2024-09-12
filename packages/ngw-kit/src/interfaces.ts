@@ -61,7 +61,7 @@ export interface TreeItem {
   item_type: 'root' | 'group' | 'layer' | string;
   display_name?: string;
   resourceId?: number | [number, string];
-  parentId?: number;
+  style_parent_id?: number;
   _layer?: any;
 }
 

@@ -354,7 +354,7 @@ export class NgwMap<
       if (mem.layer.getDependLayers) {
         const dependLayers = mem.layer.getDependLayers() as NgwWebmapItem[];
         const dependFit = dependLayers.find((x) => {
-          return x.item && x.item.parentId === id;
+          return x.item && x.item.style_parent_id === id;
         });
         if (dependFit) {
           return dependFit.layer;
