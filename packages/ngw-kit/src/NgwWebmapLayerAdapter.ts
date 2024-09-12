@@ -48,7 +48,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
   protected _extent?: LngLatBoundsArray;
 
   private response?: ResourceItem;
-  private _webmapLayersIds?: number[];
+
   private _webmapBaselayersIds: string[] = [];
   private _lastActiveBaselayer?: string;
 
@@ -108,7 +108,6 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
 
     delete this.layer;
     delete this.response;
-    delete this._webmapLayersIds;
   }
 
   async showLayer(): Promise<void> {
@@ -204,30 +203,25 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
 
   async getIdentificationIds(options?: BaseRequestOptions): Promise<number[]> {
     const visibleLayers: number[] = [];
-    let ids = this._webmapLayersIds;
-    if (!ids) {
-      ids = await this._getWebMapIds(options);
-      this._webmapLayersIds = ids;
-    }
-    if (ids && ids.length) {
-      let deps = this.getDependLayers();
-      deps = deps.sort((a, b) => b.id - a.id);
-      deps.forEach((x) => {
-        const item = x.item;
-        const parentId = item.parentId;
-        if (
-          parentId !== undefined &&
-          item.item_type === 'layer' &&
-          item.layer_identifiable
-        ) {
-          const visible = x.properties.property('visibility');
-          const isVisible = visible.get() && !visible.isBlocked();
-          if (isVisible) {
-            visibleLayers.push(parentId);
-          }
+
+    let deps = this.getDependLayers();
+    deps = deps.sort((a, b) => b.id - a.id);
+    deps.forEach((x) => {
+      const item = x.item;
+      const parentId = item.style_parent_id;
+      if (
+        parentId !== undefined &&
+        item.item_type === 'layer' &&
+        item.layer_identifiable
+      ) {
+        const visible = x.properties.property('visibility');
+        const isVisible = visible.get() && !visible.isBlocked();
+        if (isVisible) {
+          visibleLayers.push(parentId);
         }
-      });
-    }
+      }
+    });
+
     return visibleLayers;
   }
 
@@ -380,33 +374,5 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
       }
     }
     return item;
-  }
-
-  private async _getWebMapIds(
-    options?: BaseRequestOptions,
-  ): Promise<number[] | undefined> {
-    const webMapItem = this.layer;
-    if (webMapItem && webMapItem.item.item_type === 'root') {
-      const layers = webMapItem.tree.getDescendants();
-      const promises: Array<Promise<any>> = [];
-      for (const x of layers) {
-        const item = x.item;
-        if (item.item_type === 'layer') {
-          const id = item.layer_style_id;
-          const promise = this.options.connector
-            .getResource(id, options)
-            .then((y) => {
-              if (y) {
-                const parentId = Number(y.resource.parent.id);
-                item.parentId = parentId;
-                return parentId;
-              }
-            });
-          promises.push(promise);
-        }
-      }
-      const ids = await Promise.all(promises);
-      return ids.filter((x) => x !== undefined);
-    }
   }
 }
