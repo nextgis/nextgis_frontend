@@ -25,7 +25,7 @@ import type { DeepPartial } from '@nextgis/utils';
 export class NgwConnectorExtended extends NgwConnector {
   resources!: ResourcesControl;
 
-  constructor(public options: NgwConnectorOptions) {
+  constructor(options: NgwConnectorOptions) {
     super(options);
     this.resources = new ResourcesControl({
       connector: this,
