@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/logging",
-  "version": "3.0.0-alpha.4",
+  "version": "3.0.0-alpha.5",
   "description": "Logging control",
   "main": "index.js",
   "module": "lib/logging.esm-bundler.js",
@@ -8,10 +8,10 @@
   "jsdelivr": "lib/logging.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/ngw-connector": "^3.0.0-alpha.4"
+    "@nextgis/ngw-connector": "^3.0.0-alpha.5"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "^3.0.0-alpha.3"
+    "@nextgis/build-tools": "^3.0.0-alpha.5"
   },
   "buildOptions": {
     "name": "Logging",

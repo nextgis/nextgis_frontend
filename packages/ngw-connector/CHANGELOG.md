@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.5](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.4...v3.0.0-alpha.5) (2024-09-12)
+
+
+### Features
+
+* **ngw-connector:** add experimental route request engine ([2bb8e63](https://github.com/nextgis/nextgis_frontend/commit/2bb8e63a3346e29df654789cc9de5d8a37cc9b07))
+
+
+
+
+
 # [3.0.0-alpha.4](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.3...v3.0.0-alpha.4) (2024-08-29)
 
 
