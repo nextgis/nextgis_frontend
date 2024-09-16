@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/cesium-map-adapter",
-  "version": "3.0.0-alpha.5",
+  "version": "3.0.0-alpha.7",
   "private": true,
   "description": "",
   "main": "lib/cesium-map-adapter.js",

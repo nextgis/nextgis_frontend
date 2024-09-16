@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.7](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.6...v3.0.0-alpha.7) (2024-09-16)
+
+
+### Features
+
+* **cesium-map-adapter:** implement create control method ([7728c94](https://github.com/nextgis/nextgis_frontend/commit/7728c94c9a387fbaf4e3e77e730ed3c58224afa8))
+
+
+
+
+
 # [3.0.0-alpha.5](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.4...v3.0.0-alpha.5) (2024-09-12)
 
 **Note:** Version bump only for package @nextgis/cesium-map-adapter

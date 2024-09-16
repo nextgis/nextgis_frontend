@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.7](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.6...v3.0.0-alpha.7) (2024-09-16)
+
+
+### Features
+
+* **cache:** add cache expirationTime ([4c9f636](https://github.com/nextgis/nextgis_frontend/commit/4c9f636a4b079947ffa13c24e885a6a68dd607c4))
+
+
+
+
+
 # [3.0.0-alpha.5](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.4...v3.0.0-alpha.5) (2024-09-12)
 
 **Note:** Version bump only for package @nextgis/cache

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.7](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.6...v3.0.0-alpha.7) (2024-09-16)
+
+
+### Features
+
+* **ngw-connector:** add cache expirationTime for all requests ([bf4ff74](https://github.com/nextgis/nextgis_frontend/commit/bf4ff748504d394460773af71e654621320ece8c))
+
+
+
+
+
 # [3.0.0-alpha.6](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.5...v3.0.0-alpha.6) (2024-09-12)
 
 
