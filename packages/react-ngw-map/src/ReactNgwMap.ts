@@ -31,7 +31,7 @@ export function ReactNgwMap<Props extends ReactNgwMapProps = ReactNgwMapProps>({
 
   const contents = context
     ? createElement(NgwMapProvider, { value: context }, children)
-    : (placeholder ?? null);
+    : placeholder ?? null;
   const p = { className, id, style };
   return createElement('div', { ...p, ref: mapRef }, contents);
 }
