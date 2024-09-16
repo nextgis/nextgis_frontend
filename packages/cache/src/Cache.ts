@@ -20,7 +20,7 @@ export interface CacheOptions {
   namespace?: string;
 }
 
-export interface AddOptions<V, O> {
+export interface AddOptions<O> {
   props?: CacheMatchProps<O>;
   onlyFull?: boolean;
   /** life time in ms */
@@ -108,14 +108,14 @@ export class Cache<
   addFull(
     key: string,
     valueToSet: CacheValue<V> | (() => CacheValue<V>),
-    propsOrOptions?: CacheMatchProps<O> | AddOptions<V, O>,
+    propsOrOptions?: CacheMatchProps<O> | AddOptions<O>,
     expirationTime?: number,
   ): CacheValue<V> {
     if (
       typeof propsOrOptions === 'object' &&
-      'valueToSet' in (propsOrOptions as AddOptions<V, O>)
+      'valueToSet' in (propsOrOptions as AddOptions<O>)
     ) {
-      (propsOrOptions as AddOptions<V, O>).onlyFull = true;
+      (propsOrOptions as AddOptions<O>).onlyFull = true;
     }
     return this.add(key, valueToSet, propsOrOptions, true, expirationTime);
   }
@@ -123,17 +123,17 @@ export class Cache<
   add(
     key: string,
     valueToSet: CacheValue<V> | (() => CacheValue<V>),
-    propsOrOptions?: CacheMatchProps<O> | AddOptions<V, O>,
+    propsOrOptions?: CacheMatchProps<O> | AddOptions<O>,
     onlyFull?: boolean,
     expirationTime?: number,
   ): CacheValue<V> {
-    let opt: AddOptions<V, O>;
+    let opt: AddOptions<O>;
     let props: CacheMatchProps<O> | undefined;
     if (
       typeof propsOrOptions === 'object' &&
-      'valueToSet' in (propsOrOptions as AddOptions<V, O>)
+      'valueToSet' in (propsOrOptions as AddOptions<O>)
     ) {
-      opt = propsOrOptions as AddOptions<V, O>;
+      opt = propsOrOptions as AddOptions<O>;
       onlyFull = opt.onlyFull;
       expirationTime = opt.expirationTime;
       props = opt.props;

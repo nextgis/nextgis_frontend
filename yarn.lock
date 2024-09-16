@@ -34,6 +34,43 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@cesium/engine@npm:^11.0.0":
+  version: 11.0.0
+  resolution: "@cesium/engine@npm:11.0.0"
+  dependencies:
+    "@tweenjs/tween.js": ^25.0.0
+    "@zip.js/zip.js": ^2.7.34
+    autolinker: ^4.0.0
+    bitmap-sdf: ^1.0.3
+    dompurify: ^3.0.2
+    draco3d: ^1.5.1
+    earcut: ^3.0.0
+    grapheme-splitter: ^1.0.4
+    jsep: ^1.3.8
+    kdbush: ^4.0.1
+    ktx-parse: ^0.7.0
+    lerc: ^2.0.0
+    mersenne-twister: ^1.1.0
+    meshoptimizer: ^0.21.0
+    pako: ^2.0.4
+    protobufjs: ^7.1.0
+    rbush: ^4.0.0
+    topojson-client: ^3.1.0
+    urijs: ^1.19.7
+  checksum: 20e93fc0da4a6878a9f15cc9b0b358ffe2b36ab17661e0bba58b1623f8faf3066a856c32925fbec873f349c69c2f528a6801be415570e50a8cb561640601d33b
+  languageName: node
+  linkType: hard
+
+"@cesium/widgets@npm:^8.0.0":
+  version: 8.0.0
+  resolution: "@cesium/widgets@npm:8.0.0"
+  dependencies:
+    "@cesium/engine": ^11.0.0
+    nosleep.js: ^0.12.0
+  checksum: 5a1846f40c3f716afeb4a73c7b15fc21b97223d1bce32829d77e3140dc3d6249219a6a3efe96d4189f33698ed1c34c94f7f87f26286b96133595d54a12e29019
+  languageName: node
+  linkType: hard
+
 "@emnapi/core@npm:^1.1.0":
   version: 1.2.0
   resolution: "@emnapi/core@npm:1.2.0"
@@ -685,6 +722,7 @@ __metadata:
     "@nextgis/utils": ^3.0.0-alpha.5
     "@nextgis/webmap": ^3.0.0-alpha.5
     "@types/events": ^3.0.0
+    cesium: 1.121.1
     events: "*"
   peerDependencies:
     cesium: "*"
@@ -2068,6 +2106,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tweenjs/tween.js@npm:^25.0.0":
+  version: 25.0.0
+  resolution: "@tweenjs/tween.js@npm:25.0.0"
+  checksum: 457052e70954dd6f40aa722d3770007c0e000edc10d0ca3d33626848e92adb08b666eb3d6b731eeb4238c1652e704500ed0b0b511f4a5a0a36da9f26cce3f6db
+  languageName: node
+  linkType: hard
+
 "@tybys/wasm-util@npm:^0.9.0":
   version: 0.9.0
   resolution: "@tybys/wasm-util@npm:0.9.0"
@@ -2424,7 +2469,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@zip.js/zip.js@npm:^2.3.12":
+"@zip.js/zip.js@npm:^2.3.12, @zip.js/zip.js@npm:^2.7.34":
   version: 2.7.52
   resolution: "@zip.js/zip.js@npm:2.7.52"
   checksum: aecc9925bfaeb3fc46b2bb91f9de7161dcf87bb72037d22f3628d9609878b3efc4e149d767ad6fb91e19d2f21adb83303c128ba707190a44b823c6e384fecc85
@@ -2763,6 +2808,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"autolinker@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "autolinker@npm:4.0.0"
+  dependencies:
+    tslib: ^2.3.0
+  checksum: d5a1192b321b3527a6cfee777c2714ede05c2a503be1ce223ff8a277152b39dc5c62e663310b57ed69f186c2ba7da52611597a00f215bef268b5b37d7bd38e47
+  languageName: node
+  linkType: hard
+
 "autoprefixer@npm:^10.4.19":
   version: 10.4.20
   resolution: "autoprefixer@npm:10.4.20"
@@ -3055,6 +3109,16 @@ __metadata:
     align-text: ^0.1.3
     lazy-cache: ^1.0.3
   checksum: f3a4e224f0eeb7a9ebc09e6519639acadd8b65942ae33db2b6f38946fcee6320499bd6b980894f7e33fec4f1b66c056d55bb96a9b05a2ca0fde25876e9ee2ab8
+  languageName: node
+  linkType: hard
+
+"cesium@npm:1.121.1":
+  version: 1.121.1
+  resolution: "cesium@npm:1.121.1"
+  dependencies:
+    "@cesium/engine": ^11.0.0
+    "@cesium/widgets": ^8.0.0
+  checksum: 84166f98119a21aecdbd8b9f10fc7f901ca20c6d694e8126d1a7daf8dedd572aef574be32817eeab5d9a10c8066d591383dd9a71409c5851cde7d6fe77d8be79
   languageName: node
   linkType: hard
 
@@ -4086,6 +4150,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dompurify@npm:^3.0.2":
+  version: 3.1.6
+  resolution: "dompurify@npm:3.1.6"
+  checksum: cc4fc4ccd9261fbceb2a1627a985c70af231274a26ddd3f643fd0616a0a44099bd9e4480940ce3655612063be4a1fe9f5e9309967526f8c0a99f931602323866
+  languageName: node
+  linkType: hard
+
 "domutils@npm:^2.8.0":
   version: 2.8.0
   resolution: "domutils@npm:2.8.0"
@@ -4130,6 +4201,13 @@ __metadata:
   version: 16.4.5
   resolution: "dotenv@npm:16.4.5"
   checksum: 301a12c3d44fd49888b74eb9ccf9f07a1f5df43f489e7fcb89647a2edcd84c42d6bc349dc8df099cd18f07c35c7b04685c1a4f3e6a6a9e6b30f8d48c15b7f49c
+  languageName: node
+  linkType: hard
+
+"draco3d@npm:^1.5.1":
+  version: 1.5.7
+  resolution: "draco3d@npm:1.5.7"
+  checksum: 1614b0a0f022e9c182a47578e3bef1098998c47e9946da6d4b32a76a20979f7e49746feed3ce681a0a2a72817000ca58a134af5111bf896c204ab81bd9f0494d
   languageName: node
   linkType: hard
 
@@ -6311,6 +6389,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jsep@npm:^1.3.8":
+  version: 1.3.9
+  resolution: "jsep@npm:1.3.9"
+  checksum: d1f3e2cc00209f67a989b73c2a89d2ccbea908d950ec959e2448c6449b134c6367b47eef4e1292767cb490f0b5b72e7309080b93ee4c7398684df2514dbd33a3
+  languageName: node
+  linkType: hard
+
 "json-buffer@npm:3.0.1":
   version: 3.0.1
   resolution: "json-buffer@npm:3.0.1"
@@ -6442,7 +6527,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"kdbush@npm:^4.0.2":
+"kdbush@npm:^4.0.1, kdbush@npm:^4.0.2":
   version: 4.0.2
   resolution: "kdbush@npm:4.0.2"
   checksum: 6782ef2cdaec9322376b9955a16b0163beda0cefa2f87da76e8970ade2572d8b63bec915347aaeac609484b0c6e84d7b591f229ef353b68b460238095bacde2d
@@ -6478,6 +6563,13 @@ __metadata:
   version: 0.2.2
   resolution: "ktx-parse@npm:0.2.2"
   checksum: cce596097f2eedc897b175c7b56d030e24b5131c5981f969e2aa70b98e4b5f9c5f6f5675d67cc67feb27efe9bf7fa1a394bcc083da9dcb4708e11ac1c20223d0
+  languageName: node
+  linkType: hard
+
+"ktx-parse@npm:^0.7.0":
+  version: 0.7.1
+  resolution: "ktx-parse@npm:0.7.1"
+  checksum: 9ff6782a69f50d2fe441d45b47a6bdce924513152c629a2ff82cf9a3c6b34bf9b02402a6f342d8a814537c7c72619cc5e1508a1b3eb9678e89db5cf6648173d5
   languageName: node
   linkType: hard
 
@@ -7060,6 +7152,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"meshoptimizer@npm:^0.21.0":
+  version: 0.21.0
+  resolution: "meshoptimizer@npm:0.21.0"
+  checksum: fc99f074f8a9ba457472e5e56d2e7ead5786e0000d9fc6dfe321430d51566655cda1abc208d51944e1914214d12349c347222af396e67f28e89e32c2f8c7201c
+  languageName: node
+  linkType: hard
+
 "micromatch@npm:^4.0.4":
   version: 4.0.8
   resolution: "micromatch@npm:4.0.8"
@@ -7491,6 +7590,13 @@ __metadata:
   version: 6.1.0
   resolution: "normalize-url@npm:6.1.0"
   checksum: 4a4944631173e7d521d6b80e4c85ccaeceb2870f315584fa30121f505a6dfd86439c5e3fdd8cd9e0e291290c41d0c3599f0cb12ab356722ed242584c30348e50
+  languageName: node
+  linkType: hard
+
+"nosleep.js@npm:^0.12.0":
+  version: 0.12.0
+  resolution: "nosleep.js@npm:0.12.0"
+  checksum: 1bf5f9aaaed80104285e63e440d1cdecfd8eb759e3e1f3b7d1b74a98cd895654b6e99e6947a2ef528099e077b68cd49d92d96d6ae8a3ea8d244bbac3be81e318
   languageName: node
   linkType: hard
 
@@ -9158,6 +9264,26 @@ __metadata:
     "@types/node": ">=13.7.0"
     long: ^5.0.0
   checksum: 84c12ceef34d190bb0e08c7203a4e066c66b67fa788ac18575b5c45a269a515c3921b13116e12fe55ffe1fd4831ce208481d44231b75dbe0a8730ab4ca51c84b
+  languageName: node
+  linkType: hard
+
+"protobufjs@npm:^7.1.0":
+  version: 7.4.0
+  resolution: "protobufjs@npm:7.4.0"
+  dependencies:
+    "@protobufjs/aspromise": ^1.1.2
+    "@protobufjs/base64": ^1.1.2
+    "@protobufjs/codegen": ^2.0.4
+    "@protobufjs/eventemitter": ^1.1.0
+    "@protobufjs/fetch": ^1.1.0
+    "@protobufjs/float": ^1.0.2
+    "@protobufjs/inquire": ^1.1.0
+    "@protobufjs/path": ^1.1.2
+    "@protobufjs/pool": ^1.1.0
+    "@protobufjs/utf8": ^1.1.0
+    "@types/node": ">=13.7.0"
+    long: ^5.0.0
+  checksum: ba0e6b60541bbf818bb148e90f5eb68bd99004e29a6034ad9895a381cbd352be8dce5376e47ae21b2e05559f2505b4a5f4a3c8fa62402822c6ab4dcdfb89ffb3
   languageName: node
   linkType: hard
 

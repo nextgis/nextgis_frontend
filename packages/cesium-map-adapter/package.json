@@ -20,8 +20,8 @@
     "cesium": "*"
   },
   "devDependencies": {
-    "cesium": "1.121.1",
-    "@nextgis/build-tools": "file:../build-tools"
+    "@nextgis/build-tools": "file:../build-tools",
+    "cesium": "1.121.1"
   },
   "scripts": {
     "clean": "rimraf ./lib",
