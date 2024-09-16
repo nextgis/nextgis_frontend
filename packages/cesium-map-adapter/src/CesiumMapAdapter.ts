@@ -9,7 +9,6 @@ import {
   Ellipsoid,
   Entity,
   GeoJsonDataSource,
-  GridImageryProvider,
   Rectangle,
   SceneMode,
   ScreenSpaceEventType,
@@ -381,8 +380,11 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
     //
   }
 
-  createControl(control: MapControl, options: CreateControlOptions): any {
-    // return
+  async createControl(
+    control: MapControl,
+    options: CreateControlOptions,
+  ): Promise<any> {
+    return control;
   }
 
   createButtonControl(options: ButtonControlOptions): any {
