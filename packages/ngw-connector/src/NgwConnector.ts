@@ -284,7 +284,7 @@ export class NgwConnector {
       }
     };
 
-    if (cache && method === 'GET') {
+    if (method === 'GET') {
       const cacheOptions = cacheProps
         ? cacheProps
         : {
@@ -297,12 +297,10 @@ export class NgwConnector {
             }),
             params,
           };
-      return this.cache.add(
-        cacheName || url,
-        createPromise,
-        cacheOptions,
-        false,
-      );
+      return this.cache.add(cacheName || url, createPromise, {
+        props: cacheOptions,
+        expirationTime: cache ? undefined : 500,
+      });
     }
 
     return createPromise();
