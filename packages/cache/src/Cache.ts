@@ -9,6 +9,7 @@ interface CacheItem<T = any, O = any> {
   key: string;
   value: CacheValue<T>;
   props?: CacheMatchProps<O>;
+  expirationTime?: number; // Новое поле для времени истечения
 }
 
 export interface CacheOptions {
@@ -17,6 +18,13 @@ export interface CacheOptions {
    * @defaultValue 'default'
    */
   namespace?: string;
+}
+
+export interface AddOptions<V, O> {
+  props?: CacheMatchProps<O>;
+  onlyFull?: boolean;
+  /** life time in ms */
+  expirationTime?: number;
 }
 
 /**
@@ -100,17 +108,39 @@ export class Cache<
   addFull(
     key: string,
     valueToSet: CacheValue<V> | (() => CacheValue<V>),
-    props?: CacheMatchProps<O>,
+    propsOrOptions?: CacheMatchProps<O> | AddOptions<V, O>,
+    expirationTime?: number,
   ): CacheValue<V> {
-    return this.add(key, valueToSet, props, true);
+    if (
+      typeof propsOrOptions === 'object' &&
+      'valueToSet' in (propsOrOptions as AddOptions<V, O>)
+    ) {
+      (propsOrOptions as AddOptions<V, O>).onlyFull = true;
+    }
+    return this.add(key, valueToSet, propsOrOptions, true, expirationTime);
   }
 
   add(
     key: string,
     valueToSet: CacheValue<V> | (() => CacheValue<V>),
-    props?: CacheMatchProps<O>,
+    propsOrOptions?: CacheMatchProps<O> | AddOptions<V, O>,
     onlyFull?: boolean,
+    expirationTime?: number,
   ): CacheValue<V> {
+    let opt: AddOptions<V, O>;
+    let props: CacheMatchProps<O> | undefined;
+    if (
+      typeof propsOrOptions === 'object' &&
+      'valueToSet' in (propsOrOptions as AddOptions<V, O>)
+    ) {
+      opt = propsOrOptions as AddOptions<V, O>;
+      onlyFull = opt.onlyFull;
+      expirationTime = opt.expirationTime;
+      props = opt.props;
+    } else {
+      props = propsOrOptions as CacheMatchProps<O>;
+    }
+
     const exist = this._find(key, props);
     if (!exist) {
       let value: CacheValue<V>;
@@ -122,10 +152,13 @@ export class Cache<
       const nonEmptyProps =
         props && JSON.parse(JSON.stringify(objectRemoveEmpty(props)));
 
+      expirationTime = expirationTime ? Date.now() + expirationTime : undefined;
+
       const cacheItem: CacheItem<V, O> = {
         key,
         value,
         props: nonEmptyProps,
+        expirationTime,
       };
       if (onlyFull && !full(value)) {
         return value;
@@ -153,10 +186,24 @@ export class Cache<
 
   match(key: string, props?: CacheMatchProps<O>): CacheValue<V> | undefined {
     const cacheRecord = this._find(key, props);
+    if (
+      cacheRecord &&
+      cacheRecord.expirationTime &&
+      Date.now() > cacheRecord.expirationTime
+    ) {
+      this.delete(cacheRecord);
+      return undefined;
+    }
     return cacheRecord?.value;
   }
 
   matchAll(key?: string, props?: CacheMatchProps<O>): CacheValue<V>[] {
+    const now = Date.now();
+    this.cache.forEach((item) => {
+      if (item.expirationTime && now > item.expirationTime) {
+        this.delete(item);
+      }
+    });
     if (key) {
       return this.cache
         .filter((x) => this._filter(x, key, props))
