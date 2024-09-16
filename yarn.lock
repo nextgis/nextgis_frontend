@@ -592,7 +592,7 @@ __metadata:
 
 "@nextgis/build-tools@file:../build-tools::locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter":
   version: 2.5.0
-  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=afb82b&locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter"
+  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=64a24b&locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter"
   dependencies:
     "@nextgis/eslint-config": ^2.0.2
     "@rollup/plugin-alias": ^5.1.0
@@ -619,13 +619,13 @@ __metadata:
     rollup-plugin-terser: ^7.0.2
     rollup-plugin-typescript2: ^0.36.0
     typescript: ~5.2
-  checksum: ecf18e297539279ac5266e30c43d42b1fb263b45ba473f93f28b217df7d3c80beb22895f80bd69f58c6e4b9629540854e266106010e46e5e7754396c22d32d82
+  checksum: b818d7b34a5836c80150b0936a6f7819aca630d69e2be04ad31661a3419ea026adbe8289a87ebfb7f9c2c256643b6b023f7fc90fa33a4ad69935e2541e643d76
   languageName: node
   linkType: hard
 
 "@nextgis/build-tools@file:../build-tools::locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium":
   version: 2.5.0
-  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=afb82b&locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium"
+  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=64a24b&locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium"
   dependencies:
     "@nextgis/eslint-config": ^2.0.2
     "@rollup/plugin-alias": ^5.1.0
@@ -652,7 +652,7 @@ __metadata:
     rollup-plugin-terser: ^7.0.2
     rollup-plugin-typescript2: ^0.36.0
     typescript: ~5.2
-  checksum: ecf18e297539279ac5266e30c43d42b1fb263b45ba473f93f28b217df7d3c80beb22895f80bd69f58c6e4b9629540854e266106010e46e5e7754396c22d32d82
+  checksum: b818d7b34a5836c80150b0936a6f7819aca630d69e2be04ad31661a3419ea026adbe8289a87ebfb7f9c2c256643b6b023f7fc90fa33a4ad69935e2541e643d76
   languageName: node
   linkType: hard
 
@@ -4276,9 +4276,9 @@ __metadata:
   linkType: hard
 
 "dompurify@npm:^2.2.2":
-  version: 2.4.8
-  resolution: "dompurify@npm:2.4.8"
-  checksum: 70dfe653371f15d639c180314b62a7c79f1f21de848a5fde6d1ad49dd79fb5a102cf19a5b1fb690d3b7cbf72b335d37ed0bfb1a1fab11c8fa5118b6c67deff52
+  version: 2.5.6
+  resolution: "dompurify@npm:2.5.6"
+  checksum: 1d329fe79928aa86c61539b758bdbc53df58dd90bdc5b74032a2a3a22a436e84178d8f6ad8b022c8f6fac46b26d6e7e553c0cd131a37ed5105bbed6bf87be226
   languageName: node
   linkType: hard
 
