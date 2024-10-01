@@ -47,7 +47,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
   > = new EventEmitter();
   protected _extent?: LngLatBoundsArray;
 
-  private response?: ResourceItem;
+  private webmapResource?: WebmapResource;
 
   private _webmapBaselayersIds: string[] = [];
   private _lastActiveBaselayer?: string;
@@ -73,7 +73,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
   async addLayer(options: NgwWebmapAdapterOptions): Promise<any> {
     this.options = { ...this.options, ...options };
     this.layer = await this._getWebMapLayerItem();
-    const extentConstrained = this.response?.webmap?.extent_constrained;
+    const extentConstrained = this.webmapResource?.extent_constrained;
     if (
       this.options.useExtentConstrained &&
       this._extent &&
@@ -107,7 +107,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
     }
 
     delete this.layer;
-    delete this.response;
+    delete this.webmapResource;
   }
 
   async showLayer(): Promise<void> {
@@ -134,7 +134,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
   }
 
   getBounds(): LngLatBoundsArray | undefined {
-    const webmap = this.response && this.response.webmap;
+    const webmap = this.webmapResource;
     if (webmap) {
       return getNgwWebmapExtent(webmap);
     }
@@ -145,7 +145,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
   }
 
   getBookmarksResourceId(): number | undefined {
-    const webmap = this.response && this.response.webmap;
+    const webmap = this.webmapResource;
     if (webmap) {
       return webmap.bookmark_resource.id;
     }
@@ -265,10 +265,10 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
   private async getWebMapConfig(id: number) {
     const data = await this.options.connector.getResource(id);
     if (data) {
-      this.response = data;
       const webmap = data[
         this.webmapClassName as keyof ResourceItem
       ] as WebmapResource;
+      this.webmapResource = webmap;
       this._setupBaselayers(data);
       if (webmap) {
         this._extent = [

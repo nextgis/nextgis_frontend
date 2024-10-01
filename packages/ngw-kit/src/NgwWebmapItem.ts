@@ -186,6 +186,7 @@ export class NgwWebmapItem extends Item<ItemOptions> {
     const transparency = item.item_type === 'layer' && item.layer_transparency;
     const opacity =
       typeof transparency === 'number' ? (100 - transparency) / 100 : undefined;
+
     const options: Partial<ImageAdapterOptions> &
       Pick<VectorAdapterOptions, 'popupOptions'> = {
       visibility: false,
@@ -193,6 +194,7 @@ export class NgwWebmapItem extends Item<ItemOptions> {
       ...this.options,
       params: { resource: this.item.resourceId, item: this.item },
     };
+    delete options.id;
     if (this.options.order) {
       const subOrder =
         this.options.drawOrderEnabled && 'draw_order_position' in item
@@ -212,7 +214,7 @@ export class NgwWebmapItem extends Item<ItemOptions> {
 
       Object.assign(options, {
         updateWmsParams: item.updateWmsParams,
-        ...this.options,
+        ...options,
         url: item.url,
         maxZoom,
         minZoom,
