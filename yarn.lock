@@ -787,8 +787,8 @@ __metadata:
   dependencies:
     "@nextgis/build-tools": ^3.0.0-alpha.5
     "@nextgis/cancelable-promise": ^3.0.0-alpha.5
-    "@nextgis/ngw-connector": ^3.0.0-alpha.7
-    "@nextgis/ngw-kit": ^3.0.0-alpha.7
+    "@nextgis/ngw-connector": ^3.0.0-alpha.8
+    "@nextgis/ngw-kit": ^3.0.0-alpha.8
     "@nextgis/utils": ^3.0.0-alpha.5
     "@types/events": ^3.0.0
     "@types/geojson": ^7946.0.14
@@ -841,7 +841,7 @@ __metadata:
   resolution: "@nextgis/logging@workspace:packages/logging"
   dependencies:
     "@nextgis/build-tools": ^3.0.0-alpha.5
-    "@nextgis/ngw-connector": ^3.0.0-alpha.7
+    "@nextgis/ngw-connector": ^3.0.0-alpha.8
   languageName: unknown
   linkType: soft
 
@@ -874,14 +874,14 @@ __metadata:
   dependencies:
     "@nextgis/build-tools": "file:../build-tools"
     "@nextgis/cesium-map-adapter": ^3.0.0-alpha.7
-    "@nextgis/ngw-map": ^3.0.0-alpha.7
+    "@nextgis/ngw-map": ^3.0.0-alpha.8
     "@types/events": ^3.0.0
     cesium: 1.96.0
     events: "*"
   languageName: unknown
   linkType: soft
 
-"@nextgis/ngw-connector@^3.0.0-alpha.7, @nextgis/ngw-connector@workspace:packages/ngw-connector":
+"@nextgis/ngw-connector@^3.0.0-alpha.8, @nextgis/ngw-connector@workspace:packages/ngw-connector":
   version: 0.0.0-use.local
   resolution: "@nextgis/ngw-connector@workspace:packages/ngw-connector"
   dependencies:
@@ -895,14 +895,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/ngw-kit@^3.0.0-alpha.7, @nextgis/ngw-kit@workspace:packages/ngw-kit":
+"@nextgis/ngw-kit@^3.0.0-alpha.8, @nextgis/ngw-kit@workspace:packages/ngw-kit":
   version: 0.0.0-use.local
   resolution: "@nextgis/ngw-kit@workspace:packages/ngw-kit"
   dependencies:
     "@nextgis/build-tools": ^3.0.0-alpha.5
     "@nextgis/cancelable-promise": ^3.0.0-alpha.5
     "@nextgis/item": ^3.0.0-alpha.5
-    "@nextgis/ngw-connector": ^3.0.0-alpha.7
+    "@nextgis/ngw-connector": ^3.0.0-alpha.8
     "@nextgis/properties-filter": ^3.0.0-alpha.5
     "@nextgis/qms-kit": ^3.0.0-alpha.5
     "@nextgis/utils": ^3.0.0-alpha.5
@@ -919,19 +919,19 @@ __metadata:
   dependencies:
     "@nextgis/build-tools": ^3.0.0-alpha.5
     "@nextgis/leaflet-map-adapter": ^3.0.0-alpha.5
-    "@nextgis/ngw-map": ^3.0.0-alpha.7
+    "@nextgis/ngw-map": ^3.0.0-alpha.8
     leaflet.wms: "*"
   languageName: unknown
   linkType: soft
 
-"@nextgis/ngw-map@^3.0.0-alpha.7, @nextgis/ngw-map@workspace:packages/ngw-map":
+"@nextgis/ngw-map@^3.0.0-alpha.8, @nextgis/ngw-map@workspace:packages/ngw-map":
   version: 0.0.0-use.local
   resolution: "@nextgis/ngw-map@workspace:packages/ngw-map"
   dependencies:
     "@nextgis/build-tools": ^3.0.0-alpha.5
     "@nextgis/icons": ^3.0.0-alpha.5
-    "@nextgis/ngw-connector": ^3.0.0-alpha.7
-    "@nextgis/ngw-kit": ^3.0.0-alpha.7
+    "@nextgis/ngw-connector": ^3.0.0-alpha.8
+    "@nextgis/ngw-kit": ^3.0.0-alpha.8
     "@nextgis/qms-kit": ^3.0.0-alpha.5
     "@nextgis/utils": ^3.0.0-alpha.5
     "@nextgis/webmap": ^3.0.0-alpha.5
@@ -947,7 +947,7 @@ __metadata:
   dependencies:
     "@nextgis/build-tools": ^3.0.0-alpha.5
     "@nextgis/maplibre-gl-map-adapter": ^3.0.0-alpha.5
-    "@nextgis/ngw-map": ^3.0.0-alpha.7
+    "@nextgis/ngw-map": ^3.0.0-alpha.8
   languageName: unknown
   linkType: soft
 
@@ -956,7 +956,7 @@ __metadata:
   resolution: "@nextgis/ngw-ol@workspace:packages/ngw-ol"
   dependencies:
     "@nextgis/build-tools": ^3.0.0-alpha.5
-    "@nextgis/ngw-map": ^3.0.0-alpha.7
+    "@nextgis/ngw-map": ^3.0.0-alpha.8
     "@nextgis/ol-map-adapter": ^3.0.0-alpha.5
     "@types/events": ^3.0.0
     events: "*"
@@ -968,8 +968,8 @@ __metadata:
   resolution: "@nextgis/ngw-orm@workspace:packages/ngw-orm"
   dependencies:
     "@nextgis/build-tools": ^3.0.0-alpha.5
-    "@nextgis/ngw-connector": ^3.0.0-alpha.7
-    "@nextgis/ngw-kit": ^3.0.0-alpha.7
+    "@nextgis/ngw-connector": ^3.0.0-alpha.8
+    "@nextgis/ngw-kit": ^3.0.0-alpha.8
     "@nextgis/utils": ^3.0.0-alpha.5
     "@nextgis/webmap": ^3.0.0-alpha.5
     reflect-metadata: ^0.1.13
@@ -982,14 +982,14 @@ __metadata:
   dependencies:
     "@nextgis/build-tools": ^3.0.0-alpha.5
     "@nextgis/dialog": ^3.0.0-alpha.5
-    "@nextgis/ngw-connector": ^3.0.0-alpha.7
-    "@nextgis/ngw-uploader": ^3.0.0-alpha.7
+    "@nextgis/ngw-connector": ^3.0.0-alpha.8
+    "@nextgis/ngw-uploader": ^3.0.0-alpha.8
     "@types/events": ^3.0.0
     events: "*"
   languageName: unknown
   linkType: soft
 
-"@nextgis/ngw-uploader@^3.0.0-alpha.7, @nextgis/ngw-uploader@workspace:packages/ngw-uploader":
+"@nextgis/ngw-uploader@^3.0.0-alpha.8, @nextgis/ngw-uploader@workspace:packages/ngw-uploader":
   version: 0.0.0-use.local
   resolution: "@nextgis/ngw-uploader@workspace:packages/ngw-uploader"
   dependencies:
@@ -997,7 +997,7 @@ __metadata:
     "@nextgis/cancelable-promise": ^3.0.0-alpha.5
     "@nextgis/dialog": ^3.0.0-alpha.5
     "@nextgis/expression": ^3.0.0-alpha.5
-    "@nextgis/ngw-connector": ^3.0.0-alpha.7
+    "@nextgis/ngw-connector": ^3.0.0-alpha.8
     "@nextgis/utils": ^3.0.0-alpha.5
     "@types/color": ^3.0.2
     "@types/events": ^3.0.0
@@ -1085,16 +1085,16 @@ __metadata:
   dependencies:
     "@nextgis/build-tools": ^3.0.0-alpha.5
     "@nextgis/leaflet-map-adapter": ^3.0.0-alpha.5
-    "@nextgis/react-ngw-map": ^3.0.0-alpha.7
+    "@nextgis/react-ngw-map": ^3.0.0-alpha.8
   languageName: unknown
   linkType: soft
 
-"@nextgis/react-ngw-map@^3.0.0-alpha.7, @nextgis/react-ngw-map@workspace:packages/react-ngw-map":
+"@nextgis/react-ngw-map@^3.0.0-alpha.8, @nextgis/react-ngw-map@workspace:packages/react-ngw-map":
   version: 0.0.0-use.local
   resolution: "@nextgis/react-ngw-map@workspace:packages/react-ngw-map"
   dependencies:
     "@nextgis/build-tools": ^3.0.0-alpha.5
-    "@nextgis/ngw-map": ^3.0.0-alpha.7
+    "@nextgis/ngw-map": ^3.0.0-alpha.8
     "@nextgis/utils": ^3.0.0-alpha.5
     "@types/react": "*"
     "@types/react-dom": "*"
@@ -1110,7 +1110,7 @@ __metadata:
   dependencies:
     "@nextgis/build-tools": ^3.0.0-alpha.5
     "@nextgis/maplibre-gl-map-adapter": ^3.0.0-alpha.5
-    "@nextgis/react-ngw-map": ^3.0.0-alpha.7
+    "@nextgis/react-ngw-map": ^3.0.0-alpha.8
   languageName: unknown
   linkType: soft
 
@@ -1120,7 +1120,7 @@ __metadata:
   dependencies:
     "@nextgis/build-tools": ^3.0.0-alpha.5
     "@nextgis/ol-map-adapter": ^3.0.0-alpha.5
-    "@nextgis/react-ngw-map": ^3.0.0-alpha.7
+    "@nextgis/react-ngw-map": ^3.0.0-alpha.8
   languageName: unknown
   linkType: soft
 
