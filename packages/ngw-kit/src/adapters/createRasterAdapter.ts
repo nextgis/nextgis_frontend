@@ -25,7 +25,7 @@ export type LegendSymbols = {
   [symbolIndex: number]: boolean | null;
 };
 
-class Legend implements LayerLegend {
+export class Legend implements LayerLegend {
   layerId: string;
   legend: LegendItem[];
 

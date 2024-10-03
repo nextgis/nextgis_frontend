@@ -45,4 +45,5 @@ export interface LegendItemSymbol {
 export interface LayerLegend {
   layerId: string;
   legend: LegendItem[];
+  setSymbolRender?: (symbolIndex: number, status: boolean) => void;
 }
