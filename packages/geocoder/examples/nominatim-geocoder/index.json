@@ -1,0 +1,4 @@
+{
+  "name": "Geocoding using Nominatim",
+  "description": "Perform geocoding using Nominatim API to retrieve location information and show a list of unique values based on the specified address fields."
+}
