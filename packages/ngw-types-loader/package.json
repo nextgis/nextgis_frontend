@@ -1,0 +1,35 @@
+{
+  "name": "@nextgis/ngw-types-loader",
+  "version": "3.0.0-alpha.9",
+  "description": "NGW TypeScript Declaration Loader",
+  "type": "module",
+  "main": "lib/cjs/index.cjs",
+  "module": "lib/esm/index.js",
+  "exports": {
+    ".": {
+      "require": "./lib/cjs/index.cjs",
+      "import": "./lib/esm/index.js"
+    }
+  },
+  "scripts": {
+    "clean": "rimraf lib",
+    "build:cjs": "tsc --project tsconfig.cjs.json",
+    "build:esm": "tsc --project tsconfig.esm.json",
+    "build": "npm run clean && npm run build:cjs && npm run build:esm",
+    "test": "echo \"No tests yet\""
+  },
+  "bin": {
+    "ngw-types-loader": "lib/cjs/index.cjs"
+  },
+  "files": [
+    "lib"
+  ],
+  "dependencies": {
+    "chalk": "^5.3.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "rimraf": "^6.0.0"
+  },
+  "license": "MIT"
+}
