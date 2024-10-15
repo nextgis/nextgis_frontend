@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/cache",
-  "version": "3.0.0-alpha.7",
+  "version": "3.0.0-alpha.12",
   "description": "Caching for asynchronous functions",
   "main": "index.js",
   "module": "lib/cache.esm-bundler.js",

@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.12](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.9...v3.0.0-alpha.12) (2024-10-15)
+
+
+### Bug Fixes
+
+* **ngw-connector:** reexport errors as static ([360ffe4](https://github.com/nextgis/nextgis_frontend/commit/360ffe43150b3474f38aebd51ff80ba341eaa055))
+
+
+### Features
+
+* **ngw-map:** add fitResource method ([4b90894](https://github.com/nextgis/nextgis_frontend/commit/4b90894ca4a88e761781c42fbc72615c888c3dd7))
+* **ngw-types-loader:** add new library for load ngw types ([38a90f4](https://github.com/nextgis/nextgis_frontend/commit/38a90f40cd4b7019e8401c29ef70ad7c1bff51e7))
+* rewrite to route requests and ngw tsgen api ([49e4584](https://github.com/nextgis/nextgis_frontend/commit/49e45849eac580ffba9158c181dbcdd550115d79))
+* **webmap:** load map before execute set cursor ([5ba1a33](https://github.com/nextgis/nextgis_frontend/commit/5ba1a3309ccd9e47a7153cbe0a40a2c4c2c4e559))
+
+
+
+
+
 # [3.0.0-alpha.9](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.8...v3.0.0-alpha.9) (2024-10-03)
 
 

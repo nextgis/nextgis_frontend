@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/ngw-types-loader",
-  "version": "3.0.0-alpha.11",
+  "version": "3.0.0-alpha.12",
   "description": "NGW TypeScript Declaration Loader",
   "type": "module",
   "main": "lib/index.cjs",

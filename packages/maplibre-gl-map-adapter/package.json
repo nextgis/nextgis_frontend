@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/maplibre-gl-map-adapter",
-  "version": "3.0.0-alpha.5",
+  "version": "3.0.0-alpha.12",
   "_priority": 16,
   "description": "Webmap adapter to use Maplibre GL JS GIS framework.",
   "main": "lib/maplibre-gl-map-adapter.global.prod.js",
@@ -11,7 +11,7 @@
   "dependencies": {
     "@nextgis/paint": "^3.0.0-alpha.5",
     "@nextgis/properties-filter": "^3.0.0-alpha.5",
-    "@nextgis/webmap": "^3.0.0-alpha.5",
+    "@nextgis/webmap": "^3.0.0-alpha.12",
     "@types/events": "^3.0.3",
     "@types/geojson": "^7946.0.14",
     "@types/polylabel": "^1.1.3",

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.12](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.9...v3.0.0-alpha.12) (2024-10-15)
+
+
+### Features
+
+* rewrite to route requests and ngw tsgen api ([49e4584](https://github.com/nextgis/nextgis_frontend/commit/49e45849eac580ffba9158c181dbcdd550115d79))
+* **webmap:** load map before execute set cursor ([5ba1a33](https://github.com/nextgis/nextgis_frontend/commit/5ba1a3309ccd9e47a7153cbe0a40a2c4c2c4e559))
+
+
+
+
+
 # [3.0.0-alpha.5](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.4...v3.0.0-alpha.5) (2024-09-12)
 
 **Note:** Version bump only for package @nextgis/webmap
