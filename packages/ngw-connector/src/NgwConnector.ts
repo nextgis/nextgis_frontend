@@ -11,10 +11,9 @@ import {
   findConnector,
   removeConnector,
 } from './activeConnectors';
+import * as errors from './errors';
 import { AbortError } from './errors/AbortError';
 import { InsufficientPermissionsError } from './errors/InsufficientPermissionsError';
-import { NgwError } from './errors/NgwError';
-import { ResourceNotFoundError } from './errors/ResourceNotFoundError';
 import { route } from './route/route';
 import { loadData } from './utils/loadData';
 import { template } from './utils/template';
@@ -35,10 +34,7 @@ let ID = 0;
 let REQUEST_ID = 0;
 
 export class NgwConnector {
-  static errors = {
-    NgwError,
-    ResourceNotFoundError,
-  };
+  static errors = errors;
   id = ID++;
   emitter = new EventEmitter();
   user?: UserInfo;
@@ -374,9 +370,9 @@ export class NgwConnector {
 
   private _handleHttpError(er: Error) {
     if (er) {
-      if (er instanceof NgwError) {
+      if (er instanceof errors.NgwError) {
         if (er.exception === 'nextgisweb.resource.exception.ResourceNotFound') {
-          throw new ResourceNotFoundError(er);
+          throw new errors.ResourceNotFoundError(er);
         } else if (
           er.exception === 'nextgisweb.core.exception.InsufficientPermissions'
         ) {

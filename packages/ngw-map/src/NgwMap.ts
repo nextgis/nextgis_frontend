@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events';
 
 import { getIcon } from '@nextgis/icons';
-import { AbortError } from '@nextgis/ngw-connector';
+import NgwConnector from '@nextgis/ngw-connector';
 import {
   createIdentifyItem,
   createNgwLayerAdapter,
@@ -34,7 +34,6 @@ import type {
   NgwMapEvents,
   NgwMapOptions,
 } from './interfaces';
-import type NgwConnector from '@nextgis/ngw-connector';
 import type {
   FeatureItem,
   FeatureLayersIdentify,
@@ -327,7 +326,7 @@ export class NgwMap<
 
     if (signal) {
       if (signal.aborted) {
-        return Promise.reject(new AbortError());
+        return Promise.reject(new NgwConnector.errors.AbortError());
       }
       signal.addEventListener('abort', () => {
         abortController.abort('AbortError');
