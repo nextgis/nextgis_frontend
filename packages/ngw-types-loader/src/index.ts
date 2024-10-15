@@ -5,12 +5,53 @@ import * as https from 'https';
 import * as path from 'path';
 import * as readline from 'readline';
 
-import chalk from 'chalk';
+// ANSI escape codes for colors
+const colors = {
+  reset: '\x1b[0m',
+  bright: '\x1b[1m',
+  dim: '\x1b[2m',
+  underscore: '\x1b[4m',
+  blink: '\x1b[5m',
+  reverse: '\x1b[7m',
+  hidden: '\x1b[8m',
+
+  fg: {
+    black: '\x1b[30m',
+    red: '\x1b[31m',
+    green: '\x1b[32m',
+    yellow: '\x1b[33m',
+    blue: '\x1b[34m',
+    magenta: '\x1b[35m',
+    cyan: '\x1b[36m',
+    white: '\x1b[37m',
+    crimson: '\x1b[38m', // Scarlet
+  },
+  bg: {
+    black: '\x1b[40m',
+    red: '\x1b[41m',
+    green: '\x1b[42m',
+    yellow: '\x1b[43m',
+    blue: '\x1b[44m',
+    magenta: '\x1b[45m',
+    cyan: '\x1b[46m',
+    white: '\x1b[47m',
+    crimson: '\x1b[48m',
+  },
+};
 
 const DEFAULT_DOMAIN = 'https://demo.nextgis.com';
 const API_PATH = '/api/component/pyramid/codegen/api_type';
 const DECLARATION_FILE_NAME = 'nextgisweb.d.ts';
 const TSCONFIG_PATH = 'tsconfig.json';
+
+// Function to display manual include instructions
+function promptManualInclude(relativeDeclarationPath: string) {
+  console.log(
+    colors.fg.yellow +
+      'Please manually add the following line to your tsconfig.json "include" section:',
+  );
+  console.log(colors.bright + `"${relativeDeclarationPath}"` + colors.reset);
+}
 
 // Function to download the TypeScript declaration file
 function downloadDeclarationFile(domain: string = DEFAULT_DOMAIN) {
@@ -21,9 +62,8 @@ function downloadDeclarationFile(domain: string = DEFAULT_DOMAIN) {
   );
 
   console.log(
-    chalk.blue(
-      `Downloading TypeScript declaration file from ${chalk.bold(url)}...`,
-    ),
+    colors.fg.blue +
+      `Downloading TypeScript declaration file from ${colors.bright}${url}${colors.reset}...`,
   );
 
   // Create a write stream to save the downloaded file
@@ -36,9 +76,8 @@ function downloadDeclarationFile(domain: string = DEFAULT_DOMAIN) {
       file.on('finish', () => {
         file.close();
         console.log(
-          chalk.green(
-            `The file ${chalk.bold(fullDeclarationPath)} has been successfully downloaded.`,
-          ),
+          colors.fg.green +
+            `The file ${colors.bright}${fullDeclarationPath}${colors.reset} has been successfully downloaded.`,
         );
         promptTsConfigUpdate();
       });
@@ -46,12 +85,13 @@ function downloadDeclarationFile(domain: string = DEFAULT_DOMAIN) {
     .on('error', (err) => {
       fs.unlinkSync(fullDeclarationPath);
       console.error(
-        chalk.red(`Error downloading the declaration file: ${err.message}`),
+        colors.fg.red +
+          `Error downloading the declaration file: ${err.message}` +
+          colors.reset,
       );
     });
 }
 
-// Function to update tsconfig.json with the relative path to the declaration file
 function updateTsConfig() {
   const fullTsConfigPath = path.resolve(process.cwd(), TSCONFIG_PATH);
   const fullDeclarationPath = path.resolve(
@@ -67,34 +107,43 @@ function updateTsConfig() {
 
   if (!fs.existsSync(fullTsConfigPath)) {
     console.warn(
-      chalk.yellow(
-        `tsconfig.json not found at ${chalk.bold(fullTsConfigPath)}. Please manually add the declaration file to your tsconfig.json.`,
-      ),
+      colors.fg.yellow +
+        `tsconfig.json not found at ${colors.bright}${fullTsConfigPath}${colors.reset}. Please manually add the declaration file to your tsconfig.json.`,
     );
     return;
   }
 
-  const tsconfig = JSON.parse(fs.readFileSync(fullTsConfigPath, 'utf-8'));
+  const tsconfigContent = fs.readFileSync(fullTsConfigPath, 'utf-8');
 
-  if (!tsconfig.include) {
-    tsconfig.include = [];
-  }
+  try {
+    const tsconfig = JSON.parse(tsconfigContent);
 
-  // Add the relative path to the declaration file
-  if (!tsconfig.include.includes(relativeDeclarationPath)) {
-    tsconfig.include.push(relativeDeclarationPath);
-    fs.writeFileSync(fullTsConfigPath, JSON.stringify(tsconfig, null, 2));
-    console.log(
-      chalk.green(
-        `The relative path to the declaration file has been added to tsconfig.json: ${chalk.bold(relativeDeclarationPath)}`,
-      ),
+    if (!tsconfig.include) {
+      tsconfig.include = [];
+    }
+
+    // Add the relative path to the declaration file
+    if (!tsconfig.include.includes(relativeDeclarationPath)) {
+      tsconfig.include.push(relativeDeclarationPath);
+      fs.writeFileSync(fullTsConfigPath, JSON.stringify(tsconfig, null, 2));
+      console.log(
+        colors.fg.green +
+          `The relative path to the declaration file has been added to tsconfig.json: ${colors.bright}${relativeDeclarationPath}${colors.reset}`,
+      );
+    } else {
+      console.log(
+        colors.fg.yellow +
+          `The declaration file path already exists in tsconfig.json.` +
+          colors.reset,
+      );
+    }
+  } catch (error) {
+    console.error(
+      colors.fg.red +
+        `Error parsing tsconfig.json: ${(error as Error).message}` +
+        colors.reset,
     );
-  } else {
-    console.log(
-      chalk.yellow(
-        `The declaration file path already exists in tsconfig.json.`,
-      ),
-    );
+    promptManualInclude(relativeDeclarationPath);
   }
 }
 
@@ -106,9 +155,9 @@ function promptTsConfigUpdate() {
   });
 
   rl.question(
-    chalk.cyan(
-      'Would you like to update tsconfig.json to include the declaration file? (yes/no) ',
-    ),
+    colors.fg.cyan +
+      'Would you like to update tsconfig.json to include the declaration file? (yes/no) ' +
+      colors.reset,
     (answer) => {
       if (answer.toLowerCase() === 'yes' || answer.toLowerCase() === 'y') {
         updateTsConfig();
@@ -122,12 +171,7 @@ function promptTsConfigUpdate() {
           path.dirname(fullTsConfigPath),
           fullDeclarationPath,
         );
-        console.log(
-          chalk.yellow(
-            'Please manually add the following line to your tsconfig.json "include" section:',
-          ),
-        );
-        console.log(chalk.bold(`"${relativeDeclarationPath}"`));
+        promptManualInclude(relativeDeclarationPath);
       }
       rl.close();
     },
@@ -142,13 +186,13 @@ function run() {
 
   if (fs.existsSync(fullTsConfigPath)) {
     console.log(
-      chalk.green(`Found tsconfig.json at ${chalk.bold(fullTsConfigPath)}.`),
+      colors.fg.green +
+        `Found tsconfig.json at ${colors.bright}${fullTsConfigPath}${colors.reset}.`,
     );
   } else {
     console.warn(
-      chalk.yellow(
-        `tsconfig.json not found at ${chalk.bold(fullTsConfigPath)}. You will need to manually add the declaration file.`,
-      ),
+      colors.fg.yellow +
+        `tsconfig.json not found at ${colors.bright}${fullTsConfigPath}${colors.reset}. You will need to manually add the declaration file.`,
     );
   }
 
