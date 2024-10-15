@@ -39,6 +39,7 @@ import type {
   FeatureLayersIdentify,
   FeatureLayersIdentifyItems,
   LayerFeature,
+  ResourceDefinition,
   ResourceItem,
 } from '@nextgis/ngw-connector';
 import type {
@@ -418,6 +419,7 @@ export class NgwMap<
               this.fitBounds(extent, options);
             }
           });
+          this.fitResource(item.resource.id);
         }
       }
     } else {
@@ -425,6 +427,22 @@ export class NgwMap<
         typeof layerDef === 'number' ? String(layerDef) : layerDef,
         options,
       );
+    }
+  }
+
+  async fitResource(
+    resource: ResourceDefinition,
+    options?: FitOptions,
+  ): Promise<void> {
+    const resourceId = await this.connector.resources.getIdOrFail(resource);
+
+    const extent = await fetchNgwExtent({
+      resourceId,
+      connector: this.connector,
+    });
+
+    if (extent) {
+      this.fitBounds(extent, options);
     }
   }
 
