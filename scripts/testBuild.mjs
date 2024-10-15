@@ -7,13 +7,15 @@ export default function checkBuild() {
   const libs = findPackages();
   const notValid = {};
   libs.forEach((x) => {
-    const errors = checkLib(x);
-    errors.forEach((er) => {
-      if (er) {
-        notValid[x.name] = notValid[x.name] || [];
-        notValid[x.name].push(er);
-      }
-    });
+    if (x.buildOptions) {
+      const errors = checkLib(x);
+      errors.forEach((er) => {
+        if (er) {
+          notValid[x.name] = notValid[x.name] || [];
+          notValid[x.name].push(er);
+        }
+      });
+    }
   });
   return notValid;
 }
