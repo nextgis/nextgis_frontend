@@ -212,9 +212,11 @@ export class WebMapMain<
    * @param cursor - Available cursor name from https://developer.mozilla.org/ru/docs/Web/CSS/cursor
    */
   setCursor(cursor: Cursor): void {
-    if (this.mapAdapter.setCursor) {
-      this.mapAdapter.setCursor(cursor);
-    }
+    this.onLoad().then(() => {
+      if (this.mapAdapter.setCursor) {
+        this.mapAdapter.setCursor(cursor);
+      }
+    });
   }
 
   getCursor(): Cursor | undefined {
