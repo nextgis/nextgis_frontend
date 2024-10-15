@@ -317,7 +317,7 @@ export class WebMapLayers<
         }
       }
       const opacity = options.opacity;
-      if (opacity !== undefined && opacity <= 1) {
+      if (opacity !== undefined && opacity !== null && opacity <= 1) {
         this.setLayerOpacity(_adapter, opacity);
       }
       // TODO: remove backward compatibility for `getExtent`

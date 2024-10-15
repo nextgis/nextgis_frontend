@@ -1,5 +1,6 @@
 {
   "name": "Web map feature identification",
-  "description": "Highlight and identify features on a Web map",
-  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"]
+  "description": "Identify and highlight multiple features on a Web map. A panel on the side allows users to view details of each identified feature and switch between them. Click on the map to trigger identification and display details in the panel.",
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"],
+  "tags": ["identify", "highlight", "web map", "feature", "panel", "click"]
 }

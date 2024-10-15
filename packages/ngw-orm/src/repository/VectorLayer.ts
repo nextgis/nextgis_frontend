@@ -10,6 +10,7 @@ import { fetchNgwLayerItem, fetchNgwLayerItems } from '@nextgis/ngw-kit';
 // import { FindConditions } from '../find-options/FindConditions';
 // import { FindManyOptions } from '../find-options/FindManyOptions';
 // import { FindOneOptions } from '../find-options/FindOneOptions';
+
 import { Column, getMetadataArgsStorage } from '..';
 import { CannotExecuteNotConnectedError } from '../error/CannotExecuteNotConnectedError';
 import {
@@ -34,15 +35,12 @@ import type {
 import type { VectorResourceSyncItem } from '../sync-items/VectorResourceSyncItem';
 import type { VectorResourceUpdateItem } from '../sync-items/VectorResourceUpdateItem';
 import type { ValidateErrorType } from '../types/ValidateErrorType';
-import type {
-  FeatureLayerField,
-  GeometryType,
-  VectorLayerResourceItem,
-} from '@nextgis/ngw-connector';
+import type { FeatureLayerField, GeometryType } from '@nextgis/ngw-connector';
 import type { GetNgwItemsOptions } from '@nextgis/ngw-kit';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type { DeepPartial } from '@nextgis/utils';
 import type { FilterOptions } from '@nextgis/webmap';
+import type { CompositeRead } from '@nextgisweb/resource/type/api';
 import type {
   Feature,
   GeoJsonProperties,
@@ -119,11 +117,16 @@ export class VectorLayer<
     return toTypescript(this, opt);
   }
 
-  static receive(item: VectorLayerResourceItem): typeof VectorLayer {
+  static receive(item: CompositeRead): typeof VectorLayer {
     const ReceivedResource = BaseResource.receive(
       item,
       this,
     ) as typeof VectorLayer;
+
+    if (!item.vector_layer || !item.feature_layer) {
+      throw new Error('Resource is not a vector layer');
+    }
+
     ReceivedResource.geometryType = item.vector_layer.geometry_type;
     item.feature_layer.fields.forEach((x) => {
       const prop = Object.defineProperty(
@@ -351,13 +354,11 @@ export class VectorLayer<
       throw new CannotExecuteNotConnectedError();
     }
     if (!optionsOrConditions) {
-      const count = await connection.driver.get(
-        'feature_layer.feature.count',
-        null,
-        {
+      const count = await connection.driver
+        .route('feature_layer.feature.count', {
           id: Resource.item.resource.id,
-        },
-      );
+        })
+        .get();
       return count.total_count;
     } else {
       const find = await Resource.find<T>(optionsOrConditions);
@@ -451,6 +452,7 @@ export class VectorLayer<
       connector,
       resourceId: Resource.item.resource.id,
     };
+
     if (typeof optionsOrConditions === 'number') {
       const item = await fetchNgwLayerItem({
         ...options,

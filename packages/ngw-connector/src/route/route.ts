@@ -4,11 +4,11 @@ import { generateUrl, request } from './request';
 
 import type {
   RequestMethod,
-  RequestOptions,
   ResponseType,
   RouteName,
   RouteParameters,
   RouteQuery,
+  RouteRequestOptions,
   RouteResp,
   RouteResults,
   ToReturn,
@@ -61,7 +61,7 @@ export function route<N extends RouteName>(
   const result = {
     url: async (
       opt?: Pick<
-        RequestOptions<ResponseType, false, RouteQuery<N, 'get'>>,
+        RouteRequestOptions<ResponseType, false, RouteQuery<N, 'get'>>,
         'query'
       >,
     ) => {
@@ -82,7 +82,11 @@ export function route<N extends RouteName>(
       RT extends ResponseType = 'json',
       RU extends boolean = false,
     >(
-      requestOptions?: RequestOptions<RT, RU, RouteQuery<N, typeof method>>,
+      requestOptions?: RouteRequestOptions<
+        RT,
+        RU,
+        RouteQuery<N, typeof method>
+      >,
     ): Promise<ToReturn<T, RT, RU>> => {
       const { headers: optHeaders, ...restOpt } = requestOptions || {};
       const routeData = await connector.connect();

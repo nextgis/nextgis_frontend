@@ -5,7 +5,9 @@
     <title>NGW WMS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-      html, body, #map {
+      html,
+      body,
+      #map {
         margin: 0;
         padding: 0;
         width: 100%;
@@ -17,13 +19,19 @@
   <body>
     <div id="map"></div>
     <script>
-      const ngwMap = new NgwMap({
+      NgwMap.create({
         baseUrl: 'https://demo.nextgis.com',
         target: 'map',
-        bounds: [109.152, 52.382, 109.415, 52.543],
+        osm: true,
         resources: [
-          { resource: 4817, adapterOptions: { layers: 'S2A_20190520_RGB' } },
+          {
+            resource: 7264,
+            adapterOptions: { layers: ['sat_geotiff_z14_example_en'] },
+          },
         ],
+      }).then((ngwMap) => {
+        // Resource used to form WMS layer
+        ngwMap.fitResource(6056);
       });
     </script>
   </body>

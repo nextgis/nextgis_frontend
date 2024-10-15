@@ -2,7 +2,7 @@ import { createGeoJsonFeature } from './utils/featureLayerUtils';
 import { fetchNgwLayerItem } from './utils/fetchNgwLayerItem';
 
 import type NgwConnector from '@nextgis/ngw-connector';
-import type { FeatureItem, RequestOptions } from '@nextgis/ngw-connector';
+import type { FeatureItem, GetRequestOptions } from '@nextgis/ngw-connector';
 import type { LngLatBoundsArray } from '@nextgis/utils';
 import type { Feature, Point } from 'geojson';
 
@@ -31,15 +31,16 @@ export class BookmarkItem {
     }
   }
 
-  extent(opt?: RequestOptions<'GET'>): Promise<LngLatBoundsArray> {
+  extent(opt?: GetRequestOptions): Promise<LngLatBoundsArray> {
     if (this._extent) {
       return Promise.resolve(this._extent);
     }
     return this.options.connector
-      .get('feature_layer.feature.item_extent', opt, {
+      .route('feature_layer.feature.item_extent', {
         id: this.resourceId,
         fid: this.item.id,
       })
+      .get(opt)
       .then((resp) => {
         const { minLat, minLon, maxLat, maxLon } = resp.extent;
         const lonLat = [minLon, minLat, maxLon, maxLat];
@@ -49,7 +50,7 @@ export class BookmarkItem {
   }
 
   geoJson(
-    opt?: Pick<RequestOptions<'GET'>, 'cache' | 'signal'>,
+    opt?: Pick<GetRequestOptions, 'cache' | 'signal'>,
   ): Promise<Feature<Point, any>> {
     if (this.item.geom) {
       return Promise.resolve(createGeoJsonFeature(this.item));

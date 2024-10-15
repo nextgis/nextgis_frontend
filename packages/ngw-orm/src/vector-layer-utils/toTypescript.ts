@@ -7,11 +7,8 @@ import type {
   ToTypescriptOptions,
 } from '../options/ToTypescriptOptions';
 import type { VectorLayer } from '../repository/VectorLayer';
-import type {
-  GeometryType,
-  VectorFieldDatatype,
-  VectorLayerResourceItem,
-} from '@nextgis/ngw-connector';
+import type { GeometryType, VectorFieldDatatype } from '@nextgis/ngw-connector';
+import type { CompositeRead } from '@nextgisweb/resource/type/api';
 
 const dataTypeAlias: Record<VectorFieldDatatype, string> = {
   STRING: 'string',
@@ -34,7 +31,7 @@ export function toTypescript(
   Resource: typeof VectorLayer,
   opt: ToTypescriptOptions = {},
 ): ToTypescript {
-  const item = Resource.item as VectorLayerResourceItem;
+  const item = Resource.item as CompositeRead;
   if (!item) {
     throw new CannotExecuteNotConnectedError();
   }
@@ -71,6 +68,10 @@ export function toTypescript(
   ts.push(
     `export default class ${name ? name + ' ' : ''}extends VectorLayer {`,
   );
+
+  if (!item.feature_layer) {
+    throw new Error('Resource is not a vector layer');
+  }
 
   item.feature_layer.fields.forEach((x, i) => {
     const columnStr = [`  @Column({`];

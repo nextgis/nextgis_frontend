@@ -1,5 +1,6 @@
 {
-  "name": "Web map feature highlighting",
-  "description": "Highlight first Web map feature on mouse click",
-  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"]
+  "name": "WebMap feature highlighting",
+  "description": "This example demonstrates how to highlight the first feature from a web map layer upon clicking. Each new click removes the current highlight and stops any pending identification requests to ensure a seamless experience.",
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"],
+  "tags": ["highlight", "feature", "click", "identify", "geojson"]
 }

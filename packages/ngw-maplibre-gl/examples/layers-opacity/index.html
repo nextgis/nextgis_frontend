@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Layers opacity</title>
+    <title>Layers Opacity</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
       html, body, #map {
@@ -26,19 +26,10 @@
         target: 'map',
         osm: true,
         resources: [
-          4116,
-          { resource: 4114, fit: true, adapterOptions: { opacity: 0.3 } },
+          { resource: 7160, fit: true, adapterOptions: { opacity: 0.5 } },
           {
-            resource: 4112,
-            fit: true,
+            resource: 7152,
             adapterOptions: { paint: { color: 'orange' } },
-          },
-          {
-            resource: 4110,
-            adapterOptions: {
-              opacity: 0.3,
-              paint: { color: 'red', fillOpacity: 0.1, weight: 3 },
-            },
           },
         ],
       }).then((ngwMap) => {
@@ -81,7 +72,8 @@
           slider.value =
             layer.options.opacity !== undefined ? layer.options.opacity : 1;
 
-          slider.onchange = () => {
+          // Set opacity dynamically during slider movement
+          slider.oninput = () => {
             ngwMap.setLayerOpacity(layer, slider.value);
           };
           wrapper.appendChild(slider);

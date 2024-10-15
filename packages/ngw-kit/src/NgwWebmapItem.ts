@@ -6,7 +6,7 @@ import { treeSome } from '@nextgis/tree';
 import { WebmapLayerOpacityPropertyHandler } from './utils/WebmapLayerOpacityPropertyHandler';
 import { setScaleRatio } from './utils/utils';
 
-import type { TreeGroup, TreeItem, TreeLayer } from './interfaces';
+import type { TreeGroup, TreeItem, TreeLayer, TreeRoot } from './interfaces';
 import type { ItemOptions } from '@nextgis/item';
 import type { LayerLegend } from '@nextgis/ngw-connector';
 import type NgwConnector from '@nextgis/ngw-connector';
@@ -40,7 +40,7 @@ export class NgwWebmapItem extends Item<ItemOptions> {
               item.item.item_type === 'group' ||
               item.item.item_type === 'root'
             ) {
-              return treeSome<TreeGroup | TreeLayer>(
+              return treeSome<TreeGroup | TreeLayer | TreeRoot>(
                 item.item,
                 (i) => ('layer_enabled' in i ? i.layer_enabled : false),
                 (i) => (i as TreeGroup).children,
@@ -78,7 +78,7 @@ export class NgwWebmapItem extends Item<ItemOptions> {
     ],
   };
 
-  item: TreeGroup | TreeLayer;
+  item: TreeGroup | TreeLayer | TreeRoot;
   connector?: NgwConnector;
   layer?: LayerAdapter;
   readonly emitter = new EventEmitter();
@@ -87,7 +87,7 @@ export class NgwWebmapItem extends Item<ItemOptions> {
 
   constructor(
     public webMap: WebMap,
-    item: TreeGroup | TreeLayer,
+    item: TreeGroup | TreeLayer | TreeRoot,
     options?: ItemOptions,
     connector?: NgwConnector,
     parent?: NgwWebmapItem,
@@ -134,7 +134,7 @@ export class NgwWebmapItem extends Item<ItemOptions> {
     return ngwWebmapItem;
   }
 
-  initItem(item: TreeGroup | TreeLayer): Promise<void> {
+  initItem(item: TreeGroup | TreeLayer | TreeRoot): Promise<void> {
     if (item.item_type === 'group' || item.item_type === 'root') {
       return this.initGroupItem(item as TreeGroup);
     } else {
@@ -160,11 +160,12 @@ export class NgwWebmapItem extends Item<ItemOptions> {
     const id = this.layer?.id;
     if (id !== undefined) {
       const connector = this.connector;
-      if (connector) {
-        const ngwLegend = await connector.get('render.legend_symbols', {
-          params: { id: this.item.resourceId },
-          ...options,
-        });
+      if (connector && 'resourceId' in this.item) {
+        const ngwLegend = await connector
+          .route('render.legend_symbols', { id: Number(this.item.resourceId) })
+          .get({
+            ...options,
+          });
         const legend: LayerLegend = {
           layerId: id,
           legend: ngwLegend.map((legend) => ({
@@ -192,12 +193,18 @@ export class NgwWebmapItem extends Item<ItemOptions> {
       visibility: false,
       name: item.display_name,
       ...this.options,
-      params: { resource: this.item.resourceId, item: this.item },
+      params: {
+        resource: 'resourceId' in this.item ? this.item.resourceId : undefined,
+        item: this.item,
+      },
     };
     delete options.id;
     if (this.options.order) {
       const subOrder =
-        this.options.drawOrderEnabled && 'draw_order_position' in item
+        this.options.drawOrderEnabled &&
+        'draw_order_position' in item &&
+        item.draw_order_position !== undefined &&
+        item.draw_order_position !== null
           ? this._rootDescendantsCount - item.draw_order_position
           : this.id;
 
@@ -264,7 +271,7 @@ export class NgwWebmapItem extends Item<ItemOptions> {
         this.properties.set('visibility', true);
       }
 
-      if (options.opacity !== undefined) {
+      if (options.opacity !== undefined && options.opacity !== null) {
         this.webMap.setLayerOpacity(l, options.opacity);
       }
     };
@@ -308,7 +315,7 @@ export class NgwWebmapItem extends Item<ItemOptions> {
     return { minZoom, maxZoom };
   }
 
-  private _init(item: TreeGroup | TreeLayer) {
+  private _init(item: TreeGroup | TreeLayer | TreeRoot) {
     this.initItem(item).then(() => {
       this.emitter.emit('init');
     });

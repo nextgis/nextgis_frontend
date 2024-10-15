@@ -5,12 +5,12 @@ import type {
   GeometryType,
   NgwConnectorOptions,
   Resmeta,
-  ResourceCls,
   WmsClientConnection,
   WmsClientLayer,
   WmsServerServiceLayer,
 } from '@nextgis/ngw-connector';
 import type { GeometryPaint } from '@nextgis/paint';
+import type { ResourceCls } from '@nextgisweb/resource/type/api';
 
 export type ImageTypes = 'image/tif' | 'image/tiff' | '.tif';
 

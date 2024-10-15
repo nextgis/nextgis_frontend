@@ -611,6 +611,7 @@ export abstract class VectorAdapter<
                 let prop = pathPaint[p];
                 if (
                   opacity !== undefined &&
+                  opacity !== null &&
                   paramName.indexOf('opacity') !== -1
                 ) {
                   prop = Number(prop) * opacity;

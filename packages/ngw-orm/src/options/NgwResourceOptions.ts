@@ -1,4 +1,4 @@
-import type { ResourceCls } from '@nextgis/ngw-connector';
+import type { ResourceCls } from '@nextgisweb/resource/type/api';
 
 /**
  * Describes all resource's options.

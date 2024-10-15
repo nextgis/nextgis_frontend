@@ -12,8 +12,8 @@ import {
 import type { ServerResponseErrorData } from './error';
 import type {
   LunkwillData,
-  RequestOptions,
   ResponseType,
+  RouteRequestOptions,
   ToReturn,
 } from './type';
 import type Cache from '@nextgis/cache';
@@ -158,10 +158,10 @@ export async function request<
   ReturnUrl extends boolean = false,
 >(
   path: string,
-  options?: RequestOptions<RT, ReturnUrl>,
+  options?: RouteRequestOptions<RT, ReturnUrl>,
   cacheEngine?: Cache<Promise<ToReturn<T, RT, ReturnUrl>>>,
 ): Promise<ToReturn<T, RT, ReturnUrl>> {
-  const defaults: RequestOptions<RT, ReturnUrl> = {
+  const defaults: RouteRequestOptions<RT, ReturnUrl> = {
     method: 'GET',
     credentials: 'same-origin',
     headers: {},
@@ -208,7 +208,7 @@ export async function request<
     try {
       response = await fetch(url, opt);
     } catch (e) {
-      if ((e as Error).name === 'AbortError') {
+      if (opt.signal && opt.signal.aborted) {
         throw e;
       }
       throw new NetworksResponseError();
@@ -257,8 +257,8 @@ export async function request<
     return body as ToReturn<T, RT, ReturnUrl>;
   };
 
-  if (cacheEngine && cache && opt.method?.toUpperCase() === 'GET') {
-    const cacheOptions = cacheProps
+  if (cacheEngine && opt.method?.toUpperCase() === 'GET') {
+    const props = cacheProps
       ? cacheProps
       : {
           ...objectRemoveEmpty({
@@ -266,7 +266,10 @@ export async function request<
             responseType,
           }),
         };
-    return cacheEngine.add(cacheName || url, makeRequest, cacheOptions, false);
+    return cacheEngine.add(cacheName || url, makeRequest, {
+      props,
+      expirationTime: cache ? undefined : 500,
+    });
   }
   return makeRequest();
 }

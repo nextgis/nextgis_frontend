@@ -40,7 +40,7 @@ export class Geocoder extends BaseGeocoder<GeocoderOptions> {
         }
       } catch (err) {
         const er = err as Error;
-        if (er.name !== 'CancelError') {
+        if (er.name !== 'AbortError') {
           errors.push(er);
         }
       }

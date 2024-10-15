@@ -160,14 +160,14 @@ export function featureLayerIdentify(
     throw new Error('Not valid geometry format to make intersection');
   }
 
-  const data: FeatureIdentifyRequestOptions = {
+  const json: FeatureIdentifyRequestOptions = {
     geom: wkt,
     srs: 3857,
     layers,
   };
 
-  return options.connector.post('feature_layer.identify', {
-    data,
+  return options.connector.route('feature_layer.identify').post({
+    json,
     signal,
     cache,
   });

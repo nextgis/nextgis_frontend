@@ -7,13 +7,10 @@ export function fetchNgwLayerCount({
   signal,
 }: FetchNgwLayerCountOptions): Promise<number> {
   return connector
-    .get(
-      'feature_layer.feature.count',
-      { cache, signal },
-      {
-        id: resourceId,
-      },
-    )
+    .route('feature_layer.feature.count', {
+      id: resourceId,
+    })
+    .get({ cache, signal })
     .then((resp) => {
       return resp.total_count;
     });

@@ -1,1 +1,1 @@
-{"name":"Vector events position data","description":"Getting the extent and center for feature from a vector layer event"}
+{"name":"Vector events with bounds and center","description":"Capture bounds and center coordinates from vector layer events. Allows zooming to the feature on select.","tags":["vector","events","bounds","center","zoom","popup"]}

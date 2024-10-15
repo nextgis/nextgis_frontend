@@ -1,1 +1,1 @@
-{"name":"Vector layer add data while filtering","description":"Set the filter for the vector layer from the select in the top right corner. Try adding points by clicking on the colored buttons. If the color of the new point does not match the color of the selected filter, the point will be invisible."}
+{"name":"Vector layer filter and add","description":"Filter points on a vector layer by color and add new points using buttons. Points that don't match the filter will not appear.","tags":["vector","filter","add data","geojson","interactive","color"]}

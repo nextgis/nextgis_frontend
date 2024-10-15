@@ -1,5 +1,5 @@
 {
-  "name": "NextGIS Web Legend Symbol Control",
+  "name": "NGW Legend Symbol Control",
   "description": "Example demonstrating how to control layer rendering on the map, including enabling and disabling legend symbols for vector styles in NextGIS Web.",
   "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"]
 }

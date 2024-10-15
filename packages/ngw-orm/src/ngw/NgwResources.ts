@@ -4,13 +4,13 @@ import { PolygonLayer } from '../repository/PolygonLayer';
 import { ResourceGroup } from '../repository/ResourceGroup';
 
 import type { BaseResource } from '../repository/BaseResource';
-import type { ResourceCls, ResourceItem } from '@nextgis/ngw-connector';
+import type { CompositeRead, ResourceCls } from '@nextgisweb/resource/type/api';
 
-type GetClassItemCb = (item: ResourceItem) => typeof BaseResource;
+type GetClassItemCb = (item: CompositeRead) => typeof BaseResource;
 
 export class NgwResources {
   static classes: { [key in ResourceCls]?: GetClassItemCb } = {
-    vector_layer: (item: ResourceItem) => {
+    vector_layer: (item: CompositeRead) => {
       if (item.vector_layer) {
         const geometryType = item.vector_layer.geometry_type;
         if (geometryType === 'POLYGON') {
@@ -26,7 +26,7 @@ export class NgwResources {
     resource_group: () => ResourceGroup,
   };
 
-  static getResource(item: ResourceItem): typeof BaseResource {
+  static getResource(item: CompositeRead): typeof BaseResource {
     const cls = item.resource.cls;
     const resource = this.classes[cls];
     if (resource) {

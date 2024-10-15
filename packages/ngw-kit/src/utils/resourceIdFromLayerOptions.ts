@@ -1,13 +1,13 @@
 import type { NgwLayerOptions } from '../interfaces';
-import type { ResourceItem } from '@nextgis/ngw-connector';
 import type NgwConnector from '@nextgis/ngw-connector';
+import type { CompositeRead } from '@nextgisweb/resource/type/api';
 
 export async function resourceIdFromLayerOptions(
   options: NgwLayerOptions,
   connector: NgwConnector,
 ): Promise<number> {
   const resource = options.resource;
-  const item = resource as ResourceItem;
+  const item = resource as CompositeRead;
 
   // @ts-ignore @deprecated
   let { keyname, resourceId } = options;
@@ -22,7 +22,7 @@ export async function resourceIdFromLayerOptions(
       item.resource !== undefined &&
       'resource' in item
     ) {
-      resourceId = (resource as ResourceItem).resource.id;
+      resourceId = (resource as CompositeRead).resource.id;
     } else {
       // TODO: safe remove this case
       resourceId = await resourceIdFromLayerOptions(resource as any, connector);

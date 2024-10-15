@@ -4,13 +4,13 @@ import type { IdentifyItemOptions, NgwFeatureItemResponse } from '.';
 import type { FetchNgwItemOptions } from './interfaces';
 import type {
   FeatureItemExtensions,
-  FeatureResource,
+  GetRequestOptions,
   LayerFeature,
-  RequestOptions,
-  VectorLayerResourceItem,
 } from '@nextgis/ngw-connector';
 import type NgwConnector from '@nextgis/ngw-connector';
 import type { FeatureProperties, LngLatBoundsArray } from '@nextgis/utils';
+import type { FeatureLayerRead } from '@nextgisweb/feature-layer/type/api';
+import type { CompositeRead } from '@nextgisweb/resource/type/api';
 import type { Feature, GeoJsonObject, Geometry } from 'geojson';
 
 export class IdentifyItem<
@@ -29,7 +29,7 @@ export class IdentifyItem<
   private connector: NgwConnector;
   private _item?: NgwFeatureItemResponse<F, G>;
   private _geojson?: Feature<G, F>;
-  private _resource?: VectorLayerResourceItem;
+  private _resource?: CompositeRead;
   private _extent?: LngLatBoundsArray;
 
   constructor(options: IdentifyItemOptions) {
@@ -64,18 +64,21 @@ export class IdentifyItem<
     });
   }
 
-  resource(opt?: RequestOptions<'GET'>): Promise<FeatureResource> {
-    if (this._resource) {
-      return Promise.resolve(this._resource.feature_layer);
-    }
-    return this.connector.getResource(this.layerId, opt).then((resp) => {
-      this._resource = resp as VectorLayerResourceItem;
+  async resource(opt?: GetRequestOptions): Promise<FeatureLayerRead> {
+    if (this._resource && this._resource.feature_layer) {
       return this._resource.feature_layer;
-    });
+    }
+    const resp = await this.connector.getResource(this.layerId, opt);
+
+    if (!resp?.feature_layer) {
+      throw new Error('Resource is not avector layer');
+    }
+    this._resource = resp;
+    return resp.feature_layer;
   }
 
   getBounds(
-    opt?: Pick<RequestOptions<'GET'>, 'cache' | 'signal'>,
+    opt?: Pick<GetRequestOptions, 'cache' | 'signal'>,
   ): Promise<LngLatBoundsArray | undefined> {
     if (this._extent) {
       return Promise.resolve(this._extent);

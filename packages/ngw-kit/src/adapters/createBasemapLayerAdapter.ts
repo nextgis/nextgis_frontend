@@ -27,7 +27,9 @@ export async function createBasemapLayerAdapter({
       if (TileAdapter) {
         class BasemapTileAdapter extends TileAdapter {
           async addLayer(opt: TileAdapterOptions) {
-            return super.addLayer({ ...opt, url });
+            if (url) {
+              return super.addLayer({ ...opt, url });
+            }
           }
         }
         return BasemapTileAdapter;

@@ -24,14 +24,15 @@ import type {
   RasterUploadOptions,
   VectorUploadOptions,
 } from './interfaces';
-import type { RequestOptions, ResourceCls } from '@nextgis/ngw-connector';
-import type { CreatedResource, ResourceItem } from '@nextgis/ngw-connector';
+import type { CreatedResource } from '@nextgis/ngw-connector';
 import type {
   FileMeta,
   WmsClientConnection,
   WmsClientLayer,
   WmsServerServiceLayer,
 } from '@nextgis/ngw-connector';
+import type { GetRequestOptions } from '@nextgis/ngw-connector';
+import type { CompositeRead, ResourceCls } from '@nextgisweb/resource/type/api';
 
 type FileType = File | Buffer | { file: File | Buffer; name: string };
 
@@ -412,8 +413,8 @@ export class NgwUploader {
 
   getResource(
     id: number,
-    requestOptions?: RequestOptions<'GET'>,
-  ): Promise<ResourceItem | undefined> | undefined {
+    requestOptions?: GetRequestOptions,
+  ): Promise<CompositeRead | undefined> | undefined {
     return this.connector && this.connector.getResource(id, requestOptions);
   }
 

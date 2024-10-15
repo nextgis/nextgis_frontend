@@ -1,5 +1,17 @@
 {
-  "name": "Tile layer",
-  "description": "Add a tile layer to a Web map",
-  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"]
+  "name": "Tile Layer",
+  "description": "Demonstrates how to add a tile layer from an external source, such as OpenStreetMap, to the map. The example shows how to configure tile layer options like subdomains and attribution.",
+  "ngwMaps": [
+    "ngw-leaflet",
+    "ngw-ol",
+    "ngw-maplibre-gl"
+  ],
+  "tags": [
+    "tile layer",
+    "OpenStreetMap",
+    "map",
+    "external source",
+    "subdomains",
+    "attribution"
+  ]
 }

@@ -14,11 +14,9 @@ import type {
   ToTypescriptOptions,
 } from '../options/ToTypescriptOptions';
 import type { ValidateErrorType } from '../types/ValidateErrorType';
-import type {
-  ResourceIdKeynameDef,
-  ResourceItem,
-} from '@nextgis/ngw-connector';
+import type { ResourceIdKeynameDef } from '@nextgis/ngw-connector';
 import type { Type } from '@nextgis/utils';
+import type { CompositeRead } from '@nextgisweb/resource/type/api';
 
 // type QueryDeepPartialEntity<T> = DeepPartial<T>;
 // type InsertResult = any;
@@ -54,10 +52,10 @@ import type { Type } from '@nextgis/utils';
  */
 export class BaseResource {
   static connection?: Connection;
-  static item?: ResourceItem;
+  static item?: CompositeRead;
 
   static receive(
-    item: ResourceItem,
+    item: CompositeRead,
     ResCls?: typeof BaseResource,
   ): typeof BaseResource {
     ResCls = ResCls ?? this;

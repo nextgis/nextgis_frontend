@@ -6,6 +6,7 @@ export * from './IdentifyItem';
 export * from './NgwResource';
 
 export * from './constants';
+export * from './config';
 
 export * from './utils/utils';
 export * from './utils/identifyUtils';

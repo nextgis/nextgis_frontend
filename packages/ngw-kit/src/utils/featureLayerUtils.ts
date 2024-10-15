@@ -7,6 +7,8 @@ import {
   round,
 } from '@nextgis/utils';
 
+import { config } from '../config';
+
 import type {
   FeatureRequestParams,
   FetchNgwItemsOptions,
@@ -47,30 +49,38 @@ export function updateItemRequestParam<
 >(params: FeatureRequestParams, options: NgwFeatureRequestOptions<P>): void {
   const { extensions, geom, fields, srs, ilike, like } = options;
   // Empty extesions by default
-  const extensionsStr = extensions ? extensions.join(',') : '';
-  // Use character * to set all extensions
-  if (extensionsStr !== '*') {
-    params.extensions = extensionsStr;
-  }
+  params.extensions = extensions ? extensions : [];
 
-  if (fields !== undefined && fields !== null) {
-    params.fields = Array.isArray(fields) ? fields.join(',') : '';
+  if (fields) {
+    params.fields = fields as string[];
   }
   if (geom !== undefined) {
-    params.geom = geom ? 'yes' : 'no';
+    params.geom = geom;
     if (!geom) {
       delete params.srs;
       delete params.geom_format;
     }
   }
   if (defined(ilike)) {
+    // @ts-expect-error check ngw typegen
     params.ilike = ilike;
   } else if (defined(like)) {
+    // @ts-expect-error check ngw typegen
     params.like = like;
   }
   if (defined(srs)) {
     params.srs = srs;
   }
+}
+
+function paramListToQuery(paramList: [string, any][]): Record<string, any> {
+  return paramList.reduce(
+    (acc, [key, value]) => {
+      acc[key] = value;
+      return acc;
+    },
+    {} as Record<string, any>,
+  );
 }
 
 // NGW REST API is not able to filtering by combined queries
@@ -130,11 +140,9 @@ function getQueries<
   _parentAllParams: [string, any][] = [],
 ): Promise<FeatureItem<P, G>[]>[] {
   const { filters } = opt;
-
   const paramList = opt.paramList ?? [];
 
   const logic = typeof filters[0] === 'string' ? filters[0] : 'all';
-
   const filters_ = filters.filter((x) => Array.isArray(x)) as PropertyFilter[];
 
   if (logic === 'any') {
@@ -208,6 +216,7 @@ export function fetchNgwLayerItemsRequest<
   };
   const {
     limit,
+    query,
     cache,
     signal,
     offset,
@@ -218,46 +227,43 @@ export function fetchNgwLayerItemsRequest<
     intersects,
     resourceId,
   } = options;
-  if (limit) {
-    if (limit !== Number.POSITIVE_INFINITY) {
-      params.limit = limit;
-    }
+
+  if (limit && limit !== Number.POSITIVE_INFINITY) {
+    params.limit = limit;
   } else {
-    // Strict restriction on loading data from large layers
-    params.limit = 7000;
+    params.limit = config.defaultRequestLimit;
   }
+
   if (offset) {
     params.offset = offset;
   }
+
   if (geomFormat) {
     params.geom_format = geomFormat;
   }
+
   updateItemRequestParam(params, options);
 
   if (orderBy) {
     params.order_by = orderBy.join(',');
   }
+
   if (Array.isArray(intersects)) {
     const coordinates = isLngLatBoundsArray(intersects)
       ? getBoundsCoordinates(intersects)
       : intersects;
-
     params.intersects = createWktFromCoordArray(coordinates);
   } else if (typeof intersects === 'string') {
     params.intersects = intersects;
   }
 
   if (paramList) {
-    params.paramList = paramList;
+    Object.assign(params, paramListToQuery(paramList));
   }
-  const reqParams = {
-    id: resourceId,
-    ...params,
-  };
 
-  return connector.get(
-    'feature_layer.feature.collection',
-    { cache, signal },
-    reqParams,
-  ) as Promise<FeatureItem<P, G>[]>;
+  return connector
+    .route('feature_layer.feature.collection', { id: Number(resourceId) })
+    .get({ query: { ...params, ...query }, cache, signal }) as Promise<
+    FeatureItem<P, G>[]
+  >;
 }

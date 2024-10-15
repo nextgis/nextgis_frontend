@@ -1,6 +1,6 @@
 {
   "name": "Vector label",
-  "description": "Show label by vector layer attributes",
+  "description": "Display labels for vector layer features using a specified attribute field (e.g., NAME). Labels are non-interactive and provide an easy way to visualize feature data.",
   "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"],
-  "tags": ["label", "tooltip"]
+  "tags": ["label", "tooltip", "vector", "feature", "attribute"]
 }

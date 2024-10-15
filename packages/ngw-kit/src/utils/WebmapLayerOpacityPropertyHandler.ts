@@ -11,7 +11,10 @@ export class WebmapLayerOpacityPropertyHandler<
   getProperty(): number {
     const layer = this.item.layer;
     if (layer) {
-      return layer && layer.options && layer.options.opacity !== undefined
+      return layer &&
+        layer.options &&
+        layer.options.opacity !== undefined &&
+        layer.options.opacity !== null
         ? layer.options.opacity
         : 1;
     }

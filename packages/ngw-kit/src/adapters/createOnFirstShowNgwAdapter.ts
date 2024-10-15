@@ -1,15 +1,15 @@
 import { createAsyncAdapter } from './createAsyncAdapter';
 import { createOnFirstShowAdapter } from './createOnFirstShowAdapter';
 
-import type { BasemapWebmapItem } from '@nextgis/ngw-connector';
 import type NgwConnector from '@nextgis/ngw-connector';
 import type { Type } from '@nextgis/utils';
 import type { MainLayerAdapter, WebMap } from '@nextgis/webmap';
+import type { BasemapWebMapItemRead } from '@nextgisweb/basemap/type/api';
 
 interface CreateOnFirstShowAdapterOptions {
   webMap: WebMap;
   connector: NgwConnector;
-  item: BasemapWebmapItem;
+  item: BasemapWebMapItemRead;
   adapterOptions?: Record<string, any>;
   idPrefix?: string;
 }

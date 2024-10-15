@@ -5,8 +5,10 @@ export async function getCompanyLogo(
   connector: NgwConnector,
   options?: CompanyLogoOptions,
 ): Promise<HTMLElement | undefined> {
-  const settings = await connector.get('pyramid.settings', null, {
-    component: 'pyramid',
+  const settings = await connector.route('pyramid.settings').get({
+    query: {
+      component: 'pyramid',
+    },
   });
   if (settings && settings.company_logo && settings.company_logo.enabled) {
     const anchor = document.createElement('a');
@@ -23,12 +25,25 @@ export async function getCompanyLogo(
     img.style.maxWidth = '100px';
     img.src = '';
     try {
-      const src = await connector.get('pyramid.company_logo', {
-        responseType: 'blob',
-      });
-      const urlCreator = window.URL || window.webkitURL;
-      const imageUrl = urlCreator.createObjectURL(src as any);
-      img.src = imageUrl;
+      const resp = await connector.route('pyramid.csettings').get();
+      const logo = resp.pyramid?.header_logo;
+      if (logo) {
+        const [mimeType, base64Data] = logo;
+
+        const byteCharacters = atob(base64Data);
+        const byteNumbers = new Array(byteCharacters.length);
+
+        for (let i = 0; i < byteCharacters.length; i++) {
+          byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }
+
+        const byteArray = new Uint8Array(byteNumbers);
+        const blob = new Blob([byteArray], { type: mimeType });
+
+        const urlCreator = window.URL || window.webkitURL;
+        const imageUrl = urlCreator.createObjectURL(blob);
+        img.src = imageUrl;
+      }
     } catch (er) {
       console.warn(er);
     }

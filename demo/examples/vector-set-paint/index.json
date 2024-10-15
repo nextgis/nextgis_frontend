@@ -1,5 +1,6 @@
 {
-  "name": "Vector set paint",
-  "description": "Update paint of vector layer",
-  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"]
+  "name": "Vector paint controls",
+  "description": "This example demonstrates how to create interactive controls that allow users to dynamically adjust the paint settings (fill color, stroke color, and stroke weight) of a vector layer on the map. The controls provide real-time feedback, enabling the visualization of changes directly on the map.",
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"],
+  "tags": ["paint", "vector", "interactive", "controls", "customization"]
 }

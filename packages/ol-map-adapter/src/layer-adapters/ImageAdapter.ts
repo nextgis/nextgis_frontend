@@ -91,7 +91,7 @@ export class ImageAdapter
       };
 
       const layerOptions: BaseImageOptions<ImageWMS> = {
-        opacity: options.opacity,
+        opacity: options.opacity ?? undefined,
         ...resolutionOptions(this.map, options),
         ...options.nativeOptions,
       };

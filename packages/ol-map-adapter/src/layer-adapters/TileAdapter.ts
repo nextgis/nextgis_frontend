@@ -50,7 +50,7 @@ export class TileAdapter
     }
     const layer = new TileLayer({
       source,
-      opacity: options.opacity,
+      opacity: options.opacity ?? undefined,
       ...resolutionOptions(this.map, options),
       ...options.nativeOptions,
     });

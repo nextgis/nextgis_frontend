@@ -2,27 +2,41 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Example</title>
+    <title>Cancelable Request Example</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="../../lib/ngw-connector.global.js"></script>
-    <style>
-      .mb {
-        display: block;
-        margin: 10px 0;
-      }
-    </style>
   </head>
 
   <body>
     <script>
-      var connector = new NgwConnector({
+      const output = document.createElement('div');
+      document.body.appendChild(output);
+
+      const connector = new NgwConnector({
         baseUrl: 'https://demo.nextgis.com',
       });
+
       connector.connect().then(() => {
-        const request = connector.get('resource.collection', null, {
-          id: 4005,
-        });
-        request.cancel();
+        const abortController = new AbortController(); // Create a new AbortController instance
+
+        connector
+          .route('resource.collection', { id: 4005 })
+          .get({ signal: abortController.signal }) // Pass abort signal to the request
+          .then((response) => {
+            output.innerHTML = `<p>Request successful:</p><pre>${JSON.stringify(response, null, 2)}</pre>`;
+          })
+          .catch((e) => {
+            if (e.name === 'AbortError') {
+              output.innerHTML = '<p>Request was aborted</p>';
+            } else {
+              output.innerHTML = `<p>Request failed:</p><pre>${e}</pre>`;
+            }
+          });
+
+        // Simulate request abort after 10 ms
+        setTimeout(() => {
+          abortController.abort();
+        }, 10);
       });
     </script>
   </body>

@@ -2,9 +2,8 @@ import type NgwConnector from '@nextgis/ngw-connector';
 import type {
   FeatureItem,
   LayerFeature,
-  RequestOptions,
   ResourceDefinition,
-  ResourceItem,
+  RouteRequestOptions,
 } from '@nextgis/ngw-connector';
 import type { FeatureLayersIdentify } from '@nextgis/ngw-connector';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
@@ -28,6 +27,13 @@ import type {
   WebMap,
   WebMapEvents,
 } from '@nextgis/webmap';
+import type Routes from '@nextgisweb/pyramid/type/route';
+import type { CompositeRead } from '@nextgisweb/resource/type/api';
+import type {
+  WebMapItemGroupRead,
+  WebMapItemLayerRead,
+  WebMapItemRootRead,
+} from '@nextgisweb/webmap/type/api';
 import type { Feature, Geometry, Polygon, Position } from 'geojson';
 
 declare module '@nextgis/webmap' {
@@ -53,40 +59,39 @@ export interface AppSettings {
   extent_top?: number;
   draw_order_enabled?: any;
   bookmark_resource?: any;
-  root_item?: TreeGroup;
+  root_item?: TreeRoot;
 }
 
-export interface TreeItem {
-  item_type: 'root' | 'group' | 'layer' | string;
+export type TreeItem =
+  | TreeGroup
+  | TreeRoot
+  | TreeLayer
+  | {
+      item_type: 'root' | 'group' | 'layer' | string;
+      style_parent_id?: number;
+      display_name?: string;
+      resourceId?: number | [number, string];
+    };
+
+export type TreeChildItem = TreeLayer | TreeGroup;
+
+export interface TreeRoot extends Omit<WebMapItemRootRead, 'children'> {
+  children: TreeChildItem[];
+
   display_name?: string;
-  resourceId?: number | [number, string];
-  style_parent_id?: number;
-  _layer?: any;
+}
+export interface TreeGroup extends Omit<WebMapItemGroupRead, 'children'> {
+  children: TreeChildItem[];
 }
 
-export interface TreeGroup extends TreeItem {
-  item_type: 'root' | 'group';
-  group_expanded?: boolean;
-  children: Array<TreeLayer | TreeGroup>;
-}
-
-export interface TreeLayer extends TreeItem {
-  item_type: 'layer';
-  layer_adapter: string;
-  layer_enabled: boolean;
-  draw_order_position: number;
-  layer_max_scale_denom?: number;
-  layer_min_scale_denom?: number;
-  layer_style_id: number;
-  style_parent_id: number;
-  layer_transparency: number;
-  layer_identifiable: boolean;
-
+export interface TreeLayer extends WebMapItemLayerRead {
   layer_url?: string;
 
+  resourceId?: number | [number, string];
   adapter?: string;
   url?: string;
 
+  _layer?: any;
   updateWmsParams?: (parans: any) => any;
 }
 
@@ -200,7 +205,7 @@ export interface ResourceAdapter<
   F extends Feature = Feature,
 > extends VectorLayerAdapter<M, L, O, F> {
   resourceId: number;
-  item?: ResourceItem;
+  item?: CompositeRead;
   baselayer?: boolean;
   getBounds?():
     | LngLatBoundsArray
@@ -256,7 +261,7 @@ export interface GetClassAdapterOptions {
   layerOptions: NgwLayerOptions;
   webMap: WebMap;
   connector: NgwConnector;
-  item: ResourceItem;
+  item: CompositeRead;
   Adapter?: Type<MainLayerAdapter>;
   /** This is some kind of dirty hack. Get rid of */
   addLayerOptionsPriority?: false;
@@ -281,18 +286,8 @@ export interface CompanyLogoOptions {
 
 export type GeomFormat = 'wkt' | 'geojson';
 
-export interface FeatureRequestParams {
-  srs?: number;
-  fields?: string;
-  extensions?: string;
-  geom_format?: GeomFormat;
-  limit?: number;
-  intersects?: string;
-  order_by?: string;
-  geom?: 'yes' | 'no';
-  ilike?: string;
-  like?: string;
-}
+export type FeatureRequestParams =
+  Routes['feature_layer.feature.item']['get']['query'];
 
 type Extensions = keyof FeatureItem['extensions'];
 
@@ -305,14 +300,17 @@ export interface NgwFeatureRequestOptions<
   geom?: boolean;
   geomFormat?: GeomFormat;
   srs?: number;
-  signal?: AbortSignal;
+  signal?: AbortSignal | null;
 }
 
 export interface GetNgwItemOptions extends FetchNgwLayerExtentOptions {
   featureId: number;
 }
 
-export type NgwRequestOptions = Pick<RequestOptions, 'cache' | 'signal'>;
+export type NgwRequestOptions = Pick<
+  RouteRequestOptions,
+  'cache' | 'signal' | 'query'
+>;
 
 export interface FetchNgwLayerExtentOptions extends NgwRequestOptions {
   // TODO: safe rename to resource
@@ -326,7 +324,7 @@ export interface FetchNgwLayerItemExtentOptions
 }
 
 export interface FetchNgwResourceExtent extends NgwRequestOptions {
-  resource?: ResourceDefinition | ResourceItem;
+  resource?: ResourceDefinition | CompositeRead;
   connector: NgwConnector;
 }
 
@@ -337,6 +335,7 @@ export type PropertiesForNgwFilter<
 export interface GetNgwItemsOptions<
   P extends FeatureProperties = FeatureProperties,
 > extends FetchNgwLayerExtentOptions {
+  /** @deprecated use {@link NgwRequestOptions.query} instead */
   paramList?: [string, any][];
   filters?: PropertiesFilter<PropertiesForNgwFilter<P>>;
 }

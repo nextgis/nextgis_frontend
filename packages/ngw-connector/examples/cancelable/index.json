@@ -1,0 +1,4 @@
+{
+  "name": "Cancelable Request Example",
+  "description": "Demonstrates how to create and abort a cancellable API request using the NgwConnector and AbortController."
+}

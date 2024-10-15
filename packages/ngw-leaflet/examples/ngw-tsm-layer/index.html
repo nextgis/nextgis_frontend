@@ -1,11 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta charset="utf-8" />
     <title>NGW TMS example</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-      html, body, #map {
+      html,
+      body,
+      #map {
         margin: 0;
         padding: 0;
         width: 100%;
@@ -22,7 +24,7 @@
         target: 'map',
       }).then((ngwMap) => {
         ngwMap.addNgwLayer({
-          resource: 7150, // Resource is a raster style
+          resource: 7153, // Resource is a raster style
           adapter: 'TILE',
           fit: true,
         });

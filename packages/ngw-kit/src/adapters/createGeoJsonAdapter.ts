@@ -238,7 +238,7 @@ export async function createGeoJsonAdapter(
           isFull: _fullDataLoad,
         });
       } catch (er) {
-        if (er instanceof Error && er.name !== 'CancelError') {
+        if (er instanceof Error && er.name !== 'AbortError') {
           throw er;
         }
       }

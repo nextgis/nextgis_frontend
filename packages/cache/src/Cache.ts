@@ -9,7 +9,7 @@ interface CacheItem<T = any, O = any> {
   key: string;
   value: CacheValue<T>;
   props?: CacheMatchProps<O>;
-  expirationTime?: number; // Новое поле для времени истечения
+  expirationTime?: number;
 }
 
 export interface CacheOptions {

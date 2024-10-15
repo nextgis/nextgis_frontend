@@ -1,1 +1,1 @@
-{"name":"NGW layer popup on select","description":""}
+{"name":"NGW Layer Popup on Select","description":"This example demonstrates how to display a popup with detailed information about features when selecting elements on a raster layer from NextGIS Web. The popup shows attribute values for the selected features, allowing users to interact with the data."}

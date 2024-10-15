@@ -1,1 +1,1 @@
-{"name":"Vector layer mouse events","description":"Various ways to track events on clicks and hovers on a vector layer"}
+{"name":"Vector layer mouse events","description":"This example demonstrates multiple methods to capture mouse events like click, double-click, hover, and mouseout for vector layers. It includes event handling through both layer-specific and global emitters.","tags":["events","mouse","hover","click","vector","map"]}

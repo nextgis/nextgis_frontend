@@ -18,9 +18,13 @@ import type {
   ResourceDefinition,
   ResourceIdKeynameDef,
 } from './interfaces';
+import type { GetRequestOptions } from './route/type';
 import type { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
-import type { Resource, ResourceItem } from './types/ResourceItem';
 import type { DeepPartial } from '@nextgis/utils';
+import type {
+  CompositeRead,
+  ResourceRead,
+} from '@nextgisweb/resource/type/api';
 
 export class NgwConnectorExtended extends NgwConnector {
   resources!: ResourcesControl;
@@ -203,8 +207,8 @@ export class NgwConnectorExtended extends NgwConnector {
    */
   getResource(
     resource: ResourceDefinition,
-    requestOptions?: RequestOptions<'GET'>,
-  ): Promise<ResourceItem | undefined> {
+    requestOptions?: GetRequestOptions,
+  ): Promise<CompositeRead | undefined> {
     return this.resources.getOne(resource, requestOptions);
   }
 
@@ -213,8 +217,8 @@ export class NgwConnectorExtended extends NgwConnector {
    */
   getResourceOrFail(
     resource: ResourceDefinition,
-    requestOptions?: RequestOptions<'GET'>,
-  ): Promise<ResourceItem> {
+    requestOptions?: GetRequestOptions,
+  ): Promise<CompositeRead> {
     return this.resources.getOneOrFail(resource, requestOptions);
   }
 
@@ -222,22 +226,22 @@ export class NgwConnectorExtended extends NgwConnector {
    * @deprecated - use {@link getResource}
    */
   getResourceBy(
-    resource: DeepPartial<Resource>,
-  ): Promise<ResourceItem | undefined> {
+    resource: DeepPartial<ResourceRead>,
+  ): Promise<CompositeRead | undefined> {
     return this.resources.getOne(resource);
   }
 
   /**
    * @deprecated - use {@link getResource}
    */
-  getResourceByKeyname(keyname: string): Promise<ResourceItem | undefined> {
+  getResourceByKeyname(keyname: string): Promise<CompositeRead | undefined> {
     return this.resources.getOne(keyname);
   }
 
   /**
    * @deprecated - use {@link getResource}
    */
-  getResourceById(id: number): Promise<ResourceItem | undefined> {
+  getResourceById(id: number): Promise<CompositeRead | undefined> {
     return this.resources.getOne(id);
   }
 
@@ -246,7 +250,7 @@ export class NgwConnectorExtended extends NgwConnector {
    */
   getResourceId(
     resource: ResourceDefinition,
-    requestOptions?: RequestOptions<'GET'>,
+    requestOptions?: GetRequestOptions,
   ): Promise<number | undefined> {
     return this.resources.getId(resource, requestOptions);
   }
@@ -256,7 +260,7 @@ export class NgwConnectorExtended extends NgwConnector {
    */
   getResourceIdOrFail(
     resource: ResourceDefinition,
-    requestOptions?: RequestOptions<'GET'>,
+    requestOptions?: GetRequestOptions,
   ): Promise<number> {
     return this.resources.getIdOrFail(resource, requestOptions);
   }
@@ -265,9 +269,9 @@ export class NgwConnectorExtended extends NgwConnector {
    * {@link ResourcesControl.getMany}
    */
   getResourcesBy(
-    resource: DeepPartial<Resource>,
-    requestOptions?: RequestOptions<'GET'>,
-  ): Promise<ResourceItem[]> {
+    resource: DeepPartial<ResourceRead>,
+    requestOptions?: GetRequestOptions,
+  ): Promise<CompositeRead[]> {
     return this.resources.getMany(resource, requestOptions);
   }
 
@@ -276,8 +280,8 @@ export class NgwConnectorExtended extends NgwConnector {
    */
   getResourceParent(
     resource: ResourceDefinition,
-    requestOptions?: RequestOptions<'GET'>,
-  ): Promise<ResourceItem | undefined> {
+    requestOptions?: GetRequestOptions,
+  ): Promise<CompositeRead | undefined> {
     return this.resources.getParent(resource, requestOptions);
   }
 
@@ -287,7 +291,7 @@ export class NgwConnectorExtended extends NgwConnector {
   getResourceChildren(
     resource: ResourceDefinition,
     requestOptions?: GetChildrenOfOptions,
-  ): Promise<ResourceItem[]> {
+  ): Promise<CompositeRead[]> {
     return this.resources.getChildrenOf(resource, requestOptions);
   }
 
@@ -296,8 +300,8 @@ export class NgwConnectorExtended extends NgwConnector {
    */
   updateResource(
     resource: ResourceIdKeynameDef,
-    data: DeepPartial<ResourceItem>,
-  ): Promise<ResourceItem | undefined> {
+    data: DeepPartial<CompositeRead>,
+  ): Promise<CompositeRead | undefined> {
     return this.resources.update(resource, data);
   }
 

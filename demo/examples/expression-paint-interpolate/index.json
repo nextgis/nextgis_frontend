@@ -1,6 +1,6 @@
 {
   "name": "Expression paint with interpolate",
-  "description": "Use interpolate expressions to set paint",
+  "description": "Demonstrates how to use interpolate expressions for dynamically adjusting color and opacity based on feature properties.",
   "ngwMaps": [
     "ngw-leaflet",
     "ngw-ol",

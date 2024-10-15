@@ -7,16 +7,16 @@ import { resourceCompare } from './utils/resourceCompare';
 import { resourceToQuery } from './utils/resourceToQuery';
 
 import type { NgwConnectorExtended } from './NgwConnectorExtended';
-import type {
-  GetChildrenOfOptions,
-  RequestOptions,
-  ResourceDefinition,
-} from './interfaces';
-import type { Resource, ResourceItem } from './types/ResourceItem';
+import type { GetChildrenOfOptions, ResourceDefinition } from './interfaces';
+import type { GetRequestOptions } from './route/type';
 import type { DeepPartial } from '@nextgis/utils';
+import type {
+  CompositeRead,
+  ResourceRead,
+} from '@nextgisweb/resource/type/api';
 
 export class ResourcesControl {
-  cache: Cache<Promise<ResourceItem | undefined>, { id?: number | string }>;
+  cache: Cache<Promise<CompositeRead | undefined>, { id?: number | string }>;
   connector: NgwConnectorExtended;
 
   constructor({
@@ -43,8 +43,8 @@ export class ResourcesControl {
    */
   getOne(
     resource: ResourceDefinition,
-    requestOptions?: RequestOptions<'GET'>,
-  ): Promise<ResourceItem | undefined> {
+    requestOptions?: GetRequestOptions,
+  ): Promise<CompositeRead | undefined> {
     const forCache: { keyname?: string; display_name?: string; id?: number } =
       {};
     const opt = { ...requestOptions };
@@ -77,8 +77,8 @@ export class ResourcesControl {
 
   getOneOrFail(
     resource: ResourceDefinition,
-    requestOptions?: RequestOptions<'GET'>,
-  ): Promise<ResourceItem> {
+    requestOptions?: GetRequestOptions,
+  ): Promise<CompositeRead> {
     return this.getOne(resource, requestOptions).then((res) => {
       if (res) {
         return res;
@@ -99,7 +99,7 @@ export class ResourcesControl {
    */
   getId(
     resource: ResourceDefinition,
-    requestOptions?: RequestOptions<'GET'>,
+    requestOptions?: GetRequestOptions,
   ): Promise<number | undefined> {
     if (typeof resource === 'number') {
       return Promise.resolve(resource);
@@ -123,7 +123,7 @@ export class ResourcesControl {
    */
   getIdOrFail(
     resource: ResourceDefinition,
-    requestOptions?: RequestOptions<'GET'>,
+    requestOptions?: GetRequestOptions,
   ): Promise<number> {
     return this.getId(resource, requestOptions).then((resp) => {
       if (resp === undefined) {
@@ -134,9 +134,9 @@ export class ResourcesControl {
   }
 
   getMany(
-    resource: DeepPartial<Resource>,
-    requestOptions?: RequestOptions<'GET'>,
-  ): Promise<ResourceItem[]> {
+    resource: DeepPartial<ResourceRead>,
+    requestOptions?: GetRequestOptions,
+  ): Promise<CompositeRead[]> {
     return this._resourceCacheFilter(resource).then((items) => {
       if (!items.length) {
         const query: Record<string, unknown> = {};
@@ -145,21 +145,28 @@ export class ResourcesControl {
         } else {
           Object.assign(query, resourceToQuery(resource));
         }
-        return this.connector
-          .get('resource.search', requestOptions, {
-            serialization: 'full',
-            ...query,
-          })
-          .then((resources) => {
-            if (requestOptions?.cache && resources) {
-              for (const x of resources) {
-                this.cache.add('resource.item', Promise.resolve(x), {
-                  id: x.resource.id,
-                });
+        return (
+          this.connector
+            .route('resource.search')
+            // .get(requestOptions)
+            .get({
+              ...requestOptions,
+              query: {
+                serialization: 'full',
+                ...query,
+              },
+            })
+            .then((resources) => {
+              if (requestOptions?.cache && resources) {
+                for (const x of resources) {
+                  this.cache.add('resource.item', Promise.resolve(x), {
+                    id: x.resource.id,
+                  });
+                }
               }
-            }
-            return resources;
-          });
+              return resources;
+            })
+        );
       }
       return items;
     });
@@ -167,10 +174,10 @@ export class ResourcesControl {
 
   getParent(
     resource: ResourceDefinition,
-    requestOptions?: RequestOptions<'GET'>,
-  ): Promise<ResourceItem | undefined> {
+    requestOptions?: GetRequestOptions,
+  ): Promise<CompositeRead | undefined> {
     return this.getOne(resource, requestOptions).then((child) => {
-      if (child) {
+      if (child?.resource?.parent?.id) {
         return this.getOne(child.resource.parent.id, requestOptions);
       }
       return Promise.resolve(undefined);
@@ -180,7 +187,7 @@ export class ResourcesControl {
   getChildrenOf(
     resource: ResourceDefinition,
     requestOptions?: GetChildrenOfOptions,
-  ): Promise<ResourceItem[]> {
+  ): Promise<CompositeRead[]> {
     return this.getIdOrFail(resource).then((parent) =>
       this._getChildrenOf(parent, requestOptions),
     );
@@ -188,8 +195,8 @@ export class ResourcesControl {
 
   update(
     resource: ResourceDefinition,
-    data: DeepPartial<ResourceItem>,
-  ): Promise<ResourceItem | undefined> {
+    data: DeepPartial<CompositeRead>,
+  ): Promise<CompositeRead | undefined> {
     return this.getId(resource).then((id) => {
       if (id !== undefined) {
         return this.connector.put('resource.item', { data }, { id });
@@ -212,37 +219,47 @@ export class ResourcesControl {
     });
   }
 
-  private _getChildrenOf(
-    parent: ResourceDefinition,
+  private async _getChildrenOf(
+    parentDef: ResourceDefinition,
     requestOptions?: GetChildrenOfOptions,
-    _items: ResourceItem[] = [],
-  ): Promise<ResourceItem[]> {
-    return this.connector
-      .get('resource.collection', requestOptions, {
-        parent,
-      })
-      .then((items) => {
-        const recursivePromises = [];
-        for (const item of items) {
-          if (requestOptions?.cache) {
-            this.cache.add('resource.item', Promise.resolve(item), {
-              id: item.resource.id,
-            });
-          }
-          _items.push(item);
-          if (requestOptions?.recursive && item.resource.children) {
-            recursivePromises.push(
-              this._getChildrenOf(item.resource.id, requestOptions, _items),
-            );
-          }
-        }
-        if (recursivePromises.length) {
-          return Promise.all(recursivePromises).then(() => {
-            return _items;
-          });
-        }
+    _items: CompositeRead[] = [],
+  ): Promise<CompositeRead[]> {
+    let parent: number | undefined = undefined;
+    if (typeof parentDef === 'string') {
+      parent = await this.getId(parentDef, requestOptions);
+    } else if (typeof parentDef === 'object') {
+      parent = parentDef.id;
+    } else {
+      parent = parentDef;
+    }
+
+    const items = await this.connector.route('resource.collection').get({
+      ...requestOptions,
+      query: {
+        parent: parent,
+      },
+    });
+
+    const recursivePromises = [];
+    for (const item of items) {
+      if (requestOptions?.cache) {
+        this.cache.add('resource.item', Promise.resolve(item), {
+          id: item.resource.id,
+        });
+      }
+      _items.push(item);
+      if (requestOptions?.recursive && item.resource.children) {
+        recursivePromises.push(
+          this._getChildrenOf(item.resource.id, requestOptions, _items),
+        );
+      }
+    }
+    if (recursivePromises.length) {
+      return Promise.all(recursivePromises).then(() => {
         return _items;
       });
+    }
+    return _items;
   }
 
   private async _cleanResourceItemCache(id: number) {
@@ -270,26 +287,26 @@ export class ResourcesControl {
 
   private _fetchResourceById(
     id: number,
-    requestOptions?: RequestOptions<'GET'>,
-  ): Promise<ResourceItem | undefined> {
-    return this.connector.get('resource.item', requestOptions, { id });
+    requestOptions?: GetRequestOptions,
+  ): Promise<CompositeRead | undefined> {
+    return this.connector.route('resource.item', { id }).get(requestOptions);
   }
 
   private _fetchResourceBy(
-    resource: DeepPartial<Resource>,
-    requestOptions?: RequestOptions<'GET'>,
-  ): Promise<ResourceItem | undefined> {
+    resource: DeepPartial<ResourceRead>,
+    requestOptions?: GetRequestOptions,
+  ): Promise<CompositeRead | undefined> {
     return this.getMany(resource, requestOptions).then((resources) => {
       return resources[0];
     });
   }
 
   private _resourceCacheFilter(
-    resource: DeepPartial<Resource>,
-  ): Promise<ResourceItem[]> {
+    resource: DeepPartial<ResourceRead>,
+  ): Promise<CompositeRead[]> {
     return Promise.all(this.cache.matchAll('resource.item')).then(
       (resources) => {
-        const items: ResourceItem[] = [];
+        const items: CompositeRead[] = [];
         resources.filter((x) => {
           if (x) {
             // identical by uniq props

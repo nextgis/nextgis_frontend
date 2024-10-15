@@ -2,20 +2,25 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Toggle button</title>
+    <title>Toggle button control</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-      html, body, #map {
+      html,
+      body,
+      #map {
         margin: 0;
         padding: 0;
         width: 100%;
         height: 100%;
       }
+
       .toggle-button--on {
-        background-color: green !important;
+        background-color: #28a745;
+        transition: background-color 1s ease;
       }
       .toggle-button--off {
-        background-color: red !important;
+        background-color: #dc3545;
+        transition: background-color 1s ease;
       }
     </style>
     <script src="../../../packages/ngw-leaflet/lib/ngw-leaflet.global.js"></script>
@@ -26,8 +31,8 @@
       NgwMap.create({
         baseUrl: 'https://demo.nextgis.com',
         target: 'map',
-        qmsId: 448,
-        resources: [{ resource: 146, id: 'webmap', fit: true }],
+        osm: true,
+        resources: [{ resource: 5246, id: 'webmap', fit: true }],
       }).then((ngwMap) => {
         const toggleControl = ngwMap.createToggleControl({
           getStatus: () => {

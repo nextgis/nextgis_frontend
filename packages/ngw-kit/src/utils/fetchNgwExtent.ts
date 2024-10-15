@@ -3,11 +3,12 @@ import type {
   FetchNgwLayerItemExtentOptions,
 } from '../interfaces';
 import type NgwConnector from '@nextgis/ngw-connector';
-import type { ResourceItem, WebmapResource } from '@nextgis/ngw-connector';
 import type { LngLatBoundsArray } from '@nextgis/utils';
+import type { CompositeRead } from '@nextgisweb/resource/type/api';
+import type { WebMapRead } from '@nextgisweb/webmap/type/api';
 
 export function getNgwWebmapExtent(
-  webmap: WebmapResource,
+  webmap: WebMapRead,
 ): LngLatBoundsArray | undefined {
   const bottom = webmap['extent_bottom'];
   const left = webmap['extent_left'];
@@ -32,7 +33,8 @@ export function fetchNgwLayerExtent({
   signal,
 }: FetchNgwLayerExtentOptions): Promise<LngLatBoundsArray | undefined> {
   return connector
-    .get('layer.extent', { cache, signal }, { id: resourceId })
+    .route('layer.extent', { id: Number(resourceId) })
+    .get({ cache, signal })
     .then((resp) => {
       if (resp) {
         const { maxLat, maxLon, minLat, minLon } = resp.extent;
@@ -50,11 +52,11 @@ export function fetchNgwLayerItemExtent({
   signal,
 }: FetchNgwLayerItemExtentOptions): Promise<LngLatBoundsArray | undefined> {
   return connector
-    .get(
-      'feature_layer.feature.item_extent',
-      { cache, signal },
-      { id: resourceId, fid: featureId },
-    )
+    .route('feature_layer.feature.item_extent', {
+      id: Number(resourceId),
+      fid: featureId,
+    })
+    .get({ cache, signal })
     .then((resp) => {
       if (resp) {
         const { maxLat, maxLon, minLat, minLon } = resp.extent;
@@ -81,7 +83,7 @@ export function fetchNgwExtent(
 
 /** @deprecated use {@link fetchNgwExtent} instead */
 export function fetchNgwResourceExtent(
-  item: ResourceItem,
+  item: CompositeRead,
   connector: NgwConnector,
   options?: FetchNgwLayerExtentOptions,
 ): Promise<LngLatBoundsArray | undefined> {
@@ -89,7 +91,11 @@ export function fetchNgwResourceExtent(
     return Promise.resolve(getNgwWebmapExtent(item.webmap));
   } else {
     const resource = item.resource;
-    if (resource.cls && resource.cls.indexOf('style') !== -1) {
+    if (
+      resource.cls &&
+      resource.parent &&
+      resource.cls.indexOf('style') !== -1
+    ) {
       return connector.getResource(resource.parent.id, options).then((res) => {
         if (res) {
           return fetchNgwLayerExtent({

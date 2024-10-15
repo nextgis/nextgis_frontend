@@ -62,7 +62,7 @@ export class WmsAdapter extends BaseAdapter implements MainLayerAdapter {
     const source = new TileWMS(wmsOptions);
     const layer = new TileLayer({
       source,
-      opacity: options.opacity,
+      opacity: options.opacity ?? undefined,
       ...resolutionOptions(this.map, options),
       ...options.nativeOptions,
     });

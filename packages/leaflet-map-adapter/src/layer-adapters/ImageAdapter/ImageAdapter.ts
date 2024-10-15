@@ -22,18 +22,20 @@ export class ImageAdapter
   addLayer(options: ImageAdapterOptions): any {
     const url = options && options.url;
     if (url) {
-      options = { transparent: true, ...options };
       const updateWmsParamsFromOpt = options.updateWmsParams;
       this.layer = new ImageLayer(url, {
         pane: this.pane,
         headers: options.headers,
         setViewDelay: options.setViewDelay,
-        /**
-         * TODO: safe remove, use only options.nativeOptions
-         */
-        ...options,
+        // TODO: safe remove, use only options.nativeOptions
+        ...{
+          transparent: true,
+          ...options,
+          opacity: options.opacity ?? undefined,
+        },
         ...options.params,
         ...options.nativeOptions,
+        maxZoom: 12,
       });
       if (updateWmsParamsFromOpt) {
         const updateWmsParams = this.layer.updateWmsParams;

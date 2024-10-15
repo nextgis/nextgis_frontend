@@ -36,7 +36,7 @@ export class CogAdapter extends BaseAdapter implements MainLayerAdapter {
     }
     const layer = new TileLayer({
       source,
-      opacity: options.opacity,
+      opacity: options.opacity ?? undefined,
       ...resolutionOptions(this.map, options),
       ...options.nativeOptions,
     });

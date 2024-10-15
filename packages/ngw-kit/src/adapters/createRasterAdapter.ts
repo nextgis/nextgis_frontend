@@ -8,18 +8,15 @@ import type {
   NgwLayerAdapterType,
   ResourceAdapter,
 } from '../interfaces';
-import type {
-  LayerLegend,
-  LegendItem,
-  ResourceCls,
-  ResourceItem,
-} from '@nextgis/ngw-connector';
+import type { LayerLegend } from '@nextgis/ngw-connector';
 import type { Type } from '@nextgis/utils';
 import type {
   GetLegendOptions,
   ImageAdapterOptions,
   MainLayerAdapter,
 } from '@nextgis/webmap';
+import type { LegendSymbol } from '@nextgisweb/render/type/api';
+import type { CompositeRead, ResourceCls } from '@nextgisweb/resource/type/api';
 
 export type LegendSymbols = {
   [symbolIndex: number]: boolean | null;
@@ -27,7 +24,7 @@ export type LegendSymbols = {
 
 export class Legend implements LayerLegend {
   layerId: string;
-  legend: LegendItem[];
+  legend: LegendSymbol[];
 
   onSymbolRenderChange?: (indexes: number[]) => void;
 
@@ -41,7 +38,7 @@ export class Legend implements LayerLegend {
     this.onSymbolRenderChange = onSymbolRenderChange;
   }
 
-  createLegend(items: LegendItem[]): LegendItem[] {
+  createLegend(items: LegendSymbol[]): LegendSymbol[] {
     return items.map((params) => ({
       ...params,
       /** @deprecated use display_name instead */
@@ -102,7 +99,7 @@ export async function createRasterAdapter({
       connector,
     );
     return class RasterAdapter extends AdapterClass implements ResourceAdapter {
-      item?: ResourceItem = item;
+      item?: CompositeRead = item;
       resourceId = resourceId;
 
       private _blocked = false;
@@ -161,9 +158,11 @@ export async function createRasterAdapter({
           if (adapter === 'MVT') {
             return [this.item.resource.id];
           }
-          const id = this.item.resource.parent.id;
-          if (defined(id)) {
-            return [id];
+          if (this.item.resource.parent) {
+            const id = this.item.resource.parent.id;
+            if (defined(id)) {
+              return [id];
+            }
           }
         }
         return [];
@@ -172,11 +171,12 @@ export async function createRasterAdapter({
       async getLegend(options?: GetLegendOptions): Promise<Legend[]> {
         const id = this.options.id;
         if (id !== undefined) {
-          const ngwLegend = await connector.get('render.legend_symbols', {
-            params: { id: resourceId },
-            cache: true,
-            ...options,
-          });
+          const ngwLegend = await connector
+            .route('render.legend_symbols', { id: resourceId })
+            .get({
+              cache: true,
+              ...options,
+            });
           const legend = new Legend({
             layerId: id,
             legend: ngwLegend,

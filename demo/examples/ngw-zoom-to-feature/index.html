@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Zoom to NGW layer feature</title>
+    <title>Zoom to NGW Layer Feature</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
       * {
@@ -125,14 +125,12 @@
 
       function makePagination() {
         return connector.getResourceId(keyname).then((resourceId) => {
-          // You see! You can simply cache any GET request!
-          // But be careful... signals are very strong tonight!
+
           return connector
-            .get(
-              'feature_layer.feature.count',
-              { cache: true },
-              { id: resourceId },
-            )
+            .route('feature_layer.feature.count', { id: resourceId })
+            // You can simply cache any GET request!
+            // But be careful... signals are very strong tonight!
+            .get({ cache: true })
             .then((resp) => {
               const count = resp.total_count;
               const paginationBlock = document.createElement('div');

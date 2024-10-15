@@ -1,13 +1,13 @@
 import type { FeatureItem, FeatureLayersIdentify } from './types/FeatureLayer';
-import type { LegendItem } from './types/LegendItem';
 import type { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
-import type {
-  FeatureLayerField,
-  Resource,
-  ResourceItem,
-} from './types/ResourceItem';
+import type { FeatureLayerField } from './types/ResourceItem';
 import type { ResourceStoreItem } from './types/ResourceStore';
 import type { DeepPartial } from '@nextgis/utils';
+import type { LegendSymbol } from '@nextgisweb/render/type/api';
+import type {
+  CompositeRead,
+  ResourceRead,
+} from '@nextgisweb/resource/type/api';
 
 export interface FileMeta {
   id: string;
@@ -38,7 +38,9 @@ export interface FeatureLayerCount {
 }
 
 export type ResourceIdKeynameDef = string | number;
-export type ResourceDefinition = ResourceIdKeynameDef | DeepPartial<Resource>;
+export type ResourceDefinition =
+  | ResourceIdKeynameDef
+  | DeepPartial<ResourceRead>;
 
 export interface FileUploadResp {
   upload_meta: FileMeta[];
@@ -84,10 +86,10 @@ export interface RequestItemsResponseMap {
 export interface GetRequestItemsResponseMap extends RequestItemKeys {
   'pyramid.route': PyramidRoute;
   'pyramid.settings': PyramidSettings;
-  'resource.item': ResourceItem;
-  'resource.search': ResourceItem[];
+  'resource.item': CompositeRead;
+  'resource.search': CompositeRead[];
   'resource.child': any;
-  'resource.collection': ResourceItem[];
+  'resource.collection': CompositeRead[];
   'file_upload.upload': FileUploadResp;
   'layer.extent': NgwExtent;
   'feature_layer.feature.item': FeatureItem;
@@ -98,7 +100,7 @@ export interface GetRequestItemsResponseMap extends RequestItemKeys {
   'feature_layer.feature.count': FeatureLayerCount;
   'pyramid.company_logo': string;
   'spatial_ref_sys.collection': SrsItem[];
-  'render.legend_symbols': LegendItem[];
+  'render.legend_symbols': LegendSymbol[];
 }
 
 export interface IdOnly {

@@ -1,5 +1,5 @@
 {
-  "name": "Toggle webmap by zoom levels",
-  "description": "Show NGW webmap layer only between allowed zoom levels. Zoom in and out to see how the layer will behave",
+  "name": "Toggle WebMap by Zoom Levels",
+  "description": "Demonstrates how to display a NextGIS WebMap layer only within a specified zoom range. The layer will be visible between the defined minimum and maximum zoom levels, and a control shows the current zoom level, turning red when outside the allowed range.",
   "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"]
 }

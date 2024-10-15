@@ -1,1 +1,1 @@
-{"name":"Vector label","description":"Show label by vector layer attributes","tags":["label","tooltip"]}
+{"name":"Vector label","description":"Display labels for vector layer features using a specified attribute field (e.g., NAME). Labels are non-interactive and provide an easy way to visualize feature data.","tags":["label","tooltip","vector","feature","attribute"]}

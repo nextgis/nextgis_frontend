@@ -5,32 +5,28 @@ import {
 } from './featureLayerUtils';
 
 import type {
-  FeatureRequestParams,
   FetchNgwItemOptions,
   NgwFeatureItemResponse,
 } from '../interfaces';
 import type { FeatureProperties } from '@nextgis/utils';
+import type Routes from '@nextgisweb/pyramid/type/route';
 import type { Geometry } from 'geojson';
 
 export async function fetchNgwLayerItem<
   G extends Geometry = Geometry,
   P extends FeatureProperties = FeatureProperties,
 >(options: FetchNgwItemOptions<P>): Promise<NgwFeatureItemResponse<P, G>> {
-  const params: FeatureRequestParams & { [name: string]: any } = {
+  const params: Routes['feature_layer.feature.item']['get']['query'] = {
     ...FEATURE_REQUEST_PARAMS,
   };
   updateItemRequestParam(params, options);
-  const queryParams = {
-    id: options.resourceId,
-    fid: options.featureId,
-    ...params,
-  };
 
-  const resp = await options.connector.get(
-    'feature_layer.feature.item',
-    options,
-    queryParams,
-  );
+  const resp = await options.connector
+    .route('feature_layer.feature.item', {
+      id: Number(options.resourceId),
+      fid: options.featureId,
+    })
+    .get({ ...options, query: params });
 
   const toGeojson = async () => {
     if (resp.geom) {

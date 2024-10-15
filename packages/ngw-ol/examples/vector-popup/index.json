@@ -1,1 +1,1 @@
-{"name":"Vector popup","description":"Show popup on feature select"}
+{"name":"Vector layer popup","description":"This example demonstrates how to create customized popups for vector layers with detailed feature information and popup behavior description. Each popup shows whether it closes on a second click or an outside click based on layer options.","tags":["popup","vector layer","behavior","close","select"]}

@@ -21,11 +21,13 @@ export function uploadFeatureAttachment(
 export function deleteFeatureAttachment(
   options: GetNgwItemOptions & { attachmentId: number },
 ): Promise<void> {
-  return options.connector.delete('feature_attachment.item', null, {
-    id: options.resourceId,
-    fid: options.featureId,
-    aid: options.attachmentId,
-  });
+  return options.connector
+    .route('feature_attachment.item', {
+      id: Number(options.resourceId),
+      fid: options.featureId,
+      aid: options.attachmentId,
+    })
+    .delete();
 }
 
 export function addFeatureAttachment(

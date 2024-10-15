@@ -1,11 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Ngw resources</title>
+    <title>NGW Multiple Layer Selection</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-      html, body, #map {
+      html,
+      body,
+      #map {
         margin: 0;
         padding: 0;
         width: 100%;
@@ -31,25 +33,34 @@
             paint: { fillOpacity: 0.3, stroke: true },
           },
           [7157, 'Ambulance stations'],
-          { resource: 7153, id: 'availability', selectable: true, opacity: 0.8, paint: { color: "red" } },
+          {
+            resource: 7153,
+            id: 'availability',
+            selectable: true,
+            opacity: 0.8,
+            paint: { color: 'red' },
+          },
         ],
       });
 
-      let getFeaturePromise;
+      let abortController;
 
       const clean = () => {
-        if (getFeaturePromise) {
-          getFeaturePromise.cancel();
+        if (abortController) {
+          abortController.abort();
+          abortController = undefined;
         }
         ngwMap.removeLayer('highlight');
       };
 
       const drawLayer = (identify) => {
         clean();
-        getFeaturePromise = ngwMap
-          .getIdentifyGeoJson(identify)
+        abortController = new AbortController();
+
+        ngwMap
+          .getIdentifyGeoJson(identify, { signal: abortController.signal })
           .then((geojson) => {
-            getFeaturePromise = null;
+            abortController = null;
             ngwMap.addLayer('GEOJSON', {
               id: 'highlight',
               data: geojson,
@@ -57,6 +68,11 @@
               paint: { color: 'red', stroke: true, fillOpacity: 0.5 },
             });
             console.log(geojson);
+          })
+          .catch((e) => {
+            if (e.name !== 'AbortError') {
+              console.error(e);
+            }
           });
       };
 

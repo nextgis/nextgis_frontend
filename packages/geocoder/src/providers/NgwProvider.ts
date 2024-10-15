@@ -6,13 +6,10 @@ import { BaseProvider } from './BaseProvider';
 import type { BaseProviderOptions } from './BaseProviderOptions';
 import type { ResultItem } from '../types/ResultItem';
 import type { SearchItem } from '../types/SearchItem';
-import type {
-  FeatureItem,
-  NgwConnectorOptions,
-  ResourceItem,
-} from '@nextgis/ngw-connector';
+import type { FeatureItem, NgwConnectorOptions } from '@nextgis/ngw-connector';
 import type { FetchNgwItemsOptions } from '@nextgis/ngw-kit';
 import type { LngLatArray } from '@nextgis/utils';
+import type { CompositeRead } from '@nextgisweb/resource/type/api';
 
 /**
  * Extends the basic search item with NGW-specific properties.
@@ -25,7 +22,7 @@ interface NgwSearchItem extends SearchItem {
   /** The specific feature item from NGW */
   item: FeatureItem;
   /** The NGW resource item */
-  resourceItem: ResourceItem;
+  resourceItem: CompositeRead;
 }
 
 /**
@@ -35,7 +32,7 @@ interface RenderSearchItem {
   /** The specific feature item */
   item: FeatureItem;
   /** The NGW resource item */
-  resourceItem: ResourceItem;
+  resourceItem: CompositeRead;
 }
 
 /**
@@ -139,7 +136,7 @@ export class NgwProvider extends BaseProvider<NgwProviderOptions> {
         if (
           er &&
           'name' in (er as Error) &&
-          (er as Error).name !== 'CancelError'
+          (er as Error).name !== 'AbortError'
         ) {
           console.warn(er);
         }
@@ -150,14 +147,11 @@ export class NgwProvider extends BaseProvider<NgwProviderOptions> {
   result(item: NgwSearchItem): Promise<ResultItem> {
     const signal = this._makeSignal();
     const req = this.connector
-      .get(
-        'feature_layer.feature.item_extent',
-        { signal },
-        {
-          id: item.resourceId,
-          fid: item.featureId,
-        },
-      )
+      .route('feature_layer.feature.item_extent', {
+        id: item.resourceId,
+        fid: item.featureId,
+      })
+      .get({ signal })
       .then((x) => {
         const e = x.extent;
         return {
@@ -190,7 +184,7 @@ export class NgwProvider extends BaseProvider<NgwProviderOptions> {
     config: SearchResource;
     entries: FeatureItem[];
     query: string;
-    resourceItem: ResourceItem;
+    resourceItem: CompositeRead;
   }): NgwSearchItem[] {
     const items: NgwSearchItem[] = [];
 

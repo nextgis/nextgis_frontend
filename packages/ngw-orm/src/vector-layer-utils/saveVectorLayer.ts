@@ -12,11 +12,13 @@ export function saveVectorLayer(
   const features = vectorResourceToNgw(opt);
 
   return connection.driver
-    .patch(
-      'feature_layer.feature.collection',
-      { data: features },
-      { id: opt.resource.resource.id, ...FEATURE_REQUEST_PARAMS },
-    )
+    .route('feature_layer.feature.collection', { id: opt.resource.resource.id })
+
+    .patch({
+      // @ts-expect-error TODO: update api
+      json: features,
+      query: FEATURE_REQUEST_PARAMS,
+    })
     .then((resp) => {
       opt.items.forEach((x, i) => {
         x.id = resp[i].id;

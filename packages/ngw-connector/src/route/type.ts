@@ -17,7 +17,7 @@ export type Method = RequestMethod | Uppercase<RequestMethod>;
 
 export type ResponseType = 'blob' | 'json';
 
-export interface RequestOptions<
+export interface RouteRequestOptions<
   RT extends ResponseType = 'json',
   ReturnUrl extends boolean = false,
   Q = any,
@@ -58,7 +58,7 @@ export interface GetRequestOptions<
   Q = any,
   RT extends ResponseType = 'json',
   ReturnUrl extends boolean = false,
-> extends Omit<RequestOptions<RT, ReturnUrl, Q>, 'json' | 'body'> {
+> extends Omit<RouteRequestOptions<RT, ReturnUrl, Q>, 'json' | 'body'> {
   method?: 'GET';
 }
 export interface RequestOptionsJSON<
@@ -66,7 +66,7 @@ export interface RequestOptionsJSON<
   B = string | null | boolean | Record<string, any> | any[],
   RT extends ResponseType = 'json',
   M extends Method = Method,
-> extends Omit<RequestOptions<RT, false, Q, B>, 'json' | 'body'> {
+> extends Omit<RouteRequestOptions<RT, false, Q, B>, 'json' | 'body'> {
   json: B;
   method?: M;
 }
@@ -75,7 +75,7 @@ export interface RequestOptionsBody<
   Q = any,
   RT extends ResponseType = 'json',
   M extends Method = Method,
-> extends Omit<RequestOptions<RT, false, Q>, 'json' | 'body'> {
+> extends Omit<RouteRequestOptions<RT, false, Q>, 'json' | 'body'> {
   body: string;
   method?: M;
 }
@@ -101,9 +101,9 @@ export type PatchRequestOptions<
 export type DeleteRequestOptions<
   Q = any,
   RT extends ResponseType = 'json',
-> = RequestOptions<RT, false, Q>;
+> = RouteRequestOptions<RT, false, Q>;
 
-export interface RouteRequestOptions<
+export interface MethodRequestOptions<
   Q = any,
   B = any,
   RT extends ResponseType = 'json',
@@ -122,8 +122,8 @@ export type RequestOptionsByMethod<
   B = any,
   RT extends ResponseType = 'json',
   ReturnUrl extends boolean = false,
-> = M extends keyof RouteRequestOptions
-  ? RouteRequestOptions<Q, B, RT, ReturnUrl>[M]
+> = M extends keyof MethodRequestOptions
+  ? MethodRequestOptions<Q, B, RT, ReturnUrl>[M]
   : never;
 
 export type ApiRouteParams = Record<string, string>;

@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Ngw Viewer</title>
+    <title>NGW Viewer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
       html,
@@ -13,24 +13,23 @@
       }
       #wrap {
         display: flex;
-        height: 100%; /* This makes sure that #wrap takes full viewport height */
+        height: 100%;
       }
       #tree {
         width: 35%;
         min-width: 300px;
         overflow: auto;
-        height: 100%; /* Ensure #tree takes up full height of the container */
+        height: 100%;
       }
       #map {
-        flex-grow: 1; /* Takes the remaining space */
-        height: 100%; /* Full height */
+        flex-grow: 1;
+        height: 100%;
       }
       .tree-container__item {
         padding: 2px;
       }
       .tree-container__item-children {
         padding: 0;
-
         padding-left: 15px;
       }
       .tree-container__item-btn {
@@ -66,7 +65,7 @@
         osm: true,
       }).then((ngwMap) => {
         const connector = ngwMap.connector;
-        let cancelActivePreview = null;
+        let abortController = null;
         updateTreeItems(tree, 0);
 
         function updateTreeItems(treeNode, resourceId) {
@@ -86,14 +85,14 @@
           const el = document.createElement('div');
           el.className = 'tree-container__item';
 
-          // Group Toggler
-          const groupToggler = createToggler(item, el);
-          el.appendChild(groupToggler);
-
           // Resource Name
           const nameBlock = document.createElement('span');
           nameBlock.textContent = item.resource.display_name;
           el.appendChild(nameBlock);
+
+          // Group Toggler
+          const groupToggler = createToggler(item, el);
+          el.insertBefore(groupToggler, nameBlock);
 
           // Preview Button
           if (allowedPreviewClsList.includes(item.resource.cls)) {
@@ -132,27 +131,33 @@
         }
 
         function resourcePreview(item) {
-          if (cancelActivePreview) {
-            cancelActivePreview();
+          if (abortController) {
+            abortController.abort('Load next layer');
           }
-          const promise = NgwKit.fetchNgwExtent({
+
+          abortController = new AbortController();
+          ngwMap.removeLayer('active-layer');
+          ngwMap.setView({ bounds: undefined, maxBounds: undefined });
+
+          NgwKit.fetchNgwExtent({
             connector,
             resourceId: item.resource.id,
-          }).then((bounds) => {
-            ngwMap.setView({ bounds, maxBounds: bounds });
-            ngwMap.addNgwLayer({
-              id: 'active-layer',
-              resource: item.resource.id,
+            signal: abortController.signal,
+          })
+            .then((bounds) => {
+              ngwMap.setView({ bounds, maxBounds: bounds });
+              ngwMap.addNgwLayer({
+                id: 'active-layer',
+                resource: item.resource.id,
+              });
+            })
+            .catch((error) => {
+              if (error.name !== 'AbortError') {
+                console.error(error);
+              }
             });
-          });
-
-          cancelActivePreview = () => {
-            ngwMap.removeLayer('active-layer');
-            promise.cancel();
-          };
         }
       });
-
       // If this example helped you, you can ★star★ our repository on github
       // https://github.com/nextgis/nextgis_frontend
     </script>

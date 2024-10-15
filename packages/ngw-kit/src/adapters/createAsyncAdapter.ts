@@ -19,9 +19,9 @@ import type {
   ResourceAdapter,
 } from '../interfaces';
 import type NgwConnector from '@nextgis/ngw-connector';
-import type { ResourceCls, ResourceItem } from '@nextgis/ngw-connector';
 import type { Type } from '@nextgis/utils';
 import type { WebMap } from '@nextgis/webmap';
+import type { CompositeRead, ResourceCls } from '@nextgisweb/resource/type/api';
 
 export const classAdapters: Record<string, GetClassAdapter> = {};
 
@@ -64,12 +64,12 @@ export async function createAsyncAdapter(
   connector: NgwConnector,
 ): Promise<Type<ResourceAdapter> | undefined> {
   let adapter: ClassAdapter | undefined;
-  let item: ResourceItem | undefined;
+  let item: CompositeRead | undefined;
   const adapterType = options.adapter;
   const resourceId = await resourceIdFromLayerOptions(options, connector);
   if (resourceId) {
     const resourceOptions = options as NgwLayerOptions;
-    const itemFromResOpt = resourceOptions.resource as ResourceItem;
+    const itemFromResOpt = resourceOptions.resource as CompositeRead;
     if (
       itemFromResOpt &&
       itemFromResOpt.resource &&
@@ -119,7 +119,7 @@ export async function createAsyncAdapter(
         } else if (cls === 'basemap_layer') {
           adapter = createBasemapLayerAdapter(adapterOptions);
         } else {
-          if (adapterType === 'GEOJSON') {
+          if (adapterType === 'GEOJSON' && item.resource.parent) {
             const parentItem = await connector.getResource(
               item.resource.parent.id,
             );

@@ -5,16 +5,15 @@ import { getMetadataArgsStorage } from '..';
 import { NgwResources } from '../ngw/NgwResources';
 
 import type { ConnectionOptions } from './ConnectionOptions';
-import type { DeepPartial } from '../common/DeepPartial';
 import type { ResourceMetadataArgs } from '../metadata-args/ResourceMetadataArgs';
 import type { BaseResource } from '../repository/BaseResource';
 import type { SyncOptions } from '../repository/SyncOptions';
-import type { ResourceSyncItem } from '../sync-items/ResourceSyncItem';
+import type { ResourceIdKeynameDef } from '@nextgis/ngw-connector';
 import type {
-  Resource,
-  ResourceIdKeynameDef,
-  ResourceItem,
-} from '@nextgis/ngw-connector';
+  CompositeCreate,
+  CompositeRead,
+  ResourceRead,
+} from '@nextgisweb/resource/type/api';
 
 /**
  * Connection is a single NGW connection.
@@ -119,17 +118,17 @@ export class Connection {
 
   async updateResource(Resource: typeof BaseResource): Promise<void> {
     const item = Resource.item;
-    if (item && item.resource) {
-      const payload = this.getResourceNgwPayload(
+
+    if (item && item.resource && item.resource.parent) {
+      const data = this.getResourceNgwPayload(
         Resource,
         item.resource.parent.id,
       );
-      delete payload?.resource?.cls;
 
       await this.driver.put(
         'resource.item',
         {
-          data: payload,
+          data,
         },
         { id: item.resource.id },
       );
@@ -137,8 +136,8 @@ export class Connection {
   }
 
   async getResourceItem(
-    resource: ResourceIdKeynameDef | DeepPartial<Resource>,
-  ): Promise<ResourceItem | undefined> {
+    resource: ResourceIdKeynameDef | ResourceRead,
+  ): Promise<CompositeRead | undefined> {
     return this.driver.getResource(resource);
   }
 
@@ -146,8 +145,8 @@ export class Connection {
    * @deprecated use getResourceItem instead
    */
   async getResource(
-    resource: ResourceIdKeynameDef | DeepPartial<Resource>,
-  ): Promise<ResourceItem | undefined> {
+    resource: ResourceIdKeynameDef | ResourceRead,
+  ): Promise<CompositeRead | undefined> {
     try {
       return this.getResourceItem(resource);
     } catch {
@@ -170,13 +169,18 @@ export class Connection {
     resource: typeof BaseResource,
     parent: number,
     opt: Partial<SyncOptions> = {},
-  ): DeepPartial<ResourceSyncItem> | undefined {
+  ): CompositeCreate | undefined {
     const table = getMetadataArgsStorage().filterTables(
       resource,
     )[0] as ResourceMetadataArgs;
     if (table) {
       const options = { ...table, ...opt } as SyncOptions;
-      const resourceItem: DeepPartial<ResourceSyncItem> = {
+
+      if (!options.display_name) {
+        throw new Error('The resource property display_name is required');
+      }
+
+      const resourceItem: CompositeCreate = {
         resource: {
           cls: table.type,
           parent: {
@@ -239,7 +243,9 @@ export class Connection {
     let res;
     if (getExisted && payload.resource) {
       try {
-        const exist = await this.getResourceItem(payload.resource);
+        const exist = await this.getResourceItem(
+          payload.resource as ResourceRead,
+        );
         if (exist) {
           res = await resource.connect(exist.resource.id, this);
         }

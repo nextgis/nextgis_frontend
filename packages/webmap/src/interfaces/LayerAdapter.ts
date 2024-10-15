@@ -111,7 +111,7 @@ export interface AdapterOptions<
    * From 0-transparent to 1-visible
    * @defaultValue 1
    */
-  opacity?: number;
+  opacity?: number | null;
   /**
    * Fit map to layer extent
    * @defaultValue false

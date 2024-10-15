@@ -1,5 +1,5 @@
 {
-  "name": "NGW TMS layer with auth",
+  "name": "NGW TMS Layer With Auth",
   "description": "Add a tile layer from protected NGW resource to a Web map",
   "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"],
   "tags": ["tms", "tile"]

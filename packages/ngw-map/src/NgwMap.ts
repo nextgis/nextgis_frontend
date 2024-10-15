@@ -1,6 +1,7 @@
 import { EventEmitter } from 'events';
 
 import { getIcon } from '@nextgis/icons';
+import { AbortError } from '@nextgis/ngw-connector';
 import {
   createIdentifyItem,
   createNgwLayerAdapter,
@@ -40,7 +41,6 @@ import type {
   FeatureLayersIdentifyItems,
   LayerFeature,
   ResourceDefinition,
-  ResourceItem,
 } from '@nextgis/ngw-connector';
 import type {
   FetchNgwItemsOptions,
@@ -65,6 +65,7 @@ import type {
   OnLayerMouseOptions,
   WebMapEvents,
 } from '@nextgis/webmap';
+import type { CompositeRead } from '@nextgisweb/resource/type/api';
 import type { Feature, FeatureCollection, Geometry, Polygon } from 'geojson';
 import type StrictEventEmitter from 'strict-event-emitter-types';
 
@@ -194,6 +195,7 @@ export class NgwMap<
             options.adapterOptions.setViewDelay = this.options.setViewDelay;
           }
         }
+
         const adapter = createNgwLayerAdapter(options, this, this.connector);
         const adapterOpts = {
           visibility: true,
@@ -319,9 +321,18 @@ export class NgwMap<
 
   fetchIdentifyGeoJson(
     identify: NgwIdentify,
-    multiple = false,
+    { multiple, signal }: { multiple?: boolean; signal?: AbortSignal } = {},
   ): Promise<Feature | undefined> {
     const abortController = new AbortController();
+
+    if (signal) {
+      if (signal.aborted) {
+        return Promise.reject(new AbortError());
+      }
+      signal.addEventListener('abort', () => {
+        abortController.abort('AbortError');
+      });
+    }
 
     const promise = fetchIdentifyGeoJson({
       identify,
@@ -344,7 +355,7 @@ export class NgwMap<
     identify: NgwIdentify,
     multiple = false,
   ): Promise<Feature | undefined> {
-    return this.fetchIdentifyGeoJson(identify, multiple);
+    return this.fetchIdentifyGeoJson(identify, { multiple });
   }
 
   async getNgwLayers(): Promise<NgwLayers> {
@@ -366,7 +377,12 @@ export class NgwMap<
       if (mem.layer.getDependLayers) {
         const dependLayers = mem.layer.getDependLayers() as NgwWebmapItem[];
         const dependFit = dependLayers.find((x) => {
-          return x.item && x.item.style_parent_id === id;
+          return (
+            x.item &&
+            'style_parent_id' in x.item &&
+            x.item.style_parent_id !== undefined &&
+            x.item.style_parent_id === id
+          );
         });
         if (dependFit) {
           return dependFit.layer;
@@ -403,7 +419,7 @@ export class NgwMap<
           this.fitBounds(bounds, options);
         }
       } else {
-        let item: ResourceItem | undefined;
+        let item: CompositeRead | undefined;
         if (ngwLayer.layer.item) {
           item = ngwLayer.layer.item;
         } else {
@@ -411,14 +427,6 @@ export class NgwMap<
           item = await this.connector.getResource(resourceId);
         }
         if (item) {
-          fetchNgwExtent({
-            resourceId: item.resource.id,
-            connector: this.connector,
-          }).then((extent) => {
-            if (extent) {
-              this.fitBounds(extent, options);
-            }
-          });
           this.fitResource(item.resource.id);
         }
       }
@@ -670,8 +678,8 @@ export class NgwMap<
           group.splice(index, 1);
         }
       };
-      promise.then(removeFromGroup);
-      promise.catch(removeFromGroup);
+      promise.then(removeFromGroup, removeFromGroup);
+
       group.push([promise, abortController]);
     }
   }

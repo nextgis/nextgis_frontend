@@ -1,1 +1,1 @@
-{"name":"Line with mixed arrows","description":"Connect two points with a line that has an arrow originating from the line at one end and an arrow from a marker at the other end."}
+{"name":"Line with arrows","description":"This example demonstrates how to connect points with a line that includes arrows at both ends. One arrow is rendered as part of the line, while the other is an SVG marker.","tags":["arrows","lines","vector","svg marker","geometry","map"]}

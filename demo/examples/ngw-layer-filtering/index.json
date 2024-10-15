@@ -1,5 +1,5 @@
 {
-  "name": "NGW layer filtering",
-  "description": "Set the filter for NGW layer by features propery.",
+  "name": "NGW Layer Filtering with Sorting",
+  "description": "Filter and sort NGW layers based on feature properties. Allows users to apply filters, limit results, and sort features by selected fields in ascending or descending order.",
   "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"]
 }

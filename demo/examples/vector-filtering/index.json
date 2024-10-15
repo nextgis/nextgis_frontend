@@ -1,5 +1,6 @@
 {
-  "name": "Vector layer filtering",
-  "description": "Filter NGW layer by attribute",
-  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"]
+  "name": "Filter vector layer by attribute",
+  "description": "Filter features of a vector layer based on a selected attribute value using a dropdown control.",
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"],
+  "tags": ["filter", "vector", "layer", "attributes", "dropdown", "NGW"]
 }

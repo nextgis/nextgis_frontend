@@ -1,3 +1,17 @@
+// import {
+//   BasemapWebMapItemRead,
+//   BasemapWebMapRead,
+// } from '@nextgisweb/basemap/type/api';
+// import { FeatureLayerRead } from '@nextgisweb/feature-layer/type/api';
+// import { WebMapRead } from '@nextgisweb/webmap/type/api';
+
+// import type {
+//   CompositeRead,
+//   ResourceCls as NGWResourceCls,
+//   ResourceRead,
+// } from '@nextgisweb/resource/type/api';
+// import type { VectorLayerRead } from '@nextgisweb/vector-layer/type/api';
+
 export interface TreeItem {
   item_type: 'root' | 'group' | 'layer';
   display_name?: string;
@@ -37,40 +51,7 @@ export interface Permission {
   propagate: boolean;
 }
 
-export type ResourceCls =
-  // | 'resource'
-  | 'resource_group'
-  | 'postgis_layer'
-  | 'wmsserver_service'
-  | 'basemap_layer'
-  | 'postgis_connection'
-  | 'webmap'
-  | 'wfsserver_service'
-  | 'vector_layer'
-  | 'raster_layer'
-  | 'mapserver_style'
-  | 'qgis_vector_style'
-  | 'qgis_raster_style'
-  | 'raster_style'
-  | 'file_bucket'
-  | 'lookup_table'
-  | 'wmsclient_layer'
-  | 'wmsclient_connection'
-  | 'formbuilder_form'
-  | 'file_bucket'
-  | 'svg_marker_library'
-  | 'ogcfserver_service'
-  | 'tmsclient_connection'
-  | 'tileset'
-  | 'collector_project'
-  | 'demo_project'
-  | 'trackers_group'
-  | 'tracker'
-  // tms branch
-  | 'terrain_provider'
-  | 'model_3d'
-  | 'tmsclient_layer';
-
+// export type ResourceCls = NGWResourceCls;
 export interface ResourceHierarchy {
   id: number;
   parent: {
@@ -78,23 +59,7 @@ export interface ResourceHierarchy {
   };
 }
 
-export interface Resource {
-  cls: ResourceCls;
-  id: number;
-  parent: {
-    id: number;
-  };
-  owner_user: {
-    id: number;
-  };
-  permissions: Permission[];
-  keyname?: string | null;
-  display_name: string;
-  description?: string | null;
-  children: boolean;
-  interfaces: any[];
-  scopes: string[];
-}
+// export type Resource = ResourceRead;
 
 export interface BookmarkProperties {
   name: string;
@@ -115,16 +80,7 @@ export interface NgwTimeFormat {
 
 export type NgwDateTimeFormat = NgwDateFormat & NgwTimeFormat;
 
-export interface WebmapResource {
-  extent_left: number;
-  extent_right: number;
-  extent_bottom: number;
-  extent_top: number;
-  extent_constrained: boolean;
-  draw_order_enabled: boolean;
-  bookmark_resource: ResourceHierarchy;
-  root_item: TreeGroup;
-}
+// export type WebmapResource = WebMapRead;
 
 export interface BasemapResource {
   url: string;
@@ -134,17 +90,9 @@ export interface BasemapResource {
   qms: string;
 }
 
-export interface BasemapWebmapItem {
-  resource_id: number;
-  display_name: string;
-  position?: number;
-  enabled?: boolean;
-  opacity?: number;
-}
+// export type BasemapWebmapItem = BasemapWebMapItemRead;
 
-export interface BasemapWebmap {
-  basemaps: BasemapWebmapItem[];
-}
+// export type BasemapWebmap = BasemapWebMapRead;
 
 export interface LookupTableResource {
   items: Record<string, string>;
@@ -173,9 +121,7 @@ export interface FeatureLayerField {
   typemod?: unknown;
 }
 
-export interface FeatureResource {
-  fields: FeatureLayerField[];
-}
+// export type FeatureResource = FeatureLayerRead;
 
 export type GeometryType =
   | 'POINT'
@@ -191,10 +137,7 @@ export type GeometryType =
   | 'MULTILINESTRINGZ'
   | 'MULTIPOLYGONZ';
 
-export interface VectorLayer {
-  srs: { id: number };
-  geometry_type: GeometryType;
-}
+// export type VectorLayer = VectorLayerRead;
 
 export interface FileBucket {
   files: NgwFile[];
@@ -275,27 +218,5 @@ export interface Resmeta {
   items: Record<string, any>;
 }
 
-export interface ResourceItemMain {
-  resource: Resource;
-  resmeta: Resmeta;
-}
-
 // Ngw api settings
-export interface ResourceItem extends ResourceItemMain {
-  [cls: string]: any;
-  webmap?: WebmapResource;
-  feature_layer?: FeatureResource;
-  vector_layer?: VectorLayer;
-  basemap_layer?: BasemapResource;
-  basemap_webmap?: BasemapWebmap;
-  lookup_table?: LookupTableResource;
-  file_bucket?: FileBucket;
-  wmsserver_service?: WmsServerService;
-  wmsclient_layer?: WmsClientLayer;
-  wmsclient_connection?: WmsClientConnection;
-}
-
-export interface VectorLayerResourceItem extends ResourceItemMain {
-  vector_layer: VectorLayer;
-  feature_layer: FeatureResource;
-}
+// export type ResourceItem = CompositeRead;

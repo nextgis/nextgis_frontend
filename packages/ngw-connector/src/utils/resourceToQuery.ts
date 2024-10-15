@@ -2,8 +2,8 @@ import { defined } from '@nextgis/utils';
 
 import { isObject } from './isObject';
 
-import type { Resource } from '../types/ResourceItem';
 import type { DeepPartial } from '@nextgis/utils';
+import type { ResourceRead } from '@nextgisweb/resource/type/api';
 
 const exclude = ['description'];
 
@@ -18,7 +18,7 @@ const exclude = ['description'];
  * @param resource - Any property from NGW resource item
  */
 export function resourceToQuery(
-  resource: DeepPartial<Resource>,
+  resource: DeepPartial<ResourceRead>,
   prefix = '',
 ): Record<string, unknown> {
   prefix = prefix ? prefix + '__' : '';
@@ -27,7 +27,10 @@ export function resourceToQuery(
     if (exclude.indexOf(key) === -1) {
       if (isObject(value)) {
         if (key === 'owner_user') {
-          const children = resourceToQuery(value as DeepPartial<Resource>, key);
+          const children = resourceToQuery(
+            value as DeepPartial<ResourceRead>,
+            key,
+          );
           Object.assign(query, children);
         } else if (key === 'parent' && 'id' in value) {
           query.parent_id = value.id;

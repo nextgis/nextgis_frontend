@@ -32,7 +32,7 @@ export class TileAdapter extends BaseAdapter<TileAdapterOptions, Layer> {
     const urlLayer = new UrlTemplateImageryProvider(imageProviderOpt);
     // based on https://sandcastle.cesium.com/index.html?src=Imagery%2520Layers%2520Manipulation.html
     const layer = new ImageryLayer(urlLayer, { show: false });
-    if (this.options.opacity !== undefined) {
+    if (this.options.opacity !== undefined && this.options.opacity !== null) {
       layer.alpha = this.options.opacity;
     }
     this._layer = layer;

@@ -1,1 +1,1 @@
-{"name":"Tile layer","description":"Add a tile layer to a Web map"}
+{"name":"Tile Layer","description":"Demonstrates how to add a tile layer from an external source, such as OpenStreetMap, to the map. The example shows how to configure tile layer options like subdomains and attribution.","tags":["tile layer","OpenStreetMap","map","external source","subdomains","attribution"]}

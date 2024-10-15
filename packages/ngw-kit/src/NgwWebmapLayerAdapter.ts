@@ -16,19 +16,17 @@ import type {
   NgwWebmapAdapterOptions,
   NgwWebmapLayerAdapterEvents,
   ResourceAdapter,
-  TreeGroup,
+  TreeChildItem,
+  TreeItem,
   TreeLayer,
 } from './interfaces';
 import type { ItemOptions } from '@nextgis/item';
-import type {
-  BaseRequestOptions,
-  BasemapWebmap,
-  LayerLegend,
-  ResourceItem,
-  WebmapResource,
-} from '@nextgis/ngw-connector';
+import type { BaseRequestOptions, LayerLegend } from '@nextgis/ngw-connector';
 import type { LngLatBoundsArray, Type } from '@nextgis/utils';
 import type { RasterAdapterOptions, WebMap } from '@nextgis/webmap';
+import type { BasemapWebMapRead } from '@nextgisweb/basemap/type/api';
+import type { CompositeRead } from '@nextgisweb/resource/type/api';
+import type { WebMapRead } from '@nextgisweb/webmap/type/api';
 import type StrictEventEmitter from 'strict-event-emitter-types';
 
 export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
@@ -47,7 +45,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
   > = new EventEmitter();
   protected _extent?: LngLatBoundsArray;
 
-  private webmapResource?: WebmapResource;
+  private webmapResource?: WebMapRead;
 
   private _webmapBaselayersIds: string[] = [];
   private _lastActiveBaselayer?: string;
@@ -73,7 +71,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
   async addLayer(options: NgwWebmapAdapterOptions): Promise<any> {
     this.options = { ...this.options, ...options };
     this.layer = await this._getWebMapLayerItem();
-    const extentConstrained = this.webmapResource?.extent_constrained;
+    const extentConstrained = this.webmapResource?.constraining_extent;
     if (
       this.options.useExtentConstrained &&
       this._extent &&
@@ -146,7 +144,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
 
   getBookmarksResourceId(): number | undefined {
     const webmap = this.webmapResource;
-    if (webmap) {
+    if (webmap && webmap.bookmark_resource) {
       return webmap.bookmark_resource.id;
     }
   }
@@ -208,9 +206,11 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
     deps = deps.sort((a, b) => b.id - a.id);
     deps.forEach((x) => {
       const item = x.item;
-      const parentId = item.style_parent_id;
+      const parentId =
+        'style_parent_id' in item ? item.style_parent_id : undefined;
       if (
         parentId !== undefined &&
+        parentId !== null &&
         item.item_type === 'layer' &&
         item.layer_identifiable
       ) {
@@ -246,7 +246,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
         ...this.options,
         withCredentials,
         headers,
-        drawOrderEnabled: webmap.draw_order_enabled,
+        drawOrderEnabled: webmap.draw_order_enabled ?? false,
       };
 
       const layer = new this.NgwWebmapItem(
@@ -266,17 +266,12 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
     const data = await this.options.connector.getResource(id);
     if (data) {
       const webmap = data[
-        this.webmapClassName as keyof ResourceItem
-      ] as WebmapResource;
+        this.webmapClassName as keyof CompositeRead
+      ] as WebMapRead;
       this.webmapResource = webmap;
       this._setupBaselayers(data);
       if (webmap) {
-        this._extent = [
-          webmap.extent_left,
-          webmap.extent_bottom,
-          webmap.extent_right,
-          webmap.extent_top,
-        ];
+        this._extent = webmap.initial_extent ?? undefined;
         this._updateItemsParams(webmap.root_item, this.options.webMap, data);
         return webmap;
       } else {
@@ -285,7 +280,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
     }
   }
 
-  private _setupBaselayers(data: ResourceItem) {
+  private _setupBaselayers(data: CompositeRead) {
     const webMap = this.options.webMap;
     const basemap = this.options.useBasemap ?? true;
     if (basemap) {
@@ -304,7 +299,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
     }
   }
 
-  private _setBasemaps(baseWebmap: BasemapWebmap) {
+  private _setBasemaps(baseWebmap: BasemapWebMapRead) {
     const webMap = this.options.webMap;
     // to avoid set many basemaps on init
     let enabledAlreadySet = false;
@@ -334,31 +329,35 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
   }
 
   private _updateItemsParams(
-    item: TreeGroup | TreeLayer,
+    item: TreeItem,
     webMap: WebMap,
-    data: ResourceItem,
+    data: CompositeRead,
   ) {
     if (item) {
       if (item.item_type === 'group' || item.item_type === 'root') {
-        if (item.children) {
-          item.children = item.children.map((x) =>
+        if ('children' in item && item.children) {
+          const children = item.children.map((x) =>
             this._updateItemsParams(x, webMap, data),
           );
+          item.children = children as TreeChildItem[];
         }
         if (item.item_type === 'root') {
           item.display_name = data.resource.display_name;
         }
       } else if (item.item_type === 'layer') {
+        const layerItem = item as TreeLayer;
+
         const url = fixUrlStr(
           this.options.connector.options.baseUrl +
             '/api/component/render/image',
         );
-        const resourceId = item.layer_style_id;
-        item.url = url;
-        item.resourceId = resourceId;
-        item.updateWmsParams = (params) =>
+        const resourceId = layerItem.layer_style_id;
+        layerItem.url = url;
+        layerItem.resourceId = resourceId;
+        layerItem.updateWmsParams = (params) =>
           updateImageParams(params, resourceId);
-        const adapter = item.layer_adapter.toUpperCase() as NgwLayerAdapterType;
+        const adapter =
+          layerItem.layer_adapter.toUpperCase() as NgwLayerAdapterType;
         const layerAdapterOptions = ngwApiToAdapterOptions({
           options: {
             adapter,
@@ -368,7 +367,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
           baseUrl: this.options.connector.options.baseUrl || '',
         }) as RasterAdapterOptions;
         item = {
-          ...item,
+          ...layerItem,
           ...layerAdapterOptions,
         };
       }

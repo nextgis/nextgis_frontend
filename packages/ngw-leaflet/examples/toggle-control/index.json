@@ -1,1 +1,1 @@
-{"name":"Toggle button control","description":"This is a two-state control button. Useful for switching modes of operation."}
+{"name":"Toggle button control","description":"A two-state toggle button control. Switches the visibility of a webmap layer between ON and OFF states.","tags":["toggle","control","button","visibility","layer","webmap"]}

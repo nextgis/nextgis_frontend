@@ -1,5 +1,6 @@
 {
-  "name": "Vector painting",
-  "description": "",
-  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"]
+  "name": "Vector paint styles",
+  "description": "Apply different paint styles to vector layers based on their properties. This example shows how to dynamically style points, lines, and polygons using color, opacity, and other visual properties.",
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"],
+  "tags": ["vector", "paint", "style", "geometry", "properties"]
 }

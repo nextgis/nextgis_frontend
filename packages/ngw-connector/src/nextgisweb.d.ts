@@ -4,10 +4,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 declare module '@nextgisweb/pyramid/type/api' {
-  import type * as ns355 from '@nextgisweb/resource/type/api';
-  import type * as ns650 from '@nextgisweb/tracker/type/api';
-  import type * as ns155 from '@nextgisweb/file-upload/type/api';
+  import type * as ns594 from '@nextgisweb/tracker/type/api';
   import type * as ns426 from '@nextgisweb/webmap/type/api';
+  import type * as ns355 from '@nextgisweb/resource/type/api';
+  import type * as ns155 from '@nextgisweb/file-upload/type/api';
+  import type * as ns1592 from '@nextgisweb/ngwcluster/type/api';
+  import type * as ns1588 from '@nextgisweb/cadaster/type/api';
 
   export {};
   export type HealthcheckResponse = {
@@ -60,9 +62,11 @@ declare module '@nextgisweb/pyramid/type/api' {
   };
   export type CSettingsRead = {
     pyramid?: PyramidCSettingsRead;
-    tracker?: ns650.TrackerCSettingsRead;
+    tracker?: ns594.TrackerCSettingsRead;
     resource?: ns355.ResourceCSettingsRead;
     webmap?: ns426.WebMapCSettingsRead;
+    cadaster?: ns1588.CadasterCSettingsRead;
+    ngwcluster?: ns1592.NGWClusterCSettingsRead;
   };
   export type PyramidCSettingsUpdate = {
     allow_origin?: string[] | null;
@@ -74,9 +78,11 @@ declare module '@nextgisweb/pyramid/type/api' {
   };
   export type CSettingsUpdate = {
     pyramid?: PyramidCSettingsUpdate;
-    tracker?: ns650.TrackerCSettingsUpdate;
+    tracker?: ns594.TrackerCSettingsUpdate;
     resource?: ns355.ResourceCSettingsUpdate;
     webmap?: ns426.WebMapCSettingsUpdate;
+    cadaster?: ns1588.CadasterCSettingsUpdate;
+    ngwcluster?: ns1592.NGWClusterCSettingsUpdate;
   };
 }
 
@@ -228,34 +234,29 @@ declare module '@nextgisweb/auth/type/api' {
 }
 
 declare module '@nextgisweb/resource/type/api' {
-  import type * as ns532 from '@nextgisweb/tileset/type/api';
-  import type * as ns416 from '@nextgisweb/render/type/api';
-  import type * as ns535 from '@nextgisweb/basemap/type/api';
-  import type * as ns544 from '@nextgisweb/qgis/type/api';
-  import type * as ns635 from '@nextgisweb/scene-3d/type/api';
-  import type * as ns647 from '@nextgisweb/tileset-3d/type/api';
+  import type * as ns519 from '@nextgisweb/tmsclient/type/api';
   import type * as ns464 from '@nextgisweb/postgis/type/api';
-  import type * as ns650 from '@nextgisweb/tracker/type/api';
-  import type * as ns592 from '@nextgisweb/mapserver/type/api';
-  import type * as ns598 from '@nextgisweb/terrain-provider/type/api';
-  import type * as ns482 from '@nextgisweb/wfsserver/type/api';
+  import type * as ns476 from '@nextgisweb/wfsserver/type/api';
   import type * as ns421 from '@nextgisweb/svg-marker-library/type/api';
-  import type * as ns601 from '@nextgisweb/model-3d/type/api';
-  import type * as ns491 from '@nextgisweb/wfsclient/type/api';
-  import type * as ns619 from '@nextgisweb/style-3d/type/api';
-  import type * as ns579 from '@nextgisweb/gpdobj/type/api';
+  import type * as ns494 from '@nextgisweb/wmsclient/type/api';
+  import type * as ns555 from '@nextgisweb/qgis/type/api';
+  import type * as ns503 from '@nextgisweb/wmsserver/type/api';
+  import type * as ns509 from '@nextgisweb/ogcfserver/type/api';
+  import type * as ns527 from '@nextgisweb/basemap/type/api';
+  import type * as ns524 from '@nextgisweb/tileset/type/api';
   import type * as ns469 from '@nextgisweb/raster-layer/type/api';
-  import type * as ns527 from '@nextgisweb/tmsclient/type/api';
-  import type * as ns475 from '@nextgisweb/raster-mosaic/type/api';
+  import type * as ns594 from '@nextgisweb/tracker/type/api';
+  import type * as ns542 from '@nextgisweb/collector/type/api';
   import type * as ns426 from '@nextgisweb/webmap/type/api';
-  import type * as ns389 from '@nextgisweb/resmeta/type/api';
-  import type * as ns502 from '@nextgisweb/wmsclient/type/api';
+  import type * as ns551 from '@nextgisweb/mapserver/type/api';
+  import type * as ns548 from '@nextgisweb/formbuilder/type/api';
   import type * as ns392 from '@nextgisweb/social/type/api';
-  import type * as ns511 from '@nextgisweb/wmsserver/type/api';
-  import type * as ns517 from '@nextgisweb/ogcfserver/type/api';
+  import type * as ns389 from '@nextgisweb/resmeta/type/api';
   import type * as ns395 from '@nextgisweb/lookup-table/type/api';
   import type * as ns459 from '@nextgisweb/vector-layer/type/api';
   import type * as ns410 from '@nextgisweb/feature-layer/type/api';
+  import type * as ns416 from '@nextgisweb/render/type/api';
+  import type * as ns483 from '@nextgisweb/wfsclient/type/api';
 
   export {};
   export type ResourceCls =
@@ -268,7 +269,6 @@ declare module '@nextgisweb/resource/type/api' {
     | 'postgis_connection'
     | 'postgis_layer'
     | 'raster_layer'
-    | 'raster_mosaic'
     | 'raster_style'
     | 'wfsserver_service'
     | 'wfsclient_connection'
@@ -281,27 +281,12 @@ declare module '@nextgisweb/resource/type/api' {
     | 'tmsclient_layer'
     | 'tileset'
     | 'basemap_layer'
+    | 'collector_project'
     | 'demo_project'
+    | 'formbuilder_form'
+    | 'mapserver_style'
     | 'qgis_raster_style'
     | 'qgis_vector_style'
-    | 'eeko_storage'
-    | 'gallery'
-    | 'gpdobj_storage'
-    | 'gpdobj_group'
-    | 'gpdobj_dm'
-    | 'gpdobj_dm_section'
-    | 'gpdobj_dm_group'
-    | 'gpdobj_pi_dm'
-    | 'gpdobj_oper_dm'
-    | 'gpdobj_pir_obj'
-    | 'gpdobj_pir_oip'
-    | 'gpdobj_pir_dm'
-    | 'mapserver_style'
-    | 'terrain_provider'
-    | 'model_3d'
-    | 'style_3d'
-    | 'scene_3d'
-    | 'tileset_3d'
     | 'trackers_group'
     | 'tracker';
   export type ResourceInterface =
@@ -321,7 +306,8 @@ declare module '@nextgisweb/resource/type/api' {
     | 'data'
     | 'connection'
     | 'service'
-    | 'webmap';
+    | 'webmap'
+    | 'Collector';
   export type BlueprintResource = {
     identity: ResourceCls;
     label: string;
@@ -394,37 +380,24 @@ declare module '@nextgisweb/resource/type/api' {
     postgis_connection?: ns464.PostgisConnectionRead;
     postgis_layer?: ns464.PostgisLayerRead;
     raster_layer?: ns469.RasterLayerRead;
-    raster_mosaic?: ns475.RasterMosaicRead;
-    wfsserver_service?: ns482.ServiceRead;
-    wfsclient_connection?: ns491.WFSConnectionRead;
-    wfsclient_layer?: ns491.WFSLayerRead;
-    wmsclient_connection?: ns502.ConnectionRead;
-    wmsclient_layer?: ns502.LayerRead;
-    wmsserver_service?: ns511.ServiceRead;
-    ogcfserver_service?: ns517.ServiceRead;
-    tmsclient_connection?: ns527.ConnectionRead;
-    tmsclient_layer?: ns527.LayerRead;
-    tileset?: ns532.TilesetRead;
-    basemap_layer?: ns535.BasemapLayerRead;
-    basemap_webmap?: ns535.BasemapWebMapRead;
-    qgis_vector_style?: ns544.QgisVectorStyleRead;
-    qgis_raster_style?: ns544.QgisRasterStyleRead;
-    gallery?: any;
-    gpdobj_dm_section?: ns579.GPDObjDMSectionRead;
-    gpdobj_dm?: ns579.GPDObjDMRead;
-    gpdobj_pi_dm?: ns579.GPDObjPIDMRead;
-    gpdobj_pir_obj?: ns579.GPDObjPIRObjRead;
-    gpdobj_pir_oip?: ns579.GPDObjPIROIPRead;
-    gpdobj_pir_dm?: ns579.GPDObjPIRDMRead;
-    mapserver_style?: ns592.MapserverStyleRead;
-    terrain_provider?: ns598.TerrainProviderRead;
-    model_3d?: ns601.Model3DRead;
-    style_3d?: ns619.Style3DRead;
-    scene_3d?: ns635.Scene3DRead;
-    scene3d_basemap?: ns635.Scene3DBasemapRead;
-    scene3d_terrain?: ns635.Scene3DTerrainRead;
-    tileset_3d?: ns647.Tileset3DRead;
-    tracker?: ns650.TrackerRead;
+    wfsserver_service?: ns476.ServiceRead;
+    wfsclient_connection?: ns483.WFSConnectionRead;
+    wfsclient_layer?: ns483.WFSLayerRead;
+    wmsclient_connection?: ns494.ConnectionRead;
+    wmsclient_layer?: ns494.LayerRead;
+    wmsserver_service?: ns503.ServiceRead;
+    ogcfserver_service?: ns509.ServiceRead;
+    tmsclient_connection?: ns519.ConnectionRead;
+    tmsclient_layer?: ns519.LayerRead;
+    tileset?: ns524.TilesetRead;
+    basemap_layer?: ns527.BasemapLayerRead;
+    basemap_webmap?: ns527.BasemapWebMapRead;
+    collector_project?: ns542.CollectorProjectRead;
+    formbuilder_form?: ns548.FormbuilderFormRead;
+    mapserver_style?: ns551.MapserverStyleRead;
+    qgis_vector_style?: ns555.QgisVectorStyleRead;
+    qgis_raster_style?: ns555.QgisRasterStyleRead;
+    tracker?: ns594.TrackerRead;
   };
   export type ResourceUpdate = {
     parent?: ResourceRef;
@@ -447,37 +420,24 @@ declare module '@nextgisweb/resource/type/api' {
     postgis_connection?: ns464.PostgisConnectionUpdate;
     postgis_layer?: ns464.PostgisLayerUpdate;
     raster_layer?: ns469.RasterLayerUpdate;
-    raster_mosaic?: ns475.RasterMosaicUpdate;
-    wfsserver_service?: ns482.ServiceUpdate;
-    wfsclient_connection?: ns491.WFSConnectionUpdate;
-    wfsclient_layer?: ns491.WFSLayerUpdate;
-    wmsclient_connection?: ns502.ConnectionUpdate;
-    wmsclient_layer?: ns502.LayerUpdate;
-    wmsserver_service?: ns511.ServiceUpdate;
-    ogcfserver_service?: ns517.ServiceUpdate;
-    tmsclient_connection?: ns527.ConnectionUpdate;
-    tmsclient_layer?: ns527.LayerUpdate;
-    tileset?: ns532.TilesetUpdate;
-    basemap_layer?: ns535.BasemapLayerUpdate;
-    basemap_webmap?: ns535.BasemapWebMapUpdate;
-    qgis_vector_style?: ns544.QgisVectorStyleUpdate;
-    qgis_raster_style?: ns544.QgisRasterStyleUpdate;
-    gallery?: any;
-    gpdobj_dm_section?: ns579.GPDObjDMSectionUpdate;
-    gpdobj_dm?: ns579.GPDObjDMUpdate;
-    gpdobj_pi_dm?: ns579.GPDObjPIDMUpdate;
-    gpdobj_pir_obj?: ns579.GPDObjPIRObjUpdate;
-    gpdobj_pir_oip?: ns579.GPDObjPIROIPUpdate;
-    gpdobj_pir_dm?: ns579.GPDObjPIRDMUpdate;
-    mapserver_style?: ns592.MapserverStyleUpdate;
-    terrain_provider?: ns598.TerrainProviderUpdate;
-    model_3d?: ns601.Model3DUpdate;
-    style_3d?: ns619.Style3DUpdate;
-    scene_3d?: ns635.Scene3DUpdate;
-    scene3d_basemap?: ns635.Scene3DBasemapUpdate;
-    scene3d_terrain?: ns635.Scene3DTerrainUpdate;
-    tileset_3d?: ns647.Tileset3DUpdate;
-    tracker?: ns650.TrackerUpdate;
+    wfsserver_service?: ns476.ServiceUpdate;
+    wfsclient_connection?: ns483.WFSConnectionUpdate;
+    wfsclient_layer?: ns483.WFSLayerUpdate;
+    wmsclient_connection?: ns494.ConnectionUpdate;
+    wmsclient_layer?: ns494.LayerUpdate;
+    wmsserver_service?: ns503.ServiceUpdate;
+    ogcfserver_service?: ns509.ServiceUpdate;
+    tmsclient_connection?: ns519.ConnectionUpdate;
+    tmsclient_layer?: ns519.LayerUpdate;
+    tileset?: ns524.TilesetUpdate;
+    basemap_layer?: ns527.BasemapLayerUpdate;
+    basemap_webmap?: ns527.BasemapWebMapUpdate;
+    collector_project?: ns542.CollectorProjectUpdate;
+    formbuilder_form?: ns548.FormbuilderFormUpdate;
+    mapserver_style?: ns551.MapserverStyleUpdate;
+    qgis_vector_style?: ns555.QgisVectorStyleUpdate;
+    qgis_raster_style?: ns555.QgisRasterStyleUpdate;
+    tracker?: ns594.TrackerUpdate;
   };
   export type ResourceCreate = {
     cls: ResourceCls;
@@ -501,37 +461,24 @@ declare module '@nextgisweb/resource/type/api' {
     postgis_connection?: ns464.PostgisConnectionCreate;
     postgis_layer?: ns464.PostgisLayerCreate;
     raster_layer?: ns469.RasterLayerCreate;
-    raster_mosaic?: ns475.RasterMosaicCreate;
-    wfsserver_service?: ns482.ServiceCreate;
-    wfsclient_connection?: ns491.WFSConnectionCreate;
-    wfsclient_layer?: ns491.WFSLayerCreate;
-    wmsclient_connection?: ns502.ConnectionCreate;
-    wmsclient_layer?: ns502.LayerCreate;
-    wmsserver_service?: ns511.ServiceCreate;
-    ogcfserver_service?: ns517.ServiceCreate;
-    tmsclient_connection?: ns527.ConnectionCreate;
-    tmsclient_layer?: ns527.LayerCreate;
-    tileset?: ns532.TilesetCreate;
-    basemap_layer?: ns535.BasemapLayerCreate;
-    basemap_webmap?: ns535.BasemapWebMapCreate;
-    qgis_vector_style?: ns544.QgisVectorStyleCreate;
-    qgis_raster_style?: ns544.QgisRasterStyleCreate;
-    gallery?: any;
-    gpdobj_dm_section?: ns579.GPDObjDMSectionCreate;
-    gpdobj_dm?: ns579.GPDObjDMCreate;
-    gpdobj_pi_dm?: ns579.GPDObjPIDMCreate;
-    gpdobj_pir_obj?: ns579.GPDObjPIRObjCreate;
-    gpdobj_pir_oip?: ns579.GPDObjPIROIPCreate;
-    gpdobj_pir_dm?: ns579.GPDObjPIRDMCreate;
-    mapserver_style?: ns592.MapserverStyleCreate;
-    terrain_provider?: ns598.TerrainProviderCreate;
-    model_3d?: ns601.Model3DCreate;
-    style_3d?: ns619.Style3DCreate;
-    scene_3d?: ns635.Scene3DCreate;
-    scene3d_basemap?: ns635.Scene3DBasemapCreate;
-    scene3d_terrain?: ns635.Scene3DTerrainCreate;
-    tileset_3d?: ns647.Tileset3DCreate;
-    tracker?: ns650.TrackerCreate;
+    wfsserver_service?: ns476.ServiceCreate;
+    wfsclient_connection?: ns483.WFSConnectionCreate;
+    wfsclient_layer?: ns483.WFSLayerCreate;
+    wmsclient_connection?: ns494.ConnectionCreate;
+    wmsclient_layer?: ns494.LayerCreate;
+    wmsserver_service?: ns503.ServiceCreate;
+    ogcfserver_service?: ns509.ServiceCreate;
+    tmsclient_connection?: ns519.ConnectionCreate;
+    tmsclient_layer?: ns519.LayerCreate;
+    tileset?: ns524.TilesetCreate;
+    basemap_layer?: ns527.BasemapLayerCreate;
+    basemap_webmap?: ns527.BasemapWebMapCreate;
+    collector_project?: ns542.CollectorProjectCreate;
+    formbuilder_form?: ns548.FormbuilderFormCreate;
+    mapserver_style?: ns551.MapserverStyleCreate;
+    qgis_vector_style?: ns555.QgisVectorStyleCreate;
+    qgis_raster_style?: ns555.QgisRasterStyleCreate;
+    tracker?: ns594.TrackerCreate;
   };
   export type ResourceScopePermissions = {
     read: boolean;
@@ -560,6 +507,7 @@ declare module '@nextgisweb/resource/type/api' {
     connection?: ConnectionScopePermissions;
     service?: ServiceScopePermissions;
     webmap?: ns426.WebMapScopePermissions;
+    Collector?: ns542.CollectorScopePermissions;
   };
   export type ResourceVolume = { volume: number /* int */ };
   export type QuotaCheckBody = Record<string, number /* int */>;
@@ -679,8 +627,8 @@ declare module '@nextgisweb/lookup-table/type/api' {
 }
 
 declare module '@nextgisweb/feature-layer/type/api' {
-  import type * as ns355 from '@nextgisweb/resource/type/api';
   import type * as ns227 from '@nextgisweb/auth/type/api';
+  import type * as ns355 from '@nextgisweb/resource/type/api';
 
   export {};
   export type FeatureLayerFieldRead = {
@@ -737,6 +685,12 @@ declare module '@nextgisweb/feature-layer/type/api' {
   export type FeatureLayerCreate = {
     fields?: FeatureLayerFieldWrite[];
     versioning?: FVersioningUpdate;
+  };
+  export type NgwExtent = {
+    maxLon: number /* int */;
+    minLon: number /* int */;
+    maxLat: number /* int */;
+    minLat: number /* int */;
   };
   export type TransactionCreateBody = { epoch?: number /* int */ };
   export type TransactionCreatedResponse = {
@@ -813,7 +767,32 @@ declare module '@nextgisweb/feature-layer/type/api' {
     url: string;
   };
   export type OperationFieldValue = [id: number /* int */, val: any];
-
+  export type FeatureCreate = {
+    action: 'feature.create';
+    fid: number /* int */;
+    vid: number /* int */;
+    geom?: string /* bytes */ | null;
+    fields?: OperationFieldValue[];
+  };
+  export type FeatureUpdate = {
+    action: 'feature.update';
+    fid: number /* int */;
+    vid: number /* int */;
+    geom?: string /* bytes */ | null;
+    fields?: OperationFieldValue[];
+  };
+  export type FeatureDelete = {
+    action: 'feature.delete';
+    fid: number /* int */;
+    vid: number /* int */;
+  };
+  export type FeatureRestore = {
+    action: 'feature.restore';
+    fid: number /* int */;
+    vid: number /* int */;
+    geom?: string /* bytes */ | null;
+    fields?: OperationFieldValue[];
+  };
   export type VersionRead = {
     id: number /* int */;
     tstamp: string /* datetime */;
@@ -1120,8 +1099,8 @@ declare module '@nextgisweb/webmap/type/api' {
 }
 
 declare module '@nextgisweb/vector-layer/type/api' {
-  import type * as ns355 from '@nextgisweb/resource/type/api';
   import type * as ns155 from '@nextgisweb/file-upload/type/api';
+  import type * as ns355 from '@nextgisweb/resource/type/api';
 
   export {};
   export type VectorLayerRead = {
@@ -1310,8 +1289,8 @@ declare module '@nextgisweb/postgis/type/api' {
 }
 
 declare module '@nextgisweb/raster-layer/type/api' {
-  import type * as ns355 from '@nextgisweb/resource/type/api';
   import type * as ns155 from '@nextgisweb/file-upload/type/api';
+  import type * as ns355 from '@nextgisweb/resource/type/api';
 
   export {};
   export type RasterLayerRead = {
@@ -1335,34 +1314,6 @@ declare module '@nextgisweb/raster-layer/type/api' {
   };
 }
 
-declare module '@nextgisweb/raster-mosaic/type/api' {
-  import type * as ns355 from '@nextgisweb/resource/type/api';
-  import type * as ns155 from '@nextgisweb/file-upload/type/api';
-
-  export {};
-  export type RasterMosaicItemRead = {
-    id: number /* int */;
-    display_name: string | null;
-  };
-  export type RasterMosaicRead = {
-    srs: ns355.RelationshipRef;
-    items?: RasterMosaicItemRead[];
-  };
-  export type RasterMosaicItemWrite = {
-    id?: number /* int */;
-    display_name?: string | null;
-    file_upload?: ns155.FileUploadRef;
-  };
-  export type RasterMosaicUpdate = {
-    srs?: ns355.RelationshipRef;
-    items?: RasterMosaicItemWrite[];
-  };
-  export type RasterMosaicCreate = {
-    srs: ns355.RelationshipRef;
-    items?: RasterMosaicItemWrite[];
-  };
-}
-
 declare module '@nextgisweb/wfsserver/type/api' {
   export {};
   export type WFSServerLayer = {
@@ -1380,7 +1331,7 @@ declare module '@nextgisweb/wfsclient/type/api' {
   import type * as ns355 from '@nextgisweb/resource/type/api';
 
   export {};
-  export type VersionEnum = '1.0.0' | '1.1.0' | '2.0.0' | '2.0.2';
+  export type VersionEnum = '2.0.0' | '2.0.2';
   export type WFSConnectionRead = {
     path?: string;
     version?: VersionEnum;
@@ -1607,8 +1558,8 @@ declare module '@nextgisweb/tmsclient/type/api' {
 }
 
 declare module '@nextgisweb/tileset/type/api' {
-  import type * as ns355 from '@nextgisweb/resource/type/api';
   import type * as ns155 from '@nextgisweb/file-upload/type/api';
+  import type * as ns355 from '@nextgisweb/resource/type/api';
 
   export {};
   export type TilesetRead = { srs: ns355.RelationshipRef };
@@ -1659,45 +1610,145 @@ declare module '@nextgisweb/basemap/type/api' {
   export type BasemapWebMapCreate = { basemaps?: BasemapWebMapItemWrite[] };
 }
 
-declare module '@nextgisweb/qgis/type/api' {
-  import type * as ns355 from '@nextgisweb/resource/type/api';
-  import type * as ns558 from '@nextgisweb/sld/type/api';
+declare module '@nextgisweb/collector/type/api' {
+  export {};
+  export type CollectorItemGroupRead = {
+    item_type: 'group';
+    display_name: string;
+    group_expanded: boolean;
+    children: (CollectorItemGroupRead | CollectorItemLayerRead)[];
+  };
+  export type CollectorItemLayerRead = {
+    item_type: 'item';
+    display_name: string;
+    resource_id: number /* int */;
+    editable: boolean;
+    visible: boolean;
+    syncable: boolean;
+    lifetime: number /* int */ | null;
+    min_zoom: number /* int */ | null;
+    max_zoom: number /* int */ | null;
+  };
+  export type CollectorItemRootRead = {
+    item_type: 'root';
+    children: (CollectorItemGroupRead | CollectorItemLayerRead)[];
+  };
+  export type CollectorUserStruct = {
+    email: string;
+    descr: string;
+    id: number /* int */;
+    added_date: string /* datetime */;
+  };
+  export type CollectorProjectRead = {
+    screen: 'map' | 'list';
+    username?: string | null;
+    password?: string | null;
+    version?: number /* int */ | null;
+    root_item: CollectorItemRootRead;
+    collector_users: CollectorUserStruct[];
+  };
+  export type CollectorItemGroupWrite = {
+    item_type: 'group';
+    display_name: string;
+    group_expanded: boolean;
+    children: (CollectorItemGroupWrite | CollectorItemLayerWrite)[];
+  };
+  export type CollectorItemLayerWrite = {
+    item_type: 'item';
+    display_name: string;
+    resource_id: number /* int */;
+    editable: boolean;
+    visible: boolean;
+    syncable: boolean;
+    lifetime: number /* int */ | null;
+    min_zoom: number /* int */ | null;
+    max_zoom: number /* int */ | null;
+  };
+  export type CollectorItemRootWrite = {
+    item_type: 'root';
+    children: (CollectorItemGroupWrite | CollectorItemLayerWrite)[];
+  };
+  export type CollectorProjectUpdate = {
+    screen?: 'map' | 'list';
+    username?: string | null;
+    password?: string | null;
+    root_item?: CollectorItemRootWrite;
+    collector_users?: number /* int */[];
+  };
+  export type CollectorProjectCreate = {
+    screen: 'map' | 'list';
+    username?: string | null;
+    password?: string | null;
+    root_item?: CollectorItemRootWrite;
+    collector_users?: number /* int */[];
+  };
+  export type CollectorScopePermissions = { read: boolean };
+  export type CollectorUserCreateStruct = {
+    email: string;
+    descr: string;
+  };
+  export type EntityId = { id: number /* int */ };
+  export type CollectorUserLimit = {
+    count: number /* int */;
+    limit: number /* int */;
+  };
+}
+
+declare module '@nextgisweb/formbuilder/type/api' {
   import type * as ns155 from '@nextgisweb/file-upload/type/api';
+
+  export {};
+  export type FormbuilderFormRead = Record<string, never>;
+  export type FormbuilderFormUpdate = { file_upload?: ns155.FileUploadRef };
+  export type FormbuilderFormCreate = { file_upload?: ns155.FileUploadRef };
+}
+
+declare module '@nextgisweb/mapserver/type/api' {
+  export {};
+  export type MapserverStyleRead = { xml: string };
+  export type MapserverStyleUpdate = { xml?: string };
+  export type MapserverStyleCreate = { xml: string };
+}
+
+declare module '@nextgisweb/qgis/type/api' {
+  import type * as ns155 from '@nextgisweb/file-upload/type/api';
+  import type * as ns355 from '@nextgisweb/resource/type/api';
+  import type * as ns569 from '@nextgisweb/sld/type/api';
 
   export {};
   export type QgisStyleFormat = 'default' | 'qml_file' | 'sld_file' | 'sld';
   export type QgisVectorStyleRead = {
     format: QgisStyleFormat;
-    sld?: ns558.Style;
+    sld?: ns569.Style;
     svg_marker_library: ns355.ResourceRefWithParent | null;
   };
   export type QgisRasterStyleRead = {
     format: QgisStyleFormat;
-    sld?: ns558.Style;
+    sld?: ns569.Style;
   };
   export type QgisVectorStyleUpdate = {
     format?: QgisStyleFormat;
-    sld?: ns558.Style;
+    sld?: ns569.Style;
     file_upload?: ns155.FileUploadRef;
     copy_from?: ns355.ResourceRef;
     svg_marker_library?: ns355.ResourceRef | null;
   };
   export type QgisRasterStyleUpdate = {
     format?: QgisStyleFormat;
-    sld?: ns558.Style;
+    sld?: ns569.Style;
     file_upload?: ns155.FileUploadRef;
     copy_from?: ns355.ResourceRef;
   };
   export type QgisVectorStyleCreate = {
     format?: QgisStyleFormat;
-    sld?: ns558.Style;
+    sld?: ns569.Style;
     file_upload?: ns155.FileUploadRef;
     copy_from?: ns355.ResourceRef;
     svg_marker_library?: ns355.ResourceRef | null;
   };
   export type QgisRasterStyleCreate = {
     format?: QgisStyleFormat;
-    sld?: ns558.Style;
+    sld?: ns569.Style;
     file_upload?: ns155.FileUploadRef;
     copy_from?: ns355.ResourceRef;
   };
@@ -1774,445 +1825,6 @@ declare module '@nextgisweb/sld/type/api' {
     )[];
   };
   export type Style = { rules: Rule[] };
-}
-
-declare module '@nextgisweb/gpdobj/type/api' {
-  export {};
-  export type GPDObjDMSectionRead = {
-    name: string;
-    cpref: string;
-  };
-  export type GPDObjDMRead = {
-    sections: string[];
-    archive: boolean;
-  };
-  export type GPDObjPIDMRead = { code: string };
-  export type GPDObjPIRObjRead = {
-    code: string;
-    subp_name: string | null;
-    subp_industry: string | null;
-    invp_code: string | null;
-  };
-  export type GPDObjPIROIPRead = {
-    code: string;
-    ckind: string | null;
-    customer: string | null;
-    iform: string | null;
-    status: string | null;
-    year: number /* int */ | null;
-  };
-  export type GPDObjPIRDMRead = { code: string };
-  export type GPDObjDMSectionUpdate = Record<string, never>;
-  export type GPDObjDMUpdate = {
-    sections?: string[];
-    archive?: boolean;
-  };
-  export type GPDObjPIDMUpdate = { code?: string };
-  export type GPDObjPIRObjUpdate = {
-    code?: string;
-    subp_name?: string | null;
-    subp_industry?: string | null;
-    invp_code?: string | null;
-  };
-  export type GPDObjPIROIPUpdate = {
-    code?: string;
-    ckind?: string | null;
-    customer?: string | null;
-    iform?: string | null;
-    status?: string | null;
-    year?: number /* int */ | null;
-  };
-  export type GPDObjPIRDMUpdate = { code?: string };
-  export type GPDObjDMSectionCreate = Record<string, never>;
-  export type GPDObjDMCreate = {
-    sections?: string[];
-    archive?: boolean;
-  };
-  export type GPDObjPIDMCreate = { code?: string };
-  export type GPDObjPIRObjCreate = {
-    code?: string;
-    subp_name?: string | null;
-    subp_industry?: string | null;
-    invp_code?: string | null;
-  };
-  export type GPDObjPIROIPCreate = {
-    code?: string;
-    ckind?: string | null;
-    customer?: string | null;
-    iform?: string | null;
-    status?: string | null;
-    year?: number /* int */ | null;
-  };
-  export type GPDObjPIRDMCreate = { code?: string };
-  export type GPDObjCSection = {
-    name: string;
-    alias: string;
-    cpref: string;
-  };
-  export type GPDObjCSections = {
-    PI: Record<string, GPDObjCSection>;
-    PIR: Record<string, GPDObjCSection>;
-    OPER: Record<string, GPDObjCSection>;
-  };
-}
-
-declare module '@nextgisweb/mapserver/type/api' {
-  export {};
-  export type MapserverStyleRead = { xml: string };
-  export type MapserverStyleUpdate = { xml?: string };
-  export type MapserverStyleCreate = { xml: string };
-}
-
-declare module '@nextgisweb/terrain-provider/type/api' {
-  export {};
-  export type EncodingEnum = 'MAPZEN_TERRARIUM' | 'MAPBOX_TERRAIN_RGB';
-  export type TerrainProviderRead = { encoding_type: EncodingEnum };
-  export type TerrainProviderUpdate = { encoding_type?: EncodingEnum };
-  export type TerrainProviderCreate = { encoding_type?: EncodingEnum };
-}
-
-declare module '@nextgisweb/model-3d/type/api' {
-  import type * as ns155 from '@nextgisweb/file-upload/type/api';
-
-  export {};
-  export type Model3DRead = Record<string, never>;
-  export type Model3DUpdate = { source?: ns155.FileUploadRef };
-  export type Model3DCreate = { source?: ns155.FileUploadRef };
-}
-
-declare module '@nextgisweb/style-3d/type/api' {
-  export {};
-  export type Style3DRead = {
-    style_type?: 'POI' | 'GEOJSON' | 'MODEL' | 'SPHERE' | 'ELLIPSOID';
-    z_offset?: number /* float */ | null;
-    poi_icon?: string | null;
-    poi_icon_field?: number /* int */ | null;
-    poi_icon_type?: 'VALUE' | 'FIELD';
-    poi_color?: string | null;
-    poi_color_field?: number /* int */ | null;
-    poi_color_type?: 'VALUE' | 'FIELD';
-    poi_priority_field?: number /* int */ | null;
-    poi_priority_inverse?: boolean | null;
-    poi_limit?: number /* int */ | null;
-    gj_stroke?: string | null;
-    gj_stroke_field?: number /* int */ | null;
-    gj_stroke_type?: 'VALUE' | 'FIELD';
-    gj_stroke_width?: string | null;
-    gj_stroke_width_field?: number /* int */ | null;
-    gj_stroke_width_type?: 'VALUE' | 'FIELD';
-    gj_stroke_fill?: string | null;
-    gj_stroke_fill_field?: number /* int */ | null;
-    gj_stroke_fill_type?: 'VALUE' | 'FIELD';
-    gj_height?: number /* float */ | null;
-    gj_height_field?: number /* int */ | null;
-    gj_height_type?: 'VALUE' | 'FIELD';
-    sphere_stroke?: string | null;
-    sphere_stroke_field?: number /* int */ | null;
-    sphere_stroke_type?: 'VALUE' | 'FIELD';
-    sphere_stroke_width?: string | null;
-    sphere_stroke_width_field?: number /* int */ | null;
-    sphere_stroke_width_type?: 'VALUE' | 'FIELD';
-    sphere_stroke_fill?: string | null;
-    sphere_stroke_fill_field?: number /* int */ | null;
-    sphere_stroke_fill_type?: 'VALUE' | 'FIELD';
-    sphere_radius?: number /* float */ | null;
-    sphere_radius_field?: number /* int */ | null;
-    sphere_radius_type?: 'VALUE' | 'FIELD';
-    ellipsoid_stroke?: string | null;
-    ellipsoid_stroke_field?: number /* int */ | null;
-    ellipsoid_stroke_type?: 'VALUE' | 'FIELD';
-    ellipsoid_stroke_width?: string | null;
-    ellipsoid_stroke_width_field?: number /* int */ | null;
-    ellipsoid_stroke_width_type?: 'VALUE' | 'FIELD';
-    ellipsoid_stroke_fill?: string | null;
-    ellipsoid_stroke_fill_field?: number /* int */ | null;
-    ellipsoid_stroke_fill_type?: 'VALUE' | 'FIELD';
-    ellipsoid_length?: number /* float */ | null;
-    ellipsoid_length_field?: number /* int */ | null;
-    ellipsoid_length_type?: 'VALUE' | 'FIELD';
-    ellipsoid_width?: number /* float */ | null;
-    ellipsoid_width_field?: number /* int */ | null;
-    ellipsoid_width_type?: 'VALUE' | 'FIELD';
-    ellipsoid_height?: number /* float */ | null;
-    ellipsoid_height_field?: number /* int */ | null;
-    ellipsoid_height_type?: 'VALUE' | 'FIELD';
-    model_id?: number /* int */ | null;
-    model_id_field?: number /* int */ | null;
-    model_id_type?: 'VALUE' | 'FIELD';
-    model_scale?: number /* float */ | null;
-    model_scale_field?: number /* int */ | null;
-    model_scale_type?: 'VALUE' | 'FIELD';
-    model_rotate?: number /* float */ | null;
-    model_rotate_field?: number /* int */ | null;
-    model_rotate_type?: 'VALUE' | 'FIELD';
-  };
-  export type Style3DUpdate = {
-    style_type?: 'POI' | 'GEOJSON' | 'MODEL' | 'SPHERE' | 'ELLIPSOID';
-    z_offset?: number /* float */ | null;
-    poi_icon?: string | null;
-    poi_icon_field?: number /* int */ | null;
-    poi_icon_type?: 'VALUE' | 'FIELD';
-    poi_color?: string | null;
-    poi_color_field?: number /* int */ | null;
-    poi_color_type?: 'VALUE' | 'FIELD';
-    poi_priority_field?: number /* int */ | null;
-    poi_priority_inverse?: boolean | null;
-    poi_limit?: number /* int */ | null;
-    gj_stroke?: string | null;
-    gj_stroke_field?: number /* int */ | null;
-    gj_stroke_type?: 'VALUE' | 'FIELD';
-    gj_stroke_width?: string | null;
-    gj_stroke_width_field?: number /* int */ | null;
-    gj_stroke_width_type?: 'VALUE' | 'FIELD';
-    gj_stroke_fill?: string | null;
-    gj_stroke_fill_field?: number /* int */ | null;
-    gj_stroke_fill_type?: 'VALUE' | 'FIELD';
-    gj_height?: number /* float */ | null;
-    gj_height_field?: number /* int */ | null;
-    gj_height_type?: 'VALUE' | 'FIELD';
-    sphere_stroke?: string | null;
-    sphere_stroke_field?: number /* int */ | null;
-    sphere_stroke_type?: 'VALUE' | 'FIELD';
-    sphere_stroke_width?: string | null;
-    sphere_stroke_width_field?: number /* int */ | null;
-    sphere_stroke_width_type?: 'VALUE' | 'FIELD';
-    sphere_stroke_fill?: string | null;
-    sphere_stroke_fill_field?: number /* int */ | null;
-    sphere_stroke_fill_type?: 'VALUE' | 'FIELD';
-    sphere_radius?: number /* float */ | null;
-    sphere_radius_field?: number /* int */ | null;
-    sphere_radius_type?: 'VALUE' | 'FIELD';
-    ellipsoid_stroke?: string | null;
-    ellipsoid_stroke_field?: number /* int */ | null;
-    ellipsoid_stroke_type?: 'VALUE' | 'FIELD';
-    ellipsoid_stroke_width?: string | null;
-    ellipsoid_stroke_width_field?: number /* int */ | null;
-    ellipsoid_stroke_width_type?: 'VALUE' | 'FIELD';
-    ellipsoid_stroke_fill?: string | null;
-    ellipsoid_stroke_fill_field?: number /* int */ | null;
-    ellipsoid_stroke_fill_type?: 'VALUE' | 'FIELD';
-    ellipsoid_length?: number /* float */ | null;
-    ellipsoid_length_field?: number /* int */ | null;
-    ellipsoid_length_type?: 'VALUE' | 'FIELD';
-    ellipsoid_width?: number /* float */ | null;
-    ellipsoid_width_field?: number /* int */ | null;
-    ellipsoid_width_type?: 'VALUE' | 'FIELD';
-    ellipsoid_height?: number /* float */ | null;
-    ellipsoid_height_field?: number /* int */ | null;
-    ellipsoid_height_type?: 'VALUE' | 'FIELD';
-    model_id?: number /* int */ | null;
-    model_id_field?: number /* int */ | null;
-    model_id_type?: 'VALUE' | 'FIELD';
-    model_scale?: number /* float */ | null;
-    model_scale_field?: number /* int */ | null;
-    model_scale_type?: 'VALUE' | 'FIELD';
-    model_rotate?: number /* float */ | null;
-    model_rotate_field?: number /* int */ | null;
-    model_rotate_type?: 'VALUE' | 'FIELD';
-  };
-  export type Style3DCreate = {
-    style_type?: 'POI' | 'GEOJSON' | 'MODEL' | 'SPHERE' | 'ELLIPSOID';
-    z_offset?: number /* float */ | null;
-    poi_icon?: string | null;
-    poi_icon_field?: number /* int */ | null;
-    poi_icon_type?: 'VALUE' | 'FIELD';
-    poi_color?: string | null;
-    poi_color_field?: number /* int */ | null;
-    poi_color_type?: 'VALUE' | 'FIELD';
-    poi_priority_field?: number /* int */ | null;
-    poi_priority_inverse?: boolean | null;
-    poi_limit?: number /* int */ | null;
-    gj_stroke?: string | null;
-    gj_stroke_field?: number /* int */ | null;
-    gj_stroke_type?: 'VALUE' | 'FIELD';
-    gj_stroke_width?: string | null;
-    gj_stroke_width_field?: number /* int */ | null;
-    gj_stroke_width_type?: 'VALUE' | 'FIELD';
-    gj_stroke_fill?: string | null;
-    gj_stroke_fill_field?: number /* int */ | null;
-    gj_stroke_fill_type?: 'VALUE' | 'FIELD';
-    gj_height?: number /* float */ | null;
-    gj_height_field?: number /* int */ | null;
-    gj_height_type?: 'VALUE' | 'FIELD';
-    sphere_stroke?: string | null;
-    sphere_stroke_field?: number /* int */ | null;
-    sphere_stroke_type?: 'VALUE' | 'FIELD';
-    sphere_stroke_width?: string | null;
-    sphere_stroke_width_field?: number /* int */ | null;
-    sphere_stroke_width_type?: 'VALUE' | 'FIELD';
-    sphere_stroke_fill?: string | null;
-    sphere_stroke_fill_field?: number /* int */ | null;
-    sphere_stroke_fill_type?: 'VALUE' | 'FIELD';
-    sphere_radius?: number /* float */ | null;
-    sphere_radius_field?: number /* int */ | null;
-    sphere_radius_type?: 'VALUE' | 'FIELD';
-    ellipsoid_stroke?: string | null;
-    ellipsoid_stroke_field?: number /* int */ | null;
-    ellipsoid_stroke_type?: 'VALUE' | 'FIELD';
-    ellipsoid_stroke_width?: string | null;
-    ellipsoid_stroke_width_field?: number /* int */ | null;
-    ellipsoid_stroke_width_type?: 'VALUE' | 'FIELD';
-    ellipsoid_stroke_fill?: string | null;
-    ellipsoid_stroke_fill_field?: number /* int */ | null;
-    ellipsoid_stroke_fill_type?: 'VALUE' | 'FIELD';
-    ellipsoid_length?: number /* float */ | null;
-    ellipsoid_length_field?: number /* int */ | null;
-    ellipsoid_length_type?: 'VALUE' | 'FIELD';
-    ellipsoid_width?: number /* float */ | null;
-    ellipsoid_width_field?: number /* int */ | null;
-    ellipsoid_width_type?: 'VALUE' | 'FIELD';
-    ellipsoid_height?: number /* float */ | null;
-    ellipsoid_height_field?: number /* int */ | null;
-    ellipsoid_height_type?: 'VALUE' | 'FIELD';
-    model_id?: number /* int */ | null;
-    model_id_field?: number /* int */ | null;
-    model_id_type?: 'VALUE' | 'FIELD';
-    model_scale?: number /* float */ | null;
-    model_scale_field?: number /* int */ | null;
-    model_scale_type?: 'VALUE' | 'FIELD';
-    model_rotate?: number /* float */ | null;
-    model_rotate_field?: number /* int */ | null;
-    model_rotate_type?: 'VALUE' | 'FIELD';
-  };
-}
-
-declare module '@nextgisweb/scene-3d/type/api' {
-  import type * as ns355 from '@nextgisweb/resource/type/api';
-
-  export {};
-  export type Scene3DGroupRead = {
-    item_type: 'group';
-    display_name: string;
-    group_expanded: boolean;
-    children: (Scene3DGroupRead | Scene3DItemRead)[];
-  };
-  export type Scene3DItemRead = {
-    item_type: 'item';
-    display_name: string;
-    parent: number /* int */;
-    resource_id: number /* int */;
-    resource_cls: string;
-    visible: boolean;
-    classification_layer: ns355.ResourceRef | null;
-    tileset_3d_color: string | null;
-    payload: any;
-    id: number /* int */;
-  };
-  export type Scene3DRootRead = {
-    item_type: 'root';
-    children: (Scene3DGroupRead | Scene3DItemRead)[];
-  };
-  export type Scene3DRead = {
-    extent_left: number /* float */ | null;
-    extent_right: number /* float */ | null;
-    extent_bottom: number /* float */ | null;
-    extent_top: number /* float */ | null;
-    enable_ya_panoramas: boolean | null;
-    ya_panoramas_api_key: string | null;
-    enable_google_street_view: boolean | null;
-    google_street_view_api_key: string | null;
-    view: 'GLOBUS' | 'PLANE';
-    quality: 'MIN' | 'LOW' | 'MEDIUM' | 'HIGH' | 'MAX';
-    pinch: number /* float */ | null;
-    rotate: number /* float */ | null;
-    root_item: Scene3DRootRead;
-  };
-  export type Scene3DBasemapsItemRead = {
-    resource_id: number /* int */;
-    display_name: string;
-    enabled: boolean;
-    opacity: number /* float */ | null;
-  };
-  export type Scene3DBasemapRead = { basemaps3d: Scene3DBasemapsItemRead[] };
-  export type Scene3DTerrainItem = {
-    resource_id: number /* int */;
-    display_name: string;
-    enabled: boolean;
-  };
-  export type Scene3DTerrainRead = { terrains3d: Scene3DTerrainItem[] };
-  export type Scene3DGroupWrite = {
-    item_type: 'group';
-    display_name: string;
-    group_expanded: boolean;
-    children: (Scene3DGroupWrite | Scene3DItemWrite)[];
-  };
-  export type Scene3DItemWrite = {
-    item_type: 'item';
-    display_name: string;
-    resource_id: number /* int */;
-    visible: boolean;
-    classification_layer: ns355.ResourceRef | null;
-    tileset_3d_color: string | null;
-  };
-  export type Scene3DRootWrite = {
-    item_type: 'root';
-    children: (Scene3DGroupWrite | Scene3DItemWrite)[];
-  };
-  export type Scene3DUpdate = {
-    extent_left?: number /* float */ | null;
-    extent_right?: number /* float */ | null;
-    extent_bottom?: number /* float */ | null;
-    extent_top?: number /* float */ | null;
-    enable_ya_panoramas?: boolean | null;
-    ya_panoramas_api_key?: string | null;
-    enable_google_street_view?: boolean | null;
-    google_street_view_api_key?: string | null;
-    view?: 'GLOBUS' | 'PLANE';
-    quality?: 'MIN' | 'LOW' | 'MEDIUM' | 'HIGH' | 'MAX';
-    pinch?: number /* float */ | null;
-    rotate?: number /* float */ | null;
-    root_item?: Scene3DRootWrite;
-  };
-  export type Scene3DBasemapsItemWrite = {
-    resource_id: number /* int */;
-    display_name: string;
-    enabled?: boolean;
-    opacity?: number /* float */ | null;
-  };
-  export type Scene3DBasemapUpdate = {
-    basemaps3d?: Scene3DBasemapsItemWrite[];
-  };
-  export type Scene3DTerrainUpdate = { terrains3d?: Scene3DTerrainItem[] };
-  export type Scene3DCreate = {
-    extent_left?: number /* float */ | null;
-    extent_right?: number /* float */ | null;
-    extent_bottom?: number /* float */ | null;
-    extent_top?: number /* float */ | null;
-    enable_ya_panoramas?: boolean | null;
-    ya_panoramas_api_key?: string | null;
-    enable_google_street_view?: boolean | null;
-    google_street_view_api_key?: string | null;
-    view?: 'GLOBUS' | 'PLANE';
-    quality?: 'MIN' | 'LOW' | 'MEDIUM' | 'HIGH' | 'MAX';
-    pinch?: number /* float */ | null;
-    rotate?: number /* float */ | null;
-    root_item?: Scene3DRootWrite;
-  };
-  export type Scene3DBasemapCreate = {
-    basemaps3d?: Scene3DBasemapsItemWrite[];
-  };
-  export type Scene3DTerrainCreate = { terrains3d?: Scene3DTerrainItem[] };
-}
-
-declare module '@nextgisweb/tileset-3d/type/api' {
-  import type * as ns155 from '@nextgisweb/file-upload/type/api';
-
-  export {};
-  export type Tileset3DRead = {
-    with_terrain_height: boolean | null;
-    z_offset: number /* float */ | null;
-    main_tileset?: string | null;
-  };
-  export type Tileset3DUpdate = {
-    with_terrain_height?: boolean | null;
-    z_offset?: number /* float */ | null;
-    source?: ns155.FileUploadRef;
-  };
-  export type Tileset3DCreate = {
-    with_terrain_height?: boolean | null;
-    z_offset?: number /* float */ | null;
-    source?: ns155.FileUploadRef;
-  };
 }
 
 declare module '@nextgisweb/tracker/type/api' {
@@ -2321,6 +1933,13 @@ declare module '@nextgisweb/spatial-ref-sys/type/api' {
   export type SRSCatalogImportResponse = { id: number /* int */ };
 }
 
+declare module '@nextgisweb/layer/type/api' {
+  import type * as ns410 from '@nextgisweb/feature-layer/type/api';
+
+  export {};
+  export type Extent = { extent: ns410.NgwExtent };
+}
+
 declare module '@nextgisweb/feature-description/type/api' {
   export {};
   export type DescriptionPut = {
@@ -2396,69 +2015,49 @@ declare module '@nextgisweb/audit/type/api' {
   };
 }
 
-declare module '@nextgisweb/gpcrossreport/type/api' {
+declare module '@nextgisweb/cadaster/type/api' {
   export {};
-  export type CrossReportParams = {
-    format: 'pdf' | 'odt' | 'ods' | 'html';
-    geom: Record<string, any>;
-    srid: number /* int */;
-    layers: number /* int */[];
+  export type CadasterCSetting = 'all' | 'key' | 'enabled';
+  export type CadasterCSettingsRead = {
+    key?: string;
+    enabled?: boolean;
+  };
+  export type CadasterCSettingsUpdate = {
+    key?: string | null;
+    enabled?: boolean | null;
   };
 }
 
-declare module '@nextgisweb/gplprofile/type/api' {
+declare module '@nextgisweb/ngwcluster/type/api' {
   export {};
-  export type ProfileParams = {
-    data_source: 'raster' | 'vector';
-    scale: '1m' | '200k' | '100k' | '50k' | '25k';
-    geom: Record<string, any>;
-    srid: number /* int */;
-    step: number /* int */;
-  };
-  export type ProfileResponse = {
-    points: [number /* float */, number /* float */][];
-  };
-  export type ExportFormat = 'csv';
-  export type ExportProfileParams = {
-    data_source: 'raster' | 'vector';
-    scale: '1m' | '200k' | '100k' | '50k' | '25k';
-    geom: Record<string, any>;
-    srid: number /* int */;
-    step: number /* int */;
-    format: ExportFormat;
-  };
-}
-
-declare module '@nextgisweb/gputil/type/api' {
-  export {};
-  export type RasterMetadataGroupsSettings = {
-    raster_metadata_groups: number /* int */[];
-  };
+  export type NGWClusterCSetting = 'all' | 'qgis_banner';
+  export type NGWClusterCSettingsRead = { qgis_banner?: boolean };
+  export type NGWClusterCSettingsUpdate = { qgis_banner?: boolean | null };
 }
 
 declare module '@nextgisweb/pyramid/type/route' {
-  import type * as ns227 from '@nextgisweb/auth/type/api';
-  import type * as ns1612 from '@nextgisweb/gputil/type/api';
-  import type * as ns416 from '@nextgisweb/render/type/api';
-  import type * as ns355 from '@nextgisweb/resource/type/api';
-  import type * as ns544 from '@nextgisweb/qgis/type/api';
-  import type * as ns1270 from '@nextgisweb/feature-description/type/api';
+  import type * as ns1163 from '@nextgisweb/feature-description/type/api';
+  import type * as ns519 from '@nextgisweb/tmsclient/type/api';
   import type * as ns464 from '@nextgisweb/postgis/type/api';
-  import type * as ns650 from '@nextgisweb/tracker/type/api';
-  import type * as ns1272 from '@nextgisweb/feature-attachment/type/api';
-  import type * as ns1571 from '@nextgisweb/gpcrossreport/type/api';
-  import type * as ns491 from '@nextgisweb/wfsclient/type/api';
+  import type * as ns555 from '@nextgisweb/qgis/type/api';
+  import type * as ns1165 from '@nextgisweb/feature-attachment/type/api';
   import type * as ns149 from '@nextgisweb/core/type/api';
   import type * as ns155 from '@nextgisweb/file-upload/type/api';
-  import type * as ns1049 from '@nextgisweb/spatial-ref-sys/type/api';
-  import type * as ns579 from '@nextgisweb/gpdobj/type/api';
-  import type * as ns527 from '@nextgisweb/tmsclient/type/api';
+  import type * as ns939 from '@nextgisweb/spatial-ref-sys/type/api';
+  import type * as ns1592 from '@nextgisweb/ngwcluster/type/api';
   import type * as ns106 from '@nextgisweb/pyramid/type/api';
+  import type * as ns594 from '@nextgisweb/tracker/type/api';
+  import type * as ns542 from '@nextgisweb/collector/type/api';
   import type * as ns426 from '@nextgisweb/webmap/type/api';
-  import type * as ns1506 from '@nextgisweb/audit/type/api';
-  import type * as ns1597 from '@nextgisweb/gplprofile/type/api';
+  import type * as ns1399 from '@nextgisweb/audit/type/api';
+  import type * as ns1588 from '@nextgisweb/cadaster/type/api';
   import type * as ns459 from '@nextgisweb/vector-layer/type/api';
+  import type * as ns227 from '@nextgisweb/auth/type/api';
   import type * as ns410 from '@nextgisweb/feature-layer/type/api';
+  import type * as ns416 from '@nextgisweb/render/type/api';
+  import type * as ns355 from '@nextgisweb/resource/type/api';
+  import type * as ns1014 from '@nextgisweb/layer/type/api';
+  import type * as ns483 from '@nextgisweb/wfsclient/type/api';
 
   export {};
   export type Routes = {
@@ -2585,9 +2184,10 @@ declare module '@nextgisweb/pyramid/type/route' {
             | 'wmsclient'
             | 'tmsclient'
             | 'basemap'
+            | 'cadaster'
+            | 'collector'
             | 'demo'
-            | 'gpdobj'
-            | 'terrain_provider'
+            | 'ngwcluster'
             | 'tracker';
         };
         response: Record<string, any>;
@@ -3002,59 +2602,59 @@ declare module '@nextgisweb/pyramid/type/route' {
     'spatial_ref_sys.collection': {
       pathObj: Record<string, never>;
       pathArr: [];
-      get: { response: ns1049.SRSRead[] };
+      get: { response: ns939.SRSRead[] };
       post: {
-        body: ns1049.SRSCreate;
-        response: ns1049.SRSRef;
+        body: ns939.SRSCreate;
+        response: ns939.SRSRef;
       };
     };
     'spatial_ref_sys.convert': {
       pathObj: Record<string, never>;
       pathArr: [];
       post: {
-        body: ns1049.ConvertBody;
-        response: ns1049.ConvertResponse;
+        body: ns939.ConvertBody;
+        response: ns939.ConvertResponse;
       };
     };
     'spatial_ref_sys.geom_transform.batch': {
       pathObj: Record<string, never>;
       pathArr: [];
       post: {
-        body: ns1049.GeomTransformBatchBody;
-        response: ns1049.GeomTransformBatchResponse[];
+        body: ns939.GeomTransformBatchBody;
+        response: ns939.GeomTransformBatchResponse[];
       };
     };
     'spatial_ref_sys.geom_transform': {
       pathObj: { id: number /* int */ };
       pathArr: [id: number /* int */];
       post: {
-        body: ns1049.GeomTransformBody;
-        response: ns1049.GeomTransformResponse;
+        body: ns939.GeomTransformBody;
+        response: ns939.GeomTransformResponse;
       };
     };
     'spatial_ref_sys.geom_length': {
       pathObj: { id: number /* int */ };
       pathArr: [id: number /* int */];
       post: {
-        body: ns1049.GeometryPropertyBody;
-        response: ns1049.GeometryPropertyResponse;
+        body: ns939.GeometryPropertyBody;
+        response: ns939.GeometryPropertyResponse;
       };
     };
     'spatial_ref_sys.geom_area': {
       pathObj: { id: number /* int */ };
       pathArr: [id: number /* int */];
       post: {
-        body: ns1049.GeometryPropertyBody;
-        response: ns1049.GeometryPropertyResponse;
+        body: ns939.GeometryPropertyBody;
+        response: ns939.GeometryPropertyResponse;
       };
     };
     'spatial_ref_sys.item': {
       pathObj: { id: number /* int */ };
       pathArr: [id: number /* int */];
-      get: { response: ns1049.SRSRead };
+      get: { response: ns939.SRSRead };
       put: {
-        body: ns1049.SRSUpdate;
-        response: ns1049.SRSRef;
+        body: ns939.SRSUpdate;
+        response: ns939.SRSRef;
       };
       delete: { response: Record<string, never> };
     };
@@ -3067,26 +2667,26 @@ declare module '@nextgisweb/pyramid/type/route' {
           lat?: number /* float */;
           lon?: number /* float */;
         };
-        response: ns1049.SRSCatalogRecord[];
+        response: ns939.SRSCatalogRecord[];
       };
     };
     'spatial_ref_sys.catalog.item': {
       pathObj: { id: number /* int */ };
       pathArr: [id: number /* int */];
-      get: { response: ns1049.SRSCatalogItem };
+      get: { response: ns939.SRSCatalogItem };
     };
     'spatial_ref_sys.catalog.import': {
       pathObj: Record<string, never>;
       pathArr: [];
       post: {
-        body: ns1049.SRSCatalogImportBody;
-        response: ns1049.SRSCatalogImportResponse;
+        body: ns939.SRSCatalogImportBody;
+        response: ns939.SRSCatalogImportResponse;
       };
     };
     'layer.extent': {
       pathObj: { id: number /* int */ };
       pathArr: [id: number /* int */];
-      get: { response: any };
+      get: { response: ns1014.Extent };
     };
     'layer_preview.map': {
       pathObj: { id: number /* int */ };
@@ -3213,7 +2813,7 @@ declare module '@nextgisweb/pyramid/type/route' {
     'feature_layer.feature.extent': {
       pathObj: { id: number /* int */ };
       pathArr: [id: number /* int */];
-      get: { response: any };
+      get: { response: ns410.NgwExtent };
     };
     'feature_layer.geojson': {
       pathObj: { id: number /* int */ };
@@ -3314,10 +2914,10 @@ declare module '@nextgisweb/pyramid/type/route' {
           | ns410.FeatureUpdate
           | ns410.FeatureDelete
           | ns410.FeatureRestore
-          | ns1270.DescriptionPut
-          | ns1272.AttachmentCreate
-          | ns1272.AttachmentUpdate
-          | ns1272.AttachmentDelete
+          | ns1163.DescriptionPut
+          | ns1165.AttachmentCreate
+          | ns1165.AttachmentUpdate
+          | ns1165.AttachmentDelete
         )[];
       };
     };
@@ -3394,7 +2994,7 @@ declare module '@nextgisweb/pyramid/type/route' {
     'feature_attachment.bundle': {
       pathObj: Record<string, never>;
       pathArr: [];
-      post: { body: ns1272.BundleBody };
+      post: { body: ns1165.BundleBody };
     };
     'feature_attachment.page': {
       pathObj: { id: number /* int */ };
@@ -3545,7 +3145,7 @@ declare module '@nextgisweb/pyramid/type/route' {
     'wfsclient.connection.inspect': {
       pathObj: { id: number /* int */ };
       pathArr: [id: number /* int */];
-      get: { response: ns491.InspectResponse };
+      get: { response: ns483.InspectResponse };
     };
     'wfsclient.connection.inspect.layer': {
       pathObj: {
@@ -3553,7 +3153,7 @@ declare module '@nextgisweb/pyramid/type/route' {
         layer: string;
       };
       pathArr: [id: number /* int */, layer: string];
-      get: { response: ns491.InspectLayerResponse };
+      get: { response: ns483.InspectLayerResponse };
     };
     'wmsserver.wms': {
       pathObj: { id: number /* int */ };
@@ -3614,14 +3214,14 @@ declare module '@nextgisweb/pyramid/type/route' {
     'tmsclient.connection.inspect': {
       pathObj: { id: number /* int */ };
       pathArr: [id: number /* int */];
-      get: { response: ns527.InspectResponse };
+      get: { response: ns519.InspectResponse };
     };
     'audit.dbase': {
       pathObj: Record<string, never>;
       pathArr: [];
       get: {
         query: {
-          format: ns1506.QueryFormat;
+          format: ns1399.QueryFormat;
           eq?: string;
           gt?: string;
           ge?: string;
@@ -3631,10 +3231,84 @@ declare module '@nextgisweb/pyramid/type/route' {
           filter?: string;
           limit?: number /* int */;
         };
-        response: ns1506.AuditArrayLogEntry[] | ns1506.AuditObject[] | string;
+        response: ns1399.AuditArrayLogEntry[] | ns1399.AuditObject[] | string;
       };
     };
     'audit.control_panel.journal.browse': {
+      pathObj: Record<string, never>;
+      pathArr: [];
+    };
+    'cadaster.enabled': {
+      pathObj: Record<string, never>;
+      pathArr: [];
+      get: { response: any };
+    };
+    'cadaster.pkk_by_position': {
+      pathObj: Record<string, never>;
+      pathArr: [];
+      get: { response: any };
+    };
+    'cadaster.pkk_by_id': {
+      pathObj: Record<string, never>;
+      pathArr: [];
+      get: { response: any };
+    };
+    'pyramid.control_panel.cadaster': {
+      pathObj: Record<string, never>;
+      pathArr: [];
+    };
+    'collector.user.browse': {
+      pathObj: Record<string, never>;
+      pathArr: [];
+    };
+    'collector.user.create': {
+      pathObj: Record<string, never>;
+      pathArr: [];
+    };
+    'collector.user.edit': {
+      pathObj: { id: number /* int */ };
+      pathArr: [id: number /* int */];
+    };
+    'collector.resource.users': {
+      pathObj: { id: number /* int */ };
+      pathArr: [id: number /* int */];
+    };
+    'collector.resource.read': {
+      pathObj: { id: number /* int */ };
+      pathArr: [id: number /* int */];
+    };
+    'collector.user.collection': {
+      pathObj: Record<string, never>;
+      pathArr: [];
+      get: {
+        query: {
+          like?: string;
+          sortBy?: string;
+        };
+        response: ns542.CollectorUserStruct[];
+      };
+      post: {
+        body: ns542.CollectorUserCreateStruct;
+        response: ns542.EntityId;
+      };
+    };
+    'collector.user.item': {
+      pathObj: { user_id: number /* int */ };
+      pathArr: [user_id: number /* int */];
+      get: { response: ns542.CollectorUserStruct };
+      put: { response: ns542.EntityId };
+      delete: { response: any };
+    };
+    'collector.user.limit': {
+      pathObj: Record<string, never>;
+      pathArr: [];
+      get: { response: ns542.CollectorUserLimit };
+    };
+    'old.collector.user': {
+      pathObj: { user_id: number /* int */ };
+      pathArr: [user_id: number /* int */];
+    };
+    'old.collector.users': {
       pathObj: Record<string, never>;
       pathArr: [];
     };
@@ -3659,128 +3333,40 @@ declare module '@nextgisweb/pyramid/type/route' {
       pathObj: { project: string };
       pathArr: [project: string];
     };
+    'formbuilder.formbuilder_form_ngfp': {
+      pathObj: { id: number /* int */ };
+      pathArr: [id: number /* int */];
+    };
+    'nimbo.config': {
+      pathObj: Record<string, never>;
+      pathArr: [];
+      get: { response: any };
+    };
+    'ngwcluster.schema': {
+      pathObj: Record<string, never>;
+      pathArr: [];
+      get: { response: any };
+    };
+    'ngwcluster.config': {
+      pathObj: Record<string, never>;
+      pathArr: [];
+      get: { response: any };
+    };
+    'ngwcluster.usage': {
+      pathObj: Record<string, never>;
+      pathArr: [];
+      get: { response: any };
+    };
+    'ngwcluster.plan_and_features': {
+      pathObj: Record<string, never>;
+      pathArr: [];
+    };
     'qgis.style_qml': {
       pathObj: { id: number /* int */ };
       pathArr: [id: number /* int */];
       get:
-        | { query: { original?: ns544.OriginalEnum } }
-        | { query: { original?: ns544.OriginalEnum } };
-    };
-    'eeko.import_form': {
-      pathObj: { id: number /* int */ };
-      pathArr: [id: number /* int */];
-    };
-    'eeko.import': {
-      pathObj: { id: number /* int */ };
-      pathArr: [id: number /* int */];
-      post: { response: any };
-    };
-    'gallery.preview': {
-      pathObj: { id: number /* int */ };
-      pathArr: [id: number /* int */];
-      get: { query: { size?: string } };
-    };
-    'gallery.display': {
-      pathObj: { id: number /* int */ };
-      pathArr: [id: number /* int */];
-    };
-    'gpcrossreport.report.build': {
-      pathObj: Record<string, never>;
-      pathArr: [];
-      post: { body: ns1571.CrossReportParams };
-    };
-    'gpdobj.classifier.sections': {
-      pathObj: Record<string, never>;
-      pathArr: [];
-      get: { response: ns579.GPDObjCSections };
-    };
-    'gpeeko.lists.buffer': {
-      pathObj: Record<string, never>;
-      pathArr: [];
-    };
-    'gpeeko.buffer': {
-      pathObj: Record<string, never>;
-      pathArr: [];
-      post: { response: any };
-    };
-    'gpflstat.update': {
-      pathObj: Record<string, never>;
-      pathArr: [];
-      post: { response: any };
-    };
-    'gplprofile.profile.build': {
-      pathObj: Record<string, never>;
-      pathArr: [];
-      post: {
-        body: ns1597.ProfileParams;
-        response: ns1597.ProfileResponse;
-      };
-    };
-    'gplprofile.profile.export': {
-      pathObj: Record<string, never>;
-      pathArr: [];
-      post: {
-        body: ns1597.ExportProfileParams;
-        response: ns1597.ProfileResponse;
-      };
-    };
-    'gputil.raster_metadata_groups': {
-      pathObj: Record<string, never>;
-      pathArr: [];
-      get: { response: ns1612.RasterMetadataGroupsSettings };
-      put: {
-        body: ns1612.RasterMetadataGroupsSettings;
-        response: Record<string, never>;
-      };
-    };
-    'terrain_provider.layer': {
-      pathObj: { id: number /* int */ };
-      pathArr: [id: number /* int */];
-      get: { response: any };
-    };
-    'terrain_provider.tile': {
-      pathObj: {
-        id: number /* int */;
-        z: number /* int */;
-        x: number /* int */;
-        y: number /* int */;
-      };
-      pathArr: [
-        id: number /* int */,
-        z: number /* int */,
-        x: number /* int */,
-        y: number /* int */,
-      ];
-    };
-    'terrain_provider.test': {
-      pathObj: Record<string, never>;
-      pathArr: [];
-    };
-    '__/static/asset/': {
-      pathObj: Record<string, never>;
-      pathArr: [];
-    };
-    'model_3d.file_glb': {
-      pathObj: { id: number /* int */ };
-      pathArr: [id: number /* int */];
-    };
-    'model_3d.refs.types': {
-      pathObj: Record<string, never>;
-      pathArr: [];
-      get: { response: any };
-    };
-    'model_3d.refs.source_types': {
-      pathObj: Record<string, never>;
-      pathArr: [];
-      get: { response: any };
-    };
-    'scene_3d.display': {
-      pathObj: { id: number /* int */ };
-      pathArr: [id: number /* int */];
-    };
-    'tileset_3d.export': {
-      pathObj: { id: number /* int */ };
-      pathArr: [id: number /* int */];
+        | { query: { original?: ns555.OriginalEnum } }
+        | { query: { original?: ns555.OriginalEnum } };
     };
     'pyramid.control_panel.tracker': {
       pathObj: Record<string, never>;
@@ -3852,9 +3438,11 @@ declare module '@nextgisweb/pyramid/type/route' {
       get: {
         query: {
           pyramid?: ns106.PyramidCSetting[];
-          tracker?: ns650.TrackerCSetting[];
+          tracker?: ns594.TrackerCSetting[];
           resource?: ns355.ResourceCSetting[];
           webmap?: ns426.WebMapCSetting[];
+          cadaster?: ns1588.CadasterCSetting[];
+          ngwcluster?: ns1592.NGWClusterCSetting[];
         };
         response: ns106.CSettingsRead;
       };

@@ -1,1 +1,1 @@
-{"name":"NGW select","description":""}
+{"name":"NGW Feature Selection with Highlight","description":"Select and highlight features from a NextGIS Web vector layer on a map. Click on a layer to perform feature identification, and the selected feature will be highlighted with a custom style."}

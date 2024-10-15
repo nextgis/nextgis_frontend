@@ -1,7 +1,7 @@
 import { createResourceName } from './createName';
 
 import type { ResourceCreateOptions } from '../interfaces';
-import type { ResourceCls } from '@nextgis/ngw-connector';
+import type { ResourceCls } from '@nextgisweb/resource/type/api';
 
 export function createResourceOptions(
   cls: ResourceCls,

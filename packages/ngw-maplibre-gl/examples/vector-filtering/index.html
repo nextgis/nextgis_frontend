@@ -2,14 +2,29 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Vector layers filtering</title>
+    <title>Filter vector layer by attribute</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-      html, body, #map {
+      html,
+      body,
+      #map {
         margin: 0;
         padding: 0;
         width: 100%;
         height: 100%;
+      }
+      .control-panel {
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 10px;
+      }
+      select {
+        padding: 6px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+      }
+
+      .popup-btn:hover {
+        background-color: #0056b3;
       }
     </style>
     <script src="../../lib/ngw-maplibre-gl.global.js"></script>
@@ -27,8 +42,12 @@
 
       const filterInput = document.createElement('select');
       const filterLabel = document.createElement('label');
-      filterLabel.appendChild(document.createTextNode('Filter: '));
+      filterLabel.appendChild(document.createTextNode('Filter by amenity: '));
       filterLabel.appendChild(filterInput);
+
+      const controlPanel = document.createElement('div');
+      controlPanel.className = 'control-panel';
+      controlPanel.appendChild(filterLabel);
 
       filterInput.onchange = () => {
         setLayerFilter();
@@ -41,7 +60,7 @@
       const filterControl = ngwMap.createControl(
         {
           onAdd: () => {
-            return filterLabel;
+            return controlPanel;
           },
         },
         { margin: true },

@@ -1,5 +1,5 @@
 {
   "name": "Expression paint",
-  "description": "Use expressions to set paint",
+  "description": "Demonstrates how to dynamically style GeoJSON features on a map using expressions to set properties like color and radius for each point.",
   "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"]
 }

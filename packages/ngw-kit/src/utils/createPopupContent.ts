@@ -1,9 +1,9 @@
-import type { ResourceItem } from '@nextgis/ngw-connector';
+import type { CompositeRead } from '@nextgisweb/resource/type/api';
 import type { Feature } from 'geojson';
 
 export function createPopupContent(
   feature: Feature,
-  item?: ResourceItem,
+  item?: CompositeRead,
 ): HTMLElement | string {
   // @ts-ignore
   if (__BROWSER__) {
