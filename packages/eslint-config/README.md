@@ -11,14 +11,12 @@ Just run the command:
 npm i -D @nextgis/eslint-config
 ```
 
-Then create the `.eslintrc` in the root of your project and add the following content:
+Then create the `eslint.config.js` in the root of your project and add the following content:
 
-```javascripton
-{
-  "extends": [
-    "@nextgis/eslint-config"
-  ]
-}
+```javascript
+import config from './packages/eslint-config/index.js';
+
+export default config;
 ```
 
 ## Webpack
