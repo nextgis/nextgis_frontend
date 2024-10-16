@@ -522,7 +522,7 @@ export type LayerAdapter<
 > = MainLayerAdapter<M, L, O> | VectorLayerAdapter<M, L, O>;
 
 export interface GetLegendOptions {
-  signal?: AbortSignal;
+  signal?: AbortSignal | null;
   cache?: boolean;
 }
 

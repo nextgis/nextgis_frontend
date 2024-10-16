@@ -201,7 +201,7 @@ export type NgwExceptions =
 
 export interface BaseRequestOptions {
   cache?: boolean;
-  signal?: AbortSignal;
+  signal?: AbortSignal | null;
 }
 
 /**
@@ -254,7 +254,7 @@ export interface RequestOptions<
   /**
    * Signal object that allows you to communicate with a DOM request (such as fetch) and abort it if desired via an AbortController.
    */
-  signal?: AbortSignal;
+  signal?: AbortSignal | null;
 
   /**
    * Parameters to be included in the request URL.

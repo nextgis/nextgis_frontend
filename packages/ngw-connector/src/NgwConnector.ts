@@ -106,7 +106,9 @@ export class NgwConnector {
    *   .catch((er) => console.log('Connection problem', er));
    * ```
    */
-  async connect(): Promise<PyramidRoute> {
+  async connect({
+    signal,
+  }: Pick<RequestOptions, 'signal'> = {}): Promise<PyramidRoute> {
     const auth = this.options.auth;
 
     if (auth) {
@@ -116,11 +118,12 @@ export class NgwConnector {
       }
     }
     const routeUrl = `${this.routeStr}?client=${this.client}`;
-    return await this.makeQuery<PyramidRoute>(
+    return this.makeQuery<PyramidRoute>(
       routeUrl,
       {},
       {
         cacheName: 'route',
+        signal,
         cache: true,
         cacheProps: {
           id: this.id,

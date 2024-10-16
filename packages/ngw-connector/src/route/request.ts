@@ -257,7 +257,7 @@ export async function request<
     return body as ToReturn<T, RT, ReturnUrl>;
   };
 
-  if (cacheEngine && opt.method?.toUpperCase() === 'GET') {
+  if (cacheEngine && cache !== false && opt.method?.toUpperCase() === 'GET') {
     const props = cacheProps
       ? cacheProps
       : {

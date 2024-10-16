@@ -165,7 +165,7 @@ export class Cache<
       }
       this.cache.push(cacheItem);
       if (value instanceof Promise) {
-        value.catch((er) => {
+        value.catch(() => {
           this.delete(key, props);
         });
         if (onlyFull) {

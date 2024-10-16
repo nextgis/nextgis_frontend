@@ -2,6 +2,8 @@ import { fixUrlStr, objectRemoveEmpty } from '@nextgis/utils';
 
 import { generateUrl, request } from './request';
 
+import { AbortError } from '../errors';
+
 import type {
   RequestMethod,
   ResponseType,
@@ -77,7 +79,7 @@ export function route<N extends RouteName>(
   } as RouteResults<N>;
   const methods: RequestMethod[] = ['get', 'post', 'put', 'delete', 'patch'];
   for (const method of methods) {
-    const methodResp = async <
+    const methodResp = <
       T = RouteResp<N, typeof method>,
       RT extends ResponseType = 'json',
       RU extends boolean = false,
@@ -89,26 +91,32 @@ export function route<N extends RouteName>(
       >,
     ): Promise<ToReturn<T, RT, RU>> => {
       const { headers: optHeaders, ...restOpt } = requestOptions || {};
-      const routeData = await connector.connect();
-      const template = routeURL(
-        name,
-        connector.options.baseUrl ?? '',
-        routeData,
-        ...rest,
-      );
-      const headers = objectRemoveEmpty({
-        ...connector.getAuthorizationHeaders(),
-        ...(optHeaders ?? {}),
+      if (requestOptions?.signal?.aborted) {
+        throw new AbortError();
+      }
+
+      return connector.connect().then((routeData) => {
+        const template = routeURL(
+          name,
+          connector.options.baseUrl ?? '',
+          routeData,
+          ...rest,
+        );
+        const headers = objectRemoveEmpty({
+          ...connector.getAuthorizationHeaders(),
+          ...(optHeaders ?? {}),
+        });
+
+        return request<T, RT, RU>(
+          template,
+          {
+            headers,
+            ...restOpt,
+            method,
+          },
+          connector.cache,
+        );
       });
-      return request<T, RT, RU>(
-        template,
-        {
-          headers,
-          ...restOpt,
-          method,
-        },
-        connector.cache,
-      );
     };
     // Using 'unknown' for type assertion because all methods are actually written to 'result'
     (result[method] as unknown) = methodResp;
