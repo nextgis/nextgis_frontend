@@ -1,11 +1,12 @@
-import type {
-  FetchNgwLayerExtentOptions,
-  FetchNgwLayerItemExtentOptions,
-} from '../interfaces';
 import type NgwConnector from '@nextgis/ngw-connector';
 import type { LngLatBoundsArray } from '@nextgis/utils';
 import type { CompositeRead } from '@nextgisweb/resource/type/api';
 import type { WebMapRead } from '@nextgisweb/webmap/type/api';
+
+import type {
+  FetchNgwLayerExtentOptions,
+  FetchNgwLayerItemExtentOptions,
+} from '../interfaces';
 
 export function getNgwWebmapExtent(
   webmap: WebMapRead,

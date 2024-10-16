@@ -1,7 +1,8 @@
 import { createResourceName } from './createName';
 
-import type { ResourceCreateOptions } from '../interfaces';
 import type { ResourceCls } from '@nextgisweb/resource/type/api';
+
+import type { ResourceCreateOptions } from '../interfaces';
 
 export function createResourceOptions(
   cls: ResourceCls,

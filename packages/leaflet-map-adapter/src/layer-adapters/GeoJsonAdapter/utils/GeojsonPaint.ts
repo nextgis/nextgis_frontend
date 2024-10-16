@@ -4,7 +4,6 @@ import { CircleMarker, DivIcon, Marker } from 'leaflet';
 
 import { PAINT } from '../../../utils/geometries';
 
-import type { GeoJsonAdapter, LayerDef } from '../GeoJsonAdapter';
 import type {
   IconPaint,
   PathPaint,
@@ -17,6 +16,8 @@ import type {
   Path,
   PathOptions,
 } from 'leaflet';
+
+import type { GeoJsonAdapter, LayerDef } from '../GeoJsonAdapter';
 
 export class GeoJsonPaint {
   private layer: GeoJsonAdapter;

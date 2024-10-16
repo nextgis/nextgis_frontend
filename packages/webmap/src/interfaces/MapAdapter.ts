@@ -1,3 +1,14 @@
+import type {
+  LatLng,
+  LngLatArray,
+  LngLatBoundsArray,
+  Type,
+  ZoomLevel,
+} from '@nextgis/utils';
+import type { ViewOptions } from '@nextgis/webmap';
+import type { EventEmitter } from 'events';
+import type StrictEventEmitter from 'strict-event-emitter-types';
+
 import type { Pixel } from './BaseTypes';
 import type { MapAdapterEvents } from './Events';
 import type { LayerAdapter } from './LayerAdapter';
@@ -9,16 +20,6 @@ import type {
   ToggleControlOptions,
 } from './MapControl';
 import type { MapOptions } from './MapOptions';
-import type {
-  LatLng,
-  LngLatArray,
-  LngLatBoundsArray,
-  Type,
-  ZoomLevel,
-} from '@nextgis/utils';
-import type { ViewOptions } from '@nextgis/webmap';
-import type { EventEmitter } from 'events';
-import type StrictEventEmitter from 'strict-event-emitter-types';
 
 /**
  * Parameters passed to the arguments of the callback function when clicking on the map

@@ -2,8 +2,9 @@ import { defined } from '@nextgis/utils';
 
 import { fetchNgwLayerItems } from './fetchNgwLayerItems';
 
-import type { FetchNgwItemsOptions } from '../interfaces';
 import type { FeatureProperties } from '@nextgis/utils';
+
+import type { FetchNgwItemsOptions } from '../interfaces';
 
 export interface MapSelectNgwLayerDistinctOptions<
   P extends FeatureProperties = FeatureProperties,

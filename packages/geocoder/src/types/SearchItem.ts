@@ -1,7 +1,9 @@
-import type { ResultItem } from './ResultItem';
-import type { BaseProvider } from '../providers/BaseProvider';
 import type { LngLatBoundsArray } from '@nextgis/utils';
 import type { GeoJsonObject } from 'geojson';
+
+import type { BaseProvider } from '../providers/BaseProvider';
+
+import type { ResultItem } from './ResultItem';
 
 export interface SearchItem {
   /**

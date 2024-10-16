@@ -1,5 +1,3 @@
-import './ngw-uploader.css';
-
 import NgwConnector from '@nextgis/ngw-connector';
 import NgwUploader from '@nextgis/ngw-uploader';
 
@@ -7,6 +5,8 @@ import { showLoginDialog } from './utils/dialog';
 import { createInput } from './utils/input';
 
 import type { NgwUploadInputOptions, UploadInputOptions } from './interfaces';
+
+import './ngw-uploader.css';
 
 export class NgwUploaderInput extends NgwUploader {
   inputOptions: UploadInputOptions = {
@@ -36,7 +36,7 @@ export class NgwUploaderInput extends NgwUploader {
         try {
           const loginOpt = await showLoginDialog(this.options.auth);
           this.options.auth = loginOpt;
-        } catch (er) {
+        } catch {
           // ignore
         }
       }

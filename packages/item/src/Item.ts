@@ -1,5 +1,5 @@
-import { TreeHelper } from './TreeHelper';
 import { ItemProperties } from './properties/ItemProperties';
+import { TreeHelper } from './TreeHelper';
 
 import type { ItemOptions } from './interfaces';
 

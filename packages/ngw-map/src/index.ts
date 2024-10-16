@@ -2,9 +2,8 @@ import { NgwMap } from './NgwMap';
 
 import type { NgwMapOptions } from './interfaces';
 
-export * from '@nextgis/webmap';
-
 export * from './interfaces';
+export * from '@nextgis/webmap';
 
 export { NgwMap };
 

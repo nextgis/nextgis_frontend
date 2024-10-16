@@ -1,8 +1,9 @@
 import { createGeoJsonFeature } from './featureLayerUtils';
 import { fetchNgwLayerItem } from './fetchNgwLayerItem';
 
-import type { FetchNgwItemOptions } from '../interfaces';
 import type { Feature, Geometry } from 'geojson';
+
+import type { FetchNgwItemOptions } from '../interfaces';
 
 export async function fetchNgwLayerFeature<
   G extends Geometry = Geometry,

@@ -2,9 +2,10 @@ import { DomEvent, type Layer } from 'leaflet';
 
 import { createMouseEvent } from '../../../utils/createMouseEvent';
 
-import type { GeoJsonAdapter } from '../GeoJsonAdapter';
 import type { OnLayerMouseOptions } from '@nextgis/webmap';
 import type { LeafletEvent, LeafletMouseEvent } from 'leaflet';
+
+import type { GeoJsonAdapter } from '../GeoJsonAdapter';
 
 export class GeoJsonEvents {
   private layer: GeoJsonAdapter;

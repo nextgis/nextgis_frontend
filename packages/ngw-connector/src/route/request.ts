@@ -9,6 +9,8 @@ import {
   ServerResponseError,
 } from './error';
 
+import type Cache from '@nextgis/cache';
+
 import type { ServerResponseErrorData } from './error';
 import type {
   LunkwillData,
@@ -16,7 +18,6 @@ import type {
   RouteRequestOptions,
   ToReturn,
 } from './type';
-import type Cache from '@nextgis/cache';
 
 function lunkwillCheckResponse(lwResp: Response) {
   const ct = lwResp.headers.get('content-type');
@@ -30,7 +31,7 @@ function lunkwillCheckResponse(lwResp: Response) {
 async function responseJson(response: Response) {
   try {
     return response.json();
-  } catch (e) {
+  } catch {
     throw new Error();
   }
 }
@@ -56,7 +57,7 @@ async function lunkwillResponseUrl(lwResp: Response) {
     try {
       lwResp = await fetch(sum, { credentials: 'same-origin' });
       lwData = await lwResp.json();
-    } catch (e) {
+    } catch {
       failed = true;
       continue;
     }
@@ -87,7 +88,7 @@ async function lunkwillResponseUrl(lwResp: Response) {
 async function lunkwillFetch(lwRespUrl: string) {
   try {
     return await window.fetch(lwRespUrl, { credentials: 'same-origin' });
-  } catch (e) {
+  } catch {
     throw new NetworksResponseError();
   }
 }

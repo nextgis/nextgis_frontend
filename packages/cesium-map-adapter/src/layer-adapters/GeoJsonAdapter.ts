@@ -17,7 +17,6 @@ import { whenSampleTerrainMostDetailed } from '../utils/whenSampleTerrainMostDet
 
 import { BaseAdapter } from './BaseAdapter';
 
-import type { Map } from './BaseAdapter';
 import type {
   Ellipsoid3DPaint,
   GeometryPaint,
@@ -29,13 +28,22 @@ import type {
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type { LngLatBoundsArray } from '@nextgis/utils';
 import type {
+  CreatePopupContentProps,
   DataLayerFilter,
   GeoJsonAdapterOptions,
   LayerDefinition,
   VectorLayerAdapter,
 } from '@nextgis/webmap';
 import type { EllipsoidGraphics, Entity, Property } from 'cesium';
-import type { Feature, FeatureCollection, GeoJsonObject } from 'geojson';
+import type {
+  Feature,
+  FeatureCollection,
+  GeoJsonObject,
+  GeoJsonProperties,
+  Geometry,
+} from 'geojson';
+
+import type { Map } from './BaseAdapter';
 
 type Layer = GeoJsonDataSource;
 
@@ -190,12 +198,11 @@ export class GeoJsonAdapter
 
   getLayers(): LayerDefinition[] {
     if (this._source) {
-      // @ts-ignore
       return this._source?.entities.values.map((x) => {
         return {
           layer: x,
         };
-      });
+      }) as LayerDefinition[];
     }
     return [];
   }
@@ -395,7 +402,7 @@ export class GeoJsonAdapter
       return elem;
     };
 
-    //@ts-ignore
+    // @ts-expect-error is missing the following properties from type 'Property': isConstant, definitionChanged, equals
     return {
       getValue: () => {
         const id = feature.id;
@@ -411,14 +418,19 @@ export class GeoJsonAdapter
           this._currentPopupId = id;
         }
         if (this.options.popupOptions?.createPopupContent) {
-          // @ts-ignore
-          const content = this.options.popupOptions.createPopupContent({
+          const props: CreatePopupContentProps<
+            Feature<Geometry, GeoJsonProperties>,
+            any
+          > = {
             feature,
             type: 'api',
             target: this,
             close,
             onClose,
-          });
+            getBounds: () => [],
+            getCenter: () => [],
+          };
+          const content = this.options.popupOptions.createPopupContent(props);
           if (id !== undefined) {
             this._popupContainers[id] = content;
           }
@@ -506,11 +518,11 @@ export class GeoJsonAdapter
 
   private _getEntityHeight(entity: Entity, paint?: Paint): number | undefined {
     paint = paint || this._paint;
-    // @ts-ignore
-    const feature: Feature = {
+
+    const feature = {
       type: 'Feature',
       properties: entity.properties || {},
-    };
+    } as Feature;
     const featurePaint = this._getFeaturePaint(feature, paint);
     if (paint && 'extrude3d' in featurePaint) {
       return featurePaint.extrude3d as number;

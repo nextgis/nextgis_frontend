@@ -1,22 +1,21 @@
-import { EventEmitter } from 'events';
-
 import ControlContainer from '@nextgis/control-container';
 import {
   Cartesian3,
   Cartographic,
-  Math as CesiumMath,
   Color,
   Ellipsoid,
   Entity,
   GeoJsonDataSource,
+  Math as CesiumMath,
   Rectangle,
   SceneMode,
   ScreenSpaceEventType,
   Viewer,
-  WebMercatorProjection,
   viewerCesium3DTilesInspectorMixin,
   viewerCesiumInspectorMixin,
+  WebMercatorProjection,
 } from 'cesium';
+import { EventEmitter } from 'events';
 
 import { MeasureControl } from './controls/MeasureControl';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
@@ -29,7 +28,6 @@ import { getCameraFocus } from './utils/getCameraFocus';
 import { getDefaultTerrain } from './utils/getDefaultTerrain';
 import { whenSampleTerrainMostDetailed } from './utils/whenSampleTerrainMostDetailed';
 
-import type { CesiumAdapterMapClickEvent } from './interfaces';
 import type { PathPaint } from '@nextgis/paint';
 import type { LngLatArray, LngLatBoundsArray, Type } from '@nextgis/utils';
 import type {
@@ -49,6 +47,8 @@ import type {
   ScreenSpaceEventHandler,
   TerrainProvider,
 } from 'cesium';
+
+import type { CesiumAdapterMapClickEvent } from './interfaces';
 
 type Layer = any;
 type Control = any;
@@ -321,7 +321,7 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
         );
       } else {
         const pts = [west, south, west, north, east, north, east, south];
-        // @ts-ignore
+        // @ts-expect-error Type 'Rectangle' is missing the following properties from type 'Cartesian3': x, y, z
         destination = Rectangle.fromCartesianArray(
           Cartesian3.fromDegreesArray(pts),
         );
@@ -468,7 +468,7 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
     const viewer = this.map;
     if (viewer) {
       try {
-        // @ts-ignore
+        // @ts-expect-error Property '_cesiumWidget' does not exist on type 'Viewer'
         const widget = viewer._cesiumWidget;
         const creditContainer = widget._creditContainer as HTMLElement;
 
@@ -481,9 +481,6 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
       } catch (er) {
         console.warn(er);
       }
-      // const credit = new Credit('<div></div>');
-      // @ts-ignore
-      // viewer.scene.frameState.creditDisplay.addDefaultCredit(credit);
     }
   }
 

@@ -1,11 +1,14 @@
 // import { DeepPartial } from '../common/DeepPartial';
 
-import { getMetadataArgsStorage } from '..';
 import { Connection } from '../connection/Connection';
 import { NgwResource } from '../decorator/NgwResource';
 import { CannotExecuteResourceNotExistError } from '../error/CannotExecuteResourceNotExistError';
+import { getMetadataArgsStorage } from '..';
 
-import type { SyncOptions } from './SyncOptions';
+import type { ResourceIdKeynameDef } from '@nextgis/ngw-connector';
+import type { Type } from '@nextgis/utils';
+import type { CompositeRead } from '@nextgisweb/resource/type/api';
+
 import type { ConnectionOptions } from '../connection/ConnectionOptions';
 import type { ResourceMetadataArgs } from '../metadata-args/ResourceMetadataArgs';
 import type { NgwResourceOptions } from '../options/NgwResourceOptions';
@@ -14,9 +17,8 @@ import type {
   ToTypescriptOptions,
 } from '../options/ToTypescriptOptions';
 import type { ValidateErrorType } from '../types/ValidateErrorType';
-import type { ResourceIdKeynameDef } from '@nextgis/ngw-connector';
-import type { Type } from '@nextgis/utils';
-import type { CompositeRead } from '@nextgisweb/resource/type/api';
+
+import type { SyncOptions } from './SyncOptions';
 
 // type QueryDeepPartialEntity<T> = DeepPartial<T>;
 // type InsertResult = any;
@@ -78,6 +80,7 @@ export class BaseResource {
   ): T {
     const metadataArgsStorage = getMetadataArgsStorage();
     const table = metadataArgsStorage.filterTables(
+      // @ts-expect-error Argument of type 'typeof BaseResource' is not assignable to parameter of type 'string | FuncType | (string | FuncType)[]'.
       this,
     )[0] as ResourceMetadataArgs;
     const tableOptions = { ...table };
@@ -90,9 +93,14 @@ export class BaseResource {
     ResourceClone.connection = undefined;
     ResourceClone.item = undefined;
 
-    metadataArgsStorage.filterColumns(this).forEach((x) => {
-      metadataArgsStorage.columns.push({ ...x, target: ResourceClone });
-    });
+    metadataArgsStorage
+      .filterColumns(
+        // @ts-expect-error Argument of type 'typeof BaseResource' is not assignable to parameter of type 'string | FuncType | (string | FuncType)[]'.
+        this,
+      )
+      .forEach((x) => {
+        metadataArgsStorage.columns.push({ ...x, target: ResourceClone });
+      });
 
     return ResourceClone;
   }

@@ -1,12 +1,13 @@
 import { propertiesFilter } from '@nextgis/properties-filter';
 
+import type { PropertyFilter } from '@nextgis/properties-filter';
+
 import type {
   DefaultTreeItem,
   RelationFunction,
   SelfFilter,
   TreeRelation,
 } from './interfaces';
-import type { PropertyFilter } from '@nextgis/properties-filter';
 
 type D = DefaultTreeItem;
 

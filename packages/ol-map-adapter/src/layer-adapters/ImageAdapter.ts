@@ -14,9 +14,9 @@ import type {
   MainLayerAdapter,
   UpdateLayerAdapterOptions,
 } from '@nextgis/webmap';
-import type Map from 'ol/Map';
 import type { Extent } from 'ol/extent';
 import type { Options as BaseImageOptions } from 'ol/layer/BaseImage';
+import type Map from 'ol/Map';
 import type { Options as ImageWMSOptions } from 'ol/source/ImageWMS';
 
 class ImageLayerExtended extends ImageLayer<ImageWMS> {

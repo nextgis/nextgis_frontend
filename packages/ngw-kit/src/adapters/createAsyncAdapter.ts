@@ -9,6 +9,11 @@ import { createGeoJsonAdapter } from './createGeoJsonAdapter';
 import { createWebMapAdapter } from './createNgwWebmapAdapter';
 import { createRasterAdapter } from './createRasterAdapter';
 
+import type NgwConnector from '@nextgis/ngw-connector';
+import type { Type } from '@nextgis/utils';
+import type { WebMap } from '@nextgis/webmap';
+import type { CompositeRead, ResourceCls } from '@nextgisweb/resource/type/api';
+
 import type {
   ClassAdapter,
   GetClassAdapter,
@@ -18,10 +23,6 @@ import type {
   NgwLayerOptions,
   ResourceAdapter,
 } from '../interfaces';
-import type NgwConnector from '@nextgis/ngw-connector';
-import type { Type } from '@nextgis/utils';
-import type { WebMap } from '@nextgis/webmap';
-import type { CompositeRead, ResourceCls } from '@nextgisweb/resource/type/api';
 
 export const classAdapters: Record<string, GetClassAdapter> = {};
 

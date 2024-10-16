@@ -1,5 +1,6 @@
-import type { LngLatBoundsArray } from './interfaces';
 import type { Feature, Polygon } from 'geojson';
+
+import type { LngLatBoundsArray } from './interfaces';
 
 export function getBoundsPolygon(b: LngLatBoundsArray): Polygon {
   const polygon: Polygon = {

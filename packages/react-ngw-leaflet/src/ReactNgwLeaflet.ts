@@ -1,4 +1,4 @@
-/* eslint-disable import/order */
+/* eslint-disable simple-import-sort/imports */
 import MapAdapter from '@nextgis/leaflet-map-adapter';
 import { ReactNgwMap } from '@nextgis/react-ngw-map';
 import { Icon } from 'leaflet';

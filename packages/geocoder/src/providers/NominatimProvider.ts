@@ -2,11 +2,13 @@ import { fixUrlStr } from '@nextgis/utils';
 
 import { BaseProvider } from './BaseProvider';
 
-import type { BaseProviderOptions } from './BaseProviderOptions';
-import type { ResultItem } from '../types/ResultItem';
-import type { SearchItem } from '../types/SearchItem';
 import type { LngLatArray } from '@nextgis/utils';
 import type { FeatureCollection } from 'geojson';
+
+import type { ResultItem } from '../types/ResultItem';
+import type { SearchItem } from '../types/SearchItem';
+
+import type { BaseProviderOptions } from './BaseProviderOptions';
 
 /**
  * Nominatim based options {@link https://nominatim.org/release-docs/latest/api/Search}

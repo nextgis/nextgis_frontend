@@ -1,17 +1,17 @@
-import 'leaflet/dist/leaflet.css';
-import './leaflet-style-override.css';
-
 import LeafletMapAdapter from '@nextgis/leaflet-map-adapter';
 import { NgwMap } from '@nextgis/ngw-map';
 import { Icon } from 'leaflet';
-import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
 import iconUrl from 'leaflet/dist/images/marker-icon.png';
+import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
 import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
 
 import type { NgwMapOptions } from '@nextgis/ngw-map';
 import type { Map } from 'leaflet';
 
-// @ts-ignore
+import 'leaflet/dist/leaflet.css';
+import './leaflet-style-override.css';
+
+// @ts-expect-error Property '_getIconUrl' does not exist on type 'Default'.
 delete Icon.Default.prototype._getIconUrl;
 
 Icon.Default.mergeOptions({

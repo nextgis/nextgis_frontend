@@ -1,16 +1,17 @@
 import {
-  FEATURE_REQUEST_PARAMS,
   createGeoJsonFeature,
+  FEATURE_REQUEST_PARAMS,
   updateItemRequestParam,
 } from './featureLayerUtils';
+
+import type { FeatureProperties } from '@nextgis/utils';
+import type Routes from '@nextgisweb/pyramid/type/route';
+import type { Geometry } from 'geojson';
 
 import type {
   FetchNgwItemOptions,
   NgwFeatureItemResponse,
 } from '../interfaces';
-import type { FeatureProperties } from '@nextgis/utils';
-import type Routes from '@nextgisweb/pyramid/type/route';
-import type { Geometry } from 'geojson';
 
 export async function fetchNgwLayerItem<
   G extends Geometry = Geometry,

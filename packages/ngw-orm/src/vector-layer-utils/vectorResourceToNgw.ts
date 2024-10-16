@@ -1,9 +1,10 @@
 import { prepareFieldsToNgw } from '@nextgis/ngw-kit';
 
-import type { VectorLayer } from '../repository/VectorLayer';
 import type { FeatureItem } from '@nextgis/ngw-connector';
 import type { CompositeRead } from '@nextgisweb/resource/type/api';
 import type { GeoJsonProperties, Geometry } from 'geojson';
+
+import type { VectorLayer } from '../repository/VectorLayer';
 
 export interface VectorResourceToNgwOptions {
   resource: CompositeRead;

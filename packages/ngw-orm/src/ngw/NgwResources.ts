@@ -3,8 +3,9 @@ import { PointLayer } from '../repository/PointLayer';
 import { PolygonLayer } from '../repository/PolygonLayer';
 import { ResourceGroup } from '../repository/ResourceGroup';
 
-import type { BaseResource } from '../repository/BaseResource';
 import type { CompositeRead, ResourceCls } from '@nextgisweb/resource/type/api';
+
+import type { BaseResource } from '../repository/BaseResource';
 
 type GetClassItemCb = (item: CompositeRead) => typeof BaseResource;
 

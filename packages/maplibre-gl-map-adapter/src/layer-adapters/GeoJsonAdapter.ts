@@ -14,9 +14,6 @@ import {
 
 import { VectorAdapter } from './VectorAdapter';
 
-import type { EventOptions, Feature } from './VectorAdapter';
-import type { TLayer } from '../MaplibreGLMapAdapter';
-import type { SelectedFeaturesIds } from '../interfaces';
 import type { GetPaintCallback, VectorAdapterLayerPaint } from '@nextgis/paint';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type { LngLatBoundsArray } from '@nextgis/utils';
@@ -41,6 +38,11 @@ import type {
   LegacyFilterSpecification,
   Map,
 } from 'maplibre-gl';
+
+import type { SelectedFeaturesIds } from '../interfaces';
+import type { TLayer } from '../MaplibreGLMapAdapter';
+
+import type { EventOptions, Feature } from './VectorAdapter';
 
 let ID = 0;
 

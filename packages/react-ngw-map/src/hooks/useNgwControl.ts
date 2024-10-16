@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 
-import type { NgwMapContextInterface } from '../interfaces';
 import type { ControlPosition, MapControl } from '@nextgis/webmap';
+
+import type { NgwMapContextInterface } from '../interfaces';
 
 export function useNgwControl({
   context,

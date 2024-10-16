@@ -1,4 +1,4 @@
-import { Ellipsoid, IntersectionTests, Ray, defined } from 'cesium';
+import { defined, Ellipsoid, IntersectionTests, Ray } from 'cesium';
 
 import type { Cartesian3, Scene } from 'cesium';
 

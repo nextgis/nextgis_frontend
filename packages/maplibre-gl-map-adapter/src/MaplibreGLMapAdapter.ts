@@ -1,13 +1,12 @@
-import { EventEmitter } from 'events';
-
 import { debounce } from '@nextgis/utils';
+import { EventEmitter } from 'events';
 import { Map } from 'maplibre-gl';
 
 import { AttributionControl } from './controls/AttributionControl';
 import { CompassControl } from './controls/CompassControl';
-import { ZoomControl } from './controls/ZoomControl';
 import { createButtonControl } from './controls/createButtonControl';
 import { createControl } from './controls/createControl';
+import { ZoomControl } from './controls/ZoomControl';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 import { MvtAdapter } from './layer-adapters/MvtAdapter';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
@@ -17,7 +16,6 @@ import { arrayToBoundsLike } from './utils/arrayToBoundsLike';
 import { convertMapClickEvent } from './utils/convertMapClickEvent';
 import { convertZoomLevel } from './utils/convertZoomLevel';
 
-import type { Feature } from './layer-adapters/VectorAdapter';
 import type { LngLatArray, LngLatBoundsArray } from '@nextgis/utils';
 import type {
   ButtonControlOptions,
@@ -36,12 +34,14 @@ import type {
   LngLatBoundsLike,
   MapEventType,
   MapMouseEvent,
-  MapSourceDataEvent,
   MapOptions as MaplibreGLOptions,
+  MapSourceDataEvent,
   RequestParameters,
   ResourceType,
   StyleSpecification,
 } from 'maplibre-gl';
+
+import type { Feature } from './layer-adapters/VectorAdapter';
 
 export type TLayer = string[];
 export type UnselectCb = () => void;
@@ -313,17 +313,19 @@ export class MaplibreGLMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   }
 
   showLayer(layerIds: string[]): void {
-    layerIds &&
+    if (layerIds) {
       layerIds.forEach((layerId) => {
         this._toggleLayer(layerId, true);
       });
+    }
   }
 
   hideLayer(layerIds: string[]): void {
-    layerIds &&
+    if (layerIds) {
       layerIds.forEach((layerId) => {
         this._toggleLayer(layerId, false);
       });
+    }
   }
 
   removeLayer(layerIds: string[]): void {
@@ -518,7 +520,7 @@ export class MaplibreGLMapAdapter implements MapAdapter<Map, TLayer, IControl> {
       } else if (mem.getDependLayers) {
         const dependLayers = mem.getDependLayers();
         dependLayers.forEach((x) => {
-          // @ts-ignore Update x interface
+          // @ts-expect-error Update x interface
           const layer: TLayer = (x.layer && x.layer.layer) || x;
           if (Array.isArray(layer)) {
             layer.forEach((y) => {

@@ -1,8 +1,9 @@
 import { fetchNgwLayerFeatures } from './fetchNgwLayerFeatures';
 
-import type { FetchNgwItemsOptions } from '../interfaces';
 import type { FeatureProperties } from '@nextgis/utils';
 import type { FeatureCollection, Geometry } from 'geojson';
+
+import type { FetchNgwItemsOptions } from '../interfaces';
 
 export function fetchNgwLayerFeatureCollection<
   G extends Geometry | null = Geometry,

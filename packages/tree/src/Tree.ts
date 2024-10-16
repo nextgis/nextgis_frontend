@@ -6,13 +6,14 @@ import {
   treeSome,
 } from './treeFilter';
 
+import type { PropertyFilter } from '@nextgis/properties-filter';
+
 import type {
   DefaultTreeItem,
   SelfFilter,
   TreeOptions,
   TreeRelation,
 } from './interfaces';
-import type { PropertyFilter } from '@nextgis/properties-filter';
 
 export class Tree<T extends DefaultTreeItem | undefined = any> {
   relation: TreeRelation = 'children';

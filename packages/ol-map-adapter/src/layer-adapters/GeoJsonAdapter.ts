@@ -1,10 +1,8 @@
-import './Popup.css';
-
 import { create } from '@nextgis/dom';
 import { defined } from '@nextgis/utils';
-import Overlay from 'ol/Overlay';
 import GeoJSON from 'ol/format/GeoJSON';
 import VectorLayer from 'ol/layer/Vector';
+import Overlay from 'ol/Overlay';
 import { transform, transformExtent } from 'ol/proj';
 import VectorSource from 'ol/source/Vector';
 
@@ -18,13 +16,6 @@ import { getFeature } from '../utils/utils';
 
 import { BaseAdapter } from './BaseAdapter';
 
-import type {
-  ForEachFeatureAtPixelCallback,
-  ForEachFeatureAtPixelOrderedCallback,
-  MapClickEvent,
-  MouseEventType,
-  UnselectCb,
-} from '../OlMapAdapter';
 import type { Paint } from '@nextgis/paint';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type { LngLatArray, LngLatBoundsArray } from '@nextgis/utils';
@@ -41,12 +32,22 @@ import type {
 import type { Feature, GeoJsonObject } from 'geojson';
 import type OlFeature from 'ol/Feature';
 import type { FeatureLike } from 'ol/Feature';
+import type Base from 'ol/layer/Base';
 import type Map from 'ol/Map';
 import type MapBrowserEvent from 'ol/MapBrowserEvent';
 import type { Options as OverlayOptions } from 'ol/Overlay';
-import type Base from 'ol/layer/Base';
 import type { Pixel } from 'ol/pixel';
 import type { Style } from 'ol/style';
+
+import type {
+  ForEachFeatureAtPixelCallback,
+  ForEachFeatureAtPixelOrderedCallback,
+  MapClickEvent,
+  MouseEventType,
+  UnselectCb,
+} from '../OlMapAdapter';
+
+import './Popup.css';
 
 type MapBrowserPointerEvent = MapBrowserEvent<any>;
 type Layer = Base;

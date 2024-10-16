@@ -1,7 +1,7 @@
 import { createElement, useEffect, useMemo, useRef } from 'react';
 
-import { NgwMapProvider } from './context';
 import { useMapElement } from './hooks/useMapElement';
+import { NgwMapProvider } from './context';
 
 import type { ReactNgwMapProps } from './interfaces';
 

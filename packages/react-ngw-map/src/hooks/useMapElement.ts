@@ -1,8 +1,9 @@
 import { NgwMap } from '@nextgis/ngw-map';
 import { useEffect, useRef, useState } from 'react';
 
-import type { MapContainerProps } from '../interfaces';
 import type { MutableRefObject } from 'react';
+
+import type { MapContainerProps } from '../interfaces';
 
 export function useMapElement(
   mapRef: MutableRefObject<HTMLElement | null>,

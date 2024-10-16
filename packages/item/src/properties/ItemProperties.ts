@@ -1,13 +1,14 @@
 import { CheckProperty } from './CheckProperty';
 
-import type { BaseProperty } from './BaseProperty';
-import type { Item } from '../Item';
 import type {
   ItemBasePropertyOptions,
   ItemPropertyConfig,
   ItemPropertyTypes,
   Type,
 } from '../interfaces';
+import type { Item } from '../Item';
+
+import type { BaseProperty } from './BaseProperty';
 
 // Constants for property types
 const BOOLEAN_TYPE = 'boolean';

@@ -4,9 +4,9 @@ import { DomEvent, FeatureGroup, GeoJSON } from 'leaflet';
 import { boundsToArray } from '../../utils/boundsToArray';
 import { detectType } from '../../utils/detectType';
 import {
-  PAINT,
   createFeaturePositionOptions,
   filterGeometries,
+  PAINT,
   typeAlias,
 } from '../../utils/geometries';
 import { BaseAdapter } from '../BaseAdapter';
@@ -29,12 +29,12 @@ import type {
 import type { Feature, GeoJsonObject, Point } from 'geojson';
 import type {
   GeoJSONOptions,
-  PopupOptions as LPopupOptions,
   LatLng,
   LatLngExpression,
   Layer,
   LeafletMouseEvent,
   Map,
+  PopupOptions as LPopupOptions,
 } from 'leaflet';
 
 export type LayerDef = LayerDefinition<Feature, Layer>;
@@ -423,7 +423,7 @@ export class GeoJsonAdapter
         this.options.popupOptions?.unselectOnClose ?? true;
       if (unselectOnClose) {
         const p = layer.getPopup();
-        p &&
+        if (p) {
           p.once(
             'remove',
             () => {
@@ -431,6 +431,7 @@ export class GeoJsonAdapter
             },
             this,
           );
+        }
       }
       this._openedPopup.push([popup, _closeHandlers, def]);
       popup.openPopup(latLng);
@@ -509,7 +510,6 @@ export class GeoJsonAdapter
         layer,
         ...createFeaturePositionOptions(feature),
       };
-      // @ts-ignore
       layer.options.pane = this.pane;
       this._layers.push(def);
       let ok = true;
@@ -519,7 +519,7 @@ export class GeoJsonAdapter
       if (ok) {
         const { popup, popupOptions, selectable, interactive, selectOnHover } =
           this.options;
-        // @ts-ignore
+        // @ts-expect-error Property 'interactive' does not exist on type 'LayerOptions'
         layer.options.interactive = defined(interactive) ? interactive : true;
         layer_.addLayer(layer);
         if (selectable) {

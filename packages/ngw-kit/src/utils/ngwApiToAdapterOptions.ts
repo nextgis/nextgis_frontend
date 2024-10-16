@@ -1,6 +1,5 @@
 import { updateImageParams } from './utils';
 
-import type { NgwLayerOptions, TileNoData } from '../interfaces';
 import type {
   ImageAdapterOptions,
   MvtAdapterOptions,
@@ -8,6 +7,8 @@ import type {
   WebMap,
   WmsAdapterOptions,
 } from '@nextgis/webmap';
+
+import type { NgwLayerOptions, TileNoData } from '../interfaces';
 
 export interface GetLayerAdapterOptions {
   options: NgwLayerOptions;

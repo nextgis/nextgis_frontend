@@ -1,7 +1,8 @@
-import { type Expression, evaluate, isExpression } from '@nextgis/expression';
+import { evaluate, type Expression, isExpression } from '@nextgis/expression';
+
+import type { Feature } from 'geojson';
 
 import type { GetPaintCallback, VectorAdapterLayerPaint } from './interfaces';
-import type { Feature } from 'geojson';
 
 type PropertyExpressionCb = (feature: Feature) => ReturnType<typeof evaluate>;
 

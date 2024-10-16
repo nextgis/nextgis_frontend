@@ -1,11 +1,11 @@
 import { template } from './template';
 
-import type { NgwConnector } from '../NgwConnector';
 import type {
   RequestItemKeys,
   RequestItemsParams,
   RequestOptions,
 } from '../interfaces';
+import type { NgwConnector } from '../NgwConnector';
 import type { RequestItemsParamsMap } from '../types/RequestItemsParamsMap';
 
 interface ApiRequestOptions<K extends keyof RequestItemsParamsMap> {

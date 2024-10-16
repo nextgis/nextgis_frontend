@@ -1,7 +1,6 @@
-import { EventEmitter } from 'events';
-
 import NgwConnector from '@nextgis/ngw-connector';
 import { fixUrlStr, isObject } from '@nextgis/utils';
+import { EventEmitter } from 'events';
 import { Upload as TusUpload } from 'tus-js-client';
 
 import { createStyleName, nameFromOpt } from './utils/createName';
@@ -9,21 +8,6 @@ import { createResourceOptions } from './utils/createResourceOptions';
 import { evented, onLoad } from './utils/decorators';
 import { mapserverStyle } from './utils/mapserverStyle';
 
-import type {
-  CreateRasterOptions,
-  CreateStyleOptions,
-  CreateVectorOptions,
-  CreateWmsConnectedLayerOptions,
-  CreateWmsConnectionOptions,
-  CreateWmsOptions,
-  CreatedRes,
-  EmitterStatus,
-  FileUploadOptions,
-  GroupOptions,
-  NgwUploadOptions,
-  RasterUploadOptions,
-  VectorUploadOptions,
-} from './interfaces';
 import type { CreatedResource } from '@nextgis/ngw-connector';
 import type {
   FileMeta,
@@ -33,6 +17,22 @@ import type {
 } from '@nextgis/ngw-connector';
 import type { GetRequestOptions } from '@nextgis/ngw-connector';
 import type { CompositeRead, ResourceCls } from '@nextgisweb/resource/type/api';
+
+import type {
+  CreatedRes,
+  CreateRasterOptions,
+  CreateStyleOptions,
+  CreateVectorOptions,
+  CreateWmsConnectedLayerOptions,
+  CreateWmsConnectionOptions,
+  CreateWmsOptions,
+  EmitterStatus,
+  FileUploadOptions,
+  GroupOptions,
+  NgwUploadOptions,
+  RasterUploadOptions,
+  VectorUploadOptions,
+} from './interfaces';
 
 type FileType = File | Buffer | { file: File | Buffer; name: string };
 

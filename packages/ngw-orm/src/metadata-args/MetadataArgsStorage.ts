@@ -1,4 +1,5 @@
-/* eslint-disable @typescript-eslint/ban-types */
+import type { FuncType } from '../common/FuncType';
+
 import type { ColumnMetadataArgs } from './ColumnMetadataArgs';
 import type { ResourceMetadataArgs } from './ResourceMetadataArgs';
 
@@ -12,14 +13,14 @@ export class MetadataArgsStorage {
   readonly columns: ColumnMetadataArgs[] = [];
 
   filterTables(
-    target: (Function | string) | (Function | string)[],
+    target: (FuncType | string) | (FuncType | string)[],
   ): ResourceMetadataArgs[] {
-    // @ts-ignore TODO: fix types
+    // @ts-expect-error TODO: fix types
     return this.filterByTarget(this.resources, target);
   }
 
   filterColumns(
-    target: (Function | string) | (Function | string)[],
+    target: (FuncType | string) | (FuncType | string)[],
   ): ColumnMetadataArgs[] {
     return this.filterByTargetAndWithoutDuplicateProperties(
       this.columns,
@@ -30,9 +31,9 @@ export class MetadataArgsStorage {
   /**
    * Filters given array by a given target or targets.
    */
-  protected filterByTarget<T extends { target: Function | string }>(
+  protected filterByTarget<T extends { target: FuncType | string }>(
     array: T[],
-    target: (Function | string) | (Function | string)[],
+    target: (FuncType | string) | (FuncType | string)[],
   ): T[] {
     return array.filter((table) => {
       return Array.isArray(target)
@@ -45,8 +46,8 @@ export class MetadataArgsStorage {
    * Filters given array by a given target or targets and prevents duplicate property names.
    */
   protected filterByTargetAndWithoutDuplicateProperties<
-    T extends { target: Function | string; propertyName: string },
-  >(array: T[], target: (Function | string) | (Function | string)[]): T[] {
+    T extends { target: FuncType | string; propertyName: string },
+  >(array: T[], target: (FuncType | string) | (FuncType | string)[]): T[] {
     const newArray: T[] = [];
     array.forEach((item) => {
       const sameTarget = Array.isArray(target)

@@ -1,9 +1,3 @@
-let canvg: any;
-try {
-  canvg = require('canvg');
-} catch (er) {
-  // ignore
-}
 interface GetImgOpt {
   width: number;
   height: number;
@@ -24,34 +18,22 @@ export function getImageData(
   }
   canvas.setAttribute('width', String(opt.width));
   canvas.setAttribute('height', String(opt.height));
-  if (!canvg && img instanceof HTMLImageElement) {
+  if (img instanceof HTMLImageElement) {
     context.drawImage(img, 0, 0, opt.width, opt.height);
-  } else if (typeof img === 'string') {
-    if (canvg.Canvg) {
-      // for canvg v.3.x.x
-      const v = canvg.Canvg.fromString(context, img);
-      v.start();
-    } else {
-      // for canvg v.2.x.x
-      canvg(canvas, img);
-    }
   }
+
   return context.getImageData(0, 0, opt.width, opt.height);
 }
 
 export function getImage(svgStr: string, opt: GetImgOpt): Promise<ImageData> {
   return new Promise((resolve) => {
-    if (canvg) {
-      resolve(getImageData(svgStr, opt));
-    } else {
-      const svgImage = new Image();
-      svgImage.crossOrigin = 'Anonymous';
-      svgImage.src = 'data:image/svg+xml;base64,' + btoa(svgStr);
+    const svgImage = new Image();
+    svgImage.crossOrigin = 'Anonymous';
+    svgImage.src = 'data:image/svg+xml;base64,' + btoa(svgStr);
 
-      svgImage.onload = () => {
-        const imageData = getImageData(svgImage, opt);
-        resolve(imageData);
-      };
-    }
+    svgImage.onload = () => {
+      const imageData = getImageData(svgImage, opt);
+      resolve(imageData);
+    };
   });
 }

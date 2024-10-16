@@ -1,11 +1,11 @@
-/* eslint-disable @typescript-eslint/member-ordering */
+import type { WebMap } from '../WebMap';
+
 import type {
   LayerAdapter,
   OnLayerMouseOptions,
   OnLayerSelectOptions,
 } from './LayerAdapter';
 import type { DataLoadError, MapAdapter, MapClickEvent } from './MapAdapter';
-import type { WebMap } from '../WebMap';
 
 export interface WebMapEvents extends MainMapEvents {
   /**

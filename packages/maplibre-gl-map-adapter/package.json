@@ -21,9 +21,6 @@
   "peerDependencies": {
     "maplibre-gl": ">=2"
   },
-  "optionalDependencies": {
-    "canvg": ">=3"
-  },
   "devDependencies": {
     "@nextgis/build-tools": "^3.0.0-alpha.5",
     "maplibre-gl": "^4.6.0"

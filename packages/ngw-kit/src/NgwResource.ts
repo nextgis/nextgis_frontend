@@ -1,9 +1,10 @@
 import { fetchNgwResourceExtent } from './utils/fetchNgwExtent';
 
-import type { FetchNgwLayerExtentOptions } from './interfaces';
 import type NgwConnector from '@nextgis/ngw-connector';
 import type { LngLatBoundsArray } from '@nextgis/utils';
 import type { CompositeRead } from '@nextgisweb/resource/type/api';
+
+import type { FetchNgwLayerExtentOptions } from './interfaces';
 
 export class NgwResource {
   item!: CompositeRead;

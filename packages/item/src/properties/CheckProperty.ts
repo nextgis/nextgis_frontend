@@ -1,7 +1,7 @@
 import { BaseProperty } from './BaseProperty';
 
-import type { Item } from '../Item';
 import type { CheckOptions } from '../interfaces';
+import type { Item } from '../Item';
 
 type VAL = boolean;
 

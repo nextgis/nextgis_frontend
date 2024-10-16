@@ -1,12 +1,10 @@
-import { EventEmitter } from 'events';
-
 import { Item } from '@nextgis/item';
 import { treeSome } from '@nextgis/tree';
+import { EventEmitter } from 'events';
 
-import { WebmapLayerOpacityPropertyHandler } from './utils/WebmapLayerOpacityPropertyHandler';
 import { setScaleRatio } from './utils/utils';
+import { WebmapLayerOpacityPropertyHandler } from './utils/WebmapLayerOpacityPropertyHandler';
 
-import type { TreeGroup, TreeItem, TreeLayer, TreeRoot } from './interfaces';
 import type { ItemOptions } from '@nextgis/item';
 import type { LayerLegend } from '@nextgis/ngw-connector';
 import type NgwConnector from '@nextgis/ngw-connector';
@@ -18,6 +16,8 @@ import type {
   VectorAdapterOptions,
   WebMap,
 } from '@nextgis/webmap';
+
+import type { TreeGroup, TreeItem, TreeLayer, TreeRoot } from './interfaces';
 
 export class NgwWebmapItem extends Item<ItemOptions> {
   static GetAdapterFromLayerType: {

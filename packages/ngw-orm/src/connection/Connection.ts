@@ -1,19 +1,20 @@
 import NgwConnector from '@nextgis/ngw-connector';
 import { defined, objectAssign } from '@nextgis/utils';
 
-import { getMetadataArgsStorage } from '..';
 import { NgwResources } from '../ngw/NgwResources';
+import { getMetadataArgsStorage } from '..';
 
-import type { ConnectionOptions } from './ConnectionOptions';
-import type { ResourceMetadataArgs } from '../metadata-args/ResourceMetadataArgs';
-import type { BaseResource } from '../repository/BaseResource';
-import type { SyncOptions } from '../repository/SyncOptions';
 import type { ResourceIdKeynameDef } from '@nextgis/ngw-connector';
 import type {
   CompositeCreate,
   CompositeRead,
   ResourceRead,
 } from '@nextgisweb/resource/type/api';
+
+import type { BaseResource } from '../repository/BaseResource';
+import type { SyncOptions } from '../repository/SyncOptions';
+
+import type { ConnectionOptions } from './ConnectionOptions';
 
 /**
  * Connection is a single NGW connection.
@@ -170,9 +171,9 @@ export class Connection {
     parent: number,
     opt: Partial<SyncOptions> = {},
   ): CompositeCreate | undefined {
-    const table = getMetadataArgsStorage().filterTables(
-      resource,
-    )[0] as ResourceMetadataArgs;
+    const table = getMetadataArgsStorage()
+      // @ts-expect-error Argument of type 'typeof BaseResource' is not assignable to parameter of type 'string | FuncType | (string | FuncType)[]'.
+      .filterTables(resource)[0];
     if (table) {
       const options = { ...table, ...opt } as SyncOptions;
 
@@ -249,7 +250,7 @@ export class Connection {
         if (exist) {
           res = await resource.connect(exist.resource.id, this);
         }
-      } catch (er) {
+      } catch {
         // console.warn(er);
       }
     }

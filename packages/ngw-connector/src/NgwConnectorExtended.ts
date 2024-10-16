@@ -1,9 +1,17 @@
 import { objectRemoveEmpty } from '@nextgis/utils';
 
+import { apiRequest } from './utils/apiRequest';
 import { NgwConnector } from './NgwConnector';
 import { ResourcesControl } from './ResourcesControl';
-import { apiRequest } from './utils/apiRequest';
 
+import type { DeepPartial } from '@nextgis/utils';
+import type {
+  CompositeRead,
+  ResourceRead,
+} from '@nextgisweb/resource/type/api';
+
+import type { GetRequestOptions } from './route/type';
+import type { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
 import type {
   DeleteRequestItemsResponseMap,
   GetChildrenOfOptions,
@@ -18,13 +26,6 @@ import type {
   ResourceDefinition,
   ResourceIdKeynameDef,
 } from './interfaces';
-import type { GetRequestOptions } from './route/type';
-import type { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
-import type { DeepPartial } from '@nextgis/utils';
-import type {
-  CompositeRead,
-  ResourceRead,
-} from '@nextgisweb/resource/type/api';
 
 export class NgwConnectorExtended extends NgwConnector {
   resources!: ResourcesControl;

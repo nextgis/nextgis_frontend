@@ -1,8 +1,10 @@
 import { fixUrlStr, objectRemoveEmpty } from '@nextgis/utils';
 
+import { AbortError } from '../errors';
+
 import { generateUrl, request } from './request';
 
-import { AbortError } from '../errors';
+import type { NgwConnector } from '../NgwConnector';
 
 import type {
   RequestMethod,
@@ -15,7 +17,6 @@ import type {
   RouteResults,
   ToReturn,
 } from './type';
-import type { NgwConnector } from '../NgwConnector';
 
 function routeURL<N extends RouteName>(
   name: N,

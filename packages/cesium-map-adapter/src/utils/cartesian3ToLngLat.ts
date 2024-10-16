@@ -1,4 +1,4 @@
-import { Math as CesiumMath, Ellipsoid } from 'cesium';
+import { Ellipsoid, Math as CesiumMath } from 'cesium';
 
 import type { LngLatArray } from '@nextgis/utils';
 import type { Cartesian3 } from 'cesium';

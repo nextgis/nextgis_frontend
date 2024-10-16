@@ -1,5 +1,6 @@
-/* eslint-disable @typescript-eslint/ban-types */
+import type { FuncType } from './FuncType';
+
 /**
  * Represents some Type of the Object.
  */
-export type ObjectType<T> = { new (): T } | Function;
+export type ObjectType<T> = { new (): T } | FuncType;

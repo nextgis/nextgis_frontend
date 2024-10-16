@@ -17,8 +17,8 @@ import type {
   VectorAdapterLayerType,
 } from '@nextgis/webmap';
 import type { Feature } from 'geojson';
-import type OlFeature from 'ol/Feature';
 import type { Color } from 'ol/color';
+import type OlFeature from 'ol/Feature';
 import type { Options as IconOptions } from 'ol/style/Icon';
 import type { Options as TextOptions } from 'ol/style/Text';
 
@@ -101,7 +101,7 @@ export function styleFunction(
         (stroke || ['MultiLineString', 'LineString'].indexOf(type) !== -1)
       ) {
         style.stroke = new Stroke({
-          // @ts-ignore
+          // @ts-expect-error Type 'number | Expression | undefined' is not assignable to type 'number | undefined'
           width: paint.weight,
           color: getColor(strokeColor, strokeOpacity),
         });

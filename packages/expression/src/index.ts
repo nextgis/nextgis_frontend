@@ -1,2 +1,2 @@
-export * from './interfaces';
 export * from './expression';
+export * from './interfaces';

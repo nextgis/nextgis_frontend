@@ -72,7 +72,7 @@ export class CancelablePromise<T = any> implements Promise<T> {
   static TimeoutError = TimeoutError;
   static PromiseControl = PromiseControl;
 
-  // @ts-ignore
+  // @ts-expect-error Property '[Symbol.toStringTag]' has no initializer and is not definitely assigned in the constructor
   readonly [Symbol.toStringTag]: string;
   readonly id = ID++;
   private _isCanceled = false;
@@ -260,7 +260,7 @@ export class CancelablePromise<T = any> implements Promise<T> {
           for (const handler of this._cancelHandlers) {
             handler();
           }
-        } catch (error) {
+        } catch {
           // this._setCanceledCallback(error);
         }
       }

@@ -21,10 +21,10 @@ export class Clipboard {
       } else {
         this.copyToClipboard(text);
       }
-      !this.silent && console.log('Copied to Clipboard');
+      if (!this.silent) console.log('Copied to Clipboard');
       return true;
-    } catch (e) {
-      !this.silent && console.log('Please copy manually');
+    } catch {
+      if (!this.silent) console.log('Please copy manually');
     }
     return false;
   }

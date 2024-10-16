@@ -1,12 +1,12 @@
+import { isError } from '../errors/isError';
 import { NetworkError } from '../errors/NetworkError';
 import { NgwError } from '../errors/NgwError';
-import { isError } from '../errors/isError';
 
 import { isObject } from './isObject';
 
 import type {
-  RequestOptions as NgwRequestOptions,
   RequestMethods,
+  RequestOptions as NgwRequestOptions,
 } from '../interfaces';
 
 // readyState
@@ -34,7 +34,7 @@ type LoadData = (
 ) => void;
 
 let loadData: LoadData;
-// @ts-ignore
+
 if (__BROWSER__) {
   loadData = (
     url: string,
@@ -54,7 +54,7 @@ if (__BROWSER__) {
     const getResponseText = () => {
       try {
         return JSON.parse(xhr.responseText);
-      } catch (er) {
+      } catch {
         return xhr.responseText;
       }
     };
@@ -132,9 +132,13 @@ if (__BROWSER__) {
     xhr.send(data);
   };
 } else {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const url = require('url');
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const http = require('http');
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const https = require('https');
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const FormData = require('form-data');
 
   const adapterFor = (inputUrl: string) => {

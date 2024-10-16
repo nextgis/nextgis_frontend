@@ -2,8 +2,15 @@ import { preparePaint } from '@nextgis/paint';
 import { propertiesFilter } from '@nextgis/properties-filter';
 import { defined } from '@nextgis/utils';
 
-import { WebMapMain } from './WebMapMain';
 import { updateGeoJsonAdapterOptions } from './utils/updateGeoJsonAdapterOptions';
+import { WebMapMain } from './WebMapMain';
+
+import type { Paint } from '@nextgis/paint';
+import type { PropertiesFilter } from '@nextgis/properties-filter';
+import type { FeatureProperties, TileJson, Type } from '@nextgis/utils';
+import type { Feature, GeoJsonObject, Geometry } from 'geojson';
+
+import type { LayerLegend } from '../../ngw-connector/src/types/LegendItem';
 
 import type { LayerDef } from './interfaces/BaseTypes';
 import type { WebMapEvents } from './interfaces/Events';
@@ -33,11 +40,6 @@ import type {
   MapOptions,
   ToggleLayerOptions,
 } from './interfaces/MapOptions';
-import type { LayerLegend } from '../../ngw-connector/src/types/LegendItem';
-import type { Paint } from '@nextgis/paint';
-import type { PropertiesFilter } from '@nextgis/properties-filter';
-import type { FeatureProperties, TileJson, Type } from '@nextgis/utils';
-import type { Feature, GeoJsonObject, Geometry } from 'geojson';
 
 type AddedLayers<M = any, L = any> = { [id: string]: LayerAdapter<M, L> };
 
@@ -348,7 +350,7 @@ export class WebMapLayers<
     const _order =
       order || options.order !== undefined
         ? options.order
-        : 0 || this.reserveOrder();
+        : this.reserveOrder();
     const adapterConstructor = adapter as AdapterConstructor;
     const adapterConstructorPromise = adapterConstructor();
     const adapterEngine = await adapterConstructorPromise;
@@ -952,11 +954,9 @@ export class WebMapLayers<
     const name_ = String(name);
     if (defined(id) && name_.startsWith('layer:')) {
       const specificLayerName = name_.replace('layer:', 'layer-' + id + ':');
-      // @ts-ignore can't paste template literal key for interface
-      this.emitter.emit(specificLayerName, options);
+      this.emitter.emit(specificLayerName as keyof WebMapEvents, options);
     }
-    // @ts-ignore
-    this.emitter.emit(name, options);
+    this.emitter.emit(name as keyof WebMapEvents, options);
   }
 
   private async _onLayerClick(options: OnLayerMouseOptions) {
@@ -1002,7 +1002,7 @@ export class WebMapLayers<
 
     options.onMouseOut = (e) => {
       const id = e.layer.id;
-      onMouseOut && onMouseOut(e);
+      if (onMouseOut) onMouseOut(e);
       if (defined(id)) {
         this._emitLayerEvent(`layer:mouseout`, id, e);
       }
@@ -1010,7 +1010,7 @@ export class WebMapLayers<
 
     options.onMouseOver = (e) => {
       const id = e.layer.id;
-      onMouseOver && onMouseOver(e);
+      if (onMouseOver) onMouseOver(e);
       if (defined(id)) {
         this._emitLayerEvent(`layer:mouseover`, id, e);
       }

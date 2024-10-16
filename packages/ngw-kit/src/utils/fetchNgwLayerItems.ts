@@ -7,11 +7,12 @@ import {
 } from './featureLayerUtils';
 import { prepareNgwFieldsToPropertiesFilter } from './prepareNgwFieldsToPropertiesFilter';
 
-import type { FetchNgwItemsOptions } from '../interfaces';
 import type { FeatureItem } from '@nextgis/ngw-connector';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type { FeatureProperties } from '@nextgis/utils';
 import type { Geometry } from 'geojson';
+
+import type { FetchNgwItemsOptions } from '../interfaces';
 
 export async function fetchNgwLayerItems<
   G extends Geometry = Geometry,

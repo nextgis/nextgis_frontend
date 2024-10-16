@@ -2,9 +2,10 @@ import { setupLayerTransformRequest } from '../utils/setupLayerTransformRequest'
 
 import { VectorAdapter } from './VectorAdapter';
 
-import type { TLayer } from '../MaplibreGLMapAdapter';
-import type { VectorLayerSpecification } from '../interfaces';
 import type { MvtAdapterOptions } from '@nextgis/webmap';
+
+import type { VectorLayerSpecification } from '../interfaces';
+import type { TLayer } from '../MaplibreGLMapAdapter';
 
 export class MvtAdapter extends VectorAdapter<MvtAdapterOptions> {
   static sources: string[] = [];

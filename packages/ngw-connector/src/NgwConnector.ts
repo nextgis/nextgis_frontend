@@ -1,23 +1,23 @@
-import { EventEmitter } from 'events';
-
 import Cache from '@nextgis/cache';
 import { objectRemoveEmpty } from '@nextgis/utils';
 import { fixUrlStr } from '@nextgis/utils';
+import { EventEmitter } from 'events';
 
 import pkg from '../package.json';
 
+import { AbortError } from './errors/AbortError';
+import { InsufficientPermissionsError } from './errors/InsufficientPermissionsError';
+import { route } from './route/route';
+import { loadData } from './utils/loadData';
+import { template } from './utils/template';
 import {
   addConnector,
   findConnector,
   removeConnector,
 } from './activeConnectors';
 import * as errors from './errors';
-import { AbortError } from './errors/AbortError';
-import { InsufficientPermissionsError } from './errors/InsufficientPermissionsError';
-import { route } from './route/route';
-import { loadData } from './utils/loadData';
-import { template } from './utils/template';
 
+import type { RouteName, RouteParameters } from './route/type';
 import type {
   Credentials,
   NgwConnectorOptions,
@@ -28,7 +28,6 @@ import type {
   RequestTransformFunction,
   UserInfo,
 } from './interfaces';
-import type { RouteName, RouteParameters } from './route/type';
 
 let ID = 0;
 let REQUEST_ID = 0;

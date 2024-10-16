@@ -1,8 +1,3 @@
-import type { AdapterOptions, LayerAdapter } from './LayerAdapter';
-import type { FitOptions, MapAdapter } from './MapAdapter';
-import type { ControlsOptions, MapControls } from './MapControl';
-import type { RuntimeParams } from './RuntimeParams';
-import type { StarterKit } from './StarterKit';
 import type { GeometryPaint } from '@nextgis/paint';
 import type {
   LngLatArray,
@@ -10,6 +5,12 @@ import type {
   TileJson,
   Type,
 } from '@nextgis/utils';
+
+import type { AdapterOptions, LayerAdapter } from './LayerAdapter';
+import type { FitOptions, MapAdapter } from './MapAdapter';
+import type { ControlsOptions, MapControls } from './MapControl';
+import type { RuntimeParams } from './RuntimeParams';
+import type { StarterKit } from './StarterKit';
 
 export interface MapOptions<M = any, C = any> extends ViewOptions {
   /**

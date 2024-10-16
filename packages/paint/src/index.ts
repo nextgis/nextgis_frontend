@@ -1,4 +1,4 @@
-export * from './interfaces';
-export * from './typeHelpers';
 export * from './fromPaintExpression';
+export * from './interfaces';
 export * from './preparePaint';
+export * from './typeHelpers';

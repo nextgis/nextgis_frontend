@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-types */
+import type { FuncType } from '../common/FuncType';
 import type { ColumnOptions } from '../options/ColumnOptions';
 
 /**
@@ -8,7 +8,7 @@ export interface ColumnMetadataArgs {
   /**
    * Class to which column is applied.
    */
-  readonly target: Function | string;
+  readonly target: FuncType | string;
 
   /**
    * Class's property name to which column is applied.

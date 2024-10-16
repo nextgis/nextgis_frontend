@@ -1,5 +1,3 @@
-import { EventEmitter } from 'events';
-
 import { getIcon } from '@nextgis/icons';
 import NgwConnector from '@nextgis/ngw-connector';
 import {
@@ -24,16 +22,11 @@ import {
 } from '@nextgis/utils';
 import { deprecatedWarn } from '@nextgis/utils';
 import { WebMap } from '@nextgis/webmap';
+import { EventEmitter } from 'events';
 
 import { appendNgwResources } from './utils/appendNgwResources';
 import { prepareWebMapOptions } from './utils/prepareWebMapOptions';
 
-import type {
-  NgwIdentifyEvent,
-  NgwLayers,
-  NgwMapEvents,
-  NgwMapOptions,
-} from './interfaces';
 import type {
   FeatureItem,
   FeatureLayersIdentify,
@@ -67,6 +60,13 @@ import type {
 import type { CompositeRead } from '@nextgisweb/resource/type/api';
 import type { Feature, FeatureCollection, Geometry, Polygon } from 'geojson';
 import type StrictEventEmitter from 'strict-event-emitter-types';
+
+import type {
+  NgwIdentifyEvent,
+  NgwLayers,
+  NgwMapEvents,
+  NgwMapOptions,
+} from './interfaces';
 
 type PromiseGroup = 'select' | 'identify';
 
@@ -171,7 +171,7 @@ export class NgwMap<
     options: NgwLayerOptions,
   ): Promise<ResourceAdapter | undefined> {
     await this.onMapLoad();
-    // @ts-ignore for backward compatibility
+    // @ts-expect-error for backward compatibility
     const { keyname, resourceId } = options;
 
     if (keyname || resourceId !== undefined) {

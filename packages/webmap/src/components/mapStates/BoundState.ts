@@ -1,8 +1,9 @@
 import { StateItem } from './StateItem';
 
+import type { LngLatBoundsArray } from '@nextgis/utils';
+
 import type { WebMapEvents } from '../../interfaces/Events';
 import type { MapOptions } from '../../interfaces/MapOptions';
-import type { LngLatBoundsArray } from '@nextgis/utils';
 
 export class BoundState extends StateItem<LngLatBoundsArray> {
   name: keyof MapOptions = 'bounds';

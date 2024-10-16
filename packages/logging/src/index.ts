@@ -1,7 +1,7 @@
-import { Logging } from './Logging';
 import { ConsoleEngine } from './engines/ConsoleEngine';
 import { NgLogEngine } from './engines/NgLogEngine/NgLogEngine';
+import { Logging } from './Logging';
 
 export * from './interfaces';
 
-export { Logging, ConsoleEngine, NgLogEngine };
+export { ConsoleEngine, Logging, NgLogEngine };

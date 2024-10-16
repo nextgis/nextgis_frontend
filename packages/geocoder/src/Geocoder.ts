@@ -1,9 +1,10 @@
 import { BaseGeocoder } from './BaseGeocoder';
 
-import type { GeocoderOptions } from './GeocoderOptions';
+import type { LngLatArray } from '@nextgis/utils';
+
 import type { BaseProvider } from './providers/BaseProvider';
 import type { SearchItem } from './types/SearchItem';
-import type { LngLatArray } from '@nextgis/utils';
+import type { GeocoderOptions } from './GeocoderOptions';
 
 let ID = 0;
 
@@ -74,8 +75,8 @@ export class Geocoder extends BaseGeocoder<GeocoderOptions> {
         for await (const r of results) {
           yield { ...r, provider, _id: ID++ };
         }
-      } catch (er) {
-        // Handle or log errors as needed
+      } catch {
+        // ignore
       }
     }
   }

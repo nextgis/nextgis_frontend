@@ -1,6 +1,7 @@
-import type { NgwLayerOptions } from '../interfaces';
 import type NgwConnector from '@nextgis/ngw-connector';
 import type { CompositeRead } from '@nextgisweb/resource/type/api';
+
+import type { NgwLayerOptions } from '../interfaces';
 
 export async function resourceIdFromLayerOptions(
   options: NgwLayerOptions,
@@ -9,7 +10,7 @@ export async function resourceIdFromLayerOptions(
   const resource = options.resource;
   const item = resource as CompositeRead;
 
-  // @ts-ignore @deprecated
+  // @ts-expect-error @deprecated
   let { keyname, resourceId } = options;
 
   if (resource) {

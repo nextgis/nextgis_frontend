@@ -1,8 +1,9 @@
 import { template } from './template';
 
-import type { NgwUploader } from '../NgwUploader';
-import type { AvailableStatus, EmitterStatus } from '../interfaces';
 import type { CreatedResource } from '@nextgis/ngw-connector';
+
+import type { AvailableStatus, EmitterStatus } from '../interfaces';
+import type { NgwUploader } from '../NgwUploader';
 
 /**
  * decorator to emit events on start end and error for async methods

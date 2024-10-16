@@ -1,4 +1,4 @@
-import { BoundingSphere, SceneMode, defined } from 'cesium';
+import { BoundingSphere, defined, SceneMode } from 'cesium';
 
 import type { Entity, Viewer } from 'cesium';
 
@@ -14,7 +14,7 @@ export function getEntitiesBoundingSphere(
 
   const boundingSpheres = [];
   for (let i = 0, len = entities.length; i < len; i++) {
-    // @ts-ignore
+    // @ts-expect-error Property '_dataSourceDisplay' does not exist on type 'Viewer'
     const state = viewer._dataSourceDisplay.getBoundingSphere(
       entities[i],
       false,

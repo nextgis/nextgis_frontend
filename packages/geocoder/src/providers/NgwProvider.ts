@@ -3,13 +3,15 @@ import { fetchNgwLayerItems } from '@nextgis/ngw-kit';
 
 import { BaseProvider } from './BaseProvider';
 
-import type { BaseProviderOptions } from './BaseProviderOptions';
-import type { ResultItem } from '../types/ResultItem';
-import type { SearchItem } from '../types/SearchItem';
 import type { FeatureItem, NgwConnectorOptions } from '@nextgis/ngw-connector';
 import type { FetchNgwItemsOptions } from '@nextgis/ngw-kit';
 import type { LngLatArray } from '@nextgis/utils';
 import type { CompositeRead } from '@nextgisweb/resource/type/api';
+
+import type { ResultItem } from '../types/ResultItem';
+import type { SearchItem } from '../types/SearchItem';
+
+import type { BaseProviderOptions } from './BaseProviderOptions';
 
 /**
  * Extends the basic search item with NGW-specific properties.

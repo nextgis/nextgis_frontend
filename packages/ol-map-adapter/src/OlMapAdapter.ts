@@ -1,16 +1,14 @@
 import { EventEmitter } from 'events';
-
 import Map from 'ol/Map';
-import View from 'ol/View';
 import { fromLonLat, transform, transformExtent } from 'ol/proj';
+import View from 'ol/View';
 
 // import { CogAdapter } from './layer-adapters/CogAdapter';
-
 import { Attribution } from './controls/Attribution';
-import { PanelControl } from './controls/PanelControl';
-import { ZoomControl } from './controls/ZoomControl';
 import { createButtonControl } from './controls/createButtonControl';
 import { createControl } from './controls/createControl';
+import { PanelControl } from './controls/PanelControl';
+import { ZoomControl } from './controls/ZoomControl';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 import { ImageAdapter } from './layer-adapters/ImageAdapter';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
@@ -29,15 +27,15 @@ import type {
   MapOptions,
   ViewOptions,
 } from '@nextgis/webmap';
-import type { MapOptions as OlMapOptions } from 'ol/Map';
-import type MapBrowserEvent from 'ol/MapBrowserEvent';
-import type { ViewOptions as OlViewOptions } from 'ol/View';
-import type { FitOptions as OlFitOptions } from 'ol/View';
 import type Control from 'ol/control/Control';
 import type BaseEvent from 'ol/events/Event';
 import type { Extent } from 'ol/extent';
 import type Base from 'ol/layer/Base';
+import type { MapOptions as OlMapOptions } from 'ol/Map';
+import type MapBrowserEvent from 'ol/MapBrowserEvent';
 import type { Pixel } from 'ol/pixel';
+import type { ViewOptions as OlViewOptions } from 'ol/View';
+import type { FitOptions as OlFitOptions } from 'ol/View';
 
 export type MouseEventType = 'click' | 'dblclick' | 'hover';
 

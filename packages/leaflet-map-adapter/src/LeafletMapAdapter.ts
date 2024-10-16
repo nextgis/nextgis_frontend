@@ -1,6 +1,5 @@
 import { EventEmitter } from 'events';
-
-import { Control, Map, latLng, latLngBounds } from 'leaflet';
+import { Control, latLng, latLngBounds, Map } from 'leaflet';
 
 import { AttributionControl } from './controls/Attribution';
 import { createButtonControl } from './controls/createButtonControl';
@@ -182,7 +181,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
           map.setMaxBounds(b);
           this._updateMinZoomForBounds();
         } else {
-          // @ts-ignore `null` works for unset maxBounds, but not in typing
+          // @ts-expect-error `null` works for unset maxBounds, but not in typing
           map.setMaxBounds(null);
           this._updateMinZoomForBounds();
         }
@@ -276,7 +275,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   }
 
   removeLayer(layer: Layer): void {
-    layer && layer.remove && layer.remove();
+    if (layer && layer.remove) layer.remove();
   }
 
   showLayer(layer: Layer): void {

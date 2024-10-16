@@ -1,5 +1,6 @@
-import type { FindConditions } from './FindConditions';
 import type { Properties } from '@nextgis/properties-filter';
+
+import type { FindConditions } from './FindConditions';
 
 /**
  * Defines a special criteria to find specific entity.

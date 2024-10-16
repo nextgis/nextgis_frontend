@@ -1,5 +1,6 @@
-import type { CompanyLogoOptions } from '../interfaces';
 import type NgwConnector from '@nextgis/ngw-connector';
+
+import type { CompanyLogoOptions } from '../interfaces';
 
 export async function getCompanyLogo(
   connector: NgwConnector,

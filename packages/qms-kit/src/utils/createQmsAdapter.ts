@@ -4,14 +4,15 @@ import { getSubdomainsOriginUrl } from './getSubmodulesFromOriginUrl';
 import { loadJson } from './loadJson';
 import { alias, updateQmsOptions } from './updateQmsOptions';
 
+import type { Type } from '@nextgis/utils';
+import type { MainLayerAdapter, WebMap } from '@nextgis/webmap';
+
 import type {
   CreateQmsAdapterOptions,
   QmsAdapter as QA,
   QmsAdapterOptions,
   QmsBasemap,
 } from '../interfaces';
-import type { Type } from '@nextgis/utils';
-import type { MainLayerAdapter, WebMap } from '@nextgis/webmap';
 
 const URL = 'https://qms.nextgis.com';
 

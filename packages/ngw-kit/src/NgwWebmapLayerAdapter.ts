@@ -1,15 +1,23 @@
+import { fixUrlStr } from '@nextgis/utils';
 import { EventEmitter } from 'events';
 
-import { fixUrlStr } from '@nextgis/utils';
-
-import { BookmarkItem } from './BookmarkItem';
-import { NgwWebmapItem } from './NgwWebmapItem';
 import { createOnFirstShowNgwAdapter } from './adapters/createOnFirstShowNgwAdapter';
-import { WEBMAP_BASELAYER_ID_PREFIX } from './constants';
 import { getNgwWebmapExtent } from './utils/fetchNgwExtent';
 import { fetchNgwLayerItems } from './utils/fetchNgwLayerItems';
 import { ngwApiToAdapterOptions } from './utils/ngwApiToAdapterOptions';
 import { updateImageParams } from './utils/utils';
+import { BookmarkItem } from './BookmarkItem';
+import { WEBMAP_BASELAYER_ID_PREFIX } from './constants';
+import { NgwWebmapItem } from './NgwWebmapItem';
+
+import type { ItemOptions } from '@nextgis/item';
+import type { BaseRequestOptions, LayerLegend } from '@nextgis/ngw-connector';
+import type { LngLatBoundsArray, Type } from '@nextgis/utils';
+import type { RasterAdapterOptions, WebMap } from '@nextgis/webmap';
+import type { BasemapWebMapRead } from '@nextgisweb/basemap/type/api';
+import type { CompositeRead } from '@nextgisweb/resource/type/api';
+import type { WebMapRead } from '@nextgisweb/webmap/type/api';
+import type StrictEventEmitter from 'strict-event-emitter-types';
 
 import type {
   NgwLayerAdapterType,
@@ -20,14 +28,6 @@ import type {
   TreeItem,
   TreeLayer,
 } from './interfaces';
-import type { ItemOptions } from '@nextgis/item';
-import type { BaseRequestOptions, LayerLegend } from '@nextgis/ngw-connector';
-import type { LngLatBoundsArray, Type } from '@nextgis/utils';
-import type { RasterAdapterOptions, WebMap } from '@nextgis/webmap';
-import type { BasemapWebMapRead } from '@nextgisweb/basemap/type/api';
-import type { CompositeRead } from '@nextgisweb/resource/type/api';
-import type { WebMapRead } from '@nextgisweb/webmap/type/api';
-import type StrictEventEmitter from 'strict-event-emitter-types';
 
 export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
   layer?: NgwWebmapItem;
@@ -87,7 +87,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
 
     this.getDependLayers().forEach((x) => {
       if (!('layer' in x)) return;
-      // @ts-ignore Update x interface
+      // @ts-expect-error Update x interface
       mapAdapter.removeLayer(x.layer.layer);
     });
 
@@ -322,7 +322,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
             visibility,
           })
           .then((l) => {
-            l.id && this._webmapBaselayersIds.push(l.id);
+            if (l.id) this._webmapBaselayersIds.push(l.id);
           });
       });
     }

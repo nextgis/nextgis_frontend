@@ -1,11 +1,11 @@
 import { defined } from '@nextgis/utils';
 import { ImageryLayer, UrlTemplateImageryProvider } from 'cesium';
 
+import { makeUrl } from '../utils/makeUrl';
 import {
   addToTileCatalog,
   removeFromTileCatalog,
 } from '../utils/TileAdapterOrderControl';
-import { makeUrl } from '../utils/makeUrl';
 
 import { BaseAdapter } from './BaseAdapter';
 

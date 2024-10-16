@@ -1,5 +1,6 @@
-import type { FindOneOptions } from './FindOneOptions';
 import type { Properties } from '@nextgis/properties-filter';
+
+import type { FindOneOptions } from './FindOneOptions';
 
 /**
  * Defines a special criteria to find specific entities.

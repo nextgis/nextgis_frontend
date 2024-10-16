@@ -1,9 +1,10 @@
 import { convertMapClickEvent } from './convertMapClickEvent';
 import { createFeaturePositionOptions } from './geometries';
 
-import type { LayerDef } from '../layer-adapters/GeoJsonAdapter/GeoJsonAdapter';
 import type { LayerAdapter, OnLayerMouseOptions } from '@nextgis/webmap';
 import type { LeafletMouseEvent } from 'leaflet';
+
+import type { LayerDef } from '../layer-adapters/GeoJsonAdapter/GeoJsonAdapter';
 
 export interface CreateMouseEventOptions {
   layer: LayerAdapter;

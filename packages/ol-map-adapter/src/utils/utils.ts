@@ -6,7 +6,7 @@ import type RenderFeature from 'ol/render/Feature';
 
 export function getFeature(feature: OlFeature<any> | RenderFeature): Feature {
   const geojson = new GeoJSON();
-  // @ts-ignore writeFeatureObject return JSON type, need Feature
+  // @ts-expect-error writeFeatureObject return JSON type, need Feature
   return geojson.writeFeatureObject(feature, {
     dataProjection: 'EPSG:4326',
     featureProjection: 'EPSG:3857',

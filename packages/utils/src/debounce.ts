@@ -27,7 +27,7 @@ export function debounce<T extends (...args: any[]) => void>(
 
 export function DebounceDecorator(wait = 10) {
   return function (
-    target: unknown,
+    _target: unknown,
     key: string,
     descriptor: PropertyDescriptor,
   ): PropertyDescriptor {
@@ -41,8 +41,8 @@ export function DebounceDecorator(wait = 10) {
           enumerable: descriptor.enumerable,
           value: debounce(descriptor.value, wait),
         });
-        // @ts-ignore
-        return this[key];
+
+        return this[key as keyof PropertyDescriptor];
       },
     };
   };

@@ -1,7 +1,6 @@
-import { EventEmitter } from 'events';
-
 import { propertiesFilter } from '@nextgis/properties-filter';
 import { debounce } from '@nextgis/utils';
+import { EventEmitter } from 'events';
 
 import { createPopupContent } from '../utils/createPopupContent';
 import { fetchNgwExtent } from '../utils/fetchNgwExtent';
@@ -12,11 +11,6 @@ import { prepareNgwFieldsToPropertiesFilter } from '../utils/prepareNgwFieldsToP
 import { resourceIdFromLayerOptions } from '../utils/resourceIdFromLayerOptions';
 import { vectorLayerGeomToPaintTypeAlias } from '../utils/utils';
 
-import type {
-  GetClassAdapterOptions,
-  NgwFeatureRequestOptions,
-  NgwLayerOptions,
-} from '../interfaces';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type { LngLatBoundsArray, Type } from '@nextgis/utils';
 import type {
@@ -27,6 +21,12 @@ import type {
   VectorLayerAdapter,
 } from '@nextgis/webmap';
 import type { FeatureCollection } from 'geojson';
+
+import type {
+  GetClassAdapterOptions,
+  NgwFeatureRequestOptions,
+  NgwLayerOptions,
+} from '../interfaces';
 
 export async function createGeoJsonAdapter(
   props: GetClassAdapterOptions,

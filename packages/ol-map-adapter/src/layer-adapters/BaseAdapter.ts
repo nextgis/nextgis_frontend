@@ -1,6 +1,6 @@
 import type { AdapterOptions, MainLayerAdapter } from '@nextgis/webmap';
-import type Map from 'ol/Map';
 import type Base from 'ol/layer/Base';
+import type Map from 'ol/Map';
 
 export class BaseAdapter<L extends Base = Base>
   implements Partial<MainLayerAdapter>

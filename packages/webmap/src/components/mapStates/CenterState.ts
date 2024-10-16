@@ -1,8 +1,9 @@
 import { StateItem } from './StateItem';
 
+import type { LngLatArray } from '@nextgis/utils';
+
 import type { WebMapEvents } from '../../interfaces/Events';
 import type { MapOptions } from '../../interfaces/MapOptions';
-import type { LngLatArray } from '@nextgis/utils';
 
 export class CenterState extends StateItem<LngLatArray> {
   name: keyof MapOptions = 'center';

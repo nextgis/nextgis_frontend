@@ -1,7 +1,7 @@
 import { Tree } from './Tree';
 import { treeEvery, treeFilter, treeFind, treeSome } from './treeFilter';
 
-export { treeEvery, treeFilter, treeFind, treeSome, Tree };
+export { Tree, treeEvery, treeFilter, treeFind, treeSome };
 
 // shortcut to use like `Tree.find` from global scope
 export {

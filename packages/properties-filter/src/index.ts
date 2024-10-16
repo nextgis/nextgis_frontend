@@ -1,13 +1,13 @@
-export {
-  checkIfPropertyFilter,
-  propertiesFilter,
-  isPropertyFilter,
-  featureFilter,
-} from './propertiesFilter';
 export type {
   Operation,
   Operations,
   Properties,
-  PropertyFilter,
   PropertiesFilter,
+  PropertyFilter,
 } from './interfaces';
+export {
+  checkIfPropertyFilter,
+  featureFilter,
+  isPropertyFilter,
+  propertiesFilter,
+} from './propertiesFilter';

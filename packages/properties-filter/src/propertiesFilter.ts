@@ -1,10 +1,11 @@
+import type { Feature } from 'geojson';
+
 import type {
   Operation,
   Properties,
   PropertiesFilter,
   PropertyFilter,
 } from './interfaces';
-import type { Feature } from 'geojson';
 
 function reEscape(s: string): string {
   return s.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');

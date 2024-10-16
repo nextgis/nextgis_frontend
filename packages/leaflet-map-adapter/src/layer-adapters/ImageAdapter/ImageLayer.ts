@@ -159,7 +159,7 @@ export class ImageLayer extends Layer {
         if (!this._map) {
           return;
         }
-        // @ts-ignore
+        // @ts-expect-error override private
         if (overlay._url !== this._currentUrl) {
           this._map.removeLayer(overlay);
           return;

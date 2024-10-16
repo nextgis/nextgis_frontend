@@ -3,6 +3,8 @@ import { featureFilter } from '@nextgis/properties-filter';
 import { createExpressionCallback } from './fromPaintExpression';
 import { isPaintCallback, isPropertiesPaint } from './typeHelpers';
 
+import type { Feature } from 'geojson';
+
 import type {
   GeometryPaint,
   GetCustomPaintOptions,
@@ -13,7 +15,6 @@ import type {
   PropertyPaint,
   VectorAdapterLayerPaint,
 } from './interfaces';
-import type { Feature } from 'geojson';
 
 function updatePaintOptionFromCallback(
   paint: GetCustomPaintOptions,

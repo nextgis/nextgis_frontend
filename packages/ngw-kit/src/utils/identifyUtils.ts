@@ -11,6 +11,14 @@ import { fetchNgwLayerFeature } from './fetchNgwLayerFeature';
 import { fetchNgwLayerItem } from './fetchNgwLayerItem';
 
 import type {
+  FeatureLayersIdentify,
+  LayerFeature,
+} from '@nextgis/ngw-connector';
+import type { FeatureProperties, JsonMap } from '@nextgis/utils';
+import type { MapClickEvent } from '@nextgis/webmap';
+import type { Feature, Geometry, Position } from 'geojson';
+
+import type {
   FeatureIdentifyRequestOptions,
   FeatureLayerIdentifyOptions,
   GetIdentifyGeoJsonOptions,
@@ -19,13 +27,6 @@ import type {
   NgwFeatureItemResponse,
   NgwIdentifyItem,
 } from '../interfaces';
-import type {
-  FeatureLayersIdentify,
-  LayerFeature,
-} from '@nextgis/ngw-connector';
-import type { FeatureProperties, JsonMap } from '@nextgis/utils';
-import type { MapClickEvent } from '@nextgis/webmap';
-import type { Feature, Geometry, Position } from 'geojson';
 
 export function getIdentifyItems(
   identify: FeatureLayersIdentify & { resources?: number[] },

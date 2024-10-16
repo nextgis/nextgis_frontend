@@ -2,13 +2,14 @@ import { camelize, capitalize } from '@nextgis/utils';
 
 import { CannotExecuteNotConnectedError } from '../error/CannotExecuteNotConnectedError';
 
+import type { GeometryType, VectorFieldDatatype } from '@nextgis/ngw-connector';
+import type { CompositeRead } from '@nextgisweb/resource/type/api';
+
 import type {
   ToTypescript,
   ToTypescriptOptions,
 } from '../options/ToTypescriptOptions';
 import type { VectorLayer } from '../repository/VectorLayer';
-import type { GeometryType, VectorFieldDatatype } from '@nextgis/ngw-connector';
-import type { CompositeRead } from '@nextgisweb/resource/type/api';
 
 const dataTypeAlias: Record<VectorFieldDatatype, string> = {
   STRING: 'string',

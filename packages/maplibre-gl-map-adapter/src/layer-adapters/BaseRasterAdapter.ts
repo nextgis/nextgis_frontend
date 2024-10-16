@@ -1,6 +1,7 @@
-import type { TLayer } from '../MaplibreGLMapAdapter';
 import type { MainLayerAdapter, RasterAdapterOptions } from '@nextgis/webmap';
 import type { Map } from 'maplibre-gl';
+
+import type { TLayer } from '../MaplibreGLMapAdapter';
 
 let ID = 0;
 

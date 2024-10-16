@@ -1,7 +1,8 @@
-import './createButtonControl.css';
 import Control from 'ol/control/Control';
 
 import type { ButtonControlOptions } from '@nextgis/webmap';
+
+import './createButtonControl.css';
 
 export function createButtonControl(options: ButtonControlOptions): Control {
   class NewControl extends Control {

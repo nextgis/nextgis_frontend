@@ -2,9 +2,10 @@ import { defined } from '@nextgis/utils';
 
 import { getMetadataArgsStorage } from '..';
 
-import type { VectorLayer } from '../repository/VectorLayer';
 import type { FeatureItem } from '@nextgis/ngw-connector';
 import type { FeatureProperties } from '@nextgis/utils';
+
+import type { VectorLayer } from '../repository/VectorLayer';
 
 export function itemsToEntities(
   Resource: typeof VectorLayer,
@@ -22,7 +23,9 @@ export function itemToEntity(
   Resource: typeof VectorLayer,
   item: FeatureItem,
 ): VectorLayer {
-  const fields = getMetadataArgsStorage().filterColumns(Resource);
+  const fields = getMetadataArgsStorage()
+    // @ts-expect-error Argument of type 'typeof VectorLayer' is not assignable to parameter of type 'string | FuncType | (string | FuncType)[]'
+    .filterColumns(Resource);
   const itemFields = item.fields;
   if ('coordinates' in item.geom && defined(itemFields)) {
     const entity = new Resource();

@@ -1,5 +1,3 @@
-import type { MapClickEvent } from './MapAdapter';
-import type { LayerLegend } from '../../../ngw-connector/src/types/LegendItem';
 import type { Paint } from '@nextgis/paint';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type {
@@ -10,6 +8,10 @@ import type {
   Type,
 } from '@nextgis/utils';
 import type { Feature, GeoJsonObject, Geometry } from 'geojson';
+
+import type { LayerLegend } from '../../../ngw-connector/src/types/LegendItem';
+
+import type { MapClickEvent } from './MapAdapter';
 
 export type AdapterConstructor = () => Promise<Type<LayerAdapter> | any>;
 

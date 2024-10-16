@@ -1,7 +1,6 @@
-export * from './interfaces';
-
-export { ReactNgwMap } from './ReactNgwMap';
-export { MapControl } from './MapControl';
 export { ButtonControl } from './ButtonControl';
-export { ToggleControl } from './ToggleControl';
 export { useNgwMapContext } from './context';
+export * from './interfaces';
+export { MapControl } from './MapControl';
+export { ReactNgwMap } from './ReactNgwMap';
+export { ToggleControl } from './ToggleControl';

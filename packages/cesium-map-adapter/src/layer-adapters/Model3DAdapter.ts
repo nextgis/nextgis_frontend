@@ -2,10 +2,10 @@
  * UNDER DEVELOPMENT
  */
 import {
-  Math as CMath,
   Cartesian3,
   Cartographic,
   HeadingPitchRoll,
+  Math as CMath,
   Model,
   Transforms,
 } from 'cesium';

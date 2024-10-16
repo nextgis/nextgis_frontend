@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react';
 
-import type { NgwMapContextInterface } from './interfaces';
 import type { MutableRefObject } from 'react';
+
+import type { NgwMapContextInterface } from './interfaces';
 
 export interface NgwMapElement<T, C = any> {
   instance: T;

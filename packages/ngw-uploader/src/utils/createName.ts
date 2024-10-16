@@ -1,7 +1,8 @@
 import { defined } from '@nextgis/utils';
 
-import type { ResourceCreateOptions } from '../interfaces';
 import type { FileMeta } from '@nextgis/ngw-connector';
+
+import type { ResourceCreateOptions } from '../interfaces';
 
 export function nameFromOpt(opt: ResourceCreateOptions): string | undefined {
   return (

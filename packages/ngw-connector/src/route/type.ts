@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import type { LunkwillParam } from './LunkwillParam';
 import type { Routes } from '@nextgisweb/pyramid/type/route';
+
+import type { LunkwillParam } from './LunkwillParam';
 
 export type RouteParameters = {
   [K in keyof Routes]: Routes[K]['pathArr'] | [Routes[K]['pathObj']];

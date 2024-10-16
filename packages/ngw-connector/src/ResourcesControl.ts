@@ -6,14 +6,15 @@ import { isObject } from './utils/isObject';
 import { resourceCompare } from './utils/resourceCompare';
 import { resourceToQuery } from './utils/resourceToQuery';
 
-import type { NgwConnectorExtended } from './NgwConnectorExtended';
-import type { GetChildrenOfOptions, ResourceDefinition } from './interfaces';
-import type { GetRequestOptions } from './route/type';
 import type { DeepPartial } from '@nextgis/utils';
 import type {
   CompositeRead,
   ResourceRead,
 } from '@nextgisweb/resource/type/api';
+
+import type { GetRequestOptions } from './route/type';
+import type { GetChildrenOfOptions, ResourceDefinition } from './interfaces';
+import type { NgwConnectorExtended } from './NgwConnectorExtended';
 
 export class ResourcesControl {
   cache: Cache<Promise<CompositeRead | undefined>, { id?: number | string }>;
@@ -145,28 +146,25 @@ export class ResourcesControl {
         } else {
           Object.assign(query, resourceToQuery(resource));
         }
-        return (
-          this.connector
-            .route('resource.search')
-            // .get(requestOptions)
-            .get({
-              ...requestOptions,
-              query: {
-                serialization: 'full',
-                ...query,
-              },
-            })
-            .then((resources) => {
-              if (requestOptions?.cache && resources) {
-                for (const x of resources) {
-                  this.cache.add('resource.item', Promise.resolve(x), {
-                    id: x.resource.id,
-                  });
-                }
+        return this.connector
+          .route('resource.search')
+          .get({
+            ...requestOptions,
+            query: {
+              serialization: 'full',
+              ...query,
+            },
+          })
+          .then((resources) => {
+            if (requestOptions?.cache && resources) {
+              for (const x of resources) {
+                this.cache.add('resource.item', Promise.resolve(x), {
+                  id: x.resource.id,
+                });
               }
-              return resources;
-            })
-        );
+            }
+            return resources;
+          });
       }
       return items;
     });

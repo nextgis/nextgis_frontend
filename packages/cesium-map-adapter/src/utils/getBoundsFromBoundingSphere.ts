@@ -1,4 +1,4 @@
-import { Math as CMath, Ellipsoid } from 'cesium';
+import { Ellipsoid, Math as CMath } from 'cesium';
 
 import type { BoundingSphere } from 'cesium';
 

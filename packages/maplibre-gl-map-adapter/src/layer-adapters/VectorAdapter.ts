@@ -12,11 +12,6 @@ import { makeHtmlFromString } from '../utils/makeHtmlFromString';
 
 import { BaseAdapter } from './BaseAdapter';
 
-import type { TLayer } from '../MaplibreGLMapAdapter';
-import type {
-  SelectedFeaturesIds,
-  VectorLayerSpecification,
-} from '../interfaces';
 import type { IconPaint, Paint, PathPaint } from '@nextgis/paint';
 import type {
   Operation,
@@ -52,6 +47,12 @@ import type {
   MapMouseEvent,
   SourceSpecification,
 } from 'maplibre-gl';
+
+import type {
+  SelectedFeaturesIds,
+  VectorLayerSpecification,
+} from '../interfaces';
+import type { TLayer } from '../MaplibreGLMapAdapter';
 
 type Layer = VectorLayerSpecification;
 type Layout = FillLayerSpecification['layout'];
@@ -369,11 +370,10 @@ export abstract class VectorAdapter<
           becameSelected = false;
         }
       } else {
-        if (!multiselect) {
-          this.map &&
-            this.map._addUnselectCb(() =>
-              this._unselectFeature(feature, { silent: true }),
-            );
+        if (!multiselect && this.map) {
+          this.map._addUnselectCb(() =>
+            this._unselectFeature(feature, { silent: true }),
+          );
         }
         features = this._selectFeature(feature, { silent: true });
         becameSelected = true;
@@ -510,6 +510,8 @@ export abstract class VectorAdapter<
               (x) => x[0] === 'opacity',
             );
             if (opacityProp) {
+              // TODO: check
+              // eslint-disable-next-line @typescript-eslint/no-unused-expressions
               nativePaint[maplibreGLType + '-' + opacityProp[1]];
             }
             for (const p in nativePaint) {
@@ -529,7 +531,7 @@ export abstract class VectorAdapter<
             for (const p in _paint) {
               try {
                 this.map.setLayoutProperty(name, p, _paint[p]);
-              } catch (er) {
+              } catch {
                 //
               }
             }
@@ -1120,7 +1122,7 @@ export abstract class VectorAdapter<
           geometry: {} as Geometry,
         });
         return this._detectPaintType(falsePaint);
-      } catch (er) {
+      } catch {
         //
       }
     }

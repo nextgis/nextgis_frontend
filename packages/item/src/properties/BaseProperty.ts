@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events';
 
-import type { Item } from '../Item';
 import type { ItemBasePropertyOptions, ItemOptions } from '../interfaces';
+import type { Item } from '../Item';
 
 export abstract class BaseProperty<
   V = any,

@@ -1,8 +1,8 @@
-import 'dialog-polyfill/dialog-polyfill.css';
 import dialogPolyfill from 'dialog-polyfill';
 
 import type { DialogAdapter, DialogAdapterOptions } from './interfaces';
 
+import 'dialog-polyfill/dialog-polyfill.css';
 import './dialog.css';
 
 const closeBtn = `

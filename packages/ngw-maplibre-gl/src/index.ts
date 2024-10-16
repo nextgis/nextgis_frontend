@@ -1,5 +1,3 @@
-import 'maplibre-gl/dist/maplibre-gl.css';
-
 import MaplibreGLMapAdapter from '@nextgis/maplibre-gl-map-adapter';
 import { NgwMap } from '@nextgis/ngw-map';
 
@@ -7,6 +5,8 @@ import type { MaplibreGLMapAdapterOptions } from '@nextgis/maplibre-gl-map-adapt
 import type { NgwLayerOptions, ResourceAdapter } from '@nextgis/ngw-kit';
 import type { NgwMapOptions } from '@nextgis/ngw-map';
 import type { Map } from 'maplibre-gl';
+
+import 'maplibre-gl/dist/maplibre-gl.css';
 
 class NgwMaplibreGL extends NgwMap<
   Map,

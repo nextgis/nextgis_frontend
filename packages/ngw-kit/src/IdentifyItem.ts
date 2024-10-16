@@ -1,7 +1,5 @@
 import { fetchNgwLayerItem, fetchNgwLayerItemExtent } from '.';
 
-import type { IdentifyItemOptions, NgwFeatureItemResponse } from '.';
-import type { FetchNgwItemOptions } from './interfaces';
 import type {
   FeatureItemExtensions,
   GetRequestOptions,
@@ -12,6 +10,9 @@ import type { FeatureProperties, LngLatBoundsArray } from '@nextgis/utils';
 import type { FeatureLayerRead } from '@nextgisweb/feature-layer/type/api';
 import type { CompositeRead } from '@nextgisweb/resource/type/api';
 import type { Feature, GeoJsonObject, Geometry } from 'geojson';
+
+import type { IdentifyItemOptions, NgwFeatureItemResponse } from '.';
+import type { FetchNgwItemOptions } from './interfaces';
 
 export class IdentifyItem<
   F extends FeatureProperties = FeatureProperties,

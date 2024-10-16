@@ -10,11 +10,6 @@ import {
 import { config } from '../config';
 
 import type {
-  FeatureRequestParams,
-  FetchNgwItemsOptions,
-  NgwFeatureRequestOptions,
-} from '../interfaces';
-import type {
   FeatureItem,
   RequestItemAdditionalParams,
 } from '@nextgis/ngw-connector';
@@ -24,6 +19,12 @@ import type {
 } from '@nextgis/properties-filter';
 import type { FeatureProperties, LngLatArray } from '@nextgis/utils';
 import type { Feature, Geometry } from 'geojson';
+
+import type {
+  FeatureRequestParams,
+  FetchNgwItemsOptions,
+  NgwFeatureRequestOptions,
+} from '../interfaces';
 
 export const FEATURE_REQUEST_PARAMS: FeatureRequestParams = {
   srs: 4326,

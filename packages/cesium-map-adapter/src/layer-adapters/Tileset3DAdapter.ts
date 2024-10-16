@@ -2,8 +2,8 @@ import { debugLog } from '@nextgis/utils';
 import {
   Cartesian3,
   Cartographic,
-  Cesium3DTileStyle,
   Cesium3DTileset,
+  Cesium3DTileStyle,
   Color,
   Matrix4,
   PointCloudShading,
@@ -112,7 +112,7 @@ export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
       }
       return this.layer;
     } catch (er) {
-      typeof er === 'string' && debugLog(er);
+      if (typeof er === 'string') debugLog(er);
     }
   }
 

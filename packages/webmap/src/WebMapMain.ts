@@ -1,5 +1,3 @@
-import { EventEmitter } from 'events';
-
 import {
   checkExtent,
   deepmerge,
@@ -7,10 +5,21 @@ import {
   getBoundsFeature,
 } from '@nextgis/utils';
 import { deprecatedMapClick } from '@nextgis/utils';
+import { EventEmitter } from 'events';
 
 import { Keys } from './components/keys/Keys';
 import { BoundState, CenterState, ZoomState } from './components/mapStates';
 import { clearObject } from './utils/clearObject';
+
+import type { GetPaintFunction } from '@nextgis/paint';
+import type {
+  LngLatArray,
+  LngLatBoundsArray,
+  TileJson,
+  Type,
+} from '@nextgis/utils';
+import type { Feature, Polygon } from 'geojson';
+import type StrictEventEmitter from 'strict-event-emitter-types';
 
 import type { StateItem } from './components/mapStates/StateItem';
 import type { Cursor } from './interfaces/BaseTypes';
@@ -27,15 +36,6 @@ import type {
 import type { MapOptions, ViewOptions } from './interfaces/MapOptions';
 import type { RuntimeParams } from './interfaces/RuntimeParams';
 import type { StarterKit } from './interfaces/StarterKit';
-import type { GetPaintFunction } from '@nextgis/paint';
-import type {
-  LngLatArray,
-  LngLatBoundsArray,
-  TileJson,
-  Type,
-} from '@nextgis/utils';
-import type { Feature, Polygon } from 'geojson';
-import type StrictEventEmitter from 'strict-event-emitter-types';
 
 type EmitStatusEventData = any;
 

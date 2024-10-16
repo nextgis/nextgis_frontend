@@ -1,7 +1,8 @@
 import { objectAssign } from '@nextgis/utils';
 
-import type { SearchItem } from './types/SearchItem';
 import type { LngLatArray } from '@nextgis/utils';
+
+import type { SearchItem } from './types/SearchItem';
 
 /**
  * Represents the base class for a geocoder.

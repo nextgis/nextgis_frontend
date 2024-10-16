@@ -1,13 +1,14 @@
-import type { FeatureItem, FeatureLayersIdentify } from './types/FeatureLayer';
-import type { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
-import type { FeatureLayerField } from './types/ResourceItem';
-import type { ResourceStoreItem } from './types/ResourceStore';
 import type { DeepPartial } from '@nextgis/utils';
 import type { LegendSymbol } from '@nextgisweb/render/type/api';
 import type {
   CompositeRead,
   ResourceRead,
 } from '@nextgisweb/resource/type/api';
+
+import type { FeatureItem, FeatureLayersIdentify } from './types/FeatureLayer';
+import type { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
+import type { FeatureLayerField } from './types/ResourceItem';
+import type { ResourceStoreItem } from './types/ResourceStore';
 
 export interface FileMeta {
   id: string;

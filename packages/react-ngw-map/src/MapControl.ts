@@ -1,12 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-import { useNgwMapContext } from './context';
 import { useNgwControl } from './hooks/useNgwControl';
+import { useNgwMapContext } from './context';
 
-import type { ReactElementAttributes } from './interfaces';
 import type { ControlOptions, CreateControlOptions } from '@nextgis/webmap';
 import type { MutableRefObject, ReactNode } from 'react';
+
+import type { ReactElementAttributes } from './interfaces';
 
 interface MapControlProps
   extends ReactElementAttributes,

@@ -1,4 +1,3 @@
-import type { NgwMap } from './NgwMap';
 import type NgwConnector from '@nextgis/ngw-connector';
 import type { Credentials } from '@nextgis/ngw-connector';
 import type {
@@ -11,6 +10,8 @@ import type {
 import type { FeatureProperties } from '@nextgis/utils';
 import type { MapOptions, RuntimeParams, WebMapEvents } from '@nextgis/webmap';
 import type { Geometry } from 'geojson';
+
+import type { NgwMap } from './NgwMap';
 
 export type NgwResourceDefinition = number | [number, string] | NgwLayerOptions;
 

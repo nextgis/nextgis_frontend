@@ -4,8 +4,9 @@ import { QmsKit } from '@nextgis/qms-kit';
 import { deepmerge } from '@nextgis/utils';
 import { getDefaultControls } from '@nextgis/webmap';
 
-import type { NgwMapOptions } from '../interfaces';
 import type { MapOptions, StarterKit } from '@nextgis/webmap';
+
+import type { NgwMapOptions } from '../interfaces';
 
 export const OPTIONS: NgwMapOptions = {
   target: 'map',

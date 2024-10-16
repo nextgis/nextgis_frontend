@@ -1,6 +1,12 @@
-/* eslint-disable @typescript-eslint/member-ordering */
 import { fetchNgwLayerItem, fetchNgwLayerItems } from '@nextgis/ngw-kit';
 
+import { CannotExecuteNotConnectedError } from '../error/CannotExecuteNotConnectedError';
+import {
+  itemsToEntities,
+  itemToEntity,
+} from '../vector-layer-utils/itemsToEntities';
+import { saveVectorLayer } from '../vector-layer-utils/saveVectorLayer';
+import { toTypescript } from '../vector-layer-utils/toTypescript';
 // import { ResourceItem } from '@nextgis/ngw-connector';
 // import { objectAssign } from '@nextgis/utils';
 // import NgwConnector from '@nextgis/ngw-connector';
@@ -10,31 +16,10 @@ import { fetchNgwLayerItem, fetchNgwLayerItems } from '@nextgis/ngw-kit';
 // import { FindConditions } from '../find-options/FindConditions';
 // import { FindManyOptions } from '../find-options/FindManyOptions';
 // import { FindOneOptions } from '../find-options/FindOneOptions';
-
 import { Column, getMetadataArgsStorage } from '..';
-import { CannotExecuteNotConnectedError } from '../error/CannotExecuteNotConnectedError';
-import {
-  itemToEntity,
-  itemsToEntities,
-} from '../vector-layer-utils/itemsToEntities';
-import { saveVectorLayer } from '../vector-layer-utils/saveVectorLayer';
-import { toTypescript } from '../vector-layer-utils/toTypescript';
 
 import { BaseResource } from './BaseResource';
 
-import type { SyncOptions } from './SyncOptions';
-import type { UpdateOptions } from './UpdateOptions';
-import type { ObjectType } from '../common/ObjectType';
-import type { FindConditions } from '../find-options/FindConditions';
-import type { FindManyOptions } from '../find-options/FindManyOptions';
-import type { FindOneOptions } from '../find-options/FindOneOptions';
-import type {
-  ToTypescript,
-  ToTypescriptOptions,
-} from '../options/ToTypescriptOptions';
-import type { VectorResourceSyncItem } from '../sync-items/VectorResourceSyncItem';
-import type { VectorResourceUpdateItem } from '../sync-items/VectorResourceUpdateItem';
-import type { ValidateErrorType } from '../types/ValidateErrorType';
 import type { FeatureLayerField, GeometryType } from '@nextgis/ngw-connector';
 import type { GetNgwItemsOptions } from '@nextgis/ngw-kit';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
@@ -52,6 +37,21 @@ import type {
   Point,
   Polygon,
 } from 'geojson';
+
+import type { ObjectType } from '../common/ObjectType';
+import type { FindConditions } from '../find-options/FindConditions';
+import type { FindManyOptions } from '../find-options/FindManyOptions';
+import type { FindOneOptions } from '../find-options/FindOneOptions';
+import type {
+  ToTypescript,
+  ToTypescriptOptions,
+} from '../options/ToTypescriptOptions';
+import type { VectorResourceSyncItem } from '../sync-items/VectorResourceSyncItem';
+import type { VectorResourceUpdateItem } from '../sync-items/VectorResourceUpdateItem';
+import type { ValidateErrorType } from '../types/ValidateErrorType';
+
+import type { SyncOptions } from './SyncOptions';
+import type { UpdateOptions } from './UpdateOptions';
 // import { SyncOptions } from './SyncOptions';
 // import { Connection } from '../connection/Connection';
 // import { ConnectionOptions } from '../connection/ConnectionOptions';
@@ -147,6 +147,7 @@ export class VectorLayer<
   }
 
   static validate(): ValidateErrorType[] {
+    // @ts-expect-error Argument of type 'typeof VectorLayer' is not assignable to parameter of type 'string | FuncType | (string | FuncType)[]'
     const fields = getMetadataArgsStorage().filterColumns(this);
     const resource = this.item && this.item?.resource;
     const itemFields =
@@ -187,7 +188,9 @@ export class VectorLayer<
   ):
     | DeepPartial<VectorResourceSyncItem | VectorResourceUpdateItem>
     | undefined {
-    const metaFields = getMetadataArgsStorage().filterColumns(resource);
+    const metaFields = getMetadataArgsStorage()
+      // @ts-expect-error Argument of type 'typeof VectorLayer' is not assignable to parameter of type 'string | FuncType | (string | FuncType)[]'.
+      .filterColumns(resource);
     const item = resource.item;
     const existFields = item && item.feature_layer && item.feature_layer.fields;
     const fields = metaFields.map((x) => {
@@ -280,6 +283,7 @@ export class VectorLayer<
     entityOrEntities: T | T[],
     options?: UpdateOptions,
   ): Promise<T[]> {
+    // @ts-expect-error Conversion of type 'ObjectType<T>' to type 'typeof VectorLayer' may be a mistake because neither type sufficiently overlaps with the other
     const Resource = this as typeof VectorLayer;
     const connection = Resource.connection;
     if (!connection || !Resource.item) {
@@ -348,6 +352,7 @@ export class VectorLayer<
     this: ObjectType<T>,
     optionsOrConditions?: FindManyOptions<T> | PropertiesFilter<T>,
   ): Promise<number> {
+    // @ts-expect-error Conversion of type 'ObjectType<T>' to type 'typeof VectorLayer' may be a mistake because neither type sufficiently overlaps with the other
     const Resource = this as typeof VectorLayer;
     const connection = Resource.connection;
     if (!connection || !Resource.item) {
@@ -361,6 +366,7 @@ export class VectorLayer<
         .get();
       return count.total_count;
     } else {
+      // @ts-expect-error The 'this' context of type 'typeof VectorLayer' is not assignable to method's 'this' of type 'ObjectType<T>'
       const find = await Resource.find<T>(optionsOrConditions);
       return find.length;
     }
@@ -372,6 +378,7 @@ export class VectorLayer<
     this: ObjectType<T>,
     optionsOrConditions?: FindManyOptions<T> | PropertiesFilter<T>,
   ): Promise<T[]> {
+    // @ts-expect-error Conversion of type 'ObjectType<T>' to type 'typeof VectorLayer' may be a mistake because neither type sufficiently overlaps with the other
     const Resource = this as typeof VectorLayer;
     const connection = Resource.connection;
     if (!connection || !Resource.item) {
@@ -442,6 +449,7 @@ export class VectorLayer<
     optionsOrConditions?: number | FindOneOptions<T> | FindConditions<T>,
     maybeOptions?: FindOneOptions<T>,
   ): Promise<T | undefined> {
+    // @ts-expect-error Conversion of type 'ObjectType<T>' to type 'typeof VectorLayer' may be a mistake because neither type sufficiently overlaps with the other
     const Resource = this as typeof VectorLayer;
     const connection = Resource.connection;
     if (!connection || !Resource.item) {
@@ -470,7 +478,7 @@ export class VectorLayer<
         Object.assign(options, optionsOrConditions);
       }
       Object.assign(options, maybeOptions);
-
+      // @ts-expect-error The 'this' context of type 'typeof VectorLayer' is not assignable to method's 'this' of type 'ObjectType<T>'.
       const items = await Resource.find({
         ...options,
         limit: 1,
@@ -486,7 +494,9 @@ export class VectorLayer<
     optionsOrConditions?: number | FindOneOptions<T> | FindConditions<T>,
     maybeOptions?: FindOneOptions<T>,
   ): Promise<T> {
+    // @ts-expect-error nversion of type 'ObjectType<T>' to type 'typeof VectorLayer' may be a mistake because neither type sufficiently overlaps with the other
     const Resource = this as typeof VectorLayer;
+    // @ts-expect-error The 'this' context of type 'typeof VectorLayer' is not assignable to method's 'this' of type 'ObjectType<T>'.
     const item = await Resource.findOne<T>(optionsOrConditions, maybeOptions);
     if (item) {
       return item;
@@ -539,7 +549,10 @@ export class VectorLayer<
 
   toGeoJson(): Feature<G, this> {
     const constructor = this.getConstructor();
-    const columns = getMetadataArgsStorage().filterColumns(constructor);
+    const columns = getMetadataArgsStorage()
+      // @ts-expect-error Argument of type 'typeof VectorLayer' is not assignable to parameter of type 'string | FuncType | (string | FuncType)[]'.
+      .filterColumns(constructor);
+
     const properties = {} as Record<keyof this, any>;
     columns.forEach((x) => {
       const key = x.propertyName as keyof this;

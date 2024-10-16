@@ -1,7 +1,6 @@
-import { WebMapLayers } from './WebMapLayers';
 import { createToggleControl } from './components/controls/createToggleControl';
+import { WebMapLayers } from './WebMapLayers';
 
-import type { WebMapMain } from './WebMapMain';
 import type { WebMapEvents } from './interfaces/Events';
 import type { ControlPosition } from './interfaces/MapAdapter';
 import type {
@@ -13,6 +12,7 @@ import type {
   ToggleControlOptions,
 } from './interfaces/MapControl';
 import type { MapOptions } from './interfaces/MapOptions';
+import type { WebMapMain } from './WebMapMain';
 
 /**
  * Collection of methods for managing map controls
@@ -159,7 +159,7 @@ export class WebMapControls<
    */
   removeControl(control: C): void {
     if ('remove' in control) {
-      // @ts-ignore TODO: ugly code, rewrite
+      // @ts-expect-error TODO: ugly code, rewrite
       control.remove();
     } else if (this.mapAdapter.removeControl) {
       Promise.resolve(control).then((c) => {
