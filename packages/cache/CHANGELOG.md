@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.13](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.12...v3.0.0-alpha.13) (2024-10-24)
+
+
+### Bug Fixes
+
+* **ngw-connector:** make cache work with abort ([b82a651](https://github.com/nextgis/nextgis_frontend/commit/b82a651c9e3b935b2de18cd3efe41dac2473dd62))
+
+
+
+
+
 # [3.0.0-alpha.12](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.9...v3.0.0-alpha.12) (2024-10-15)
 
 

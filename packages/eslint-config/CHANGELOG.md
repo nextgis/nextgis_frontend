@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.13](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.12...v3.0.0-alpha.13) (2024-10-24)
+
+
+### Features
+
+* **eslint-config:** upgrade eslint version ([cc7f360](https://github.com/nextgis/nextgis_frontend/commit/cc7f360a9cd436e687d9109a2e16b94b9cd3ae98))
+
+
+
+
+
 # [3.0.0-alpha.5](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.4...v3.0.0-alpha.5) (2024-09-12)
 
 **Note:** Version bump only for package @nextgis/eslint-config

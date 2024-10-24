@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/queue",
-  "version": "3.0.0-alpha.5",
+  "version": "3.0.0-alpha.13",
   "description": "Manage concurrent asynchronous tasks with abort capabilities",
   "main": "index.js",
   "module": "lib/queue.esm-bundler.js",
@@ -8,7 +8,7 @@
   "jsdelivr": "lib/queue.global.prod.js",
   "types": "lib/index.d.ts",
   "devDependencies": {
-    "@nextgis/build-tools": "^3.0.0-alpha.5"
+    "@nextgis/build-tools": "^3.0.0-alpha.13"
   },
   "buildOptions": {
     "name": "Queue",
