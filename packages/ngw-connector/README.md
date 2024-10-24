@@ -46,6 +46,38 @@ We recommend linking to a specific version number `/ngw-connector@[version]`
 npm install @nextgis/ngw-connector
 ```
 
+## TypeScript Support
+
+If you plan to use this library in a TypeScript project, it's recommended to install TypeScript declaration files for NextGIS Web by using the `@nextgis/ngw-types-loader` tool.
+
+### Installing NGW Types
+
+Run the following command to download the latest TypeScript declaration files:
+
+```bash
+npx @nextgis/ngw-types-loader
+```
+
+This will download the declaration file from the default NextGIS Web instance (`https://demo.nextgis.com`) and update your `tsconfig.json` to include it.
+
+If you are using a custom NextGIS Web deployment, you can specify the URL:
+
+```bash
+npx @nextgis/ngw-types-loader https://your-custom-ngw-url.com
+```
+
+After running the tool, ensure that your `tsconfig.json` includes the downloaded file:
+
+```json
+{
+  "include": [
+    "./nextgisweb.d.ts"
+  ]
+}
+```
+
+For more details, refer to the [NGW Types Loader](https://www.npmjs.com/package/@nextgis/ngw-types-loader).
+
 ## Usage
 
 ```javascript
@@ -56,22 +88,25 @@ const ngwConnector = new NgwConnector({
   // auth: {login, password}
 });
 
-ngwConnector.get('resource.item', null, { id: 485 }).then((data) => {
-  console.log(data);
-});
+ngwConnector
+  .route('resource.item', { id: 485 })
+  .get()
+  .then((data) => {
+    console.log(data);
+  });
 
-ngwConnector.post('resource.collection', { data: [RESOURCE JSON] });
-ngwConnector.patch(
-  'feature_layer.feature.collection',
-  { data: [ITEMS JSON] },
-  {
-    id,
+ngwConnector.route('resource.collection').patch({ json: RESOURCE });
+ngwConnector.route('feature_layer.feature.collection', { id }).patch({
+  json: ITEMS,
+  query: {
     srs: 4326,
     geom_format: 'geojson',
-  }
-);
-ngwConnector.put('feature_layer.feature.item', { data: [ITEM JSON] }, { id, fid })
-ngwConnector.delete('feature_layer.feature.item', null, { id, fid })
+  },
+});
+ngwConnector
+  .route('feature_layer.feature.item', { id, fid })
+  .put({ json: ITEM });
+ngwConnector.route('feature_layer.feature.item', { id, fid }).delete();
 
 // Shortcuts methods to find resources
 ngwConnector.getResource(2011); // by id
