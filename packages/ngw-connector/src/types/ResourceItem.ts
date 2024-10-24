@@ -1,16 +1,15 @@
-// import {
-//   BasemapWebMapItemRead,
-//   BasemapWebMapRead,
-// } from '@nextgisweb/basemap/type/api';
-// import { FeatureLayerRead } from '@nextgisweb/feature-layer/type/api';
-// import { WebMapRead } from '@nextgisweb/webmap/type/api';
-
-// import type {
-//   CompositeRead,
-//   ResourceCls as NGWResourceCls,
-//   ResourceRead,
-// } from '@nextgisweb/resource/type/api';
-// import type { VectorLayerRead } from '@nextgisweb/vector-layer/type/api';
+import type {
+  BasemapWebMapItemRead,
+  BasemapWebMapRead,
+} from '@nextgisweb/basemap/type/api';
+import type { FeatureLayerRead } from '@nextgisweb/feature-layer/type/api';
+import type {
+  CompositeRead,
+  ResourceCls as NGWResourceCls,
+  ResourceRead,
+} from '@nextgisweb/resource/type/api';
+import type { VectorLayerRead } from '@nextgisweb/vector-layer/type/api';
+import type { WebMapRead } from '@nextgisweb/webmap/type/api';
 
 export interface TreeItem {
   item_type: 'root' | 'group' | 'layer';
@@ -51,7 +50,8 @@ export interface Permission {
   propagate: boolean;
 }
 
-// export type ResourceCls = NGWResourceCls;
+/** @deprecated use  ResourceCls from '@nextgisweb/resource/type/api' instead */
+export type ResourceCls = NGWResourceCls;
 export interface ResourceHierarchy {
   id: number;
   parent: {
@@ -59,7 +59,8 @@ export interface ResourceHierarchy {
   };
 }
 
-// export type Resource = ResourceRead;
+/** @deprecated use  ResourceRead from '@nextgisweb/resource/type/api' instead */
+export type Resource = ResourceRead;
 
 export interface BookmarkProperties {
   name: string;
@@ -80,7 +81,8 @@ export interface NgwTimeFormat {
 
 export type NgwDateTimeFormat = NgwDateFormat & NgwTimeFormat;
 
-// export type WebmapResource = WebMapRead;
+/** @deprecated use  WebMapRead from '@nextgisweb/resource/type/api' instead */
+export type WebmapResource = WebMapRead;
 
 export interface BasemapResource {
   url: string;
@@ -90,9 +92,11 @@ export interface BasemapResource {
   qms: string;
 }
 
-// export type BasemapWebmapItem = BasemapWebMapItemRead;
+/** @deprecated use  BasemapWebMapItemRead from '@nextgisweb/resource/type/api' instead */
+export type BasemapWebmapItem = BasemapWebMapItemRead;
 
-// export type BasemapWebmap = BasemapWebMapRead;
+/** @deprecated use  BasemapWebMapRead from '@nextgisweb/resource/type/api' instead */
+export type BasemapWebmap = BasemapWebMapRead;
 
 export interface LookupTableResource {
   items: Record<string, string>;
@@ -121,7 +125,8 @@ export interface FeatureLayerField {
   typemod?: unknown;
 }
 
-// export type FeatureResource = FeatureLayerRead;
+/** @deprecated use  FeatureLayerRead from '@nextgisweb/resource/type/api' instead */
+export type FeatureResource = FeatureLayerRead;
 
 export type GeometryType =
   | 'POINT'
@@ -137,7 +142,8 @@ export type GeometryType =
   | 'MULTILINESTRINGZ'
   | 'MULTIPOLYGONZ';
 
-// export type VectorLayer = VectorLayerRead;
+/** @deprecated use  VectorLayerRead from '@nextgisweb/resource/type/api' instead */
+export type VectorLayer = VectorLayerRead;
 
 export interface FileBucket {
   files: NgwFile[];
@@ -218,5 +224,5 @@ export interface Resmeta {
   items: Record<string, any>;
 }
 
-// Ngw api settings
-// export type ResourceItem = CompositeRead;
+/** @deprecated use  CompositeRead from '@nextgisweb/resource/type/api' instead */
+export type ResourceItem = CompositeRead;
