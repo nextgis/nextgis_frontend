@@ -8,7 +8,7 @@ export class Item<O extends ItemOptions = ItemOptions> {
   options: O = {} as O;
 
   properties!: ItemProperties;
-  tree: TreeHelper;
+  tree: TreeHelper<this>;
   id = ID;
 
   constructor(options?: O) {

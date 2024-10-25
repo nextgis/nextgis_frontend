@@ -1,9 +1,9 @@
 import { treeEvery, treeFilter, treeFind, treeSome } from '@nextgis/tree';
 
 import type { ItemOptions } from './interfaces';
-import type { Item } from './Item';
+import type { Item as BaseItem } from './Item';
 
-export class TreeHelper {
+export class TreeHelper<Item extends BaseItem = BaseItem> {
   item: Item;
 
   private _children: Item[] = [];
@@ -49,7 +49,9 @@ export class TreeHelper {
     return toReturn;
   }
 
-  find(filterFunc?: (item: Item) => boolean): Item<ItemOptions> | undefined {
+  find(
+    filterFunc?: (item: Item) => boolean,
+  ): BaseItem<ItemOptions> | undefined {
     return treeFind(this._children, filterFunc, (x) => {
       return x.tree.getChildren();
     });
@@ -68,11 +70,11 @@ export class TreeHelper {
   }
 
   // getDescendants shortcut
-  all(filterFunc?: (item: Item) => boolean): any[] {
+  all(filterFunc?: (item: Item) => boolean): Item[] {
     return this.getDescendants(filterFunc);
   }
 
-  getDescendants(filterFunc?: (item: Item) => boolean): any[] {
+  getDescendants(filterFunc?: (item: Item) => boolean): Item[] {
     return treeFilter(this._children, filterFunc, (x) => {
       return x.tree.getChildren();
     });
