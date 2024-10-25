@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/item",
-  "version": "3.0.0-alpha.13",
+  "version": "3.0.0-alpha.14",
   "description": "Hierarchical layers control",
   "main": "index.js",
   "module": "lib/item.esm-bundler.js",

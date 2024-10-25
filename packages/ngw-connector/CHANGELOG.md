@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.14](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.13...v3.0.0-alpha.14) (2024-10-25)
+
+
+### Bug Fixes
+
+* **ngw-connector:** request method case sensitive ([754c53b](https://github.com/nextgis/nextgis_frontend/commit/754c53b07a0768c5185fe0f58c776997234adccf))
+
+
+### Features
+
+* **ngw-connector:** clean cache on every non get request ([8c53943](https://github.com/nextgis/nextgis_frontend/commit/8c53943058923a4a4564f27d422f7c9b3e5c8532))
+* **ngw-connector:** return old resource types ([0f628e1](https://github.com/nextgis/nextgis_frontend/commit/0f628e1d42f748c334d7c68ce907be58c2b7604c))
+
+
+
+
+
 # [3.0.0-alpha.13](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.12...v3.0.0-alpha.13) (2024-10-24)
 
 
