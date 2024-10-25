@@ -13,20 +13,20 @@ import type { Point, Position } from 'geojson';
 const TESTS_GROUP_ID = 0;
 let CONNECTION: Connection;
 
-function getConnection(): Promise<Connection> {
+async function getConnection(): Promise<Connection> {
   if (CONNECTION) {
-    return Promise.resolve(CONNECTION);
+    return CONNECTION;
   }
-  return Connection.connect({
+
+  const connection = await Connection.connect({
     baseUrl: 'https://sandbox.nextgis.com',
     auth: {
       login: 'administrator',
       password: 'demodemo',
     },
-  }).then((connection) => {
-    CONNECTION = connection;
-    return connection;
   });
+  CONNECTION = connection;
+  return connection;
 }
 
 const features: [ISandboxPointLayer, Position][] = [

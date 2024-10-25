@@ -17,16 +17,16 @@ export class SandboxPointLayerSpecial
   extends PointLayer
   implements ISandboxPointLayerSpecial
 {
-  @Column()
+  @Column('STRING')
   ATTR_G!: string;
-  @Column()
+  @Column('STRING')
   ATTR_N!: string;
-  @Column()
+  @Column('STRING')
   ATTR_Z!: string;
-  @Column()
+  @Column('STRING')
   ATTR_S!: string;
-  @Column()
+  @Column('STRING')
   ATTR_K!: string;
-  @Column()
+  @Column('STRING')
   ATTR_P!: string;
 }

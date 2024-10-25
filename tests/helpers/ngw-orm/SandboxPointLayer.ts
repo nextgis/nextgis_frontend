@@ -13,8 +13,8 @@ export class SandboxPointLayer
   extends PointLayer
   implements ISandboxPointLayer
 {
-  @Column()
+  @Column("STRING")
   test!: string;
-  @Column()
+  @Column("REAL")
   number!: number;
 }

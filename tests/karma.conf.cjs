@@ -1,6 +1,5 @@
 const path = require('path');
-
-const createWebpack = require('./webpack.config');
+const createWebpack = require('./webpack.config.cjs');
 
 module.exports = (config) => {
   const coverage = config.coverage !== undefined ? true : false;

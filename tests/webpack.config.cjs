@@ -3,7 +3,6 @@ const webpack = require('webpack');
 let alias = {};
 
 const getAliases = require('../packages/build-tools/lib/aliases.cjs');
-
 alias = { ...alias, ...getAliases() };
 
 module.exports = (opt = { coverage: false }) => {
@@ -12,15 +11,15 @@ module.exports = (opt = { coverage: false }) => {
       test: /\.ts$/,
       use: [
         {
-          loader: 'ts-loader',
+          loader: 'esbuild-loader',
           options: {
-            transpileOnly: true,
-            // configFile: 'tsconfig.json',
+            loader: 'ts',
+
+            tsconfig: 'tsconfig.json',
           },
         },
       ],
       exclude: [/node_modules/],
-      // include
     },
     {
       test: /\.css$/,
@@ -55,7 +54,6 @@ module.exports = (opt = { coverage: false }) => {
       extensions: ['.js', '.ts', '.json'],
       alias,
       fallback: { util: require.resolve('util/') },
-      // modules: ['node_modules'],
     },
     module: {
       rules,
@@ -63,20 +61,6 @@ module.exports = (opt = { coverage: false }) => {
     stats: {
       modules: false,
       colors: true,
-    },
-    optimization: {
-      runtimeChunk: 'single',
-      splitChunks: {
-        chunks: 'all',
-        minSize: 0,
-        cacheGroups: {
-          commons: {
-            name: 'commons',
-            chunks: 'initial',
-            minChunks: 1,
-          },
-        },
-      },
     },
     plugins: [
       new webpack.DefinePlugin({
