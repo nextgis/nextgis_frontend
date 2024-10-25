@@ -1,8 +1,9 @@
+// eslint-disable-next-line simple-import-sort/imports
+import 'reflect-metadata';
+
 import { getGlobalVariable } from '@nextgis/utils';
 
 import { MetadataArgsStorage } from './metadata-args/MetadataArgsStorage';
-
-import 'reflect-metadata';
 
 export { Connection } from './connection/Connection';
 export { Column } from './decorator/Column';
