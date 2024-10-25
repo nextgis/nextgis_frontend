@@ -1,16 +1,3 @@
-import type {
-  BasemapWebMapItemRead,
-  BasemapWebMapRead,
-} from '@nextgisweb/basemap/type/api';
-import type { FeatureLayerRead } from '@nextgisweb/feature-layer/type/api';
-import type {
-  CompositeRead,
-  ResourceCls as NGWResourceCls,
-  ResourceRead,
-} from '@nextgisweb/resource/type/api';
-import type { VectorLayerRead } from '@nextgisweb/vector-layer/type/api';
-import type { WebMapRead } from '@nextgisweb/webmap/type/api';
-
 export interface TreeItem {
   item_type: 'root' | 'group' | 'layer';
   display_name?: string;
@@ -51,7 +38,40 @@ export interface Permission {
 }
 
 /** @deprecated use  ResourceCls from '@nextgisweb/resource/type/api' instead */
-export type ResourceCls = NGWResourceCls;
+export type ResourceCls =
+  // | 'resource'
+  | 'resource_group'
+  | 'postgis_layer'
+  | 'wmsserver_service'
+  | 'basemap_layer'
+  | 'postgis_connection'
+  | 'webmap'
+  | 'wfsserver_service'
+  | 'vector_layer'
+  | 'raster_layer'
+  | 'mapserver_style'
+  | 'qgis_vector_style'
+  | 'qgis_raster_style'
+  | 'raster_style'
+  | 'file_bucket'
+  | 'lookup_table'
+  | 'wmsclient_layer'
+  | 'wmsclient_connection'
+  | 'formbuilder_form'
+  | 'file_bucket'
+  | 'svg_marker_library'
+  | 'ogcfserver_service'
+  | 'tmsclient_connection'
+  | 'tileset'
+  | 'collector_project'
+  | 'demo_project'
+  | 'trackers_group'
+  | 'tracker'
+  // tms branch
+  | 'terrain_provider'
+  | 'model_3d'
+  | 'tmsclient_layer';
+
 export interface ResourceHierarchy {
   id: number;
   parent: {
@@ -60,7 +80,23 @@ export interface ResourceHierarchy {
 }
 
 /** @deprecated use  ResourceRead from '@nextgisweb/resource/type/api' instead */
-export type Resource = ResourceRead;
+export interface Resource {
+  cls: ResourceCls;
+  id: number;
+  parent: {
+    id: number;
+  };
+  owner_user: {
+    id: number;
+  };
+  permissions: Permission[];
+  keyname?: string | null;
+  display_name: string;
+  description?: string | null;
+  children: boolean;
+  interfaces: any[];
+  scopes: string[];
+}
 
 export interface BookmarkProperties {
   name: string;
@@ -82,7 +118,16 @@ export interface NgwTimeFormat {
 export type NgwDateTimeFormat = NgwDateFormat & NgwTimeFormat;
 
 /** @deprecated use  WebMapRead from '@nextgisweb/resource/type/api' instead */
-export type WebmapResource = WebMapRead;
+export interface WebmapResource {
+  extent_left: number;
+  extent_right: number;
+  extent_bottom: number;
+  extent_top: number;
+  extent_constrained: boolean;
+  draw_order_enabled: boolean;
+  bookmark_resource: ResourceHierarchy;
+  root_item: TreeGroup;
+}
 
 export interface BasemapResource {
   url: string;
@@ -93,10 +138,18 @@ export interface BasemapResource {
 }
 
 /** @deprecated use  BasemapWebMapItemRead from '@nextgisweb/resource/type/api' instead */
-export type BasemapWebmapItem = BasemapWebMapItemRead;
+export interface BasemapWebmapItem {
+  resource_id: number;
+  display_name: string;
+  position?: number;
+  enabled?: boolean;
+  opacity?: number;
+}
 
 /** @deprecated use  BasemapWebMapRead from '@nextgisweb/resource/type/api' instead */
-export type BasemapWebmap = BasemapWebMapRead;
+export interface BasemapWebmap {
+  basemaps: BasemapWebmapItem[];
+}
 
 export interface LookupTableResource {
   items: Record<string, string>;
@@ -126,7 +179,9 @@ export interface FeatureLayerField {
 }
 
 /** @deprecated use  FeatureLayerRead from '@nextgisweb/resource/type/api' instead */
-export type FeatureResource = FeatureLayerRead;
+export interface FeatureResource {
+  fields: FeatureLayerField[];
+}
 
 export type GeometryType =
   | 'POINT'
@@ -143,7 +198,10 @@ export type GeometryType =
   | 'MULTIPOLYGONZ';
 
 /** @deprecated use  VectorLayerRead from '@nextgisweb/resource/type/api' instead */
-export type VectorLayer = VectorLayerRead;
+export interface VectorLayer {
+  srs: { id: number };
+  geometry_type: GeometryType;
+}
 
 export interface FileBucket {
   files: NgwFile[];
@@ -224,5 +282,29 @@ export interface Resmeta {
   items: Record<string, any>;
 }
 
+export interface ResourceItemMain {
+  resource: Resource;
+  resmeta: Resmeta;
+}
+
+// Ngw api settings
+
 /** @deprecated use  CompositeRead from '@nextgisweb/resource/type/api' instead */
-export type ResourceItem = CompositeRead;
+export interface ResourceItem extends ResourceItemMain {
+  [cls: string]: any;
+  webmap?: WebmapResource;
+  feature_layer?: FeatureResource;
+  vector_layer?: VectorLayer;
+  basemap_layer?: BasemapResource;
+  basemap_webmap?: BasemapWebmap;
+  lookup_table?: LookupTableResource;
+  file_bucket?: FileBucket;
+  wmsserver_service?: WmsServerService;
+  wmsclient_layer?: WmsClientLayer;
+  wmsclient_connection?: WmsClientConnection;
+}
+
+export interface VectorLayerResourceItem extends ResourceItemMain {
+  vector_layer: VectorLayer;
+  feature_layer: FeatureResource;
+}
