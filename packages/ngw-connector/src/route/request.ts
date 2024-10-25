@@ -181,6 +181,7 @@ export async function request<
     ...defaults,
     ...options,
   };
+  opt.method = opt.method?.toUpperCase();
 
   if (withCredentials) {
     opt.credentials = 'include';
