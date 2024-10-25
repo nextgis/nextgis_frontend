@@ -257,20 +257,26 @@ export async function request<
     }
     return body as ToReturn<T, RT, ReturnUrl>;
   };
-
-  if (cacheEngine && cache !== false && opt.method?.toUpperCase() === 'GET') {
-    const props = cacheProps
-      ? cacheProps
-      : {
-          ...objectRemoveEmpty({
-            withCredentials,
-            responseType,
-          }),
-        };
-    return cacheEngine.add(cacheName || url, makeRequest, {
-      props,
-      expirationTime: cache ? undefined : 500,
-    });
+  if (cacheEngine) {
+    if (opt.method?.toUpperCase() === 'GET') {
+      if (cache !== false) {
+        const props = cacheProps
+          ? cacheProps
+          : {
+              ...objectRemoveEmpty({
+                withCredentials,
+                responseType,
+              }),
+            };
+        return cacheEngine.add(cacheName || url, makeRequest, {
+          props,
+          expirationTime: cache ? undefined : 500,
+        });
+      }
+    } else {
+      cacheEngine.clean();
+    }
   }
+
   return makeRequest();
 }
