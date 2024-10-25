@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "postinstall": "npx @nextgis/ngw-types-loader",
     "clean": "lerna run clean",
     "dev": "lerna run dev",
     "prod": "npm run lint && node ./packages/build-tools/lib/build.js --release",

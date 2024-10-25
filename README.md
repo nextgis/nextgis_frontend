@@ -212,6 +212,38 @@ Examples
 
 [Add different NextGIS Web resource](http://code.nextgis.com/demo-examples-ngw-layers)
 
+## TypeScript Support
+
+If you plan to use this library in a TypeScript project, it's recommended to install TypeScript declaration files for NextGIS Web by using the `@nextgis/ngw-types-loader` tool.
+
+### Installing NGW Types
+
+Run the following command to download the latest TypeScript declaration files:
+
+```bash
+npx @nextgis/ngw-types-loader
+```
+
+This will download the declaration file from the default NextGIS Web instance (`https://demo.nextgis.com`) and update your `tsconfig.json` to include it.
+
+If you are using a custom NextGIS Web deployment, you can specify the URL:
+
+```bash
+npx @nextgis/ngw-types-loader https://your-custom-ngw-url.com
+```
+
+After running the tool, ensure that your `tsconfig.json` includes the downloaded file:
+
+```json
+{
+  "include": [
+    "./nextgisweb.d.ts"
+  ]
+}
+```
+
+For more details, refer to the [NGW Types Loader](https://www.npmjs.com/package/@nextgis/ngw-types-loader).
+
 ## Developer Guide
 
 ### Repository Setup
