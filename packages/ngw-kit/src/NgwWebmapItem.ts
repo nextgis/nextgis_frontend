@@ -98,7 +98,7 @@ export class NgwWebmapItem extends Item<ItemOptions> {
       this.connector = connector;
     }
     if (parent) {
-      this.tree.setParent(parent);
+      this.tree.setParent(parent as typeof this);
     }
     this.item = item;
     if (this.item.item_type === 'root') {
@@ -255,7 +255,7 @@ export class NgwWebmapItem extends Item<ItemOptions> {
           this.connector,
           this,
         );
-        this.tree.addChild(childItem);
+        this.tree.addChild(childItem as typeof this);
       }
     }
     return Promise.resolve();

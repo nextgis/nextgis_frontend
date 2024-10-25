@@ -34,7 +34,8 @@
     "packages/global.d.ts",
     "packages/*/src/**/*.ts",
     "packages/*/src/**/*.d.ts",
-    "nextgisweb.d.ts"
+    "nextgisweb.d.ts",
+    "tests/**/*.ts"
   ],
-  "exclude": ["tests", "node_modules"]
+  "exclude": ["node_modules"]
 }
