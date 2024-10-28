@@ -25,28 +25,31 @@ export async function getCompanyLogo(
     img.style.maxHeight = '100px';
     img.style.maxWidth = '100px';
     img.src = '';
-    try {
-      const resp = await connector.route('pyramid.csettings').get();
-      const logo = resp.pyramid?.header_logo;
-      if (logo) {
-        const [mimeType, base64Data] = logo;
 
-        const byteCharacters = atob(base64Data);
-        const byteNumbers = new Array(byteCharacters.length);
+    const resp = await connector.route('pyramid.csettings').get({
+      query: {
+        pyramid: ['header_logo'],
+      },
+    });
+    const logo = resp.pyramid?.header_logo;
+    if (logo) {
+      const [mimeType, base64Data] = logo;
 
-        for (let i = 0; i < byteCharacters.length; i++) {
-          byteNumbers[i] = byteCharacters.charCodeAt(i);
-        }
+      const byteCharacters = atob(base64Data);
+      const byteNumbers = new Array(byteCharacters.length);
 
-        const byteArray = new Uint8Array(byteNumbers);
-        const blob = new Blob([byteArray], { type: mimeType });
-
-        const urlCreator = window.URL || window.webkitURL;
-        const imageUrl = urlCreator.createObjectURL(blob);
-        img.src = imageUrl;
+      for (let i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
       }
-    } catch (er) {
-      console.warn(er);
+
+      const byteArray = new Uint8Array(byteNumbers);
+      const blob = new Blob([byteArray], { type: mimeType });
+
+      const urlCreator = window.URL || window.webkitURL;
+      const imageUrl = urlCreator.createObjectURL(blob);
+      img.src = imageUrl;
+    } else {
+      return;
     }
 
     if (
