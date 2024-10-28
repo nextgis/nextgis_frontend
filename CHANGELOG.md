@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.15](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.14...v3.0.0-alpha.15) (2024-10-28)
+
+
+### Bug Fixes
+
+* **ngw-kit:** createRasterAdapter show and hide layers ([000691f](https://github.com/nextgis/nextgis_frontend/commit/000691f5336bfca57a4aaf4f259db29ecb8f323f))
+* **ngw-kit:** get company logo ([34aa62b](https://github.com/nextgis/nextgis_frontend/commit/34aa62b1db9d77c50f12329446c7fac22be8fa8d))
+
+
+
+
+
 # [3.0.0-alpha.14](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.13...v3.0.0-alpha.14) (2024-10-25)
 
 

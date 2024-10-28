@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.15](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.14...v3.0.0-alpha.15) (2024-10-28)
+
+**Note:** Version bump only for package @nextgis/react-ngw-maplibre-gl
+
+
+
+
+
 # [3.0.0-alpha.14](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.13...v3.0.0-alpha.14) (2024-10-25)
 
 **Note:** Version bump only for package @nextgis/react-ngw-maplibre-gl
