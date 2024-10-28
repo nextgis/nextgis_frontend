@@ -141,15 +141,20 @@ export async function createRasterAdapter({
 
       showLayer(): void {
         this._layerVisibility = true;
-        if (this.layer) {
-          if (!this._blocked) {
+
+        if (!this._blocked) {
+          if (super.showLayer) {
+            super.showLayer(this.layer);
+          } else if (this.layer) {
             webMap.mapAdapter.showLayer(this.layer);
           }
         }
       }
       hideLayer(): void {
         this._layerVisibility = false;
-        if (this.layer) {
+        if (super.hideLayer) {
+          super.hideLayer(this.layer);
+        } else if (this.layer) {
           webMap.mapAdapter.hideLayer(this.layer);
         }
       }
