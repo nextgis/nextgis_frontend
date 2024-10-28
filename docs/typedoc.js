@@ -1,7 +1,7 @@
 // @ts-check
-const findPackages = require('../scripts/findPackages');
+import findPackages from '../scripts/findPackages.js';
 
-const allowPackages = findPackages().filter((x) => {
+const allowPackages = (await findPackages()).filter((x) => {
   return !x.name.includes('react') && !x.name.includes('cesium');
 });
 
@@ -15,4 +15,5 @@ const config = {
   includeVersion: false,
   entryPointStrategy: 'packages',
 };
-module.exports = config;
+
+export default config;

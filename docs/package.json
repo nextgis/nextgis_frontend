@@ -1,16 +1,16 @@
 {
   "name": "@nextgis/frontend_docs",
   "private": true,
+  "type": "module",
   "version": "2.0.0",
   "scripts": {
     "doc": "node ./node_modules/typedoc/bin/typedoc",
     "build": "node ./node_modules/typedoc/bin/typedoc",
-    "docker": "docmypkg -r harbor.nextgis.net -n frontend/code-api -l -d ./docker"
+    "docker": "dockpkg -r harbor.nextgis.net -n frontend/code-api -l -d ./docker"
   },
   "devDependencies": {
     "docmypkg": "^0.0.1",
-    "typedoc": "^0.26.3"
+    "typedoc": "^0.26.10"
   },
-  "license": "MIT",
-  "packageManager": "yarn@3.6.3"
+  "license": "MIT"
 }
