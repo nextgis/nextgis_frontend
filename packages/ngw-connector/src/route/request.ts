@@ -275,7 +275,11 @@ export async function request<
         });
       }
     } else {
-      cacheEngine.clean();
+      // Special check for requests that do not require cache clearing.
+      const ignoredForClean = ['api/feature_layer/identify'];
+      if (ignoredForClean.every((part) => !path.includes(part))) {
+        cacheEngine.clean();
+      }
     }
   }
 

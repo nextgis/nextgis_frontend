@@ -41,6 +41,9 @@ export class NgwConnector {
   cache: Cache;
   withCredentials?: boolean = undefined;
 
+  // Dedicated cache for route requests, as these are executed before any other requests.
+  // This cache does not need to be cleared during the session.
+  private readonly routeCache: Cache;
   private client = `NextGIS-NGW-Connector/${pkg.version}`;
   private routeStr = '/api/component/pyramid/route';
   private activeRequests: {
@@ -51,6 +54,7 @@ export class NgwConnector {
   constructor(public options: NgwConnectorOptions) {
     const exist = findConnector(options);
     this.cache = new Cache({ namespace: options.cacheId });
+    this.routeCache = new Cache({ namespace: 'routecache' });
     if (exist) {
       return exist;
     } else {
@@ -117,19 +121,8 @@ export class NgwConnector {
       }
     }
     const routeUrl = `${this.routeStr}?client=${this.client}`;
-    return this.makeQuery<PyramidRoute>(
-      routeUrl,
-      {},
-      {
-        cacheName: 'route',
-        signal,
-        cache: true,
-        cacheProps: {
-          id: this.id,
-          auth,
-          baseUrl: this.options.baseUrl,
-        },
-      },
+    return this.routeCache.add(this.options.baseUrl || String(this.id), () =>
+      this.makeQuery<PyramidRoute>(routeUrl, null, { signal, cache: false }),
     );
   }
 
@@ -151,6 +144,7 @@ export class NgwConnector {
     removeConnector(this);
     this.options.auth = undefined;
     this.user = undefined;
+    this.routeCache.clean();
     this.clearCache();
     this.emitter.emit('logout');
   }
@@ -282,7 +276,7 @@ export class NgwConnector {
       }
     };
 
-    if (method === 'GET') {
+    if (method === 'GET' && cache !== false) {
       const cacheOptions = cacheProps
         ? cacheProps
         : {
