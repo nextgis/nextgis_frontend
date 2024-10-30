@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/ngw-uploader-input",
-  "version": "3.0.0-alpha.14",
+  "version": "3.0.0-alpha.16",
   "_priority": 13,
   "description": "",
   "main": "index.js",
@@ -10,8 +10,8 @@
   "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/dialog": "^3.0.0-alpha.13",
-    "@nextgis/ngw-connector": "^3.0.0-alpha.14",
-    "@nextgis/ngw-uploader": "^3.0.0-alpha.14",
+    "@nextgis/ngw-connector": "^3.0.0-alpha.16",
+    "@nextgis/ngw-uploader": "^3.0.0-alpha.16",
     "@types/events": "^3.0.0",
     "events": "*"
   },

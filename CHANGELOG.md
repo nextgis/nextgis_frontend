@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.16](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.15...v3.0.0-alpha.16) (2024-10-30)
+
+
+### Bug Fixes
+
+* **ngw-connector:** optimize cache to prevent unnecessary clearing ([0e30c23](https://github.com/nextgis/nextgis_frontend/commit/0e30c23c57fe9ba26be654104e566250d3e9016f))
+
+
+
+
+
 # [3.0.0-alpha.15](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.14...v3.0.0-alpha.15) (2024-10-28)
 
 
