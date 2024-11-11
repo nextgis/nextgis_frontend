@@ -2,12 +2,15 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 import { directoryName } from './utils.js';
-
 const isDirectory = (source) => fs.lstatSync(source).isDirectory();
 
-export default function generate(source = '', moduleFlag = false) {
+export default function generate(
+  source = '',
+  { moduleFlag = false, suffix = '' } = {},
+) {
   source = source || path.resolve(path.join(directoryName, '..', '..'));
   const items = {};
+
   fs.readdirSync(source).forEach((name) => {
     const libPath = path.join(source, name);
     // find packages
@@ -20,11 +23,11 @@ export default function generate(source = '', moduleFlag = false) {
           if (pkg.module) {
             const modulePath = path.join(libPath, pkg.module);
             if (fs.existsSync(modulePath)) {
-              items[pkg.name + '$'] = modulePath;
+              items[pkg.name + suffix] = modulePath;
             }
           }
         } else {
-          items[pkg.name + '$'] = path.join(libPath, '/src/index.ts');
+          items[pkg.name + suffix] = path.join(libPath, '/src/index.ts');
         }
       }
     }
