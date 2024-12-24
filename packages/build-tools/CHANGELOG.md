@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.17](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.16...v3.0.0-alpha.17) (2024-12-24)
+
+
+### Features
+
+* **build-tools:** generate aliases with suffix ([bd54a36](https://github.com/nextgis/nextgis_frontend/commit/bd54a36f85567d4ea034c7c65c37e40a6992d57b))
+
+
+
+
+
 # [3.0.0-alpha.13](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.12...v3.0.0-alpha.13) (2024-10-24)
 
 **Note:** Version bump only for package @nextgis/build-tools

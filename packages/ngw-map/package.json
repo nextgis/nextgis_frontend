@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/ngw-map",
-  "version": "3.0.0-alpha.16",
+  "version": "3.0.0-alpha.17",
   "_priority": 11,
   "description": "",
   "main": "index.js",
@@ -9,18 +9,18 @@
   "jsdelivr": "lib/ngw-map.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/icons": "^3.0.0-alpha.13",
-    "@nextgis/ngw-connector": "^3.0.0-alpha.16",
-    "@nextgis/ngw-kit": "^3.0.0-alpha.16",
-    "@nextgis/qms-kit": "^3.0.0-alpha.13",
-    "@nextgis/utils": "^3.0.0-alpha.13",
-    "@nextgis/webmap": "^3.0.0-alpha.13",
+    "@nextgis/icons": "^3.0.0-alpha.17",
+    "@nextgis/ngw-connector": "^3.0.0-alpha.17",
+    "@nextgis/ngw-kit": "^3.0.0-alpha.17",
+    "@nextgis/qms-kit": "^3.0.0-alpha.17",
+    "@nextgis/utils": "^3.0.0-alpha.17",
+    "@nextgis/webmap": "^3.0.0-alpha.17",
     "@types/events": "^3.0.0",
     "events": "*",
     "strict-event-emitter-types": "^2.0.0"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "^3.0.0-alpha.13"
+    "@nextgis/build-tools": "^3.0.0-alpha.17"
   },
   "buildOptions": {
     "name": "NgwMap",

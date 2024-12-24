@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.17](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.16...v3.0.0-alpha.17) (2024-12-24)
+
+
+### Bug Fixes
+
+* api ngw extend may be null ([46dc1aa](https://github.com/nextgis/nextgis_frontend/commit/46dc1aa7015fd6c0aca1ca5640ac40415f4895df))
+* remove leaflet image adapter hardcode maxzoom ([78fcd18](https://github.com/nextgis/nextgis_frontend/commit/78fcd184d4c606ba9a218845fb044ed54f2ed1c7))
+
+
+### Features
+
+* **build-tools:** generate aliases with suffix ([bd54a36](https://github.com/nextgis/nextgis_frontend/commit/bd54a36f85567d4ea034c7c65c37e40a6992d57b))
+
+
+
+
+
 # [3.0.0-alpha.16](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.15...v3.0.0-alpha.16) (2024-10-30)
 
 

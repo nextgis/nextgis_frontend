@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/utils",
-  "version": "3.0.0-alpha.13",
+  "version": "3.0.0-alpha.17",
   "description": "Common development tools",
   "main": "index.js",
   "module": "lib/utils.esm-bundler.js",
@@ -9,7 +9,7 @@
   "types": "lib/index.d.ts",
   "sideEffects": false,
   "devDependencies": {
-    "@nextgis/build-tools": "^3.0.0-alpha.13",
+    "@nextgis/build-tools": "^3.0.0-alpha.17",
     "@types/geojson": "^7946.0.14"
   },
   "buildOptions": {

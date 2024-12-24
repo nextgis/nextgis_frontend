@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.17](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.16...v3.0.0-alpha.17) (2024-12-24)
+
+
+### Bug Fixes
+
+* remove leaflet image adapter hardcode maxzoom ([78fcd18](https://github.com/nextgis/nextgis_frontend/commit/78fcd184d4c606ba9a218845fb044ed54f2ed1c7))
+
+
+
+
+
 # [3.0.0-alpha.13](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.12...v3.0.0-alpha.13) (2024-10-24)
 
 **Note:** Version bump only for package @nextgis/leaflet-map-adapter
