@@ -652,7 +652,7 @@ export class WebMapLayers<
     }
   }
 
-  isLayerLabelVisible(layerDef: LayerDef): boolean | undefined {
+  isLayerLabelVisible(layerDef: LayerDef): boolean {
     const layer = this.getLayer(layerDef) as VectorLayerAdapter;
     if (layer.isLabelVisible) {
       return layer.isLabelVisible();

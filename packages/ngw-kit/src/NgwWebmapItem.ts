@@ -18,6 +18,7 @@ import type {
 } from '@nextgis/webmap';
 
 import type { TreeGroup, TreeItem, TreeLayer, TreeRoot } from './interfaces';
+import { Legend } from './adapters/createRasterAdapter';
 
 export class NgwWebmapItem extends Item<ItemOptions> {
   static GetAdapterFromLayerType: {
@@ -166,17 +167,18 @@ export class NgwWebmapItem extends Item<ItemOptions> {
           .get({
             ...options,
           });
-        const legend: LayerLegend = {
-          layerId: id,
-          legend: ngwLegend.map((legend) => ({
-            /** @deprecated use display_name instead */
-            name: legend.display_name,
-            /** @deprecated use icon instead */
-            symbol: legend.icon,
-            ...legend,
-          })),
-        };
-        return [legend];
+        if (this.layer) {
+          const legend: LayerLegend = new Legend({
+            layerId: id,
+            legend: ngwLegend,
+            layer: this.layer,
+            resourceId: Number(this.item.resourceId),
+            webMap: this.webMap,
+          });
+
+          return [legend];
+        }
+        return [];
       }
     }
 

@@ -573,6 +573,9 @@ export interface MainLayerAdapter<
   setOpacity?(val: number): void;
 
   getLegend?(options?: GetLegendOptions): Promise<LayerLegend[]>;
+
+  blocked?: boolean;
+  layerVisibility?: boolean;
 }
 
 /**

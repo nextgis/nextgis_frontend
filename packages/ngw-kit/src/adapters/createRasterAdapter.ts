@@ -8,7 +8,9 @@ import type { Type } from '@nextgis/utils';
 import type {
   GetLegendOptions,
   ImageAdapterOptions,
+  LayerAdapter,
   MainLayerAdapter,
+  WebMap,
 } from '@nextgis/webmap';
 import type { LegendSymbol } from '@nextgisweb/render/type/api';
 import type { CompositeRead, ResourceCls } from '@nextgisweb/resource/type/api';
@@ -26,16 +28,29 @@ export type LegendSymbols = {
 export class Legend implements LayerLegend {
   layerId: string;
   legend: LegendSymbol[];
-
+  layer: LayerAdapter;
   onSymbolRenderChange?: (indexes: number[]) => void;
+  resourceId: number;
+  webMap: WebMap;
 
   constructor({
+    resourceId,
     layerId,
     legend,
+    webMap,
+    layer,
     onSymbolRenderChange,
-  }: LayerLegend & { onSymbolRenderChange?: (indexes: number[]) => void }) {
+  }: LayerLegend & {
+    layer: LayerAdapter;
+    resourceId: number;
+    webMap: WebMap;
+    onSymbolRenderChange?: (indexes: number[]) => void;
+  }) {
+    this.layer = layer;
     this.layerId = layerId;
     this.legend = this.createLegend(legend);
+    this.resourceId = resourceId;
+    this.webMap = webMap;
     this.onSymbolRenderChange = onSymbolRenderChange;
   }
 
@@ -55,13 +70,66 @@ export class Legend implements LayerLegend {
       const render = legendItem.render;
       if (render !== status) {
         legendItem.render = status;
+        const newSymbols = this.legend
+          .filter((l) => l.render)
+          .map((l) => l.index);
+        this.setLegendSymbol(newSymbols);
         if (this.onSymbolRenderChange) {
-          this.onSymbolRenderChange(
-            this.legend.filter((l) => l.render).map((l) => l.index),
-          );
+          this.onSymbolRenderChange(newSymbols);
         }
       }
     }
+  }
+
+  setLegendSymbol(renderIndexes: number[]): void {
+    const intervals = this._consolidateIntervals(renderIndexes);
+    if (!intervals.length) {
+      this._hideLayer();
+      this.layer.blocked = true;
+    } else {
+      this.layer.blocked = false;
+      this._showLayer();
+    }
+    if (this.layer.updateLayer) {
+      this.layer.updateLayer({
+        params: {
+          [`symbols[${this.resourceId}]`]: intervals.join(',') || undefined,
+        },
+      });
+    }
+  }
+
+  private _hideLayer(): void {
+    if (this.layer.options.id) {
+      this.webMap.mapAdapter.hideLayer(this.layer.layer);
+    }
+  }
+
+  private _showLayer(): void {
+    if (this.layer.options.id) {
+      if (this.layer.layerVisibility) {
+        this.webMap.showLayer(this.layer.options.id, { silent: true });
+      }
+    }
+  }
+
+  private _consolidateIntervals(symbols: number[]): string[] {
+    const sortedSymbols = symbols.slice().sort((a, b) => a - b);
+    const intervals: string[] = [];
+    let start = sortedSymbols[0];
+    let end = start;
+
+    for (let i = 1; i <= sortedSymbols.length; i++) {
+      if (sortedSymbols[i] === end + 1) {
+        end = sortedSymbols[i];
+      } else {
+        intervals.push(start === end ? `${start}` : `${start}-${end}`);
+        start = sortedSymbols[i];
+        end = start;
+      }
+    }
+
+    return intervals;
   }
 }
 
@@ -103,8 +171,8 @@ export async function createRasterAdapter({
       item?: CompositeRead = item;
       resourceId = resourceId;
 
-      private _blocked = false;
-      private _layerVisibility?: boolean;
+      blocked = false;
+      layerVisibility?: boolean;
 
       constructor(
         public map: any,
@@ -140,9 +208,9 @@ export async function createRasterAdapter({
       }
 
       showLayer(): void {
-        this._layerVisibility = true;
+        this.layerVisibility = true;
 
-        if (!this._blocked) {
+        if (!this.blocked) {
           if (super.showLayer) {
             super.showLayer(this.layer);
           } else if (this.layer) {
@@ -151,7 +219,7 @@ export async function createRasterAdapter({
         }
       }
       hideLayer(): void {
-        this._layerVisibility = false;
+        this.layerVisibility = false;
         if (super.hideLayer) {
           super.hideLayer(this.layer);
         } else if (this.layer) {
@@ -185,63 +253,14 @@ export async function createRasterAdapter({
             });
           const legend = new Legend({
             layerId: id,
+            layer: this,
+            resourceId,
+            webMap,
             legend: ngwLegend,
-            onSymbolRenderChange: this._setLegendSymbol.bind(this),
           });
           return [legend];
         }
         return [];
-      }
-
-      private _hideLayer(): void {
-        if (this.options.id) {
-          webMap.mapAdapter.hideLayer(this.layer);
-        }
-      }
-
-      private _showLayer(): void {
-        if (this.options.id) {
-          if (this._layerVisibility) {
-            webMap.showLayer(this.options.id, { silent: true });
-          }
-        }
-      }
-
-      private _setLegendSymbol(renderIndexes: number[]): void {
-        const intervals = this._consolidateIntervals(renderIndexes);
-        if (!intervals.length) {
-          this._hideLayer();
-          this._blocked = true;
-        } else {
-          this._blocked = false;
-          this._showLayer();
-        }
-        if (this.updateLayer) {
-          this.updateLayer({
-            params: {
-              [`symbols[${resourceId}]`]: intervals.join(',') || undefined,
-            },
-          });
-        }
-      }
-
-      private _consolidateIntervals(symbols: number[]): string[] {
-        const sortedSymbols = symbols.slice().sort((a, b) => a - b);
-        const intervals: string[] = [];
-        let start = sortedSymbols[0];
-        let end = start;
-
-        for (let i = 1; i <= sortedSymbols.length; i++) {
-          if (sortedSymbols[i] === end + 1) {
-            end = sortedSymbols[i];
-          } else {
-            intervals.push(start === end ? `${start}` : `${start}-${end}`);
-            start = sortedSymbols[i];
-            end = start;
-          }
-        }
-
-        return intervals;
       }
     };
   } else {
