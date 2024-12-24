@@ -20,6 +20,7 @@ import type {
   NgwLayerAdapterType,
   ResourceAdapter,
 } from '../interfaces';
+import { LegendSymbolsEnum } from '@nextgisweb/webmap/type/api';
 
 export type LegendSymbols = {
   [symbolIndex: number]: boolean | null;
@@ -32,8 +33,10 @@ export class Legend implements LayerLegend {
   onSymbolRenderChange?: (indexes: number[]) => void;
   resourceId: number;
   webMap: WebMap;
+  legendSymbols: LegendSymbolsEnum = 'expand';
 
   constructor({
+    legendSymbols,
     resourceId,
     layerId,
     legend,
@@ -44,8 +47,12 @@ export class Legend implements LayerLegend {
     layer: LayerAdapter;
     resourceId: number;
     webMap: WebMap;
+    legendSymbols?: LegendSymbolsEnum;
     onSymbolRenderChange?: (indexes: number[]) => void;
   }) {
+    if (legendSymbols) {
+      this.legendSymbols = legendSymbols;
+    }
     this.layer = layer;
     this.layerId = layerId;
     this.legend = this.createLegend(legend);

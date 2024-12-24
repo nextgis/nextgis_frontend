@@ -162,21 +162,26 @@ export class NgwWebmapItem extends Item<ItemOptions> {
     if (id !== undefined) {
       const connector = this.connector;
       if (connector && 'resourceId' in this.item) {
-        const ngwLegend = await connector
-          .route('render.legend_symbols', { id: Number(this.item.resourceId) })
-          .get({
-            ...options,
-          });
-        if (this.layer) {
-          const legend: LayerLegend = new Legend({
-            layerId: id,
-            legend: ngwLegend,
-            layer: this.layer,
-            resourceId: Number(this.item.resourceId),
-            webMap: this.webMap,
-          });
+        if (this.item.item_type === 'layer') {
+          const ngwLegend = await connector
+            .route('render.legend_symbols', {
+              id: Number(this.item.resourceId),
+            })
+            .get({
+              ...options,
+            });
+          if (this.layer && ngwLegend) {
+            const legend: LayerLegend = new Legend({
+              layerId: id,
+              legend: ngwLegend,
+              layer: this.layer,
+              resourceId: Number(this.item.resourceId),
+              webMap: this.webMap,
+              legendSymbols: this.item.legend_symbols ?? undefined,
+            });
 
-          return [legend];
+            return [legend];
+          }
         }
         return [];
       }
