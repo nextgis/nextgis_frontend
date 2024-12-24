@@ -35,7 +35,6 @@ export class ImageAdapter
         },
         ...options.params,
         ...options.nativeOptions,
-        maxZoom: 12,
       });
       if (updateWmsParamsFromOpt) {
         const updateWmsParams = this.layer.updateWmsParams;
