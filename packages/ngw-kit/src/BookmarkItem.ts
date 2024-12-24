@@ -31,7 +31,7 @@ export class BookmarkItem {
     }
   }
 
-  extent(opt?: GetRequestOptions): Promise<LngLatBoundsArray> {
+  extent(opt?: GetRequestOptions): Promise<LngLatBoundsArray | undefined> {
     if (this._extent) {
       return Promise.resolve(this._extent);
     }
@@ -42,10 +42,12 @@ export class BookmarkItem {
       })
       .get(opt)
       .then((resp) => {
-        const { minLat, minLon, maxLat, maxLon } = resp.extent;
-        const lonLat = [minLon, minLat, maxLon, maxLat];
-        this._extent = lonLat;
-        return lonLat;
+        if (resp.extent) {
+          const { minLat, minLon, maxLat, maxLon } = resp.extent;
+          const lonLat = [minLon, minLat, maxLon, maxLat];
+          this._extent = lonLat;
+          return lonLat;
+        }
       });
   }
 

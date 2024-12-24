@@ -59,7 +59,7 @@ export function fetchNgwLayerItemExtent({
     })
     .get({ cache, signal })
     .then((resp) => {
-      if (resp) {
+      if (resp && resp.extent) {
         const { maxLat, maxLon, minLat, minLon } = resp.extent;
         const extentArray: LngLatBoundsArray = [minLon, minLat, maxLon, maxLat];
         return extentArray;

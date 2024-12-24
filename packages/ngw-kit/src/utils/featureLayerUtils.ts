@@ -29,6 +29,7 @@ import type {
 export const FEATURE_REQUEST_PARAMS: FeatureRequestParams = {
   srs: 4326,
   geom_format: 'geojson',
+  dt_format: 'iso',
 };
 
 export function createGeoJsonFeature<
