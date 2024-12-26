@@ -5,7 +5,7 @@
  * MIT License
  */
 
-import { debounce } from '@nextgis/utils';
+import { debounce, isObject } from '@nextgis/utils';
 import { CRS, Layer, Util } from 'leaflet';
 
 import { ImageOverlay } from './ImageOverlay';
@@ -77,7 +77,7 @@ export class ImageLayer extends Layer {
     for (opt in options) {
       if (opt in this.options) {
         opts[opt] = options[opt];
-      } else {
+      } else if (!isObject(options[opt])) {
         params[opt] = options[opt];
       }
     }
