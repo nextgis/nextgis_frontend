@@ -84,7 +84,7 @@ export class IdentifyItem<
       throw new Error('Resource does not exist');
     }
     if (!resp.feature_layer) {
-      throw new Error('Resource is not avector layer');
+      throw new Error('Resource is not a vector layer');
     }
 
     this._resource = resp;

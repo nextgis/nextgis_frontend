@@ -18,7 +18,7 @@ import type {
 } from '@nextgis/webmap';
 
 import type { TreeGroup, TreeItem, TreeLayer, TreeRoot } from './interfaces';
-import { Legend } from './adapters/createRasterAdapter';
+import { Legend } from './Legend';
 
 export class NgwWebmapItem extends Item<ItemOptions> {
   static GetAdapterFromLayerType: {

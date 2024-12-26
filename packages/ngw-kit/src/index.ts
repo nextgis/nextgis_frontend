@@ -6,6 +6,7 @@ export * from './adapters/createOnFirstShowNgwAdapter';
 export * from './adapters/createRasterAdapter';
 export * from './config';
 export * from './constants';
+export * from './Legend';
 export * from './IdentifyItem';
 export * from './NgwResource';
 export * from './NgwWebmapItem';
