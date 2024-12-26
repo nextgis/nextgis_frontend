@@ -92,7 +92,9 @@ export class IdentifyItem<
     });
   }
 
-  geojson(options: Partial<FetchNgwItemOptions<F>>): Promise<Feature<G, F>> {
+  geojson(
+    options: Partial<FetchNgwItemOptions<F>> = {},
+  ): Promise<Feature<G, F>> {
     if (this._geojson) {
       return Promise.resolve(this._geojson);
     }

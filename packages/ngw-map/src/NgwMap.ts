@@ -592,7 +592,8 @@ export class NgwMap<
         interactive &&
         this.isLayerVisible(layer)
       ) {
-        promises.push(identFunc.call(layer));
+        const layerIds = identFunc.call(layer)
+        promises.push(layerIds);
       }
     }
     const getIdsPromise = Promise.all(promises);

@@ -293,6 +293,16 @@ export class NgwWebmapItem extends Item<ItemOptions> {
 
     if (adapter) {
       return this.webMap.addLayer(adapter, options).then((newLayer) => {
+        this.webMap.emitter.on('layer:toggle', (e) => {
+          if (e.id === newLayer.id) {
+            const enabled = this.properties.get('visibility');
+            const mapVisible = this.webMap.isLayerVisible(newLayer);
+            if (enabled !== mapVisible) {
+              this.properties.set('visibility', mapVisible);
+            }
+          }
+        });
+
         setNewLayer(newLayer);
       });
     }

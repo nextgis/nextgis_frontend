@@ -207,7 +207,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
     deps.forEach((x) => {
       const item = x.item;
       const parentId =
-        'style_parent_id' in item ? item.style_parent_id : undefined;
+      'style_parent_id' in item ? item.style_parent_id : undefined;
       if (
         parentId !== undefined &&
         parentId !== null &&
