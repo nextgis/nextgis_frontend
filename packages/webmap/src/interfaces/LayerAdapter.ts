@@ -574,8 +574,6 @@ export interface MainLayerAdapter<
 
   getLegend?(options?: GetLegendOptions): Promise<LayerLegend[]>;
 
-  blocked?: boolean;
-  layerVisibility?: boolean;
 }
 
 /**

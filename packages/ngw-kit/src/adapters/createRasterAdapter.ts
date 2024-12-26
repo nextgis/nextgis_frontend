@@ -97,26 +97,6 @@ export async function createRasterAdapter({
         return super.addLayer({ ...this.options, ...addOptions });
       }
 
-      showLayer(): void {
-        this.layerVisibility = true;
-
-        if (!this.blocked) {
-          if (super.showLayer) {
-            super.showLayer(this.layer);
-          } else if (this.layer) {
-            webMap.mapAdapter.showLayer(this.layer);
-          }
-        }
-      }
-      hideLayer(): void {
-        this.layerVisibility = false;
-        if (super.hideLayer) {
-          super.hideLayer(this.layer);
-        } else if (this.layer) {
-          webMap.mapAdapter.hideLayer(this.layer);
-        }
-      }
-
       async getIdentificationIds(): Promise<number[]> {
         if (this.item) {
           if (adapter === 'MVT') {

@@ -14,6 +14,9 @@ export class Legend implements LayerLegend {
   webMap: WebMap;
   legendSymbols: LegendSymbolsEnum = 'expand';
 
+  layerVisibility: boolean = true;
+  blocked: boolean = false;
+
   constructor({
     legendSymbols,
     resourceId,
@@ -38,29 +41,6 @@ export class Legend implements LayerLegend {
     this.resourceId = resourceId;
     this.webMap = webMap;
     this.onSymbolRenderChange = onSymbolRenderChange;
-
-    const showLayer = layer.showLayer;
-    const hideLayer = layer.hideLayer;
-
-    layer.showLayer = (): void => {
-      layer.layerVisibility = true;
-
-      if (!layer.blocked) {
-        if (showLayer) {
-          showLayer(layer);
-        } else if (layer) {
-          webMap.mapAdapter.showLayer(layer.layer);
-        }
-      }
-    };
-    layer.hideLayer = (): void => {
-      layer.layerVisibility = false;
-      if (hideLayer) {
-        hideLayer(layer);
-      } else if (layer) {
-        webMap.mapAdapter.hideLayer(layer.layer);
-      }
-    };
   }
 
   createLegend(items: LegendSymbol[]): LegendSymbol[] {
@@ -94,9 +74,9 @@ export class Legend implements LayerLegend {
     const intervals = this._consolidateIntervals(renderIndexes);
     if (!intervals.length) {
       this._hideLayer();
-      this.layer.blocked = true;
+      this.blocked = true;
     } else {
-      this.layer.blocked = false;
+      this.blocked = false;
       this._showLayer();
     }
     if (this.layer.updateLayer) {
@@ -116,7 +96,7 @@ export class Legend implements LayerLegend {
 
   private _showLayer(): void {
     if (this.layer.options.id) {
-      if (this.layer.layerVisibility) {
+      if (this.layerVisibility) {
         this.webMap.showLayer(this.layer.options.id, { silent: true });
       }
     }
