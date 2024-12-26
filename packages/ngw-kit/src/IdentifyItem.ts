@@ -66,16 +66,29 @@ export class IdentifyItem<
   }
 
   async resource(opt?: GetRequestOptions): Promise<FeatureLayerRead> {
+    const composite = await this.composite(opt);
+
+    return composite.feature_layer;
+  }
+  async composite(
+    opt?: GetRequestOptions,
+  ): Promise<CompositeRead & { feature_layer: FeatureLayerRead }> {
     if (this._resource && this._resource.feature_layer) {
-      return this._resource.feature_layer;
+      return this._resource as CompositeRead & {
+        feature_layer: FeatureLayerRead;
+      };
     }
     const resp = await this.connector.getResource(this.layerId, opt);
 
-    if (!resp?.feature_layer) {
+    if (!resp) {
+      throw new Error('Resource does not exist');
+    }
+    if (!resp.feature_layer) {
       throw new Error('Resource is not avector layer');
     }
+
     this._resource = resp;
-    return resp.feature_layer;
+    return resp as CompositeRead & { feature_layer: FeatureLayerRead };
   }
 
   getBounds(
