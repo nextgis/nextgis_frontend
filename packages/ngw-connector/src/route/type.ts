@@ -1,6 +1,7 @@
 import type { Routes } from '@nextgisweb/pyramid/type/route';
 
 import type { LunkwillParam } from './LunkwillParam';
+import { CompositeRead } from '@nextgisweb/resource/type/api';
 
 export type RouteParameters = {
   [K in keyof Routes]: Routes[K]['pathArr'] | [Routes[K]['pathObj']];
@@ -14,6 +15,9 @@ export type GetRouteParam<R extends RouteName> = (RouteParameters[R] &
 export type RequestMethod = keyof RouteMethods<RouteName>;
 
 export type Method = RequestMethod | Uppercase<RequestMethod>;
+
+export type CompositeFor<K extends keyof CompositeRead> = CompositeRead &
+  Required<Pick<CompositeRead, K>>;
 
 export type ResponseType = 'blob' | 'json';
 

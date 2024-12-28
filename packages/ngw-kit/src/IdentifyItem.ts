@@ -1,6 +1,7 @@
 import { fetchNgwLayerItem, fetchNgwLayerItemExtent } from '.';
 
 import type {
+  CompositeFor,
   FeatureItemExtensions,
   GetRequestOptions,
   LayerFeature,
@@ -72,11 +73,9 @@ export class IdentifyItem<
   }
   async composite(
     opt?: GetRequestOptions,
-  ): Promise<CompositeRead & { feature_layer: FeatureLayerRead }> {
+  ): Promise<CompositeFor<'feature_layer'>> {
     if (this._resource && this._resource.feature_layer) {
-      return this._resource as CompositeRead & {
-        feature_layer: FeatureLayerRead;
-      };
+      return this._resource as CompositeFor<'feature_layer'>;
     }
     const resp = await this.connector.getResource(this.layerId, opt);
 
@@ -88,7 +87,7 @@ export class IdentifyItem<
     }
 
     this._resource = resp;
-    return resp as CompositeRead & { feature_layer: FeatureLayerRead };
+    return resp as CompositeFor<'feature_layer'>;
   }
 
   getBounds(
