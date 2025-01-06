@@ -62,16 +62,13 @@ export interface AppSettings {
   root_item?: TreeRoot;
 }
 
-export type TreeItem =
-  | TreeGroup
-  | TreeRoot
-  | TreeLayer
-  // | {
-  //     item_type: 'root' | 'group' | 'layer' | string;
-  //     style_parent_id?: number;
-  //     display_name?: string;
-  //     resourceId?: number | [number, string];
-  //   };
+export type TreeItem = TreeGroup | TreeRoot | TreeLayer;
+// | {
+//     item_type: 'root' | 'group' | 'layer' | string;
+//     style_parent_id?: number;
+//     display_name?: string;
+//     resourceId?: number | [number, string];
+//   };
 
 export type TreeChildItem = TreeLayer | TreeGroup;
 

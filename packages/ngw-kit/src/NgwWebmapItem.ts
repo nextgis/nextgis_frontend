@@ -4,6 +4,7 @@ import { EventEmitter } from 'events';
 
 import { setScaleRatio } from './utils/utils';
 import { WebmapLayerOpacityPropertyHandler } from './utils/WebmapLayerOpacityPropertyHandler';
+import { Legend } from './Legend';
 
 import type { ItemOptions } from '@nextgis/item';
 import type { LayerLegend } from '@nextgis/ngw-connector';
@@ -18,7 +19,6 @@ import type {
 } from '@nextgis/webmap';
 
 import type { TreeGroup, TreeItem, TreeLayer, TreeRoot } from './interfaces';
-import { Legend } from './Legend';
 
 export interface NgwWebmapItemOptions {
   webMap: WebMap;
@@ -185,7 +185,6 @@ export class NgwWebmapItem extends Item<ItemOptions> {
               ...options,
             });
           if (this.layer && ngwLegend) {
-
             const legend = new Legend({
               layerId: id,
               legend: ngwLegend,

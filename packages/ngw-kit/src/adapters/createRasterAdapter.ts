@@ -1,5 +1,6 @@
 import { defined } from '@nextgis/utils';
 
+import { Legend } from '../Legend';
 import { ngwApiToAdapterOptions } from '../utils/ngwApiToAdapterOptions';
 import { resourceIdFromLayerOptions } from '../utils/resourceIdFromLayerOptions';
 
@@ -9,7 +10,6 @@ import type {
   ImageAdapterOptions,
   MainLayerAdapter,
 } from '@nextgis/webmap';
-
 import type { CompositeRead, ResourceCls } from '@nextgisweb/resource/type/api';
 
 import type {
@@ -17,7 +17,6 @@ import type {
   NgwLayerAdapterType,
   ResourceAdapter,
 } from '../interfaces';
-import { Legend } from '../Legend';
 
 export type LegendSymbols = {
   [symbolIndex: number]: boolean | null;

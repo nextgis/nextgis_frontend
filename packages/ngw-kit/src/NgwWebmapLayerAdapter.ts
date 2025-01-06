@@ -8,11 +8,11 @@ import { ngwApiToAdapterOptions } from './utils/ngwApiToAdapterOptions';
 import { updateImageParams } from './utils/utils';
 import { BookmarkItem } from './BookmarkItem';
 import { WEBMAP_BASELAYER_ID_PREFIX } from './constants';
-import { NgwWebmapItem, NgwWebmapItemOptions } from './NgwWebmapItem';
+import { NgwWebmapItem } from './NgwWebmapItem';
 
 import type { ItemOptions } from '@nextgis/item';
 import type { BaseRequestOptions, LayerLegend } from '@nextgis/ngw-connector';
-import type { LngLatBoundsArray, Type } from '@nextgis/utils';
+import type { LngLatBoundsArray } from '@nextgis/utils';
 import type { RasterAdapterOptions, WebMap } from '@nextgis/webmap';
 import type { BasemapWebMapRead } from '@nextgisweb/basemap/type/api';
 import type { CompositeRead } from '@nextgisweb/resource/type/api';
@@ -28,6 +28,7 @@ import type {
   TreeItem,
   TreeLayer,
 } from './interfaces';
+import type { NgwWebmapItemOptions } from './NgwWebmapItem';
 
 export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
   layer?: NgwWebmapItem;

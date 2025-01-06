@@ -1,7 +1,7 @@
 import type { Routes } from '@nextgisweb/pyramid/type/route';
+import type { CompositeRead } from '@nextgisweb/resource/type/api';
 
 import type { LunkwillParam } from './LunkwillParam';
-import { CompositeRead } from '@nextgisweb/resource/type/api';
 
 export type RouteParameters = {
   [K in keyof Routes]: Routes[K]['pathArr'] | [Routes[K]['pathObj']];

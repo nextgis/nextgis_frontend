@@ -1,5 +1,5 @@
 import type { LegendSymbol } from '@nextgisweb/render/type/api';
-import { LegendSymbolsEnum } from '@nextgisweb/webmap/type/api';
+import type { LegendSymbolsEnum } from '@nextgisweb/webmap/type/api';
 
 /**
  * Represents a legend for a specific layer.

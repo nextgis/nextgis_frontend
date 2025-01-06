@@ -1,10 +1,8 @@
-import NgwConnector from '@nextgis/ngw-connector';
+import type NgwConnector from '@nextgis/ngw-connector';
 import type { GetRequestOptions, LayerLegend } from '@nextgis/ngw-connector';
-
 import type { LayerAdapter, WebMap } from '@nextgis/webmap';
 import type { LegendSymbol } from '@nextgisweb/render/type/api';
-
-import { LegendSymbolsEnum } from '@nextgisweb/webmap/type/api';
+import type { LegendSymbolsEnum } from '@nextgisweb/webmap/type/api';
 
 export class Legend implements LayerLegend {
   layerId: string;
@@ -14,9 +12,9 @@ export class Legend implements LayerLegend {
 
   legend: LegendSymbol[];
 
-  private blocked: boolean = false;
+  // private blocked: boolean = false;
   private layerVisibility: boolean = true;
-  private symbolRenderIndexes?: number[];
+  // private symbolRenderIndexes?: number[];
 
   private readonly onSymbolRenderChange?: (indexes: number[]) => void;
   private readonly webMap: WebMap;
@@ -55,7 +53,9 @@ export class Legend implements LayerLegend {
     this.layer = layer;
   }
 
-  async create(options: GetRequestOptions): Promise<LegendSymbol[] | undefined> {
+  async create(
+    options: GetRequestOptions,
+  ): Promise<LegendSymbol[] | undefined> {
     if (this.connector) {
       const ngwLegend = await this.connector
         .route('render.legend_symbols', {
@@ -97,13 +97,13 @@ export class Legend implements LayerLegend {
   }
 
   setLegendSymbol(symbolRenderIndexes: number[]): void {
-    this.symbolRenderIndexes = symbolRenderIndexes;
+    // this.symbolRenderIndexes = symbolRenderIndexes;
 
     const intervals = this._consolidateIntervals(symbolRenderIndexes);
 
     if (!intervals.length) {
       this._hideLayer();
-      this.blocked = true;
+      // this.blocked = true;
     }
     if (this.layer.updateLayer) {
       this.layer.updateLayer({
@@ -113,7 +113,7 @@ export class Legend implements LayerLegend {
       });
     }
     if (intervals.length) {
-      this.blocked = false;
+      // this.blocked = false;
       this._showLayer();
     }
   }
