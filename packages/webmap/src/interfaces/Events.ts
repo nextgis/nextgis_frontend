@@ -109,6 +109,11 @@ export interface WebMapEvents extends MainMapEvents {
    * @eventProperty
    */
   'controls:create': any;
+
+  /**
+   * @eventProperty
+   */
+  [key: `event-${string}`]: any;
 }
 
 export interface MapAdapterEvents extends MainMapEvents {
