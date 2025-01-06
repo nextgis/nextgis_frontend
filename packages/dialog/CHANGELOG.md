@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.18](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.17...v3.0.0-alpha.18) (2025-01-06)
+
+
+### Features
+
+* add legendSymbols state ([60873aa](https://github.com/nextgis/nextgis_frontend/commit/60873aae63cdf5eec11e6d040941c4538ca3d21a))
+
+
+
+
+
 # [3.0.0-alpha.17](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.16...v3.0.0-alpha.17) (2024-12-24)
 
 **Note:** Version bump only for package @nextgis/dialog

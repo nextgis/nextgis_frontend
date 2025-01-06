@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.18](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.17...v3.0.0-alpha.18) (2025-01-06)
+
+
+### Bug Fixes
+
+* remove extra params from image url ([ada21b8](https://github.com/nextgis/nextgis_frontend/commit/ada21b8f86cec46f86a13764cba841bc8bb3636d))
+
+
+
+
+
 # [3.0.0-alpha.17](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.16...v3.0.0-alpha.17) (2024-12-24)
 
 

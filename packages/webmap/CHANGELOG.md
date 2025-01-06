@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.18](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.17...v3.0.0-alpha.18) (2025-01-06)
+
+
+### Bug Fixes
+
+* simplify legend symbol toggle ([8e72da1](https://github.com/nextgis/nextgis_frontend/commit/8e72da1140c86e0020f16211994c9ef5b03dd35f))
+
+
+### Features
+
+* make ngw layer legend universal ([2452639](https://github.com/nextgis/nextgis_frontend/commit/24526399ae326bbafcc6ecbd32cc9328aa11ec5f))
+* **webmap:** add custom event emit opportunity ([4e78ddc](https://github.com/nextgis/nextgis_frontend/commit/4e78ddcdea384f0996e4cabf024d3e81014322bb))
+
+
+
+
+
 # [3.0.0-alpha.17](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.16...v3.0.0-alpha.17) (2024-12-24)
 
 **Note:** Version bump only for package @nextgis/webmap

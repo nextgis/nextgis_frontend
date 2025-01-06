@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.18](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.17...v3.0.0-alpha.18) (2025-01-06)
+
+
+### Bug Fixes
+
+* **ngw-kit:** legend symbols blocks ([e40149d](https://github.com/nextgis/nextgis_frontend/commit/e40149d35fee0d535f01669a29266b0b9a544cb6))
+* **ngw-kit:** NgwWebmapItem layer show hide ([4621dff](https://github.com/nextgis/nextgis_frontend/commit/4621dff23dbb6c577b07736c0e8e9e9fd7c2f529))
+* remove extra params from image url ([ada21b8](https://github.com/nextgis/nextgis_frontend/commit/ada21b8f86cec46f86a13764cba841bc8bb3636d))
+* simplify legend symbol toggle ([8e72da1](https://github.com/nextgis/nextgis_frontend/commit/8e72da1140c86e0020f16211994c9ef5b03dd35f))
+
+
+### Features
+
+* add legendSymbols state ([60873aa](https://github.com/nextgis/nextgis_frontend/commit/60873aae63cdf5eec11e6d040941c4538ca3d21a))
+* make ngw layer legend universal ([2452639](https://github.com/nextgis/nextgis_frontend/commit/24526399ae326bbafcc6ecbd32cc9328aa11ec5f))
+* **ngw-kit:** add identify item compose method ([0aa77d9](https://github.com/nextgis/nextgis_frontend/commit/0aa77d9e8b7cfc304cad8d3af7807d3dc547f5bd))
+* **ngw-kit:** emit legend symbol change event ([87d8d4e](https://github.com/nextgis/nextgis_frontend/commit/87d8d4ebc62607c055b02c400cdecc9913208372))
+* **webmap:** add custom event emit opportunity ([4e78ddc](https://github.com/nextgis/nextgis_frontend/commit/4e78ddcdea384f0996e4cabf024d3e81014322bb))
+
+
+
+
+
 # [3.0.0-alpha.17](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.16...v3.0.0-alpha.17) (2024-12-24)
 
 

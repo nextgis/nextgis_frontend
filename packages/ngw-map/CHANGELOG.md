@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.18](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.17...v3.0.0-alpha.18) (2025-01-06)
+
+
+### Bug Fixes
+
+* **ngw-kit:** NgwWebmapItem layer show hide ([4621dff](https://github.com/nextgis/nextgis_frontend/commit/4621dff23dbb6c577b07736c0e8e9e9fd7c2f529))
+
+
+
+
+
 # [3.0.0-alpha.17](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.16...v3.0.0-alpha.17) (2024-12-24)
 
 **Note:** Version bump only for package @nextgis/ngw-map
