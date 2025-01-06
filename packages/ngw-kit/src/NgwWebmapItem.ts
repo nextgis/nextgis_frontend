@@ -20,6 +20,15 @@ import type {
 import type { TreeGroup, TreeItem, TreeLayer, TreeRoot } from './interfaces';
 import { Legend } from './Legend';
 
+export interface NgwWebmapItemOptions {
+  webMap: WebMap;
+  item: TreeGroup | TreeLayer | TreeRoot;
+  options?: ItemOptions;
+  connector?: NgwConnector;
+  parent?: NgwWebmapItem;
+  noInit?: boolean;
+}
+
 export class NgwWebmapItem extends Item<ItemOptions> {
   static GetAdapterFromLayerType: {
     [layerType: string]: (
@@ -80,21 +89,25 @@ export class NgwWebmapItem extends Item<ItemOptions> {
   };
 
   item: TreeGroup | TreeLayer | TreeRoot;
+  readonly webMap: WebMap;
   connector?: NgwConnector;
   layer?: LayerAdapter;
+  legend?: LayerLegend;
   readonly emitter = new EventEmitter();
 
   protected _rootDescendantsCount = 0;
 
-  constructor(
-    public webMap: WebMap,
-    item: TreeGroup | TreeLayer | TreeRoot,
-    options?: ItemOptions,
-    connector?: NgwConnector,
-    parent?: NgwWebmapItem,
-    noInit?: boolean,
-  ) {
+  constructor({
+    webMap,
+    item,
+    options,
+    connector,
+    parent,
+    noInit,
+  }: NgwWebmapItemOptions) {
     super({ ...NgwWebmapItem.options, ...options });
+    this.webMap = webMap;
+
     if (connector) {
       this.connector = connector;
     }
@@ -123,14 +136,14 @@ export class NgwWebmapItem extends Item<ItemOptions> {
     connector?: NgwConnector,
     parent?: NgwWebmapItem,
   ): Promise<NgwWebmapItem> {
-    const ngwWebmapItem = new NgwWebmapItem(
+    const ngwWebmapItem = new NgwWebmapItem({
       webMap,
       item,
       options,
       connector,
       parent,
-      true,
-    );
+      noInit: true,
+    });
     await ngwWebmapItem._init(item);
     return ngwWebmapItem;
   }
@@ -162,22 +175,31 @@ export class NgwWebmapItem extends Item<ItemOptions> {
     if (id !== undefined) {
       const connector = this.connector;
       if (connector && 'resourceId' in this.item) {
+        const resourceId = Number(this.item.resourceId);
         if (this.item.item_type === 'layer') {
           const ngwLegend = await connector
             .route('render.legend_symbols', {
-              id: Number(this.item.resourceId),
+              id: resourceId,
             })
             .get({
               ...options,
             });
           if (this.layer && ngwLegend) {
-            const legend: LayerLegend = new Legend({
+
+            const legend = new Legend({
               layerId: id,
               legend: ngwLegend,
               layer: this.layer,
-              resourceId: Number(this.item.resourceId),
+              resourceId,
               webMap: this.webMap,
               legendSymbols: this.item.legend_symbols ?? undefined,
+              onSymbolRenderChange: (indexes) => {
+                this.webMap.emitter.emit('event-symbol-render:change', {
+                  layerId: id,
+                  resourceId,
+                  indexes,
+                });
+              },
             });
 
             return [legend];
@@ -255,13 +277,13 @@ export class NgwWebmapItem extends Item<ItemOptions> {
     if (group.children && group.children.length) {
       const children = this.getChildren(group);
       for (const child of children) {
-        const childItem = new (this.constructor as typeof NgwWebmapItem)(
-          this.webMap,
-          child,
-          this.options,
-          this.connector,
-          this,
-        );
+        const childItem = new (this.constructor as typeof NgwWebmapItem)({
+          webMap: this.webMap,
+          item: child,
+          options: this.options,
+          connector: this.connector,
+          parent: this,
+        });
         this.tree.addChild(childItem as typeof this);
       }
     }

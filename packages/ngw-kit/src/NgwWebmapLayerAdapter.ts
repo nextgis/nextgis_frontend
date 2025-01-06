@@ -8,7 +8,7 @@ import { ngwApiToAdapterOptions } from './utils/ngwApiToAdapterOptions';
 import { updateImageParams } from './utils/utils';
 import { BookmarkItem } from './BookmarkItem';
 import { WEBMAP_BASELAYER_ID_PREFIX } from './constants';
-import { NgwWebmapItem } from './NgwWebmapItem';
+import { NgwWebmapItem, NgwWebmapItemOptions } from './NgwWebmapItem';
 
 import type { ItemOptions } from '@nextgis/item';
 import type { BaseRequestOptions, LayerLegend } from '@nextgis/ngw-connector';
@@ -32,7 +32,8 @@ import type {
 export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
   layer?: NgwWebmapItem;
 
-  NgwWebmapItem: Type<NgwWebmapItem> = NgwWebmapItem;
+  NgwWebmapItem: new (options: NgwWebmapItemOptions) => NgwWebmapItem =
+    NgwWebmapItem;
   /**
    * Radius for searching objects in pixels
    */
@@ -207,7 +208,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
     deps.forEach((x) => {
       const item = x.item;
       const parentId =
-      'style_parent_id' in item ? item.style_parent_id : undefined;
+        'style_parent_id' in item ? item.style_parent_id : undefined;
       if (
         parentId !== undefined &&
         parentId !== null &&
@@ -249,12 +250,12 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
         drawOrderEnabled: webmap.draw_order_enabled ?? false,
       };
 
-      const layer = new this.NgwWebmapItem(
-        this.options.webMap,
-        webmap.root_item,
+      const layer = new this.NgwWebmapItem({
+        webMap: this.options.webMap,
+        item: webmap.root_item,
         options,
         connector,
-      );
+      });
 
       layer.emitter.on('init', () => {
         resolve(layer);
@@ -372,6 +373,11 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
         };
       }
     }
+
+    if (typeof this.options.nativeOptions?.beforeItemCreated === 'function') {
+      item = this.options.nativeOptions.beforeItemCreated(item);
+    }
+
     return item;
   }
 }

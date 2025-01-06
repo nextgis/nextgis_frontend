@@ -1,4 +1,5 @@
-import type { LayerLegend } from '@nextgis/ngw-connector';
+import NgwConnector from '@nextgis/ngw-connector';
+import type { GetRequestOptions, LayerLegend } from '@nextgis/ngw-connector';
 
 import type { LayerAdapter, WebMap } from '@nextgis/webmap';
 import type { LegendSymbol } from '@nextgisweb/render/type/api';
@@ -7,19 +8,24 @@ import { LegendSymbolsEnum } from '@nextgisweb/webmap/type/api';
 
 export class Legend implements LayerLegend {
   layerId: string;
-  legend: LegendSymbol[];
   layer: LayerAdapter;
-  onSymbolRenderChange?: (indexes: number[]) => void;
   resourceId: number;
-  webMap: WebMap;
   legendSymbols: LegendSymbolsEnum = 'expand';
 
-  layerVisibility: boolean = true;
-  blocked: boolean = false;
+  legend: LegendSymbol[];
+
+  private blocked: boolean = false;
+  private layerVisibility: boolean = true;
+  private symbolRenderIndexes?: number[];
+
+  private readonly onSymbolRenderChange?: (indexes: number[]) => void;
+  private readonly webMap: WebMap;
+  private readonly connector?: NgwConnector;
 
   constructor({
     legendSymbols,
     resourceId,
+    connector,
     layerId,
     legend,
     webMap,
@@ -27,20 +33,40 @@ export class Legend implements LayerLegend {
     onSymbolRenderChange,
   }: LayerLegend & {
     layer: LayerAdapter;
-    resourceId: number;
     webMap: WebMap;
-    legendSymbols?: LegendSymbolsEnum;
+    resourceId: number;
+    connector?: NgwConnector;
     onSymbolRenderChange?: (indexes: number[]) => void;
   }) {
     if (legendSymbols) {
       this.legendSymbols = legendSymbols;
     }
+    this.connector = connector;
     this.layer = layer;
     this.layerId = layerId;
     this.legend = this.createLegend(legend);
     this.resourceId = resourceId;
     this.webMap = webMap;
     this.onSymbolRenderChange = onSymbolRenderChange;
+  }
+
+  attachLayer(layer: LayerAdapter) {
+    this.layerId = String(layer.id);
+    this.layer = layer;
+  }
+
+  async create(options: GetRequestOptions): Promise<LegendSymbol[] | undefined> {
+    if (this.connector) {
+      const ngwLegend = await this.connector
+        .route('render.legend_symbols', {
+          id: this.resourceId,
+        })
+        .get({
+          ...options,
+        });
+
+      return this.createLegend(ngwLegend);
+    }
   }
 
   createLegend(items: LegendSymbol[]): LegendSymbol[] {
@@ -70,14 +96,14 @@ export class Legend implements LayerLegend {
     }
   }
 
-  setLegendSymbol(renderIndexes: number[]): void {
-    const intervals = this._consolidateIntervals(renderIndexes);
+  setLegendSymbol(symbolRenderIndexes: number[]): void {
+    this.symbolRenderIndexes = symbolRenderIndexes;
+
+    const intervals = this._consolidateIntervals(symbolRenderIndexes);
+
     if (!intervals.length) {
       this._hideLayer();
       this.blocked = true;
-    } else {
-      this.blocked = false;
-      this._showLayer();
     }
     if (this.layer.updateLayer) {
       this.layer.updateLayer({
@@ -85,6 +111,10 @@ export class Legend implements LayerLegend {
           [`symbols[${this.resourceId}]`]: intervals.join(',') || undefined,
         },
       });
+    }
+    if (intervals.length) {
+      this.blocked = false;
+      this._showLayer();
     }
   }
 
