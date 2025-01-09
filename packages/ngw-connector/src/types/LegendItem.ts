@@ -6,7 +6,8 @@ import type { LegendSymbolsEnum } from '@nextgisweb/webmap/type/api';
  */
 export interface LayerLegend {
   layerId: string;
-  legend: LegendSymbol[];
+  legend?: LegendSymbol[];
+  resourceId: number;
   setSymbolRender?: (symbolIndex: number, status: boolean) => void;
   legendSymbols?: LegendSymbolsEnum;
 }
