@@ -26,6 +26,7 @@ interface OverlayOptions {
   withCredentials?: boolean;
   viewPortBuffer?: number;
   setViewDelay?: number;
+  params?: Record<string, unknown>;
 }
 
 /*
@@ -75,18 +76,26 @@ export class ImageLayer extends Layer {
     const opts: any = {};
     let opt: keyof OverlayOptions;
     for (opt in options) {
+      const val = options[opt];
       if (opt in this.options) {
-        opts[opt] = options[opt];
-      } else if (!isObject(options[opt])) {
-        params[opt] = options[opt];
+        opts[opt] = val;
+      }
+    }
+
+    if (options.params) {
+      for (const param in options.params) {
+        const val = options.params[param];
+        if (
+          !isObject(val) &&
+          !Array.isArray(val) &&
+          typeof val !== 'function'
+        ) {
+          params[param] = val;
+        }
       }
     }
     Util.setOptions(this, opts);
-    this.wmsParams = Util.extend(
-      {},
-      this.defaultWmsParams,
-      params?.params ?? {},
-    );
+    this.wmsParams = Util.extend({}, this.defaultWmsParams, params);
   }
 
   setParams(params: Record<string, any>): void {
