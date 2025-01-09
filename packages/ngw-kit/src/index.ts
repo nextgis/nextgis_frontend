@@ -30,6 +30,7 @@ export * from './utils/prepareNgwFieldsToPropertiesFilter';
 export * from './utils/resourceIdFromLayerOptions';
 export * from './utils/selectNgwLayerDistinct';
 export * from './utils/uploadFeatureAttachment';
+export * from './utils/createLayerSymbolParam';
 export * from './utils/utils';
 
 export { NgwKit };

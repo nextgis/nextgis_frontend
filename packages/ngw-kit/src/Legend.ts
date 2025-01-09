@@ -3,6 +3,7 @@ import type { GetRequestOptions, LayerLegend } from '@nextgis/ngw-connector';
 import type { LayerAdapter, WebMap } from '@nextgis/webmap';
 import type { LegendSymbol } from '@nextgisweb/render/type/api';
 import type { LegendSymbolsEnum } from '@nextgisweb/webmap/type/api';
+import { createLayerSymbolParam } from './utils/createLayerSymbolParam';
 
 export class Legend implements LayerLegend {
   layerId: string;
@@ -10,7 +11,7 @@ export class Legend implements LayerLegend {
   resourceId: number;
   legendSymbols: LegendSymbolsEnum = 'expand';
 
-  legend: LegendSymbol[];
+  legend?: LegendSymbol[];
 
   // private blocked: boolean = false;
   private layerVisibility: boolean = true;
@@ -42,7 +43,9 @@ export class Legend implements LayerLegend {
     this.connector = connector;
     this.layer = layer;
     this.layerId = layerId;
-    this.legend = this.createLegend(legend);
+    if (legend) {
+      this.legend = this.createLegend(legend);
+    }
     this.resourceId = resourceId;
     this.webMap = webMap;
     this.onSymbolRenderChange = onSymbolRenderChange;
@@ -54,7 +57,7 @@ export class Legend implements LayerLegend {
   }
 
   async create(
-    options: GetRequestOptions,
+    options: GetRequestOptions = {},
   ): Promise<LegendSymbol[] | undefined> {
     if (this.connector) {
       const ngwLegend = await this.connector
@@ -64,7 +67,7 @@ export class Legend implements LayerLegend {
         .get({
           ...options,
         });
-
+      this.legend = ngwLegend;
       return this.createLegend(ngwLegend);
     }
   }
@@ -80,17 +83,19 @@ export class Legend implements LayerLegend {
   }
 
   setSymbolRender(symbolIndex: number, status: boolean): void {
-    const legendItem = this.legend.find((l) => l.index === symbolIndex);
-    if (legendItem) {
-      const render = legendItem.render;
-      if (render !== status) {
-        legendItem.render = status;
-        const newSymbols = this.legend
-          .filter((l) => l.render)
-          .map((l) => l.index);
-        this.setLegendSymbol(newSymbols);
-        if (this.onSymbolRenderChange) {
-          this.onSymbolRenderChange(newSymbols);
+    if (this.legend) {
+      const legendItem = this.legend.find((l) => l.index === symbolIndex);
+      if (legendItem) {
+        const render = legendItem.render;
+        if (render !== status) {
+          legendItem.render = status;
+          const newSymbols = this.legend
+            .filter((l) => l.render)
+            .map((l) => l.index);
+          this.setLegendSymbol(newSymbols);
+          if (this.onSymbolRenderChange) {
+            this.onSymbolRenderChange(newSymbols);
+          }
         }
       }
     }
@@ -108,7 +113,7 @@ export class Legend implements LayerLegend {
     if (this.layer.updateLayer) {
       this.layer.updateLayer({
         params: {
-          [`symbols[${this.resourceId}]`]: intervals.join(',') || undefined,
+          ...createLayerSymbolParam(this.resourceId, intervals),
         },
       });
     }

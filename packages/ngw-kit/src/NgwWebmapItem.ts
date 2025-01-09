@@ -177,17 +177,10 @@ export class NgwWebmapItem extends Item<ItemOptions> {
       if (connector && 'resourceId' in this.item) {
         const resourceId = Number(this.item.resourceId);
         if (this.item.item_type === 'layer') {
-          const ngwLegend = await connector
-            .route('render.legend_symbols', {
-              id: resourceId,
-            })
-            .get({
-              ...options,
-            });
-          if (this.layer && ngwLegend) {
+          if (this.layer) {
             const legend = new Legend({
+              connector: this.connector,
               layerId: id,
-              legend: ngwLegend,
               layer: this.layer,
               resourceId,
               webMap: this.webMap,
@@ -200,7 +193,7 @@ export class NgwWebmapItem extends Item<ItemOptions> {
                 });
               },
             });
-
+            await legend.create(options);
             return [legend];
           }
         }
