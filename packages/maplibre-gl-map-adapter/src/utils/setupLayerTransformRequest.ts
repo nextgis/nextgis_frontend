@@ -19,7 +19,7 @@ export function setupLayerTransformRequest({
     staticUrl = staticUrl.replace(/(z=\d+)/, 'z={z}');
     staticUrl = staticUrl.replace(/(x=\d+)/, 'x={x}');
     staticUrl = staticUrl.replace(/(y=\d+)/, 'y={y}');
-    if (staticUrl === url) {
+    if (staticUrl.startsWith(url)) {
       return {
         url: url_,
         headers,

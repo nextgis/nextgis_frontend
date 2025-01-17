@@ -155,7 +155,12 @@ export class NgwProvider extends BaseProvider<NgwProviderOptions> {
       })
       .get({ signal })
       .then((x) => {
-        const e = x.extent;
+        const e = x.extent || {
+          minLon: 0,
+          minLat: 0,
+          maxLon: 0,
+          maxLat: 0,
+        };
         return {
           text: item.text,
           extent: [e.minLon, e.minLat, e.maxLon, e.maxLat],

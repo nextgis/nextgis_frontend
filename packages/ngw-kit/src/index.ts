@@ -11,6 +11,7 @@ export * from './Legend';
 export * from './NgwResource';
 export * from './NgwWebmapItem';
 export * from './NgwWebmapLayerAdapter';
+export * from './utils/createLayerSymbolParam';
 export * from './utils/createPopupContent';
 export * from './utils/featureLayerUtils';
 export * from './utils/fetchNgwExtent';
@@ -30,7 +31,6 @@ export * from './utils/prepareNgwFieldsToPropertiesFilter';
 export * from './utils/resourceIdFromLayerOptions';
 export * from './utils/selectNgwLayerDistinct';
 export * from './utils/uploadFeatureAttachment';
-export * from './utils/createLayerSymbolParam';
 export * from './utils/utils';
 
 export { NgwKit };

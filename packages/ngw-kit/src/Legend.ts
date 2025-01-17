@@ -1,9 +1,10 @@
+import { createLayerSymbolParam } from './utils/createLayerSymbolParam';
+
 import type NgwConnector from '@nextgis/ngw-connector';
 import type { GetRequestOptions, LayerLegend } from '@nextgis/ngw-connector';
 import type { LayerAdapter, WebMap } from '@nextgis/webmap';
 import type { LegendSymbol } from '@nextgisweb/render/type/api';
 import type { LegendSymbolsEnum } from '@nextgisweb/webmap/type/api';
-import { createLayerSymbolParam } from './utils/createLayerSymbolParam';
 
 export class Legend implements LayerLegend {
   layerId: string;
