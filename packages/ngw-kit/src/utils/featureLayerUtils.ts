@@ -7,8 +7,6 @@ import {
   round,
 } from '@nextgis/utils';
 
-import { config } from '../config';
-
 import type {
   FeatureItem,
   RequestItemAdditionalParams,
@@ -157,14 +155,7 @@ function getQueries<
           }),
         );
       } else {
-        getQueries(
-          {
-            ...opt,
-            filters: f,
-          },
-          _queries,
-          [..._parentAllParams],
-        );
+        getQueries({ ...opt, filters: f }, _queries, [..._parentAllParams]);
       }
     }
   } else if (logic === 'all') {
@@ -180,14 +171,10 @@ function getQueries<
 
     if (propertiesFilterList.length) {
       for (const x of propertiesFilterList) {
-        getQueries(
-          {
-            ...opt,
-            filters: x,
-          },
-          _queries,
-          [..._parentAllParams, ...filters],
-        );
+        getQueries({ ...opt, filters: x }, _queries, [
+          ..._parentAllParams,
+          ...filters,
+        ]);
       }
     } else {
       _queries.push(
@@ -230,10 +217,8 @@ export function fetchNgwLayerItemsRequest<
     resourceId,
   } = options;
 
-  if (limit && limit !== Number.POSITIVE_INFINITY) {
+  if (typeof limit === 'number' && limit !== Number.POSITIVE_INFINITY) {
     params.limit = limit;
-  } else {
-    params.limit = config.defaultRequestLimit;
   }
 
   if (offset) {
