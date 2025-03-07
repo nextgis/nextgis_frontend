@@ -592,7 +592,7 @@ __metadata:
 
 "@nextgis/build-tools@file:../build-tools::locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter":
   version: 2.5.0
-  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=afb82b&locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter"
+  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=64a24b&locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter"
   dependencies:
     "@nextgis/eslint-config": ^2.0.2
     "@rollup/plugin-alias": ^5.1.0
@@ -619,13 +619,13 @@ __metadata:
     rollup-plugin-terser: ^7.0.2
     rollup-plugin-typescript2: ^0.36.0
     typescript: ~5.2
-  checksum: ecf18e297539279ac5266e30c43d42b1fb263b45ba473f93f28b217df7d3c80beb22895f80bd69f58c6e4b9629540854e266106010e46e5e7754396c22d32d82
+  checksum: b818d7b34a5836c80150b0936a6f7819aca630d69e2be04ad31661a3419ea026adbe8289a87ebfb7f9c2c256643b6b023f7fc90fa33a4ad69935e2541e643d76
   languageName: node
   linkType: hard
 
 "@nextgis/build-tools@file:../build-tools::locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium":
   version: 2.5.0
-  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=afb82b&locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium"
+  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=64a24b&locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium"
   dependencies:
     "@nextgis/eslint-config": ^2.0.2
     "@rollup/plugin-alias": ^5.1.0
@@ -652,7 +652,7 @@ __metadata:
     rollup-plugin-terser: ^7.0.2
     rollup-plugin-typescript2: ^0.36.0
     typescript: ~5.2
-  checksum: ecf18e297539279ac5266e30c43d42b1fb263b45ba473f93f28b217df7d3c80beb22895f80bd69f58c6e4b9629540854e266106010e46e5e7754396c22d32d82
+  checksum: b818d7b34a5836c80150b0936a6f7819aca630d69e2be04ad31661a3419ea026adbe8289a87ebfb7f9c2c256643b6b023f7fc90fa33a4ad69935e2541e643d76
   languageName: node
   linkType: hard
 
@@ -2859,13 +2859,13 @@ __metadata:
   linkType: hard
 
 "axios@npm:^1.6.0":
-  version: 1.6.8
-  resolution: "axios@npm:1.6.8"
+  version: 1.8.2
+  resolution: "axios@npm:1.8.2"
   dependencies:
     follow-redirects: ^1.15.6
     form-data: ^4.0.0
     proxy-from-env: ^1.1.0
-  checksum: bf007fa4b207d102459300698620b3b0873503c6d47bf5a8f6e43c0c64c90035a4f698b55027ca1958f61ab43723df2781c38a99711848d232cad7accbcdfcdd
+  checksum: c47a43b79a058aa9e53a65bec9ade35c9f6e76a3999c795a79a2d205fb5f803fd4245497a0209a9727cbbe4f558791dd852ad2c168c5fc030259c11598ed8fd7
   languageName: node
   linkType: hard
 
