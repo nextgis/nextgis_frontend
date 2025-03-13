@@ -592,7 +592,7 @@ __metadata:
 
 "@nextgis/build-tools@file:../build-tools::locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter":
   version: 2.5.0
-  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=afb82b&locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter"
+  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=f16aec&locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter"
   dependencies:
     "@nextgis/eslint-config": ^2.0.2
     "@rollup/plugin-alias": ^5.1.0
@@ -619,13 +619,13 @@ __metadata:
     rollup-plugin-terser: ^7.0.2
     rollup-plugin-typescript2: ^0.36.0
     typescript: ~5.2
-  checksum: ecf18e297539279ac5266e30c43d42b1fb263b45ba473f93f28b217df7d3c80beb22895f80bd69f58c6e4b9629540854e266106010e46e5e7754396c22d32d82
+  checksum: 552459f46d390c88033cbf7d8e23252859ba18391e50f45eaf0f7c45156be00abfccb314ca62e9ed27e42ec286c3d0afe0517c3b10a283a4be8ecce96cf59836
   languageName: node
   linkType: hard
 
 "@nextgis/build-tools@file:../build-tools::locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium":
   version: 2.5.0
-  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=afb82b&locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium"
+  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=f16aec&locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium"
   dependencies:
     "@nextgis/eslint-config": ^2.0.2
     "@rollup/plugin-alias": ^5.1.0
@@ -652,7 +652,7 @@ __metadata:
     rollup-plugin-terser: ^7.0.2
     rollup-plugin-typescript2: ^0.36.0
     typescript: ~5.2
-  checksum: ecf18e297539279ac5266e30c43d42b1fb263b45ba473f93f28b217df7d3c80beb22895f80bd69f58c6e4b9629540854e266106010e46e5e7754396c22d32d82
+  checksum: 552459f46d390c88033cbf7d8e23252859ba18391e50f45eaf0f7c45156be00abfccb314ca62e9ed27e42ec286c3d0afe0517c3b10a283a4be8ecce96cf59836
   languageName: node
   linkType: hard
 
@@ -2261,13 +2261,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/offscreencanvas@npm:^2019.6.4":
-  version: 2019.7.3
-  resolution: "@types/offscreencanvas@npm:2019.7.3"
-  checksum: 53a394a65ae08eddff6e0a2a8db72abecc94f41fc8fee166e8900075d3c1ca32540ddf5b4836c37357d53a0253a03fea4d781b2db543e3f08bc1cdc2dc0fefb5
-  languageName: node
-  linkType: hard
-
 "@types/pbf@npm:*, @types/pbf@npm:^3.0.5":
   version: 3.0.5
   resolution: "@types/pbf@npm:3.0.5"
@@ -3154,16 +3147,15 @@ __metadata:
   linkType: hard
 
 "canvg@npm:>=3":
-  version: 4.0.1
-  resolution: "canvg@npm:4.0.1"
+  version: 4.0.3
+  resolution: "canvg@npm:4.0.3"
   dependencies:
-    "@types/offscreencanvas": ^2019.6.4
     "@types/raf": ^3.4.0
     raf: ^3.4.1
     rgbcolor: ^1.0.1
     stackblur-canvas: ^2.0.0
     svg-pathdata: ^6.0.3
-  checksum: a227ae2486521a02ec4d829859bd2eeda3197ec7c90351b514a39cb323f2ad551250dc86745122c416446f53af4c3f58fd77d6100d77f5f06818bd31161cef10
+  checksum: 650ac70bfe48700170fc95104496ff39ef6c65772ddb5e6db3cd47e52d5bd99b2e62cb7882eb416eeec625a5e34c4816a528e4328d04200e6c46dd6b7adc046f
   languageName: node
   linkType: hard
 
