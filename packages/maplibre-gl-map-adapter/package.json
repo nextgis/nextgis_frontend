@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/maplibre-gl-map-adapter",
-  "version": "3.0.0-alpha.18",
+  "version": "3.0.0-alpha.19",
   "_priority": 16,
   "description": "Webmap adapter to use Maplibre GL JS GIS framework.",
   "main": "lib/maplibre-gl-map-adapter.global.prod.js",

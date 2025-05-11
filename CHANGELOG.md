@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.19](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.18...v3.0.0-alpha.19) (2025-01-17)
+
+
+### Bug Fixes
+
+* **leaflet-map-adapter:** format image layer wms params ([8a79517](https://github.com/nextgis/nextgis_frontend/commit/8a795172d48f4d2085598055eeb0108f8e19063d))
+* **maplibre-gl-map-adapter:** fix layer header on update parameters ([6f07e2a](https://github.com/nextgis/nextgis_frontend/commit/6f07e2af6153c922e9d1be50197ed15445a6d47b))
+
+
+
+
+
 # [3.0.0-alpha.18](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.17...v3.0.0-alpha.18) (2025-01-06)
 
 
