@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.20](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.18...v3.0.0-alpha.20) (2025-05-11)
+
+
+### Features
+
+* **maplibre-gl-map-adapter:** implement polygon layer stroke weight ([ac548c4](https://github.com/nextgis/nextgis_frontend/commit/ac548c41b8805b2571c592ef641995fd0ab9127d))
+
+
+
+
+
 # [3.0.0-alpha.19](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.18...v3.0.0-alpha.19) (2025-01-17)
 
 **Note:** Version bump only for package @nextgis/ngw-maplibre-gl

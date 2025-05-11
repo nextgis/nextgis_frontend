@@ -671,7 +671,7 @@ __metadata:
 
 "@nextgis/build-tools@file:../build-tools::locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter":
   version: 3.0.0-alpha.17
-  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=0ab9ec&locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter"
+  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=559299&locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter"
   dependencies:
     "@nextgis/eslint-config": ^3.0.0-alpha.13
     "@rollup/plugin-alias": ^5.1.0
@@ -697,13 +697,13 @@ __metadata:
     rollup-plugin-postcss: ^4.0.2
     rollup-plugin-terser: ^7.0.2
     typescript: ~5.5.x
-  checksum: a5f848d049eb1a21e502883a91f1bb9f26fe4de50f4dfb808e010984803d53b26cc3d3059f57af6b7af7e7df69c2cf5a79f2ac57769cc74c690fe31d889b883b
+  checksum: 35e21b072ef5ace2ed3b24383f741e3ac8bd9f41c05941bb7e6ad00c9f9c2a8ea41f9a19e21c076b1535655d0693ef0e6e290d97f6b1484679eb407bf89d93ca
   languageName: node
   linkType: hard
 
 "@nextgis/build-tools@file:../build-tools::locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium":
   version: 3.0.0-alpha.17
-  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=0ab9ec&locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium"
+  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=559299&locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium"
   dependencies:
     "@nextgis/eslint-config": ^3.0.0-alpha.13
     "@rollup/plugin-alias": ^5.1.0
@@ -729,7 +729,7 @@ __metadata:
     rollup-plugin-postcss: ^4.0.2
     rollup-plugin-terser: ^7.0.2
     typescript: ~5.5.x
-  checksum: a5f848d049eb1a21e502883a91f1bb9f26fe4de50f4dfb808e010984803d53b26cc3d3059f57af6b7af7e7df69c2cf5a79f2ac57769cc74c690fe31d889b883b
+  checksum: 35e21b072ef5ace2ed3b24383f741e3ac8bd9f41c05941bb7e6ad00c9f9c2a8ea41f9a19e21c076b1535655d0693ef0e6e290d97f6b1484679eb407bf89d93ca
   languageName: node
   linkType: hard
 
@@ -828,8 +828,8 @@ __metadata:
   dependencies:
     "@nextgis/build-tools": ^3.0.0-alpha.17
     "@nextgis/cancelable-promise": ^3.0.0-alpha.17
-    "@nextgis/ngw-connector": ^3.0.0-alpha.19
-    "@nextgis/ngw-kit": ^3.0.0-alpha.19
+    "@nextgis/ngw-connector": ^3.0.0-alpha.20
+    "@nextgis/ngw-kit": ^3.0.0-alpha.20
     "@nextgis/utils": ^3.0.0-alpha.17
     "@types/events": ^3.0.0
     "@types/geojson": ^7946.0.14
@@ -857,7 +857,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/leaflet-map-adapter@^3.0.0-alpha.19, @nextgis/leaflet-map-adapter@workspace:packages/leaflet-map-adapter":
+"@nextgis/leaflet-map-adapter@^3.0.0-alpha.20, @nextgis/leaflet-map-adapter@workspace:packages/leaflet-map-adapter":
   version: 0.0.0-use.local
   resolution: "@nextgis/leaflet-map-adapter@workspace:packages/leaflet-map-adapter"
   dependencies:
@@ -882,11 +882,11 @@ __metadata:
   resolution: "@nextgis/logging@workspace:packages/logging"
   dependencies:
     "@nextgis/build-tools": ^3.0.0-alpha.17
-    "@nextgis/ngw-connector": ^3.0.0-alpha.19
+    "@nextgis/ngw-connector": ^3.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@nextgis/maplibre-gl-map-adapter@^3.0.0-alpha.19, @nextgis/maplibre-gl-map-adapter@workspace:packages/maplibre-gl-map-adapter":
+"@nextgis/maplibre-gl-map-adapter@^3.0.0-alpha.20, @nextgis/maplibre-gl-map-adapter@workspace:packages/maplibre-gl-map-adapter":
   version: 0.0.0-use.local
   resolution: "@nextgis/maplibre-gl-map-adapter@workspace:packages/maplibre-gl-map-adapter"
   dependencies:
@@ -911,14 +911,14 @@ __metadata:
   dependencies:
     "@nextgis/build-tools": "file:../build-tools"
     "@nextgis/cesium-map-adapter": ^3.0.0-alpha.18
-    "@nextgis/ngw-map": ^3.0.0-alpha.19
+    "@nextgis/ngw-map": ^3.0.0-alpha.20
     "@types/events": ^3.0.0
     cesium: 1.96.0
     events: "*"
   languageName: unknown
   linkType: soft
 
-"@nextgis/ngw-connector@^3.0.0-alpha.19, @nextgis/ngw-connector@workspace:packages/ngw-connector":
+"@nextgis/ngw-connector@^3.0.0-alpha.20, @nextgis/ngw-connector@workspace:packages/ngw-connector":
   version: 0.0.0-use.local
   resolution: "@nextgis/ngw-connector@workspace:packages/ngw-connector"
   dependencies:
@@ -932,14 +932,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/ngw-kit@^3.0.0-alpha.19, @nextgis/ngw-kit@workspace:packages/ngw-kit":
+"@nextgis/ngw-kit@^3.0.0-alpha.20, @nextgis/ngw-kit@workspace:packages/ngw-kit":
   version: 0.0.0-use.local
   resolution: "@nextgis/ngw-kit@workspace:packages/ngw-kit"
   dependencies:
     "@nextgis/build-tools": ^3.0.0-alpha.17
     "@nextgis/cancelable-promise": ^3.0.0-alpha.17
     "@nextgis/item": ^3.0.0-alpha.17
-    "@nextgis/ngw-connector": ^3.0.0-alpha.19
+    "@nextgis/ngw-connector": ^3.0.0-alpha.20
     "@nextgis/properties-filter": ^3.0.0-alpha.17
     "@nextgis/qms-kit": ^3.0.0-alpha.18
     "@nextgis/utils": ^3.0.0-alpha.17
@@ -955,20 +955,20 @@ __metadata:
   resolution: "@nextgis/ngw-leaflet@workspace:packages/ngw-leaflet"
   dependencies:
     "@nextgis/build-tools": ^3.0.0-alpha.17
-    "@nextgis/leaflet-map-adapter": ^3.0.0-alpha.19
-    "@nextgis/ngw-map": ^3.0.0-alpha.19
+    "@nextgis/leaflet-map-adapter": ^3.0.0-alpha.20
+    "@nextgis/ngw-map": ^3.0.0-alpha.20
     leaflet.wms: "*"
   languageName: unknown
   linkType: soft
 
-"@nextgis/ngw-map@^3.0.0-alpha.19, @nextgis/ngw-map@workspace:packages/ngw-map":
+"@nextgis/ngw-map@^3.0.0-alpha.20, @nextgis/ngw-map@workspace:packages/ngw-map":
   version: 0.0.0-use.local
   resolution: "@nextgis/ngw-map@workspace:packages/ngw-map"
   dependencies:
     "@nextgis/build-tools": ^3.0.0-alpha.17
     "@nextgis/icons": ^3.0.0-alpha.17
-    "@nextgis/ngw-connector": ^3.0.0-alpha.19
-    "@nextgis/ngw-kit": ^3.0.0-alpha.19
+    "@nextgis/ngw-connector": ^3.0.0-alpha.20
+    "@nextgis/ngw-kit": ^3.0.0-alpha.20
     "@nextgis/qms-kit": ^3.0.0-alpha.18
     "@nextgis/utils": ^3.0.0-alpha.17
     "@nextgis/webmap": ^3.0.0-alpha.18
@@ -983,8 +983,8 @@ __metadata:
   resolution: "@nextgis/ngw-maplibre-gl@workspace:packages/ngw-maplibre-gl"
   dependencies:
     "@nextgis/build-tools": ^3.0.0-alpha.17
-    "@nextgis/maplibre-gl-map-adapter": ^3.0.0-alpha.19
-    "@nextgis/ngw-map": ^3.0.0-alpha.19
+    "@nextgis/maplibre-gl-map-adapter": ^3.0.0-alpha.20
+    "@nextgis/ngw-map": ^3.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
@@ -993,7 +993,7 @@ __metadata:
   resolution: "@nextgis/ngw-ol@workspace:packages/ngw-ol"
   dependencies:
     "@nextgis/build-tools": ^3.0.0-alpha.17
-    "@nextgis/ngw-map": ^3.0.0-alpha.19
+    "@nextgis/ngw-map": ^3.0.0-alpha.20
     "@nextgis/ol-map-adapter": ^3.0.0-alpha.18
     "@types/events": ^3.0.0
     events: "*"
@@ -1005,8 +1005,8 @@ __metadata:
   resolution: "@nextgis/ngw-orm@workspace:packages/ngw-orm"
   dependencies:
     "@nextgis/build-tools": ^3.0.0-alpha.17
-    "@nextgis/ngw-connector": ^3.0.0-alpha.19
-    "@nextgis/ngw-kit": ^3.0.0-alpha.19
+    "@nextgis/ngw-connector": ^3.0.0-alpha.20
+    "@nextgis/ngw-kit": ^3.0.0-alpha.20
     "@nextgis/utils": ^3.0.0-alpha.17
     "@nextgis/webmap": ^3.0.0-alpha.18
     reflect-metadata: ^0.1.13
@@ -1030,14 +1030,14 @@ __metadata:
   dependencies:
     "@nextgis/build-tools": ^3.0.0-alpha.17
     "@nextgis/dialog": ^3.0.0-alpha.18
-    "@nextgis/ngw-connector": ^3.0.0-alpha.19
-    "@nextgis/ngw-uploader": ^3.0.0-alpha.19
+    "@nextgis/ngw-connector": ^3.0.0-alpha.20
+    "@nextgis/ngw-uploader": ^3.0.0-alpha.20
     "@types/events": ^3.0.0
     events: "*"
   languageName: unknown
   linkType: soft
 
-"@nextgis/ngw-uploader@^3.0.0-alpha.19, @nextgis/ngw-uploader@workspace:packages/ngw-uploader":
+"@nextgis/ngw-uploader@^3.0.0-alpha.20, @nextgis/ngw-uploader@workspace:packages/ngw-uploader":
   version: 0.0.0-use.local
   resolution: "@nextgis/ngw-uploader@workspace:packages/ngw-uploader"
   dependencies:
@@ -1045,7 +1045,7 @@ __metadata:
     "@nextgis/cancelable-promise": ^3.0.0-alpha.17
     "@nextgis/dialog": ^3.0.0-alpha.18
     "@nextgis/expression": ^3.0.0-alpha.17
-    "@nextgis/ngw-connector": ^3.0.0-alpha.19
+    "@nextgis/ngw-connector": ^3.0.0-alpha.20
     "@nextgis/utils": ^3.0.0-alpha.17
     "@types/color": ^3.0.2
     "@types/events": ^3.0.0
@@ -1132,17 +1132,17 @@ __metadata:
   resolution: "@nextgis/react-ngw-leaflet@workspace:packages/react-ngw-leaflet"
   dependencies:
     "@nextgis/build-tools": ^3.0.0-alpha.17
-    "@nextgis/leaflet-map-adapter": ^3.0.0-alpha.19
-    "@nextgis/react-ngw-map": ^3.0.0-alpha.19
+    "@nextgis/leaflet-map-adapter": ^3.0.0-alpha.20
+    "@nextgis/react-ngw-map": ^3.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@nextgis/react-ngw-map@^3.0.0-alpha.19, @nextgis/react-ngw-map@workspace:packages/react-ngw-map":
+"@nextgis/react-ngw-map@^3.0.0-alpha.20, @nextgis/react-ngw-map@workspace:packages/react-ngw-map":
   version: 0.0.0-use.local
   resolution: "@nextgis/react-ngw-map@workspace:packages/react-ngw-map"
   dependencies:
     "@nextgis/build-tools": ^3.0.0-alpha.17
-    "@nextgis/ngw-map": ^3.0.0-alpha.19
+    "@nextgis/ngw-map": ^3.0.0-alpha.20
     "@nextgis/utils": ^3.0.0-alpha.17
     "@types/react": "*"
     "@types/react-dom": "*"
@@ -1157,8 +1157,8 @@ __metadata:
   resolution: "@nextgis/react-ngw-maplibre-gl@workspace:packages/react-ngw-maplibre-gl"
   dependencies:
     "@nextgis/build-tools": ^3.0.0-alpha.17
-    "@nextgis/maplibre-gl-map-adapter": ^3.0.0-alpha.19
-    "@nextgis/react-ngw-map": ^3.0.0-alpha.19
+    "@nextgis/maplibre-gl-map-adapter": ^3.0.0-alpha.20
+    "@nextgis/react-ngw-map": ^3.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
@@ -1168,7 +1168,7 @@ __metadata:
   dependencies:
     "@nextgis/build-tools": ^3.0.0-alpha.17
     "@nextgis/ol-map-adapter": ^3.0.0-alpha.18
-    "@nextgis/react-ngw-map": ^3.0.0-alpha.19
+    "@nextgis/react-ngw-map": ^3.0.0-alpha.20
   languageName: unknown
   linkType: soft
 

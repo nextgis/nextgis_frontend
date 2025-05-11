@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.20](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.18...v3.0.0-alpha.20) (2025-05-11)
+
+
+### Bug Fixes
+
+* **leaflet-map-adapter:** format image layer wms params ([8a79517](https://github.com/nextgis/nextgis_frontend/commit/8a795172d48f4d2085598055eeb0108f8e19063d))
+* **maplibre-gl-map-adapter:** fix layer header on update parameters ([6f07e2a](https://github.com/nextgis/nextgis_frontend/commit/6f07e2af6153c922e9d1be50197ed15445a6d47b))
+* **ngw-kit:** toggle-layer listener ([77c3b20](https://github.com/nextgis/nextgis_frontend/commit/77c3b20923cd1e6374aba8d61c507a942ab5357f))
+
+
+### Features
+
+* **maplibre-gl-map-adapter:** implement polygon layer stroke weight ([ac548c4](https://github.com/nextgis/nextgis_frontend/commit/ac548c41b8805b2571c592ef641995fd0ab9127d))
+* **ngw-kit:** dismiss feature query default limit ([d38848e](https://github.com/nextgis/nextgis_frontend/commit/d38848eaa271333ecd69a79e3d038ac0c5f9085b))
+
+
+
+
+
 # [3.0.0-alpha.19](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.18...v3.0.0-alpha.19) (2025-01-17)
 
 
