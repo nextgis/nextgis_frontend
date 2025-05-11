@@ -156,35 +156,56 @@ export abstract class VectorAdapter<
     this.layer = [];
     const types = (this._types = options.type ? [options.type] : this._types);
     if (options.paint) {
-      this._beforeLayerLayer(this._sourceId);
+      await this._beforeLayerLayer(this._sourceId);
       for (const t of types) {
         const geomType = typeAliasForFilter[t];
-        if (geomType) {
-          let type = t;
-          if (t === 'point') {
-            const paintType = this._detectPaintType(options.paint);
-            if (paintType === 'icon') {
-              type = 'point';
-            }
+        if (!geomType) {
+          continue;
+        }
+        let type = t;
+        if (t === 'point') {
+          const paintType = this._detectPaintType(options.paint);
+          if (paintType === 'icon') {
+            type = 'point';
           }
-          const layer = this._getLayerNameFromType(t);
-          const geomFilter =
-            types.length > 1 ? ['==', '$type', geomType] : undefined;
+        }
+        const layerId = this._getLayerNameFromType(t);
+        const geomFilter =
+          types.length > 1 ? ['==', '$type', geomType] : undefined;
 
-          await this._addGeomLayer(layer, type, [
+        await this._addGeomLayer(layerId, type, [
+          geomFilter,
+          this._getNativeFilter(),
+        ]);
+        this.layer.push(layerId);
+
+        if (t === 'polygon') {
+          const strokeId = `${layerId}-stroke`;
+          await this._addGeomLayer(strokeId, 'line', [
             geomFilter,
             this._getNativeFilter(),
           ]);
-          this.layer.push(layer);
-          if (options.selectedPaint) {
-            const selectionLayer = this._getSelectionLayerNameFromType(t);
+          this.layer.push(strokeId);
+        }
+        if (options.selectedPaint) {
+          const selFillId = this._getSelectionLayerNameFromType(t);
+          await this._addGeomLayer(
+            selFillId,
+            type,
+            [geomFilter, ['in', this.featureIdName, '']],
+            this.options.selectedLayout,
+          );
+          this.layer.push(selFillId);
+
+          if (t === 'polygon') {
+            const selStrokeId = `${selFillId}-stroke`;
             await this._addGeomLayer(
-              selectionLayer,
-              type,
+              selStrokeId,
+              'line',
               [geomFilter, ['in', this.featureIdName, '']],
               this.options.selectedLayout,
             );
-            this.layer.push(selectionLayer);
+            this.layer.push(selStrokeId);
           }
         }
       }
@@ -482,14 +503,17 @@ export abstract class VectorAdapter<
 
   protected async _updateLayerPaint(
     type: VectorAdapterLayerType,
+    layers?: [string, Paint][],
   ): Promise<void> {
     const layerName = this._getLayerNameFromType(type);
 
     if (this.options.paint) {
-      const layers: [string, Paint][] = [[layerName, this.options.paint]];
-      if (this.options.selectedPaint) {
-        const selName = this._getSelectionLayerNameFromType(type);
-        layers.push([selName, this.options.selectedPaint]);
+      if (!layers) {
+        layers = [[layerName, this.options.paint]];
+        if (this.options.selectedPaint) {
+          const selName = this._getSelectionLayerNameFromType(type);
+          layers.push([selName, this.options.selectedPaint]);
+        }
       }
 
       const maplibreGLType = maplibreGLTypeAlias[type];
@@ -541,6 +565,14 @@ export abstract class VectorAdapter<
             }
           }
         }
+      }
+      if (type === 'polygon') {
+        layers = [[`${layerName}-stroke`, this.options.paint]];
+        if (this.options.selectedPaint) {
+          const selName = this._getSelectionLayerNameFromType(type);
+          layers.push([`${selName}-stroke`, this.options.selectedPaint]);
+        }
+        this._updateLayerPaint('line', layers);
       }
     }
   }
@@ -748,6 +780,7 @@ export abstract class VectorAdapter<
 
   protected _updatePropertiesFilter(): void {
     const layers = this.layer;
+    const map = this.map;
     if (layers) {
       for (const t of this._types) {
         const geomType = typeAliasForFilter[t];
@@ -758,61 +791,62 @@ export abstract class VectorAdapter<
             geomType,
           ];
           const layerName = this._getLayerNameFromType(t);
+          const layerNameStroke = `${layerName}-stroke`;
           const selLayerName = this._getSelectionLayerNameFromType(t);
+          const selLayerNameStroke = `${selLayerName}-stroke`;
           const selectProperties = this._selectProperties;
           const filterProperties = this._filterProperties;
           const propertyFilters =
             filterProperties &&
             this._convertToMaplibreGLFilter(filterProperties);
-          if (this.map && layers.indexOf(selLayerName) !== -1) {
-            if (this._selectionName) {
-              let filters: any[] = [];
-              if (selectProperties || this._selectedFeatureIds) {
+          if (map) {
+            [selLayerName, selLayerNameStroke].forEach((name) => {
+              if (layers.indexOf(name) !== -1) {
+                if (this._selectionName) {
+                  let filters: any[] = [];
+                  if (selectProperties || this._selectedFeatureIds) {
+                    if (selectProperties) {
+                      filters =
+                        this._convertToMaplibreGLFilter(selectProperties) || [];
+                    } else if (this._selectedFeatureIds) {
+                      filters = [
+                        ['in', this.featureIdName, ...this._selectedFeatureIds],
+                      ];
+                    }
+                    if (propertyFilters) {
+                      propertyFilters.forEach((x) => filters.push(x));
+                    }
+                    map.setFilter(name, ['all', geomFilter, ...filters]);
+                  } else {
+                    filters = ['in', '$id', ''];
+                    map.setFilter(name, filters as FilterSpecification);
+                  }
+                }
+              }
+            });
+            [layerName, layerNameStroke].forEach((name) => {
+              if (layers.indexOf(name) !== -1) {
+                const filters_: any[] = ['all', geomFilter];
+                this._updateWithNativeFilter(filters_);
                 if (selectProperties) {
-                  filters =
-                    this._convertToMaplibreGLFilter(selectProperties) || [];
+                  const selectFilters = this._convertToMaplibreGLFilter(
+                    selectProperties,
+                    true,
+                  );
+                  selectFilters.forEach((x) => filters_.push(x));
                 } else if (this._selectedFeatureIds) {
-                  filters = [
-                    ['in', this.featureIdName, ...this._selectedFeatureIds],
-                  ];
+                  filters_.push([
+                    '!in',
+                    this.featureIdName,
+                    ...this._selectedFeatureIds,
+                  ]);
                 }
                 if (propertyFilters) {
-                  propertyFilters.forEach((x) => filters.push(x));
+                  propertyFilters.forEach((x) => filters_.push(x));
                 }
-                this.map.setFilter(selLayerName, [
-                  'all',
-                  geomFilter,
-                  ...filters,
-                ]);
-              } else {
-                filters = ['in', '$id', ''];
-                this.map.setFilter(
-                  selLayerName,
-                  filters as FilterSpecification,
-                );
+                map.setFilter(name, filters_ as FilterSpecification);
               }
-            }
-          }
-          if (this.map && layers.indexOf(layerName) !== -1) {
-            const filters_: any[] = ['all', geomFilter];
-            this._updateWithNativeFilter(filters_);
-            if (selectProperties) {
-              const selectFilters = this._convertToMaplibreGLFilter(
-                selectProperties,
-                true,
-              );
-              selectFilters.forEach((x) => filters_.push(x));
-            } else if (this._selectedFeatureIds) {
-              filters_.push([
-                '!in',
-                this.featureIdName,
-                ...this._selectedFeatureIds,
-              ]);
-            }
-            if (propertyFilters) {
-              propertyFilters.forEach((x) => filters_.push(x));
-            }
-            this.map.setFilter(layerName, filters_ as FilterSpecification);
+            });
           }
         }
       }

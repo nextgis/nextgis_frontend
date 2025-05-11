@@ -348,32 +348,39 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
             geomType,
           ];
           const layerName = this._getLayerNameFromType(t);
+          const layerNameStroke = `${layerName}-stroke`;
           const selLayerName = this._getSelectionLayerNameFromType(t);
-          if (layers.indexOf(selLayerName) !== -1) {
-            if (this._selectionName) {
-              const selectFilter: FilterSpecification = [
-                'in',
-                this.featureIdName,
-              ];
-              selectFilter.push(...selectionArray);
+          const selLayerNameStroke = `${selLayerName}-stroke`;
 
-              map.setFilter(selLayerName, [
-                'all',
-                geomFilter,
-                selectFilter,
-              ] as FilterSpecification);
+          [selLayerName, selLayerNameStroke].forEach((name) => {
+            if (layers.indexOf(name) !== -1) {
+              if (this._selectionName) {
+                const selectFilter: FilterSpecification = [
+                  'in',
+                  this.featureIdName,
+                ];
+                selectFilter.push(...selectionArray);
+
+                map.setFilter(name, [
+                  'all',
+                  geomFilter,
+                  selectFilter,
+                ] as FilterSpecification);
+              }
             }
-          }
-          if (layers.indexOf(layerName) !== -1) {
-            const filter_: any[] = ['all', geomFilter];
-            if (filtered) {
-              filter_.push(['in', this.featureIdName, ...filteredArray]);
-            } else {
-              filter_.push(['!in', this.featureIdName, ...selectionArray]);
-              this._updateWithNativeFilter(filter_);
+          });
+          [layerName, layerNameStroke].forEach((name) => {
+            if (layers.indexOf(name) !== -1) {
+              const filter_: any[] = ['all', geomFilter];
+              if (filtered) {
+                filter_.push(['in', this.featureIdName, ...filteredArray]);
+              } else {
+                filter_.push(['!in', this.featureIdName, ...selectionArray]);
+                this._updateWithNativeFilter(filter_);
+              }
+              map.setFilter(name, filter_ as FilterSpecification);
             }
-            map.setFilter(layerName, filter_ as FilterSpecification);
-          }
+          });
         }
       }
     }
