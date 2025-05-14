@@ -6,7 +6,7 @@
  */
 
 import { debounce, isObject } from '@nextgis/utils';
-import { CRS, Layer, Util } from 'leaflet';
+import { Layer, Util } from 'leaflet';
 
 import { ImageOverlay } from './ImageOverlay';
 
@@ -37,13 +37,7 @@ interface OverlayOptions {
  */
 export class ImageLayer extends Layer {
   defaultWmsParams = {
-    service: 'WMS',
     request: 'GetMap',
-    version: '1.1.1',
-    layers: '',
-    styles: '',
-    format: 'image/jpeg',
-    transparent: false,
   };
 
   options: OverlayOptions = {
@@ -243,9 +237,8 @@ export class ImageLayer extends Layer {
       size.x = Math.ceil(size.x * factor);
       size.y = Math.ceil(size.y * factor);
     }
-    const wmsVersion = parseFloat(this.wmsParams.version);
     const crs = this.options.crs || map.options.crs;
-    const projectionKey = wmsVersion >= 1.3 ? 'crs' : 'srs';
+
     if (crs) {
       const nw = crs.project(bounds.getNorthWest());
       const se = crs.project(bounds.getSouthEast());
@@ -255,12 +248,7 @@ export class ImageLayer extends Layer {
         width: size.x,
         height: size.y,
       };
-      params[projectionKey] = crs.code;
-      params.bbox = (
-        wmsVersion >= 1.3 && crs === CRS.EPSG4326
-          ? [se.y, nw.x, nw.y, se.x]
-          : [nw.x, se.y, se.x, nw.y]
-      ).join(',');
+      params.bbox = [nw.x, se.y, se.x, nw.y];
 
       Util.extend(this.wmsParams, params);
     }
