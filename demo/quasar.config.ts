@@ -6,11 +6,12 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { configure } from 'quasar/wrappers';
+import { defineConfig } from '#q-app/wrappers';
+
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
-export default configure((/* ctx */) => {
+export default defineConfig((/* ctx */) => {
   return {
     // https://v2.quasar.dev/quasar-cli-vite/prefetch-feature
     // preFetch: true,
@@ -79,18 +80,19 @@ export default configure((/* ctx */) => {
       // viteVuePluginOptions: {},
 
       vitePlugins: [
-        [
-          'vite-plugin-checker',
-          {
-            vueTsc: {
-              tsconfigPath: 'tsconfig.vue-tsc.json',
-            },
-            eslint: {
-              lintCommand: 'eslint "./**/*.{js,ts,mjs,cjs,vue}"',
-            },
-          },
-          { server: false },
-        ],
+        // [
+        //   'vite-plugin-checker',
+        //   {
+        //     vueTsc: {
+        //       tsconfigPath: 'tsconfig.vue-tsc.json',
+        //     },
+        //     eslint: {
+        //       lintCommand: 'eslint "./**/*.{js,ts,mjs,cjs,vue}"',
+        //       useFlatConfig: true
+        //     },
+        //   },
+        //   { server: false },
+        // ],
       ],
     },
 
@@ -223,7 +225,7 @@ export default configure((/* ctx */) => {
       // extendBexScriptsConf (esbuildConf) {},
       // extendBexManifestJson (json) {},
 
-      contentScripts: ['my-content-script'],
+      contentScripts: [],
     },
   };
 });
