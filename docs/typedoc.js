@@ -5,7 +5,7 @@ const allowPackages = (await findPackages()).filter((x) => {
   return !x.name.includes('react') && !x.name.includes('cesium');
 });
 
-const entryPoints = allowPackages.map((x) => x.path);
+const entryPoints = allowPackages.map((x) => x.path.replace(/\\/g, '/'));
 
 const config = {
   out: 'build',

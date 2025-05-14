@@ -632,12 +632,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis/area@workspace:packages/area"
   dependencies:
-    "@nextgis/build-tools": ^3.0.0-alpha.17
-    "@nextgis/utils": ^3.0.0-alpha.17
+    "@nextgis/build-tools": 3.0.0-alpha.17
+    "@nextgis/utils": 3.0.0-alpha.17
   languageName: unknown
   linkType: soft
 
-"@nextgis/build-tools@3.0.0-alpha.17, @nextgis/build-tools@^3.0.0-alpha.17, @nextgis/build-tools@workspace:packages/build-tools":
+"@nextgis/build-tools@3.0.0-alpha.17, @nextgis/build-tools@workspace:packages/build-tools":
   version: 0.0.0-use.local
   resolution: "@nextgis/build-tools@workspace:packages/build-tools"
   dependencies:
@@ -1191,7 +1191,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/utils@3.0.0-alpha.17, @nextgis/utils@^3.0.0-alpha.17, @nextgis/utils@workspace:packages/utils":
+"@nextgis/utils@3.0.0-alpha.17, @nextgis/utils@workspace:packages/utils":
   version: 0.0.0-use.local
   resolution: "@nextgis/utils@workspace:packages/utils"
   dependencies:
