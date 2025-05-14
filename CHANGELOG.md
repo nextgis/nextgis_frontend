@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.21](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.20...v3.0.0-alpha.21) (2025-05-14)
+
+
+### Bug Fixes
+
+* **leaflet-map-adapter:** remove unused WMS parameters ([8cc5c61](https://github.com/nextgis/nextgis_frontend/commit/8cc5c61ea7ea529062a0bc3b5e288cadc3000ebf))
+
+
+
+
+
 # [3.0.0-alpha.20](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.18...v3.0.0-alpha.20) (2025-05-11)
 
 
