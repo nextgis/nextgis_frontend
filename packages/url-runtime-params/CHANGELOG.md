@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.22](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.21...v3.0.0-alpha.22) (2025-05-14)
+
+
+### Bug Fixes
+
+* update dependencies to use exact versions for self [@nextgis](https://github.com/nextgis) packages ([d27f9d2](https://github.com/nextgis/nextgis_frontend/commit/d27f9d2c6e0413a232961398eba4c075e1792032))
+
+
+
+
+
 # [3.0.0-alpha.18](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.17...v3.0.0-alpha.18) (2025-01-06)
 
 **Note:** Version bump only for package @nextgis/url-runtime-params

@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/build-tools",
-  "version": "3.0.0-alpha.17",
+  "version": "3.0.0-alpha.22",
   "description": "Build system ",
   "type": "module",
   "dependencies": {
