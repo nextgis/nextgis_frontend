@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.4](https://github.com/nextgis/nextgis_frontend/compare/v2.5.3...v2.5.4) (2025-05-14)
+
+
+### Bug Fixes
+
+* **leaflet-map-adapter:** remove unused WMS parameters ([f4ff3b5](https://github.com/nextgis/nextgis_frontend/commit/f4ff3b5c464aaca506abb21c0b6d0fe94cc96593))
+
+
+
+
+
 # [2.5.0](https://github.com/nextgis/nextgis_frontend/compare/v2.4.1...v2.5.0) (2024-07-09)
 
 
