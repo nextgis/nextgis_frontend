@@ -6,15 +6,15 @@
   "module": "lib/react-ngw-map.esm-bundler.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/ngw-map": "^3.0.0-alpha.20",
-    "@nextgis/utils": "^3.0.0-alpha.17"
+    "@nextgis/ngw-map": "3.0.0-alpha.20",
+    "@nextgis/utils": "3.0.0-alpha.17"
   },
   "peerDependencies": {
     "react": "*",
     "react-dom": "*"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "^3.0.0-alpha.17",
+    "@nextgis/build-tools": "3.0.0-alpha.17",
     "@types/react": "*",
     "@types/react-dom": "*"
   },

@@ -8,11 +8,11 @@
   "unpkg": "lib/cesium-map-adapter.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/control-container": "^3.0.0-alpha.18",
-    "@nextgis/dom": "^3.0.0-alpha.17",
-    "@nextgis/paint": "^3.0.0-alpha.17",
-    "@nextgis/utils": "^3.0.0-alpha.17",
-    "@nextgis/webmap": "^3.0.0-alpha.18",
+    "@nextgis/control-container": "3.0.0-alpha.18",
+    "@nextgis/dom": "3.0.0-alpha.17",
+    "@nextgis/paint": "3.0.0-alpha.17",
+    "@nextgis/utils": "3.0.0-alpha.17",
+    "@nextgis/webmap": "3.0.0-alpha.18",
     "@types/events": "^3.0.0",
     "events": "*"
   },

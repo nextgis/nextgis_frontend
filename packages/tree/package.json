@@ -8,11 +8,11 @@
   "jsdelivr": "lib/tree.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/properties-filter": "^3.0.0-alpha.17",
-    "@nextgis/utils": "^3.0.0-alpha.17"
+    "@nextgis/properties-filter": "3.0.0-alpha.17",
+    "@nextgis/utils": "3.0.0-alpha.17"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "^3.0.0-alpha.17"
+    "@nextgis/build-tools": "3.0.0-alpha.17"
   },
   "buildOptions": {
     "name": "Tree",

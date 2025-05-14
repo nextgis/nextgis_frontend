@@ -9,11 +9,11 @@
   "jsdelivr": "lib/qms-kit.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/utils": "^3.0.0-alpha.17",
-    "@nextgis/webmap": "^3.0.0-alpha.18"
+    "@nextgis/utils": "3.0.0-alpha.17",
+    "@nextgis/webmap": "3.0.0-alpha.18"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "^3.0.0-alpha.17"
+    "@nextgis/build-tools": "3.0.0-alpha.17"
   },
   "buildOptions": {
     "name": "QmsKit",

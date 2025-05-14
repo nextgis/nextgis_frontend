@@ -8,12 +8,12 @@
   "jsdelivr": "lib/paint.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/expression": "^3.0.0-alpha.17",
-    "@nextgis/properties-filter": "^3.0.0-alpha.17",
+    "@nextgis/expression": "3.0.0-alpha.17",
+    "@nextgis/properties-filter": "3.0.0-alpha.17",
     "@types/geojson": "^7946.0.14"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "^3.0.0-alpha.17"
+    "@nextgis/build-tools": "3.0.0-alpha.17"
   },
   "buildOptions": {
     "name": "Paint",

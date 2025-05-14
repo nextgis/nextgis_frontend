@@ -9,11 +9,11 @@
   "jsdelivr": "lib/ngw-maplibre-gl.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/maplibre-gl-map-adapter": "^3.0.0-alpha.20",
-    "@nextgis/ngw-map": "^3.0.0-alpha.20"
+    "@nextgis/maplibre-gl-map-adapter": "3.0.0-alpha.20",
+    "@nextgis/ngw-map": "3.0.0-alpha.20"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "^3.0.0-alpha.17"
+    "@nextgis/build-tools": "3.0.0-alpha.17"
   },
   "buildOptions": {
     "name": "NgwMaplibreGL",
