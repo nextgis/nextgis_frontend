@@ -5,7 +5,9 @@
     <title>IP cameras map</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-      html, body, #map {
+      html,
+      body,
+      #map {
         margin: 0;
         padding: 0;
         width: 100%;
@@ -102,17 +104,30 @@
         const title = cameraPanel.querySelector('.camera-title');
         const player = videojs(cameraPanel.querySelector('#vid1'));
 
-        function updateCameraPanel(feature) {
+        async function updateCameraPanel(feature) {
           if (feature) {
-            wrapper.style.display = 'block';
-            title.innerHTML = 'Camera #' + feature.properties.name;
-            player.src({
-              src: feature.properties.camera,
-              type: 'application/x-mpegURL',
-              overrideNative: true,
-            });
-            player.play();
-            ngwMap.setLayerData('sectors', cameraSectorPoly(feature));
+            try {
+              const resp = await fetch(feature.properties.tokenPage);
+              const text = await resp.text();
+              const regex = /token=([a-zA-Z0-9._-]+)/;
+              const match = text.match(regex);
+              token = match ? match[1] : null;
+
+              wrapper.style.display = 'block';
+              title.innerHTML = 'Camera #' + feature.properties.name;
+              player.src({
+                src: `${feature.properties.camera}?token=${token}`,
+                type: 'application/x-mpegURL',
+                overrideNative: true,
+              });
+              player.play();
+              ngwMap.setLayerData('sectors', cameraSectorPoly(feature));
+            } catch (error) {
+              console.error('Error fetching camera token:', error);
+              wrapper.style.display = 'none';
+              title.innerHTML = 'Error loading camera';
+              ngwMap.clearLayerData('sectors');
+            }
           } else {
             ngwMap.clearLayerData('sectors');
             wrapper.style.display = 'none';
