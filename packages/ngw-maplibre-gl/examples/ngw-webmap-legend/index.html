@@ -46,7 +46,7 @@
         target: 'map',
         osm: true,
         resources: [
-          { resource: 7120, id: 'webmap', fit: true, selectable: true },
+          { resource: 9018, id: 'webmap', fit: true, selectable: true },
         ],
       }).then((ngwMap) => {
         const legendContainer = document.getElementById('legend');
@@ -92,15 +92,15 @@
 
           // Iterate through each LegendItem in the current LayerLegend
           layerLegend.legend.forEach((item) => {
-            if (item.symbol.format === 'png') {
+            if (item.icon.format === 'png') {
               // Create an image element for the PNG symbol
               const img = document.createElement('img');
-              img.src = `data:image/png;base64,${item.symbol.data}`;
-              img.alt = item.name;
+              img.src = `data:image/png;base64,${item.icon.data}`;
+              img.alt = item.display_name;
 
               // Create a label for the legend item
               const label = document.createElement('span');
-              label.textContent = item.name;
+              label.textContent = item.display_name;
 
               // Append the image and label to the layer section
               const itemContainer = document.createElement('div');

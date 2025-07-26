@@ -46,21 +46,19 @@
     </div>
     <script>
       const layers = [
-        { resource: 4119, description: 'Webmap resource' },
-        { resource: 7620, description: 'Vector resource' },
+        { resource: 9049, description: 'Webmap resource' },
+        { resource: 9034, description: 'Vector resource' },
         {
-          resource: 7620,
+          resource: 9034,
           description: 'First style of vector resource',
           adapter: 'IMAGE',
         },
-        { resource: 7621, description: 'Style resource' },
+        { resource: 9033, description: 'Style resource' },
         {
-          resource: 7621,
+          resource: 9033,
           description: 'Vector resource from style resource parent',
           adapter: 'GEOJSON',
-        },
-        { resource: 7618, description: 'First style from image resource' },
-        { resource: 7617, description: 'Image style resource' },
+        }
       ];
 
       const layersBlock = document.getElementById('layers');

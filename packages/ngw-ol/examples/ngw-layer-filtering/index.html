@@ -105,7 +105,6 @@
         .route('resource.item', { id: 1733 })
         .get({ cache: true })
         .then((composite) => {
-          console.log(composite.feature_layer.fields);
           updateOrderByOptions(composite.feature_layer.fields);
         });
 

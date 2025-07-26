@@ -45,13 +45,6 @@
           id: 'building',
           interactive: false,
           intersects: bounds,
-          selectable: true,
-          selectedPaint: {
-            color: 'red',
-            strokeColor: 'red',
-            stroke: true,
-            weight: 3,
-          },
         });
 
         const paintControl = ngwMap.createControl(
@@ -88,7 +81,7 @@
                 ngwMap.updateLayerPaint('building', {
                   fillColor: fillColorSelect.value,
                   strokeColor: strokeColorSelect.value,
-                  weight: Number(strokeWeightSelect.value),
+                  weight: strokeWeightSelect.value,
                 });
               }, 300);
 
