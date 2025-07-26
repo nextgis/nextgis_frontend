@@ -48,7 +48,6 @@ export interface ItemPropertyConfig<K extends keyof ItemPropertyTypes>
 
 export interface CheckOptions<V = boolean> extends ItemBasePropertyOptions<V> {
   label?: string;
-
   turnOff?: <O = CheckOptions>(options?: O) => void;
   turnOn?: <O = CheckOptions>(options?: O) => void;
 }

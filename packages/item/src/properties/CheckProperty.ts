@@ -69,7 +69,8 @@ export class CheckProperty<
 
   unBlock(options?: O): void {
     this._blocked = false;
-    if (this.getValue()) {
+    const value = this.getValue();
+    if (value) {
       this._unBlock(options);
     }
   }
@@ -121,7 +122,7 @@ export class CheckProperty<
       item.properties &&
       (item.properties.property(this.name) as CheckProperty<V, O>);
     if (prop && prop.block) {
-      prop.block(options);
+      prop.block({ silent: true, ...(options || {}) } as O);
     }
   }
 
@@ -130,7 +131,7 @@ export class CheckProperty<
       item.properties &&
       (item.properties.property(this.name) as CheckProperty<V, O>);
     if (prop && prop.unBlock) {
-      prop.unBlock(options);
+      prop.unBlock({ silent: true, ...(options || {}) } as O);
     }
   }
 

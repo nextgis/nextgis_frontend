@@ -14,6 +14,7 @@ import type {
   ImageAdapterOptions,
   LayerAdapter,
   LayerAdapterDefinition,
+  ToggleLayerOptions,
   VectorAdapterOptions,
   WebMap,
 } from '@nextgis/webmap';
@@ -58,23 +59,20 @@ export class NgwWebmapItem extends Item<ItemOptions> {
             } else if (item.item.item_type === 'layer') {
               return item.item.layer_enabled;
             }
-            // else if (item.item.item_type === 'root') {
-            //   return true;
-            // }
           }
           return false;
         },
         onSet(
           value: boolean,
-          options?: Record<string, any>,
+          options?: ToggleLayerOptions,
           item?: NgwWebmapItem,
         ): void {
           if (item && item.item.item_type === 'layer') {
             if (item.layer) {
               if (value) {
-                item.webMap.showLayer(item.layer);
+                item.webMap.showLayer(item.layer, options);
               } else {
-                item.webMap.hideLayer(item.layer);
+                item.webMap.hideLayer(item.layer, options);
               }
             }
             item.item['layer_enabled'] = value;

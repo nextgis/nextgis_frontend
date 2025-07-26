@@ -16,7 +16,13 @@ export abstract class BaseProperty<
   item: I;
   protected _blocked = false;
   protected _container?: HTMLElement;
-  protected _value?: V;
+  protected __value?: V;
+  protected set _value(v: V | undefined) {
+    this.__value = v;
+  }
+  protected get _value(): V | undefined {
+    return this.__value;
+  }
 
   private _removeEventsListener?: () => void;
 
