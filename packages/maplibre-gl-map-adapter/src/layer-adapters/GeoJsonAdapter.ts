@@ -514,8 +514,24 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
         style['icon-image'] = `{_icon-image-${name}}`;
       } else {
         let p: keyof typeof _paint;
-        for (p in _paint) {
-          const toSave = _paint[p];
+
+        const pathPaint = { ..._paint };
+
+        if (
+          'stroke' in pathPaint &&
+          pathPaint.stroke &&
+          pathPaint.strokeColor === undefined
+        ) {
+          pathPaint.strokeColor = pathPaint.color;
+        }
+
+        if ('fill' in pathPaint && pathPaint.fill === false) {
+          pathPaint.fillColor = 'rgba(0,0,0,0)';
+          pathPaint.opacity = 0;
+        }
+
+        for (p in pathPaint) {
+          const toSave = pathPaint[p];
           if (feature.properties) {
             feature.properties[`_paint_${p}_${name}`] = toSave;
           }
