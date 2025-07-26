@@ -2,7 +2,7 @@
   "name": "@nextgis/frontend_docs",
   "private": true,
   "type": "module",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "scripts": {
     "doc": "node ./node_modules/typedoc/bin/typedoc",
     "build": "node ./node_modules/typedoc/bin/typedoc",
