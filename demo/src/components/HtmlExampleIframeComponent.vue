@@ -20,7 +20,10 @@ const writeIFrame = async () => {
     return;
   }
 
-  iframe.srcdoc = content.value;
+  const blob = new Blob([content.value], { type: 'text/html' });
+  const blobUrl = URL.createObjectURL(blob);
+
+  iframe.src = blobUrl;
 };
 
 watch([content], writeIFrame, { immediate: true });
