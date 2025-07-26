@@ -155,13 +155,17 @@ export class ImageAdapter
 
       const _src = url + '?' + queryString;
 
-      // The queue is cleared in OlMapAdapter at each movestart event
-      ImageAdapter.queue.add(() => {
-        return setTileLoadFunction({
-          tile: image,
-          src: _src,
-          headers,
-          withCredentials,
+      // Use a timeout to prevent the queue from aborting right after adding,
+      // especially in cases with zoomToExtent.
+      setTimeout(() => {
+        // The queue is cleared in OlMapAdapter at each movestart event
+        ImageAdapter.queue.add(() => {
+          return setTileLoadFunction({
+            tile: image,
+            src: _src,
+            headers,
+            withCredentials,
+          });
         });
       });
     };
