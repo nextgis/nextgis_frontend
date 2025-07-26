@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.22...v3.0.0) (2025-07-26)
+
+
+### Bug Fixes
+
+* **item:** property handling in CheckOptions ([3a42122](https://github.com/nextgis/nextgis_frontend/commit/3a42122b130c0893fb332c1d3d7089598ca9f64b))
+
+
+
+
+
 # [3.0.0-alpha.22](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.21...v3.0.0-alpha.22) (2025-05-14)
 
 

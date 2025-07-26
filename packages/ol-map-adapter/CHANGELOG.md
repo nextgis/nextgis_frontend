@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.22...v3.0.0) (2025-07-26)
+
+
+### Bug Fixes
+
+* **ol-map-adapter:** prevent image adapter tile load function abort on start ([e1493be](https://github.com/nextgis/nextgis_frontend/commit/e1493be688313fe71d4909d0a2b405f40fb603e7))
+
+
+
+
+
 # [3.0.0-alpha.22](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.21...v3.0.0-alpha.22) (2025-05-14)
 
 

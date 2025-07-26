@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.22...v3.0.0) (2025-07-26)
+
+
+### Bug Fixes
+
+* **maplibre-gl-map-adapter:** enhance paint handling for stroke and fill properties ([7afb3eb](https://github.com/nextgis/nextgis_frontend/commit/7afb3eb2aa29ead6864c649290bc7a7fe22da1fc))
+
+
+
+
+
 # [3.0.0-alpha.22](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.21...v3.0.0-alpha.22) (2025-05-14)
 
 
