@@ -30,8 +30,8 @@
   "homepage": "https://code.nextgis.com",
   "repository": "https://github.com/nextgis/nextgis_frontend",
   "devDependencies": {
-    "@types/node": "^20.14.10",
-    "lerna": "^8.1.6",
+    "@types/node": "^24.1.0",
+    "lerna": "^8.2.3",
     "rimraf": "^3.0.2"
   },
   "license": "MIT",

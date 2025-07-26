@@ -12,7 +12,7 @@ import type {
   ResourceRead,
 } from '@nextgisweb/resource/type/api';
 
-import type { GetRequestOptions } from './route/type';
+import type { GetRequestOptions, RouteQuery } from './route/type';
 import type { GetChildrenOfOptions, ResourceDefinition } from './interfaces';
 import type { NgwConnectorExtended } from './NgwConnectorExtended';
 
@@ -140,7 +140,7 @@ export class ResourcesControl {
   ): Promise<CompositeRead[]> {
     return this._resourceCacheFilter(resource).then((items) => {
       if (!items.length) {
-        const query: Record<string, unknown> = {};
+        const query = {} as RouteQuery<'resource.search', 'get'>;
         if (resource.keyname) {
           query.keyname = resource.keyname;
         } else {
