@@ -15,7 +15,7 @@ export function useNgwControl({
 }) {
   const pos = position || 'top-left';
   const [container, setContainer] = useState<HTMLElement>();
-  const added = useRef<MapControl>();
+  const added = useRef<MapControl>(undefined);
   useEffect(
     function addControl() {
       if (instance) {
