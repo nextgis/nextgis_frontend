@@ -190,7 +190,7 @@ export class NgwConnector {
     credentials = credentials || this.options.auth;
     if (credentials) {
       const { login, password } = credentials;
-      const encodedStr = [login, password].map(encodeURIComponent).join(':');
+      const encodedStr = `${login}:${password}`;
 
       if (__BROWSER__) {
         return window.btoa(encodedStr);
