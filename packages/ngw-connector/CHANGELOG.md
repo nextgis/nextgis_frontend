@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.1](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0...v3.0.1) (2025-07-28)
+
+
+### Bug Fixes
+
+* **ngw-connector:** simplify encoding for client id ([6ec11a9](https://github.com/nextgis/nextgis_frontend/commit/6ec11a971e1c4158a86c6eb66d36773717295db5))
+
+
+
+
+
 # [3.0.0](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.22...v3.0.0) (2025-07-26)
 
 **Note:** Version bump only for package @nextgis/ngw-connector
