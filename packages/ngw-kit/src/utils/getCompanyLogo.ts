@@ -11,7 +11,9 @@ export async function getCompanyLogo(
       component: 'pyramid',
     },
   });
-  if (settings && settings.company_logo && settings.company_logo.enabled) {
+  const company_logo =
+    settings && 'company_logo' in settings ? settings.company_logo : undefined;
+  if (company_logo && company_logo.enabled) {
     const anchor = document.createElement('a');
     anchor.style.position = 'absolute';
     anchor.style.bottom = '0';
@@ -52,13 +54,10 @@ export async function getCompanyLogo(
       return;
     }
 
-    if (
-      settings.company_logo.link !== null &&
-      settings.company_logo.link.trim() !== ''
-    ) {
-      anchor.href = settings.company_logo.link;
+    if (company_logo.link !== null && company_logo.link.trim() !== '') {
+      anchor.href = company_logo.link;
       anchor.target = '_blank';
-      if (settings.company_logo.link.search(/:\/\/nextgis/) !== -1) {
+      if (company_logo.link.search(/:\/\/nextgis/) !== -1) {
         img.alt = 'Get your own Web GIS at nextgis.com';
       }
     }
