@@ -33,7 +33,7 @@
     }
   },
   "devDependencies": {
-    "@quasar/app-vite": "^2.2.0",
+    "@quasar/app-vite": "2.2.0",
     "@types/node": "^20.12.7",
     "@vue/eslint-config-prettier": "^10.1.0",
     "@vue/eslint-config-typescript": "^14.4.0",

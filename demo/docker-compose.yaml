@@ -1,0 +1,10 @@
+services:
+  frontend:
+    image: harbor.nextgis.net/frontend/code:latest
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: nextgis-frontend-demo
+    ports:
+      - "8080:80"
+    restart: unless-stopped
