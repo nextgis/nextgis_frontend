@@ -25,20 +25,19 @@
         qmsId: 448,
         resources: [
           {
-            resource: 7154,
-            id: 'border',
-            fit: true,
-            selectable: true,
-            adapter: 'GEOJSON',
-            paint: { fillOpacity: 0.3, stroke: true },
-          },
-          [7157, 'Ambulance stations'],
-          {
-            resource: 7153,
+            resource: 10069,
             id: 'availability',
             selectable: true,
             opacity: 0.8,
             paint: { color: 'red' },
+          },
+          [10063, 'Ambulance stations'],
+          {
+            resource: 10067,
+            id: 'border',
+            fit: true,
+            selectable: true,
+            paint: { fillOpacity: 0.3, stroke: true },
           },
         ],
       });
@@ -56,9 +55,9 @@
       const drawLayer = (identify) => {
         clean();
         abortController = new AbortController();
-
+        console.log(identify)
         ngwMap
-          .getIdentifyGeoJson(identify, { signal: abortController.signal })
+          .fetchIdentifyGeoJson(identify, { signal: abortController.signal })
           .then((geojson) => {
             abortController = null;
             ngwMap.addLayer('GEOJSON', {
