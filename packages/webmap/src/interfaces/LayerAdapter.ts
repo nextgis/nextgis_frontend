@@ -168,6 +168,8 @@ export interface AdapterOptions<
   type?: VectorAdapterLayerType;
 
   layers?: string;
+
+  propertiesFilter?: PropertiesFilter;
 }
 
 export interface MvtAdapterOptions<F extends Feature = Feature>

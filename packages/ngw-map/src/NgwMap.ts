@@ -172,7 +172,7 @@ export class NgwMap<
   ): Promise<ResourceAdapter | undefined> {
     await this.onMapLoad();
     // @ts-expect-error for backward compatibility
-    const { keyname, resourceId } = options;
+    const { keyname, resourceId, filters } = options;
 
     if (keyname || resourceId !== undefined) {
       deprecatedWarn(
@@ -188,11 +188,14 @@ export class NgwMap<
     }
     if (defined(this.options.baseUrl)) {
       try {
+        options.adapterOptions = options.adapterOptions || {};
         if (defined(this.options.setViewDelay)) {
-          options.adapterOptions = options.adapterOptions || {};
           if (!defined(options.adapterOptions.setViewDelay)) {
             options.adapterOptions.setViewDelay = this.options.setViewDelay;
           }
+        }
+        if (defined(filters)) {
+          options.adapterOptions.propertiesFilter = filters;
         }
 
         const adapter = createNgwLayerAdapter(options, this, this.connector);

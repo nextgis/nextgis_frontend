@@ -2,89 +2,177 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Ngw layers properties filtering</title>
+    <title>NGW layer filtering</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-      html, body, #map {
+      html,
+      body,
+      #map {
         margin: 0;
         padding: 0;
         width: 100%;
         height: 100%;
       }
+
+      .filter-panel {
+        background: #fff;
+        padding: 12px;
+        min-width: 260px;
+        font-family: sans-serif;
+      }
+
+      .filter-panel h3 {
+        margin: 0 0 12px;
+        font-size: 16px;
+      }
+
+      .filter-panel label {
+        display: block;
+        margin: 0 0 4px;
+        font-size: 13px;
+      }
+
+      .filter-panel select,
+      .filter-panel input {
+        width: 100%;
+        box-sizing: border-box;
+        margin: 0 0 10px;
+        padding: 6px 8px;
+        font-size: 14px;
+      }
     </style>
+
     <script src="../../lib/ngw-maplibre-gl.global.js"></script>
   </head>
   <body>
     <div id="map"></div>
+
     <script>
-      let amenityList = [];
+      const BASE_URL = 'https://demo.nextgis.com';
+      const RESOURCE_ID = 10048;
 
-      const ngwMap = new NgwMap({
-        baseUrl: 'https://demo.nextgis.com/',
+      const isNumberField = (datatype) =>
+        datatype === 'INTEGER' || datatype === 'BIGINT' || datatype === 'REAL';
+
+      NgwMap.create({
+        baseUrl: BASE_URL,
         target: 'map',
-        qmsId: 448,
-      });
+        osm: true,
+        controls: ['ZOOM', 'ATTRIBUTION'],
+      }).then(async (ngwMap) => {
+        const resource = await ngwMap.connector.getResourceOrFail(RESOURCE_ID);
+        const fields = (resource.feature_layer?.fields || []).filter(
+          (x) => x.keyname,
+        );
 
-      const filterFunction = (e) => {
-        return;
-      };
+        let layer;
 
-      amenityList = ['cafe', 'restaurant'];
+        const panel = document.createElement('div');
+        panel.className = 'filter-panel';
+        panel.innerHTML = `
+          <h3>Layer filter</h3>
 
-      ngwMap.addNgwLayer({
-        resource: 1733,
-        adapter: 'GEOJSON',
-        fit: true,
-        adapterOptions: {
-          propertiesFilter: [['id', 'eq', 1]],
-          paint: { color: 'red', radius: 10 },
-        },
-      });
+          <label>Adapter</label>
+          <select id="adapter">
+            <option value="TILE">TILE</option>
+            <option value="IMAGE">IMAGE</option>
+            <option value="GEOJSON">GEOJSON</option>
+          </select>
 
-      ngwMap.addNgwLayer({
-        resource: 1733,
-        adapter: 'GEOJSON',
-        fit: true,
-        adapterOptions: {
-          propertiesFilter: [
-            ['NAME', 'ilike', 'Papa John%'],
-            ['NAME', 'ilike', 'Papa Murph%'],
-          ],
-          paint: { color: 'blue', radius: 8 },
-        },
-      });
+          <label>Field</label>
+          <select id="field"></select>
 
-      ngwMap.addNgwLayer({
-        resource: 1733,
-        adapter: 'GEOJSON',
-        fit: true,
-        adapterOptions: {
-          propertiesFilter: [
-            'any',
-            [
-              ['AMENITY', 'eq', 'restaurant'],
-              ['NAME', 'ilike', 'Subway%'],
-            ],
-            [
-              ['AMENITY', 'eq', 'cafe'],
-              [
-                'any',
-                ['NAME', 'ilike', 'Caribou%'],
-                ['NAME', 'ilike', 'Starbucks%'],
-              ],
-            ],
-          ],
-          paint: (e) => {
-            const name = e.properties.NAME.toLowerCase();
-            const color =
-              name.indexOf('subway') !== -1
-                ? 'green'
-                : name.indexOf('caribou') !== -1
-                  ? 'orange'
-                  : 'gray';
-            return { color: color, radius: 4 };
-          },
-        },
+          <label>Operator</label>
+          <select id="operator">
+            <option value="eq">=</option>
+            <option value="ne" selected>!=</option>
+            <!--
+            <option value="gt">></option>
+            <option value="ge">>=</option>
+            <option value="lt"><</option>
+            <option value="le"><=</option>
+            -->
+          </select>
+
+          <label>Value</label>
+          <input id="value" value="yes" />
+        `;
+
+        const adapterEl = panel.querySelector('#adapter');
+        const fieldEl = panel.querySelector('#field');
+        const operatorEl = panel.querySelector('#operator');
+        const valueEl = panel.querySelector('#value');
+
+        fields.forEach((field) => {
+          const option = document.createElement('option');
+          option.value = field.keyname;
+          option.textContent = field.display_name || field.keyname;
+          if (field.keyname === 'BUILDING') {
+            option.selected = true;
+          }
+          fieldEl.appendChild(option);
+        });
+
+        ngwMap.addControl('CONTROL', 'top-right', {
+          control: { onAdd: () => panel },
+          options: { bar: true },
+        });
+
+        function getField() {
+          return fields.find((x) => x.keyname === fieldEl.value);
+        }
+
+        function getFilter() {
+          const field = getField();
+          const rawValue = valueEl.value;
+
+          if (!field || rawValue === '') {
+            return undefined;
+          }
+
+          const value = isNumberField(field.datatype)
+            ? Number(rawValue)
+            : rawValue;
+
+          return [[field.keyname, operatorEl.value, value]];
+        }
+
+        function updateValueType() {
+          const field = getField();
+          valueEl.type =
+            field && isNumberField(field.datatype) ? 'number' : 'text';
+        }
+
+        async function createLayer() {
+          if (layer) {
+            ngwMap.removeLayer(layer);
+          }
+
+          // Recreate layer only when adapter changes
+          layer = await ngwMap.addNgwLayer({
+            resource: RESOURCE_ID,
+            adapter: adapterEl.value,
+            fit: true,
+          });
+
+          applyFilter();
+        }
+
+        function applyFilter() {
+          updateValueType();
+
+          // Update only the filter
+          if (layer?.propertiesFilter) {
+            layer.propertiesFilter(getFilter());
+          }
+        }
+
+        await createLayer();
+
+        adapterEl.addEventListener('change', createLayer);
+        fieldEl.addEventListener('change', applyFilter);
+        operatorEl.addEventListener('change', applyFilter);
+        valueEl.addEventListener('input', applyFilter);
       });
     </script>
   </body>

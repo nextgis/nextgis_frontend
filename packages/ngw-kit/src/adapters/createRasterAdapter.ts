@@ -1,9 +1,11 @@
-import { defined } from '@nextgis/utils';
+import { defined, updateUrlParams } from '@nextgis/utils';
 
 import { Legend } from '../Legend';
+import { createLayerFilterParam } from '../utils/createLayerFilterParam';
 import { ngwApiToAdapterOptions } from '../utils/ngwApiToAdapterOptions';
 import { resourceIdFromLayerOptions } from '../utils/resourceIdFromLayerOptions';
 
+import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type { Type } from '@nextgis/utils';
 import type {
   GetLegendOptions,
@@ -74,10 +76,28 @@ export async function createRasterAdapter({
           baseUrl: connector.options.baseUrl || '',
         });
         if (opt) {
+          const { propertiesFilter, ...restAdapterOptions } =
+            layerOptions.adapterOptions || {};
+
+          const filterParams = createLayerFilterParam(
+            resourceId,
+            propertiesFilter,
+          );
+
           const layerAdapterOptions: ImageAdapterOptions = {
             ...opt,
-            ...layerOptions.adapterOptions,
-            params: { resource: resourceId },
+            ...restAdapterOptions,
+            params: {
+              resource: resourceId,
+              ...filterParams,
+            },
+            url:
+              adapter === 'TILE' && opt.url
+                ? updateUrlParams(opt.url, {
+                    resource: String(resourceId),
+                    ...filterParams,
+                  })
+                : opt.url,
             layers: opt.layers || String(resourceId),
             resourceId,
           };
@@ -94,6 +114,18 @@ export async function createRasterAdapter({
 
       addLayer(addOptions: any) {
         return super.addLayer({ ...this.options, ...addOptions });
+      }
+
+      async propertiesFilter(filters: PropertiesFilter): Promise<void> {
+        const opt = this.options as ImageAdapterOptions;
+
+        const params = {
+          ...(opt.params || {}),
+          ...createLayerFilterParam(this.resourceId, filters),
+        };
+
+        opt.params = params;
+        this.updateLayer?.({ params });
       }
 
       async getIdentificationIds(): Promise<number[]> {

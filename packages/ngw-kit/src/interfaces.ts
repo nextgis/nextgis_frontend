@@ -96,7 +96,7 @@ export type TileNoData = 200 | 404 | 204;
 
 export interface NgwLayerOptions<
   T extends NgwLayerAdapterType = NgwLayerAdapterType,
-  P = FeatureProperties,
+  P extends FeatureProperties = FeatureProperties,
   A extends Record<string, any> = Record<string, any>,
 > {
   resource: ResourceDefinition;
@@ -104,6 +104,7 @@ export interface NgwLayerOptions<
   Adapter?: Type<MainLayerAdapter>;
   adapter?: T;
   adapterOptions?: Partial<LayerAdaptersOptions[T] & AdapterOptions<A>>;
+  filters?: PropertiesFilter<P>;
   fit?: boolean;
   meta?: P;
   headers?: any;
@@ -122,7 +123,7 @@ export interface NgwLayerOptions<
 /** @deprecated use {@link NgwLayerOptions} instead */
 export type ResourceNgwLayerOptions<
   T extends NgwLayerAdapterType = NgwLayerAdapterType,
-  P = { [name: string]: any },
+  P extends FeatureProperties = FeatureProperties,
 > = NgwLayerOptions<T, P>;
 
 export interface NgwConfig {

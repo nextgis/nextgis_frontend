@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { useNgwMapContext } from './context';
 import { useNgwControl } from './hooks/useNgwControl';
+import { useNgwMapContext } from './context';
 
 import type { ControlOptions, ToggleControlOptions } from '@nextgis/webmap';
 import type { ReactNode } from 'react';
