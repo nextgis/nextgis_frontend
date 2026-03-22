@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.1.0](https://github.com/nextgis/nextgis_frontend/compare/v3.0.1...v3.1.0) (2026-03-22)
+
+
+### Features
+
+* **ngw-kit:** add raster NGW layer filtering ([77858ab](https://github.com/nextgis/nextgis_frontend/commit/77858ab20239f6dee6bffc73b5688c650c77b832))
+* **react-ngw-map:** add react-ngw-layer component ([da24246](https://github.com/nextgis/nextgis_frontend/commit/da24246262562d285e62411d961151f7d70a6f0f))
+
+
+
+
+
 ## [3.0.1](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0...v3.0.1) (2025-07-28)
 
 **Note:** Version bump only for package @nextgis/react-ngw-map
