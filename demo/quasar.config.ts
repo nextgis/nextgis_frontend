@@ -101,6 +101,9 @@ export default defineConfig((/* ctx */) => {
       // https: true
       open: true, // opens browser window automatically
       port: 8080,
+      headers: {
+        'Referrer-Policy': 'strict-origin-when-cross-origin',
+      },
     },
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#framework

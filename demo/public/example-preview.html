@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Example Preview</title>
+    <script>
+      (() => {
+        const storagePrefix = 'ngf-example-preview:';
+        const params = new URLSearchParams(window.location.search);
+        const previewId = params.get('previewId');
+
+        const withReferrerPolicy = (html) => {
+          if (!html) {
+            return null;
+          }
+
+          if (/name=(["'])referrer\1/i.test(html)) {
+            return html;
+          }
+
+          const referrerMeta =
+            '<meta name="referrer" content="strict-origin-when-cross-origin" />';
+
+          if (/<head(?:\s[^>]*)?>/i.test(html)) {
+            return html.replace(/<head((?:\s[^>]*)?)>/i, `<head$1>\n    ${referrerMeta}`);
+          }
+
+          return `<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    ${referrerMeta}
+  </head>
+  <body>${html}</body>
+</html>`;
+        };
+
+        const previewHtml = previewId
+          ? sessionStorage.getItem(storagePrefix + previewId)
+          : null;
+
+        const html =
+          withReferrerPolicy(previewHtml) ||
+          `<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Preview not found</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+        font-family: sans-serif;
+      }
+
+      body {
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        color: #444;
+      }
+    </style>
+  </head>
+  <body>Preview data is unavailable.</body>
+</html>`;
+
+        document.open();
+        document.write(html);
+        document.close();
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>
