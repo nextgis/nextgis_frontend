@@ -1,7 +1,6 @@
 {
   "editor.formatOnSave": false,
   "tslint.enable": false,
-  "typescript.tsdk": "node_modules\\typescript\\lib",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
@@ -9,7 +8,10 @@
   "markdownlint.config": {
     "default": true,
     "MD033": {
-      "allowed_elements": [ "summary", "details" ]
+      "allowed_elements": [
+        "summary",
+        "details"
+      ]
     }
   }
 }

@@ -6,7 +6,7 @@
 .webmap-ctrl-bottom-right {
   position: absolute;
   pointer-events: none;
-  z-index: 2;
+  z-index: 9999;
 }
 
 .webmap-ctrl-left, .webmap-ctrl-right {
@@ -41,36 +41,152 @@
   bottom: 0;
 }
 
-.webmap-ctrl {
+.webmap-ctrl,
+.webmap-ctrl-wrapper {
   clear: both;
   pointer-events: auto;
   /* workaround for a Safari bug https://github.com/mapbox/mapbox-gl-js/issues/8185 */
   transform: translate(0, 0);
 }
 
-.webmap-ctrl-top-left .webmap-ctrl {
+.webmap-ctrl-top-left > .webmap-ctrl,
+.webmap-ctrl-top-left > .webmap-ctrl-wrapper {
+  float: left;
+}
+
+.webmap-ctrl-top-right > .webmap-ctrl,
+.webmap-ctrl-top-right > .webmap-ctrl-wrapper {
+  float: right;
+}
+
+.webmap-ctrl-bottom-left > .webmap-ctrl,
+.webmap-ctrl-bottom-left > .webmap-ctrl-wrapper {
+  float: left;
+}
+
+.webmap-ctrl-bottom-right > .webmap-ctrl,
+.webmap-ctrl-bottom-right > .webmap-ctrl-wrapper {
+  float: right;
+}
+
+.webmap-ctrl-top-left > .webmap-ctrl-margin {
   margin: 10px 0 0 10px;
-  float: left;
 }
 
-.webmap-ctrl-top-right .webmap-ctrl {
+.webmap-ctrl-top-right > .webmap-ctrl-margin {
   margin: 10px 10px 0 0;
-  float: right;
 }
 
-.webmap-ctrl-bottom-left .webmap-ctrl {
+.webmap-ctrl-bottom-left > .webmap-ctrl-margin {
   margin: 0 0 10px 10px;
-  float: left;
 }
 
-.webmap-ctrl-bottom-right .webmap-ctrl {
+.webmap-ctrl-bottom-right > .webmap-ctrl-margin {
   margin: 0 10px 10px 0;
-  float: right;
 }
 
 .webmap-ctrl-group {
   border-radius: 4px;
   background: #fff;
+}
+
+.webmap-ctrl .webmap-ctrl-wrapper {
+  clear: none;
+  float: none;
+  margin: 0;
+}
+
+.webmap-ctrl .webmap-ctrl-wrapper > .webmap-ctrl {
+  clear: none;
+  float: none;
+  margin: 0 !important;
+}
+
+.webmap-ctrl > .webmap-ctrl {
+  clear: none;
+  float: none;
+  margin: 0 !important;
+}
+
+.webmap-ctrl-vertical,
+.webmap-ctrl-horizontal {
+  display: flex;
+}
+
+.webmap-ctrl-vertical {
+  flex-direction: column;
+  align-items: var(--webmap-ctrl-align, flex-start);
+}
+
+.webmap-ctrl-horizontal {
+  flex-direction: row;
+  align-items: var(--webmap-ctrl-align, stretch);
+}
+
+.webmap-ctrl:not(.webmap-ctrl-group).webmap-ctrl-vertical,
+.webmap-ctrl:not(.webmap-ctrl-group).webmap-ctrl-horizontal {
+  gap: var(--webmap-ctrl-gap, 0);
+}
+
+.webmap-ctrl-gapless:not(.webmap-ctrl-group) {
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  box-sizing: border-box;
+  background: #fff;
+  overflow: hidden;
+}
+
+.webmap-ctrl-gapless:not(.webmap-ctrl-group):not(:empty) {
+  box-shadow: none;
+}
+
+.webmap-ctrl-gapless > .webmap-ctrl-group,
+.webmap-ctrl-gapless > .webmap-ctrl-wrapper > .webmap-ctrl-group {
+  border-radius: 0;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.webmap-ctrl-gapless > .webmap-ctrl,
+.webmap-ctrl-gapless > .webmap-ctrl-wrapper > .webmap-ctrl,
+.webmap-ctrl-gapless > .leaflet-bar,
+.webmap-ctrl-gapless > .webmap-ctrl-wrapper > .leaflet-bar,
+.webmap-ctrl-gapless > .maplibregl-ctrl-group,
+.webmap-ctrl-gapless > .webmap-ctrl-wrapper > .maplibregl-ctrl-group,
+.webmap-ctrl-gapless > .ol-control,
+.webmap-ctrl-gapless > .webmap-ctrl-wrapper > .ol-control {
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.webmap-ctrl-gapless.webmap-ctrl-horizontal > .webmap-ctrl-group:first-child,
+.webmap-ctrl-gapless.webmap-ctrl-horizontal > .webmap-ctrl-wrapper:first-child > .webmap-ctrl-group {
+  border-radius: 4px 0 0 4px;
+}
+
+.webmap-ctrl-gapless.webmap-ctrl-horizontal > .webmap-ctrl-group:last-child,
+.webmap-ctrl-gapless.webmap-ctrl-horizontal > .webmap-ctrl-wrapper:last-child > .webmap-ctrl-group {
+  border-radius: 0 4px 4px 0;
+}
+
+.webmap-ctrl-gapless.webmap-ctrl-vertical > .webmap-ctrl-group:first-child,
+.webmap-ctrl-gapless.webmap-ctrl-vertical > .webmap-ctrl-wrapper:first-child > .webmap-ctrl-group {
+  border-radius: 4px 4px 0 0;
+}
+
+.webmap-ctrl-gapless.webmap-ctrl-vertical > .webmap-ctrl-group:last-child,
+.webmap-ctrl-gapless.webmap-ctrl-vertical > .webmap-ctrl-wrapper:last-child > .webmap-ctrl-group {
+  border-radius: 0 0 4px 4px;
+}
+
+.webmap-ctrl-gapless > .webmap-ctrl-group:only-child,
+.webmap-ctrl-gapless > .webmap-ctrl-wrapper:only-child > .webmap-ctrl-group {
+  border-radius: 4px;
+}
+
+.webmap-ctrl-vertical > .webmap-ctrl-wrapper,
+.webmap-ctrl-horizontal > .webmap-ctrl-wrapper {
+  display: flex;
 }
 
 .webmap-ctrl-group:not(:empty) {
@@ -83,6 +199,16 @@
   .webmap-ctrl-group:not(:empty) {
     box-shadow: 0 0 0 2px ButtonText;
   }
+
+  .webmap-ctrl-gapless:not(.webmap-ctrl-group) {
+    border-color: ButtonText;
+  }
+}
+
+.webmap-ctrl-gapless > .webmap-ctrl-group:not(:empty),
+.webmap-ctrl-gapless > .webmap-ctrl-wrapper > .webmap-ctrl-group:not(:empty) {
+  border: 0 !important;
+  box-shadow: none !important;
 }
 
 .webmap-ctrl-group button {
@@ -97,8 +223,30 @@
   cursor: pointer;
 }
 
+.webmap-ctrl-button {
+  line-height: inherit !important;
+  font-weight: normal !important;
+}
+
 .webmap-ctrl-group button + button {
   border-top: 1px solid #ddd;
+}
+
+.webmap-ctrl-group.webmap-ctrl-horizontal > button + button {
+  border-top: 0;
+  border-left: 1px solid #ddd;
+}
+
+.webmap-ctrl-gapless .webmap-ctrl-group button + button,
+.webmap-ctrl-group.webmap-ctrl-gapless button + button {
+  border-top: 0 !important;
+  border-left: 0 !important;
+}
+
+.webmap-ctrl-gapless .webmap-ctrl-group button {
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
 
 .webmap-ctrl button .webmap-ctrl-icon {

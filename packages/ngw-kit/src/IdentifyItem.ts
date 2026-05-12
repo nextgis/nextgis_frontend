@@ -1,12 +1,12 @@
 import { fetchNgwLayerItem, fetchNgwLayerItemExtent } from '.';
 
+import type NgwConnector from '@nextgis/ngw-connector';
 import type {
   CompositeFor,
   FeatureItemExtensions,
   GetRequestOptions,
   LayerFeature,
 } from '@nextgis/ngw-connector';
-import type NgwConnector from '@nextgis/ngw-connector';
 import type { FeatureProperties, LngLatBoundsArray } from '@nextgis/utils';
 import type { FeatureLayerRead } from '@nextgisweb/feature-layer/type/api';
 import type { CompositeRead } from '@nextgisweb/resource/type/api';

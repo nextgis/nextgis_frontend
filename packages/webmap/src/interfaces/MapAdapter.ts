@@ -1,3 +1,11 @@
+export type {
+  ControlPosition,
+  ControlTargetPosition,
+} from '@nextgis/control-container';
+import type {
+  ControlPosition,
+  ControlTargetPosition,
+} from '@nextgis/control-container';
 import type {
   LatLng,
   LngLatArray,
@@ -13,10 +21,10 @@ import type { Pixel } from './BaseTypes';
 import type { MapAdapterEvents } from './Events';
 import type { LayerAdapter } from './LayerAdapter';
 import type {
+  AddControlOptions,
   ButtonControlOptions,
   CreateControlOptions,
   MapControl,
-  MapControls,
   ToggleControlOptions,
 } from './MapControl';
 import type { MapOptions } from './MapOptions';
@@ -62,12 +70,6 @@ export interface FitOptions {
  * @deprecated use ControlPosition instead
  */
 export type ControlPositions = ControlPosition;
-
-export type ControlPosition =
-  | 'top-right'
-  | 'top-left'
-  | 'bottom-right'
-  | 'bottom-left';
 
 export interface Locate {
   stop: () => void;
@@ -182,10 +184,10 @@ export interface MapAdapter<M = any, L = any, C = any> {
   createButtonControl?(options: ButtonControlOptions): C;
   createToggleControl?(options: ToggleControlOptions): C;
 
-  addControl<K extends keyof MapControls>(
-    controlName: K | any,
-    position: ControlPosition,
-    options?: MapControls[K],
+  addControl(
+    control: C,
+    position: ControlTargetPosition,
+    options?: AddControlOptions,
   ): any;
   removeControl(control: any): void;
 

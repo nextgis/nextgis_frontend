@@ -9,6 +9,7 @@
   "jsdelivr": "lib/leaflet-map-adapter.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
+    "@nextgis/leaflet-control-container": "3.1.0",
     "@nextgis/paint": "3.0.0",
     "@nextgis/queue": "3.0.0",
     "@nextgis/utils": "3.0.0",

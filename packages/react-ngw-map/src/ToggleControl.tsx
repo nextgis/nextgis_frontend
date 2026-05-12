@@ -1,7 +1,9 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { useNgwControl } from './hooks/useNgwControl';
+import { useShallowMemo } from './hooks/useShallowMemo';
 import { useNgwMapContext } from './context';
+import { useMapControlContext } from './controlContext';
 
 import type { ControlOptions, ToggleControlOptions } from '@nextgis/webmap';
 import type { ReactNode } from 'react';
@@ -13,19 +15,37 @@ interface MapControlProps extends ToggleControlOptions, ControlOptions {
 export function ToggleControl<P extends MapControlProps = MapControlProps>(
   props: P,
 ) {
-  const { position } = props;
+  const { id, order, position } = props;
   const context = useNgwMapContext();
+  const parentControl = useMapControlContext();
+  const controlPosition = useMemo(
+    () =>
+      position ||
+      (parentControl?.id ? { inside: parentControl.id } : undefined),
+    [position, parentControl?.id],
+  );
 
-  const createControl = useCallback(() => {
-    return context.ngwMap.createToggleControl(props);
-  }, []);
+  const controlOptions = { ...props } as Record<string, any>;
+  delete controlOptions.id;
+  delete controlOptions.order;
+  delete controlOptions.control;
+  delete controlOptions.position;
+  delete controlOptions.children;
+
+  const stableControlOptions = useShallowMemo(controlOptions);
 
   const [instance, setInstance] = useState<Promise<unknown>>();
-  useNgwControl({ context, instance, position });
+  useNgwControl({
+    instance,
+    position: controlPosition,
+    context,
+    order,
+    id,
+  });
 
   useEffect(() => {
-    setInstance(createControl());
-  }, [createControl, position]);
+    setInstance(context.ngwMap.createToggleControl(stableControlOptions));
+  }, [context.ngwMap, stableControlOptions]);
 
   return null;
 }

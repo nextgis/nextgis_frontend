@@ -707,7 +707,7 @@ __metadata:
 
 "@nextgis/build-tools@file:../build-tools::locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter":
   version: 3.0.0
-  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=e32bd6&locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter"
+  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=31210b&locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter"
   dependencies:
     "@nextgis/eslint-config": 3.0.0
     "@rollup/plugin-alias": ^5.1.1
@@ -733,13 +733,13 @@ __metadata:
     rollup-plugin-postcss: ^4.0.2
     rollup-plugin-terser: ^7.0.2
     typescript: ~5.8.3
-  checksum: 847f1b5ec64d8889f585628393cdacbc12a7cd8f6adb2ee25f550d2361092c81f417b2ca9f15f56c34bee307033512507991cca374c56ba7e56e2d1ef891927d
+  checksum: d76ab9aa2373fccaa4dca5e11980b8b8457ea5e9c3897af9df9a490a14b5faab8d4e849f1401c28970499e586e7475544f13e6dd21c6cb2c7458924793da4e05
   languageName: node
   linkType: hard
 
 "@nextgis/build-tools@file:../build-tools::locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium":
   version: 3.0.0
-  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=e32bd6&locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium"
+  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=31210b&locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium"
   dependencies:
     "@nextgis/eslint-config": 3.0.0
     "@rollup/plugin-alias": ^5.1.1
@@ -765,7 +765,7 @@ __metadata:
     rollup-plugin-postcss: ^4.0.2
     rollup-plugin-terser: ^7.0.2
     typescript: ~5.8.3
-  checksum: 847f1b5ec64d8889f585628393cdacbc12a7cd8f6adb2ee25f550d2361092c81f417b2ca9f15f56c34bee307033512507991cca374c56ba7e56e2d1ef891927d
+  checksum: d76ab9aa2373fccaa4dca5e11980b8b8457ea5e9c3897af9df9a490a14b5faab8d4e849f1401c28970499e586e7475544f13e6dd21c6cb2c7458924793da4e05
   languageName: node
   linkType: hard
 
@@ -811,7 +811,6 @@ __metadata:
     "@nextgis/build-tools": 3.0.0
     "@nextgis/dom": 3.0.0
     "@nextgis/utils": 3.0.0
-    "@nextgis/webmap": 3.1.0
     "@types/events": ^3.0.0
     events: "*"
   languageName: unknown
@@ -893,11 +892,25 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@nextgis/leaflet-control-container@3.1.0, @nextgis/leaflet-control-container@workspace:packages/leaflet-control-container":
+  version: 0.0.0-use.local
+  resolution: "@nextgis/leaflet-control-container@workspace:packages/leaflet-control-container"
+  dependencies:
+    "@nextgis/build-tools": 3.0.0
+    "@nextgis/control-container": 3.1.0
+    "@types/leaflet": ^1.7.5
+    leaflet: 1.7.1
+  peerDependencies:
+    leaflet: ">=1.5.0"
+  languageName: unknown
+  linkType: soft
+
 "@nextgis/leaflet-map-adapter@3.1.0, @nextgis/leaflet-map-adapter@workspace:packages/leaflet-map-adapter":
   version: 0.0.0-use.local
   resolution: "@nextgis/leaflet-map-adapter@workspace:packages/leaflet-map-adapter"
   dependencies:
     "@nextgis/build-tools": 3.0.0
+    "@nextgis/leaflet-control-container": 3.1.0
     "@nextgis/paint": 3.0.0
     "@nextgis/queue": 3.0.0
     "@nextgis/utils": 3.0.0
@@ -922,11 +935,24 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@nextgis/maplibre-gl-control-container@3.1.0, @nextgis/maplibre-gl-control-container@workspace:packages/maplibre-gl-control-container":
+  version: 0.0.0-use.local
+  resolution: "@nextgis/maplibre-gl-control-container@workspace:packages/maplibre-gl-control-container"
+  dependencies:
+    "@nextgis/build-tools": 3.0.0
+    "@nextgis/control-container": 3.1.0
+    maplibre-gl: ^4.7.1
+  peerDependencies:
+    maplibre-gl: ">=2"
+  languageName: unknown
+  linkType: soft
+
 "@nextgis/maplibre-gl-map-adapter@3.1.0, @nextgis/maplibre-gl-map-adapter@workspace:packages/maplibre-gl-map-adapter":
   version: 0.0.0-use.local
   resolution: "@nextgis/maplibre-gl-map-adapter@workspace:packages/maplibre-gl-map-adapter"
   dependencies:
     "@nextgis/build-tools": 3.0.0
+    "@nextgis/maplibre-gl-control-container": 3.1.0
     "@nextgis/paint": 3.0.0
     "@nextgis/properties-filter": 3.0.0
     "@nextgis/webmap": 3.1.0
@@ -1091,13 +1117,25 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@nextgis/ol-control-container@3.1.0, @nextgis/ol-control-container@workspace:packages/ol-control-container":
+  version: 0.0.0-use.local
+  resolution: "@nextgis/ol-control-container@workspace:packages/ol-control-container"
+  dependencies:
+    "@nextgis/build-tools": 3.0.0
+    "@nextgis/control-container": 3.1.0
+    ol: ^10.6.1
+  peerDependencies:
+    ol: ">=6.0.0"
+  languageName: unknown
+  linkType: soft
+
 "@nextgis/ol-map-adapter@3.1.0, @nextgis/ol-map-adapter@workspace:packages/ol-map-adapter":
   version: 0.0.0-use.local
   resolution: "@nextgis/ol-map-adapter@workspace:packages/ol-map-adapter"
   dependencies:
     "@nextgis/build-tools": 3.0.0
-    "@nextgis/control-container": 3.1.0
     "@nextgis/dom": 3.0.0
+    "@nextgis/ol-control-container": 3.1.0
     "@nextgis/paint": 3.0.0
     "@nextgis/properties-filter": 3.0.0
     "@nextgis/queue": 3.0.0

@@ -7,8 +7,8 @@ import { WebmapLayerOpacityPropertyHandler } from './utils/WebmapLayerOpacityPro
 import { Legend } from './Legend';
 
 import type { ItemOptions } from '@nextgis/item';
-import type { LayerLegend } from '@nextgis/ngw-connector';
 import type NgwConnector from '@nextgis/ngw-connector';
+import type { LayerLegend } from '@nextgis/ngw-connector';
 import type {
   GetLegendOptions,
   ImageAdapterOptions,

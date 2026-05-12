@@ -2,6 +2,7 @@ import type {
   ButtonControlOptions,
   ToggleControl,
   ToggleControlOptions,
+  ToggleStatusChangeListener,
 } from '../../interfaces/MapControl';
 
 /**
@@ -13,6 +14,7 @@ export function createToggleControl<C = any>(
   options: ToggleControlOptions,
 ): C & ToggleControl {
   const link = document.createElement('div');
+  const statusListeners = new Set<ToggleStatusChangeListener>();
 
   let status = false;
   if (options.getStatus) {
@@ -83,6 +85,10 @@ export function createToggleControl<C = any>(
   }
   setClass();
 
+  function notifyStatusChange(control: ToggleControl) {
+    statusListeners.forEach((listener) => listener(status, control));
+  }
+
   const changeStatus = (status_?: boolean) => {
     if (status_ !== undefined) {
       status = status_;
@@ -92,15 +98,40 @@ export function createToggleControl<C = any>(
     setClass();
   };
 
+  const getStatus = () => status;
+
   const onClick = (status_?: boolean) => {
+    if (status_ === undefined && status && buttonControl.disableOnSecondClick) {
+      return;
+    }
+
+    const previousStatus = status;
     status = status_ !== undefined ? status_ : !status;
     if (options.onClick) {
-      const afterClick = options.onClick(status);
+      let afterClick;
+      try {
+        afterClick = options.onClick(status);
+      } catch (er) {
+        status = previousStatus;
+        changeStatus();
+        throw er;
+      }
       Promise.resolve(afterClick)
-        .then(() => changeStatus())
-        .catch(() => (status = !status));
+        .then(() => {
+          changeStatus();
+          if (previousStatus !== status) {
+            notifyStatusChange(buttonControl);
+          }
+        })
+        .catch(() => {
+          status = previousStatus;
+          changeStatus();
+        });
     } else {
       changeStatus();
+      if (previousStatus !== status) {
+        notifyStatusChange(buttonControl);
+      }
     }
   };
 
@@ -110,5 +141,14 @@ export function createToggleControl<C = any>(
   }) as C & ToggleControl;
   buttonControl.onClick = onClick;
   buttonControl.changeStatus = changeStatus;
+  buttonControl.getStatus = getStatus;
+  buttonControl.switch = options.switch;
+  if (options.disableOnSecondClick !== undefined) {
+    buttonControl.disableOnSecondClick = options.disableOnSecondClick;
+  }
+  buttonControl.onStatusChange = (listener) => {
+    statusListeners.add(listener);
+    return () => statusListeners.delete(listener);
+  };
   return buttonControl;
 }

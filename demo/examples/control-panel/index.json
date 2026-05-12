@@ -1,0 +1,6 @@
+{
+  "name": "Control panel with nested controls",
+  "description": "Visual control layout test with default controls, standalone controls, a text bar, and nested panels in every map corner.",
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"],
+  "tags": ["control", "control panel", "button", "toggle", "order"]
+}

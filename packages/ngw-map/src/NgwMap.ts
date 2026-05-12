@@ -48,7 +48,8 @@ import type { QmsAdapterOptions } from '@nextgis/qms-kit';
 import type { FeatureProperties, JsonMap } from '@nextgis/utils';
 import type {
   AdapterOptions,
-  ControlPosition,
+  AddControlOptions,
+  ControlTargetPosition,
   FitOptions,
   LayerAdapter,
   LayerDef,
@@ -144,8 +145,8 @@ export class NgwMap<
    */
   async addControl<K extends keyof MapControls>(
     controlDef: K | C,
-    position: ControlPosition,
-    options?: MapControls[K],
+    position: ControlTargetPosition,
+    options?: MapControls[K] & AddControlOptions,
   ): Promise<any> {
     await this.onLoad('controls:create');
     return super.addControl(controlDef, position, options);

@@ -31,8 +31,9 @@ import { whenSampleTerrainMostDetailed } from './utils/whenSampleTerrainMostDeta
 import type { PathPaint } from '@nextgis/paint';
 import type { LngLatArray, LngLatBoundsArray, Type } from '@nextgis/utils';
 import type {
+  AddControlOptions,
   ButtonControlOptions,
-  ControlPosition,
+  ControlTargetPosition,
   CreateControlOptions,
   FitOptions,
   MapAdapter,
@@ -77,7 +78,7 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
   };
 
   static controlAdapters: Record<string, Type<MapControl>> = {
-    ZOOM: ControlContainer.controls.ZOOM,
+    // ZOOM: ControlContainer.controls.ZOOM,
     // ATTRIBUTION: Attribution
     MEASURE: MeasureControl,
   };
@@ -391,9 +392,13 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
     // return
   }
 
-  addControl(control: Control, position: ControlPosition): any {
+  addControl(
+    control: Control,
+    position: ControlTargetPosition,
+    options?: AddControlOptions,
+  ): any {
     if (this._controlContainer) {
-      this._controlContainer.addControl(control, position);
+      return this._controlContainer.addControl(control, position, options);
     }
   }
 

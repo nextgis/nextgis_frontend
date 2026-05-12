@@ -2,8 +2,12 @@ import { createToggleControl } from './components/controls/createToggleControl';
 import { WebMapLayers } from './WebMapLayers';
 
 import type { WebMapEvents } from './interfaces/Events';
-import type { ControlPosition } from './interfaces/MapAdapter';
 import type {
+  ControlPosition,
+  ControlTargetPosition,
+} from './interfaces/MapAdapter';
+import type {
+  AddControlOptions,
   ButtonControlOptions,
   CreateControlOptions,
   MapControl,
@@ -48,29 +52,35 @@ export class WebMapControls<
   };
 
   private _loadControlQueue: {
-    [key in ControlPosition]: (() => Promise<any>)[];
+    [key in ControlPosition | 'inside']: (() => Promise<any>)[];
   } = {
     'top-right': [],
     'bottom-right': [],
     'top-left': [],
     'bottom-left': [],
+    inside: [],
   };
-  private _isControlLoading: { [key in ControlPosition]: boolean } = {
+  private _isControlLoading: {
+    [key in ControlPosition | 'inside']: boolean;
+  } = {
     'top-right': false,
     'bottom-right': false,
     'top-left': false,
     'bottom-left': false,
+    inside: false,
   };
 
   async addControl<K extends keyof MapControls>(
     controlDef: K | C,
-    position: ControlPosition,
-    options?: MapControls[K],
+    position: ControlTargetPosition,
+    options?: MapControls[K] & AddControlOptions,
   ): Promise<any> {
     let control: C | undefined;
+
+    const { addOptions, createOptions } = this._splitControlOptions(options);
     position = position ?? 'top-left';
     if (typeof controlDef === 'string') {
-      control = this.getControl(controlDef, options);
+      control = this.getControl(controlDef, createOptions as MapControls[K]);
     } else {
       control = controlDef as C;
     }
@@ -78,10 +88,10 @@ export class WebMapControls<
       return new Promise<() => Promise<any>>((resolve) => {
         const promise = async () => {
           const _control = await control;
-          const c = this.mapAdapter.addControl(_control, position);
+          const c = this.mapAdapter.addControl(_control, position, addOptions);
           resolve(c);
         };
-        this._setControlQueue(position, promise);
+        this._setControlQueue(this._getControlQueueKey(position), promise);
       });
     }
   }
@@ -194,14 +204,23 @@ export class WebMapControls<
     }
   }
 
-  private _setControlQueue(position: ControlPosition, cb: () => Promise<any>) {
+  private _getControlQueueKey(
+    position: ControlTargetPosition,
+  ): ControlPosition | 'inside' {
+    return typeof position === 'string' ? position : 'inside';
+  }
+
+  private _setControlQueue(
+    position: ControlPosition | 'inside',
+    cb: () => Promise<any>,
+  ) {
     this._loadControlQueue[position].push(cb);
     if (!this._isControlLoading[position]) {
       this._applyControls(position);
     }
   }
 
-  private async _applyControls(position: ControlPosition) {
+  private async _applyControls(position: ControlPosition | 'inside') {
     if (this._loadControlQueue[position].length) {
       this._isControlLoading[position] = true;
       const controlCb = this._loadControlQueue[position][0];
@@ -211,5 +230,31 @@ export class WebMapControls<
     } else {
       this._isControlLoading[position] = false;
     }
+  }
+
+  private _splitControlOptions<T extends object>(
+    options?: T & AddControlOptions,
+  ): {
+    addOptions?: AddControlOptions;
+    createOptions?: T;
+  } {
+    if (!options) {
+      return {};
+    }
+
+    const { id, order, ...createOptions } = options;
+    const addOptions = this._getAddControlOptions(id, order);
+
+    return {
+      addOptions,
+      createOptions: createOptions as T,
+    };
+  }
+
+  private _getAddControlOptions(
+    id?: string,
+    order?: number,
+  ): AddControlOptions | undefined {
+    return id !== undefined || order !== undefined ? { id, order } : undefined;
   }
 }

@@ -1,13 +1,16 @@
-import type { ControlPosition } from './MapAdapter';
-
-export type OnClickSync = () => void;
-export type onClickAsync = () => Promise<void>;
-
-export type OnToggleClickSync = (status: boolean) => void;
-export type onToggleClickAsync = (status: boolean) => Promise<void>;
-
-export type OnClick = OnClickSync | onClickAsync;
-export type OnToggleClick = OnToggleClickSync | onToggleClickAsync;
+import type { ControlTargetPosition } from './MapAdapter';
+export type {
+  AddControlOptions,
+  ButtonControlOptions,
+  CreateControlOptions,
+  HtmlDef,
+  HtmlToggle,
+  MapControl,
+  TitleToggle,
+  ToggleControl,
+  ToggleControlOptions,
+  ToggleStatusChangeListener,
+} from '@nextgis/control-container';
 
 // like in https://leafletjs.com/reference-1.3.4.html#control-zoom
 
@@ -44,8 +47,10 @@ export interface ContribControlsOptions {
 }
 
 export interface ControlOptions {
-  position?: ControlPosition;
+  position?: ControlTargetPosition;
   control?: string;
+  order?: number;
+  id?: string;
 }
 
 export type ControlsOptions<
@@ -54,76 +59,3 @@ export type ControlsOptions<
 > = {
   [control in K]: O[K];
 };
-
-export interface MapControl<M = any> {
-  onAdd(map?: M): HTMLElement | undefined;
-  onRemove(map?: M): unknown;
-  getContainer?(): HTMLElement;
-  remove?(): void;
-}
-
-/**
- * Options for creating a {@link WebMapControls.createButtonControl | button control}.
- */
-export interface ButtonControlOptions {
-  /** Button content. */
-  html?: string | HTMLElement;
-  /** Additional css class string */
-  addClass?: string;
-  /** Set an action to execute when button clicked. */
-  onClick: OnClick;
-  /** Button HTMLElement title */
-  title?: string;
-}
-
-export type HtmlDef = string | HTMLElement;
-
-/**
- * Values to be in the button content in accordance with the status of the toggle control
- */
-export interface HtmlToggle {
-  on: HtmlDef;
-  off: HtmlDef;
-}
-
-/**
- * Values to be in the title in accordance with the status of the toggle control
- */
-export interface TitleToggle {
-  on: string;
-  off: string;
-}
-
-/**
- * Options for creating a {@link WebMapControls.createToggleControl | toggle control}
- * to layout customization and assigning a callback function
- */
-export interface ToggleControlOptions {
-  /** Boolean state of control. */
-  status?: boolean;
-  /** Button content, can be set for each state (`on` or `off`). */
-  html?: HtmlDef | HtmlToggle;
-  /** Additional css class string */
-  addClass?: string;
-  /** Additional css class string for `on` state only. */
-  addClassOn?: string;
-  /** Additional css class string for `off` state only. */
-  addClassOff?: string;
-  /** Button HTMLElement title, can be set for each state (`on` or `off`). */
-  title?: string | TitleToggle;
-  /** Set an action to execute when button clicked. */
-  onClick?: OnToggleClick;
-  /** Get current control status. */
-  getStatus?: () => boolean;
-}
-
-export interface CreateControlOptions {
-  bar?: boolean;
-  margin?: boolean;
-  addClass?: string;
-}
-
-export interface ToggleControl {
-  onClick: OnClick;
-  changeStatus: OnClickSync;
-}

@@ -146,8 +146,12 @@ export class WebMap<
             }
           }
         }
-        const { position, ...options } = controlOptions;
-        this.addControl(controlAdapterName, position || 'top-left', options);
+        const { id, order, position, ...options } = controlOptions;
+        this.addControl(controlAdapterName, position || 'top-left', {
+          ...options,
+          id,
+          order,
+        });
       });
     }
     this._emitStatusEvent('controls:create');

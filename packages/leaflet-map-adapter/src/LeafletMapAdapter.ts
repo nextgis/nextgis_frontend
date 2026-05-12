@@ -1,9 +1,13 @@
+import {
+  createButtonControl,
+  createControl,
+  createToggleControl,
+  LeafletControlContainer,
+} from '@nextgis/leaflet-control-container';
 import { EventEmitter } from 'events';
 import { Control, latLng, latLngBounds, Map } from 'leaflet';
 
 import { AttributionControl } from './controls/Attribution';
-import { createButtonControl } from './controls/createButtonControl';
-import { createControl } from './controls/createControl';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter/GeoJsonAdapter';
 import { ImageAdapter } from './layer-adapters/ImageAdapter/ImageAdapter';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
@@ -14,7 +18,9 @@ import { convertMapClickEvent } from './utils/convertMapClickEvent';
 
 import type { LngLatArray, LngLatBoundsArray } from '@nextgis/utils';
 import type {
+  AddControlOptions,
   ButtonControlOptions,
+  ControlTargetPosition,
   CreateControlOptions,
   FitOptions,
   LayerAdapter,
@@ -25,10 +31,11 @@ import type {
   MapAdapter,
   MapControl,
   MapOptions,
+  ToggleControl,
+  ToggleControlOptions,
   ViewOptions,
 } from '@nextgis/webmap';
 import type {
-  ControlPosition,
   FitBoundsOptions,
   GridLayer,
   Layer,
@@ -67,6 +74,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   map?: Map;
 
   private _resizeObserver?: ResizeObserver;
+  private _controlContainer?: LeafletControlContainer;
   private _unselectCb: UnselectDef[] = [];
   private _universalEvents: (keyof MainMapEvents)[] = [
     'move',
@@ -111,6 +119,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
       this._watchSizeChangeToUpdateMinZoom();
       // create default pane
       const defPane = this.map.createPane('order-0');
+      this._controlContainer = new LeafletControlContainer(this.map);
       (this.map as any)._addUnselectCb = (def: UnselectDef) => {
         this._addUnselectCb(def);
       };
@@ -124,6 +133,10 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     if (this.map) {
       this.map.remove();
     }
+    if (this._controlContainer) {
+      this._controlContainer.detach();
+      this._controlContainer = undefined;
+    }
     this._stopWatchSizeChangeToUpdateMinZoom();
   }
 
@@ -132,6 +145,9 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   }
 
   getControlContainer(): HTMLElement {
+    if (this._controlContainer) {
+      return this._controlContainer.getContainer();
+    }
     const controlContainer = this.map && (this.map as any)._controlContainer;
     if (controlContainer) {
       return controlContainer;
@@ -260,17 +276,23 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     return createButtonControl(options, this);
   }
 
-  addControl(control: Control, position: string): Control | undefined {
-    control.options.position = position.replace('-', '') as ControlPosition;
-    if (this.map) {
-      this.map.addControl(control);
-      return control;
+  createToggleControl(options: ToggleControlOptions): Control & ToggleControl {
+    return createToggleControl(options, this);
+  }
+
+  addControl(
+    control: Control,
+    position: ControlTargetPosition,
+    options?: AddControlOptions,
+  ): Control | undefined {
+    if (this._controlContainer) {
+      return this._controlContainer.addControl(control, position, options);
     }
   }
 
   removeControl(control: Control): void {
-    if (this.map) {
-      this.map.removeControl(control);
+    if (this._controlContainer) {
+      this._controlContainer.removeControl(control);
     }
   }
 

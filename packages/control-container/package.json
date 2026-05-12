@@ -10,7 +10,6 @@
   "dependencies": {
     "@nextgis/dom": "3.0.0",
     "@nextgis/utils": "3.0.0",
-    "@nextgis/webmap": "3.1.0",
     "@types/events": "^3.0.0",
     "events": "*"
   },

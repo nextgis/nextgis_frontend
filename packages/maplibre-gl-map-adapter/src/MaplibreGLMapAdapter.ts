@@ -1,11 +1,15 @@
+import {
+  createButtonControl,
+  createControl,
+  createToggleControl,
+  MaplibreGLControlContainer,
+} from '@nextgis/maplibre-gl-control-container';
 import { debounce } from '@nextgis/utils';
 import { EventEmitter } from 'events';
 import { Map } from 'maplibre-gl';
 
 import { AttributionControl } from './controls/AttributionControl';
 import { CompassControl } from './controls/CompassControl';
-import { createButtonControl } from './controls/createButtonControl';
-import { createControl } from './controls/createControl';
 import { ZoomControl } from './controls/ZoomControl';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 import { MvtAdapter } from './layer-adapters/MvtAdapter';
@@ -18,14 +22,17 @@ import { convertZoomLevel } from './utils/convertZoomLevel';
 
 import type { LngLatArray, LngLatBoundsArray } from '@nextgis/utils';
 import type {
+  AddControlOptions,
   ButtonControlOptions,
-  ControlPosition,
+  ControlTargetPosition,
   CreateControlOptions,
   FitOptions,
   LayerAdapter,
   MapAdapter,
   MapControl,
   MapOptions,
+  ToggleControl,
+  ToggleControlOptions,
   ViewOptions,
 } from '@nextgis/webmap';
 import type {
@@ -79,6 +86,7 @@ export class MaplibreGLMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   layerAdapters = MaplibreGLMapAdapter.layerAdapters;
   controlAdapters = MaplibreGLMapAdapter.controlAdapters;
   isLoaded = false;
+  private _controlContainer?: MaplibreGLControlContainer;
 
   private _universalEvents: (keyof MapEventType)[] = [
     'zoomstart',
@@ -182,6 +190,8 @@ export class MaplibreGLMapAdapter implements MapAdapter<Map, TLayer, IControl> {
             );
           };
 
+          this._controlContainer = new MaplibreGLControlContainer(this.map);
+
           const onMapLoaded = () => {
             this.map.transformRequests = [];
             this.map._onMapClickLayers = [];
@@ -207,10 +217,21 @@ export class MaplibreGLMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     if (this.map) {
       this.map.remove();
     }
+    if (this._controlContainer) {
+      this._controlContainer.detach();
+      this._controlContainer = undefined;
+    }
   }
 
   getContainer(): HTMLElement | undefined {
     return this.map && this.map.getContainer();
+  }
+
+  getControlContainer(): HTMLElement {
+    if (this._controlContainer) {
+      return this._controlContainer.getContainer();
+    }
+    throw new Error('Maplibre GL Map is not initialized yet');
   }
 
   setView(lngLat: LngLatArray, zoom?: number): void;
@@ -369,26 +390,30 @@ export class MaplibreGLMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   }
 
   createControl(control: MapControl, options?: CreateControlOptions): IControl {
-    return createControl(control, options);
+    return createControl(control, options, this);
   }
 
   createButtonControl(options: ButtonControlOptions): IControl {
-    return createButtonControl(options);
+    return createButtonControl(options, this);
+  }
+
+  createToggleControl(options: ToggleControlOptions): IControl & ToggleControl {
+    return createToggleControl(options, this);
   }
 
   addControl(
     control: IControl,
-    position: ControlPosition,
+    position: ControlTargetPosition,
+    options?: AddControlOptions,
   ): IControl | undefined {
-    if (this.map) {
-      this.map.addControl(control, position);
-      return control;
+    if (this._controlContainer) {
+      return this._controlContainer.addControl(control, position, options);
     }
   }
 
   removeControl(control: IControl): void {
-    if (this.map) {
-      this.map.removeControl(control);
+    if (this._controlContainer) {
+      this._controlContainer.removeControl(control);
     }
   }
 

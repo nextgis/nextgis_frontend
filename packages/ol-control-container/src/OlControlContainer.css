@@ -1,4 +1,4 @@
-/* Openlayers fixes */
+/* OpenLayers fixes */
 
 .ol-control { clear: both; pointer-events: auto; }
 
@@ -22,7 +22,7 @@
   bottom: inherit;
   right: inherit;
   white-space: nowrap;
-  max-width: 100%
+  max-width: 100%;
 }
 
 .webmap-control-container .ol-attribution.ol-uncollapsible {
@@ -33,10 +33,3 @@
 .webmap-ctrl-left .openlayers-ctrl .webmap-ctrl {
   height: 100%;
 }
-
-
-
-
-
-
-

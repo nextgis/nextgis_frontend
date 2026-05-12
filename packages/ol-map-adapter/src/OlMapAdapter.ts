@@ -1,3 +1,9 @@
+import {
+  createButtonControl,
+  createControl,
+  createToggleControl,
+  OlControlContainer,
+} from '@nextgis/ol-control-container';
 import { EventEmitter } from 'events';
 import Map from 'ol/Map';
 import { fromLonLat, transform, transformExtent } from 'ol/proj';
@@ -5,9 +11,6 @@ import View from 'ol/View';
 
 // import { CogAdapter } from './layer-adapters/CogAdapter';
 import { Attribution } from './controls/Attribution';
-import { createButtonControl } from './controls/createButtonControl';
-import { createControl } from './controls/createControl';
-import { PanelControl } from './controls/PanelControl';
 import { ZoomControl } from './controls/ZoomControl';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 import { ImageAdapter } from './layer-adapters/ImageAdapter';
@@ -18,13 +21,16 @@ import { convertMapClickEvent } from './utils/convertMapClickEvent';
 
 import type { LngLatArray, LngLatBoundsArray } from '@nextgis/utils';
 import type {
+  AddControlOptions,
   ButtonControlOptions,
-  ControlPosition,
+  ControlTargetPosition,
   CreateControlOptions,
   FitOptions,
   MapAdapter,
   MapControl,
   MapOptions,
+  ToggleControl,
+  ToggleControlOptions,
   ViewOptions,
 } from '@nextgis/webmap';
 import type Control from 'ol/control/Control';
@@ -89,7 +95,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
   private _forEachFeatureAtPixel: ForEachFeatureAtPixelOrderedCallback[] = [];
   private _unselectCb: UnselectCb[] = [];
   private _olView?: View;
-  private _panelControl?: PanelControl;
+  private _panelControl?: OlControlContainer;
   private _isLoaded = false;
   private _positionMem: { [key in 'movestart' | 'moveend']?: PositionMem } = {};
 
@@ -115,7 +121,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
 
     this.map = this.options.map || new Map(mapInitOptions);
 
-    this._panelControl = new PanelControl();
+    this._panelControl = new OlControlContainer();
     this.map.addControl(this._panelControl);
 
     this.map.set('_mapClickEvents', this._mapClickEvents);
@@ -299,12 +305,20 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
   }
 
   createButtonControl(options: ButtonControlOptions): Control {
-    return createButtonControl(options);
+    return createButtonControl(options, this);
   }
 
-  addControl(control: Control, position: ControlPosition): Control | undefined {
+  createToggleControl(options: ToggleControlOptions): Control & ToggleControl {
+    return createToggleControl(options, this);
+  }
+
+  addControl(
+    control: Control,
+    position: ControlTargetPosition,
+    options?: AddControlOptions,
+  ): Control | undefined {
     if (this._panelControl) {
-      this._panelControl.addControl(control, position);
+      this._panelControl.addControl(control, position, options);
       return control;
     }
   }
