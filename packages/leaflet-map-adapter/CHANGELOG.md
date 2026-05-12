@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0-alpha.0](https://github.com/nextgis/nextgis_frontend/compare/v3.1.0...v4.0.0-alpha.0) (2026-05-12)
+
+
+### Features
+
+* **control-container:** unify and improve control container ([e00544e](https://github.com/nextgis/nextgis_frontend/commit/e00544e672e887e2b8d4d5f548dd8b2842fd59db))
+
+
+
+
+
 # [3.1.0](https://github.com/nextgis/nextgis_frontend/compare/v3.0.1...v3.1.0) (2026-03-22)
 
 **Note:** Version bump only for package @nextgis/leaflet-map-adapter
