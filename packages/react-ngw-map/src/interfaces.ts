@@ -17,8 +17,8 @@ export interface MapControlProps extends ControlOptions {
   createControl: (portal: MutableRefObject<HTMLDivElement>) => Promise<unknown>;
 }
 
-export interface NgwMapContextInterface {
-  ngwMap: NgwMap;
+export interface NgwMapContextInterface<M = unknown> {
+  ngwMap: NgwMap<M>;
   layerContainer?: ControlledLayer;
   overlayContainer?: LayerAdapter;
   pane?: string;

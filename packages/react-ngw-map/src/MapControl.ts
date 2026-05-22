@@ -91,15 +91,20 @@ export function MapControl<P extends MapControlProps = MapControlProps>(
   props: P,
 ) {
   const {
+    id,
     bar,
+    gap,
+    align,
+    order,
+    style,
     margin,
     addClass,
-    id,
-    order,
-    className,
-    style,
     children,
     position,
+    direction,
+    className,
+    orientation,
+    disableOnSecondClick,
   } = props;
   const context = useNgwMapContext();
   const parentControl = useMapControlContext();
@@ -132,10 +137,29 @@ export function MapControl<P extends MapControlProps = MapControlProps>(
             //
           },
         },
-        { bar, margin, addClass },
+        {
+          gap,
+          bar,
+          align,
+          margin,
+          addClass,
+          direction,
+          orientation,
+          disableOnSecondClick,
+        },
       );
     },
-    [context.ngwMap, bar, margin, addClass],
+    [
+      bar,
+      gap,
+      align,
+      margin,
+      addClass,
+      context.ngwMap,
+      direction,
+      orientation,
+      disableOnSecondClick,
+    ],
   );
 
   const [instance, setInstance] = useState<Promise<unknown>>();

@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 import { useNgwControl } from './hooks/useNgwControl';
 import { useShallowMemo } from './hooks/useShallowMemo';
@@ -18,6 +19,7 @@ export function ButtonControl<P extends MapControlProps = MapControlProps>(
   const { id, order, position } = props;
   const context = useNgwMapContext();
   const parentControl = useMapControlContext();
+  const portal = useRef(document.createElement('span'));
   const controlPosition = useMemo(
     () =>
       position ||
@@ -25,6 +27,11 @@ export function ButtonControl<P extends MapControlProps = MapControlProps>(
     [position, parentControl?.id],
   );
   const controlOptions = { ...props };
+  const useChildrenAsHtml =
+    props.children !== undefined && controlOptions.html === undefined;
+  if (useChildrenAsHtml) {
+    controlOptions.html = portal.current;
+  }
   delete controlOptions.id;
   delete controlOptions.order;
   delete controlOptions.control;
@@ -46,5 +53,5 @@ export function ButtonControl<P extends MapControlProps = MapControlProps>(
     setInstance(context.ngwMap.createButtonControl(stableControlOptions));
   }, [context.ngwMap, stableControlOptions]);
 
-  return null;
+  return useChildrenAsHtml ? createPortal(props.children, portal.current) : null;
 }

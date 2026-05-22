@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 import { useNgwControl } from './hooks/useNgwControl';
 import { useShallowMemo } from './hooks/useShallowMemo';
@@ -18,6 +19,7 @@ export function ToggleControl<P extends MapControlProps = MapControlProps>(
   const { id, order, position } = props;
   const context = useNgwMapContext();
   const parentControl = useMapControlContext();
+  const portal = useRef(document.createElement('span'));
   const controlPosition = useMemo(
     () =>
       position ||
@@ -26,6 +28,14 @@ export function ToggleControl<P extends MapControlProps = MapControlProps>(
   );
 
   const controlOptions = { ...props } as Record<string, any>;
+  const useChildrenAsHtml =
+    props.children !== undefined && controlOptions.html === undefined;
+  if (useChildrenAsHtml) {
+    controlOptions.html = portal.current;
+  }
+  if (controlOptions.switch === undefined && parentControl?.id) {
+    controlOptions.switch = parentControl.id;
+  }
   delete controlOptions.id;
   delete controlOptions.order;
   delete controlOptions.control;
@@ -47,5 +57,5 @@ export function ToggleControl<P extends MapControlProps = MapControlProps>(
     setInstance(context.ngwMap.createToggleControl(stableControlOptions));
   }, [context.ngwMap, stableControlOptions]);
 
-  return null;
+  return useChildrenAsHtml ? createPortal(props.children, portal.current) : null;
 }
