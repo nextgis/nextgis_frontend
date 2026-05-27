@@ -20,7 +20,7 @@
     "docker-demo": "cd ./demo/ && yarn run docker",
     "docker-docs": "cd ./docs/ && yarn run docker",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "publish": "npm run test-build && lerna publish from-package",
+    "publish:packages": "npm run test-build && lerna publish from-package",
     "patch": "npm run test-build && lerna version patch --exact --conventional-commits -m \"chore(release): publish %s\" --no-push --create-release github",
     "minor": "npm run test-build && lerna version minor --exact --conventional-commits -m \"chore(release): publish %s\" --no-push --create-release github",
     "major": "npm run test-build && lerna version major --exact --conventional-commits -m \"chore(release): publish %s\" --no-push --create-release github",
