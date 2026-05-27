@@ -1,38 +1,51 @@
+import { getLayerRequestOptions } from '@nextgis/webmap';
+
+import type { LayerRequestOptions } from '@nextgis/webmap';
+
 export function callAjax({
   src,
   headers,
   withCredentials,
+  request,
 }: {
   src: string;
+  /** @deprecated use request.headers instead. */
   headers?: Record<string, any>;
+  /** @deprecated use request.credentials instead. */
   withCredentials?: boolean;
+  request?: LayerRequestOptions;
 }): [Promise<string>, () => void] {
-  let abortFunc = () => {
-    // void
-  };
-  const promise = new Promise<string>((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', src);
-    xhr.responseType = 'arraybuffer';
-    for (const h in headers) {
-      xhr.setRequestHeader(h, headers[h]);
-    }
-    if (withCredentials) {
-      xhr.withCredentials = withCredentials;
-    }
-    xhr.onload = function () {
-      const arrayBufferView = new Uint8Array(this.response);
-      const blob = new Blob([arrayBufferView], { type: 'image/png' });
-      const urlCreator = window.URL || window.webkitURL;
-      const imageUrl = urlCreator.createObjectURL(blob);
-      resolve(imageUrl);
-    };
-    xhr.onerror = reject;
-    xhr.send();
-    abortFunc = () => {
-      xhr.abort();
-      resolve('');
-    };
+  const layerRequest = getLayerRequestOptions({
+    headers,
+    request,
+    withCredentials,
   });
+  const requestHeaders = layerRequest?.headers || {};
+  const controller = new AbortController();
+  const promise = fetch(src, {
+    cache: layerRequest?.cache,
+    credentials: layerRequest?.credentials,
+    headers: requestHeaders,
+    signal: controller.signal,
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      return response.blob();
+    })
+    .then((blob) => {
+      const urlCreator = window.URL || window.webkitURL;
+      return urlCreator.createObjectURL(blob);
+    })
+    .catch((er: Error) => {
+      if (er.name === 'AbortError') {
+        return '';
+      }
+      throw er;
+    });
+  const abortFunc = () => {
+    controller.abort();
+  };
   return [promise, abortFunc];
 }

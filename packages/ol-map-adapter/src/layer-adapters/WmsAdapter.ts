@@ -1,3 +1,4 @@
+import { getLayerRequestOptions } from '@nextgis/webmap';
 import TileLayer from 'ol/layer/Tile';
 import TileWMS from 'ol/source/TileWMS';
 
@@ -30,27 +31,30 @@ export class WmsAdapter extends BaseAdapter implements MainLayerAdapter {
     };
 
     const updateWmsParams = options.updateWmsParams;
-    if (updateWmsParams) {
+    const request = getLayerRequestOptions(options);
+    const hasRequest = !!request;
+    if (updateWmsParams || hasRequest) {
       wmsOptions.tileLoadFunction = (image, src) => {
-        const url = src.split('?')[0];
-        const query = src.split('?')[1];
-        const { resource, BBOX, WIDTH, HEIGHT } = queryToObject(query);
-        const queryString = objectToQuery(
-          updateWmsParams({
-            resource,
-            bbox: BBOX,
-            width: WIDTH,
-            height: HEIGHT,
-          }),
-        );
-        const { headers, withCredentials } = options;
-        const _src = url + '?' + queryString;
-        if (headers || withCredentials) {
+        let _src = src;
+        if (updateWmsParams) {
+          const url = src.split('?')[0];
+          const query = src.split('?')[1];
+          const { resource, BBOX, WIDTH, HEIGHT } = queryToObject(query);
+          const queryString = objectToQuery(
+            updateWmsParams({
+              resource,
+              bbox: BBOX,
+              width: WIDTH,
+              height: HEIGHT,
+            }),
+          );
+          _src = url + '?' + queryString;
+        }
+        if (hasRequest) {
           setTileLoadFunction({
             tile: image,
             src: _src,
-            headers,
-            withCredentials,
+            request,
           });
         } else {
           // @ts-expect-error Property 'getImage' does not exist on type 'Tile'.

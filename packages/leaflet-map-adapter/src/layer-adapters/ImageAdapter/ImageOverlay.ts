@@ -4,10 +4,14 @@ import { callAjax } from '../../utils/callAjax';
 
 import imageQueue from './imageQueue';
 
+import type { LayerRequestOptions } from '@nextgis/webmap';
 import type { ImageOverlayOptions, LatLngBoundsExpression } from 'leaflet';
 
 type IOptions = ImageOverlayOptions & {
+  /** @deprecated use request.headers instead. */
   headers?: any;
+  request?: LayerRequestOptions;
+  /** @deprecated use request.credentials instead. */
   withCredentials?: boolean;
 };
 
@@ -33,7 +37,7 @@ export class ImageOverlay extends LImageOverlay {
     // @ts-expect-error extend private method
     super._initImage();
 
-    const { headers, withCredentials } = this.options as IOptions;
+    const { headers, request, withCredentials } = this.options as IOptions;
     // @ts-expect-error _image is a private property
     const img: HTMLImageElement = this._image;
     const src = img.src;
@@ -43,6 +47,7 @@ export class ImageOverlay extends LImageOverlay {
       const [promise, abortFunc] = callAjax({
         src,
         headers,
+        request,
         withCredentials,
       });
       promise.then((imgUrl) => {

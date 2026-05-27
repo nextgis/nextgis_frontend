@@ -1,4 +1,5 @@
 import { updateUrlParams } from '@nextgis/utils';
+import { getLayerRequestOptions } from '@nextgis/webmap';
 import TileLayer from 'ol/layer/Tile';
 import XYZ from 'ol/source/XYZ';
 
@@ -42,10 +43,10 @@ export class TileAdapter
       xyzOpt.crossOrigin = options.crossOrigin;
     }
     const source = new XYZ(xyzOpt);
-    const { headers, withCredentials } = options;
-    if (headers || withCredentials) {
+    const request = getLayerRequestOptions(options);
+    if (request) {
       source.setTileLoadFunction((tile, src) => {
-        setTileLoadFunction({ tile, src, headers, withCredentials });
+        setTileLoadFunction({ tile, src, request });
       });
     }
     const layer = new TileLayer({

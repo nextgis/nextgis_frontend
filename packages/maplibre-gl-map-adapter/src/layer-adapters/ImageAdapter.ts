@@ -1,4 +1,7 @@
+import { getLayerRequestOptions } from '@nextgis/webmap';
+
 import { convertZoomLevel } from '../utils/convertZoomLevel';
+import { setupLayerTransformRequest } from '../utils/setupLayerTransformRequest';
 
 import { BaseRasterAdapter } from './BaseRasterAdapter';
 
@@ -31,6 +34,14 @@ export class ImageAdapter
         });
       } else {
         tiles = [url];
+      }
+      const request = getLayerRequestOptions(options);
+      if (request) {
+        setupLayerTransformRequest({
+          map: this.map,
+          url,
+          request,
+        });
       }
 
       const sourceOptions: RasterSourceSpecification = {

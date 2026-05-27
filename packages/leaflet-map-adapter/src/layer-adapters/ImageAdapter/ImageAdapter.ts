@@ -1,3 +1,4 @@
+import { getLayerRequestOptions } from '@nextgis/webmap';
 import { type Map, Util } from 'leaflet';
 
 import { BaseAdapter } from '../BaseAdapter';
@@ -23,9 +24,9 @@ export class ImageAdapter
     const url = options && options.url;
     if (url) {
       const updateWmsParamsFromOpt = options.updateWmsParams;
+      const request = getLayerRequestOptions(options);
       this.layer = new ImageLayer(url, {
         pane: this.pane,
-        headers: options.headers,
         setViewDelay: options.setViewDelay,
         // TODO: safe remove, use only options.nativeOptions
         ...{
@@ -35,6 +36,7 @@ export class ImageAdapter
         },
         ...options.params,
         ...options.nativeOptions,
+        request,
       });
       if (updateWmsParamsFromOpt) {
         const updateWmsParams = this.layer.updateWmsParams;

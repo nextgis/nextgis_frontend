@@ -1,4 +1,5 @@
 import Queue from '@nextgis/queue';
+import { getLayerRequestOptions } from '@nextgis/webmap';
 import ImageLayer from 'ol/layer/Image';
 import CanvasImageLayerRenderer from 'ol/renderer/canvas/ImageLayer';
 import ImageWMS from 'ol/source/ImageWMS';
@@ -151,7 +152,7 @@ export class ImageAdapter
       const queryString = objectToQuery(
         updateWmsParams ? updateWmsParams(queryParams) : params,
       );
-      const { headers, withCredentials } = options;
+      const request = getLayerRequestOptions(options);
 
       const _src = url + '?' + queryString;
 
@@ -163,8 +164,7 @@ export class ImageAdapter
           return setTileLoadFunction({
             tile: image,
             src: _src,
-            headers,
-            withCredentials,
+            request,
           });
         });
       });

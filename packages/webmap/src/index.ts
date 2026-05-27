@@ -14,6 +14,7 @@ export * from './interfaces/RuntimeParams';
 export * from './interfaces/StarterKit';
 export * from './utils/geometryTypes';
 export * from './utils/getDefaultControls';
+export * from './utils/layerRequestOptions';
 export * from './utils/updateGeoJsonAdapterOptions';
 export * from './WebMapControls';
 export * from './WebMapLayers';

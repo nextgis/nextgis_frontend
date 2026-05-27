@@ -1,4 +1,5 @@
 import { debugLog } from '@nextgis/utils';
+import { getLayerRequestOptions } from '@nextgis/webmap';
 import {
   Cartesian3,
   Cartographic,
@@ -82,7 +83,7 @@ export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
   }
 
   private async _addLayer() {
-    const url = makeUrl(this.options.url, this.options.headers);
+    const url = makeUrl(this.options.url, getLayerRequestOptions(this.options));
     const options: Partial<Cesium3DTileset> & { url: string | Resource } = {
       url,
       skipLevelOfDetail: true,

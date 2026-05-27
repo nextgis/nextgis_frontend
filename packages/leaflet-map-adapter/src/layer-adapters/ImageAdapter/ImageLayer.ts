@@ -10,6 +10,7 @@ import { Layer, Util } from 'leaflet';
 
 import { ImageOverlay } from './ImageOverlay';
 
+import type { LayerRequestOptions } from '@nextgis/webmap';
 import type { Map } from 'leaflet';
 
 interface OverlayOptions {
@@ -22,7 +23,10 @@ interface OverlayOptions {
   maxZoom?: number;
   zIndex?: number;
   pane?: string;
+  /** @deprecated use request.headers instead. */
   headers?: any;
+  request?: LayerRequestOptions;
+  /** @deprecated use request.credentials instead. */
   withCredentials?: boolean;
   viewPortBuffer?: number;
   setViewDelay?: number;
@@ -149,6 +153,7 @@ export class ImageLayer extends Layer {
       opacity: 0,
       pane: this.options.pane,
       headers: this.options.headers,
+      request: this.options.request,
       withCredentials: this.options.withCredentials,
     });
     overlay.addTo(this._map);

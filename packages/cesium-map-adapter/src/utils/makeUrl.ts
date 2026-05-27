@@ -1,11 +1,15 @@
+import { getLayerRequestOptions } from '@nextgis/webmap';
 import { Resource } from 'cesium';
+
+import type { LayerRequestOptions } from '@nextgis/webmap';
 
 export function makeUrl(
   url: string,
-  headers?: Record<string, any>,
+  request?: LayerRequestOptions,
 ): string | Resource {
-  if (headers) {
-    return new Resource({ url, headers });
+  const layerRequest = getLayerRequestOptions({ request });
+  if (layerRequest?.headers) {
+    return new Resource({ url, headers: layerRequest.headers });
   }
   return url;
 }

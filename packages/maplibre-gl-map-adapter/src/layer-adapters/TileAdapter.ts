@@ -1,4 +1,5 @@
 import { updateUrlParams } from '@nextgis/utils';
+import { getLayerRequestOptions } from '@nextgis/webmap';
 
 import { convertZoomLevel } from '../utils/convertZoomLevel';
 import { setupLayerTransformRequest } from '../utils/setupLayerTransformRequest';
@@ -41,13 +42,12 @@ export class TileAdapter<O extends RasterAdapterOptions = TileAdapterOptions>
       } else {
         tiles.push(options.url);
       }
-      const { headers, withCredentials } = options;
-      if (headers || withCredentials) {
+      const request = getLayerRequestOptions(options);
+      if (request) {
         setupLayerTransformRequest({
           map: this.map,
           url: options.url,
-          headers,
-          withCredentials,
+          request,
         });
       }
 

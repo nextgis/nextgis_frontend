@@ -1,3 +1,4 @@
+import { getLayerRequestOptions } from '@nextgis/webmap';
 import { CesiumTerrainProvider } from 'cesium';
 
 import { getDefaultTerrain } from '../utils/getDefaultTerrain';
@@ -14,7 +15,7 @@ export class TerrainAdapter extends BaseAdapter<TileAdapterOptions, Layer> {
 
   async addLayer(opt: TileAdapterOptions): Promise<CesiumTerrainProvider> {
     this.options = { ...this.options, ...opt };
-    const url = makeUrl(this.options.url, this.options.headers);
+    const url = makeUrl(this.options.url, getLayerRequestOptions(this.options));
     const layer = await CesiumTerrainProvider.fromUrl(url, {
       requestVertexNormals: true,
       credit: opt.attribution,

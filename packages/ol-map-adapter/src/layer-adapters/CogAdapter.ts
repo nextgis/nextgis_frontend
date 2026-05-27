@@ -1,3 +1,4 @@
+import { getLayerRequestOptions } from '@nextgis/webmap';
 import TileLayer from 'ol/layer/WebGLTile';
 import GeoTIFF from 'ol/source/GeoTIFF';
 
@@ -21,19 +22,25 @@ export class CogAdapter extends BaseAdapter implements MainLayerAdapter {
 
   addLayer(options: RasterAdapterOptions): TileLayer {
     Object.assign(this.options, options);
+    const request = getLayerRequestOptions(options);
     const urls: string[] = [options.url];
 
     const geoTiffOpt: Options = {
       sources: urls.map((x) => ({ url: x })),
     };
-
-    const source = new GeoTIFF(geoTiffOpt);
-    const headers = options.headers;
-    if (headers) {
-      // source.getIma((tile, src) => {
-      //   setTileLoadFunction(tile, src, headers);
-      // });
+    if (request?.headers) {
+      geoTiffOpt.sourceOptions = {
+        ...(geoTiffOpt.sourceOptions || {}),
+        headers: request.headers,
+      };
     }
+    if (request?.credentials !== undefined) {
+      geoTiffOpt.sourceOptions = {
+        ...(geoTiffOpt.sourceOptions || {}),
+        credentials: request.credentials,
+      };
+    }
+    const source = new GeoTIFF(geoTiffOpt);
     const layer = new TileLayer({
       source,
       opacity: options.opacity ?? undefined,

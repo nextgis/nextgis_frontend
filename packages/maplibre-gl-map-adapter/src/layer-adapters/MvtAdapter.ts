@@ -1,3 +1,5 @@
+import { getLayerRequestOptions } from '@nextgis/webmap';
+
 import { setupLayerTransformRequest } from '../utils/setupLayerTransformRequest';
 
 import { VectorAdapter } from './VectorAdapter';
@@ -14,11 +16,12 @@ export class MvtAdapter extends VectorAdapter<MvtAdapterOptions> {
 
   async addLayer(options: MvtAdapterOptions): Promise<TLayer> {
     const layer = await super.addLayer(options);
-    if (this.map && options.headers) {
+    const request = getLayerRequestOptions(options);
+    if (this.map && request) {
       setupLayerTransformRequest({
         map: this.map,
         url: options.url,
-        headers: options.headers,
+        request,
       });
     }
     this._updateLayerPaint(this.options.type || 'polygon');

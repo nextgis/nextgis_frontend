@@ -1,6 +1,7 @@
 /**
  * UNDER DEVELOPMENT
  */
+import { getLayerRequestOptions } from '@nextgis/webmap';
 import {
   Cartesian3,
   Cartographic,
@@ -30,7 +31,7 @@ export class Model3DAdapter extends BaseAdapter<Model3DOptions, Layer> {
 
   async addLayer(opt: Model3DOptions): Promise<Model> {
     this.options = { ...this.options, ...opt };
-    const url = makeUrl(this.options.url, this.options.headers);
+    const url = makeUrl(this.options.url, getLayerRequestOptions(this.options));
     this.options = { ...opt };
     this._layer = await Model.fromGltfAsync({
       url,

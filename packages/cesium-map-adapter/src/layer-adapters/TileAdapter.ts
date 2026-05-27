@@ -1,4 +1,5 @@
 import { defined } from '@nextgis/utils';
+import { getLayerRequestOptions } from '@nextgis/webmap';
 import { ImageryLayer, UrlTemplateImageryProvider } from 'cesium';
 
 import { makeUrl } from '../utils/makeUrl';
@@ -19,7 +20,8 @@ export class TileAdapter extends BaseAdapter<TileAdapterOptions, Layer> {
 
   addLayer(opt: TileAdapterOptions): ImageryLayer {
     this.options = { ...this.options, ...opt };
-    const url = makeUrl(this.options.url, this.options.headers);
+    const request = getLayerRequestOptions(this.options);
+    const url = makeUrl(this.options.url, request);
     const imageProviderOpt: UrlTemplateImageryProvider.ConstructorOptions = {
       url,
       credit: opt.attribution,

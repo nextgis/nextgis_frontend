@@ -2,6 +2,10 @@ import { preparePaint } from '@nextgis/paint';
 import { propertiesFilter } from '@nextgis/properties-filter';
 import { defined } from '@nextgis/utils';
 
+import {
+  getLayerRequestOptions,
+  normalizeLayerRequestOptions,
+} from './utils/layerRequestOptions';
 import { updateGeoJsonAdapterOptions } from './utils/updateGeoJsonAdapterOptions';
 import { WebMapMain } from './WebMapMain';
 
@@ -28,6 +32,7 @@ import type {
   LayerAdapters,
   LayerAdaptersOptions,
   LayerDefinition,
+  LayerRequestOptions,
   MainLayerAdapter,
   OnLayerMouseOptions,
   OnLayerSelectOptions,
@@ -267,6 +272,10 @@ export class WebMapLayers<
         }
       }
     }
+    options = {
+      ...options,
+      request: this._getLayerRequestOptions(options as LO),
+    };
     if (adapterEngine !== undefined) {
       const _adapter = new adapterEngine(this.mapAdapter.map, options);
       _adapter.options = { ...options, ..._adapter.options };
@@ -947,6 +956,43 @@ export class WebMapLayers<
       subdomains: tileJson.scheme,
       attribution: tileJson.attribution,
     }) as Promise<MainLayerAdapter<M, any, TileAdapterOptions>>;
+  }
+
+  /**
+   * Merges global and per-layer request options while preserving backward
+   * compatibility for deprecated `headers` and `withCredentials` options.
+   * The returned value is normalized so adapters receive only meaningful
+   * request options.
+   */
+  private _getLayerRequestOptions<LO extends AdapterOptions>(
+    options: LO,
+  ): LayerRequestOptions | undefined {
+    const defaultRequest = normalizeLayerRequestOptions(
+      this.options.layerRequest,
+    );
+    const layerRequest = getLayerRequestOptions(options);
+    const headers = {
+      ...(defaultRequest?.headers || {}),
+      ...(layerRequest?.headers || {}),
+    };
+    const credentials =
+      options.withCredentials === false &&
+      options.request?.credentials === undefined &&
+      defaultRequest?.credentials !== undefined
+        ? 'same-origin'
+        : (layerRequest?.credentials ?? defaultRequest?.credentials);
+    const cache =
+      options.request?.cache !== undefined
+        ? options.request.cache
+        : (layerRequest?.cache ?? defaultRequest?.cache);
+
+    return normalizeLayerRequestOptions({
+      ...defaultRequest,
+      ...layerRequest,
+      ...(Object.keys(headers).length ? { headers } : {}),
+      ...(credentials !== undefined ? { credentials } : {}),
+      ...(cache !== undefined ? { cache } : {}),
+    });
   }
 
   /** @internal */

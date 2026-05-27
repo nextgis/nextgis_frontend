@@ -6,7 +6,11 @@ import type {
   Type,
 } from '@nextgis/utils';
 
-import type { AdapterOptions, LayerAdapter } from './LayerAdapter';
+import type {
+  AdapterOptions,
+  LayerAdapter,
+  LayerRequestOptions,
+} from './LayerAdapter';
 import type { FitOptions, MapAdapter } from './MapAdapter';
 import type { ControlsOptions, MapControls } from './MapControl';
 import type { RuntimeParams } from './RuntimeParams';
@@ -81,6 +85,10 @@ export interface MapOptions<M = any, C = any> extends ViewOptions {
    * The callback function is calling before adding each layer
    */
   onBeforeAddLayer?: OnBeforeLayerAdd;
+  /**
+   * Default request parameters for all layer adapters added to this map.s
+   */
+  layerRequest?: LayerRequestOptions;
 
   /**
    * List of controls that will be initialized when creating a map instance.

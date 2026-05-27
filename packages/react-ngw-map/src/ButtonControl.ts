@@ -53,5 +53,7 @@ export function ButtonControl<P extends MapControlProps = MapControlProps>(
     setInstance(context.ngwMap.createButtonControl(stableControlOptions));
   }, [context.ngwMap, stableControlOptions]);
 
-  return useChildrenAsHtml ? createPortal(props.children, portal.current) : null;
+  return useChildrenAsHtml
+    ? createPortal(props.children, portal.current)
+    : null;
 }

@@ -1,3 +1,4 @@
+import { getLayerRequestOptions } from '@nextgis/webmap';
 import { TileLayer } from 'leaflet';
 
 import { BaseAdapter } from '../BaseAdapter';
@@ -26,11 +27,11 @@ export class WmsAdapter
         ...options.nativeOptions,
       };
       let layer;
-      if (opt.headers || opt.withCredentials) {
+      const request = getLayerRequestOptions(opt);
+      if (request) {
         layer = new WMS(url, {
           ...layerOptions,
-          headers: opt.headers,
-          withCredentials: opt.withCredentials,
+          request,
         });
       } else {
         layer = new TileLayer.WMS(url, layerOptions);

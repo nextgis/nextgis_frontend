@@ -1,4 +1,5 @@
 import { updateUrlParams } from '@nextgis/utils';
+import { getLayerRequestOptions } from '@nextgis/webmap';
 import { TileLayer } from 'leaflet';
 
 import { BaseAdapter } from '../BaseAdapter';
@@ -33,11 +34,11 @@ export class TileAdapter
           tileLayerOptions.subdomains = opt.subdomains;
         }
         let layer;
-        if (opt.headers || opt.withCredentials) {
+        const request = getLayerRequestOptions(opt);
+        if (request) {
           layer = new TL(url, {
             ...tileLayerOptions,
-            headers: opt.headers,
-            withCredentials: opt.withCredentials,
+            request,
             setViewDelay: opt.setViewDelay,
           });
         } else {

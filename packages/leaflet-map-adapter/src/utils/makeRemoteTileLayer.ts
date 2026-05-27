@@ -29,6 +29,7 @@ export function makeRemote<TBase extends Constructor>(Base: TBase): TBase {
         src,
         withCredentials: this.options.withCredentials,
         headers: this.options.headers,
+        request: this.options.request,
       });
       promise.then((response) => {
         tile.src = response;

@@ -49,6 +49,27 @@ export interface OnLayerMouseOptions<
 }
 
 /**
+ * Common request parameters used by layer adapters when they load remote data.
+ */
+export interface LayerRequestOptions {
+  /**
+   * Additional HTTP headers that will be sent with layer requests when the
+   * underlying map library allows request customization.
+   */
+  headers?: Record<string, any>;
+  /**
+   * Controls how credentials such as cookies are sent with requests.
+   * Uses the same values as the Fetch API.
+   */
+  credentials?: RequestCredentials;
+  /**
+   * Browser request cache mode. Set to `'no-store'` to disable cache
+   * for adapters that can control requests.
+   */
+  cache?: RequestCache;
+}
+
+/**
  * Parameters that can be used to create any map layer adapter.
  */
 export interface AdapterOptions<
@@ -139,8 +160,19 @@ export interface AdapterOptions<
    */
   crossOrigin?: 'anonymous';
 
+  /**
+   * Common request parameters for remote layer data.
+   */
+  request?: LayerRequestOptions;
+
+  /**
+   * @deprecated use {@link AdapterOptions.request} headers instead.
+   */
   headers?: Record<string, any>;
 
+  /**
+   * @deprecated use {@link AdapterOptions.request} credentials instead.
+   */
   withCredentials?: boolean;
 
   /**
