@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0-alpha.1](https://github.com/nextgis/nextgis_frontend/compare/v4.0.0-alpha.0...v4.0.0-alpha.1) (2026-05-27)
+
+
+### Features
+
+* **react:** extend controls parameters ([ea13db5](https://github.com/nextgis/nextgis_frontend/commit/ea13db50318cdd874e90d6974ad47df8daa080e4))
+* **webmap:** add layer request options support ([a421974](https://github.com/nextgis/nextgis_frontend/commit/a421974b85b4fed1121f282d7a7c61e6910a3ed9))
+
+
+
+
+
 # [4.0.0-alpha.0](https://github.com/nextgis/nextgis_frontend/compare/v3.1.0...v4.0.0-alpha.0) (2026-05-12)
 
 
