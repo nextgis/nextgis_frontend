@@ -13,6 +13,17 @@ interface SetupLayerTransformRequestOptions {
   withCredentials?: boolean;
 }
 
+function tileUrlTemplateToRegex(template: string): RegExp {
+  const escaped = template.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+  const pattern = escaped
+    .replace('\\{z\\}', '\\d+')
+    .replace('\\{x\\}', '\\d+')
+    .replace('\\{y\\}', '\\d+');
+
+  return new RegExp(`^${pattern}$`);
+}
+
 export function setupLayerTransformRequest({
   map,
   url,
@@ -26,16 +37,14 @@ export function setupLayerTransformRequest({
     withCredentials,
   });
   const transformRequests = map.transformRequests;
+  const urlRegex = tileUrlTemplateToRegex(url);
+
   transformRequests.push((url_: string) => {
     const credentials =
       layerRequest?.credentials !== 'omit'
         ? layerRequest?.credentials
         : undefined;
-    let staticUrl = url_;
-    staticUrl = staticUrl.replace(/(z=\d+)/, 'z={z}');
-    staticUrl = staticUrl.replace(/(x=\d+)/, 'x={x}');
-    staticUrl = staticUrl.replace(/(y=\d+)/, 'y={y}');
-    if (staticUrl.startsWith(url)) {
+    if (urlRegex.test(url_)) {
       return {
         url: url_,
         cache: layerRequest?.cache,
