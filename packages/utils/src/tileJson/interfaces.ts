@@ -119,4 +119,9 @@ export interface TileJson {
    */
   center?: number[];
   // [k: string]: unknown;
+
+  /**
+   * Common request parameters for remote layer data.
+   */
+  request?: Pick<RequestInit, 'cache' | 'credentials' | 'headers'>;
 }

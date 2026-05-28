@@ -955,6 +955,7 @@ export class WebMapLayers<
       minZoom: tileJson.minzoom,
       subdomains: tileJson.scheme,
       attribution: tileJson.attribution,
+      request: tileJson.request,
     }) as Promise<MainLayerAdapter<M, any, TileAdapterOptions>>;
   }
 
