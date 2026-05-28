@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0-alpha.2](https://github.com/nextgis/nextgis_frontend/compare/v4.0.0-alpha.1...v4.0.0-alpha.2) (2026-05-28)
+
+
+### Features
+
+* **webmap:** add request option to tileJson ([7cbfb1a](https://github.com/nextgis/nextgis_frontend/commit/7cbfb1a3bbbdf3b68169b4f298cc17b68b71586d))
+
+
+
+
+
 # [4.0.0-alpha.1](https://github.com/nextgis/nextgis_frontend/compare/v4.0.0-alpha.0...v4.0.0-alpha.1) (2026-05-27)
 
 
