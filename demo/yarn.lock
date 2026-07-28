@@ -511,7 +511,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis/demo-app@workspace:."
   dependencies:
-    "@quasar/app-vite": ^2.2.0
+    "@quasar/app-vite": 2.2.0
     "@quasar/extras": ^1.16.12
     "@types/node": ^20.12.7
     "@vue/eslint-config-prettier": ^10.1.0
@@ -527,7 +527,7 @@ __metadata:
     marked: ^12.0.1
     marked-highlight: 2.0.6
     prettier: ^3.3.3
-    quasar: ^2.16.5
+    quasar: ^2.22.0
     simple-code-editor: ^2.0.9
     typescript: ~5.3.0
     vite-plugin-checker: ^0.9.0
@@ -601,7 +601,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@quasar/app-vite@npm:^2.2.0":
+"@quasar/app-vite@npm:2.2.0":
   version: 2.2.0
   resolution: "@quasar/app-vite@npm:2.2.0"
   dependencies:
@@ -5894,10 +5894,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"quasar@npm:^2.16.5":
-  version: 2.16.6
-  resolution: "quasar@npm:2.16.6"
-  checksum: 550db1cf06c0a155f02f6be20bbb1a6db283cc20c22bc26ee083055a9711e60c12fcb8677e731e0e885db746ea470a311de35e15ace951c6d0f5eccc0a49d9df
+"quasar@npm:^2.22.0":
+  version: 2.22.0
+  resolution: "quasar@npm:2.22.0"
+  checksum: 19a12ff0e4c7a38469940479a10552d7abb7dcdf7562b801ba3d641ccafc96b8a3fe7395fa9ecd009a2cfe48f1071a8a852219411614896be85b5c98dadae44e
   languageName: node
   linkType: hard
 
