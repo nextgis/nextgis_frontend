@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/qms-maplibre-gl",
-  "version": "4.0.0-alpha.3",
+  "version": "4.0.0-alpha.4",
   "description": "QuickMapServices layers for MapLibre GL JS",
   "main": "lib/qms-maplibre-gl.global.prod.js",
   "module": "lib/qms-maplibre-gl.esm-bundler.js",
@@ -8,7 +8,7 @@
   "jsdelivr": "lib/qms-maplibre-gl.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/qms-core": "4.0.0-alpha.3"
+    "@nextgis/qms-core": "4.0.0-alpha.4"
   },
   "peerDependencies": {
     "maplibre-gl": ">=2"

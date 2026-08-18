@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/cesium-map-adapter",
-  "version": "4.0.0-alpha.2",
+  "version": "4.0.0-alpha.4",
   "private": true,
   "description": "",
   "main": "lib/cesium-map-adapter.js",
@@ -12,7 +12,7 @@
     "@nextgis/dom": "3.0.0",
     "@nextgis/paint": "4.0.0-alpha.2",
     "@nextgis/utils": "4.0.0-alpha.2",
-    "@nextgis/webmap": "4.0.0-alpha.2",
+    "@nextgis/webmap": "4.0.0-alpha.4",
     "@types/events": "^3.0.0",
     "events": "*"
   },
