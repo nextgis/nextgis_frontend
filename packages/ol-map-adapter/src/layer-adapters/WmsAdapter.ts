@@ -26,7 +26,14 @@ export class WmsAdapter extends BaseAdapter implements MainLayerAdapter {
     Object.assign(this.options, options);
     const wmsOptions: TileWMSOptions = {
       url: options.url,
-      params: { LAYERS: options.layers, VERSION: options.version },
+      params: {
+        LAYERS: options.layers,
+        FORMAT: options.format,
+        VERSION: options.version,
+        TRANSPARENT: options.transparent ?? true,
+        TILED: true,
+        ...options.params,
+      },
       projection: undefined,
     };
 

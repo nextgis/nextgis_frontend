@@ -1,0 +1,4 @@
+{
+  "name": "Fit to QMS service with OpenLayers",
+  "description": "Fit an OpenLayers map to a QMS service extent"
+}

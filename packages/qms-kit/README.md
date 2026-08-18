@@ -19,7 +19,7 @@ const webMap = new WebMap({
     starterKits: [new QmsKit()],
 });
 
-webMap.addBaseLayer('QMS', { qmsId: 3335 });
+webMap.addBaseLayer('QMS', { qmsId: 448 });
 ```
 
 ### Use with createQmsAdapter function
@@ -34,7 +34,7 @@ const webMap = new WebMap({
     mapAdapter: new LeafletMapAdapter(),
 });
 
-webMap.addBaseLayer(createQmsAdapter({ webMap, qmsId: 3335 }));
+webMap.addBaseLayer(createQmsAdapter({ webMap, qmsId: 448 }));
 ```
 
 [![http://nextgis.com](https://nextgis.com/img/nextgis.png)](http://nextgis.com)

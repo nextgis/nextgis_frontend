@@ -1,0 +1,4 @@
+{
+  "name": "QMS services with Leaflet",
+  "description": "Add TMS and WMS services from NextGIS QMS to a Leaflet map"
+}

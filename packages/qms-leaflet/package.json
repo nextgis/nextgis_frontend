@@ -1,0 +1,55 @@
+{
+  "name": "@nextgis/qms-leaflet",
+  "version": "4.0.0-alpha.3",
+  "description": "QuickMapServices layers for Leaflet",
+  "main": "lib/qms-leaflet.global.prod.js",
+  "module": "lib/qms-leaflet.esm-bundler.js",
+  "unpkg": "lib/qms-leaflet.global.prod.js",
+  "jsdelivr": "lib/qms-leaflet.global.prod.js",
+  "types": "lib/index.d.ts",
+  "dependencies": {
+    "@nextgis/qms-core": "4.0.0-alpha.3"
+  },
+  "peerDependencies": {
+    "leaflet": ">=1.5.0"
+  },
+  "devDependencies": {
+    "@nextgis/build-tools": "3.0.0",
+    "@types/leaflet": "^1.7.5",
+    "leaflet": "1.7.1"
+  },
+  "buildOptions": {
+    "name": "QmsLeaflet",
+    "formats": [
+      "esm-bundler",
+      "esm-browser",
+      "global"
+    ]
+  },
+  "scripts": {
+    "clean": "rimraf ./lib",
+    "dev": "node ../build-tools/lib/build.js",
+    "prod": "npm run dev -- --release",
+    "lint": "eslint ./src/**/*.ts --fix -c ../../eslint.config.js",
+    "watch": "npm run dev -- --watch"
+  },
+  "keywords": [
+    "NextGIS",
+    "QMS",
+    "Leaflet",
+    "MAP"
+  ],
+  "author": "NextGIS",
+  "files": [
+    "lib"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/nextgis/nextgis_frontend/tree/master/packages/qms-leaflet#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nextgis/nextgis_frontend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nextgis/nextgis_frontend/issues"
+  }
+}

@@ -1,53 +1,73 @@
+import { QmsClient } from '@nextgis/qms-core';
 import { mixinProperties } from '@nextgis/utils';
 
-import { getSubdomainsOriginUrl } from './getSubmodulesFromOriginUrl';
-import { loadJson } from './loadJson';
-import { alias, updateQmsOptions } from './updateQmsOptions';
-
+import type { QmsLayer, QmsService, QmsServiceType } from '@nextgis/qms-core';
 import type { Type } from '@nextgis/utils';
-import type { MainLayerAdapter, WebMap } from '@nextgis/webmap';
+import type {
+  LayerAdaptersOptions,
+  MainLayerAdapter,
+  WebMap,
+} from '@nextgis/webmap';
 
 import type {
   CreateQmsAdapterOptions,
   QmsAdapter as QA,
   QmsAdapterOptions,
-  QmsBasemap,
 } from '../interfaces';
 
-const URL = 'https://qms.nextgis.com';
+export const alias: {
+  [key in QmsServiceType]: keyof LayerAdaptersOptions;
+} = {
+  tms: 'TILE',
+  wms: 'WMS',
+};
+
+function qmsLayerToOptions(layer: QmsLayer): Partial<QmsAdapterOptions> {
+  if (layer.type === 'tms') {
+    return {
+      url:
+        layer.scheme === 'tms' ? layer.url.replace('{y}', '{-y}') : layer.url,
+      subdomains: layer.subdomains,
+      maxZoom: layer.maxZoom,
+      minZoom: layer.minZoom,
+      name: layer.name,
+      attribution: layer.attribution,
+    };
+  }
+  return {
+    url: layer.url,
+    layers: layer.layers,
+    format: layer.format,
+    version: layer.version,
+    params: layer.params,
+    name: layer.name,
+    attribution: layer.attribution,
+  };
+}
 
 export function createQmsAdapter(
   options: CreateQmsAdapterOptions,
 ): Type<MainLayerAdapter>;
 export function createQmsAdapter(
   webMap: WebMap,
-  url?: string,
   createOpt?: Partial<QmsAdapterOptions>,
 ): Type<MainLayerAdapter>;
 export function createQmsAdapter(
   webMapOrOptions: WebMap | CreateQmsAdapterOptions,
-  url = URL,
   createOpt: Partial<QmsAdapterOptions> = {},
 ): Type<MainLayerAdapter> {
   let webMap: WebMap;
   if ('webMap' in webMapOrOptions) {
-    const { webMap: webMap_, url: url_, ...adapterOptions } = webMapOrOptions;
+    const { webMap: webMap_, ...adapterOptions } = webMapOrOptions;
     webMap = webMap_;
-    if (url_) {
-      url = url_;
-    }
-    if (adapterOptions) {
-      createOpt = adapterOptions;
-    }
+    createOpt = adapterOptions;
   } else {
     webMap = webMapOrOptions;
   }
 
-  if (!url) {
-    url = URL;
-  }
+  const client = new QmsClient();
   class QmsAdapter<M = any> implements MainLayerAdapter<M>, QA {
-    qms?: QmsBasemap;
+    qms?: QmsService;
 
     options: QmsAdapterOptions;
     map: M;
@@ -63,45 +83,42 @@ export function createQmsAdapter(
     }
 
     async addLayer(options: QmsAdapterOptions): Promise<any> {
-      // qmsId for request, id for store
-      if (!this.qms && options.qmsId) {
-        try {
-          this.qms = await loadJson<QmsBasemap>(
-            url + '/api/v1/geoservices/' + options.qmsId,
-          );
-        } catch (er) {
-          console.error(er);
-        }
+      const signal = options.signal ?? this.options.signal;
+      const qmsId = options.qmsId ?? this.qms?.id;
+      if (qmsId === undefined) {
+        return;
       }
-      const qms = this.qms;
-      if (qms) {
-        const type = alias[qms.type || 'tms'];
+      try {
+        const layer = await client.getLayer(qmsId, { signal });
+        this.qms = layer.service;
+        const type = alias[layer.type];
         const WebMapAdapter = webMap.mapAdapter.layerAdapters[type];
         if (WebMapAdapter) {
           mixinProperties(QmsAdapter, WebMapAdapter, [
             'showLayer',
             'hideLayer',
           ]);
-          if (type === 'TILE') {
-            options = {
-              order: 0,
-              maxZoom: webMap.options.maxZoom,
-              minZoom: webMap.options.minZoom,
-              ...this.options,
-              ...updateQmsOptions(qms),
-            };
-            if (qms.origin_url) {
-              const [url, subdomains] = getSubdomainsOriginUrl(qms.origin_url);
-              if (subdomains.length) {
-                options.subdomains = subdomains;
-                options.url = url;
-              }
-            }
-            this.options = options;
-            const adapter = new WebMapAdapter(this.map, options);
-            return adapter.addLayer(options);
-          }
+          options = {
+            ...(type === 'TILE'
+              ? {
+                  order: 0,
+                  maxZoom: webMap.options.maxZoom,
+                  minZoom: webMap.options.minZoom,
+                }
+              : {}),
+            ...this.options,
+            ...qmsLayerToOptions(layer),
+            signal,
+          } as QmsAdapterOptions;
+          this.options = options;
+          const adapter = new WebMapAdapter(this.map, options);
+          return adapter.addLayer(options);
         }
+      } catch (er) {
+        if (signal?.aborted) {
+          throw er;
+        }
+        console.error(er);
       }
     }
   }

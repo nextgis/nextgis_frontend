@@ -1183,13 +1183,59 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@nextgis/qms-core@4.0.0-alpha.3, @nextgis/qms-core@workspace:packages/qms-core":
+  version: 0.0.0-use.local
+  resolution: "@nextgis/qms-core@workspace:packages/qms-core"
+  dependencies:
+    "@nextgis/build-tools": 3.0.0
+  languageName: unknown
+  linkType: soft
+
 "@nextgis/qms-kit@4.0.0-alpha.2, @nextgis/qms-kit@workspace:packages/qms-kit":
   version: 0.0.0-use.local
   resolution: "@nextgis/qms-kit@workspace:packages/qms-kit"
   dependencies:
     "@nextgis/build-tools": 3.0.0
+    "@nextgis/qms-core": 4.0.0-alpha.3
     "@nextgis/utils": 4.0.0-alpha.2
     "@nextgis/webmap": 4.0.0-alpha.2
+  languageName: unknown
+  linkType: soft
+
+"@nextgis/qms-leaflet@workspace:packages/qms-leaflet":
+  version: 0.0.0-use.local
+  resolution: "@nextgis/qms-leaflet@workspace:packages/qms-leaflet"
+  dependencies:
+    "@nextgis/build-tools": 3.0.0
+    "@nextgis/qms-core": 4.0.0-alpha.3
+    "@types/leaflet": ^1.7.5
+    leaflet: 1.7.1
+  peerDependencies:
+    leaflet: ">=1.5.0"
+  languageName: unknown
+  linkType: soft
+
+"@nextgis/qms-maplibre-gl@workspace:packages/qms-maplibre-gl":
+  version: 0.0.0-use.local
+  resolution: "@nextgis/qms-maplibre-gl@workspace:packages/qms-maplibre-gl"
+  dependencies:
+    "@nextgis/build-tools": 3.0.0
+    "@nextgis/qms-core": 4.0.0-alpha.3
+    maplibre-gl: ^4.7.1
+  peerDependencies:
+    maplibre-gl: ">=2"
+  languageName: unknown
+  linkType: soft
+
+"@nextgis/qms-ol@workspace:packages/qms-ol":
+  version: 0.0.0-use.local
+  resolution: "@nextgis/qms-ol@workspace:packages/qms-ol"
+  dependencies:
+    "@nextgis/build-tools": 3.0.0
+    "@nextgis/qms-core": 4.0.0-alpha.3
+    ol: ^10.6.1
+  peerDependencies:
+    ol: ">=6.0.0"
   languageName: unknown
   linkType: soft
 
@@ -3095,9 +3141,9 @@ __metadata:
   linkType: hard
 
 "caniuse-lite@npm:^1.0.0, caniuse-lite@npm:^1.0.30001702, caniuse-lite@npm:^1.0.30001726":
-  version: 1.0.30001727
-  resolution: "caniuse-lite@npm:1.0.30001727"
-  checksum: 2bc6112f242701198a99c17713d4409be9b404d09005f34f351ec29a4ea46c054e7aa4982bc16f06b81b7a375cbc61c937e89650170cbce84db772a376ed3963
+  version: 1.0.30001809
+  resolution: "caniuse-lite@npm:1.0.30001809"
+  checksum: 848f2e481da9e7da0327e351bfcfdcf610058c756ceb9daa0f0a12090f84dd31962da33e62a2d8bc3774eb2ca255bdca1026431c3f47333af62f5d4e3bc71056
   languageName: node
   linkType: hard
 

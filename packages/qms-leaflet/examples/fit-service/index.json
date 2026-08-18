@@ -1,0 +1,4 @@
+{
+  "name": "Fit to QMS service with Leaflet",
+  "description": "Fit a Leaflet map to a QMS service extent"
+}

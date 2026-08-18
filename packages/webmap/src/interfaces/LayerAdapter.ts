@@ -459,6 +459,7 @@ export interface WmsAdapterOptions extends RasterAdapterOptions {
   format?: 'image/png' | 'image/jpeg' | string;
   version?: string;
   tileSize?: number;
+  params?: Record<string, string | number | boolean>;
   updateWmsParams?: (obj: {
     [paramName: string]: any;
   }) => Record<string, string>;

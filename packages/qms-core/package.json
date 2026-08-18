@@ -1,23 +1,17 @@
 {
-  "name": "@nextgis/qms-kit",
-  "version": "4.0.0-alpha.2",
-  "_priority": 20,
-  "description": "Build webmap with QuickMapServices",
+  "name": "@nextgis/qms-core",
+  "version": "4.0.0-alpha.3",
+  "description": "NextGIS QMS client for TMS and WMS services",
   "main": "index.js",
-  "module": "lib/qms-kit.esm-bundler.js",
-  "unpkg": "lib/qms-kit.global.prod.js",
-  "jsdelivr": "lib/qms-kit.global.prod.js",
+  "module": "lib/qms-core.esm-bundler.js",
+  "unpkg": "lib/qms-core.global.prod.js",
+  "jsdelivr": "lib/qms-core.global.prod.js",
   "types": "lib/index.d.ts",
-  "dependencies": {
-    "@nextgis/qms-core": "4.0.0-alpha.3",
-    "@nextgis/utils": "4.0.0-alpha.2",
-    "@nextgis/webmap": "4.0.0-alpha.2"
-  },
   "devDependencies": {
     "@nextgis/build-tools": "3.0.0"
   },
   "buildOptions": {
-    "name": "QmsKit",
+    "name": "QmsCore",
     "formats": [
       "esm-bundler",
       "esm-browser",
@@ -29,11 +23,12 @@
     "clean": "rimraf ./lib",
     "dev": "node ../build-tools/lib/build.js",
     "prod": "npm run dev -- --release",
-    "lint": "eslint ./src/**/*.ts --fix --c ../../.eslintrc",
+    "lint": "eslint ./src/**/*.ts --fix -c ../../eslint.config.js",
     "watch": "npm run dev -- --watch"
   },
   "keywords": [
     "NextGIS",
+    "QMS",
     "MAP"
   ],
   "author": "NextGIS",
@@ -42,13 +37,12 @@
     "lib"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/nextgis/nextgis_frontend/tree/master/packages/qms-kit#readme",
+  "homepage": "https://github.com/nextgis/nextgis_frontend/tree/master/packages/qms-core#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nextgis/nextgis_frontend.git"
   },
   "bugs": {
     "url": "https://github.com/nextgis/nextgis_frontend/issues"
-  },
-  "gitHead": "edc68033f914f6c95c4125b9738bba6d36e990b4"
+  }
 }

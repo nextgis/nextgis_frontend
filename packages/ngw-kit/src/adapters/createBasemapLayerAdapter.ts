@@ -15,7 +15,7 @@ export async function createBasemapLayerAdapter({
     if (qms) {
       const qms_ = JSON.parse(qms);
       const adapter = Promise.resolve(
-        QmsKit.utils.createQmsAdapter(webMap, undefined, {
+        QmsKit.utils.createQmsAdapter(webMap, {
           qms: qms_,
           baselayer: true,
         }),

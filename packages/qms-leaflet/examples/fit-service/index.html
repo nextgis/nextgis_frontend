@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Fit to QMS service with Leaflet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css"
+    />
+    <style>
+      html,
+      body,
+      #map {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+      }
+      #fit {
+        position: absolute;
+        z-index: 1000;
+        top: 12px;
+        left: 48px;
+        padding: 6px;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="../../lib/qms-leaflet.global.js"></script>
+  </head>
+  <body>
+    <button id="fit">Fit to service extent</button>
+    <div id="map"></div>
+    <script>
+      const qmsId = 4646;
+      const map = L.map('map');
+
+      QmsLeaflet.addQmsLayer(map, qmsId, { fit: true });
+      document.getElementById('fit').addEventListener('click', () => {
+        QmsLeaflet.fitQmsService(map, qmsId);
+      });
+    </script>
+  </body>
+</html>

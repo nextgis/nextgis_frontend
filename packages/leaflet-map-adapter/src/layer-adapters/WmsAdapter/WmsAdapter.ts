@@ -23,7 +23,9 @@ export class WmsAdapter
         maxZoom: opt.maxZoom,
         layers: options.layers,
         format: options.format,
-        transparent: true,
+        version: options.version,
+        transparent: options.transparent ?? true,
+        ...options.params,
         ...options.nativeOptions,
       };
       let layer;

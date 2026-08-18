@@ -8,13 +8,15 @@ export class WmsAdapter
 {
   addLayer(options: WmsAdapterOptions): string[] | undefined {
     Object.assign(this.options, options);
-    const params: Record<string, string | number> = {
+    const version = options.version || '1.1.1';
+    const params: Record<string, string | number | boolean> = {
+      ...options.params,
       bbox: '{bbox-epsg-3857}',
       format: options.format || 'image/png',
       service: 'WMS',
-      version: '1.1.1',
+      version,
       request: 'GetMap',
-      srs: 'EPSG:3857',
+      [parseFloat(version) >= 1.3 ? 'crs' : 'srs']: 'EPSG:3857',
       transparent: 'true',
       width: options.tileSize || '256',
       height: options.tileSize || '256',

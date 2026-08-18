@@ -1,0 +1,4 @@
+{
+  "name": "QMS services with OpenLayers",
+  "description": "Add TMS and WMS services from NextGIS QMS to an OpenLayers map"
+}

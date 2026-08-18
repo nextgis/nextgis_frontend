@@ -1,0 +1,4 @@
+{
+  "name": "Fit to QMS service with MapLibre GL",
+  "description": "Fit a MapLibre GL map to a QMS service extent"
+}
