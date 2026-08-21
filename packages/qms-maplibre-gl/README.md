@@ -17,6 +17,7 @@ Create a MapLibre GL JS map and add a QMS service after the map style is loaded:
 ```ts
 import { Map, NavigationControl } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
+import '@nextgis/qms-maplibre-gl/lib/qms-maplibre-gl.css';
 
 import { addQmsLayer } from '@nextgis/qms-maplibre-gl';
 
@@ -26,6 +27,7 @@ const map = new Map({
   center: [0, 20],
   zoom: 2,
 });
+map.addControl(new NavigationControl(), 'top-right');
 
 map.once('load', () => {
   addQmsLayer(map, 448);
@@ -48,7 +50,29 @@ import { fitQmsService } from '@nextgis/qms-maplibre-gl';
 await fitQmsService(map, 4646, { maxZoom: 14 });
 ```
 
-See the [QMS services](https://code.nextgis.com/qms-maplibre-gl-examples-qms-services) and [fit to service extent](https://code.nextgis.com/qms-maplibre-gl-examples-fit-service) examples.
+Add the QMS search and catalog control to the map:
+
+```ts
+import { createQmsControl } from '@nextgis/qms-maplibre-gl';
+
+map.addControl(createQmsControl({ initialLayer: 448 }), 'top-left');
+```
+
+| Option          | Type                                 | Default | Description                                                     |
+| --------------- | ------------------------------------ | ------- | --------------------------------------------------------------- |
+| `initialLayer`  | `number \| (() => QmsMaplibreLayer)` |         | QMS service ID or a layer already added to the map.             |
+| `search`        | `boolean`                            | `true`  | Show QMS search.                                                |
+| `catalog`       | `boolean`                            | `true`  | Show the catalog.                                               |
+| `closeOnSelect` | `boolean`                            | `false` | Close the panel after selecting a service.                      |
+| `lang`          | `string`                             | `'en'`  | Built-in language: `en`, `de`, `es`, `fr`, `it`, `pt`, or `ru`. |
+| `limit`         | `number`                             | `10`    | Maximum search results for each service type.                   |
+| `className`     | `string`                             |         | Additional class for custom control styles.                     |
+
+## Examples
+
+- [QMS services](https://code.nextgis.com/qms-maplibre-gl-examples-qms-services)
+- [Fit to service extent](https://code.nextgis.com/qms-maplibre-gl-examples-fit-service)
+- [QMS control](https://code.nextgis.com/qms-maplibre-gl-examples-search-control)
 
 ## Commercial support
 

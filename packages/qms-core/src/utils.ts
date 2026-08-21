@@ -48,6 +48,16 @@ export function getSubdomainsOriginUrl(originUrl: string): [string, string[]] {
   return [originUrl, subdomains];
 }
 
+export function getQmsTileQuadKey(x: number, y: number, z: number): string {
+  let quadKey = '';
+  for (let i = z; i > 0; i--) {
+    const scale = 2 ** (i - 1);
+    const digit = (Math.floor(x / scale) % 2) + 2 * (Math.floor(y / scale) % 2);
+    quadKey += digit;
+  }
+  return quadKey;
+}
+
 export function parseQmsWmsParams(
   params?: string | null,
 ): Record<string, string> {

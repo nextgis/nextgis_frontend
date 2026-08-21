@@ -17,11 +17,12 @@ import path from 'node:path';
 import { brotliCompressSync, gzipSync } from 'node:zlib';
 
 import chalk from 'chalk';
-import { execa, execaSync } from 'execa';
+import { execa, execaCommand, execaSync } from 'execa';
 import minimist from 'minimist';
 
 import {
   directoryName,
+  findPackageDir,
   fuzzyMatchTarget,
   getTargets,
   require,
@@ -56,6 +57,7 @@ export default async function run() {
   } else {
     allTargets = fuzzyMatchTarget(targets, buildAllMatching);
   }
+  await runPrebuilds(allTargets);
   await buildAll(allTargets);
 
   if (buildTypes) {
@@ -70,6 +72,55 @@ export default async function run() {
 
   await checkAllSizes(allTargets);
 }
+
+/**
+ * @param {Array<string>} targets
+ */
+async function runPrebuilds(targets) {
+  const packages = [];
+  const visited = new Set();
+
+  for (const target of targets) {
+    collectPackages(target.replace(/^packages[\\/]/, ''), packages, visited);
+  }
+
+  for (const { directory, pkg } of packages) {
+    const command = pkg.buildOptions && pkg.buildOptions.prebuild;
+    if (command) {
+      await execaCommand(command, { cwd: directory, stdio: 'inherit' });
+    }
+  }
+}
+
+/**
+ * @param {string} target
+ * @param {Array<{directory: string, pkg: any}>} packages
+ * @param {Set<string>} visited
+ */
+function collectPackages(target, packages, visited) {
+  if (visited.has(target)) {
+    return;
+  }
+  visited.add(target);
+
+  const directory = findPackageDir(target);
+  if (!directory) {
+    return;
+  }
+  const pkg = require(path.join(directory, 'package.json'));
+  const dependencies = {
+    ...pkg.dependencies,
+    ...pkg.peerDependencies,
+    ...pkg.optionalDependencies,
+  };
+  for (const dependency of Object.keys(dependencies)) {
+    if (dependency.startsWith('@nextgis/')) {
+      collectPackages(dependency.replace('@nextgis/', ''), packages, visited);
+    }
+  }
+  packages.push({ directory, pkg });
+}
+
 /**
  * Builds all the targets in parallel.
  * @param {Array<string>} targets - An array of targets to build.

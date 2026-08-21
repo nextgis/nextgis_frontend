@@ -11,8 +11,61 @@ export interface QmsRequestOptions {
   signal?: AbortSignal;
 }
 
-export interface QmsServiceBase {
+export interface QmsSearchOptions extends QmsRequestOptions {
+  type: QmsServiceType;
+  limit?: number;
+  offset?: number;
+}
+
+export interface QmsSearchService {
   id: number;
+  name: string;
+  desc: string;
+  type: QmsServiceType;
+  icon: number | null;
+  extent?: string | null;
+}
+
+export interface QmsCatalogServiceBase {
+  id: string;
+  type: QmsServiceType;
+  name: string;
+  group: string;
+  copyrightText?: string;
+  copyrightUrl?: string;
+  termsOfUseUrl?: string;
+}
+
+export interface QmsCatalogTmsService extends QmsCatalogServiceBase {
+  type: 'tms';
+  url: string;
+  minZoom?: number;
+  maxZoom?: number;
+  yOriginTop: boolean;
+}
+
+export interface QmsCatalogWmsService extends QmsCatalogServiceBase {
+  type: 'wms';
+  url: string;
+  layers: string;
+  params: string;
+}
+
+export type QmsCatalogService = QmsCatalogTmsService | QmsCatalogWmsService;
+
+export interface QmsCatalogGroup {
+  id: string;
+  name: string;
+  services: QmsCatalogService[];
+}
+
+export interface QmsCatalog {
+  groups: QmsCatalogGroup[];
+  revision: string;
+}
+
+export interface QmsServiceBase {
+  id: string | number;
   guid: string;
   name: string;
   desc: string;
@@ -58,14 +111,14 @@ export interface QmsWmsService extends QmsServiceBase {
 
 export type QmsService = QmsTmsService | QmsWmsService;
 
-export interface QmsLayerBase<S extends QmsService = QmsService> {
-  service: S;
+export interface QmsLayerBase {
   name: string;
   attribution?: string;
   extent?: QmsExtent;
 }
 
-export interface QmsTmsLayer extends QmsLayerBase<QmsTmsService> {
+export interface QmsTmsLayer extends QmsLayerBase {
+  service: QmsTmsService;
   type: 'tms';
   url: string;
   subdomains: string[];
@@ -74,7 +127,8 @@ export interface QmsTmsLayer extends QmsLayerBase<QmsTmsService> {
   maxZoom?: number;
 }
 
-export interface QmsWmsLayer extends QmsLayerBase<QmsWmsService> {
+export interface QmsWmsLayer extends QmsLayerBase {
+  service: QmsWmsService;
   type: 'wms';
   url: string;
   layers: string;

@@ -19,6 +19,7 @@ import Map from 'ol/Map';
 import View from 'ol/View';
 import { fromLonLat } from 'ol/proj';
 import 'ol/ol.css';
+import '@nextgis/qms-ol/lib/qms-ol.css';
 
 import { addQmsLayer } from '@nextgis/qms-ol';
 
@@ -46,7 +47,33 @@ import { fitQmsService } from '@nextgis/qms-ol';
 await fitQmsService(map, 4646, { maxZoom: 14 });
 ```
 
-See the [QMS services](https://code.nextgis.com/qms-ol-examples-qms-services) and [fit to service extent](https://code.nextgis.com/qms-ol-examples-fit-service) examples.
+Add the QMS search and catalog control to the map:
+
+```ts
+import { createQmsControl } from '@nextgis/qms-ol';
+
+map.addControl(createQmsControl({ initialLayer: 448 }));
+```
+
+| Option          | Type                          | Default | Description                                                     |
+| --------------- | ----------------------------- | ------- | --------------------------------------------------------------- |
+| `initialLayer`  | `number \| (() => BaseLayer)` |         | QMS service ID or a layer already added to the map.             |
+| `target`        | `HTMLElement \| string`       |         | Optional OpenLayers control target.                             |
+| `search`        | `boolean`                     | `true`  | Show QMS search.                                                |
+| `catalog`       | `boolean`                     | `true`  | Show the catalog.                                               |
+| `closeOnSelect` | `boolean`                     | `false` | Close the panel after selecting a service.                      |
+| `lang`          | `string`                      | `'en'`  | Built-in language: `en`, `de`, `es`, `fr`, `it`, `pt`, or `ru`. |
+| `limit`         | `number`                      | `10`    | Maximum search results for each service type.                   |
+| `className`     | `string`                      |         | Additional class for custom control styles.                     |
+
+OpenLayers placement can also be changed with `--nextgis-qms-control-top` and
+`--nextgis-qms-control-left`.
+
+## Examples
+
+- [QMS services](https://code.nextgis.com/qms-ol-examples-qms-services)
+- [Fit to service extent](https://code.nextgis.com/qms-ol-examples-fit-service)
+- [QMS control](https://code.nextgis.com/qms-ol-examples-search-control)
 
 ## Commercial support
 

@@ -1,8 +1,19 @@
-import { getQmsServiceExtent, resolveQmsLayer } from '@nextgis/qms-core';
+import {
+  getQmsServiceExtent,
+  QmsControlController,
+  resolveQmsLayer,
+} from '@nextgis/qms-core';
 
-import type { QmsRequestOptions, QmsWmsLayer } from '@nextgis/qms-core';
+import type {
+  QmsControlControllerOptions,
+  QmsControlElement,
+  QmsLayer,
+  QmsRequestOptions,
+  QmsWmsLayer,
+} from '@nextgis/qms-core';
 import type {
   FitBoundsOptions,
+  IControl,
   LayerSpecification,
   Map,
   RasterSourceSpecification,
@@ -19,6 +30,8 @@ export interface QmsMaplibreOptions extends QmsRequestOptions {
   opacity?: number;
   fit?: boolean | FitBoundsOptions;
 }
+
+export type QmsControlOptions = QmsControlControllerOptions<QmsMaplibreLayer>;
 
 function setParam(
   params: URLSearchParams,
@@ -73,9 +86,13 @@ export class QmsMaplibreLayer {
   ) {}
 
   addTo(map: Map, before?: string): this {
-    map.addSource(this.sourceId, this.source);
+    if (!map.getSource(this.sourceId)) {
+      map.addSource(this.sourceId, this.source);
+    }
     for (const layer of this.layers) {
-      map.addLayer(layer, before);
+      if (!map.getLayer(layer.id)) {
+        map.addLayer(layer, before);
+      }
     }
     this._map = map;
     return this;
@@ -97,11 +114,10 @@ export class QmsMaplibreLayer {
   }
 }
 
-export async function createQmsLayer(
-  id: number,
+function createLayer(
+  qms: QmsLayer,
   options: QmsMaplibreOptions = {},
-): Promise<QmsMaplibreLayer> {
-  const qms = await resolveQmsLayer(id, options);
+): QmsMaplibreLayer {
   const layerId = options.id || `qms-${qms.service.id}-${ID++}`;
   const sourceId = `${layerId}-source`;
 
@@ -114,12 +130,17 @@ export async function createQmsLayer(
     rasterSource.attribution = qms.attribution;
   }
   if (qms.type === 'tms') {
+    const url = qms.url.replace('{q}', '{quadkey}');
     rasterSource.scheme = qms.scheme;
     rasterSource.tiles = qms.subdomains.length
-      ? qms.subdomains.map((subdomain) => qms.url.replace('{s}', subdomain))
-      : [qms.url];
-    rasterSource.minzoom = qms.minZoom;
-    rasterSource.maxzoom = qms.maxZoom;
+      ? qms.subdomains.map((subdomain) => url.replace('{s}', subdomain))
+      : [url];
+    if (qms.minZoom !== undefined) {
+      rasterSource.minzoom = qms.minZoom;
+    }
+    if (qms.maxZoom !== undefined) {
+      rasterSource.maxzoom = qms.maxZoom;
+    }
   }
   const rasterLayer: LayerSpecification = {
     id: layerId,
@@ -156,7 +177,7 @@ export async function addQmsLayer(
   id: number,
   options: QmsMaplibreOptions = {},
 ): Promise<QmsMaplibreLayer> {
-  const layer = await createQmsLayer(id, options);
+  const layer = createLayer(await resolveQmsLayer(id, options), options);
   layer.addTo(map, options.before);
   if (options.fit) {
     await fitQmsService(map, id, {
@@ -165,4 +186,45 @@ export async function addQmsLayer(
     });
   }
   return layer;
+}
+
+export class QmsControl implements IControl {
+  readonly control: QmsControlElement;
+
+  private readonly _controller: QmsControlController<Map, QmsMaplibreLayer>;
+
+  constructor(options: QmsControlOptions = {}) {
+    this._controller = new QmsControlController<Map, QmsMaplibreLayer>(
+      options,
+      {
+        addLayer: (map, layer) => layer.addTo(map),
+        beforeAdd: (map) => this._whenLoaded(map),
+        createLayer,
+        removeLayer: (_map, layer) => layer.remove(),
+      },
+    );
+    this.control = this._controller.control;
+    this.control.element.classList.add('maplibregl-ctrl');
+  }
+
+  onAdd(map: Map): HTMLElement {
+    this._controller.setMap(map);
+    return this.control.element;
+  }
+
+  onRemove(): void {
+    this.control.element.remove();
+    this._controller.setMap();
+  }
+
+  private _whenLoaded(map: Map): Promise<void> {
+    if (map.getStyle()) {
+      return Promise.resolve();
+    }
+    return new Promise((resolve) => map.once('style.load', resolve));
+  }
+}
+
+export function createQmsControl(options: QmsControlOptions = {}): QmsControl {
+  return new QmsControl(options);
 }

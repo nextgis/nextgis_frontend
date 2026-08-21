@@ -243,3 +243,4 @@ input
 
 demo/src/examples.json
 nextgisweb.d.ts
+packages/qms-core/src/catalog.json

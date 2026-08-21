@@ -16,7 +16,7 @@ export const tsconfigPaths = tsconfig.compilerOptions.paths['@nextgis/*'];
 export const baseDirs = tsconfigPaths.map((p) => {
   // Remove '/*' and anything after 'packages' in the path
   const trimmedPath = p.replace('/*', '').split('/packages/')[0] + '/packages';
-  return path.resolve('.', trimmedPath);
+  return path.resolve(rootPath, trimmedPath);
 });
 
 export function findRootDirectory(currentDir) {
@@ -82,7 +82,7 @@ export const fuzzyMatchTarget = (partialTargets, includeAllMatching) => {
  * @param {string} target The package name
  * @returns {string|null} The found package directory or null if not found
  */
-function findPackageDir(target) {
+export function findPackageDir(target) {
   for (const dir of baseDirs) {
     const possibleDir = path.join(dir, target);
     if (fs.existsSync(path.join(possibleDir, 'package.json'))) {

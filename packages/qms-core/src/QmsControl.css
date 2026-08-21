@@ -1,0 +1,323 @@
+.nextgis-qms-control {
+  --nextgis-qms-control-width: 300px;
+  --nextgis-qms-control-max-height: 380px;
+  --nextgis-qms-control-background: #fff;
+  --nextgis-qms-control-color: #252a31;
+  --nextgis-qms-control-muted-color: #69717d;
+  --nextgis-qms-control-accent: #0C65AF;
+  --nextgis-qms-control-border-color: #d8dde3;
+  --nextgis-qms-control-hover-background: #f3f5f7;
+  --nextgis-qms-control-border-radius: 6px;
+  --nextgis-qms-control-shadow: 0 2px 10px rgb(0 0 0 / 18%);
+  --nextgis-qms-control-gap: 8px;
+
+  width: max-content;
+  color: var(--nextgis-qms-control-color);
+  font: 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.nextgis-qms-control.ol-control {
+  top: var(--nextgis-qms-control-top, 0.5em);
+  left: var(--nextgis-qms-control-left, 3em);
+  padding: 0;
+  background: transparent;
+}
+
+.nextgis-qms-control[hidden],
+.nextgis-qms-control [hidden] {
+  display: none;
+}
+
+.nextgis-qms-control button,
+.nextgis-qms-control input {
+  box-sizing: border-box;
+  font: inherit;
+}
+
+.nextgis-qms-control button {
+  margin: 0;
+}
+
+.nextgis-qms-control .nextgis-qms-control__toggle {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  color: var(--nextgis-qms-control-color);
+  line-height: 1;
+  cursor: pointer;
+  background-color: var(--nextgis-qms-control-background);
+  background-image: url("./qms_logo.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 24px 24px;
+  border: 1px solid var(--nextgis-qms-control-border-color);
+  border-radius: var(--nextgis-qms-control-border-radius);
+  box-shadow: var(--nextgis-qms-control-shadow);
+  place-items: center;
+}
+
+.nextgis-qms-control .nextgis-qms-control__toggle[hidden] {
+  display: none;
+}
+
+.nextgis-qms-control .nextgis-qms-control__toggle:hover,
+.nextgis-qms-control .nextgis-qms-control__close:hover,
+.nextgis-qms-control .nextgis-qms-control__about:hover,
+.nextgis-qms-control .nextgis-qms-control__about-close:hover,
+.nextgis-qms-control .nextgis-qms-control__service:hover,
+.nextgis-qms-control__group > summary:hover {
+  background-color: var(--nextgis-qms-control-hover-background);
+}
+
+.nextgis-qms-control button:focus-visible,
+.nextgis-qms-control input:focus-visible,
+.nextgis-qms-control__group > summary:focus-visible {
+  outline: 2px solid var(--nextgis-qms-control-accent);
+  outline-offset: -2px;
+}
+
+.nextgis-qms-control__panel {
+  box-sizing: border-box;
+  width: min(var(--nextgis-qms-control-width), calc(100vw - 20px));
+  padding: var(--nextgis-qms-control-gap);
+  overflow: hidden;
+  background: var(--nextgis-qms-control-background);
+  border: 1px solid var(--nextgis-qms-control-border-color);
+  border-radius: var(--nextgis-qms-control-border-radius);
+  box-shadow: var(--nextgis-qms-control-shadow);
+}
+
+.nextgis-qms-control__header {
+  display: flex;
+  min-height: 28px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--nextgis-qms-control-gap);
+}
+
+.nextgis-qms-control__title {
+  padding-left: 2px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.nextgis-qms-control .nextgis-qms-control__close {
+  display: grid;
+  position: relative;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  color: var(--nextgis-qms-control-muted-color);
+  font-size: 0;
+  line-height: 0;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  border-radius: 4px;
+  box-shadow: none;
+  place-items: center;
+}
+
+.nextgis-qms-control__input {
+  width: 100%;
+  height: 34px;
+  padding: 0 10px;
+  color: inherit;
+  background: var(--nextgis-qms-control-background);
+  border: 1px solid var(--nextgis-qms-control-border-color);
+  border-radius: 4px;
+}
+
+.nextgis-qms-control__input:focus {
+  border-color: var(--nextgis-qms-control-accent);
+}
+
+.nextgis-qms-control__results,
+.nextgis-qms-control__catalog {
+  max-height: var(--nextgis-qms-control-max-height);
+  margin-top: var(--nextgis-qms-control-gap);
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-top: 1px solid var(--nextgis-qms-control-border-color);
+}
+
+.nextgis-qms-control__results {
+  padding: 6px 0;
+  color: var(--nextgis-qms-control-muted-color);
+}
+
+.nextgis-qms-control__results > .nextgis-qms-control__service {
+  color: var(--nextgis-qms-control-color);
+}
+
+.nextgis-qms-control__group {
+  border-bottom: 1px solid var(--nextgis-qms-control-border-color);
+}
+
+.nextgis-qms-control__group > summary {
+  display: flex;
+  min-height: 36px;
+  padding: 0 8px;
+  align-items: center;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+}
+
+.nextgis-qms-control__group > summary::-webkit-details-marker {
+  display: none;
+}
+
+.nextgis-qms-control__group > summary::after {
+  flex: none;
+  margin-left: auto;
+  color: var(--nextgis-qms-control-muted-color);
+  content: "›";
+  font-size: 18px;
+  transition: transform 120ms ease;
+}
+
+.nextgis-qms-control__group[open] > summary::after {
+  transform: rotate(90deg);
+}
+
+.nextgis-qms-control__group-title {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nextgis-qms-control .nextgis-qms-control__service {
+  display: block;
+  width: 100%;
+  min-height: 34px;
+  padding: 7px 10px;
+  overflow: hidden;
+  color: inherit;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.nextgis-qms-control__group > .nextgis-qms-control__service {
+  padding-left: 22px;
+  color: var(--nextgis-qms-control-muted-color);
+}
+
+.nextgis-qms-control__group > .nextgis-qms-control__service:hover {
+  color: var(--nextgis-qms-control-color);
+}
+
+.nextgis-qms-control__footer {
+  display: flex;
+  padding-top: var(--nextgis-qms-control-gap);
+  justify-content: center;
+}
+
+.nextgis-qms-control .nextgis-qms-control__about {
+  display: inline-block;
+  width: auto;
+  height: auto;
+  padding: 2px 6px;
+  color: var(--nextgis-qms-control-accent);
+  line-height: inherit;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.nextgis-qms-control__about-dialog {
+  box-sizing: border-box;
+  width: min(420px, calc(100vw - 32px));
+  padding: 24px;
+  color: var(--nextgis-qms-control-color);
+  font: inherit;
+  text-align: left;
+  background: var(--nextgis-qms-control-background);
+  border: 1px solid var(--nextgis-qms-control-border-color);
+  border-radius: var(--nextgis-qms-control-border-radius);
+  box-shadow: var(--nextgis-qms-control-shadow);
+}
+
+.nextgis-qms-control__about-dialog::backdrop {
+  background: rgb(0 0 0 / 40%);
+}
+
+.nextgis-qms-control__about-title {
+  display: block;
+  padding-right: 24px;
+  font-size: 16px;
+}
+
+.nextgis-qms-control__about-dialog p {
+  margin: 12px 0;
+}
+
+.nextgis-qms-control__about-links {
+  display: grid;
+  gap: 6px;
+}
+
+.nextgis-qms-control__about-links a {
+  color: var(--nextgis-qms-control-accent);
+}
+
+.nextgis-qms-control .nextgis-qms-control__about-close {
+  position: relative;
+  float: right;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  color: var(--nextgis-qms-control-muted-color);
+  font-size: 0;
+  line-height: 0;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  border-radius: 4px;
+  box-shadow: none;
+}
+
+.nextgis-qms-control__close::before,
+.nextgis-qms-control__close::after,
+.nextgis-qms-control__about-close::before,
+.nextgis-qms-control__about-close::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 1px;
+  background: currentcolor;
+  content: "";
+}
+
+.nextgis-qms-control__close::before,
+.nextgis-qms-control__about-close::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.nextgis-qms-control__close::after,
+.nextgis-qms-control__about-close::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.nextgis-qms-control.maplibregl-ctrl
+  .nextgis-qms-control__toggle:not(:disabled):hover {
+  background-color: var(--nextgis-qms-control-hover-background);
+}
+
+.nextgis-qms-control button.nextgis-qms-control__about:not(:focus-visible) {
+  outline: 0;
+}
+
+.nextgis-qms-control__about-developed-by {
+  color: var(--nextgis-qms-control-muted-color);
+}

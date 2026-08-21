@@ -1,6 +1,12 @@
 import { prepareQmsTmsLayer, prepareQmsWmsLayer } from './utils';
 
-import type { QmsLayer, QmsRequestOptions, QmsService } from './interfaces';
+import type {
+  QmsLayer,
+  QmsRequestOptions,
+  QmsSearchOptions,
+  QmsSearchService,
+  QmsService,
+} from './interfaces';
 
 export const QMS_URL = 'https://qms.nextgis.com';
 
@@ -36,6 +42,25 @@ export class QmsClient {
       return prepareQmsTmsLayer(service);
     }
     return prepareQmsWmsLayer(service);
+  }
+
+  async searchServices(
+    search: string,
+    { limit = 10, offset, signal, type }: QmsSearchOptions,
+  ): Promise<QmsSearchService[]> {
+    const params = new URLSearchParams({
+      search,
+      limit: String(limit),
+      type,
+    });
+    if (offset !== undefined) {
+      params.set('offset', String(offset));
+    }
+    const response = await this._getJson<{ results: QmsSearchService[] }>(
+      `${this.url}/api/v1/geoservices/?${params}`,
+      { signal },
+    );
+    return response.results;
   }
 
   private async _getJson<T>(

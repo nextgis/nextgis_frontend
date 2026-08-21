@@ -25,6 +25,42 @@ import { getQmsServiceExtent } from '@nextgis/qms-core';
 const extent = await getQmsServiceExtent(4646);
 ```
 
+Search for services by name or description:
+
+```ts
+const services = await qms.searchServices('OpenStreetMap', { type: 'tms' });
+```
+
+The bundled catalog is generated from
+[quickmapservices_contrib](https://github.com/nextgis/quickmapservices_contrib).
+The catalog is generated automatically before the package build. To
+update it manually, run:
+
+```bash
+yarn workspace @nextgis/qms-core catalog:update
+```
+
+`QmsControlElement` provides the shared search and catalog UI used by the map
+adapters. Search and catalog can be enabled independently. Its
+`nextgis-qms-control` classes and CSS custom properties can be overridden by
+the host interface.
+
+Built-in control languages are `en`, `de`, `es`, `fr`, `it`, `pt`, and `ru`.
+Select one with `lang` (`en` by default):
+
+```ts
+import { QmsControlElement } from '@nextgis/qms-core';
+
+const control = new QmsControlElement({
+  lang: 'ru',
+  messages: {
+    title: 'Подложки',
+  },
+});
+```
+
+`messages` can override search panel labels.
+
 ## Commercial support
 
 Need to fix a bug or add a feature to NextGIS Frontend? We provide custom development and support for this software. [Contact us](http://nextgis.com/contact/) to discuss options!

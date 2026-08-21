@@ -85,7 +85,7 @@ export function createQmsAdapter(
     async addLayer(options: QmsAdapterOptions): Promise<any> {
       const signal = options.signal ?? this.options.signal;
       const qmsId = options.qmsId ?? this.qms?.id;
-      if (qmsId === undefined) {
+      if (typeof qmsId !== 'number') {
         return;
       }
       try {

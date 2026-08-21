@@ -1,8 +1,20 @@
-import { getQmsServiceExtent, resolveQmsLayer } from '@nextgis/qms-core';
-import { TileLayer } from 'leaflet';
+import {
+  getQmsServiceExtent,
+  getQmsTileQuadKey,
+  QmsControlController,
+  resolveQmsLayer,
+} from '@nextgis/qms-core';
+import { Control, DomEvent, TileLayer } from 'leaflet';
 
-import type { QmsRequestOptions } from '@nextgis/qms-core';
 import type {
+  QmsControlControllerOptions,
+  QmsControlElement,
+  QmsLayer,
+  QmsRequestOptions,
+} from '@nextgis/qms-core';
+import type {
+  ControlOptions,
+  Coords,
   FitBoundsOptions,
   Layer,
   Map,
@@ -15,6 +27,23 @@ export type QmsLeafletFitOptions = FitBoundsOptions & QmsRequestOptions;
 export interface QmsLeafletOptions extends QmsRequestOptions {
   opacity?: number;
   fit?: boolean | FitBoundsOptions;
+}
+
+export interface QmsControlOptions
+  extends QmsControlControllerOptions<Layer>,
+    ControlOptions {}
+
+const QUADKEY_PLACEHOLDER = 'nextgis-qms-quadkey';
+
+class QmsTileLayer extends TileLayer {
+  getTileUrl(coords: Coords): string {
+    return super
+      .getTileUrl(coords)
+      .replace(
+        QUADKEY_PLACEHOLDER,
+        getQmsTileQuadKey(coords.x, coords.y, coords.z),
+      );
+  }
 }
 
 function getLeafletWmsParams(params: Record<string, string>) {
@@ -38,11 +67,7 @@ function getLeafletWmsParams(params: Record<string, string>) {
   return normalizedParams;
 }
 
-export async function createQmsLayer(
-  id: number,
-  options: QmsLeafletOptions = {},
-): Promise<Layer> {
-  const qms = await resolveQmsLayer(id, options);
+function createLayer(qms: QmsLayer, options: QmsLeafletOptions = {}): Layer {
   let layer: Layer;
 
   if (qms.type === 'tms') {
@@ -54,7 +79,10 @@ export async function createQmsLayer(
       tms: qms.scheme === 'tms',
       opacity: options.opacity,
     };
-    layer = new TileLayer(qms.url, layerOptions);
+    layer = new QmsTileLayer(
+      qms.url.replace('{q}', QUADKEY_PLACEHOLDER),
+      layerOptions,
+    );
   } else {
     const layerOptions: WMSOptions = {
       layers: qms.layers,
@@ -96,7 +124,7 @@ export async function addQmsLayer(
   id: number,
   options: QmsLeafletOptions = {},
 ): Promise<Layer> {
-  const layer = await createQmsLayer(id, options);
+  const layer = createLayer(await resolveQmsLayer(id, options), options);
   layer.addTo(map);
   if (options.fit) {
     await fitQmsService(map, id, {
@@ -105,4 +133,36 @@ export async function addQmsLayer(
     });
   }
   return layer;
+}
+
+export class QmsControl extends Control {
+  readonly control: QmsControlElement;
+
+  private readonly _controller: QmsControlController<Map, Layer>;
+
+  constructor(options: QmsControlOptions = {}) {
+    super(options.position ? { position: options.position } : undefined);
+    this._controller = new QmsControlController<Map, Layer>(options, {
+      addLayer: (map, layer) => layer.addTo(map),
+      createLayer,
+      removeLayer: (map, layer) => map.removeLayer(layer),
+    });
+    this.control = this._controller.control;
+  }
+
+  onAdd(map: Map): HTMLElement {
+    this.control.element.classList.add('leaflet-control');
+    DomEvent.disableClickPropagation(this.control.element);
+    DomEvent.disableScrollPropagation(this.control.element);
+    this._controller.setMap(map);
+    return this.control.element;
+  }
+
+  onRemove(): void {
+    this._controller.setMap();
+  }
+}
+
+export function createQmsControl(options: QmsControlOptions = {}): QmsControl {
+  return new QmsControl(options);
 }
