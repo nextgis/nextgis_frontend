@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0-alpha.5](https://github.com/nextgis/nextgis_frontend/compare/v4.0.0-alpha.4...v4.0.0-alpha.5) (2026-08-21)
+
+
+### Features
+
+* **qms:** add map controls for QMS services ([52efc43](https://github.com/nextgis/nextgis_frontend/commit/52efc43b8c856eca43a52d27ee68765bf6689269))
+
+
+
+
+
 # [3.0.0](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.22...v3.0.0) (2025-07-26)
 
 **Note:** Version bump only for package @nextgis/build-tools
