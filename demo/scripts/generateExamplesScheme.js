@@ -1,6 +1,6 @@
-import { existsSync, lstatSync, readFileSync, readdirSync } from 'node:fs';
+import { existsSync, lstatSync, readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
-import { URL, fileURLToPath } from 'node:url';
+import { fileURLToPath, URL } from 'node:url';
 
 const pkgRoot = path.join(
   fileURLToPath(new URL(import.meta.url)),
@@ -30,21 +30,27 @@ function replaceAbsolutePathToCdn(line, packages) {
     const emptyCharsCount = line.search(/\S/);
 
     const isLibPath = line.match(
-      /(?:src|href)=("|').*?(lib\/).*?([-\w.]+)\.(?:([-\w.]+)\.)((?:js|css))/,
+      /(?:src|href)=("|').*?lib\/([-\w]+?)(?:\.global(?:\.prod)?)?\.(js|css)/,
     );
 
     if (isLibPath) {
       newLine = '';
-      const lineLibName = isLibPath[3];
+      const lineLibName = isLibPath[2];
+      const extension = isLibPath[3];
 
       if (lineLibName) {
         for (let fry = 0; fry < packages.length; fry++) {
           const pkg = packages[fry] && packages[fry].package;
           const packageLibName = pkg.name.replace(/^@nextgis\//, '');
           if (packageLibName === lineLibName) {
-            newLine =
-              new Array(emptyCharsCount + 1).join(' ') +
-              `<script src="https://unpkg.com/${pkg.name}@${pkg.version}/${pkg.unpkg}"></script>`;
+            const file =
+              extension === 'css' ? `lib/${lineLibName}.css` : pkg.unpkg;
+            const url = `https://cdn.jsdelivr.net/npm/${pkg.name}@${pkg.version}/${file}`;
+            const tag =
+              extension === 'css'
+                ? `<link rel="stylesheet" href="${url}" />`
+                : `<script src="${url}"></script>`;
+            newLine = new Array(emptyCharsCount + 1).join(' ') + tag;
           }
         }
       }
