@@ -27,7 +27,7 @@ export function prepareFieldsToNgw<
           } else if (x.datatype === 'BOOLEAN') {
             value =
               typeof prop === 'boolean' || typeof prop === 'number'
-                ? Number(!!prop)
+                ? !!prop
                 : null;
           } else if (x.datatype === 'DATE' || x.datatype === 'DATETIME') {
             let dt: Date | undefined;

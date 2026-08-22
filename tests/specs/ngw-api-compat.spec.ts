@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 
 import { ResourcesControl } from '../../packages/ngw-connector/src/ResourcesControl';
+import { prepareFieldsToNgw } from '../../packages/ngw-kit/src/utils/prepareFieldsToNgw';
 import { vectorLayerGeomToPaintTypeAlias } from '../../packages/ngw-kit/src/utils/utils';
 
 import type { NgwConnectorExtended } from '../../packages/ngw-connector/src/NgwConnectorExtended';
@@ -61,5 +62,16 @@ describe('NGW API compatibility', () => {
 
   it('does not select a paint type for no-geometry layers', () => {
     expect(vectorLayerGeomToPaintTypeAlias.NONE).to.be.undefined;
+  });
+
+  it('keeps boolean feature field values as booleans', () => {
+    const fields = [{ keyname: 'enabled', datatype: 'BOOLEAN' as const }];
+
+    expect(prepareFieldsToNgw({ enabled: true }, fields)).to.deep.equal({
+      enabled: true,
+    });
+    expect(prepareFieldsToNgw({ enabled: false }, fields)).to.deep.equal({
+      enabled: false,
+    });
   });
 });

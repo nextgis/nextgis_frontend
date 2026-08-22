@@ -201,9 +201,7 @@ export class VectorLayer<
     const fields = metaFields.map((x) => {
       return {
         keyname: x.propertyName,
-        // NGW does not support boolean yet
-        datatype:
-          x.options.datatype === 'BOOLEAN' ? 'INTEGER' : x.options.datatype,
+        datatype: x.options.datatype,
         grid_visibility: x.options.grid_visibility,
         label_field: x.options.label_field,
         display_name: x.options.display_name,

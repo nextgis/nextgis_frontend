@@ -54,7 +54,7 @@ export function Column(
         String: 'STRING',
         Number: 'REAL',
         Ddate: 'DATE',
-        Boolean: 'INTEGER',
+        Boolean: 'BOOLEAN',
       };
       const type = alias[reflectMetadataType];
       if (type) {
