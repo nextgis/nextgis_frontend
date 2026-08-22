@@ -112,6 +112,9 @@ export class NgwUploader {
             throw new Error('Vector resource creation error');
           }
           const styleOptions = options.style || {};
+          if (v.vector_layer.geometry_type === 'NONE') {
+            return newRes;
+          }
           if (!styleOptions.style) {
             const geometryType = v.vector_layer.geometry_type;
             styleOptions.style = mapserverStyle({

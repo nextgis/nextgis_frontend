@@ -3,6 +3,7 @@ import type { LegendSymbol } from '@nextgisweb/render/type/api';
 import type {
   CompositeRead,
   ResourceRead,
+  SearchResponse,
 } from '@nextgisweb/resource/type/api';
 
 import type { FeatureItem, FeatureLayersIdentify } from './types/FeatureLayer';
@@ -88,7 +89,7 @@ export interface GetRequestItemsResponseMap extends RequestItemKeys {
   'pyramid.route': PyramidRoute;
   'pyramid.settings': PyramidSettings;
   'resource.item': CompositeRead;
-  'resource.search': CompositeRead[];
+  'resource.search': CompositeRead[] | SearchResponse;
   'resource.child': any;
   'resource.collection': CompositeRead[];
   'file_upload.upload': FileUploadResp;

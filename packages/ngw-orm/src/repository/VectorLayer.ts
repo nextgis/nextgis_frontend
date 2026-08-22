@@ -71,7 +71,7 @@ type Geometry =
   | Polygon
   | MultiPolygon;
 
-const aliases: Record<GeometryType, GeoJsonTypes> = {
+const aliases: Partial<Record<GeometryType, GeoJsonTypes>> = {
   POINT: 'Point',
   MULTIPOINT: 'MultiPoint',
   LINESTRING: 'LineString',
@@ -108,7 +108,12 @@ export class VectorLayer<
   }
   set coordinates(coordinates: G['coordinates']) {
     const constructor = this.getConstructor();
-    const type: GeoJsonTypes = aliases[constructor.geometryType];
+    const type = aliases[constructor.geometryType];
+    if (!type) {
+      throw new Error(
+        `${constructor.geometryType} geometry type is not supported`,
+      );
+    }
     const geom = { type, coordinates } as G;
     this._geom = geom;
   }

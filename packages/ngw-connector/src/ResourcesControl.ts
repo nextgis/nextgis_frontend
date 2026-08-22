@@ -156,14 +156,17 @@ export class ResourcesControl {
             },
           })
           .then((resources) => {
-            if (requestOptions?.cache && resources) {
-              for (const x of resources) {
+            const items = Array.isArray(resources)
+              ? resources
+              : resources.items;
+            if (requestOptions?.cache) {
+              for (const x of items) {
                 this.cache.add('resource.item', Promise.resolve(x), {
                   id: x.resource.id,
                 });
               }
             }
-            return resources;
+            return items;
           });
       }
       return items;
