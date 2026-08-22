@@ -47,10 +47,9 @@ export class NgwWebmapItem extends Item<ItemOptions> {
         name: 'visibility',
         getProperty(item?: NgwWebmapItem): boolean {
           if (item) {
-            if (
-              item.item.item_type === 'group' ||
-              item.item.item_type === 'root'
-            ) {
+            if (item.item.item_type === 'group') {
+              return item.item.group_enabled;
+            } else if (item.item.item_type === 'root') {
               return treeSome<TreeGroup | TreeLayer | TreeRoot>(
                 item.item,
                 (i) => ('layer_enabled' in i ? i.layer_enabled : false),
@@ -67,7 +66,9 @@ export class NgwWebmapItem extends Item<ItemOptions> {
           options?: ToggleLayerOptions,
           item?: NgwWebmapItem,
         ): void {
-          if (item && item.item.item_type === 'layer') {
+          if (item?.item.item_type === 'group') {
+            item.item.group_enabled = value;
+          } else if (item?.item.item_type === 'layer') {
             if (item.layer) {
               if (value) {
                 item.webMap.showLayer(item.layer, options);
@@ -276,6 +277,9 @@ export class NgwWebmapItem extends Item<ItemOptions> {
         });
         this.tree.addChild(childItem as typeof this);
       }
+    }
+    if (this.item.item_type === 'group' && !group.group_enabled) {
+      this.properties.property('visibility').set(false);
     }
     return Promise.resolve();
   }
