@@ -9,20 +9,24 @@ type FilterExpressionString = string & {
 };
 
 type GetExpr = ['get', string];
+type FidExpr = ['fid'];
+type FieldExpr = GetExpr | FidExpr;
 
 type EqNeOp = '==' | '!=';
 type CmpOp = '>' | '<' | '>=' | '<=';
 type InOp = 'in' | '!in';
 type IsNullOp = 'is_null' | '!is_null';
+type IlikeOp = 'ilike';
 
 type ConditionValue = string | number | boolean | null;
 
-type EqNeExpr = [EqNeOp, GetExpr, ConditionValue];
-type CmpExpr = [CmpOp, GetExpr, number | string];
-type InExpr = [InOp, GetExpr, ...(string | number)[]];
-type IsNullExpr = [IsNullOp, GetExpr];
+type EqNeExpr = [EqNeOp, FieldExpr, ConditionValue];
+type CmpExpr = [CmpOp, FieldExpr, number | string];
+type InExpr = [InOp, FieldExpr, ...(string | number)[]];
+type IsNullExpr = [IsNullOp, FieldExpr];
+type IlikeExpr = [IlikeOp, FieldExpr, string];
 
-type ConditionExpr = EqNeExpr | CmpExpr | InExpr | IsNullExpr;
+type ConditionExpr = EqNeExpr | CmpExpr | InExpr | IsNullExpr | IlikeExpr;
 
 type LogicalOp = 'all' | 'any';
 type GroupExpr = [LogicalOp, ...(ConditionExpr | GroupExpr)[]];
@@ -45,8 +49,25 @@ function isPropertiesFilterGroup<T extends Properties = Properties>(
   return Array.isArray(value) && !isPropertyFilter(value);
 }
 
-function toGetExpr(field: string): GetExpr {
-  return ['get', field];
+function toGetExpr(field: string): FieldExpr {
+  return field === 'id' ? ['fid'] : ['get', field];
+}
+
+function parseWildcardField(field: string): {
+  field: string;
+  leadingWildcard: boolean;
+  trailingWildcard: boolean;
+} {
+  const leadingWildcard = field.startsWith('%');
+  const trailingWildcard = field.endsWith('%');
+  return {
+    field: field.slice(
+      leadingWildcard ? 1 : 0,
+      trailingWildcard ? -1 : undefined,
+    ),
+    leadingWildcard,
+    trailingWildcard,
+  };
 }
 
 function toConditionExpr<T extends Properties = Properties>(
@@ -133,8 +154,16 @@ function toConditionExpr<T extends Properties = Properties>(
       }
       return ['!in', getExpr, ...value];
 
+    case 'ilike': {
+      if (typeof value !== 'string') {
+        throw new Error(`Operator "ilike" requires string for "${field}"`);
+      }
+      const parsed = parseWildcardField(field);
+      const pattern = `${parsed.leadingWildcard ? '%' : ''}${value}${parsed.trailingWildcard ? '%' : ''}`;
+      return ['ilike', toGetExpr(parsed.field), pattern];
+    }
+
     case 'like':
-    case 'ilike':
       throw new Error(
         `Operator "${op}" is not supported by server FilterExpression`,
       );

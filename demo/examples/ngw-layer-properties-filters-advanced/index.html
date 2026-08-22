@@ -5,7 +5,9 @@
     <title>NGW layers advanced properties filtering</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-      html, body, #map {
+      html,
+      body,
+      #map {
         margin: 0;
         padding: 0;
         width: 100%;
@@ -17,19 +19,11 @@
   <body>
     <div id="map"></div>
     <script>
-      let amenityList = [];
-
       const ngwMap = new NgwMap({
         baseUrl: 'https://demo.nextgis.com/',
         target: 'map',
         qmsId: 448,
       });
-
-      const filterFunction = (e) => {
-        return;
-      };
-
-      amenityList = ['cafe', 'restaurant'];
 
       ngwMap.addNgwLayer({
         resource: 1733,
@@ -47,8 +41,11 @@
         fit: true,
         adapterOptions: {
           propertiesFilter: [
-            ['NAME', 'ilike', 'Papa John%'],
-            ['NAME', 'ilike', 'Papa Murph%'],
+            [
+              'any',
+              ['NAME', 'ilike', 'Papa John%'],
+              ['NAME', 'ilike', 'Papa Murph%'],
+            ],
           ],
           paint: { color: 'blue', radius: 8 },
         },

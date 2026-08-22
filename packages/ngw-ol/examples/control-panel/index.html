@@ -63,6 +63,7 @@
               : label,
             title: 'Toggle ' + label,
             switch: options.switch,
+            onClick: (status) => {console.log(`${label}: ${status}`)}
           });
         };
 

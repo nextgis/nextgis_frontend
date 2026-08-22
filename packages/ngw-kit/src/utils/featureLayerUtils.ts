@@ -1,4 +1,3 @@
-import { isPropertyFilter } from '@nextgis/properties-filter';
 import {
   defined,
   degrees2meters,
@@ -11,10 +10,6 @@ import type {
   FeatureItem,
   RequestItemAdditionalParams,
 } from '@nextgis/ngw-connector';
-import type {
-  PropertiesFilter,
-  PropertyFilter,
-} from '@nextgis/properties-filter';
 import type { FeatureProperties, LngLatArray } from '@nextgis/utils';
 import type { Feature, Geometry } from 'geojson';
 
@@ -81,111 +76,6 @@ function paramListToQuery(paramList: [string, any][]): Record<string, any> {
     },
     {} as Record<string, any>,
   );
-}
-
-// NGW REST API is not able to filtering by combined queries
-// therefore the filter is divided into several requests
-export async function createFeatureFieldFilterQueries<
-  G extends Geometry = Geometry,
-  P extends { [field: string]: any } = { [field: string]: any },
->(
-  opt: FetchNgwItemsOptions<P> &
-    Required<Pick<FetchNgwItemsOptions, 'filters'>>,
-): Promise<FeatureItem<P, G>[]> {
-  const queries: Promise<FeatureItem<P, G>[]>[] = getQueries<G, P>(opt);
-
-  const itemsParts = await Promise.all(queries);
-  // this list of ids used for optimization
-  const ids: number[] = [];
-  const items: FeatureItem<P, G>[] = [];
-  for (const part of itemsParts) {
-    for (const item of part) {
-      if (!ids.includes(item.id)) {
-        items.push(item);
-        ids.push(item.id);
-      }
-    }
-  }
-  const offset = opt.offset !== undefined ? opt.offset : 0;
-  const limit = opt.limit !== undefined ? opt.limit : items.length;
-  if (opt.offset || opt.limit) {
-    return items.splice(offset, limit);
-  }
-  return items;
-}
-
-function createParam(pf: PropertyFilter): [string, any] {
-  const [field, operation, value] = pf;
-  const isFldStr = field !== 'id' ? 'fld_' : '';
-  let vStart = '';
-  let vEnd = '';
-  const field_ = String(field)
-    .trim()
-    .replace(/^(%?)(.+?)(%?)$/, (m, a, b, c) => {
-      vStart = a;
-      vEnd = c;
-      return b;
-    });
-  const v = vStart + value + vEnd;
-  return [`${isFldStr}${field_}__${operation}`, v];
-}
-
-function getQueries<
-  G extends Geometry = Geometry,
-  P extends { [field: string]: any } = { [field: string]: any },
->(
-  opt: FetchNgwItemsOptions<P> &
-    Required<Pick<FetchNgwItemsOptions, 'filters'>>,
-  _queries: Promise<FeatureItem<P, G>[]>[] = [],
-  _parentAllParams: [string, any][] = [],
-): Promise<FeatureItem<P, G>[]>[] {
-  const { filters } = opt;
-  const paramList = opt.paramList ?? [];
-
-  const logic = typeof filters[0] === 'string' ? filters[0] : 'all';
-  const filters_ = filters.filter((x) => Array.isArray(x)) as PropertyFilter[];
-
-  if (logic === 'any') {
-    for (const f of filters_) {
-      if (isPropertyFilter(f)) {
-        _queries.push(
-          fetchNgwLayerItemsRequest<G, P>({
-            ...opt,
-            paramList: [..._parentAllParams, ...paramList, createParam(f)],
-          }),
-        );
-      } else {
-        getQueries({ ...opt, filters: f }, _queries, [..._parentAllParams]);
-      }
-    }
-  } else if (logic === 'all') {
-    const filters: [string, any][] = [];
-    const propertiesFilterList: PropertiesFilter[] = [];
-    for (const f of filters_) {
-      if (isPropertyFilter(f)) {
-        filters.push(createParam(f));
-      } else {
-        propertiesFilterList.push(f);
-      }
-    }
-
-    if (propertiesFilterList.length) {
-      for (const x of propertiesFilterList) {
-        getQueries({ ...opt, filters: x }, _queries, [
-          ..._parentAllParams,
-          ...filters,
-        ]);
-      }
-    } else {
-      _queries.push(
-        fetchNgwLayerItemsRequest<G, P>({
-          ...opt,
-          paramList: [..._parentAllParams, ...paramList, ...filters],
-        }),
-      );
-    }
-  }
-  return _queries;
 }
 
 function createWktFromCoordArray(coord: LngLatArray[]): string {

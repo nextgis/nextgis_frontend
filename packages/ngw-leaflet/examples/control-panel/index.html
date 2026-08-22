@@ -63,6 +63,7 @@
               : label,
             title: 'Toggle ' + label,
             switch: options.switch,
+            onClick: (status) => {console.log(`${label}: ${status}`)}
           });
         };
 
@@ -101,7 +102,7 @@
           });
           const horizontalPanel = createPanel({
             orientation: 'horizontal',
-            gap: 4,
+            gap: 0,
           });
           const verticalPanel = createPanel({
             orientation: 'vertical',

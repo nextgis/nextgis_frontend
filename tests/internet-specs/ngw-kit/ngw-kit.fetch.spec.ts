@@ -219,34 +219,6 @@ describe('NgwKit', function () {
         });
         expect(items4.length).to.be.equal(2);
       });
-      it(`like`, async () => {
-        const connection = await getConnection();
-        const resourceId = await newPointLayerId('NgwKit items');
-        const items1 = await fetchNgwLayerItems<Point, ISandboxPointLayer>({
-          connector: connection.driver,
-          resourceId,
-          filters: [['%test', 'like', 'bar']],
-        });
-        expect(items1.length).to.be.equal(2);
-        const items2 = await fetchNgwLayerItems<Point, ISandboxPointLayer>({
-          connector: connection.driver,
-          resourceId,
-          filters: [['test%', 'like', 'foo']],
-        });
-        expect(items2.length).to.be.equal(2);
-        const items3 = await fetchNgwLayerItems<Point, ISandboxPointLayer>({
-          connector: connection.driver,
-          resourceId,
-          filters: [['%test%', 'like', 'oB']],
-        });
-        expect(items3.length).to.be.equal(1);
-        const items4 = await fetchNgwLayerItems<Point, ISandboxPointLayer>({
-          connector: connection.driver,
-          resourceId,
-          filters: [['test', 'like', 'FooFoo']],
-        });
-        expect(items4.length).to.be.equal(1);
-      });
       it(`eq all any`, async () => {
         const connection = await getConnection();
         const resourceId = await newPointLayerId('NgwKit items');
@@ -294,16 +266,6 @@ describe('NgwKit', function () {
           filters: [['%test%', 'ilike', 'Да Выпей']],
         });
         expect(items1.length).to.be.equal(2);
-      });
-      it(`like cyrillic`, async () => {
-        const connection = await getConnection();
-        const resourceId = await newPointLayerId('NgwKit items');
-        const items1 = await fetchNgwLayerItems<Point, ISandboxPointLayer>({
-          connector: connection.driver,
-          resourceId,
-          filters: [['%test%', 'like', 'Да Выпей']],
-        });
-        expect(items1.length).to.be.equal(1);
       });
       // NGW not support yet
       // it(`ne null`, async () => {
