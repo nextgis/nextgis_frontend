@@ -18,12 +18,14 @@
     "build:esm": "tsc --outDir lib --module esnext",
     "rename:cjs": "node -e \"require('fs').renameSync('./lib/index.js', './lib/index.cjs')\"",
     "prod": "npm run clean && npm run build:cjs && npm run build:esm",
-    "test": "echo \"No tests yet\""
+    "test": "npm run prod && node --test test/*.test.mjs"
+  },
+  "dependencies": {
+    "typescript": "~6.0.3"
   },
   "devDependencies": {
     "@types/node": "^24.1.0",
-    "rimraf": "^6.0.0",
-    "typescript": "~6.0.3"
+    "rimraf": "^6.0.0"
   },
   "license": "MIT"
 }

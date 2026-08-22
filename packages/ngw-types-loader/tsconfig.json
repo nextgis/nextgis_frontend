@@ -10,7 +10,8 @@
     "outDir": "./lib"
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*.ts",
+    "src/**/*.cts"
   ],
   "exclude": [
     "node_modules",
