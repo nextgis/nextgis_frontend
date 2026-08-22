@@ -10,7 +10,7 @@ export default [
   ...tseslint.configs.recommended,
   eslintPluginPrettierRecommended,
   {
-    files: ['**/*.{js,mjs,cjs,ts}'],
+    files: ['**/*.{js,mjs,cjs,ts,mts,cts}'],
     languageOptions: {
       globals: {
         ...globals.browser,
@@ -19,6 +19,7 @@ export default [
     rules: {
       indent: 'off',
       camelcase: 'off',
+      'no-useless-assignment': 'off',
       'max-len': [
         'error',
         {

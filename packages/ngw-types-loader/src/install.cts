@@ -6,6 +6,7 @@ import ts from 'typescript';
 const GENERATED_SCOPE = '@nextgisweb';
 const MARKER_FILE_NAME = '.ngw-types-loader';
 const MODULE_NAME_PATTERN =
+  // eslint-disable-next-line max-len
   /^@nextgisweb\/([a-z0-9]+(?:-[a-z0-9]+)*)\/([a-z0-9]+(?:[._-][a-z0-9]+)*(?:\/[a-z0-9]+(?:[._-][a-z0-9]+)*)*)$/;
 
 interface GeneratedModule {

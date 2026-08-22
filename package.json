@@ -10,7 +10,7 @@
     "prod-each": "lerna run prod && npm run test-build",
     "build-dts": "npx tsc -p tsconfig.build.json && rollup -c ./packages/build-tools/lib/rollup.dts.config.js",
     "watch-dts": "npx tsc -p tsconfig.build.json --watch",
-    "lint": "eslint --fix ./packages/**/src/**/*.ts",
+    "lint": "eslint --fix \"packages/**/src/**/*.{ts,cts}\"",
     "demo": "yarn run examples && cd ./demo/ && yarn run build && yarn run docker",
     "examples": "node ./scripts/updateExamples.mjs",
     "test": "npm run karma -- --single-run --coverage",
