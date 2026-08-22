@@ -21,8 +21,9 @@
     "test": "echo \"No tests yet\""
   },
   "devDependencies": {
+    "@types/node": "^24.1.0",
     "rimraf": "^6.0.0",
-    "typescript": "^5.5.0"
+    "typescript": "~6.0.3"
   },
   "license": "MIT"
 }

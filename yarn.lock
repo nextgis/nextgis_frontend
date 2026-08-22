@@ -701,13 +701,13 @@ __metadata:
     rollup-plugin-postcss: ^4.0.2
     rollup-plugin-terser: ^7.0.2
     rollup-plugin-visualizer: ^5.14.0
-    typescript: ~5.8.3
+    typescript: ~6.0.3
   languageName: unknown
   linkType: soft
 
 "@nextgis/build-tools@file:../build-tools::locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter":
   version: 4.0.0-alpha.5
-  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=2764d2&locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter"
+  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=6fd27b&locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter"
   dependencies:
     "@nextgis/eslint-config": 3.0.0
     "@rollup/plugin-alias": ^5.1.1
@@ -732,14 +732,14 @@ __metadata:
     rollup-plugin-polyfill-node: ^0.13.0
     rollup-plugin-postcss: ^4.0.2
     rollup-plugin-terser: ^7.0.2
-    typescript: ~5.8.3
-  checksum: 3de0fbf1d43b35d0dadcb67bac41e60142546d645d16f3fbe4c313a7262ce6a2230b887279d41b49731a054211710c43667100b0115a9b568eaa408dc2a2e94a
+    typescript: ~6.0.3
+  checksum: 7009908d7084986f77af38c8dd0c0bc16e22ebf862e106619fd165671505e8898391b4d06773effe578e07c1d3b66393bbfe062952a19bb064073fc052b0e945
   languageName: node
   linkType: hard
 
 "@nextgis/build-tools@file:../build-tools::locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium":
   version: 4.0.0-alpha.5
-  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=2764d2&locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium"
+  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=6fd27b&locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium"
   dependencies:
     "@nextgis/eslint-config": 3.0.0
     "@rollup/plugin-alias": ^5.1.1
@@ -764,8 +764,8 @@ __metadata:
     rollup-plugin-polyfill-node: ^0.13.0
     rollup-plugin-postcss: ^4.0.2
     rollup-plugin-terser: ^7.0.2
-    typescript: ~5.8.3
-  checksum: 3de0fbf1d43b35d0dadcb67bac41e60142546d645d16f3fbe4c313a7262ce6a2230b887279d41b49731a054211710c43667100b0115a9b568eaa408dc2a2e94a
+    typescript: ~6.0.3
+  checksum: 7009908d7084986f77af38c8dd0c0bc16e22ebf862e106619fd165671505e8898391b4d06773effe578e07c1d3b66393bbfe062952a19bb064073fc052b0e945
   languageName: node
   linkType: hard
 
@@ -1079,8 +1079,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis/ngw-types-loader@workspace:packages/ngw-types-loader"
   dependencies:
+    "@types/node": ^24.1.0
     rimraf: ^6.0.0
-    typescript: ^5.5.0
+    typescript: ~6.0.3
   bin:
     ngw-types-loader: ./lib/index.cjs
   languageName: unknown
@@ -10341,7 +10342,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:>=3 < 6, typescript@npm:^5.5.0, typescript@npm:~5.8.3":
+"typescript@npm:>=3 < 6":
   version: 5.8.3
   resolution: "typescript@npm:5.8.3"
   bin:
@@ -10351,13 +10352,33 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@>=3 < 6#~builtin<compat/typescript>, typescript@patch:typescript@^5.5.0#~builtin<compat/typescript>, typescript@patch:typescript@~5.8.3#~builtin<compat/typescript>":
+"typescript@npm:~6.0.3":
+  version: 6.0.3
+  resolution: "typescript@npm:6.0.3"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: c1182dfadf8a8cb22a4e32442715afef1af1b950ae635b1c52c27e0d7fb7a5e2607ed7c7c4079bba4163579250e02445fd8d46b09cbceda71ff72a5b7d69db61
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@>=3 < 6#~builtin<compat/typescript>":
   version: 5.8.3
   resolution: "typescript@patch:typescript@npm%3A5.8.3#~builtin<compat/typescript>::version=5.8.3&hash=f3b441"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 1b503525a88ff0ff5952e95870971c4fb2118c17364d60302c21935dedcd6c37e6a0a692f350892bafcef6f4a16d09073fe461158547978d2f16fbe4cb18581c
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@~6.0.3#~builtin<compat/typescript>":
+  version: 6.0.3
+  resolution: "typescript@patch:typescript@npm%3A6.0.3#~builtin<compat/typescript>::version=6.0.3&hash=f3b441"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 8ed159a81ab4901a620c19fda539632cee610f8ec34dde57a3acc6b6df72894ad0b50bdd1946b763313d9b73dedb019d2e81c03eff06c0f2c785cde30a537d15
   languageName: node
   linkType: hard
 

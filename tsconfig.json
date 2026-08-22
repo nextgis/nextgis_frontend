@@ -1,11 +1,10 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "outDir": "temp",
     "sourceMap": false,
     "target": "es2016",
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "allowJs": false,
     "strict": true,
     "noUnusedLocals": true,
