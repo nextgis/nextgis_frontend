@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0-alpha.6](https://github.com/nextgis/nextgis_frontend/compare/v4.0.0-alpha.5...v4.0.0-alpha.6) (2026-08-24)
+
+
+### Bug Fixes
+
+* **demo:** switch to jsdelivr cdn in examples ([4199fd1](https://github.com/nextgis/nextgis_frontend/commit/4199fd1a4ce93056df805a240876110f6075e71e))
+* **ngw-kit:** omit empty render filter parameter ([b5eb5a6](https://github.com/nextgis/nextgis_frontend/commit/b5eb5a6b76489b331e2ca6e9c6219f74fe45e758))
+* **ngw-kit:** support webmap group visibility ([deb8c26](https://github.com/nextgis/nextgis_frontend/commit/deb8c2611c7db05c7e05ff90d76aec40b7c82b9e))
+* **ngw:** support boolean vector fields ([06da313](https://github.com/nextgis/nextgis_frontend/commit/06da313cc8380a2fc33c323884701a742cbced15))
+* **ngw:** support updated API types ([29d4cdd](https://github.com/nextgis/nextgis_frontend/commit/29d4cdddf620c0ba399441f311c8524b7febc31c))
+
+
+### Features
+
+* **ngw-kit:** support NGW feature filter expressions ([8fa9a97](https://github.com/nextgis/nextgis_frontend/commit/8fa9a9759fcf9908ba9f2517b00934e2af5e99a8))
+* **ngw-types-loader:** install generated types as packages ([a1eabdd](https://github.com/nextgis/nextgis_frontend/commit/a1eabddd6cf82523e02b544410fd6b3a3fc5e632))
+
+
+
+
+
 # [4.0.0-alpha.5](https://github.com/nextgis/nextgis_frontend/compare/v4.0.0-alpha.4...v4.0.0-alpha.5) (2026-08-21)
 
 

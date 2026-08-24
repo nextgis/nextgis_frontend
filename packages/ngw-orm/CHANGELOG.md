@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0-alpha.6](https://github.com/nextgis/nextgis_frontend/compare/v4.0.0-alpha.5...v4.0.0-alpha.6) (2026-08-24)
+
+
+### Bug Fixes
+
+* **ngw:** support boolean vector fields ([06da313](https://github.com/nextgis/nextgis_frontend/commit/06da313cc8380a2fc33c323884701a742cbced15))
+* **ngw:** support updated API types ([29d4cdd](https://github.com/nextgis/nextgis_frontend/commit/29d4cdddf620c0ba399441f311c8524b7febc31c))
+
+
+
+
+
 # [4.0.0-alpha.5](https://github.com/nextgis/nextgis_frontend/compare/v4.0.0-alpha.4...v4.0.0-alpha.5) (2026-08-21)
 
 **Note:** Version bump only for package @nextgis/ngw-orm

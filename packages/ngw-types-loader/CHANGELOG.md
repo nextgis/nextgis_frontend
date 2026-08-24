@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0-alpha.6](https://github.com/nextgis/nextgis_frontend/compare/v4.0.0-alpha.5...v4.0.0-alpha.6) (2026-08-24)
+
+
+### Features
+
+* **ngw-types-loader:** install generated types as packages ([a1eabdd](https://github.com/nextgis/nextgis_frontend/commit/a1eabddd6cf82523e02b544410fd6b3a3fc5e632))
+
+
+
+
+
 # [3.0.0](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0-alpha.22...v3.0.0) (2025-07-26)
 
 **Note:** Version bump only for package @nextgis/ngw-types-loader

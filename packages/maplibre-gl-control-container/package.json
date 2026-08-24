@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/maplibre-gl-control-container",
-  "version": "4.0.0-alpha.5",
+  "version": "4.0.0-alpha.6",
   "description": "MapLibre GL JS integration for NextGIS control container",
   "main": "lib/maplibre-gl-control-container.global.prod.js",
   "module": "lib/maplibre-gl-control-container.esm-bundler.js",
@@ -8,13 +8,13 @@
   "jsdelivr": "lib/maplibre-gl-control-container.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/control-container": "4.0.0-alpha.5"
+    "@nextgis/control-container": "4.0.0-alpha.6"
   },
   "peerDependencies": {
     "maplibre-gl": ">=2"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "4.0.0-alpha.5",
+    "@nextgis/build-tools": "4.0.0-alpha.6",
     "maplibre-gl": "^6.5.0"
   },
   "buildOptions": {

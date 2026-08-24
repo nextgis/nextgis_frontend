@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/ol-control-container",
-  "version": "4.0.0-alpha.5",
+  "version": "4.0.0-alpha.6",
   "description": "OpenLayers integration for NextGIS control container",
   "main": "lib/ol-control-container.global.prod.js",
   "module": "lib/ol-control-container.esm-bundler.js",
@@ -8,13 +8,13 @@
   "jsdelivr": "lib/ol-control-container.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/control-container": "4.0.0-alpha.5"
+    "@nextgis/control-container": "4.0.0-alpha.6"
   },
   "peerDependencies": {
     "ol": ">=6.0.0"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "4.0.0-alpha.5",
+    "@nextgis/build-tools": "4.0.0-alpha.6",
     "ol": "^10.10.0"
   },
   "buildOptions": {
