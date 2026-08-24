@@ -17,7 +17,7 @@ import path from 'node:path';
 import { brotliCompressSync, gzipSync } from 'node:zlib';
 
 import chalk from 'chalk';
-import { execa, execaCommand, execaSync } from 'execa';
+import { execa, execaSync, parseCommandString } from 'execa';
 import minimist from 'minimist';
 
 import {
@@ -87,7 +87,8 @@ async function runPrebuilds(targets) {
   for (const { directory, pkg } of packages) {
     const command = pkg.buildOptions && pkg.buildOptions.prebuild;
     if (command) {
-      await execaCommand(command, { cwd: directory, stdio: 'inherit' });
+      const [file, ...commandArgs] = parseCommandString(command);
+      await execa(file, commandArgs, { cwd: directory, stdio: 'inherit' });
     }
   }
 }
