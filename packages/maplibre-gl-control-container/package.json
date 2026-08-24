@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@nextgis/build-tools": "4.0.0-alpha.5",
-    "maplibre-gl": "^4.7.1"
+    "maplibre-gl": "^6.5.0"
   },
   "buildOptions": {
     "name": "MaplibreGLControlContainer",

@@ -36,6 +36,7 @@ import type {
   ViewOptions,
 } from '@nextgis/webmap';
 import type {
+  CameraOptions,
   FitBoundsOptions,
   IControl,
   LngLatBoundsLike,
@@ -241,7 +242,7 @@ export class MaplibreGLMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     if (!map) return;
     if (Array.isArray(lngLatOrOpt)) {
       const c = lngLatOrOpt;
-      const options: maplibregl.CameraOptions = {
+      const options: CameraOptions = {
         center: [c[0], c[1]],
       };
       if (zoom) {
@@ -381,7 +382,13 @@ export class MaplibreGLMapAdapter implements MapAdapter<Map, TLayer, IControl> {
               _map.setPaintProperty(layerId, 'text-opacity', opacity);
               _map.setPaintProperty(layerId, 'icon-opacity', opacity);
             } else {
-              _map.setPaintProperty(layerId, layer.type + '-opacity', opacity);
+              _map.setPaintProperty(
+                layerId,
+                (layer.type + '-opacity') as Parameters<
+                  Map['setPaintProperty']
+                >[1],
+                opacity,
+              );
             }
           }
         });
@@ -578,13 +585,22 @@ export class MaplibreGLMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     }
   }
 
-  private _onMapError(data: ErrorEvent & MapSourceDataEvent) {
-    if (this._sourceDataLoading[data.sourceId]) {
-      const isLoaded = data.isSourceLoaded;
+  private _onMapError(data: MapEventType['error']) {
+    const sourceData = data as MapEventType['error'] & {
+      sourceId?: string;
+      isSourceLoaded?: boolean;
+      tile?: MapSourceDataEvent['tile'];
+    };
+    if (sourceData.sourceId && this._sourceDataLoading[sourceData.sourceId]) {
+      const isLoaded = sourceData.isSourceLoaded;
       const emit = (target: string) => {
         this.emitter.emit('data-error', { target });
       };
-      this._onDataLoad(data, isLoaded, emit);
+      this._onDataLoad(
+        { sourceId: sourceData.sourceId, tile: sourceData.tile },
+        isLoaded,
+        emit,
+      );
     }
   }
 

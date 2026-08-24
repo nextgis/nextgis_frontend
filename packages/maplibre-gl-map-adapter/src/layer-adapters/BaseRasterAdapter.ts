@@ -32,7 +32,7 @@ export abstract class BaseRasterAdapter<
 
   protected updateOpacity(): void {
     const opacity = this.options.opacity;
-    if (this.map && this.layer && opacity !== undefined) {
+    if (this.map && this.layer && opacity != null) {
       for (const l of this.layer) {
         this.map.setPaintProperty(l, 'raster-opacity', opacity);
       }

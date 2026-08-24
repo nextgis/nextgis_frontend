@@ -221,7 +221,7 @@ export class QmsControl implements IControl {
     if (map.getStyle()) {
       return Promise.resolve();
     }
-    return new Promise((resolve) => map.once('style.load', resolve));
+    return new Promise((resolve) => map.once('style.load', () => resolve()));
   }
 }
 

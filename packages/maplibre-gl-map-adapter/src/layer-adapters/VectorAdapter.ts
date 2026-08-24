@@ -45,6 +45,7 @@ import type {
   MapEventType,
   MapLayerMouseEvent,
   MapMouseEvent,
+  PopupOptions as MaplibrePopupOptions,
   SourceSpecification,
 } from 'maplibre-gl';
 
@@ -554,14 +555,22 @@ export abstract class VectorAdapter<
             _paint['icon-allow-overlap'] = true;
             for (const p in _paint) {
               try {
-                this.map.setLayoutProperty(name, p, _paint[p]);
+                this.map.setLayoutProperty(
+                  name,
+                  p as Parameters<Map['setLayoutProperty']>[1],
+                  _paint[p],
+                );
               } catch {
                 //
               }
             }
           } else {
             for (const p in _paint) {
-              this.map.setPaintProperty(name, p, _paint[p]);
+              this.map.setPaintProperty(
+                name,
+                p as Parameters<Map['setPaintProperty']>[1],
+                _paint[p],
+              );
             }
           }
         }
@@ -947,7 +956,7 @@ export abstract class VectorAdapter<
     if (content && coordinates) {
       const html =
         typeof content === 'string' ? makeHtmlFromString(content) : content;
-      const popupOpt: maplibregl.PopupOptions = {
+      const popupOpt: MaplibrePopupOptions = {
         closeButton,
         closeOnClick: false,
       };
@@ -973,7 +982,7 @@ export abstract class VectorAdapter<
     const map = this.map;
     const { labelField, label } = this.options;
     if (map && (labelField || label)) {
-      const popupOpt: maplibregl.PopupOptions = {
+      const popupOpt: MaplibrePopupOptions = {
         closeButton: false,
         closeOnClick: false,
         closeOnMove: this.options.labelOnHover,
@@ -1176,11 +1185,15 @@ export abstract class VectorAdapter<
   }
 
   private _removeEventListeners() {
-    if (this.$onLayerMouseMove && this.map) {
-      this.map.off('mousemove', this.$onLayerMouseMove);
-    }
-    if (this.$onLayerMouseLeave && this.map) {
-      this.map.off('mouseleave', this.$onLayerMouseLeave);
+    if (this.layer && this.map) {
+      this.layer.forEach((x) => {
+        if (this.$onLayerMouseMove && this.map) {
+          this.map.off('mousemove', x, this.$onLayerMouseMove);
+        }
+        if (this.$onLayerMouseLeave && this.map) {
+          this.map.off('mouseleave', x, this.$onLayerMouseLeave);
+        }
+      });
     }
   }
 }

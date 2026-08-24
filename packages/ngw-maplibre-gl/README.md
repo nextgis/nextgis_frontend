@@ -2,29 +2,39 @@
 
 ![size](https://img.shields.io/bundlephobia/minzip/@nextgis/ngw-maplibre-gl) ![version](https://img.shields.io/npm/v/@nextgis/ngw-maplibre-gl)
 
-Single-file bundle for rapid deployment of [Maplibre GL JS](https://maplibre.org/maplibre-gl-js/docs/) based web-gis applications with NextGIS services
+Browser bundle for rapid deployment of [Maplibre GL JS](https://maplibre.org/maplibre-gl-js/docs/) based web-gis applications with NextGIS services.
 
-Styles images and other assets are already in bundle, you don't need to include anything except one JS file!
+Styles and images are included in the bundle. MapLibre GL JS 6 also requires
+worker modules for processing GeoJSON and vector tiles.
 
 ## Installation
 
 ### In Browser
 
-#### Include assets
+#### Include browser files
 
-Simply download and include with a script tag, `NgwMaplibreGL` and `NgwMap` will be registered as a global variable.
+Keep `maplibre-gl-worker.mjs` and `maplibre-gl-shared.mjs` next to the browser
+bundle. They are copied to `lib` during the package build. `NgwMaplibreGL` and
+`NgwMap` will be registered as global variables.
+
+```text
+lib/
+├── ngw-maplibre-gl.global.prod.js
+├── maplibre-gl-worker.mjs
+└── maplibre-gl-shared.mjs
+```
 
 ```html
 <script src="../lib/ngw-maplibre-gl.global.prod.js"></script>
 
-<div id='map'></div>
+<div id="map"></div>
 <script>
   // const ngwMap = new NgwMaplibreGL({
   const ngwMap = new NgwMap({
     baseUrl: 'https://demo.nextgis.com',
     target: 'map',
     qmsId: 448,
-    webmapId: 3985
+    webmapId: 3985,
   });
 </script>
 ```
@@ -34,22 +44,56 @@ Simply download and include with a script tag, `NgwMaplibreGL` and `NgwMap` will
 unpkg
 
 ```html
-<script src="https://unpkg.com/@nextgis/ngw-maplibre-gl"></script>
+<script src="https://unpkg.com/@nextgis/ngw-maplibre-gl@VERSION/lib/ngw-maplibre-gl.global.prod.js"></script>
 ```
 
 jsdelivr
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@nextgis/ngw-maplibre-gl"></script>
+<script src="https://cdn.jsdelivr.net/npm/@nextgis/ngw-maplibre-gl@VERSION/lib/ngw-maplibre-gl.global.prod.js"></script>
 ```
 
-We recommend linking to a specific version number `/ngw-maplibre-gl@[version]`
+The explicit bundle path is required so MapLibre can resolve the worker modules
+from the same `lib` directory. Replace `VERSION` with a specific package
+version. When a strict Content Security Policy is enabled for a cross-origin
+CDN, follow the `worker-src` guidance in the migration guide linked below.
 
 ### In Node.js
 
 ```bash
 npm install maplibre-gl @nextgis/ngw-maplibre-gl
 ```
+
+### MapLibre GL JS 6 worker
+
+The `esm-bundler` build leaves MapLibre as a peer dependency, so the final
+application bundler must provide the worker URL before creating a map.
+
+For Vite, use its worker pipeline so the worker and its shared module are emitted
+together:
+
+```ts
+import { setWorkerUrl } from 'maplibre-gl';
+import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
+
+setWorkerUrl(workerUrl);
+```
+
+For other bundlers, copy both `maplibre-gl-worker.mjs` and
+`maplibre-gl-shared.mjs` from `maplibre-gl/dist` to the same public directory,
+then configure the URL:
+
+```ts
+import { setWorkerUrl } from 'maplibre-gl';
+
+setWorkerUrl('/maplibre/maplibre-gl-worker.mjs');
+```
+
+See the official MapLibre documentation:
+
+- [ESM and bundler setup](https://github.com/maplibre/maplibre-gl-js/blob/main/docs/index.md#esm)
+- [MapLibre GL JS 5 to 6 migration guide](https://maplibre.org/maplibre-gl-js/docs/guides/v5-to-v6-migration-guide/)
+- [`setWorkerUrl()` API](https://maplibre.org/maplibre-gl-js/docs/API/functions/setWorkerUrl/)
 
 ## Usage
 
@@ -60,7 +104,7 @@ const ngwMap = new NgwMap({
   baseUrl: 'https://demo.nextgis.com',
   target: 'map',
   qmsId: 448,
-  webmapId: 3985
+  webmapId: 3985,
 });
 ```
 

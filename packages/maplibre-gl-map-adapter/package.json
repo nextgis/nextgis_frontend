@@ -24,10 +24,14 @@
   },
   "devDependencies": {
     "@nextgis/build-tools": "4.0.0-alpha.5",
-    "maplibre-gl": "^4.7.1"
+    "maplibre-gl": "^6.5.0"
   },
   "buildOptions": {
     "name": "MaplibreGLMapAdapter",
+    "assets": [
+      "../../node_modules/maplibre-gl/dist/maplibre-gl-worker.mjs",
+      "../../node_modules/maplibre-gl/dist/maplibre-gl-shared.mjs"
+    ],
     "formats": [
       "esm-bundler",
       "esm-browser",

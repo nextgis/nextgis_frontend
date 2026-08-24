@@ -425,15 +425,22 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
 
       const source = this.map.getSource(this.source) as GeoJSONSource;
       if (source) {
+        const sourceData = source._data as unknown;
+        const data =
+          sourceData &&
+          typeof sourceData === 'object' &&
+          'geojson' in sourceData
+            ? sourceData.geojson
+            : sourceData;
         const geojson =
-          typeof source._data === 'string'
-            ? (JSON.parse(source._data) as GeoJSON.GeoJSON)
-            : source._data;
-        if (geojson) {
+          typeof data === 'string'
+            ? (JSON.parse(data) as GeoJSON.GeoJSON)
+            : data;
+        if (geojson && typeof geojson === 'object' && 'type' in geojson) {
           if (geojson.type === 'Feature') {
-            return [geojson];
+            return [geojson as Feature];
           } else if (geojson.type === 'FeatureCollection') {
-            return geojson.features;
+            return (geojson as FeatureCollection).features;
           }
         }
         return [];

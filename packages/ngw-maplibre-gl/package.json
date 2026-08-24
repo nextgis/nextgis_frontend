@@ -2,7 +2,7 @@
   "name": "@nextgis/ngw-maplibre-gl",
   "_priority": 10,
   "version": "4.0.0-alpha.5",
-  "description": "Single-file bundle for rapid deployment of Maplibre GL JS based web-gis applications with NextGIS services",
+  "description": "Browser bundle for rapid deployment of Maplibre GL JS based web-gis applications with NextGIS services",
   "main": "lib/ngw-maplibre-gl.global.prod.js",
   "module": "lib/ngw-maplibre-gl.esm-bundler.js",
   "unpkg": "lib/ngw-maplibre-gl.global.prod.js",
@@ -18,6 +18,10 @@
   "buildOptions": {
     "name": "NgwMaplibreGL",
     "injectCss": true,
+    "assets": [
+      "../../node_modules/maplibre-gl/dist/maplibre-gl-worker.mjs",
+      "../../node_modules/maplibre-gl/dist/maplibre-gl-shared.mjs"
+    ],
     "formats": [
       "esm-bundler",
       "esm-browser",

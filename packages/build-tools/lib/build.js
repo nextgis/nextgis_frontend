@@ -74,9 +74,16 @@ export default async function run() {
 }
 
 /**
+ * @typedef {Object} PackageInfo
+ * @property {string} directory
+ * @property {any} pkg
+ */
+
+/**
  * @param {Array<string>} targets
  */
 async function runPrebuilds(targets) {
+  /** @type {PackageInfo[]} */
   const packages = [];
   const visited = new Set();
 
@@ -187,6 +194,17 @@ async function build(target) {
   const env =
     (pkg.buildOptions && pkg.buildOptions.env) ||
     (devOnly ? 'development' : 'production');
+
+  const assets = (pkg.buildOptions && pkg.buildOptions.assets) || [];
+  if (assets.length) {
+    await fs.mkdir(`${pkgDir}/lib`, { recursive: true });
+    for (const asset of assets) {
+      await fs.copyFile(
+        path.resolve(pkgDir, asset),
+        path.resolve(pkgDir, 'lib', path.basename(asset)),
+      );
+    }
+  }
 
   const config = path.join(directoryName, './rollup.config.js');
 
