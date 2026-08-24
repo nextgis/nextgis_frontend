@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0-alpha.7](https://github.com/nextgis/nextgis_frontend/compare/v4.0.0-alpha.6...v4.0.0-alpha.7) (2026-08-24)
+
+
+### Bug Fixes
+
+* **maplibre-gl-map-adapter:** keep selected features visible without selected paint ([33d57f2](https://github.com/nextgis/nextgis_frontend/commit/33d57f2b9c21808cd5368dc1988ee0e713830dec))
+* **ol-map-adapter:** preserve event handlers when removing layers ([d91eed4](https://github.com/nextgis/nextgis_frontend/commit/d91eed48e8e31d35e9f9037ff85742c8a098f537))
+
+
+### Features
+
+* **demo:** migrate examples to ESM ([191c49f](https://github.com/nextgis/nextgis_frontend/commit/191c49f05f14c2ed5b4809d6fe121b7347bd25be))
+
+
+
+
+
 # [4.0.0-alpha.6](https://github.com/nextgis/nextgis_frontend/compare/v4.0.0-alpha.5...v4.0.0-alpha.6) (2026-08-24)
 
 

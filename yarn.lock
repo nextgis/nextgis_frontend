@@ -975,7 +975,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/maplibre-gl-map-adapter@4.0.0-alpha.6, @nextgis/maplibre-gl-map-adapter@workspace:packages/maplibre-gl-map-adapter":
+"@nextgis/maplibre-gl-map-adapter@4.0.0-alpha.7, @nextgis/maplibre-gl-map-adapter@workspace:packages/maplibre-gl-map-adapter":
   version: 0.0.0-use.local
   resolution: "@nextgis/maplibre-gl-map-adapter@workspace:packages/maplibre-gl-map-adapter"
   dependencies:
@@ -1073,7 +1073,7 @@ __metadata:
   resolution: "@nextgis/ngw-maplibre-gl@workspace:packages/ngw-maplibre-gl"
   dependencies:
     "@nextgis/build-tools": 4.0.0-alpha.6
-    "@nextgis/maplibre-gl-map-adapter": 4.0.0-alpha.6
+    "@nextgis/maplibre-gl-map-adapter": 4.0.0-alpha.7
     "@nextgis/ngw-map": 4.0.0-alpha.6
   languageName: unknown
   linkType: soft
@@ -1084,7 +1084,7 @@ __metadata:
   dependencies:
     "@nextgis/build-tools": 4.0.0-alpha.6
     "@nextgis/ngw-map": 4.0.0-alpha.6
-    "@nextgis/ol-map-adapter": 4.0.0-alpha.6
+    "@nextgis/ol-map-adapter": 4.0.0-alpha.7
     "@types/events": ^3.0.0
     events: "*"
   languageName: unknown
@@ -1158,7 +1158,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/ol-map-adapter@4.0.0-alpha.6, @nextgis/ol-map-adapter@workspace:packages/ol-map-adapter":
+"@nextgis/ol-map-adapter@4.0.0-alpha.7, @nextgis/ol-map-adapter@workspace:packages/ol-map-adapter":
   version: 0.0.0-use.local
   resolution: "@nextgis/ol-map-adapter@workspace:packages/ol-map-adapter"
   dependencies:
@@ -1307,7 +1307,7 @@ __metadata:
   resolution: "@nextgis/react-ngw-maplibre-gl@workspace:packages/react-ngw-maplibre-gl"
   dependencies:
     "@nextgis/build-tools": 4.0.0-alpha.6
-    "@nextgis/maplibre-gl-map-adapter": 4.0.0-alpha.6
+    "@nextgis/maplibre-gl-map-adapter": 4.0.0-alpha.7
     "@nextgis/react-ngw-map": 4.0.0-alpha.6
   languageName: unknown
   linkType: soft
@@ -1317,7 +1317,7 @@ __metadata:
   resolution: "@nextgis/react-ngw-ol@workspace:packages/react-ngw-ol"
   dependencies:
     "@nextgis/build-tools": 4.0.0-alpha.6
-    "@nextgis/ol-map-adapter": 4.0.0-alpha.6
+    "@nextgis/ol-map-adapter": 4.0.0-alpha.7
     "@nextgis/react-ngw-map": 4.0.0-alpha.6
   languageName: unknown
   linkType: soft
