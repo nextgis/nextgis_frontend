@@ -15,9 +15,9 @@
     "@nextgis/expression": "4.0.0-alpha.5",
     "@nextgis/ngw-connector": "4.0.0-alpha.5",
     "@nextgis/utils": "4.0.0-alpha.5",
-    "@types/color": "^3.0.2",
+    "@types/color": "^4.2.1",
     "@types/events": "^3.0.0",
-    "color": "^4.1.0",
+    "color": "^4.2.3",
     "events": "*",
     "tus-js-client": "^4.3.1"
   },

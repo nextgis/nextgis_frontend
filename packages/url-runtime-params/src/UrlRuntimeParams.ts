@@ -2,9 +2,9 @@ import type { RuntimeParams } from '@nextgis/webmap';
 
 import type { Params, StateData } from './interfaces';
 
-export class UrlRuntimeParams<P extends Params = Params>
-  implements RuntimeParams<P>
-{
+export class UrlRuntimeParams<
+  P extends Params = Params,
+> implements RuntimeParams<P> {
   private _params = {} as P;
 
   get(name: keyof P): string {

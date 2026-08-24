@@ -1,9 +1,10 @@
 import type { AdapterOptions, MainLayerAdapter } from '@nextgis/webmap';
 import type { Map } from 'leaflet';
 
-export class BaseAdapter<O extends AdapterOptions = AdapterOptions, L = any>
-  implements MainLayerAdapter<Map, L, O>
-{
+export class BaseAdapter<
+  O extends AdapterOptions = AdapterOptions,
+  L = any,
+> implements MainLayerAdapter<Map, L, O> {
   layer?: L;
   protected pane = 'order-0';
 

@@ -2,9 +2,9 @@ import type { AdapterOptions, MainLayerAdapter } from '@nextgis/webmap';
 import type Base from 'ol/layer/Base';
 import type Map from 'ol/Map';
 
-export class BaseAdapter<L extends Base = Base>
-  implements Partial<MainLayerAdapter>
-{
+export class BaseAdapter<
+  L extends Base = Base,
+> implements Partial<MainLayerAdapter> {
   layer?: L;
 
   constructor(

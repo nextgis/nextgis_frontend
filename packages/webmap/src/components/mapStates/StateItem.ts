@@ -3,9 +3,9 @@ import type { MapOptions } from '../../interfaces/MapOptions';
 import type { MapStateItem } from '../../interfaces/MapState';
 import type { WebMap } from '../../WebMap';
 
-export abstract class StateItem<V extends any | undefined = any | undefined>
-  implements MapStateItem<V | undefined>
-{
+export abstract class StateItem<
+  V extends any | undefined = any | undefined,
+> implements MapStateItem<V | undefined> {
   name!: keyof MapOptions;
   event!: (keyof WebMapEvents)[];
   protected value?: V;

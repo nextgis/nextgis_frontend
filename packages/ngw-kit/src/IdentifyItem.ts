@@ -18,8 +18,7 @@ import type { FetchNgwItemOptions } from './interfaces';
 export class IdentifyItem<
   F extends FeatureProperties = FeatureProperties,
   G extends Geometry = Geometry,
-> implements LayerFeature
-{
+> implements LayerFeature {
   readonly id: number;
   readonly label: string;
   readonly layerId: number;

@@ -15,8 +15,8 @@
   },
   "devDependencies": {
     "@nextgis/build-tools": "4.0.0-alpha.5",
-    "@types/react": "*",
-    "@types/react-dom": "*"
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.5"
   },
   "buildOptions": {
     "name": "ReactNgwMap",

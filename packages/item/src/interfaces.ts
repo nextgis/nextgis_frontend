@@ -32,13 +32,15 @@ export interface ItemPropertyBaseConfig<
   type?: ItemPropertyTypes[K];
   name?: string;
 }
-export interface ItemPropertyConfig<K extends keyof ItemPropertyTypes>
-  extends ItemPropertyBaseConfig<K> {
+export interface ItemPropertyConfig<
+  K extends keyof ItemPropertyTypes,
+> extends ItemPropertyBaseConfig<K> {
   handler?: Type<BaseProperty<ItemPropertyTypes[K]>>;
 }
 
-export interface ItemPropertyConfig<K extends keyof ItemPropertyTypes>
-  extends ItemPropertyBaseConfig<K> {
+export interface ItemPropertyConfig<
+  K extends keyof ItemPropertyTypes,
+> extends ItemPropertyBaseConfig<K> {
   getProperty?(): ItemPropertyTypes[K];
   onSet?(
     value: ItemPropertyTypes[K],

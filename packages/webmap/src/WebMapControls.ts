@@ -22,12 +22,12 @@ import type { WebMapMain } from './WebMapMain';
  * Collection of methods for managing map controls
  */
 export class WebMapControls<
-    M = any,
-    L = any,
-    C extends object = any,
-    E extends WebMapEvents = WebMapEvents,
-    O extends MapOptions = MapOptions,
-  >
+  M = any,
+  L = any,
+  C extends object = any,
+  E extends WebMapEvents = WebMapEvents,
+  O extends MapOptions = MapOptions,
+>
   extends WebMapLayers<M, L, E, O>
   implements WebMapLayers, WebMapMain
 {

@@ -80,12 +80,12 @@ import type { WebMapMain } from './WebMapMain';
  *
  */
 export class WebMap<
-    M = any,
-    L = any,
-    C extends object = any,
-    E extends WebMapEvents = WebMapEvents,
-    O extends MapOptions = MapOptions,
-  >
+  M = any,
+  L = any,
+  C extends object = any,
+  E extends WebMapEvents = WebMapEvents,
+  O extends MapOptions = MapOptions,
+>
   extends WebMapControls<M, L, C, E, O>
   implements WebMapControls, WebMapLayers, WebMapMain
 {

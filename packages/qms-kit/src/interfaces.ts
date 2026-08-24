@@ -6,8 +6,7 @@ import type {
 } from '@nextgis/webmap';
 
 export interface QmsAdapterOptions
-  extends RasterAdapterOptions,
-    QmsRequestOptions {
+  extends RasterAdapterOptions, QmsRequestOptions {
   qmsId?: number;
   name?: string;
   format?: string;

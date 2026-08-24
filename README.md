@@ -331,19 +331,27 @@ yarn run watch
 
 ### Publishing
 
-(For maintainers) Before publishing updates, make sure to build all packages in production mode:
+(For maintainers) Before publishing updates, run the release checks from the repository root:
 
 ```bash
 npm run prod
+npm test
+npm run test-build
 ```
 
-To publish a new version of all packages to npm (and create a git tag), use Lerna from the root of the repository:
+Then choose the command matching the release type. It updates the unified version of all packages and creates the release commit and tag:
 
 ```bash
-npm run publish
+npm run patch
+npm run minor
+npm run major
 ```
 
-You will be prompted to choose the new version number, which will be applied to all packages (the monorepo uses a unified version). Lerna will handle inter-package dependencies during the version bump.
+Review the generated commit and tag before pushing them. Publish the versioned packages to npm with:
+
+```bash
+npm run publish:packages
+```
 
 To publish a brand new package (if one is added to the monorepo) for the first time, go into that package folder and run:
 

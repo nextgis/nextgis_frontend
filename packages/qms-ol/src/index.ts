@@ -33,8 +33,8 @@ export interface QmsOlOptions extends QmsRequestOptions {
   fit?: boolean | FitOptions;
 }
 
-export interface QmsControlOptions
-  extends QmsControlControllerOptions<BaseLayer> {
+// eslint-disable-next-line max-len
+export interface QmsControlOptions extends QmsControlControllerOptions<BaseLayer> {
   target?: HTMLElement | string;
 }
 

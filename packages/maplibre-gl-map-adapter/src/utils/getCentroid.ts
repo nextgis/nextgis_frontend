@@ -5,7 +5,7 @@ import type { Feature } from 'geojson';
 
 export function getCentroid(feature: Feature): number[] {
   if (feature.geometry.type === 'Polygon') {
-    return polylabel(feature.geometry.coordinates);
+    return polylabel(feature.geometry.coordinates as [number, number][][]);
   } else if (feature.geometry.type === 'Point') {
     return feature.geometry.coordinates;
   }

@@ -113,8 +113,8 @@ const maplibreGLTypeAlias: Record<VectorAdapterLayerType, MaplibreGLLayerType> =
   };
 
 export abstract class VectorAdapter<
-    O extends VectorAdapterOptions = VectorAdapterOptions,
-  >
+  O extends VectorAdapterOptions = VectorAdapterOptions,
+>
   extends BaseAdapter<O>
   implements VectorLayerAdapter<Map, TLayer, O, Feature>
 {

@@ -317,8 +317,8 @@ export interface FetchNgwLayerExtentOptions extends NgwRequestOptions {
   connector: NgwConnector;
 }
 
-export interface FetchNgwLayerItemExtentOptions
-  extends FetchNgwLayerExtentOptions {
+// eslint-disable-next-line max-len
+export interface FetchNgwLayerItemExtentOptions extends FetchNgwLayerExtentOptions {
   featureId: number;
 }
 

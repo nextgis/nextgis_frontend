@@ -18,9 +18,7 @@ import type { MutableRefObject, ReactNode } from 'react';
 import type { ReactElementAttributes } from './interfaces';
 
 interface MapControlProps
-  extends ReactElementAttributes,
-    CreateControlOptions,
-    ControlOptions {
+  extends ReactElementAttributes, CreateControlOptions, ControlOptions {
   children?: ReactNode;
 }
 

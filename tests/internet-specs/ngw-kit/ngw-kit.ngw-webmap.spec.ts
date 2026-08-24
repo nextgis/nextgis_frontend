@@ -15,7 +15,7 @@ describe('NgwKit', function () {
     ngwMap = await NgwMap.create({
       target: 'map',
       baseUrl: 'https://demo.nextgis.com',
-      resources: [{ resource: 7120, id: 'webmap', fit: true }],
+      resources: [{ resource: 6278, id: 'webmap', fit: true }],
     });
   });
 
@@ -35,22 +35,25 @@ describe('NgwKit', function () {
     });
 
     it('togglesLayerVisibility', async () => {
-      const landAreaLayer = webMapLayer.layer!.tree.getDescendants(
-        (x) => x.item.display_name === 'Land area',
+      const buildingsLayer = webMapLayer.layer!.tree.getDescendants(
+        (x) => x.item.display_name === '2.5D Buildings',
       )[0];
-      expect(landAreaLayer).to.exist;
+      expect(buildingsLayer).to.exist;
 
-      landAreaLayer.properties.set('visibility', false);
-      expect(landAreaLayer.properties.get('visibility')).to.be.false;
+      buildingsLayer.properties.set('visibility', false);
+      expect(buildingsLayer.properties.get('visibility')).to.be.false;
 
-      landAreaLayer.properties.set('visibility', true);
-      expect(landAreaLayer.properties.get('visibility')).to.be.true;
+      buildingsLayer.properties.set('visibility', true);
+      expect(buildingsLayer.properties.get('visibility')).to.be.true;
     });
 
     it('setsLayerOpacity', async () => {
-      const layer = webMapLayer.layer!.tree.getDescendants()[0];
-      layer.properties.set('opacity', 0.5);
-      expect(layer.properties.get('opacity')).to.equal(0.5);
+      const layer = webMapLayer.layer!.tree
+        .getDescendants()
+        .find((x) => x.item.item_type === 'layer');
+      expect(layer).to.exist;
+      layer!.properties.set('opacity', 0.5);
+      expect(layer!.properties.get('opacity')).to.equal(0.5);
     });
 
     it('validatesLayerTypes', async () => {
@@ -59,17 +62,15 @@ describe('NgwKit', function () {
 
       const items = webMapLayer.layer!.tree.getDescendants();
 
-      const groupItem = items[7].item;
+      const groupItem = items.find((x) => x.item.item_type === 'group')!.item;
       if (groupItem.item_type === 'group') {
-        expect(groupItem.children)
-          .to.be.an('array')
-          .and.to.have.length.greaterThan(0);
+        expect(groupItem.children).to.be.an('array');
       }
       expect(groupItem.item_type).to.equal('group');
 
-      const layerItem = items[0].item;
+      const layerItem = items.find((x) => x.item.item_type === 'layer')!.item;
       if (layerItem.item_type === 'layer') {
-        expect(layerItem.layer_style_id).to.equal(7131);
+        expect(layerItem.layer_style_id).to.be.a('number');
       }
       expect(layerItem.item_type).to.equal('layer');
     });

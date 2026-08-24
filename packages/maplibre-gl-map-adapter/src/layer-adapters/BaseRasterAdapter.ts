@@ -7,8 +7,7 @@ let ID = 0;
 
 export abstract class BaseRasterAdapter<
   O extends RasterAdapterOptions = RasterAdapterOptions,
-> implements MainLayerAdapter<Map, TLayer, O>
-{
+> implements MainLayerAdapter<Map, TLayer, O> {
   layer?: TLayer;
   map?: Map;
   protected readonly _layerId: string;

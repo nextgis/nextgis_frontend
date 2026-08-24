@@ -30,8 +30,7 @@ export interface QmsLeafletOptions extends QmsRequestOptions {
 }
 
 export interface QmsControlOptions
-  extends QmsControlControllerOptions<Layer>,
-    ControlOptions {}
+  extends QmsControlControllerOptions<Layer>, ControlOptions {}
 
 const QUADKEY_PLACEHOLDER = 'nextgis-qms-quadkey';
 

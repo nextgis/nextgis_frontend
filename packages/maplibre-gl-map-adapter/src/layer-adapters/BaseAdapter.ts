@@ -5,9 +5,9 @@ import type { TLayer } from '../MaplibreGLMapAdapter';
 
 let ID = 0;
 
-export abstract class BaseAdapter<O extends AdapterOptions = AdapterOptions>
-  implements MainLayerAdapter<Map, TLayer, O>
-{
+export abstract class BaseAdapter<
+  O extends AdapterOptions = AdapterOptions,
+> implements MainLayerAdapter<Map, TLayer, O> {
   layer?: TLayer;
   map?: Map;
   protected readonly _layerId: string;

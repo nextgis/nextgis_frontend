@@ -204,8 +204,9 @@ export interface AdapterOptions<
   propertiesFilter?: PropertiesFilter;
 }
 
-export interface MvtAdapterOptions<F extends Feature = Feature>
-  extends VectorAdapterOptions<F> {
+export interface MvtAdapterOptions<
+  F extends Feature = Feature,
+> extends VectorAdapterOptions<F> {
   url: string;
   sourceLayer?: string;
 }
@@ -214,8 +215,10 @@ export type VectorAdapterLayerType = 'polygon' | 'point' | 'line';
 
 export type PopupOnCloseFunction = (args: LayerDefinition) => void;
 
-export interface CreatePopupContentProps<F extends Feature = Feature, L = any>
-  extends LayerDefinition<F, L> {
+export interface CreatePopupContentProps<
+  F extends Feature = Feature,
+  L = any,
+> extends LayerDefinition<F, L> {
   /**
    * The source of the event call. User `click`, `hover`, or programmatic `api` call
    */
@@ -441,8 +444,7 @@ export interface TileAdapterOptions extends RasterAdapterOptions {
 }
 
 export interface Tileset3DAdapterOptions
-  extends RasterAdapterOptions,
-    VectorAdapterOptions {
+  extends RasterAdapterOptions, VectorAdapterOptions {
   useTerrainHeight?: boolean;
   heightOffset?: number;
 }
@@ -501,8 +503,10 @@ export interface FeaturePosition {
   getCenter: () => LngLatArray;
 }
 
-export interface LayerDefinition<F extends Feature = Feature, L = any>
-  extends FeaturePosition {
+export interface LayerDefinition<
+  F extends Feature = Feature,
+  L = any,
+> extends FeaturePosition {
   /** The adapter in which the layer is created. */
   target: LayerAdapter;
   /** A vector layer object in geojson format. */

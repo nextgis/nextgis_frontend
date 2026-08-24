@@ -40,7 +40,7 @@ export interface MapContainerProps<
   L = any,
   C extends object = any,
   O extends NgwMapOptions<M, C> = NgwMapOptions<M, C>,
-> extends ReactElementAttributes,
-    NgwMapOptions {
+>
+  extends ReactElementAttributes, NgwMapOptions {
   whenCreated?: (map: NgwMap<M, L, C, O>) => void;
 }
