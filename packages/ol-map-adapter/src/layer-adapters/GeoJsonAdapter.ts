@@ -267,12 +267,14 @@ export class GeoJsonAdapter
       const source = this.layer.getSource();
       if (source) {
         const bounds = source.getExtent();
-        const extent = transformExtent(
-          bounds,
-          this.displayProjection,
-          this.lonlatProjection,
-        );
-        return extent as LngLatBoundsArray;
+        if (bounds) {
+          const extent = transformExtent(
+            bounds,
+            this.displayProjection,
+            this.lonlatProjection,
+          );
+          return extent as LngLatBoundsArray;
+        }
       }
     }
   }

@@ -38,6 +38,10 @@ export function getFeaturesBounds(
 ): LngLatBoundsArray {
   const source = featuresSource(opt);
   const bounds = source.getExtent();
+  if (!bounds) {
+    source.dispose();
+    throw new Error('Unable to calculate feature bounds');
+  }
   const extent = transformExtent(
     bounds,
     opt.featureProjection,

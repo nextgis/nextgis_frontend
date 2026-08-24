@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@nextgis/build-tools": "4.0.0-alpha.5",
-    "ol": "^10.6.1"
+    "ol": "^10.10.0"
   },
   "buildOptions": {
     "name": "QmsOl",

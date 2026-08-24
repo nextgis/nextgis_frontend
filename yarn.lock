@@ -1158,7 +1158,7 @@ __metadata:
   dependencies:
     "@nextgis/build-tools": 4.0.0-alpha.5
     "@nextgis/control-container": 4.0.0-alpha.5
-    ol: ^10.6.1
+    ol: ^10.10.0
   peerDependencies:
     ol: ">=6.0.0"
   languageName: unknown
@@ -1179,7 +1179,7 @@ __metadata:
     "@types/geojson": ^7946.0.14
     "@types/polylabel": ^1.1.3
     events: ^3.3.0
-    ol: ^10.6.1
+    ol: ^10.10.0
     polylabel: ^2.0.1
   peerDependencies:
     ol: ">=6.0.0"
@@ -1269,7 +1269,7 @@ __metadata:
   dependencies:
     "@nextgis/build-tools": 4.0.0-alpha.5
     "@nextgis/qms-core": 4.0.0-alpha.5
-    ol: ^10.6.1
+    ol: ^10.10.0
   peerDependencies:
     ol: ">=6.0.0"
   languageName: unknown
@@ -1804,10 +1804,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@petamoriken/float16@npm:^3.4.7":
-  version: 3.9.2
-  resolution: "@petamoriken/float16@npm:3.9.2"
-  checksum: db09e3e0bc6af31aa7f7ba80bb041113535a5f5a472daf0fcdf3e0e50bfb0d5ea69d36bfbba57d43c0a61b0d3f6473552b8d54b75bbc0bd1a46372d1c4b7dfce
+"@petamoriken/float16@npm:^3.9.3":
+  version: 3.9.3
+  resolution: "@petamoriken/float16@npm:3.9.3"
+  checksum: 99e4710c86d8c256db5841cc72df3f9433d1b0d9903edde102f15bb6e69b37c0e5e6032794d08416313868016c83cccf6a096f35bfd3391cf81c9e3025ddea4d
   languageName: node
   linkType: hard
 
@@ -2685,6 +2685,16 @@ __metadata:
     js-yaml: ^3.10.0
     tslib: ^2.4.0
   checksum: fb40a87ae7c9f3fc0b2a6b7d84375d1c69ae8304daf598c089b52966bfb4ac94fbd2dcd87ed041970416e03d34359cb5ff16be5f5601f48d1f936213a8edaf4d
+  languageName: node
+  linkType: hard
+
+"@zarrita/storage@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "@zarrita/storage@npm:0.2.0"
+  dependencies:
+    reference-spec-reader: ^0.2.0
+    unzipit: 2.0.0
+  checksum: 1bd26476efe4a1083e3fa7ae935b697d1d2d15812646e74fec00f4d95a0008d5b43323c285826e18d0a982b56ea98741c761c3ae343c5fa596274344b00f4d78
   languageName: node
   linkType: hard
 
@@ -4824,6 +4834,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fflate@npm:^0.8.0":
+  version: 0.8.3
+  resolution: "fflate@npm:0.8.3"
+  checksum: a2a417e8fb5128b946cb397ab59a90e089057cba492f2c17a89c4af6ba8568b3da72ed36ef1efe901df7858a20964ce56e84d282e60498be1947fcc6133bc891
+  languageName: node
+  linkType: hard
+
 "figures@npm:3.2.0, figures@npm:^3.0.0":
   version: 3.2.0
   resolution: "figures@npm:3.2.0"
@@ -5049,19 +5066,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"geotiff@npm:^2.1.3":
-  version: 2.1.3
-  resolution: "geotiff@npm:2.1.3"
+"geotiff@npm:^3.1.0-beta.0":
+  version: 3.1.0-beta.0
+  resolution: "geotiff@npm:3.1.0-beta.0"
   dependencies:
-    "@petamoriken/float16": ^3.4.7
+    "@petamoriken/float16": ^3.9.3
     lerc: ^3.0.0
     pako: ^2.0.4
     parse-headers: ^2.0.2
     quick-lru: ^6.1.1
-    web-worker: ^1.2.0
-    xml-utils: ^1.0.2
-    zstddec: ^0.1.0
-  checksum: e966c735339fe121d7cf22fad71c68dbe5f6c88c252baed40bc596c662829bdc6df1c2463855c2dfc5453d191425f6151945b2ad063837cb82a99fe3eb482b50
+    web-worker: ^1.5.0
+    xml-utils: ^1.10.2
+    zstddec: ^0.2.0
+  checksum: 62d1ec7f3978598e738e5c69adf30c575debfe7d74a86a174609751f012f2c67e840505001ca34c26e31b8bd80ceed46befdef37709316d85c3ef62e2727c781
   languageName: node
   linkType: hard
 
@@ -7429,6 +7446,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"numcodecs@npm:^0.3.2":
+  version: 0.3.2
+  resolution: "numcodecs@npm:0.3.2"
+  dependencies:
+    fflate: ^0.8.0
+  checksum: 8ce2fc4651cec0ecf738492d80d99870e5baad246b9de5e3c597ca1147954ad526fa131716f7c683a1a3c79ee60233cd9ca79df9ec4ac14f2f731c0bd964abc9
+  languageName: node
+  linkType: hard
+
 "nx@npm:>=17.1.2 < 21":
   version: 20.8.2
   resolution: "nx@npm:20.8.2"
@@ -7513,16 +7539,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ol@npm:^10.6.1":
-  version: 10.6.1
-  resolution: "ol@npm:10.6.1"
+"ol@npm:^10.10.0":
+  version: 10.10.0
+  resolution: "ol@npm:10.10.0"
   dependencies:
     "@types/rbush": 4.0.0
     earcut: ^3.0.0
-    geotiff: ^2.1.3
-    pbf: 4.0.1
+    geotiff: ^3.1.0-beta.0
+    pbf: 5.1.2
     rbush: ^4.0.0
-  checksum: 5c3955251325c6c1b9450f79a47bbe69fdc2ffa308620f519932adb83d4d7198e140429336e32f8ed418b56bff94b20608b30313bd2a7de5a87c766a62390c7d
+    zarrita: ^0.7.1
+  checksum: 69fd9a162df992621013ed41a59a3b5a8ba3fd34587171e9e008a8bac30939cce6ff685037bf0ce90911613874550055cd51da2935b8933c075fcf68474e8d0b
   languageName: node
   linkType: hard
 
@@ -7959,14 +7986,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pbf@npm:4.0.1":
-  version: 4.0.1
-  resolution: "pbf@npm:4.0.1"
+"pbf@npm:5.1.2":
+  version: 5.1.2
+  resolution: "pbf@npm:5.1.2"
   dependencies:
     resolve-protobuf-schema: ^2.1.0
   bin:
     pbf: bin/pbf
-  checksum: c8a553847b3932803f63f62adece39da7b938f29bab97eb7e62f37cde96207a9c962ba92e26af3a7cad28df53e5a0fbcbca9aab985c32eb0553cbee5d4becfef
+  checksum: db9305046d7d10c6f4b68b80d22a62f64f8cec3fc20c21239a6c7956827509151ece5643c8f502c5288f27f1bffa7f2ad2dac2db57361f70b1aa83efc7e4fa1f
   languageName: node
   linkType: hard
 
@@ -9175,6 +9202,13 @@ __metadata:
     indent-string: ^4.0.0
     strip-indent: ^3.0.0
   checksum: fa1ef20404a2d399235e83cc80bd55a956642e37dd197b4b612ba7327bf87fa32745aeb4a1634b2bab25467164ab4ed9c15be2c307923dd08b0fe7c52431ae6b
+  languageName: node
+  linkType: hard
+
+"reference-spec-reader@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "reference-spec-reader@npm:0.2.0"
+  checksum: 4681767571504fda04edc86aa77ccbcca5a56744b2d0d6b767646209affd02dffbc973b7945f26a25a56d10c9751beca57e97afb05a6d54817bb9ba452364a33
   languageName: node
   linkType: hard
 
@@ -10530,6 +10564,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"unzipit@npm:2.0.0":
+  version: 2.0.0
+  resolution: "unzipit@npm:2.0.0"
+  checksum: f1ee48b5d94b283a0f3f8f9271362c0bd920ea9313559c53ced50cbeb1e5f94fc3a1d17023bcfa3d254e859f67ed9df7b28b7676f766b08005091c97abb0f822
+  languageName: node
+  linkType: hard
+
 "upath@npm:2.0.1":
   version: 2.0.1
   resolution: "upath@npm:2.0.1"
@@ -10651,7 +10692,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"web-worker@npm:^1.2.0":
+"web-worker@npm:^1.5.0":
   version: 1.5.0
   resolution: "web-worker@npm:1.5.0"
   checksum: e092c9a739c19574796b0d8c313080786d6fa4b72cae0a30bdf7d64e16616957793cbe65c2f2608c70bbf638dba3463a2de335977d55d6e74d0a7c89d0283f99
@@ -10840,7 +10881,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"xml-utils@npm:^1.0.2":
+"xml-utils@npm:^1.10.2":
   version: 1.10.2
   resolution: "xml-utils@npm:1.10.2"
   checksum: f33952a65fba0943fc59893d4b1e73afa7eaab3142ca8fd01bf25c5c8afab4a82dfc8918428ab603e7145455d4afd8c83ebf9bf2482cc6e218458f0085a15bc6
@@ -10970,9 +11011,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zstddec@npm:^0.1.0":
-  version: 0.1.0
-  resolution: "zstddec@npm:0.1.0"
-  checksum: 76113b43ec4031f9a120285c830e43bafae4c25c0a72f7a9e228af815c3e52432a8414c5d4eb6cfd3282443a4a3d2bc18b445dd702e770b1e330b6e39081750f
+"zarrita@npm:^0.7.1":
+  version: 0.7.4
+  resolution: "zarrita@npm:0.7.4"
+  dependencies:
+    "@zarrita/storage": ^0.2.0
+    numcodecs: ^0.3.2
+  checksum: 24e6bc3bd3c7a14d79d1e04752d9cf1d64d7cc0e67a22267eb89c7d5bf831743965fd4f8a4f57ad15d600d7e9c5aae30771cbff0c34119773ac4e97f976d7dea
+  languageName: node
+  linkType: hard
+
+"zstddec@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "zstddec@npm:0.2.0"
+  checksum: aae021103d1a1fed56eb476ad9fadee400ba1247efddf71f8a57915948309505b0fd5f2b08ec33714ec8ea30ce237f2f8494d035438a2a25bc4042b2b145e10a
   languageName: node
   linkType: hard
