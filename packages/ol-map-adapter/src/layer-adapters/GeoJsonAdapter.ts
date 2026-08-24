@@ -124,21 +124,19 @@ export class GeoJsonAdapter
 
   beforeRemove(): void {
     const glob = this.forEachFeatureAtPixel;
-    for (let i = glob.length; i--; ) {
-      const cb = glob[i][1];
-      const index = glob.findIndex((x) => x[1] === cb);
+    for (const cb of this._forEachFeatureAtPixel) {
+      const index = glob.indexOf(cb);
       if (index !== -1) {
-        glob.splice(i, 1);
+        glob.splice(index, 1);
       }
     }
     this._forEachFeatureAtPixel.length = 0;
 
     const globSelect = this.mapClickEvents;
-    for (let i = globSelect.length; i--; ) {
-      const cb = globSelect[i];
+    for (const cb of this._mapClickEvents) {
       const index = globSelect.indexOf(cb);
       if (index !== -1) {
-        globSelect.splice(i, 1);
+        globSelect.splice(index, 1);
       }
     }
     this._mapClickEvents.length = 0;
@@ -398,8 +396,9 @@ export class GeoJsonAdapter
 
     const unselectOnClick = this.options.unselectOnClick ?? true;
     if (unselectOnClick) {
-      this._mapClickEvents.push(() => this.unselect());
-      this.mapClickEvents.push(() => this.unselect());
+      const cb = () => this.unselect();
+      this._mapClickEvents.push(cb);
+      this.mapClickEvents.push(cb);
     }
   }
 
