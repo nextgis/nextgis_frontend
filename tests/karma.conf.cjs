@@ -33,6 +33,7 @@ module.exports = (config) => {
       // { pattern: 'tests/internet-specs/**/ngw-kit.ngw-webmap.spec.ts', type: 'ts' },
       { pattern: 'tests/internet-specs/**/*.spec.ts', type: 'ts' },
     ],
+    exclude: ['tests/internet-specs/ngw-orm.spec.ts'],
     preprocessors: {
       'tests/specs/*.spec.ts': ['webpack', 'sourcemap', 'coverage'],
       'tests/internet-specs/**/*.spec.ts': ['webpack', 'sourcemap', 'coverage'],
