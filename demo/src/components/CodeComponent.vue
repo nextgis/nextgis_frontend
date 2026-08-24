@@ -24,6 +24,7 @@ const html = computed({
     v-model="html"
     line-nums
     :header="false"
+    :languages="[['html', 'HTML']]"
     :font-size="fontSize"
     theme="github"
     width="100%"

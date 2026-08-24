@@ -29,7 +29,27 @@ function replaceAbsolutePathToCdn(line, packages) {
     let newLine = line;
     const emptyCharsCount = line.search(/\S/);
 
-    const isLibPath = line.match(
+    const moduleImport = line.match(
+      /(import\s+.+?\s+from\s+)(["']).*?lib\/([-\w]+\.esm-browser\.js)\2/,
+    );
+
+    if (moduleImport) {
+      const lineLibName = moduleImport[3].replace(/\.esm-browser\.js$/, '');
+      const pkg = packages.find(
+        (item) =>
+          item.package.name.replace(/^@nextgis\//, '') === lineLibName,
+      );
+
+      if (pkg) {
+        const url = `https://cdn.jsdelivr.net/npm/${pkg.package.name}@${pkg.package.version}/lib/${moduleImport[3]}`;
+        newLine = line.replace(
+          moduleImport[0],
+          `${moduleImport[1]}${moduleImport[2]}${url}${moduleImport[2]}`,
+        );
+      }
+    }
+
+    const isLibPath = !moduleImport && line.match(
       /(?:src|href)=("|').*?lib\/([-\w]+?)(?:\.global(?:\.prod)?)?\.(js|css)/,
     );
 
