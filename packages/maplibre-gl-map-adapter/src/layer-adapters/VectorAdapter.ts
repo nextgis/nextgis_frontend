@@ -837,18 +837,20 @@ export abstract class VectorAdapter<
               if (layers.indexOf(name) !== -1) {
                 const filters_: any[] = ['all', geomFilter];
                 this._updateWithNativeFilter(filters_);
-                if (selectProperties) {
-                  const selectFilters = this._convertToMaplibreGLFilter(
-                    selectProperties,
-                    true,
-                  );
-                  selectFilters.forEach((x) => filters_.push(x));
-                } else if (this._selectedFeatureIds) {
-                  filters_.push([
-                    '!in',
-                    this.featureIdName,
-                    ...this._selectedFeatureIds,
-                  ]);
+                if (this.options.selectedPaint) {
+                  if (selectProperties) {
+                    const selectFilters = this._convertToMaplibreGLFilter(
+                      selectProperties,
+                      true,
+                    );
+                    selectFilters.forEach((x) => filters_.push(x));
+                  } else if (this._selectedFeatureIds) {
+                    filters_.push([
+                      '!in',
+                      this.featureIdName,
+                      ...this._selectedFeatureIds,
+                    ]);
+                  }
                 }
                 if (propertyFilters) {
                   propertyFilters.forEach((x) => filters_.push(x));
