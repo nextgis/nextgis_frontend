@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "docmypkg": "^0.0.1",
-    "typedoc": "^0.28.7"
+    "typedoc": "^0.28.20"
   },
   "license": "MIT"
 }
