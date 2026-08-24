@@ -19,7 +19,7 @@
     "@types/events": "^3.0.0",
     "color": "^4.1.0",
     "events": "*",
-    "tus-js-client": "^4.1.0"
+    "tus-js-client": "^4.3.1"
   },
   "devDependencies": {
     "@nextgis/build-tools": "4.0.0-alpha.5"

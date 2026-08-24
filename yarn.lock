@@ -995,7 +995,7 @@ __metadata:
     "@types/polylabel": ^1.1.3
     events: ^3.3.0
     maplibre-gl: ^4.7.1
-    polylabel: ^2.0.1
+    polylabel: ^2.1.0
   peerDependencies:
     maplibre-gl: ">=2"
   languageName: unknown
@@ -1024,7 +1024,7 @@ __metadata:
     "@nextgis/utils": 4.0.0-alpha.5
     "@types/events": ^3.0.0
     events: "*"
-    form-data: ^4.0.0
+    form-data: ^4.0.6
   languageName: unknown
   linkType: soft
 
@@ -1148,7 +1148,7 @@ __metadata:
     "@types/events": ^3.0.0
     color: ^4.1.0
     events: "*"
-    tus-js-client: ^4.1.0
+    tus-js-client: ^4.3.1
   languageName: unknown
   linkType: soft
 
@@ -1180,7 +1180,7 @@ __metadata:
     "@types/polylabel": ^1.1.3
     events: ^3.3.0
     ol: ^10.10.0
-    polylabel: ^2.0.1
+    polylabel: ^2.1.0
   peerDependencies:
     ol: ">=6.0.0"
   languageName: unknown
@@ -4952,7 +4952,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"form-data@npm:^4.0.0, form-data@npm:^4.0.4":
+"form-data@npm:^4.0.4":
   version: 4.0.4
   resolution: "form-data@npm:4.0.4"
   dependencies:
@@ -4962,6 +4962,19 @@ __metadata:
     hasown: ^2.0.2
     mime-types: ^2.1.12
   checksum: 9b7788836df9fa5a6999e0c02515b001946b2a868cfe53f026c69e2c537a2ff9fbfb8e9d2b678744628f3dc7a2d6e14e4e45dfaf68aa6239727f0bdb8ce0abf2
+  languageName: node
+  linkType: hard
+
+"form-data@npm:^4.0.6":
+  version: 4.0.6
+  resolution: "form-data@npm:4.0.6"
+  dependencies:
+    asynckit: ^0.4.0
+    combined-stream: ^1.0.8
+    es-set-tostringtag: ^2.1.0
+    hasown: ^2.0.4
+    mime-types: ^2.1.35
+  checksum: e51b9e97678c250c872cd4ec3e5eaa8fa43bee4b1acf8274c337308aebc6aebb0553091ce0810612826601ffafed9dace12504a63c6ef16c57fffcd7dcfec457
   languageName: node
   linkType: hard
 
@@ -5419,6 +5432,15 @@ __metadata:
   dependencies:
     function-bind: ^1.1.2
   checksum: e8516f776a15149ca6c6ed2ae3110c417a00b62260e222590e54aa367cbcd6ed99122020b37b7fbdf05748df57b265e70095d7bf35a47660587619b15ffb93db
+  languageName: node
+  linkType: hard
+
+"hasown@npm:^2.0.4":
+  version: 2.0.4
+  resolution: "hasown@npm:2.0.4"
+  dependencies:
+    function-bind: ^1.1.2
+  checksum: 4bd8f916b629e06324853593ffbdd45e200022952a85ad0c967f3bd4c2e4c7e1f9a9766fbe6186f60bd394e0afc73e719730caa1da15cd9bd832b7cdf53fd26c
   languageName: node
   linkType: hard
 
@@ -6814,7 +6836,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mime-types@npm:^2.1.12":
+"mime-types@npm:^2.1.12, mime-types@npm:^2.1.35":
   version: 2.1.35
   resolution: "mime-types@npm:2.1.35"
   dependencies:
@@ -8067,12 +8089,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"polylabel@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "polylabel@npm:2.0.1"
+"polylabel@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "polylabel@npm:2.1.0"
   dependencies:
     tinyqueue: ^3.0.0
-  checksum: 76886d5abbea8666be6738818cbe9462b8651b51c5572c9e278c73f03037baa06c46a504d578a1d97e604e1a232177108c5dd13829114b8c2686f5942aaa3f97
+  checksum: a60955b3410fedf8e35e5f5251e6b76c8ea4935e6b5a4980b4539b044f1d1b2a5a0f8ef2fca4ca6cddc18c0d3f445f30beb770fbb89884822bdf669dc022d002
   languageName: node
   linkType: hard
 
@@ -10330,7 +10352,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tus-js-client@npm:^4.1.0":
+"tus-js-client@npm:^4.3.1":
   version: 4.3.1
   resolution: "tus-js-client@npm:4.3.1"
   dependencies:
