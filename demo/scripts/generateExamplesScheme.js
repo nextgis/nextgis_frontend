@@ -29,27 +29,27 @@ function replaceAbsolutePathToCdn(line, packages) {
     let newLine = line;
     const emptyCharsCount = line.search(/\S/);
 
-    const moduleImport = line.match(
-      /(import\s+.+?\s+from\s+)(["']).*?lib\/([-\w]+\.esm-browser\.js)\2/,
+    const browserModulePath = line.match(
+      /(["'])([^"']*?lib\/([-\w]+\.esm-browser\.js))\1/,
     );
 
-    if (moduleImport) {
-      const lineLibName = moduleImport[3].replace(/\.esm-browser\.js$/, '');
+    if (browserModulePath) {
+      const lineLibName = browserModulePath[3].replace(
+        /\.esm-browser\.js$/,
+        '',
+      );
       const pkg = packages.find(
         (item) =>
           item.package.name.replace(/^@nextgis\//, '') === lineLibName,
       );
 
       if (pkg) {
-        const url = `https://cdn.jsdelivr.net/npm/${pkg.package.name}@${pkg.package.version}/lib/${moduleImport[3]}`;
-        newLine = line.replace(
-          moduleImport[0],
-          `${moduleImport[1]}${moduleImport[2]}${url}${moduleImport[2]}`,
-        );
+        const url = `https://cdn.jsdelivr.net/npm/${pkg.package.name}@${pkg.package.version}/lib/${browserModulePath[3]}`;
+        newLine = line.replace(browserModulePath[2], url);
       }
     }
 
-    const isLibPath = !moduleImport && line.match(
+    const isLibPath = !browserModulePath && line.match(
       /(?:src|href)=("|').*?lib\/([-\w]+?)(?:\.global(?:\.prod)?)?\.(js|css)/,
     );
 

@@ -28,13 +28,14 @@
         text-align: center;
       }
     </style>
-    <script src="../../lib/ngw-maplibre-gl.global.js"></script>
 
     <!-- Import Utils.degrees2Radian, Utils.meters2degrees and Utils.degrees2meters -->
-    <script src="../../../utils/lib/utils.global.js"></script>
 
     <!-- Video Player libraries -->
-    <link href="https://vjs.zencdn.net/7.3.0/video-js.min.css" rel="stylesheet" />
+    <link
+      href="https://vjs.zencdn.net/7.3.0/video-js.min.css"
+      rel="stylesheet"
+    />
     <script src="https://vjs.zencdn.net/7.3.0/video.min.js"></script>
     <script src="https://unpkg.com/@videojs/http-streaming@1.8.0/dist/videojs-http-streaming.js"></script>
   </head>
@@ -42,7 +43,21 @@
   <body>
     <div id="map"></div>
 
-    <script>
+    <script type="importmap">
+      {
+        "imports": {
+          "@nextgis/ngw-maplibre-gl": "../../lib/ngw-maplibre-gl.esm-browser.js"
+        }
+      }
+    </script>
+
+    <script type="module">
+      import NgwMap from '@nextgis/ngw-maplibre-gl';
+      import {
+        degrees2meters,
+        degrees2Radian,
+        meters2degrees,
+      } from '@nextgis/utils';
       // initialize map
       NgwMap.create({
         baseUrl: 'https://demo.nextgis.com',
@@ -111,7 +126,7 @@
               const text = await resp.text();
               const regex = /token=([a-zA-Z0-9._-]+)/;
               const match = text.match(regex);
-              token = match ? match[1] : null;
+              const token = match ? match[1] : null;
 
               wrapper.style.display = 'block';
               title.innerHTML = 'Camera #' + feature.properties.name;
@@ -137,16 +152,13 @@
 
         function cameraSectorPoly(feature) {
           const props = feature.properties;
-          const xy = Utils.degrees2meters.apply(
-            this,
-            feature.geometry.coordinates,
-          );
+          const xy = degrees2meters.apply(this, feature.geometry.coordinates);
           const x = xy[0];
           const y = xy[1];
-          const azimuth = Utils.degrees2Radian(
+          const azimuth = degrees2Radian(
             90 - (props.azimuth !== undefined ? props.azimuth : 90),
           );
-          const angle = Utils.degrees2Radian(
+          const angle = degrees2Radian(
             props.angle !== undefined ? props.angle : 60,
           );
           const focalLength =
@@ -165,7 +177,7 @@
                 -l * Math.cos(azimuth) + y + focalLength * Math.sin(azimuth),
               ],
             ].map((x) => {
-              return Utils.meters2degrees.apply(this, x);
+              return meters2degrees.apply(this, x);
             }),
             [feature.geometry.coordinates],
           );

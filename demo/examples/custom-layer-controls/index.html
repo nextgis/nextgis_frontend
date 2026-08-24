@@ -21,8 +21,16 @@
   </head>
   <body>
     <div id="map"></div>
+    <script type="importmap">
+      {
+        "imports": {
+          "@nextgis/ngw-leaflet": "../../../packages/ngw-leaflet/lib/ngw-leaflet.esm-browser.js"
+        }
+      }
+    </script>
+
     <script type="module">
-      import NgwMap from '../../../packages/ngw-leaflet/lib/ngw-leaflet.esm-browser.js';
+      import NgwMap from '@nextgis/ngw-leaflet';
       // Define the names of the web map and base layer for easier reference
       const webMapName = 'webmap';
       const qmsBaseLayerName = 'qmsbasemap';

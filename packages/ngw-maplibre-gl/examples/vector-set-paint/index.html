@@ -26,12 +26,21 @@
         margin: 0.2rem;
       }
     </style>
-    <script src="../../lib/ngw-maplibre-gl.global.js"></script>
-    <script src="../../../utils/lib/utils.global.js"></script>
   </head>
   <body>
     <div id="map"></div>
-    <script>
+    <script type="importmap">
+      {
+        "imports": {
+          "@nextgis/ngw-maplibre-gl": "../../lib/ngw-maplibre-gl.esm-browser.js",
+          "@nextgis/utils": "../../../utils/lib/utils.esm-browser.js"
+        }
+      }
+    </script>
+
+    <script type="module">
+      import NgwMap from '@nextgis/ngw-maplibre-gl';
+      import { debounce } from '@nextgis/utils';
       const bounds = [-3.71133, 40.4117, -3.6978, 40.42115];
 
       NgwMap.create({
@@ -77,7 +86,7 @@
               strokeColorSelect.value = ngwMap.options.paint.color;
               strokeWeightSelect.value = ngwMap.options.paint.weight;
 
-              const updatePaint = Utils.debounce(() => {
+              const updatePaint = debounce(() => {
                 ngwMap.updateLayerPaint('building', {
                   fillColor: fillColorSelect.value,
                   strokeColor: strokeColorSelect.value,

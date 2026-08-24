@@ -5,7 +5,9 @@
     <title>NGW BBOX+ STRATEGY</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-      html, body, #map {
+      html,
+      body,
+      #map {
         margin: 0;
         padding: 0;
         width: 100%;
@@ -17,12 +19,23 @@
         line-height: 28px;
       }
     </style>
-    <script src="../../lib/ngw-maplibre-gl.global.js"></script>
-    <script src="../../../ngw-kit/lib/ngw-kit.global.js"></script>
   </head>
   <body>
     <div id="map"></div>
-    <script>
+    <script type="importmap">
+      {
+        "imports": {
+          "@nextgis/ngw-maplibre-gl": "../../lib/ngw-maplibre-gl.esm-browser.js"
+        }
+      }
+    </script>
+
+    <script type="module">
+      import NgwMap from '@nextgis/ngw-maplibre-gl';
+      import {
+        fetchNgwLayerExtent,
+        fetchNgwLayerCount,
+      } from '@nextgis/ngw-kit';
       const id = 'bbox-plus-layer';
       NgwMap.create({
         baseUrl: 'https://demo.nextgis.com',
@@ -34,12 +47,12 @@
         // helper layer to control fetching of vector data
         ngwMap.addNgwLayer({ resource: resourceId, adapter: 'IMAGE' });
 
-        NgwKit.fetchNgwLayerExtent({
+        fetchNgwLayerExtent({
           connector: ngwMap.connector,
           resourceId,
         }).then((e) => {
           // Manual buffer for extent
-          maxBounds = [e[0] - 1, e[1] - 1, e[2] + 1, e[3] + 1];
+          const maxBounds = [e[0] - 1, e[1] - 1, e[2] + 1, e[3] + 1];
           ngwMap.setView({
             center: [-88, 44],
             zoom: 10,
@@ -76,7 +89,7 @@
         });
         ngwMap.emitter.on('layer-' + id + ':updated', (e) => {
           // Feel free to execute this method each time, the request for count is cached.
-          NgwKit.fetchNgwLayerCount({
+          fetchNgwLayerCount({
             connector: ngwMap.connector,
             resourceId,
           }).then((total) => {

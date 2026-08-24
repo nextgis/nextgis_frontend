@@ -35,7 +35,6 @@
         z-index: 9999;
       }
     </style>
-    <script src="../../lib/ngw-maplibre-gl.global.js"></script>
   </head>
   <body>
     <div class="grid-container">
@@ -64,7 +63,16 @@
         <div id="map6" class="map"></div>
       </div>
     </div>
-    <script>
+    <script type="importmap">
+      {
+        "imports": {
+          "@nextgis/ngw-maplibre-gl": "../../lib/ngw-maplibre-gl.esm-browser.js"
+        }
+      }
+    </script>
+
+    <script type="module">
+      import NgwMap from '@nextgis/ngw-maplibre-gl';
       // Map 1: Initialization with specific zoom and center
       NgwMap.create({
         baseUrl: 'https://demo.nextgis.com',

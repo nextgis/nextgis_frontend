@@ -45,9 +45,18 @@
       <div id="tree"></div>
       <div id="map"></div>
     </div>
+    <script type="importmap">
+      {
+        "imports": {
+          "@nextgis/ngw-leaflet": "../../../packages/ngw-leaflet/lib/ngw-leaflet.esm-browser.js",
+          "@nextgis/ngw-kit": "../../../packages/ngw-kit/lib/ngw-kit.esm-browser.js"
+        }
+      }
+    </script>
+
     <script type="module">
-      import NgwMap from '../../../packages/ngw-leaflet/lib/ngw-leaflet.esm-browser.js';
-      import { fetchNgwExtent } from '../../../packages/ngw-kit/lib/ngw-kit.esm-browser.js';
+      import NgwMap from '@nextgis/ngw-leaflet';
+      import { fetchNgwExtent } from '@nextgis/ngw-kit';
       const tree = document.getElementById('tree');
       const allowedPreviewClsList = [
         'webmap',

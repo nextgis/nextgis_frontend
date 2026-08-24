@@ -63,8 +63,16 @@
         <div id="map6" class="map"></div>
       </div>
     </div>
+    <script type="importmap">
+      {
+        "imports": {
+          "@nextgis/ngw-leaflet": "../../../packages/ngw-leaflet/lib/ngw-leaflet.esm-browser.js"
+        }
+      }
+    </script>
+
     <script type="module">
-      import NgwMap from '../../../packages/ngw-leaflet/lib/ngw-leaflet.esm-browser.js';
+      import NgwMap from '@nextgis/ngw-leaflet';
       // Map 1: Initialization with specific zoom and center
       NgwMap.create({
         baseUrl: 'https://demo.nextgis.com',

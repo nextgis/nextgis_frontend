@@ -16,9 +16,18 @@
   </head>
   <body>
     <div id="map"></div>
+    <script type="importmap">
+      {
+        "imports": {
+          "@nextgis/ngw-leaflet": "../../../packages/ngw-leaflet/lib/ngw-leaflet.esm-browser.js",
+          "@nextgis/icons": "../../../packages/icons/lib/icons.esm-browser.js"
+        }
+      }
+    </script>
+
     <script type="module">
-      import NgwMap from '../../../packages/ngw-leaflet/lib/ngw-leaflet.esm-browser.js';
-      import { getIcon } from '../../../packages/icons/lib/icons.esm-browser.js';
+      import NgwMap from '@nextgis/ngw-leaflet';
+      import { getIcon } from '@nextgis/icons';
       // Initializing the NGW Map with basic parameters
       NgwMap.create({
         baseUrl: 'https://demo.nextgis.com',

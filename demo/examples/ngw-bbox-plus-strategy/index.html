@@ -22,12 +22,20 @@
   </head>
   <body>
     <div id="map"></div>
+    <script type="importmap">
+      {
+        "imports": {
+          "@nextgis/ngw-leaflet": "../../../packages/ngw-leaflet/lib/ngw-leaflet.esm-browser.js"
+        }
+      }
+    </script>
+
     <script type="module">
-      import NgwMap from '../../../packages/ngw-leaflet/lib/ngw-leaflet.esm-browser.js';
+      import NgwMap from '@nextgis/ngw-leaflet';
       import {
         fetchNgwLayerExtent,
         fetchNgwLayerCount,
-      } from '../../../packages/ngw-kit/lib/ngw-kit.esm-browser.js';
+      } from '@nextgis/ngw-kit';
       const id = 'bbox-plus-layer';
       NgwMap.create({
         baseUrl: 'https://demo.nextgis.com',

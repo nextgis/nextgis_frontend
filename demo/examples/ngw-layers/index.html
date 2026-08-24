@@ -43,8 +43,16 @@
       <div id="layers"></div>
       <div id="map"></div>
     </div>
+    <script type="importmap">
+      {
+        "imports": {
+          "@nextgis/ngw-leaflet": "../../../packages/ngw-leaflet/lib/ngw-leaflet.esm-browser.js"
+        }
+      }
+    </script>
+
     <script type="module">
-      import NgwMap from '../../../packages/ngw-leaflet/lib/ngw-leaflet.esm-browser.js';
+      import NgwMap from '@nextgis/ngw-leaflet';
       const layers = [
         { resource: 9049, description: 'Webmap resource' },
         { resource: 9034, description: 'Vector resource' },

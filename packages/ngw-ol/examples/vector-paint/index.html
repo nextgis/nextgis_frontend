@@ -15,11 +15,19 @@
         height: 100%;
       }
     </style>
-    <script src="../../lib/ngw-ol.global.js"></script>
   </head>
   <body>
     <div id="map"></div>
-    <script>
+    <script type="importmap">
+      {
+        "imports": {
+          "@nextgis/ngw-ol": "../../lib/ngw-ol.esm-browser.js"
+        }
+      }
+    </script>
+
+    <script type="module">
+      import NgwMap from '@nextgis/ngw-ol';
       const properties = [
         { id: 1 },
         { id: 2, color: 'green', opacity: 0.5 },

@@ -22,11 +22,19 @@
         margin: 5px;
       }
     </style>
-    <script src="../../lib/ngw-maplibre-gl.global.js"></script>
   </head>
   <body>
     <div id="map"></div>
-    <script>
+    <script type="importmap">
+      {
+        "imports": {
+          "@nextgis/ngw-maplibre-gl": "../../lib/ngw-maplibre-gl.esm-browser.js"
+        }
+      }
+    </script>
+
+    <script type="module">
+      import NgwMap from '@nextgis/ngw-maplibre-gl';
       const ngwMap = new NgwMap({
         baseUrl: 'https://demo.nextgis.com',
         target: 'map',
@@ -57,7 +65,7 @@
           option.setAttribute('value', i);
           select.appendChild(option);
         });
-        select.addEventListener('change', (opt) => {
+        select.addEventListener('change', (event) => {
           setSelected(items[event.target.value], info);
         });
         identifyPanel.appendChild(select);

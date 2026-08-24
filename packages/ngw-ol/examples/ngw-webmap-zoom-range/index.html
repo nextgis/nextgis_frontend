@@ -16,11 +16,19 @@
         font-weight: bold;
       }
     </style>
-    <script src="../../lib/ngw-ol.global.js"></script>
   </head>
   <body>
     <div id="map"></div>
-    <script>
+    <script type="importmap">
+      {
+        "imports": {
+          "@nextgis/ngw-ol": "../../lib/ngw-ol.esm-browser.js"
+        }
+      }
+    </script>
+
+    <script type="module">
+      import NgwMap from '@nextgis/ngw-ol';
       const minZoom = 11;
       const maxZoom = 15;
 
@@ -36,7 +44,7 @@
         const zoomLevelControl = ngwMap.createControl(
           {
             onAdd: () => {
-              zoomEl = document.createElement('div');
+              const zoomEl = document.createElement('div');
               zoomEl.className = 'show-zoom';
               const updateZoom = () => {
                 const zoom = ngwMap.getZoom();

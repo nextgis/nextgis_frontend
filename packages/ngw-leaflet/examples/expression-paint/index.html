@@ -12,12 +12,20 @@
         height: 100%;
       }
     </style>
-    <script src="../../lib/ngw-leaflet.global.js"></script>
   </head>
 
   <body>
     <div id="map"></div>
-    <script>
+    <script type="importmap">
+      {
+        "imports": {
+          "@nextgis/ngw-leaflet": "../../lib/ngw-leaflet.esm-browser.js"
+        }
+      }
+    </script>
+
+    <script type="module">
+      import NgwMap from '@nextgis/ngw-leaflet';
       // Initialize the NextGIS map with predefined bounds
       NgwMap.create({
         baseUrl: 'https://demo.nextgis.com',

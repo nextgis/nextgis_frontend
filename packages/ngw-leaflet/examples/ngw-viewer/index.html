@@ -39,15 +39,24 @@
         cursor: pointer;
       }
     </style>
-    <script src="../../lib/ngw-leaflet.global.js"></script>
-    <script src="../../../ngw-kit/lib/ngw-kit.global.js"></script>
   </head>
   <body>
     <div id="wrap">
       <div id="tree"></div>
       <div id="map"></div>
     </div>
-    <script>
+    <script type="importmap">
+      {
+        "imports": {
+          "@nextgis/ngw-leaflet": "../../lib/ngw-leaflet.esm-browser.js",
+          "@nextgis/ngw-kit": "../../../ngw-kit/lib/ngw-kit.esm-browser.js"
+        }
+      }
+    </script>
+
+    <script type="module">
+      import NgwMap from '@nextgis/ngw-leaflet';
+      import { fetchNgwExtent } from '@nextgis/ngw-kit';
       const tree = document.getElementById('tree');
       const allowedPreviewClsList = [
         'webmap',
@@ -139,7 +148,7 @@
           ngwMap.removeLayer('active-layer');
           ngwMap.setView({ bounds: undefined, maxBounds: undefined });
 
-          NgwKit.fetchNgwExtent({
+          fetchNgwExtent({
             connector,
             resourceId: item.resource.id,
             signal: abortController.signal,

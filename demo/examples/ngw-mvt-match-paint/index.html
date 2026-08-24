@@ -20,8 +20,16 @@
   </head>
   <body>
     <div id="map"></div>
+    <script type="importmap">
+      {
+        "imports": {
+          "@nextgis/ngw-maplibre-gl": "../../../packages/ngw-maplibre-gl/lib/ngw-maplibre-gl.esm-browser.js"
+        }
+      }
+    </script>
+
     <script type="module">
-      import NgwMap from '../../../packages/ngw-maplibre-gl/lib/ngw-maplibre-gl.esm-browser.js';
+      import NgwMap from '@nextgis/ngw-maplibre-gl';
       NgwMap.create({
         target: 'map',
         baseUrl: 'https://demo.nextgis.com',

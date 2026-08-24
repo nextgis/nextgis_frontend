@@ -12,11 +12,19 @@
         height: 100%;
       }
     </style>
-    <script src="../../lib/ngw-maplibre-gl.global.js"></script>
   </head>
   <body>
     <div id="map"></div>
-    <script>
+    <script type="importmap">
+      {
+        "imports": {
+          "@nextgis/ngw-maplibre-gl": "../../lib/ngw-maplibre-gl.esm-browser.js"
+        }
+      }
+    </script>
+
+    <script type="module">
+      import NgwMap from '@nextgis/ngw-maplibre-gl';
       NgwMap.create({
         osm: true,
         baseUrl: 'https://demo.nextgis.com',

@@ -35,8 +35,16 @@
       <div id="map"></div>
       <div id="log"></div>
     </div>
+    <script type="importmap">
+      {
+        "imports": {
+          "@nextgis/ngw-leaflet": "../../../packages/ngw-leaflet/lib/ngw-leaflet.esm-browser.js"
+        }
+      }
+    </script>
+
     <script type="module">
-      import NgwMap from '../../../packages/ngw-leaflet/lib/ngw-leaflet.esm-browser.js';
+      import NgwMap from '@nextgis/ngw-leaflet';
       const ID = 'layer-id';
       const logBlock = document.getElementById('log');
       const log = (msg) => {

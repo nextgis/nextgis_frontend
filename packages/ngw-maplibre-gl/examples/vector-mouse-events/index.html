@@ -29,14 +29,22 @@
         color: green;
       }
     </style>
-    <script src="../../lib/ngw-maplibre-gl.global.js"></script>
   </head>
   <body>
     <div id="wrapper">
       <div id="map"></div>
       <div id="log"></div>
     </div>
-    <script>
+    <script type="importmap">
+      {
+        "imports": {
+          "@nextgis/ngw-maplibre-gl": "../../lib/ngw-maplibre-gl.esm-browser.js"
+        }
+      }
+    </script>
+
+    <script type="module">
+      import NgwMap from '@nextgis/ngw-maplibre-gl';
       const ID = 'layer-id';
       const logBlock = document.getElementById('log');
       const log = (msg) => {

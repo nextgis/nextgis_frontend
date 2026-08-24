@@ -43,13 +43,21 @@
   <body>
     <div id="map"></div>
 
+    <script type="importmap">
+      {
+        "imports": {
+          "@nextgis/ngw-leaflet": "../../../packages/ngw-leaflet/lib/ngw-leaflet.esm-browser.js"
+        }
+      }
+    </script>
+
     <script type="module">
-      import NgwMap from '../../../packages/ngw-leaflet/lib/ngw-leaflet.esm-browser.js';
+      import NgwMap from '@nextgis/ngw-leaflet';
       import {
         degrees2meters,
         degrees2Radian,
         meters2degrees,
-      } from '../../../packages/utils/lib/utils.esm-browser.js';
+      } from '@nextgis/utils';
       // initialize map
       NgwMap.create({
         baseUrl: 'https://demo.nextgis.com',
