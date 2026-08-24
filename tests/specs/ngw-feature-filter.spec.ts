@@ -1,11 +1,16 @@
 import { expect } from 'chai';
 
+import { createLayerFilterParam } from '../../packages/ngw-kit/src/utils/createLayerFilterParam';
 import { fetchNgwLayerItems } from '../../packages/ngw-kit/src/utils/fetchNgwLayerItems';
 import { propertiesFilterToExpression } from '../../packages/ngw-kit/src/utils/propertiesFilterToExpression';
 
 import type { FetchNgwItemsOptions } from '../../packages/ngw-kit/src/interfaces';
 
 describe('NGW feature filters', () => {
+  it('omits the render filter parameter when no filter is provided', () => {
+    expect(createLayerFilterParam(1734)).to.deep.equal({});
+  });
+
   it('converts id filters to the NGW fid expression', () => {
     expect(propertiesFilterToExpression([['id', 'eq', 1]])).to.deep.equal([
       'all',

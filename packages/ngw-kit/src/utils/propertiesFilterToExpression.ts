@@ -224,12 +224,3 @@ export function propertiesFilterToExpressionString<
     propertiesFilterToExpression(filters),
   ) as FilterExpressionString;
 }
-
-export function createLayerFilterParam<T extends Properties = Properties>(
-  resourceId: number,
-  filters?: PropertiesFilter<T>,
-): Record<string, string | undefined> {
-  return {
-    [`filter[${resourceId}]`]: propertiesFilterToExpressionString(filters),
-  };
-}
