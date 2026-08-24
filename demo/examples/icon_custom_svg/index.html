@@ -2,24 +2,23 @@
   <head>
     <meta charset="utf-8" />
     <title>Interactive SVG Icon Map Example</title>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-      html, body, #map {
+      html,
+      body,
+      #map {
         margin: 0;
         padding: 0;
         width: 100%;
         height: 100%;
       }
     </style>
-    <script src="../../../packages/ngw-leaflet/lib/ngw-leaflet.global.js"></script>
-    <script src="../../../packages/icons/lib/icons.global.js"></script>
   </head>
   <body>
     <div id="map"></div>
-    <script>
+    <script type="module">
+      import NgwMap from '../../../packages/ngw-leaflet/lib/ngw-leaflet.esm-browser.js';
+      import { getIcon } from '../../../packages/icons/lib/icons.esm-browser.js';
       // Initializing the NGW Map with basic parameters
       NgwMap.create({
         baseUrl: 'https://demo.nextgis.com',
@@ -48,12 +47,12 @@
               resource: 9030,
               fit: true,
               adapterOptions: {
-                paint: Icons.getIcon({
+                paint: getIcon({
                   svg: icons[0],
                   size: 20,
                 }),
                 selectable: true,
-                selectedPaint: Icons.getIcon({
+                selectedPaint: getIcon({
                   svg: icons[0],
                   size: 30,
                 }),
@@ -65,7 +64,7 @@
               resource: 9032,
               interactive: false,
               adapterOptions: {
-                paint: Icons.getIcon({
+                paint: getIcon({
                   svg: icons[1],
                   size: 20,
                 }),
@@ -77,7 +76,7 @@
               resource: 9034,
               interactive: false,
               adapterOptions: {
-                paint: Icons.getIcon({
+                paint: getIcon({
                   svg: icons[2],
                   size: 20,
                 }),

@@ -37,14 +37,14 @@
         padding-left: 15px;
       }
     </style>
-    <script src="../../../packages/ngw-leaflet/lib/ngw-leaflet.global.js"></script>
   </head>
   <body>
     <div id="wrap">
       <div id="tree"></div>
       <div id="map"></div>
     </div>
-    <script>
+    <script type="module">
+      import NgwMap from '../../../packages/ngw-leaflet/lib/ngw-leaflet.esm-browser.js';
       const tree = document.getElementById('tree');
       const ngwMap = new NgwMap({
         baseUrl: 'https://demo.nextgis.com',

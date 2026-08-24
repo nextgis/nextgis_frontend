@@ -35,7 +35,6 @@
         z-index: 9999;
       }
     </style>
-    <script src="../../../packages/ngw-leaflet/lib/ngw-leaflet.global.js"></script>
   </head>
   <body>
     <div class="grid-container">
@@ -64,7 +63,8 @@
         <div id="map6" class="map"></div>
       </div>
     </div>
-    <script>
+    <script type="module">
+      import NgwMap from '../../../packages/ngw-leaflet/lib/ngw-leaflet.esm-browser.js';
       // Map 1: Initialization with specific zoom and center
       NgwMap.create({
         baseUrl: 'https://demo.nextgis.com',

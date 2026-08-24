@@ -16,11 +16,11 @@
         font-weight: bold;
       }
     </style>
-    <script src="../../../packages/ngw-leaflet/lib/ngw-leaflet.global.js"></script>
   </head>
   <body>
     <div id="map"></div>
-    <script>
+    <script type="module">
+      import NgwMap from '../../../packages/ngw-leaflet/lib/ngw-leaflet.esm-browser.js';
       const minZoom = 11;
       const maxZoom = 15;
 
@@ -36,7 +36,7 @@
         const zoomLevelControl = ngwMap.createControl(
           {
             onAdd: () => {
-              zoomEl = document.createElement('div');
+              const zoomEl = document.createElement('div');
               zoomEl.className = 'show-zoom';
               const updateZoom = () => {
                 const zoom = ngwMap.getZoom();

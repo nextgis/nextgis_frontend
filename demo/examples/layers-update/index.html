@@ -19,11 +19,11 @@
         padding: 5px;
       }
     </style>
-    <script src="../../../packages/ngw-leaflet/lib/ngw-leaflet.global.js"></script>
   </head>
   <body>
     <div id="map"></div>
-    <script>
+    <script type="module">
+      import NgwMap from '../../../packages/ngw-leaflet/lib/ngw-leaflet.esm-browser.js';
       const vectorLayerKeyName = 'add-feature-example-layer';
       const baseUrl = 'https://sandbox.nextgis.com';
 

@@ -20,12 +20,12 @@
       }
     </style>
 
-    <script src="../../../packages/ngw-leaflet/lib/ngw-leaflet.global.js"></script>
   </head>
 
   <body>
     <div id="map"></div>
-    <script>
+    <script type="module">
+      import NgwMap from '../../../packages/ngw-leaflet/lib/ngw-leaflet.esm-browser.js';
       NgwMap.create({
         target: 'map',
         qmsId: 448,

@@ -29,14 +29,14 @@
         color: green;
       }
     </style>
-    <script src="../../../packages/ngw-leaflet/lib/ngw-leaflet.global.js"></script>
   </head>
   <body>
     <div id="wrapper">
       <div id="map"></div>
       <div id="log"></div>
     </div>
-    <script>
+    <script type="module">
+      import NgwMap from '../../../packages/ngw-leaflet/lib/ngw-leaflet.esm-browser.js';
       const ID = 'layer-id';
       const logBlock = document.getElementById('log');
       const log = (msg) => {

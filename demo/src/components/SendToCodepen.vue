@@ -10,6 +10,7 @@ interface PenData {
   js?: string;
   title?: string;
   description?: string;
+  editors?: string;
   html_pre_processor?: 'none';
   css_pre_processor?: 'none';
   css_starter?: 'neither';
@@ -28,56 +29,18 @@ const props = defineProps({
   html: { type: String, required: true },
 });
 
-const tabLeft = (text: string) => {
-  const lines = text.split('\n');
-  let newTextArr: string[] = [];
-  const emptyCharsCounts = [];
-  let noEmptyLinesOnBegin = false;
-  for (let fry = 0; fry < lines.length; fry++) {
-    let line = lines[fry];
-    line = line.replace('\r', '');
-    const isLineNotEmpty = !!line;
-    if (noEmptyLinesOnBegin || isLineNotEmpty) {
-      noEmptyLinesOnBegin = true;
-      newTextArr.push(line);
-      if (isLineNotEmpty) {
-        const emptyLines = line.search(/\S/);
-        if (emptyLines !== -1) {
-          emptyCharsCounts.push(emptyLines);
-        }
-      }
-    }
-  }
-  const minEmptyChars = Math.min(...emptyCharsCounts);
-  if (minEmptyChars) {
-    newTextArr = newTextArr.map((x) => x.substring(minEmptyChars));
-  }
-  return newTextArr.join('\n');
-};
-
 const parseHtml = (html: string): PenData => {
-  const parseTag = (tag: string) => {
-    const re = new RegExp(`<${tag}>((.|[\n\r])*)</${tag}>`, 'i');
-    const match = html.match(re);
-    if (match && match.length) {
-      html = html.replace(match[0], '');
-      return match[1] || '';
-    }
-    return '';
-  };
-  const js = tabLeft(parseTag('script'));
-  const css = tabLeft(parseTag('style'));
-
   return {
     title: `${props.item.label} | ${props.item.id}`,
     description: '',
+    editors: '100',
     html,
     html_pre_processor: 'none',
-    css,
+    css: '',
     css_pre_processor: 'none',
     css_starter: 'neither',
     css_prefix_free: false,
-    js,
+    js: '',
     js_pre_processor: 'none',
     js_modernizr: false,
     js_library: '',

@@ -39,16 +39,19 @@
     </style>
     <!-- Note: For production environments, consider using a build system and ESM modules for better performance and maintainability.-->
     <!-- This approach is suitable for demonstration purposes only. -->
-    <script src="../../../packages/ngw-leaflet/lib/ngw-leaflet.global.js"></script>
-    <script src="../../../packages/ngw-connector/lib/ngw-connector.global.js"></script>
-    <script src="../../../packages/ngw-kit/lib/ngw-kit.global.js"></script>
   </head>
   <body>
     <div id="wrapper">
       <div id="feature-list">Loading features...</div>
       <div id="map"></div>
     </div>
-    <script>
+    <script type="module">
+      import NgwMap from '../../../packages/ngw-leaflet/lib/ngw-leaflet.esm-browser.js';
+      import NgwConnector from '../../../packages/ngw-connector/lib/ngw-connector.esm-browser.js';
+      import {
+        fetchNgwLayerItems,
+        fetchNgwLayerItemExtent,
+      } from '../../../packages/ngw-kit/lib/ngw-kit.esm-browser.js';
       // NGW resource keyname
       const keyname = 'eat-here';
       const pageSize = 10;
@@ -76,7 +79,7 @@
         // because the first response will be cached
         // and requests to the server will no longer be executed
         connector.getResourceId(keyname).then((resourceId) => {
-          NgwKit.fetchNgwLayerItems({
+          fetchNgwLayerItems({
             // and that would work too: connector: ngwMap.connector
             connector: connector,
             resourceId: resourceId,
@@ -111,7 +114,7 @@
         itemBlock.innerHTML = item.fields.NAME;
         itemBlock.addEventListener('click', () => {
           return connector.getResourceId(keyname).then((resourceId) => {
-            return NgwKit.fetchNgwLayerItemExtent({
+            return fetchNgwLayerItemExtent({
               featureId: item.id,
               resourceId: resourceId,
               connector: connector,
@@ -125,33 +128,34 @@
 
       function makePagination() {
         return connector.getResourceId(keyname).then((resourceId) => {
-
-          return connector
-            .route('feature_layer.feature.count', { id: resourceId })
-            // You can simply cache any GET request!
-            // But be careful... signals are very strong tonight!
-            .get({ cache: true })
-            .then((resp) => {
-              const count = resp.total_count;
-              const paginationBlock = document.createElement('div');
-              paginationBlock.className = 'pagination-block';
-              const items = pagination(PAGE, Math.ceil(count / pageSize));
-              for (let i = 0; i < items.length; i++) {
-                const p = items[i];
-                const numPageBlock = document.createElement('div');
-                numPageBlock.className = 'pagination-block-item';
-                numPageBlock.innerHTML =
-                  PAGE === Number(p) ? '<strong>' + p + '</strong>' : p;
-                paginationBlock.appendChild(numPageBlock);
-                if (p !== '...') {
-                  numPageBlock.addEventListener(
-                    'click',
-                    changePage.bind(this, p),
-                  );
+          return (
+            connector
+              .route('feature_layer.feature.count', { id: resourceId })
+              // You can simply cache any GET request!
+              // But be careful... signals are very strong tonight!
+              .get({ cache: true })
+              .then((resp) => {
+                const count = resp.total_count;
+                const paginationBlock = document.createElement('div');
+                paginationBlock.className = 'pagination-block';
+                const items = pagination(PAGE, Math.ceil(count / pageSize));
+                for (let i = 0; i < items.length; i++) {
+                  const p = items[i];
+                  const numPageBlock = document.createElement('div');
+                  numPageBlock.className = 'pagination-block-item';
+                  numPageBlock.innerHTML =
+                    PAGE === Number(p) ? '<strong>' + p + '</strong>' : p;
+                  paginationBlock.appendChild(numPageBlock);
+                  if (p !== '...') {
+                    numPageBlock.addEventListener(
+                      'click',
+                      changePage.bind(this, p),
+                    );
+                  }
                 }
-              }
-              return paginationBlock;
-            });
+                return paginationBlock;
+              })
+          );
         });
       }
 
