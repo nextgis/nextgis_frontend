@@ -300,7 +300,7 @@ function createConfig(format, output, plugins = []) {
       json({
         namedExports: false,
       }),
-      ignoreLibImports(),
+      ...(isGlobalBuild || isBrowserESMBuild ? [] : [ignoreLibImports()]),
       alias({
         entries,
       }),
