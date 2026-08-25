@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/leaflet-control-container",
-  "version": "4.0.0-alpha.6",
+  "version": "4.0.0-alpha.8",
   "description": "Leaflet integration for NextGIS control container",
   "main": "lib/leaflet-control-container.global.prod.js",
   "module": "lib/leaflet-control-container.esm-bundler.js",
@@ -8,13 +8,13 @@
   "jsdelivr": "lib/leaflet-control-container.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/control-container": "4.0.0-alpha.6"
+    "@nextgis/control-container": "4.0.0-alpha.8"
   },
   "peerDependencies": {
     "leaflet": ">=1.5.0"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "4.0.0-alpha.6",
+    "@nextgis/build-tools": "4.0.0-alpha.8",
     "@types/leaflet": "^1.7.5",
     "leaflet": "1.7.1"
   },
