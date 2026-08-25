@@ -1,0 +1,133 @@
+import NgwMap from '@nextgis/ngw-leaflet';
+import NgwConnector from '@nextgis/ngw-connector';
+import { fetchNgwLayerItems, fetchNgwLayerItemExtent } from '@nextgis/ngw-kit';
+
+// NGW resource keyname
+const keyname = 'eat-here';
+const pageSize = 10;
+let PAGE = 1;
+const featureListBlock = document.getElementById('feature-list');
+
+const connector = new NgwConnector({
+  baseUrl: 'https://demo.nextgis.com',
+});
+
+const ngwMap = new NgwMap({
+  connector,
+  target: 'map',
+  center: [-89.84, 44.55],
+  zoom: 6,
+  osm: true,
+  resources: [{ resource: keyname, fit: true, adapter: 'TILE' }],
+});
+
+fillFeatureList();
+
+function fillFeatureList() {
+  featureListBlock.innerHTML = 'Loading features...';
+  // Do not worry about calling this (and other api) method  much time,
+  // because the first response will be cached
+  // and requests to the server will no longer be executed
+  connector.getResourceId(keyname).then((resourceId) => {
+    fetchNgwLayerItems({
+      // and that would work too: connector: ngwMap.connector
+      connector: connector,
+      resourceId: resourceId,
+      offset: (PAGE - 1) * pageSize,
+      limit: pageSize,
+      // it is good practice to only ask for fields that will be used
+      fields: ['NAME'],
+      // Use the cache for lists carefully, it can overflow memory and break the browser.
+      cache: true,
+      // We recommend do not use the returned geometry to get extent of feature.
+      // Sometimes it can be a very large polygon!!! (^0-0^)
+      geom: false,
+    }).then((items) => {
+      drawHtml(items);
+    });
+  });
+}
+
+function drawHtml(items) {
+  featureListBlock.innerHTML = '';
+  for (let i = 0; i < items.length; i++) {
+    featureListBlock.appendChild(createItemBlock(items[i]));
+  }
+  makePagination().then((paginationBlock) => {
+    featureListBlock.appendChild(paginationBlock);
+  });
+}
+
+function createItemBlock(item) {
+  const itemBlock = document.createElement('div');
+  itemBlock.className = 'item-block';
+  itemBlock.innerHTML = item.fields.NAME;
+  itemBlock.addEventListener('click', () => {
+    return connector.getResourceId(keyname).then((resourceId) => {
+      return fetchNgwLayerItemExtent({
+        featureId: item.id,
+        resourceId: resourceId,
+        connector: connector,
+      }).then((extent) => {
+        ngwMap.fitBounds(extent, { maxZoom: 18 });
+      });
+    });
+  });
+  return itemBlock;
+}
+
+function makePagination() {
+  return connector.getResourceId(keyname).then((resourceId) => {
+    return (
+      connector
+        .route('feature_layer.feature.count', { id: resourceId })
+        // You can simply cache any GET request!
+        // But be careful... signals are very strong tonight!
+        .get({ cache: true })
+        .then((resp) => {
+          const count = resp.total_count;
+          const paginationBlock = document.createElement('div');
+          paginationBlock.className = 'pagination-block';
+          const items = pagination(PAGE, Math.ceil(count / pageSize));
+          for (let i = 0; i < items.length; i++) {
+            const p = items[i];
+            const numPageBlock = document.createElement('div');
+            numPageBlock.className = 'pagination-block-item';
+            numPageBlock.innerHTML =
+              PAGE === Number(p) ? '<strong>' + p + '</strong>' : p;
+            paginationBlock.appendChild(numPageBlock);
+            if (p !== '...') {
+              numPageBlock.addEventListener('click', changePage.bind(this, p));
+            }
+          }
+          return paginationBlock;
+        })
+    );
+  });
+}
+
+function changePage(pageNum) {
+  PAGE = Number(pageNum);
+  fillFeatureList();
+}
+
+// If this example helped you, you can ★star★ our repository on github
+// https://github.com/nextgis/nextgis_frontend
+
+// from here https://gist.github.com/kottenator/9d936eb3e4e3c3e02598#gistcomment-3413141
+function pagination(current, total) {
+  const center = [current - 1, current, current + 1],
+    filteredCenter = center.filter((p) => p > 1 && p < total),
+    includeThreeLeft = current === 5,
+    includeThreeRight = current === total - 4,
+    includeLeftDots = current > 5,
+    includeRightDots = current < total - 4;
+
+  if (includeThreeLeft) filteredCenter.unshift(2);
+  if (includeThreeRight) filteredCenter.push(total - 1);
+
+  if (includeLeftDots) filteredCenter.unshift('...');
+  if (includeRightDots) filteredCenter.push('...');
+
+  return [1, ...filteredCenter, total];
+}

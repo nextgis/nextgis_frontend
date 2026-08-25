@@ -29,6 +29,7 @@
   </head>
   <body>
     <div id="map"></div>
+
     <script type="importmap">
       {
         "imports": {
@@ -38,80 +39,6 @@
       }
     </script>
 
-    <script type="module">
-      import NgwMap from '@nextgis/ngw-maplibre-gl';
-      import { debounce } from '@nextgis/utils';
-      const bounds = [-3.71133, 40.4117, -3.6978, 40.42115];
-
-      NgwMap.create({
-        baseUrl: 'https://demo.nextgis.com',
-        target: 'map',
-        bounds,
-        osm: true,
-      }).then((ngwMap) => {
-        ngwMap.addNgwLayer({
-          resource: 6098,
-          id: 'building',
-          interactive: false,
-          intersects: bounds,
-        });
-
-        const paintControl = ngwMap.createControl(
-          {
-            onAdd: () => {
-              const elem = document.createElement('div');
-              elem.innerHTML = `
-              <div class="">
-                <input id="fill-color-select" type="color" />
-                <label for="fill-color-select">Fill color</label>
-              </div>
-              <div>
-                <input id="stroke-color-select" type="color" />
-                <label for="stroke-color-select">Stroke color</label>
-              </div>
-              <div>
-                <input id="stroke-weight-select" type="range" min="1" max="5" step="1"/>
-                <label for="stroke-weight-select">Stroke weight</label>
-              </div>
-              `;
-              const fillColorSelect = elem.querySelector('#fill-color-select');
-              const strokeWeightSelect = elem.querySelector(
-                '#stroke-weight-select',
-              );
-              const strokeColorSelect = elem.querySelector(
-                '#stroke-color-select',
-              );
-
-              fillColorSelect.value = ngwMap.options.paint.color;
-              strokeColorSelect.value = ngwMap.options.paint.color;
-              strokeWeightSelect.value = ngwMap.options.paint.weight;
-
-              const updatePaint = debounce(() => {
-                ngwMap.updateLayerPaint('building', {
-                  fillColor: fillColorSelect.value,
-                  strokeColor: strokeColorSelect.value,
-                  weight: strokeWeightSelect.value,
-                });
-              }, 300);
-
-              fillColorSelect.oninput = () => {
-                updatePaint();
-              };
-              strokeColorSelect.oninput = () => {
-                updatePaint();
-              };
-              strokeWeightSelect.oninput = () => {
-                updatePaint();
-              };
-
-              return elem;
-            },
-          },
-          { bar: true, addClass: 'paint-control' },
-        );
-
-        ngwMap.addControl(paintControl, 'top-right');
-      });
-    </script>
+    <script type="module" src="./index.js"></script>
   </body>
 </html>

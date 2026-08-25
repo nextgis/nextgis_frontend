@@ -22,8 +22,10 @@ function copyExampleToLib(packageName, exampleFolderPath, exampleName) {
 
   const metaPath = join(exampleFolderPath, 'index.json');
   const htmlPath = join(exampleFolderPath, 'index.html');
+  const jsPath = join(exampleFolderPath, 'index.js');
   const newMetaPath = join(libExamplesPath, 'index.json');
   const newHtmlPath = join(libExamplesPath, 'index.html');
+  const newJsPath = join(libExamplesPath, 'index.js');
 
   if (!fs.existsSync(libExamplesPath)) {
     fs.mkdirSync(libExamplesPath);
@@ -47,16 +49,22 @@ function copyExampleToLib(packageName, exampleFolderPath, exampleName) {
     return `../../../${g}/`;
   });
 
+  const js = fs.readFileSync(jsPath, 'utf8');
+  const newJs = changeHtmlMapAdapter(js, packageName, ngwMaps);
+
   // Check if the content is different and update count
   if (
     !fs.existsSync(newHtmlPath) ||
-    fs.readFileSync(newHtmlPath, 'utf8') !== newHtml
+    fs.readFileSync(newHtmlPath, 'utf8') !== newHtml ||
+    !fs.existsSync(newJsPath) ||
+    fs.readFileSync(newJsPath, 'utf8') !== newJs
   ) {
     updatedExamplesCount++;
     console.log(chalk.blue(`Updating example: ${packageName}/${exampleName}`));
   }
 
   fs.writeFileSync(newHtmlPath, newHtml);
+  fs.writeFileSync(newJsPath, newJs);
 }
 
 function updateExamples() {
@@ -68,7 +76,12 @@ function updateExamples() {
       if (isDirectory(examplePath)) {
         const metaPath = join(examplePath, 'index.json');
         const htmlPath = join(examplePath, 'index.html');
-        if (fs.existsSync(metaPath) && fs.existsSync(htmlPath)) {
+        const jsPath = join(examplePath, 'index.js');
+        if (
+          fs.existsSync(metaPath) &&
+          fs.existsSync(htmlPath) &&
+          fs.existsSync(jsPath)
+        ) {
           const meta = JSON.parse(fs.readFileSync(metaPath, 'utf8'));
           if (meta.ngwMaps && !meta.onlyForDemo) {
             meta.ngwMaps.forEach((x) => {

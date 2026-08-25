@@ -1,5 +1,6 @@
-import fs from 'fs/promises';
+import fs from 'node:fs/promises';
 import path from 'node:path';
+import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 
 import chalk from 'chalk';
@@ -45,6 +46,7 @@ async function updateDemoExamples() {
     console.log(chalk.yellow(`File size: ${fileSizeInKb}`));
   } catch (error) {
     console.error(chalk.red(`Error occurred during update: ${error.message}`));
+    process.exitCode = 1;
   } finally {
     console.log(chalk.blue('Update process completed.'));
   }

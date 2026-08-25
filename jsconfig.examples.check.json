@@ -1,0 +1,16 @@
+{
+  "extends": "./jsconfig.examples.json",
+  "compilerOptions": {
+    "paths": {
+      "@nextgis/*": ["./packages/*/lib/index.d.ts"]
+    }
+  },
+  "include": [
+    "./demo/examples/*/index.js",
+    "./packages/ngw-leaflet/examples/*/index.js",
+    "./packages/ngw-ol/examples/*/index.js",
+    "./packages/ngw-maplibre-gl/examples/*/index.js",
+    "./demo/examples/globals.d.ts",
+    "./packages/global.d.ts"
+  ]
+}

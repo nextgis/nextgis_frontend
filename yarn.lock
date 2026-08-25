@@ -737,7 +737,7 @@ __metadata:
 
 "@nextgis/build-tools@file:../build-tools::locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter":
   version: 4.0.0-alpha.6
-  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=5af939&locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter"
+  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=3f6201&locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter"
   dependencies:
     "@nextgis/eslint-config": 4.0.0-alpha.6
     "@rollup/plugin-alias": ^6.0.0
@@ -762,13 +762,13 @@ __metadata:
     rollup-plugin-polyfill-node: ^0.13.0
     rollup-plugin-postcss: ^4.0.2
     typescript: ~6.0.3
-  checksum: 74c9f46fcd52db94be38e71451daa1a991c3eaa69c4212dbbdae45f5b668fde6fd5206929ad077ebdec3f23b819bf0d18ed074c486c0fb3494248ad8cda6e259
+  checksum: 94e4615de7c91cd1c5fd5079b94c0194480bd8b402d7ec60e9250731d1fd392e2dc48db87ab0b92b9425805db6f4b481ed90fdd92668b9635ceb1de4e390269b
   languageName: node
   linkType: hard
 
 "@nextgis/build-tools@file:../build-tools::locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium":
   version: 4.0.0-alpha.6
-  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=5af939&locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium"
+  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=3f6201&locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium"
   dependencies:
     "@nextgis/eslint-config": 4.0.0-alpha.6
     "@rollup/plugin-alias": ^6.0.0
@@ -793,7 +793,7 @@ __metadata:
     rollup-plugin-polyfill-node: ^0.13.0
     rollup-plugin-postcss: ^4.0.2
     typescript: ~6.0.3
-  checksum: 74c9f46fcd52db94be38e71451daa1a991c3eaa69c4212dbbdae45f5b668fde6fd5206929ad077ebdec3f23b819bf0d18ed074c486c0fb3494248ad8cda6e259
+  checksum: 94e4615de7c91cd1c5fd5079b94c0194480bd8b402d7ec60e9250731d1fd392e2dc48db87ab0b92b9425805db6f4b481ed90fdd92668b9635ceb1de4e390269b
   languageName: node
   linkType: hard
 

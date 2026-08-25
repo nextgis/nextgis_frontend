@@ -15,6 +15,7 @@
   </head>
   <body>
     <div id="map"></div>
+
     <script type="importmap">
       {
         "imports": {
@@ -23,27 +24,6 @@
       }
     </script>
 
-    <script type="module">
-      import NgwMap from '@nextgis/ngw-leaflet';
-      var ngwMap = new NgwMap({
-        baseUrl: 'https://demo.nextgis.com',
-        target: 'map',
-        qmsId: 448,
-        resources: [
-          {
-            resource: 1733,
-            adapterOptions: {
-              paint: [
-                { radius: 6, stroke: true, fillOpacity: 0.5 },
-                [[['AMENITY', 'eq', 'restaurant']], { color: 'green' }],
-                [[['AMENITY', 'eq', 'cafe']], { color: 'red' }],
-              ],
-              fit: true,
-              limit: 300,
-            },
-          },
-        ],
-      });
-    </script>
+    <script type="module" src="./index.js"></script>
   </body>
 </html>

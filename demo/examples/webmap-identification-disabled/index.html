@@ -15,6 +15,7 @@
   </head>
   <body>
     <div id="map"></div>
+
     <script type="importmap">
       {
         "imports": {
@@ -23,32 +24,6 @@
       }
     </script>
 
-    <script type="module">
-      import NgwMap from '@nextgis/ngw-leaflet';
-      const ngwMap = new NgwMap({
-        baseUrl: 'https://demo.nextgis.com',
-        target: 'map',
-        osm: true,
-        resources: [{ resource: 5148, fit: true, selectable: true }],
-      });
-
-      ngwMap.emitter.on('click', (e) => {
-        ngwMap.cancelPromise('select', 'identify');
-        ngwMap.removeLayer('geojson');
-      });
-
-      const setSelected = (items, info) => {
-        ngwMap.removeLayer('geojson');
-        items[0].geojson().then((feature) => {
-          ngwMap.addGeoJsonLayer({ data: feature, id: 'geojson' });
-        });
-      };
-
-      ngwMap.emitter.on('ngw:select', (e) => {
-        if (e) {
-          setSelected(e.getIdentifyItems());
-        }
-      });
-    </script>
+    <script type="module" src="./index.js"></script>
   </body>
 </html>

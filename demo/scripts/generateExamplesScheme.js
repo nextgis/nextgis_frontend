@@ -39,8 +39,7 @@ function replaceAbsolutePathToCdn(line, packages) {
         '',
       );
       const pkg = packages.find(
-        (item) =>
-          item.package.name.replace(/^@nextgis\//, '') === lineLibName,
+        (item) => item.package.name.replace(/^@nextgis\//, '') === lineLibName,
       );
 
       if (pkg) {
@@ -49,9 +48,11 @@ function replaceAbsolutePathToCdn(line, packages) {
       }
     }
 
-    const isLibPath = !browserModulePath && line.match(
-      /(?:src|href)=("|').*?lib\/([-\w]+?)(?:\.global(?:\.prod)?)?\.(js|css)/,
-    );
+    const isLibPath =
+      !browserModulePath &&
+      line.match(
+        /(?:src|href)=("|').*?lib\/([-\w]+?)(?:\.global(?:\.prod)?)?\.(js|css)/,
+      );
 
     if (isLibPath) {
       newLine = '';
@@ -81,7 +82,26 @@ function replaceAbsolutePathToCdn(line, packages) {
   return line;
 }
 
-function prepareHtml(html, _pkg, packages) {
+function prepareHtml(html, examplePath, packages) {
+  const modulePath = path.join(examplePath, 'index.js');
+  const moduleTag =
+    /^([ \t]*)<script type="module" src="\.\/index\.js"><\/script>/m;
+  const hasModule = existsSync(modulePath);
+  const hasModuleTag = moduleTag.test(html);
+  if (hasModule !== hasModuleTag) {
+    throw new Error(`External module script not found in ${examplePath}`);
+  }
+  if (hasModule) {
+    html = html.replace(moduleTag, (_match, indent) => {
+      const moduleScript = readFileSync(modulePath, 'utf8')
+        .trimEnd()
+        .split('\n')
+        .map((line) => `${indent}  ${line}`)
+        .join('\n');
+      return `${indent}<script type="module">\n${moduleScript}\n${indent}</script>`;
+    });
+  }
+
   const newHtml = [];
 
   // comment direct to lib script
@@ -125,7 +145,7 @@ function getExamples(libPath, pkg, packages) {
             const meta = JSON.parse(readFileSync(metaPath, 'utf8'));
             const html = prepareHtml(
               readFileSync(htmlPath, 'utf8'),
-              pkg,
+              examplePath,
               packages,
             );
 

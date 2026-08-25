@@ -15,6 +15,7 @@
   </head>
   <body>
     <div id="map"></div>
+
     <script type="importmap">
       {
         "imports": {
@@ -23,18 +24,6 @@
       }
     </script>
 
-    <script type="module">
-      import NgwMap from '@nextgis/ngw-maplibre-gl';
-      NgwMap.create({
-        target: 'map',
-        center: [-115.149631, 36.161019],
-        zoom: 15,
-        osm: true,
-      }).then((ngwMap) => {
-        ngwMap.addTileLayer(
-          'https://demo.nextgis.com/api/component/render/tile?resource=10049,10047,10045,10043&nd=204&z={z}&x={x}&y={y}',
-        );
-      });
-    </script>
+    <script type="module" src="./index.js"></script>
   </body>
 </html>
