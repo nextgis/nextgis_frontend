@@ -28,10 +28,25 @@ async function updateDemoExamples() {
   );
 
   try {
+    const filePath = path.join(pkgRoot, 'src', 'examples.json');
+    const packagesPath = path.join(pkgRoot, '..', 'packages');
+    const hasWorkspacePackages = await fs
+      .stat(packagesPath)
+      .then((stats) => stats.isDirectory())
+      .catch(() => false);
+
+    if (!hasWorkspacePackages) {
+      await fs.access(filePath);
+      console.log(
+        chalk.yellow(
+          `Workspace packages not found. Using existing file: ${filePath}`,
+        ),
+      );
+      return;
+    }
+
     const examples = generateExamples();
     const totalCount = countEntries(examples);
-
-    const filePath = path.join(pkgRoot, 'src', 'examples.json');
 
     const fileData = JSON.stringify(examples);
     await fs.writeFile(filePath, fileData);
