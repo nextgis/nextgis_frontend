@@ -612,7 +612,11 @@ export abstract class VectorAdapter<
   ): Promise<any> {
     if (isPaint(paint)) {
       const maplibreGLPaint: any = {};
-      const paint_ = { ...PAINT, ...(paint || {}) };
+      const paint_ = { ...PAINT, ...(paint || {}) } as PathPaint;
+      if (paint_.color !== undefined) {
+        paint_.fillColor ??= paint_.color;
+        paint_.strokeColor ??= paint_.color;
+      }
       if (paint.type === 'icon' && paint.html) {
         await this._registerImage(paint);
         const image: Record<string, unknown> = {
@@ -627,7 +631,7 @@ export abstract class VectorAdapter<
         }
         return image;
       } else {
-        const pathPaint = paint_ as PathPaint;
+        const pathPaint = paint_;
         const maplibreGLType = maplibreGLTypeAlias[type];
         const allowed = allowedByType[type];
         if (allowed) {
