@@ -1,4 +1,3 @@
-import { updateUrlParams } from '@nextgis/utils';
 import { getLayerRequestOptions } from '@nextgis/webmap';
 
 import { convertZoomLevel } from '../utils/convertZoomLevel';
@@ -10,13 +9,11 @@ import type {
   MainLayerAdapter,
   RasterAdapterOptions,
   TileAdapterOptions,
-  UpdateLayerAdapterOptions,
 } from '@nextgis/webmap';
 import type {
   LayerSpecification,
   RasterLayerSpecification,
   RasterSourceSpecification,
-  RasterTileSource,
 } from 'maplibre-gl';
 
 type Layer = RasterLayerSpecification;
@@ -42,6 +39,7 @@ export class TileAdapter<O extends RasterAdapterOptions = TileAdapterOptions>
       } else {
         tiles.push(options.url);
       }
+      this._tiles = tiles;
       const request = getLayerRequestOptions(options);
       if (request) {
         setupLayerTransformRequest({
@@ -90,16 +88,4 @@ export class TileAdapter<O extends RasterAdapterOptions = TileAdapterOptions>
     }
   }
 
-  updateLayer(options?: UpdateLayerAdapterOptions): void {
-    const source = this.map?.getSource(
-      this._layerId + '_source',
-    ) as RasterTileSource;
-    if (source) {
-      const params = options?.params;
-
-      source.setTiles(
-        source.tiles.map((t) => updateUrlParams(t, params || {})),
-      );
-    }
-  }
 }

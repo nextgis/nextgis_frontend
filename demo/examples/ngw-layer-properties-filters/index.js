@@ -106,10 +106,9 @@ NgwMap.create({
     layer = await ngwMap.addNgwLayer({
       resource: RESOURCE_ID,
       adapter: /** @type {'TILE' | 'IMAGE' | 'GEOJSON'} */ (adapterEl.value),
+      adapterOptions: { propertiesFilter: getFilter() },
       fit: true,
     });
-
-    applyFilter();
   }
 
   function applyFilter() {

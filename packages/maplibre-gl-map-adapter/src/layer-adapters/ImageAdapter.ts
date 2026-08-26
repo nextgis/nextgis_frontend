@@ -35,6 +35,7 @@ export class ImageAdapter
       } else {
         tiles = [url];
       }
+      this._tiles = tiles;
       const request = getLayerRequestOptions(options);
       if (request) {
         setupLayerTransformRequest({

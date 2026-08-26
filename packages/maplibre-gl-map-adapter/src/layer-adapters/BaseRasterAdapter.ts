@@ -1,5 +1,11 @@
-import type { MainLayerAdapter, RasterAdapterOptions } from '@nextgis/webmap';
-import type { Map } from 'maplibre-gl';
+import { updateUrlParams } from '@nextgis/utils';
+
+import type {
+  MainLayerAdapter,
+  RasterAdapterOptions,
+  UpdateLayerAdapterOptions,
+} from '@nextgis/webmap';
+import type { Map, RasterTileSource } from 'maplibre-gl';
 
 import type { TLayer } from '../MaplibreGLMapAdapter';
 
@@ -11,6 +17,7 @@ export abstract class BaseRasterAdapter<
   layer?: TLayer;
   map?: Map;
   protected readonly _layerId: string;
+  protected _tiles: string[] = [];
 
   constructor(
     map: Map,
@@ -27,6 +34,17 @@ export abstract class BaseRasterAdapter<
   setOpacity(value: number): void {
     this.options.opacity = Number(value);
     this.updateOpacity();
+  }
+
+  updateLayer(options?: UpdateLayerAdapterOptions): void {
+    const source = this.map?.getSource(
+      this._layerId + '_source',
+    ) as RasterTileSource;
+    if (source) {
+      source.setTiles(
+        this._tiles.map((tile) => updateUrlParams(tile, options?.params || {})),
+      );
+    }
   }
 
   protected updateOpacity(): void {
