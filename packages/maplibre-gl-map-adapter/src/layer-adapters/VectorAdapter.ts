@@ -130,6 +130,7 @@ export abstract class VectorAdapter<
   protected _selectProperties?: PropertiesFilter;
   protected _filterProperties?: PropertiesFilter;
   protected _openedPopup: [Feature, Popup, PopupOnCloseFunction[]][] = [];
+  private _popupGeneration = 0;
 
   private $onLayerMouseMove?: (e: MapLayerMouseEvent) => void;
   private $onLayerMouseLeave?: (e: MapLayerMouseEvent) => void;
@@ -905,6 +906,7 @@ export abstract class VectorAdapter<
   }
 
   protected _removeAllPopup(): void {
+    this._popupGeneration++;
     for (const p of this._openedPopup) {
       p[1].remove();
     }
@@ -933,6 +935,10 @@ export abstract class VectorAdapter<
         return;
       }
     }
+    if (!this.options.multiselect) {
+      this._removeAllPopup();
+    }
+    const popupGeneration = this._popupGeneration;
     const map = this.map;
     if (!map) return;
     let popup: Popup;
@@ -961,6 +967,18 @@ export abstract class VectorAdapter<
           ...this._createLayerOptions(feature),
         })
       : popupContent;
+    if (popupGeneration !== this._popupGeneration) {
+      return;
+    }
+    if (refresh) {
+      const openedPopup = this._openedPopup.find((x) => x[0].id === feature.id);
+      if (openedPopup) {
+        if (coordinates) {
+          openedPopup[1].setLngLat(coordinates);
+        }
+        return;
+      }
+    }
     coordinates =
       coordinates || (feature && (getCentroid(feature) as [number, number]));
     if (content && coordinates) {

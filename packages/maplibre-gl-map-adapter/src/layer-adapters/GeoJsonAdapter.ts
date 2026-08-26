@@ -213,6 +213,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
           find(this._createLayerOptions(x)),
         );
         this._selectFeature(features);
+        this._fireOnLayerSelectEvent();
       } else {
         this.selected = true;
         this._selectProperties = find;
@@ -563,13 +564,21 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   }
 
   private _fireOnLayerSelectEvent() {
-    if (this.options.onSelect) {
-      const features_: Feature[] = [];
-      this.getSelected().forEach((x) => {
-        if (x.feature) {
-          features_.push(x.feature);
+    const features_: Feature[] = [];
+    this.getSelected().forEach((x) => {
+      if (x.feature) {
+        features_.push(x.feature);
+        if (this.options.popupOnSelect) {
+          this._openPopup({
+            feature: x.feature,
+            options: this.options.popupOptions,
+            type: 'api',
+            refresh: true,
+          });
         }
-      });
+      }
+    });
+    if (this.options.onSelect) {
       const features = features_.length ? features_ : undefined;
       this.options.onSelect({
         layer: this,
