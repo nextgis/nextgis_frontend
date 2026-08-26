@@ -104,6 +104,11 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     source.setData({ type: 'FeatureCollection', features });
   }
 
+  async setData(data: GeoJsonObject): Promise<void> {
+    this._features = [];
+    await this.addData(data);
+  }
+
   async addData(data: GeoJsonObject): Promise<void> {
     let type: VectorAdapterLayerType | undefined;
     if (this.options.type) {
