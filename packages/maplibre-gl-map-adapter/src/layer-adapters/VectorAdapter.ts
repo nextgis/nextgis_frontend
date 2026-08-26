@@ -1064,26 +1064,12 @@ export abstract class VectorAdapter<
   private _getFeatureFromPoint(
     evt: MapEventType['click'] & MapMouseEvent,
   ): Feature | undefined {
-    // not work correct
-    // const features = this.map.queryRenderedFeatures(e.point, {
-    //   layers: this.layer
-    // });
     const map = this.map;
-    if (map) {
-      if (this.options.onMouseOver && this.layer) {
-        let feature: Feature | undefined;
-        this.layer.find((a) => {
-          const features_ = map.queryRenderedFeatures(evt.point, {
-            layers: [a],
-          });
-          if (features_.length) {
-            feature = features_[0] as Feature;
-            return true;
-          }
-          return false;
-        });
-        return feature;
-      }
+    if (map && this.options.onMouseOver && this.layer) {
+      const features = map.queryRenderedFeatures(evt.point, {
+        layers: this.layer,
+      });
+      return features[0] as Feature | undefined;
     }
   }
 
