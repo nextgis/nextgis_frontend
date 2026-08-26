@@ -12,6 +12,7 @@ NgwMap.create({
     adapter: 'MVT',
     adapterOptions: {
       selectable: true,
+      nativeFilter: ['!=', 'ADMIN_LVL', '4'],
       paint: {
         fillOpacity: 0.3,
         stroke: true,
