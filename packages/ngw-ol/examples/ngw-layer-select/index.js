@@ -26,6 +26,9 @@ const clean = () => {
 
 const drawLayer = (identify) => {
   clean();
+  if (!identify) {
+    return;
+  }
   abortController = new AbortController();
 
   ngwMap

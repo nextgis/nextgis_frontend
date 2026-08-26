@@ -43,6 +43,7 @@ import type {
   LngLatLike,
   Map,
   MapEventType,
+  MapGeoJSONFeature,
   MapLayerMouseEvent,
   MapMouseEvent,
   PopupOptions as MaplibrePopupOptions,
@@ -368,12 +369,19 @@ export abstract class VectorAdapter<
 
   protected _createLayerClickOptions(e: MapLayerMouseEvent, f: Feature) {
     const isSelected = this._featureSelect(f, e.lngLat);
+    // Convert the MapLibre feature to plain GeoJSON so it can be reused as layer data.
+    const mapFeature = f as MapGeoJSONFeature;
+    const geojson = mapFeature.toJSON ? mapFeature.toJSON() : f;
+    const feature = {
+      ...geojson,
+      properties: geojson.properties ? { ...geojson.properties } : null,
+    } as Feature;
     return {
       layer: this,
       selected: isSelected,
       event: convertMapClickEvent(e),
       source: e,
-      ...this._createLayerOptions(f),
+      ...this._createLayerOptions(feature),
     };
   }
 

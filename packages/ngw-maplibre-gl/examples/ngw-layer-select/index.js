@@ -26,19 +26,20 @@ const clean = () => {
 
 const drawLayer = (identify) => {
   clean();
+  if (!identify) {
+    return;
+  }
   abortController = new AbortController();
 
   ngwMap
     .fetchIdentifyGeoJson(identify, { signal: abortController.signal })
     .then((geojson) => {
       abortController = null;
-
       ngwMap.addLayer('GEOJSON', {
         id: 'highlight',
         data: geojson,
         paint: { color: 'green', stroke: true, fillOpacity: 0.8 },
       });
-      console.log(geojson);
     })
     .catch((e) => {
       if (e.name !== 'AbortError') {

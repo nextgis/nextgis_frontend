@@ -136,7 +136,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
       }
       await this._updateLayerPaint(type);
       const source = this.map.getSource(this._sourceId) as GeoJSONSource;
-      source.setData({
+      await source.setData({
         type: 'FeatureCollection',
         features: this._features,
       });
@@ -326,14 +326,18 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
       for (const x of features) {
         const id = this._getFeatureFilterId(x);
         if (id !== undefined && filtered.indexOf(id) !== -1) {
-          if (selected && selected.indexOf(id) !== -1) {
+          if (
+            this.options.selectedPaint &&
+            selected &&
+            selected.indexOf(id) !== -1
+          ) {
             selectionArray.push(id);
           } else {
             filteredArray.push(id);
           }
         }
       }
-    } else if (selected) {
+    } else if (this.options.selectedPaint && selected) {
       selectionArray = selected;
     }
     this.selected = !!selected;
