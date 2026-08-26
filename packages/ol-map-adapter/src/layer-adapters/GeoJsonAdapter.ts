@@ -207,7 +207,7 @@ export class GeoJsonAdapter
   }
 
   unselect(findFeatureCb?: DataLayerFilter<Feature> | PropertiesFilter): void {
-    let features = this._selectedFeatures;
+    let features = [...this._selectedFeatures];
     if (typeof findFeatureCb === 'function') {
       features = this._selectedFeatures.filter((x) =>
         findFeatureCb(this._createLayerDefOpts(getFeature(x))),
