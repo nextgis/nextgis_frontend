@@ -32,7 +32,7 @@ import {
 const args = minimist(process.argv.slice(2));
 const targets = args._;
 const watch = args.watch || args.w;
-const formats = args.formats || args.f || (watch && 'global');
+const formats = args.formats || args.f || (watch && 'esm-browser');
 const devOnly = watch || args.devOnly || args.d;
 const prodOnly = !devOnly && (args.prodOnly || args.p);
 const sourceMap = args.sourcemap || args.s || watch;
@@ -253,7 +253,7 @@ async function checkSize(target) {
     'packages',
     target,
     'lib',
-    `${target}.global.prod.js`,
+    `${target}.esm-browser.prod.js`,
   );
   await checkFileSize(pkgDir);
 }
