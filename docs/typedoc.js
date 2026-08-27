@@ -2,7 +2,7 @@
 import findPackages from '../scripts/findPackages.js';
 
 const allowPackages = (await findPackages()).filter((x) => {
-  return !x.name.includes('react') && !x.name.includes('cesium');
+  return !x.name.includes('cesium');
 });
 
 const entryPoints = allowPackages.map((x) => x.path.replace(/\\/g, '/'));
@@ -14,6 +14,10 @@ const config = {
   excludePrivate: true,
   includeVersion: false,
   entryPointStrategy: 'packages',
+  packageOptions: {
+    entryPoints: ['src/index.ts'],
+  },
+  projectDocuments: ['PACKAGES.md'],
 };
 
 export default config;

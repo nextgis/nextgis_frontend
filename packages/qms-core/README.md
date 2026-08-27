@@ -2,7 +2,16 @@
 
 ![size](https://img.shields.io/bundlephobia/minzip/@nextgis/qms-core) ![version](https://img.shields.io/npm/v/@nextgis/qms-core)
 
-Load and prepare TMS and WMS services from [NextGIS QMS](https://qms.nextgis.com/).
+Map-independent client, catalog, and shared control UI for
+[NextGIS QMS](https://qms.nextgis.com/). Use an engine-specific package instead
+when adding QMS services directly to a Leaflet, OpenLayers, or MapLibre GL JS
+map.
+
+## Installation
+
+```bash
+npm install @nextgis/qms-core
+```
 
 ```ts
 import { QmsClient } from '@nextgis/qms-core';
@@ -60,6 +69,9 @@ const control = new QmsControlElement({
 ```
 
 `messages` can override search panel labels.
+
+See the [API Documentation](https://code-api.nextgis.com/modules/_nextgis_qms-core.html)
+and the [package architecture guide](../../docs/PACKAGES.md).
 
 ## Commercial support
 

@@ -3,6 +3,7 @@
 ![size](https://img.shields.io/bundlephobia/minzip/@nextgis/qms-ol) ![version](https://img.shields.io/npm/v/@nextgis/qms-ol)
 
 Add [NextGIS QMS](https://qms.nextgis.com/) TMS and WMS services directly to an OpenLayers map.
+Use this package when the application owns the native OpenLayers map instance.
 
 ## Installation
 
@@ -74,6 +75,9 @@ OpenLayers placement can also be changed with `--nextgis-qms-control-top` and
 - [QMS services](https://code.nextgis.com/qms-ol-examples-qms-services)
 - [Fit to service extent](https://code.nextgis.com/qms-ol-examples-fit-service)
 - [QMS control](https://code.nextgis.com/qms-ol-examples-search-control)
+
+See the [API Documentation](https://code-api.nextgis.com/modules/_nextgis_qms-ol.html)
+and the [package architecture guide](../../docs/PACKAGES.md).
 
 ## Commercial support
 

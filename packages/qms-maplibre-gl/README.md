@@ -3,6 +3,8 @@
 ![size](https://img.shields.io/bundlephobia/minzip/@nextgis/qms-maplibre-gl) ![version](https://img.shields.io/npm/v/@nextgis/qms-maplibre-gl)
 
 Add [NextGIS QMS](https://qms.nextgis.com/) TMS and WMS services directly to a MapLibre GL JS map.
+Use this package when the application owns the native MapLibre GL JS map
+instance.
 
 ## Installation
 
@@ -73,6 +75,9 @@ map.addControl(createQmsControl({ initialLayer: 448 }), 'top-left');
 - [QMS services](https://code.nextgis.com/qms-maplibre-gl-examples-qms-services)
 - [Fit to service extent](https://code.nextgis.com/qms-maplibre-gl-examples-fit-service)
 - [QMS control](https://code.nextgis.com/qms-maplibre-gl-examples-search-control)
+
+See the [API Documentation](https://code-api.nextgis.com/modules/_nextgis_qms-maplibre-gl.html)
+and the [package architecture guide](../../docs/PACKAGES.md).
 
 ## Commercial support
 

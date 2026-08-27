@@ -3,6 +3,7 @@
 ![size](https://img.shields.io/bundlephobia/minzip/@nextgis/qms-leaflet) ![version](https://img.shields.io/npm/v/@nextgis/qms-leaflet)
 
 Add [NextGIS QMS](https://qms.nextgis.com/) TMS and WMS services directly to a Leaflet map.
+Use this package when the application owns the native Leaflet map instance.
 
 ## Installation
 
@@ -65,6 +66,9 @@ createQmsControl({ initialLayer: 448, position: 'topleft' }).addTo(map);
 - [QMS services](https://code.nextgis.com/qms-leaflet-examples-qms-services)
 - [Fit to service extent](https://code.nextgis.com/qms-leaflet-examples-fit-service)
 - [QMS control](https://code.nextgis.com/qms-leaflet-examples-search-control)
+
+See the [API Documentation](https://code-api.nextgis.com/modules/_nextgis_qms-leaflet.html)
+and the [package architecture guide](../../docs/PACKAGES.md).
 
 ## Commercial support
 

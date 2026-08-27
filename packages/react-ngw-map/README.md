@@ -1,8 +1,14 @@
-# ReactNgwMap component
+# React NGW Map
 
 ![size](https://img.shields.io/bundlephobia/minzip/@nextgis/react-ngw-map) ![version](https://img.shields.io/npm/v/@nextgis/react-ngw-map)
 
-Plugin to integrate NGW maps into React web framework
+React integration for [`@nextgis/ngw-map`](../ngw-map/README.md). It provides
+the common map component, context, hooks, layer components, and controls used by
+the engine-specific React packages.
+
+Most applications should use `react-ngw-leaflet`, `react-ngw-ol`, or
+`react-ngw-maplibre-gl`. Use this package directly when supplying a map adapter
+or building reusable React components around the common `NgwMap` API.
 
 ## Installation
 
@@ -10,57 +16,44 @@ Plugin to integrate NGW maps into React web framework
 npm install @nextgis/react-ngw-map
 ```
 
+Install one map engine and its adapter as well. This example uses OpenLayers:
+
 ```bash
 npm install ol @nextgis/ol-map-adapter
 ```
 
-```bash
-npm install maplibre-gl @nextgis/maplibre-gl-map-adapter
-```
-
-```bash
-npm install leaflet @nextgis/leaflet-map-adapter
-```
-
 ## Usage
 
-```jsx
-import React from 'react';
-import { render } from 'react-dom';
-import ReactNgwMap from '@nextgis/react-ngw-map';
+```tsx
+import { createRoot } from 'react-dom/client';
+import { ReactNgwMap } from '@nextgis/react-ngw-map';
 
 import MapAdapter from '@nextgis/ol-map-adapter';
 import 'ol/ol.css';
 
-/** Imports for Maplibre GL JS */
-// import MapAdapter from '@nextgis/maplibre-gl-map-adapter';
-// import 'maplibre-gl/dist/maplibre-gl.css';
-
-/** Imports for Leaflet */
-// import MapAdapter from '@nextgis/leaflet-map-adapter';
-// import 'leaflet/dist/leaflet.css';
-// import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
-// import iconUrl from 'leaflet/dist/images/marker-icon.png';
-// import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
-// delete Icon.Default.prototype._getIconUrl;
-// Icon.Default.mergeOptions({
-//   iconRetinaUrl: iconRetinaUrl,
-//   iconUrl: iconUrl,
-//   shadowUrl: shadowUrl,
-// });
-
 function App() {
   return (
     <ReactNgwMap
-      mapAdapter={ new MapAdapter() }
+      mapAdapter={new MapAdapter()}
       baseUrl="https://demo.nextgis.com"
       resources={[{ resource: 6118, id: 'webmap', fit: true }]}
+      style={{ width: '100%', height: '100%' }}
+      whenCreated={(ngwMap) => {
+        // The map is initialized and exposes the common NgwMap/WebMap API.
+      }}
     />
   );
 }
 
-render(<App />, document.getElementById('app'));
+createRoot(document.getElementById('app')!).render(<App />);
 ```
+
+Components rendered as children can access the map through
+`useNgwMapContext()`. The package also exports `ReactNgwLayer`, `MapControl`,
+`ButtonControl`, and `ToggleControl`.
+
+See the [API Documentation](https://code-api.nextgis.com/modules/_nextgis_react-ngw-map.html)
+and the [package architecture guide](../../docs/PACKAGES.md).
 
 ## Commercial support
 

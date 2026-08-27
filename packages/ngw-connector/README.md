@@ -4,6 +4,10 @@
 
 A lightweight HTTP client optimized for use with [NextGIS Web](http://docs.nextgis.com/docs_ngweb_dev/doc/developer/toc.html) API.
 
+Use this package when an application needs NextGIS Web resources, features, or
+other HTTP API operations without a map. Ready-to-use `ngw-*` map packages
+expose an initialized connector as `ngwMap.connector`.
+
 > [!IMPORTANT]
 > The typed `NgwConnector.route()` API requires declarations generated for your NextGIS Web deployment. Install `@nextgis/ngw-types-loader` and run it before using `route()`. The declarations depend on the components and extensions installed on that server.
 >
@@ -117,7 +121,19 @@ ngwConnector.getResources({ cls: 'vector_layer', parent__id: 0 }); // find resou
 ngwConnector.getResource({ display_name: 'My layer', parent__id: 0 }); // get first
 ```
 
-Check out the [API Documentation](https://code-api.nextgis.com/modules/_nextgis_ngw_connector.html)
+## Typed routes and compatibility methods
+
+Prefer `route()` for API endpoints represented by the declarations generated
+by your NextGIS Web deployment. Route names, path parameters, query parameters,
+and response bodies are derived from `@nextgisweb` modules.
+
+Methods such as `getResource()` and `getResources()` use the compatibility
+types shipped with `ngw-connector`. They remain useful for established code and
+for operations without a generated route declaration. These two type sources
+are intentionally separate because available server routes depend on installed
+NextGIS Web components and extensions.
+
+Check out the [API Documentation](https://code-api.nextgis.com/modules/_nextgis_ngw-connector.html)
 
 ## NGW API
 
@@ -130,6 +146,8 @@ ngwConnector.get(request_name, request_options, arguments);
 [request_options](https://code-api.nextgis.com/interfaces/ngw_connector.RequestOptions.html)
 
 [API request names](https://demo.nextgis.com/doc/api)
+
+See also the [package architecture guide](../../docs/PACKAGES.md).
 
 ## Commercial support
 

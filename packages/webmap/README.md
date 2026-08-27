@@ -2,29 +2,48 @@
 
 ![size](https://img.shields.io/bundlephobia/minzip/@nextgis/webmap) ![version](https://img.shields.io/npm/v/@nextgis/webmap)
 
-Universal map constructor
+Framework-independent map engine and adapter contract.
 
-Use Webmap with NPM installation method for building large scale applications. It pairs nicely with module bundlers such as [Webpack](https://webpack.js.org/)
+`WebMap` manages the map lifecycle, layers, controls, events, view state,
+selection, filtering, and ordering without depending on a particular rendering
+engine or backend. It is primarily intended for adapter and library authors.
+
+Applications connected to NextGIS Web normally use one of `ngw-leaflet`,
+`ngw-ol`, or `ngw-maplibre-gl`. Their map classes inherit the API documented by
+this package through `NgwMap`.
+
+## Installation
 
 ```bash
-# latest stable
-npm install @nextgis/webmap
+npm install @nextgis/webmap @nextgis/leaflet-map-adapter leaflet
 ```
 
-```javascript
-import { WebMap } from '@nextgis/webmap';
+## Usage
+
+```ts
+import { createWebMap } from '@nextgis/webmap';
 import MapAdapter from '@nextgis/leaflet-map-adapter';
-// manually added styles
 import 'leaflet/dist/leaflet.css';
 
-const webMap = new WebMap({
-  mapAdapter: new MapAdapter()
+const webMap = await createWebMap({
+  target: 'map',
+  mapAdapter: new MapAdapter(),
 });
-
-webMap.onLoad().then(() => {
-  // on map adapter created
-})
 ```
+
+Use this package to implement:
+
+- common layer operations through `WebMapLayers`;
+- controls through `WebMapControls`;
+- lifecycle, events, and view operations through `WebMapMain`;
+- new `MapAdapter` and `LayerAdapter` implementations;
+- starter kits that register controls and layer providers.
+
+Backend-specific behavior, including NextGIS Web requests and resources, does
+not belong in this package.
+
+See the [API Documentation](https://code-api.nextgis.com/modules/_nextgis_webmap.html)
+and the [package architecture guide](../../docs/PACKAGES.md).
 
 ## Commercial support
 

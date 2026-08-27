@@ -2,21 +2,28 @@
 
 ![size](https://img.shields.io/bundlephobia/minzip/@nextgis/ngw-map) ![version](https://img.shields.io/npm/v/@nextgis/ngw-map)
 
-Abstract Map for NGW
+Framework-independent NextGIS Web map class used by `ngw-leaflet`, `ngw-ol`,
+and `ngw-maplibre-gl`.
 
-This library is not intended for using directly in the browser.
+Most applications should import one of those ready-to-use packages. Use
+`@nextgis/ngw-map` directly when creating another map distribution, injecting a
+custom map adapter, or extending the common NextGIS Web behavior.
 
-Use NgwMap with NPM installation method for building large scale applications. It pairs nicely with module bundlers such as [Webpack](https://webpack.js.org/)
+`NgwMap` extends [`WebMap`](../webmap/README.md), adds an `NgwConnector`, and
+provides NextGIS Web resources, feature requests, identification, selection,
+and extent operations. It also re-exports the public `@nextgis/webmap` API.
+
+## Installation
 
 ```bash
-# latest stable
-npm install @nextgis/ngw-map
+npm install @nextgis/ngw-map @nextgis/leaflet-map-adapter leaflet
 ```
 
-```javascript
+## Usage
+
+```ts
 import { NgwMap } from '@nextgis/ngw-map';
 import MapAdapter from '@nextgis/leaflet-map-adapter';
-// manually added styles
 import 'leaflet/dist/leaflet.css';
 
 const ngwMap = new NgwMap({
@@ -24,10 +31,24 @@ const ngwMap = new NgwMap({
   baseUrl: 'https://demo.nextgis.com',
   target: 'map',
   qmsId: 448,
-  webmapId: 3985
+  webmapId: 3985,
 });
 
+await ngwMap.onLoad();
 ```
+
+The map adapter is required when this package is used directly. The
+ready-to-use map packages create it automatically.
+
+Important inherited API groups include:
+
+- NextGIS Web resources: `addNgwLayer()`, `fitResource()`, and `connector`;
+- features and identification: `fetchNgwLayerItems()`,
+  `fetchIdentifyGeoJson()`, and `ngw:select` events;
+- common WebMap layers, controls, events, filtering, and view methods.
+
+See the [API Documentation](https://code-api.nextgis.com/modules/_nextgis_ngw-map.html)
+and the [package architecture guide](../../docs/PACKAGES.md).
 
 ## Commercial support
 

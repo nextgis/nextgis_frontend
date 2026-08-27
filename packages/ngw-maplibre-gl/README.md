@@ -4,6 +4,10 @@
 
 Browser bundle for rapid deployment of [Maplibre GL JS](https://maplibre.org/maplibre-gl-js/docs/) based web-gis applications with NextGIS services.
 
+Its default export extends `NgwMap`, so the common APIs from
+[`@nextgis/ngw-map`](../ngw-map/README.md) and
+[`@nextgis/webmap`](../webmap/README.md) are available on the map instance.
+
 Styles and images are included in the bundle. MapLibre GL JS 6 also requires
 worker modules for processing GeoJSON and vector tiles.
 
@@ -100,7 +104,7 @@ See the official MapLibre documentation:
 ```javascript
 import NgwMap from '@nextgis/ngw-maplibre-gl';
 
-const ngwMap = new NgwMap({
+const ngwMap = await NgwMap.create({
   baseUrl: 'https://demo.nextgis.com',
   target: 'map',
   qmsId: 448,
@@ -108,7 +112,19 @@ const ngwMap = new NgwMap({
 });
 ```
 
-Check out the [API Documentation](https://code-api.nextgis.com/modules/_nextgis_ngw_maplibre_gl.html)
+Use `new NgwMap(options)` when the instance is needed before initialization is
+complete. Use `NgwMap.create(options)` when subsequent code requires a ready
+map.
+
+TypeScript users should generate declarations for the NextGIS Web deployment
+used by the application:
+
+```bash
+npx @nextgis/ngw-types-loader https://your-ngw-server.com
+```
+
+Check out the [API Documentation](https://code-api.nextgis.com/modules/_nextgis_ngw-maplibre-gl.html)
+and the [package architecture guide](../../docs/PACKAGES.md).
 
 ## Commercial support
 

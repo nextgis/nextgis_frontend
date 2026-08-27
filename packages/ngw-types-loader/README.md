@@ -2,12 +2,15 @@
 
 ![size](https://img.shields.io/bundlephobia/minzip/@nextgis/ngw-types-loader) ![version](https://img.shields.io/npm/v/@nextgis/ngw-types-loader)
 
-A CLI tool that downloads TypeScript declarations from NextGIS Web and installs them as resolvable packages.
+A CLI tool that downloads TypeScript declarations from a NextGIS Web
+deployment and installs them as resolvable packages. Use it when consuming the
+typed `NgwConnector.route()` API or other declarations that import
+`@nextgisweb/*` modules.
 
 ## Installation
 
 ```bash
-npm install @nextgis/ngw-types-loader
+npm install --save-dev @nextgis/ngw-types-loader
 ```
 
 ## Usage
@@ -52,12 +55,21 @@ installing dependencies:
 }
 ```
 
+Package managers and deployment environments may skip lifecycle scripts. Keep
+the explicit `npx @nextgis/ngw-types-loader ...` command in project setup and
+CI documentation even when `postinstall` is configured.
+
 Use the URL of your own server when its installed components or version differ from
 NextGIS Cloud.
+
+Run the loader again after changing the NextGIS Web version, installed
+components or extensions, or after recreating `node_modules`.
 
 ## API documentation
 
 See the [NextGIS Web API documentation](https://demo.nextgis.com/doc/api).
+
+See also the [package architecture guide](../../docs/PACKAGES.md).
 
 ## Commercial support
 
