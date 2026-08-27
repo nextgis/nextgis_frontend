@@ -4,13 +4,16 @@
   "type": "module",
   "version": "3.0.0",
   "scripts": {
-    "doc": "node ./node_modules/typedoc/bin/typedoc",
-    "build": "node ./node_modules/typedoc/bin/typedoc",
+    "doc": "yarn build",
+    "build": "yarn build:api && yarn build:llms",
+    "build:api": "node ./node_modules/typedoc/bin/typedoc",
+    "build:llms": "node ./scripts/buildLlms.mjs",
     "docker": "dockpkg -r harbor.nextgis.net -n frontend/code-api -l -d ./docker"
   },
   "devDependencies": {
     "docmypkg": "^0.0.1",
-    "typedoc": "^0.28.20"
+    "typedoc": "^0.28.20",
+    "typedoc-plugin-markdown": "^4.13.0"
   },
   "license": "MIT"
 }

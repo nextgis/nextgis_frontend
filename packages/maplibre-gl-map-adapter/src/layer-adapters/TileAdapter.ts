@@ -87,5 +87,4 @@ export class TileAdapter<O extends RasterAdapterOptions = TileAdapterOptions>
       return this.layer;
     }
   }
-
 }

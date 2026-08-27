@@ -24,6 +24,7 @@ __metadata:
   dependencies:
     docmypkg: ^0.0.1
     typedoc: ^0.28.20
+    typedoc-plugin-markdown: ^4.13.0
   languageName: unknown
   linkType: soft
 
@@ -306,6 +307,15 @@ __metadata:
   dependencies:
     has-flag: ^4.0.0
   checksum: 3dda818de06ebbe5b9653e07842d9479f3555ebc77e9a0280caf5a14fb877ffee9ed57007c3b78f5a6324b8dbeec648d9e97a24e2ed9fdb81ddc69ea07100f4a
+  languageName: node
+  linkType: hard
+
+"typedoc-plugin-markdown@npm:^4.13.0":
+  version: 4.13.0
+  resolution: "typedoc-plugin-markdown@npm:4.13.0"
+  peerDependencies:
+    typedoc: 0.28.x
+  checksum: e4e632c294e31a1aaef7bcd4303bfae7a184b9fe0a8022c3382bacfb526e61e08c6bea3959492f885c2dea7262e7efd0d4440f755df66deeb60501f9864684a5
   languageName: node
   linkType: hard
 

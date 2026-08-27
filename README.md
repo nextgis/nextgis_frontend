@@ -39,6 +39,7 @@ A suite of frontend JavaScript libraries designed to accelerate the development 
 
 - [Live Examples & Documentation](https://code.nextgis.com)
 - [API Documentation](https://code-api.nextgis.com)
+- [LLM Documentation Index](https://code-api.nextgis.com/llms.txt)
 - [GitHub Repository](https://github.com/nextgis/nextgis_frontend)
 - [Vue2 GitHub Repository](https://github.com/nextgis/nextgis_frontend_vue2)
 - [Related Article](https://nextgis.com/blog/nextgis-frontend)

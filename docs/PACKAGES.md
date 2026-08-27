@@ -159,5 +159,6 @@ The loader installs resolvable declaration packages under
 
 - [Live examples](https://code.nextgis.com)
 - [API documentation](https://code-api.nextgis.com)
+- [LLM documentation index](https://code-api.nextgis.com/llms.txt)
 - [NextGIS Web API documentation](https://demo.nextgis.com/doc/api)
 - [NGW Types Loader](../packages/ngw-types-loader/README.md)

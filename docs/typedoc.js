@@ -8,7 +8,11 @@ const allowPackages = (await findPackages()).filter((x) => {
 const entryPoints = allowPackages.map((x) => x.path.replace(/\\/g, '/'));
 
 const config = {
-  out: 'build',
+  plugin: ['typedoc-plugin-markdown'],
+  outputs: [
+    { name: 'html', path: 'build' },
+    { name: 'markdown', path: 'build/markdown' },
+  ],
   entryPoints,
   name: 'NextGIS Frontend',
   excludePrivate: true,
