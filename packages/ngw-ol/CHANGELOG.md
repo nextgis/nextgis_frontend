@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0-rc.0](https://github.com/nextgis/nextgis_frontend/compare/v4.0.0-alpha.8...v4.0.0-rc.0) (2026-08-27)
+
+
+### Bug Fixes
+
+* **examples:** update demos ([75f3a60](https://github.com/nextgis/nextgis_frontend/commit/75f3a60c1e203ef37fc5c7d15cff5f9847835930))
+* **maplibre-gl-map-adapter:** preserve selected features in GeoJSON layers ([4fe3246](https://github.com/nextgis/nextgis_frontend/commit/4fe3246ff4f7438a81deb18c607349ad29cd6fca))
+* **maplibre-gl-map-adapter:** update raster layer filters ([9484f02](https://github.com/nextgis/nextgis_frontend/commit/9484f02b0d51f73fc2f379b0d17a8ee3e1a37c79))
+
+
+
+
+
 # [4.0.0-alpha.8](https://github.com/nextgis/nextgis_frontend/compare/v4.0.0-alpha.7...v4.0.0-alpha.8) (2026-08-25)
 
 **Note:** Version bump only for package @nextgis/ngw-ol

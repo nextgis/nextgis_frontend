@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0-rc.0](https://github.com/nextgis/nextgis_frontend/compare/v4.0.0-alpha.8...v4.0.0-rc.0) (2026-08-27)
+
+
+### Bug Fixes
+
+* **demo:** preserve adapter and reveal active example ([30f0134](https://github.com/nextgis/nextgis_frontend/commit/30f01344e5f57763192f6d39a56f1add6625fcda))
+* **demo:** use generated examples during Docker build ([87668fa](https://github.com/nextgis/nextgis_frontend/commit/87668fa384328874bd3d3381da27c30ee97f6a17))
+* **examples:** exclude overlapping MVT features ([f5e275f](https://github.com/nextgis/nextgis_frontend/commit/f5e275f6bb9f251d8b7e50e9e9cccf2d20b626d0))
+* **examples:** update demos ([75f3a60](https://github.com/nextgis/nextgis_frontend/commit/75f3a60c1e203ef37fc5c7d15cff5f9847835930))
+* **leaflet-map-adapter:** disable zoom snapping for consistent fit bounds ([63afde8](https://github.com/nextgis/nextgis_frontend/commit/63afde84e2aa4d3b8bcbfa52872c9bc3b1b9bb63))
+* **maplibre-gl-map-adapter:** back to queryRenderedFeatures from all layers in adapter ([009e41c](https://github.com/nextgis/nextgis_frontend/commit/009e41cceca2fd88d0e46eb9030515bc8b593241))
+* **maplibre-gl-map-adapter:** handle popups during programmatic selection ([b8167be](https://github.com/nextgis/nextgis_frontend/commit/b8167bedc89501da0309ca68ab8f917cf2ebcec0))
+* **maplibre-gl-map-adapter:** preserve selected features in GeoJSON layers ([4fe3246](https://github.com/nextgis/nextgis_frontend/commit/4fe3246ff4f7438a81deb18c607349ad29cd6fca))
+* **maplibre-gl-map-adapter:** set default strokeColor from paint ([0423959](https://github.com/nextgis/nextgis_frontend/commit/04239593813252ef0dcac0e1d53821855ced3e9b))
+* **maplibre-gl-map-adapter:** update GeoJSON data when filtering ([cb30459](https://github.com/nextgis/nextgis_frontend/commit/cb3045994dbf52822dacd95fe2dff7f2d94366dc))
+* **maplibre-gl-map-adapter:** update raster layer filters ([9484f02](https://github.com/nextgis/nextgis_frontend/commit/9484f02b0d51f73fc2f379b0d17a8ee3e1a37c79))
+* **ol-map-adapter:** clear all selected features ([e5e6caf](https://github.com/nextgis/nextgis_frontend/commit/e5e6caffa07a895a48860213930829cbe075d8fc))
+* **ol-map-adapter:** restore control styling ([a48d05e](https://github.com/nextgis/nextgis_frontend/commit/a48d05eed2f6801cda7bef370af0eb39db4bfd86))
+
+
+
+
+
 # [4.0.0-alpha.8](https://github.com/nextgis/nextgis_frontend/compare/v4.0.0-alpha.7...v4.0.0-alpha.8) (2026-08-25)
 
 

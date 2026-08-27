@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0-rc.0](https://github.com/nextgis/nextgis_frontend/compare/v4.0.0-alpha.8...v4.0.0-rc.0) (2026-08-27)
+
+
+### Bug Fixes
+
+* **maplibre-gl-map-adapter:** back to queryRenderedFeatures from all layers in adapter ([009e41c](https://github.com/nextgis/nextgis_frontend/commit/009e41cceca2fd88d0e46eb9030515bc8b593241))
+* **maplibre-gl-map-adapter:** handle popups during programmatic selection ([b8167be](https://github.com/nextgis/nextgis_frontend/commit/b8167bedc89501da0309ca68ab8f917cf2ebcec0))
+* **maplibre-gl-map-adapter:** preserve selected features in GeoJSON layers ([4fe3246](https://github.com/nextgis/nextgis_frontend/commit/4fe3246ff4f7438a81deb18c607349ad29cd6fca))
+* **maplibre-gl-map-adapter:** set default strokeColor from paint ([0423959](https://github.com/nextgis/nextgis_frontend/commit/04239593813252ef0dcac0e1d53821855ced3e9b))
+* **maplibre-gl-map-adapter:** update GeoJSON data when filtering ([cb30459](https://github.com/nextgis/nextgis_frontend/commit/cb3045994dbf52822dacd95fe2dff7f2d94366dc))
+* **maplibre-gl-map-adapter:** update raster layer filters ([9484f02](https://github.com/nextgis/nextgis_frontend/commit/9484f02b0d51f73fc2f379b0d17a8ee3e1a37c79))
+
+
+
+
+
 # [4.0.0-alpha.8](https://github.com/nextgis/nextgis_frontend/compare/v4.0.0-alpha.7...v4.0.0-alpha.8) (2026-08-25)
 
 **Note:** Version bump only for package @nextgis/maplibre-gl-map-adapter
