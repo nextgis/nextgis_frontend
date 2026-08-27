@@ -15,6 +15,12 @@
   right: inherit;
 }
 
+/* Keep custom control content margins inside its panel, as in other adapters. */
+.webmap-control-container
+  .webmap-ctrl-group:not(.webmap-ctrl-vertical):not(.webmap-ctrl-horizontal) {
+  display: flow-root;
+}
+
 .webmap-control-container .ol-attribution {
   padding: 0;
   background-color: rgba(255, 255, 255, 0.5);
