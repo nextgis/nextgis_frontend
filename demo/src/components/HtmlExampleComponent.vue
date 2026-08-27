@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useQuasar } from 'quasar';
-import { type PropType, computed, ref, unref, watch } from 'vue';
+import { type PropType, computed, ref, watch } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
 import changeHtmlMapAdapter from '../../scripts/changeHtmlMapAdapter.mjs';
 
@@ -15,10 +16,24 @@ const props = defineProps({
   fullScreen: Boolean,
 });
 const $q = useQuasar();
+const route = useRoute();
+const router = useRouter();
+const ngwMaps = props.item.ngwMaps || [];
 
-const ngwMapAdapter = ref<string>(
-  props.item.ngwMaps && props.item.ngwMaps[0] ? props.item.ngwMaps[0].name : '',
-);
+const ngwMapAdapter = computed<string>({
+  get: () => {
+    const adapter = route.query.adapter;
+    return typeof adapter === 'string' &&
+      ngwMaps.some((item) => item.name === adapter)
+      ? adapter
+      : ngwMaps[0]?.name || '';
+  },
+  set: (adapter) => {
+    router.replace({
+      query: { ...route.query, adapter },
+    });
+  },
+});
 
 const html = ref<string>(props.item.html || '');
 const editableHtml = ref<string>(html.value);
@@ -27,18 +42,15 @@ const scrollAreaHeight = ref('calc(100% - 90px)');
 const dirt = computed(() => html.value !== editableHtml.value);
 
 const changeAdapter = () => {
-  const ngwMaps = unref(props.item.ngwMaps);
-  const adapter = unref(ngwMapAdapter.value);
-  if (ngwMaps) {
-    const exist = ngwMaps.find((x) => x.name === adapter);
-    if (exist) {
-      html.value = changeHtmlMapAdapter(html.value, exist, ngwMaps);
-      editableHtml.value = html.value;
-    }
+  const adapter = ngwMapAdapter.value;
+  const exist = ngwMaps.find((x) => x.name === adapter);
+  if (exist) {
+    html.value = changeHtmlMapAdapter(html.value, exist, ngwMaps);
+    editableHtml.value = html.value;
   }
 };
 
-watch([ngwMapAdapter], changeAdapter);
+watch(ngwMapAdapter, changeAdapter, { immediate: true });
 
 const save = () => {
   editableHtml.value = html.value;

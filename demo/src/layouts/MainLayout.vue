@@ -65,7 +65,7 @@ const prepareItem = ({ name, ...conf }: Item) => {
 const setSelected = (pageId?: string | null) => {
   if (pageId) {
     selected.value = pageId;
-    router.push({ path: `/${selected.value}` });
+    router.push({ path: `/${selected.value}`, query: route.query });
   }
 };
 
@@ -108,6 +108,10 @@ const build = async () => {
   if (props.id) {
     const pageFromProps = findItem(props.id, items.value);
     if (pageFromProps) {
+      const parent = items.value.find((item) =>
+        item.children?.some((child) => child.id === pageFromProps.id),
+      );
+      expanded.value = parent && parent.id !== undefined ? [parent.id] : [];
       setSelected(pageFromProps.id);
     }
   }
