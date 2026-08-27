@@ -108,6 +108,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
           attributionControl: false,
           zoomControl: false,
           maxBounds: mb ? arrayToBoundsExpression(mb) : undefined,
+          zoomSnap: 0,
           maxZoom,
           minZoom,
           center: center && [center[1], center[0]],
