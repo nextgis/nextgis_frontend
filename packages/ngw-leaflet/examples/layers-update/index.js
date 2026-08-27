@@ -10,10 +10,7 @@ NgwMap.create({
   const connector = ngwMap.connector;
 
   // Get the resource ID of the vector layer or create a new one if it doesn't exist
-  let resourceId = await getOrCreateResource(
-    connector,
-    vectorLayerKeyName,
-  );
+  let resourceId = await getOrCreateResource(connector, vectorLayerKeyName);
 
   // Get the style ID for the layer or create a default style if none exists
   let styleId = await getOrCreateStyle(connector, resourceId);

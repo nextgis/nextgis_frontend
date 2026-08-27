@@ -1,6 +1,6 @@
 {
   "name": "Web Map Layer-Specific Feature Identification",
-  "description": "If the NGW webmap layer item 'identifiable' setting is turned off, layers connected through 'addNgwLayer' will not be interactive in the frontend. This ensures that specific layers have identification disabled, preventing feature highlighting and event processing for these layers.",
+  "description": "The polygon frame displayed above all other layers is not identified because identification is disabled for this Web Map layer item.",
   "ngwMaps": [
     "ngw-leaflet",
     "ngw-ol",

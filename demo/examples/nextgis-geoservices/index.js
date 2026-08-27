@@ -1,6 +1,6 @@
 import NgwMap from '@nextgis/ngw-leaflet';
 // This key for demonstrations only
-const apiKey = '67f622354b0e6302cb2b59f4d1b634e8';
+const apiKey = '9da237c7a0b3c1d369a62b7ec95674b5';
 NgwMap.create({
   target: 'map',
   center: [-89.4008, 43.0722],
@@ -8,7 +8,7 @@ NgwMap.create({
 }).then((ngwMap) => {
   ngwMap.addLayer('TILE', {
     url:
-      'https://geoservices.nextgis.com/raster/osm/klokantech-3d/{z}/{x}/{y}.png?apikey=' +
+      'https://tilehub.nextgis.com/raster/tile/8/{z}/{x}/{y}.png?apikey=' +
       apiKey,
     maxZoom: 18,
     attribution:

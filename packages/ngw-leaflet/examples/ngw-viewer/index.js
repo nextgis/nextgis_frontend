@@ -59,9 +59,9 @@ NgwMap.create({
   function createToggler(item, parentElement) {
     const toggler = document.createElement('span');
     toggler.className = 'tree-container__item-btn';
-    toggler.innerHTML = '+';
 
     if (item.resource.children) {
+      toggler.innerHTML = '+';
       let isOpen = false;
       const childrenBlock = document.createElement('div');
       childrenBlock.className = 'tree-container__item-children';
