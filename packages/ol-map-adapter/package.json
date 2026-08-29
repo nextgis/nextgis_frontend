@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/ol-map-adapter",
-  "version": "4.0.0-rc.0",
+  "version": "4.0.0-rc.1",
   "_priority": 16,
   "description": "",
   "main": "lib/ol-map-adapter.global.prod.js",
@@ -9,12 +9,12 @@
   "jsdelivr": "lib/ol-map-adapter.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/dom": "4.0.0-rc.0",
-    "@nextgis/ol-control-container": "4.0.0-rc.0",
-    "@nextgis/paint": "4.0.0-rc.0",
-    "@nextgis/properties-filter": "4.0.0-rc.0",
-    "@nextgis/queue": "4.0.0-rc.0",
-    "@nextgis/webmap": "4.0.0-rc.0",
+    "@nextgis/dom": "4.0.0-rc.1",
+    "@nextgis/ol-control-container": "4.0.0-rc.1",
+    "@nextgis/paint": "4.0.0-rc.1",
+    "@nextgis/properties-filter": "4.0.0-rc.1",
+    "@nextgis/queue": "4.0.0-rc.1",
+    "@nextgis/webmap": "4.0.0-rc.1",
     "@types/events": "^3.0.3",
     "@types/geojson": "^7946.0.14",
     "@types/polylabel": "^2.0.0",
@@ -25,7 +25,7 @@
     "ol": ">=6.0.0"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "4.0.0-rc.0",
+    "@nextgis/build-tools": "4.0.0-rc.1",
     "ol": "^10.10.0"
   },
   "buildOptions": {

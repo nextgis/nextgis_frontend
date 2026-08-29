@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0-rc.1](https://github.com/nextgis/nextgis_frontend/compare/v4.0.0-rc.0...v4.0.0-rc.1) (2026-08-29)
+
+
+### Bug Fixes
+
+* **build:** avoid adapter CSS race during parallel builds ([c88aa19](https://github.com/nextgis/nextgis_frontend/commit/c88aa197bcf5fd2f65793486a4f540d29e685c45))
+
+
+
+
+
 # [4.0.0-rc.0](https://github.com/nextgis/nextgis_frontend/compare/v4.0.0-alpha.8...v4.0.0-rc.0) (2026-08-27)
 
 
