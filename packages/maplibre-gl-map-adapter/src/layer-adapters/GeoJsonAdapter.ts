@@ -251,6 +251,20 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     return this._features.length ? getFeatureBounds(this._features) : undefined;
   }
 
+  protected _resolveRenderedFeature(rendered: Feature): Feature {
+    const id = this._getFeatureFilterId(rendered);
+
+    if (id === undefined) {
+      return rendered;
+    }
+
+    return (
+      this._getFeatures().find(
+        (feature) => this._getFeatureFilterId(feature) === id,
+      ) ?? rendered
+    );
+  }
+
   protected async _beforeLayerLayer(sourceId: string): Promise<void> {
     let source = this.map.getSource(sourceId) as GeoJSONSource;
     if (!source) {

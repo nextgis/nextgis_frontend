@@ -368,11 +368,17 @@ export abstract class VectorAdapter<
     return feature;
   }
 
+  protected _resolveRenderedFeature(feature: Feature): Feature {
+    return feature;
+  }
+
   protected _createLayerClickOptions(e: MapLayerMouseEvent, f: Feature) {
-    const isSelected = this._featureSelect(f, e.lngLat);
-    // Convert the MapLibre feature to plain GeoJSON so it can be reused as layer data.
-    const mapFeature = f as MapGeoJSONFeature;
-    const geojson = mapFeature.toJSON ? mapFeature.toJSON() : f;
+    const resolvedFeature = this._resolveRenderedFeature(f);
+
+    const isSelected = this._featureSelect(resolvedFeature, e.lngLat);
+
+    const mapFeature = resolvedFeature as MapGeoJSONFeature;
+    const geojson = mapFeature.toJSON ? mapFeature.toJSON() : resolvedFeature;
     const feature = {
       ...geojson,
       properties: geojson.properties ? { ...geojson.properties } : null,
