@@ -1,0 +1,17 @@
+{
+  "name": "@nextgis-example/ngw-kit-add-feature-attachment",
+  "private": true,
+  "displayName": "Add attachment to feature",
+  "description": "Add new attachment to feature in vector layer",
+  "scripts": {
+    "start": "vite --host 0.0.0.0 --port 8080 --strictPort --open",
+    "build": "vite build --base=./"
+  },
+  "dependencies": {
+    "@nextgis/ngw-connector": "workspace:*",
+    "@nextgis/ngw-kit": "workspace:*"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}

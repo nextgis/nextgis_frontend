@@ -1,0 +1,17 @@
+{
+  "name": "@nextgis-example/qms-maplibre-gl-fit-service",
+  "private": true,
+  "displayName": "Fit to QMS service with MapLibre GL",
+  "description": "Fit a MapLibre GL map to a QMS service extent",
+  "scripts": {
+    "start": "yarn run -T example",
+    "build": "yarn run -T example:build"
+  },
+  "dependencies": {
+    "@nextgis/qms-maplibre-gl": "workspace:*",
+    "maplibre-gl": "^6.5.0"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "@nextgis-example/demo-layers-update",
+  "private": true,
+  "displayName": "Layers update",
+  "description": "A NextGIS Web raster-style vector layer is added to the map. Clicks on the map place points in this layer, automatically updating and reloading its raster styling.",
+  "ngwMaps": [
+    "ngw-leaflet",
+    "ngw-ol",
+    "ngw-maplibre-gl"
+  ],
+  "scripts": {
+    "start": "yarn run start:leaflet",
+    "start:leaflet": "yarn run -T example --adapter=ngw-leaflet",
+    "start:ol": "yarn run -T example --adapter=ngw-ol",
+    "start:maplibre-gl": "yarn run -T example --adapter=ngw-maplibre-gl",
+    "build": "yarn run -T example:build",
+    "build:leaflet": "yarn run -T example:build --adapter=ngw-leaflet",
+    "build:ol": "yarn run -T example:build --adapter=ngw-ol",
+    "build:maplibre-gl": "yarn run -T example:build --adapter=ngw-maplibre-gl"
+  },
+  "dependencies": {
+    "@nextgis/ngw-leaflet": "*"
+  },
+  "devDependencies": {
+    "@nextgis/ngw-connector": "*",
+    "@nextgis/ngw-maplibre-gl": "*",
+    "@nextgis/ngw-ol": "*",
+    "@nextgis/utils": "*",
+    "vite": "^6.3.5"
+  }
+}

@@ -1,8 +1,0 @@
-{
-  "extends": "../../../jsconfig.examples.json",
-  "include": [
-    "./*/index.js",
-    "../../../demo/examples/globals.d.ts",
-    "../../global.d.ts"
-  ]
-}

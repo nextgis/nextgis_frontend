@@ -24,33 +24,14 @@
         padding: 6px;
       }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/ol@10.6.1/dist/ol.js"></script>
-    <script src="../../lib/qms-ol.global.js"></script>
-  </head>
+
+</head>
   <body>
     <select id="service">
       <option data-qms-id="448">TMS</option>
       <option data-qms-id="2589">WMS</option>
     </select>
     <div id="map"></div>
-    <script>
-      const map = new ol.Map({
-        target: 'map',
-        view: new ol.View({ center: ol.proj.fromLonLat([0, 20]), zoom: 2 }),
-      });
-      const serviceSelect = document.getElementById('service');
-      let activeLayer;
-
-      async function showService() {
-        if (activeLayer) {
-          map.removeLayer(activeLayer);
-        }
-        const qmsId = Number(serviceSelect.selectedOptions[0].dataset.qmsId);
-        activeLayer = await QmsOl.addQmsLayer(map, qmsId);
-      }
-
-      serviceSelect.addEventListener('change', showService);
-      showService();
-    </script>
+    <script type="module" src="./index.ts"></script>
   </body>
 </html>

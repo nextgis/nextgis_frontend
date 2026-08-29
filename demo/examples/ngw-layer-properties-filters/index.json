@@ -1,5 +1,0 @@
-{
-  "name": "NGW layer properties filter",
-  "description": "Create an NGW layer with different adapters and update its properties filter from custom controls.",
-  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"]
-}

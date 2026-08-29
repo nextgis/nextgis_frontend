@@ -1,0 +1,115 @@
+import { fetchNgwExtent } from '@nextgis/ngw-kit';
+import NgwMap from '@nextgis/ngw-leaflet';
+
+import type { CompositeRead } from '@nextgisweb/resource/type/api';
+
+const tree = document.getElementById('tree') as HTMLDivElement;
+const allowedPreviewClsList = [
+  'webmap',
+  'vector_layer',
+  'raster_layer',
+  'raster_style',
+  'mapserver_style',
+  'qgis_raster_style',
+  'qgis_vector_style',
+];
+
+NgwMap.create({
+  baseUrl: 'https://demo.nextgis.com',
+  target: 'map',
+  osm: true,
+}).then((ngwMap) => {
+  const connector = ngwMap.connector;
+  let abortController: AbortController | null = null;
+  updateTreeItems(tree, 0);
+
+  function updateTreeItems(treeNode: HTMLElement, resourceId: number) {
+    const childBlock = document.createElement('div');
+    childBlock.textContent = 'loading...';
+    treeNode.appendChild(childBlock);
+
+    connector.getResourceChildren(resourceId).then((childItem) => {
+      childBlock.textContent = '';
+      childItem.forEach((c) => childBlock.appendChild(createTreeElement(c)));
+    });
+  }
+
+  function createTreeElement(item: CompositeRead) {
+    const el = document.createElement('div');
+    el.className = 'tree-container__item';
+
+    // Resource Name
+    const nameBlock = document.createElement('span');
+    nameBlock.textContent = item.resource.display_name;
+    el.appendChild(nameBlock);
+
+    // Group Toggler
+    const groupToggler = createToggler(item, el);
+    el.insertBefore(groupToggler, nameBlock);
+
+    // Preview Button
+    if (allowedPreviewClsList.includes(item.resource.cls)) {
+      const showBtn = document.createElement('span');
+      showBtn.className = 'tree-container__item-btn';
+      showBtn.textContent = '👁';
+      showBtn.addEventListener('click', () => resourcePreview(item));
+      el.insertBefore(showBtn, nameBlock);
+    }
+
+    return el;
+  }
+
+  function createToggler(item: CompositeRead, parentElement: HTMLElement) {
+    const toggler = document.createElement('span');
+    toggler.className = 'tree-container__item-btn';
+
+    if (item.resource.children) {
+      toggler.innerHTML = '+';
+      let isOpen = false;
+      const childrenBlock = document.createElement('div');
+      childrenBlock.className = 'tree-container__item-children';
+      parentElement.appendChild(childrenBlock);
+
+      toggler.addEventListener('click', () => {
+        isOpen = !isOpen;
+        childrenBlock.style.display = isOpen ? 'block' : 'none';
+        if (isOpen && !childrenBlock.hasChildNodes()) {
+          updateTreeItems(childrenBlock, item.resource.id);
+        }
+        toggler.innerHTML = isOpen ? '-' : '+';
+      });
+    }
+
+    return toggler;
+  }
+
+  function resourcePreview(item: CompositeRead) {
+    if (abortController) {
+      abortController.abort('Load next layer');
+    }
+
+    abortController = new AbortController();
+    ngwMap.removeLayer('active-layer');
+    ngwMap.setView({ bounds: undefined, maxBounds: undefined });
+
+    fetchNgwExtent({
+      connector,
+      resourceId: item.resource.id,
+      signal: abortController.signal,
+    })
+      .then((bounds) => {
+        ngwMap.setView({ bounds, maxBounds: bounds });
+        ngwMap.addNgwLayer({
+          id: 'active-layer',
+          resource: item.resource.id,
+        });
+      })
+      .catch((error) => {
+        if (!(error instanceof Error) || error.name !== 'AbortError') {
+          console.error(error);
+        }
+      });
+  }
+});
+// If this example helped you, you can ★star★ our repository on github
+// https://github.com/nextgis/nextgis_frontend

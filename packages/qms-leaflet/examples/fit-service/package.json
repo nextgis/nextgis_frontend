@@ -1,0 +1,17 @@
+{
+  "name": "@nextgis-example/qms-leaflet-fit-service",
+  "private": true,
+  "displayName": "Fit to QMS service with Leaflet",
+  "description": "Fit a Leaflet map to a QMS service extent",
+  "scripts": {
+    "start": "vite --host 0.0.0.0 --port 8080 --strictPort --open",
+    "build": "vite build --base=./"
+  },
+  "dependencies": {
+    "@nextgis/qms-leaflet": "workspace:*",
+    "leaflet": "1.7.1"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}

@@ -18,34 +18,14 @@
         height: 100%;
       }
     </style>
-
-    <script src="../../lib/ngw-leaflet.global.js"></script>
-    <link
+<link
       rel="stylesheet"
       href="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.css"
     />
-    <script src="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.min.js"></script>
-  </head>
+</head>
 
   <body>
     <div id="map"></div>
-    <script>
-
-      const bounds = [37.65972, 55.7299, 37.66735, 55.73278];
-      NgwMap.create({
-        baseUrl: 'https://demo.nextgis.com',
-        target: 'map',
-        osm: true,
-        bounds,
-      }).then((ngwMap) => {
-
-        console.log(L.PM);
-
-        ngwMap.mapAdapter.map.pm.addControls({
-          position: 'topleft',
-          drawCircle: false,
-        });
-      });
-    </script>
+    <script type="module" src="./index.ts"></script>
   </body>
 </html>

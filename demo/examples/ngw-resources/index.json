@@ -1,5 +1,0 @@
-{
-  "name": "NGW Multiple Layer Selection",
-  "description": "Display and interact with multiple vector layers from NextGIS Web on a map. The configuration allows adding various resources, including selectable layers for feature identification upon click.",
-  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"]
-}

@@ -116,13 +116,17 @@ export async function createRasterAdapter({
         return super.addLayer({ ...this.options, ...addOptions });
       }
 
-      async propertiesFilter(filters: PropertiesFilter): Promise<void> {
+      async propertiesFilter(filters?: PropertiesFilter | null): Promise<void> {
         const opt = this.options as ImageAdapterOptions;
+        const filterName = `filter[${this.resourceId}]`;
 
         const params = {
           ...(opt.params || {}),
-          ...createLayerFilterParam(this.resourceId, filters),
+          ...createLayerFilterParam(this.resourceId, filters ?? undefined),
         };
+        if (!filters) {
+          delete params[filterName];
+        }
 
         opt.params = params;
         this.updateLayer?.({ params });

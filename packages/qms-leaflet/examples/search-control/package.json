@@ -1,0 +1,17 @@
+{
+  "name": "@nextgis-example/qms-leaflet-search-control",
+  "private": true,
+  "displayName": "QMS control with Leaflet",
+  "description": "Search the QMS API or browse the catalog and add a service",
+  "scripts": {
+    "start": "vite --host 0.0.0.0 --port 8080 --strictPort --open",
+    "build": "vite build --base=./"
+  },
+  "dependencies": {
+    "@nextgis/qms-leaflet": "workspace:*",
+    "leaflet": "1.7.1"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}

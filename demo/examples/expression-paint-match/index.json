@@ -1,5 +1,0 @@
-{
-  "name": "Expression paint with match",
-  "description": "Demonstrates the use of match expressions to conditionally style features based on specific property values, applying different colors for amenities like cafes and restaurants.",
-  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"]
-}

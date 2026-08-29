@@ -1,0 +1,17 @@
+{
+  "name": "@nextgis-example/ngw-maplibre-gl-geojson-paint-cb",
+  "private": true,
+  "displayName": "Paint function for GeoJSON data",
+  "description": "",
+  "scripts": {
+    "start": "yarn run -T example",
+    "build": "yarn run -T example:build"
+  },
+  "dependencies": {
+    "@nextgis/ngw-maplibre-gl": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/geojson": "^7946.0.16",
+    "vite": "^6.3.5"
+  }
+}

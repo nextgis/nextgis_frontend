@@ -11,6 +11,7 @@ import type {
 } from '@nextgis/ngw-connector';
 import type { GeometryPaint } from '@nextgis/paint';
 import type { ResourceCls } from '@nextgisweb/resource/type/api';
+import type { EventEmitter } from 'events';
 
 export type ImageTypes = 'image/tif' | 'image/tiff' | '.tif';
 
@@ -45,7 +46,7 @@ export interface CreateWmsOptions extends ResourceCreateOptions {
   /** @deprecated use {@link CreateWmsOptions.resourceId} instead */
   id?: number;
   resourceId?: number;
-  layers: WmsServerServiceLayer[];
+  layers?: WmsServerServiceLayer[];
 }
 
 export interface CreateMapserverStyleOptions extends ResourceCreateOptions {
@@ -57,7 +58,15 @@ export type CreateWmsConnectionOptions = ResourceCreateOptions &
   WmsClientConnection;
 
 export type CreateWmsConnectedLayerOptions = ResourceCreateOptions &
-  WmsClientLayer;
+  Omit<
+    WmsClientLayer,
+    'connection' | 'imgformat' | 'srs' | 'vendor_params' | 'wmslayers'
+  > &
+  Partial<
+    Pick<WmsClientLayer, 'connection' | 'imgformat' | 'srs' | 'vendor_params'>
+  > & {
+    wmslayers: string | string[];
+  };
 
 export interface NgwUploadOptions extends NgwConnectorOptions {
   connector?: NgwConnector;
@@ -135,6 +144,15 @@ export interface EmitterStatus {
   state: 'begin' | 'end' | 'progress' | 'error';
   message?: string;
   data?: any;
+}
+
+export interface NgwUploaderEmitter extends EventEmitter {
+  on(eventName: 'load', listener: () => void): this;
+  on(
+    eventName: 'status:change',
+    listener: (event: EmitterStatus) => void,
+  ): this;
+  once(eventName: 'load', listener: () => void): this;
 }
 
 export interface CreateStyleOptions extends ResourceCreateOptions {

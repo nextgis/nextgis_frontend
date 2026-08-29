@@ -1,0 +1,132 @@
+import NgwMap from '@nextgis/ngw-leaflet';
+
+import type { PropertiesFilter } from '@nextgis/properties-filter';
+import type { FeatureLayerFieldRead } from '@nextgisweb/feature-layer/type/api';
+
+let amenityList: string[] = [];
+
+const ngwMap = new NgwMap({
+  baseUrl: 'https://demo.nextgis.com/',
+  target: 'map',
+  qmsId: 448,
+});
+
+const filterContainer = document.createElement('div');
+
+// Filter select
+const filterInput = document.createElement('select');
+const filterLabel = document.createElement('label');
+filterLabel.appendChild(document.createTextNode('Filter: '));
+filterLabel.appendChild(filterInput);
+
+// Limit input
+const limitInput = document.createElement('input');
+limitInput.value = '300';
+const limitLabel = document.createElement('label');
+limitLabel.appendChild(document.createTextNode('Limit: '));
+limitLabel.appendChild(limitInput);
+
+// OrderBy select
+const orderByInput = document.createElement('select');
+const orderByLabel = document.createElement('label');
+orderByLabel.appendChild(document.createTextNode('Order by: '));
+orderByLabel.appendChild(orderByInput);
+
+// Descending checkbox
+const descendingInput = document.createElement('input');
+descendingInput.type = 'checkbox';
+const descendingLabel = document.createElement('label');
+descendingLabel.appendChild(document.createTextNode('Descending'));
+descendingLabel.appendChild(descendingInput);
+
+filterInput.onchange = setLayerFilter;
+limitInput.onchange = setLayerFilter;
+orderByInput.onchange = setLayerFilter;
+descendingInput.onchange = setLayerFilter;
+
+filterContainer.appendChild(filterLabel);
+filterContainer.appendChild(limitLabel);
+filterContainer.appendChild(orderByLabel);
+filterContainer.appendChild(descendingLabel);
+
+const filterFunction = (): PropertiesFilter => {
+  return [['AMENITY', 'eq', filterInput.value]];
+};
+
+amenityList = ['cafe', 'restaurant'];
+updateSelectOptions();
+
+function updateSelectOptions() {
+  for (let fry = 0; fry < amenityList.length; fry++) {
+    const option = document.createElement('option');
+    option.innerHTML = amenityList[fry];
+    filterInput.appendChild(option);
+  }
+}
+
+function updateOrderByOptions(fields: FeatureLayerFieldRead[]) {
+  orderByInput.innerHTML = '';
+  fields.forEach((field) => {
+    const option = document.createElement('option');
+    option.innerHTML = field.display_name;
+    option.value = field.keyname;
+    orderByInput.appendChild(option);
+  });
+}
+
+const filterControl = ngwMap.createControl(
+  {
+    onAdd: () => filterContainer,
+    onRemove: () => {},
+  },
+  { margin: true },
+);
+
+ngwMap.addControl(filterControl, 'top-right');
+
+ngwMap.connector
+  .route('resource.item', { id: 1733 })
+  .get({ cache: true })
+  .then((composite) => {
+    if (composite.feature_layer) {
+      updateOrderByOptions(composite.feature_layer.fields);
+    }
+  });
+
+ngwMap.addNgwLayer({
+  id: 'geojson',
+  resource: 1733,
+  adapter: 'GEOJSON',
+  fit: true,
+  adapterOptions: {
+    propertiesFilter: filterFunction(),
+    waitFullLoad: true,
+    paint: {
+      color: [
+        'match',
+        ['get', 'AMENITY'],
+        'cafe',
+        'blue',
+        'restaurant',
+        'red',
+        'gray', // last item is default value
+      ],
+      fillOpacity: 0.8,
+      stroke: true,
+      radius: 6,
+    },
+  },
+});
+
+function setLayerFilter() {
+  let orderBy = orderByInput.value ? [orderByInput.value] : undefined;
+
+  if (descendingInput.checked && orderBy) {
+    orderBy = orderBy.map((field) => '-' + field);
+  }
+
+  ngwMap.propertiesFilter('geojson', filterFunction(), {
+    limit: Number(limitInput.value),
+    orderBy,
+  });
+}

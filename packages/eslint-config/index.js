@@ -11,11 +11,6 @@ export default [
   eslintPluginPrettierRecommended,
   {
     files: ['**/*.{js,mjs,cjs,ts,mts,cts}'],
-    languageOptions: {
-      globals: {
-        ...globals.browser,
-      },
-    },
     rules: {
       indent: 'off',
       camelcase: 'off',
@@ -46,6 +41,18 @@ export default [
           argsIgnorePattern: '^_',
         },
       ],
+    },
+  },
+  {
+    files: ['**/*.{js,ts,tsx}'],
+    languageOptions: {
+      globals: { ...globals.browser },
+    },
+  },
+  {
+    files: ['**/*.{mjs,cjs,mts,cts}'],
+    languageOptions: {
+      globals: { ...globals.node },
     },
   },
   {

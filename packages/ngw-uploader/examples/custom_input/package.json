@@ -1,0 +1,17 @@
+{
+  "name": "@nextgis-example/ngw-uploader-custom_input",
+  "private": true,
+  "displayName": "Raster upload to map",
+  "description": "This example shows how to add a newly created raster on the map",
+  "scripts": {
+    "start": "vite --host 0.0.0.0 --port 8080 --strictPort --open",
+    "build": "vite build --base=./"
+  },
+  "dependencies": {
+    "@nextgis/ngw-leaflet": "workspace:*",
+    "@nextgis/ngw-uploader": "workspace:*"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}

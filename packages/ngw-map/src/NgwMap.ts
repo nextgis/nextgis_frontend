@@ -38,8 +38,11 @@ import type {
   FetchNgwItemsOptions,
   NgwFeatureItemResponse,
   NgwFeatureRequestOptions,
+  NgwGeoJsonLayerAdapter,
+  NgwGeoJsonLayerOptions,
   NgwIdentify,
   NgwWebmapItem,
+  NgwWebmapLayerAdapter,
   ResourceAdapter,
 } from '@nextgis/ngw-kit';
 import type { NgwLayerOptions } from '@nextgis/ngw-kit';
@@ -168,6 +171,13 @@ export class NgwMap<
    * });
    * ```
    */
+  addNgwLayer<P extends FeatureProperties = FeatureProperties>(
+    options: NgwGeoJsonLayerOptions<NoInfer<P>>,
+  ): Promise<NgwGeoJsonLayerAdapter<P, M, L> | undefined>;
+  addNgwLayer(
+    options: NgwLayerOptions<'NGW:WEBMAP'> & { adapter: 'NGW:WEBMAP' },
+  ): Promise<NgwWebmapLayerAdapter<M> | undefined>;
+  addNgwLayer(options: NgwLayerOptions): Promise<ResourceAdapter | undefined>;
   async addNgwLayer(
     options: NgwLayerOptions,
   ): Promise<ResourceAdapter | undefined> {
@@ -458,7 +468,7 @@ export class NgwMap<
   }
 
   /** @deprecated use {@link fitLayer} instead */
-  async zoomToLayer(layerDef: string | ResourceAdapter): Promise<void> {
+  async zoomToLayer(layerDef: LayerDef): Promise<void> {
     return this.fitLayer(layerDef);
   }
 

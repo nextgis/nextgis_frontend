@@ -1,0 +1,17 @@
+{
+  "name": "@nextgis-example/ngw-ol-ngw-srs-layer",
+  "private": true,
+  "displayName": "Ngw srs layer",
+  "description": "Eliminate reprojection errors for accurate measurements",
+  "scripts": {
+    "start": "vite --host 0.0.0.0 --port 8080 --strictPort --open",
+    "build": "vite build --base=./"
+  },
+  "dependencies": {
+    "@nextgis/ngw-ol": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/geojson": "^7946.0.16",
+    "vite": "^6.3.5"
+  }
+}

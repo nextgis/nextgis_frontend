@@ -2,7 +2,7 @@ import { DomEvent, type Layer } from 'leaflet';
 
 import { createMouseEvent } from '../../../utils/createMouseEvent';
 
-import type { OnLayerMouseOptions } from '@nextgis/webmap';
+import type { OnLayerClickOptions } from '@nextgis/webmap';
 import type { LeafletEvent, LeafletMouseEvent } from 'leaflet';
 
 import type { GeoJsonAdapter } from '../GeoJsonAdapter';
@@ -72,7 +72,7 @@ export class GeoJsonEvents {
     }
   }
 
-  private _createMouseEvent(source: LeafletEvent): OnLayerMouseOptions {
+  private _createMouseEvent(source: LeafletEvent): OnLayerClickOptions {
     return createMouseEvent({
       layer: this.layer,
       source: source as LeafletMouseEvent,

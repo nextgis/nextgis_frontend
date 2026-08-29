@@ -19,10 +19,8 @@
       }
     </style>
 
-    <script src="../../lib/webmap.global.js"></script>
-    <script src="https://unpkg.com/@nextgis/leaflet-map-adapter"></script>
-    <script src="https://unpkg.com/@nextgis/qms-kit"></script>
-    <link
+
+<link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
       integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
@@ -32,17 +30,6 @@
 
   <body>
     <div id="map"></div>
-    <script>
-       WebMap.createWebMap({
-        mapAdapter: new LeafletMapAdapter(),
-        target: 'map',
-        controls: webMap.getDefaultControls(),
-        starterKits: [new QmsKit.QmsKit()],
-        center: [104, 52],
-        zoom: 6
-      }).then(function (map) {
-        map.addBaseLayer('QMS', {qmsId: 448})
-      });
-    </script>
+    <script type="module" src="./index.ts"></script>
   </body>
 </html>

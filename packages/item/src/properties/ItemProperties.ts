@@ -14,18 +14,18 @@ import type { BaseProperty } from './BaseProperty';
 const BOOLEAN_TYPE = 'boolean';
 const STRING_TYPE = 'string';
 
-export class ItemProperties {
-  static handlers: Record<string, Type<BaseProperty>> = {
+export class ItemProperties<I extends Item = any> {
+  static handlers: Record<string, Type<BaseProperty<any, any, any>>> = {
     CheckProperty,
   };
 
   options: Record<string, any> = {};
 
-  private _properties: Record<string, BaseProperty> = {};
+  private _properties: Record<string, BaseProperty<any, any, any>> = {};
   private _propertiesList: string[] = [];
 
   constructor(
-    public item: Item,
+    public item: I,
     propertiesList?: ItemPropertyConfig<keyof ItemPropertyTypes>[],
   ) {
     if (propertiesList) {
@@ -57,11 +57,11 @@ export class ItemProperties {
     }
   }
 
-  property(name: string): BaseProperty<any, ItemBasePropertyOptions<any>> {
+  property(name: string): BaseProperty<any, ItemBasePropertyOptions<any>, I> {
     return this._properties[name];
   }
 
-  list(): BaseProperty<any, ItemBasePropertyOptions<any>>[] {
+  list(): BaseProperty<any, ItemBasePropertyOptions<any>, I>[] {
     return this._propertiesList.map((name) => this._properties[name]);
   }
 
@@ -93,7 +93,7 @@ export class ItemProperties {
 
   private _getHandler(
     propOpt: ItemPropertyConfig<keyof ItemPropertyTypes>,
-  ): Type<BaseProperty> | undefined {
+  ): Type<BaseProperty<any, any, any>> | undefined {
     const Handler = propOpt.handler;
     if (!Handler && propOpt.type) {
       switch (propOpt.type) {

@@ -1,0 +1,17 @@
+{
+  "name": "@nextgis-example/ngw-kit-select-ngw-layer-distinct",
+  "private": true,
+  "displayName": "Select NGW Layer distinct",
+  "description": "Show a list of unique values by fields from the resource of the NGV vector layer",
+  "scripts": {
+    "start": "vite --host 0.0.0.0 --port 8080 --strictPort --open",
+    "build": "vite build --base=./"
+  },
+  "dependencies": {
+    "@nextgis/ngw-connector": "workspace:*",
+    "@nextgis/ngw-kit": "workspace:*"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "@nextgis-example/ngw-maplibre-gl-ngw-mvt",
+  "private": true,
+  "displayName": "Add MVT NGW resource",
+  "description": "",
+  "scripts": {
+    "start": "yarn run -T example",
+    "build": "yarn run -T example:build"
+  },
+  "dependencies": {
+    "@nextgis/ngw-maplibre-gl": "workspace:*"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}

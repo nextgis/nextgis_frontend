@@ -1,0 +1,17 @@
+{
+  "name": "@nextgis-example/qms-ol-fit-service",
+  "private": true,
+  "displayName": "Fit to QMS service with OpenLayers",
+  "description": "Fit an OpenLayers map to a QMS service extent",
+  "scripts": {
+    "start": "vite --host 0.0.0.0 --port 8080 --strictPort --open",
+    "build": "vite build --base=./"
+  },
+  "dependencies": {
+    "@nextgis/qms-ol": "workspace:*",
+    "ol": "^10.10.0"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}

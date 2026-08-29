@@ -1,0 +1,21 @@
+{
+  "name": "@nextgis-example/ngw-ol-ngw-cog-layer",
+  "private": true,
+  "skipTypecheck": true,
+  "displayName": "NGW COG layer",
+  "description": "Add a COG GeoTIFF raster layer from NGW resource to the WebMap",
+  "tags": [
+    "cog",
+    "raster"
+  ],
+  "scripts": {
+    "start": "vite --host 0.0.0.0 --port 8080 --strictPort --open",
+    "build": "vite build --base=./"
+  },
+  "dependencies": {
+    "@nextgis/ngw-ol": "workspace:*"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}

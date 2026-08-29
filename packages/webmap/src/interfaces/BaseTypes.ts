@@ -21,7 +21,7 @@ export interface Pixel {
  * });
  * ```
  */
-export type LayerDef = string | LayerAdapter;
+export type LayerDef = string | LayerAdapter<any, any, any>;
 
 /**
  * Available cursor names from

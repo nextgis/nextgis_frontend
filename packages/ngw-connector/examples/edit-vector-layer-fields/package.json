@@ -1,0 +1,16 @@
+{
+  "name": "@nextgis-example/ngw-connector-edit-vector-layer-fields",
+  "private": true,
+  "displayName": "Edit vector layer fields",
+  "description": "Use PUT request to create update or delete NGW vector resource field",
+  "scripts": {
+    "start": "vite --host 0.0.0.0 --port 8080 --strictPort --open",
+    "build": "vite build --base=./"
+  },
+  "dependencies": {
+    "@nextgis/ngw-connector": "workspace:*"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}

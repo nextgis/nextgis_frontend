@@ -1,0 +1,16 @@
+{
+  "name": "@nextgis-example/ngw-connector-resource-item",
+  "private": true,
+  "displayName": "Get resource item from NGW",
+  "description": "Use NGW connector to interact with Cloud api",
+  "scripts": {
+    "start": "vite --host 0.0.0.0 --port 8080 --strictPort --open",
+    "build": "vite build --base=./"
+  },
+  "dependencies": {
+    "@nextgis/ngw-connector": "workspace:*"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}

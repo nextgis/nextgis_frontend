@@ -1,4 +1,0 @@
-{
-  "name": "Request transform",
-  "description": "The ability to change each request at any time before sending"
-}

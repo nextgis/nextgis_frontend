@@ -19,34 +19,11 @@
       height: 100%;
     }
   </style>
-
-
-  <script src="../../lib/ngw-maplibre-gl.global.js"></script>
 </head>
 
 <body>
   <div id='map'></div>
-  <script>
-    var ngwMap = new NgwMap({
-      baseUrl: 'https://demo.nextgis.com',
-      target: 'map',
-      qmsId: 448,
-      resources: [
-        {
-          resource: 1733,
-          adapterOptions: {
-            paint: [
-              { type: 'pin' },
-              [[['AMENITY', 'eq', 'restaurant']], { color: 'green' }],
-              [[['AMENITY', 'eq', 'cafe']], { color: 'red' }]
-            ],
-            fit: true,
-            limit: 100
-          }
-        },
-      ]
-    });
-  </script>
-</body>
+    <script type="module" src="./index.ts"></script>
+  </body>
 
 </html>

@@ -1,0 +1,16 @@
+{
+  "name": "@nextgis-example/ngw-maplibre-gl-nextgis-map-vector",
+  "private": true,
+  "displayName": "NextGIS Map Vector tiles",
+  "description": "",
+  "scripts": {
+    "start": "yarn run -T example",
+    "build": "yarn run -T example:build"
+  },
+  "dependencies": {
+    "@nextgis/ngw-maplibre-gl": "workspace:*"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}

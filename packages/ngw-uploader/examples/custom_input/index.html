@@ -5,9 +5,8 @@
 
     <title>Custom Input | Ngw Uploader Example</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="../../../ngw-leaflet/lib/ngw-leaflet.global.js"></script>
-    <script src="../../lib/ngw-uploader.global.js"></script>
-    <style>
+
+<style>
       * {
         margin: 0;
         padding: 0;
@@ -43,52 +42,6 @@
       </div>
     </template>
     <div id="map"></div>
-    <script>
-      const template = document.getElementById('control-element');
-      const element = document.importNode(template.content, true);
-
-      const uploader = element.querySelector('#uploader');
-      const statusUpload = element.querySelector('#status');
-      const input = element.querySelector('#resource-input');
-      const baseUrl = 'https://sandbox.nextgis.com';
-      const ngwUploader = new NgwUploader({
-        baseUrl: baseUrl,
-        useTus: false
-      });
-
-      const ngwMap = new NgwMap({
-        baseUrl: baseUrl,
-        target: 'map',
-        qmsId: 448,
-        bounds: [30, 20, 180, 70],
-      });
-
-      const control = ngwMap.createControl(
-        {
-          onAdd: () => {
-            return element;
-          },
-        },
-        { margin: true },
-      );
-      ngwMap.addControl(control, 'top-right');
-
-      ngwUploader.emitter.on('status:change', (evt) => {
-        statusUpload.innerHTML = evt.message;
-      });
-
-      input.addEventListener('change', () => {
-        ngwUploader
-          .uploadRaster(input.files[0], {
-            addTimestampToName: true,
-            parentId: 0,
-          })
-          .then((newStyle) => {
-            ngwMap.addNgwLayer({ resourceId: newStyle.id }).then((layer) => {
-              ngwMap.zoomToLayer(layer);
-            });
-          });
-      });
-    </script>
+    <script type="module" src="./index.ts"></script>
   </body>
 </html>

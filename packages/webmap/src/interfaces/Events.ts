@@ -2,6 +2,7 @@ import type { WebMap } from '../WebMap';
 
 import type {
   LayerAdapter,
+  OnLayerClickOptions,
   OnLayerMouseOptions,
   OnLayerSelectOptions,
 } from './LayerAdapter';
@@ -79,13 +80,13 @@ export interface WebMapEvents extends MainMapEvents {
   /**
    * @eventProperty
    */
-  'layer:click': OnLayerMouseOptions;
-  [key: `layer-${string | number}:click`]: OnLayerMouseOptions;
+  'layer:click': OnLayerClickOptions;
+  [key: `layer-${string | number}:click`]: OnLayerClickOptions;
   /**
    * @eventProperty
    */
-  'layer:dblclick': OnLayerMouseOptions;
-  [key: `layer-${string | number}:dblclick`]: OnLayerMouseOptions;
+  'layer:dblclick': OnLayerClickOptions;
+  [key: `layer-${string | number}:dblclick`]: OnLayerClickOptions;
   /**
    * @eventProperty
    */

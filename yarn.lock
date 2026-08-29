@@ -112,10 +112,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@esbuild/aix-ppc64@npm:0.25.12":
+  version: 0.25.12
+  resolution: "@esbuild/aix-ppc64@npm:0.25.12"
+  conditions: os=aix & cpu=ppc64
+  languageName: node
+  linkType: hard
+
 "@esbuild/aix-ppc64@npm:0.28.2":
   version: 0.28.2
   resolution: "@esbuild/aix-ppc64@npm:0.28.2"
   conditions: os=aix & cpu=ppc64
+  languageName: node
+  linkType: hard
+
+"@esbuild/android-arm64@npm:0.25.12":
+  version: 0.25.12
+  resolution: "@esbuild/android-arm64@npm:0.25.12"
+  conditions: os=android & cpu=arm64
   languageName: node
   linkType: hard
 
@@ -126,10 +140,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@esbuild/android-arm@npm:0.25.12":
+  version: 0.25.12
+  resolution: "@esbuild/android-arm@npm:0.25.12"
+  conditions: os=android & cpu=arm
+  languageName: node
+  linkType: hard
+
 "@esbuild/android-arm@npm:0.28.2":
   version: 0.28.2
   resolution: "@esbuild/android-arm@npm:0.28.2"
   conditions: os=android & cpu=arm
+  languageName: node
+  linkType: hard
+
+"@esbuild/android-x64@npm:0.25.12":
+  version: 0.25.12
+  resolution: "@esbuild/android-x64@npm:0.25.12"
+  conditions: os=android & cpu=x64
   languageName: node
   linkType: hard
 
@@ -140,10 +168,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@esbuild/darwin-arm64@npm:0.25.12":
+  version: 0.25.12
+  resolution: "@esbuild/darwin-arm64@npm:0.25.12"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
 "@esbuild/darwin-arm64@npm:0.28.2":
   version: 0.28.2
   resolution: "@esbuild/darwin-arm64@npm:0.28.2"
   conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@esbuild/darwin-x64@npm:0.25.12":
+  version: 0.25.12
+  resolution: "@esbuild/darwin-x64@npm:0.25.12"
+  conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
@@ -154,10 +196,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@esbuild/freebsd-arm64@npm:0.25.12":
+  version: 0.25.12
+  resolution: "@esbuild/freebsd-arm64@npm:0.25.12"
+  conditions: os=freebsd & cpu=arm64
+  languageName: node
+  linkType: hard
+
 "@esbuild/freebsd-arm64@npm:0.28.2":
   version: 0.28.2
   resolution: "@esbuild/freebsd-arm64@npm:0.28.2"
   conditions: os=freebsd & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@esbuild/freebsd-x64@npm:0.25.12":
+  version: 0.25.12
+  resolution: "@esbuild/freebsd-x64@npm:0.25.12"
+  conditions: os=freebsd & cpu=x64
   languageName: node
   linkType: hard
 
@@ -168,10 +224,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@esbuild/linux-arm64@npm:0.25.12":
+  version: 0.25.12
+  resolution: "@esbuild/linux-arm64@npm:0.25.12"
+  conditions: os=linux & cpu=arm64
+  languageName: node
+  linkType: hard
+
 "@esbuild/linux-arm64@npm:0.28.2":
   version: 0.28.2
   resolution: "@esbuild/linux-arm64@npm:0.28.2"
   conditions: os=linux & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@esbuild/linux-arm@npm:0.25.12":
+  version: 0.25.12
+  resolution: "@esbuild/linux-arm@npm:0.25.12"
+  conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
@@ -182,10 +252,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@esbuild/linux-ia32@npm:0.25.12":
+  version: 0.25.12
+  resolution: "@esbuild/linux-ia32@npm:0.25.12"
+  conditions: os=linux & cpu=ia32
+  languageName: node
+  linkType: hard
+
 "@esbuild/linux-ia32@npm:0.28.2":
   version: 0.28.2
   resolution: "@esbuild/linux-ia32@npm:0.28.2"
   conditions: os=linux & cpu=ia32
+  languageName: node
+  linkType: hard
+
+"@esbuild/linux-loong64@npm:0.25.12":
+  version: 0.25.12
+  resolution: "@esbuild/linux-loong64@npm:0.25.12"
+  conditions: os=linux & cpu=loong64
   languageName: node
   linkType: hard
 
@@ -196,10 +280,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@esbuild/linux-mips64el@npm:0.25.12":
+  version: 0.25.12
+  resolution: "@esbuild/linux-mips64el@npm:0.25.12"
+  conditions: os=linux & cpu=mips64el
+  languageName: node
+  linkType: hard
+
 "@esbuild/linux-mips64el@npm:0.28.2":
   version: 0.28.2
   resolution: "@esbuild/linux-mips64el@npm:0.28.2"
   conditions: os=linux & cpu=mips64el
+  languageName: node
+  linkType: hard
+
+"@esbuild/linux-ppc64@npm:0.25.12":
+  version: 0.25.12
+  resolution: "@esbuild/linux-ppc64@npm:0.25.12"
+  conditions: os=linux & cpu=ppc64
   languageName: node
   linkType: hard
 
@@ -210,10 +308,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@esbuild/linux-riscv64@npm:0.25.12":
+  version: 0.25.12
+  resolution: "@esbuild/linux-riscv64@npm:0.25.12"
+  conditions: os=linux & cpu=riscv64
+  languageName: node
+  linkType: hard
+
 "@esbuild/linux-riscv64@npm:0.28.2":
   version: 0.28.2
   resolution: "@esbuild/linux-riscv64@npm:0.28.2"
   conditions: os=linux & cpu=riscv64
+  languageName: node
+  linkType: hard
+
+"@esbuild/linux-s390x@npm:0.25.12":
+  version: 0.25.12
+  resolution: "@esbuild/linux-s390x@npm:0.25.12"
+  conditions: os=linux & cpu=s390x
   languageName: node
   linkType: hard
 
@@ -224,10 +336,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@esbuild/linux-x64@npm:0.25.12":
+  version: 0.25.12
+  resolution: "@esbuild/linux-x64@npm:0.25.12"
+  conditions: os=linux & cpu=x64
+  languageName: node
+  linkType: hard
+
 "@esbuild/linux-x64@npm:0.28.2":
   version: 0.28.2
   resolution: "@esbuild/linux-x64@npm:0.28.2"
   conditions: os=linux & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@esbuild/netbsd-arm64@npm:0.25.12":
+  version: 0.25.12
+  resolution: "@esbuild/netbsd-arm64@npm:0.25.12"
+  conditions: os=netbsd & cpu=arm64
   languageName: node
   linkType: hard
 
@@ -238,10 +364,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@esbuild/netbsd-x64@npm:0.25.12":
+  version: 0.25.12
+  resolution: "@esbuild/netbsd-x64@npm:0.25.12"
+  conditions: os=netbsd & cpu=x64
+  languageName: node
+  linkType: hard
+
 "@esbuild/netbsd-x64@npm:0.28.2":
   version: 0.28.2
   resolution: "@esbuild/netbsd-x64@npm:0.28.2"
   conditions: os=netbsd & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@esbuild/openbsd-arm64@npm:0.25.12":
+  version: 0.25.12
+  resolution: "@esbuild/openbsd-arm64@npm:0.25.12"
+  conditions: os=openbsd & cpu=arm64
   languageName: node
   linkType: hard
 
@@ -252,10 +392,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@esbuild/openbsd-x64@npm:0.25.12":
+  version: 0.25.12
+  resolution: "@esbuild/openbsd-x64@npm:0.25.12"
+  conditions: os=openbsd & cpu=x64
+  languageName: node
+  linkType: hard
+
 "@esbuild/openbsd-x64@npm:0.28.2":
   version: 0.28.2
   resolution: "@esbuild/openbsd-x64@npm:0.28.2"
   conditions: os=openbsd & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@esbuild/openharmony-arm64@npm:0.25.12":
+  version: 0.25.12
+  resolution: "@esbuild/openharmony-arm64@npm:0.25.12"
+  conditions: os=openharmony & cpu=arm64
   languageName: node
   linkType: hard
 
@@ -266,10 +420,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@esbuild/sunos-x64@npm:0.25.12":
+  version: 0.25.12
+  resolution: "@esbuild/sunos-x64@npm:0.25.12"
+  conditions: os=sunos & cpu=x64
+  languageName: node
+  linkType: hard
+
 "@esbuild/sunos-x64@npm:0.28.2":
   version: 0.28.2
   resolution: "@esbuild/sunos-x64@npm:0.28.2"
   conditions: os=sunos & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@esbuild/win32-arm64@npm:0.25.12":
+  version: 0.25.12
+  resolution: "@esbuild/win32-arm64@npm:0.25.12"
+  conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
@@ -280,10 +448,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@esbuild/win32-ia32@npm:0.25.12":
+  version: 0.25.12
+  resolution: "@esbuild/win32-ia32@npm:0.25.12"
+  conditions: os=win32 & cpu=ia32
+  languageName: node
+  linkType: hard
+
 "@esbuild/win32-ia32@npm:0.28.2":
   version: 0.28.2
   resolution: "@esbuild/win32-ia32@npm:0.28.2"
   conditions: os=win32 & cpu=ia32
+  languageName: node
+  linkType: hard
+
+"@esbuild/win32-x64@npm:0.25.12":
+  version: 0.25.12
+  resolution: "@esbuild/win32-x64@npm:0.25.12"
+  conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
@@ -367,6 +549,22 @@ __metadata:
     "@eslint/core": ^1.2.1
     levn: ^0.4.1
   checksum: 16fa97792c3f8e9723f5068abf854557cfa4da7c0b2eee691bff092fbb507d1dd2e1e86c027522c9165616954f4c1ae8d75911058813fb07c0b9ebda2cbfbae1
+  languageName: node
+  linkType: hard
+
+"@geoman-io/leaflet-geoman-free@npm:^2.20.0":
+  version: 2.20.0
+  resolution: "@geoman-io/leaflet-geoman-free@npm:2.20.0"
+  dependencies:
+    "@turf/boolean-contains": ^7.3.5
+    "@turf/kinks": ^7.3.5
+    "@turf/line-intersect": ^7.3.5
+    "@turf/line-split": ^7.3.5
+    lodash: 4.18.1
+    polyclip-ts: ^0.16.8
+  peerDependencies:
+    leaflet: ^1.2.0
+  checksum: dc2d4227e53e46d2ab9f601776e59946763cb0b153853e82f38c12fc98de9d1fe0ec9c287c8d76ace3a5a30c1477e2ef13c7395dd1a5ce3134b4ab509f5da113
   languageName: node
   linkType: hard
 
@@ -696,6 +894,464 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@nextgis-example/geocoder-ngw-geocoder@workspace:packages/geocoder/examples/ngw-geocoder":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/geocoder-ngw-geocoder@workspace:packages/geocoder/examples/ngw-geocoder"
+  dependencies:
+    "@nextgis/geocoder": "workspace:*"
+    "@nextgis/ngw-leaflet": "workspace:*"
+    "@nextgis/utils": "workspace:*"
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/geocoder-nominatim-geocoder@workspace:packages/geocoder/examples/nominatim-geocoder":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/geocoder-nominatim-geocoder@workspace:packages/geocoder/examples/nominatim-geocoder"
+  dependencies:
+    "@nextgis/geocoder": "workspace:*"
+    "@nextgis/ngw-kit": "workspace:*"
+    "@nextgis/ngw-leaflet": "workspace:*"
+    "@nextgis/utils": "workspace:*"
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/icons-icon_shapes@workspace:packages/icons/examples/icon_shapes":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/icons-icon_shapes@workspace:packages/icons/examples/icon_shapes"
+  dependencies:
+    "@nextgis/icons": "workspace:*"
+    "@nextgis/ngw-leaflet": "workspace:*"
+    "@types/geojson": ^7946.0.16
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/ngw-connector-abort-controller@workspace:packages/ngw-connector/examples/abort-controller":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/ngw-connector-abort-controller@workspace:packages/ngw-connector/examples/abort-controller"
+  dependencies:
+    "@nextgis/ngw-connector": "workspace:*"
+    "@nextgis/ngw-kit": "workspace:*"
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/ngw-connector-auth@workspace:packages/ngw-connector/examples/auth":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/ngw-connector-auth@workspace:packages/ngw-connector/examples/auth"
+  dependencies:
+    "@nextgis/ngw-connector": "workspace:*"
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/ngw-connector-cancelable@workspace:packages/ngw-connector/examples/cancelable":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/ngw-connector-cancelable@workspace:packages/ngw-connector/examples/cancelable"
+  dependencies:
+    "@nextgis/ngw-connector": "workspace:*"
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/ngw-connector-edit-vector-layer-fields@workspace:packages/ngw-connector/examples/edit-vector-layer-fields":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/ngw-connector-edit-vector-layer-fields@workspace:packages/ngw-connector/examples/edit-vector-layer-fields"
+  dependencies:
+    "@nextgis/ngw-connector": "workspace:*"
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/ngw-connector-request-transform@workspace:packages/ngw-connector/examples/request-transform":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/ngw-connector-request-transform@workspace:packages/ngw-connector/examples/request-transform"
+  dependencies:
+    "@nextgis/ngw-connector": "workspace:*"
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/ngw-connector-resource-item@workspace:packages/ngw-connector/examples/resource-item":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/ngw-connector-resource-item@workspace:packages/ngw-connector/examples/resource-item"
+  dependencies:
+    "@nextgis/ngw-connector": "workspace:*"
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/ngw-connector-resource-table@workspace:packages/ngw-connector/examples/resource-table":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/ngw-connector-resource-table@workspace:packages/ngw-connector/examples/resource-table"
+  dependencies:
+    "@nextgis/ngw-connector": "workspace:*"
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/ngw-connector-search-resources@workspace:packages/ngw-connector/examples/search-resources":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/ngw-connector-search-resources@workspace:packages/ngw-connector/examples/search-resources"
+  dependencies:
+    "@nextgis/ngw-connector": "workspace:*"
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/ngw-kit-add-feature-attachment@workspace:packages/ngw-kit/examples/add-feature-attachment":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/ngw-kit-add-feature-attachment@workspace:packages/ngw-kit/examples/add-feature-attachment"
+  dependencies:
+    "@nextgis/ngw-connector": "workspace:*"
+    "@nextgis/ngw-kit": "workspace:*"
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/ngw-kit-featch-ngw-layer-items@workspace:packages/ngw-kit/examples/featch-ngw-layer-items":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/ngw-kit-featch-ngw-layer-items@workspace:packages/ngw-kit/examples/featch-ngw-layer-items"
+  dependencies:
+    "@nextgis/ngw-connector": "workspace:*"
+    "@nextgis/ngw-kit": "workspace:*"
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/ngw-kit-select-ngw-layer-distinct@workspace:packages/ngw-kit/examples/select-ngw-layer-distinct":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/ngw-kit-select-ngw-layer-distinct@workspace:packages/ngw-kit/examples/select-ngw-layer-distinct"
+  dependencies:
+    "@nextgis/ngw-connector": "workspace:*"
+    "@nextgis/ngw-kit": "workspace:*"
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/ngw-leaflet-leaflet-geoman@workspace:packages/ngw-leaflet/examples/leaflet-geoman":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/ngw-leaflet-leaflet-geoman@workspace:packages/ngw-leaflet/examples/leaflet-geoman"
+  dependencies:
+    "@geoman-io/leaflet-geoman-free": ^2.20.0
+    "@nextgis/ngw-leaflet": "workspace:*"
+    leaflet: 1.7.1
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/ngw-maplibre-gl-geojson-paint-cb@workspace:packages/ngw-maplibre-gl/examples/geojson-paint-cb":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/ngw-maplibre-gl-geojson-paint-cb@workspace:packages/ngw-maplibre-gl/examples/geojson-paint-cb"
+  dependencies:
+    "@nextgis/ngw-maplibre-gl": "workspace:*"
+    "@types/geojson": ^7946.0.16
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/ngw-maplibre-gl-nextgis-map-vector@workspace:packages/ngw-maplibre-gl/examples/nextgis-map-vector":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/ngw-maplibre-gl-nextgis-map-vector@workspace:packages/ngw-maplibre-gl/examples/nextgis-map-vector"
+  dependencies:
+    "@nextgis/ngw-maplibre-gl": "workspace:*"
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/ngw-maplibre-gl-ngw-mvt-match-paint@workspace:packages/ngw-maplibre-gl/examples/ngw-mvt-match-paint":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/ngw-maplibre-gl-ngw-mvt-match-paint@workspace:packages/ngw-maplibre-gl/examples/ngw-mvt-match-paint"
+  dependencies:
+    "@nextgis/ngw-maplibre-gl": "workspace:*"
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/ngw-maplibre-gl-ngw-mvt-native-paint@workspace:packages/ngw-maplibre-gl/examples/ngw-mvt-native-paint":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/ngw-maplibre-gl-ngw-mvt-native-paint@workspace:packages/ngw-maplibre-gl/examples/ngw-mvt-native-paint"
+  dependencies:
+    "@nextgis/ngw-maplibre-gl": "workspace:*"
+    "@nextgis/webmap": "workspace:*"
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/ngw-maplibre-gl-ngw-mvt@workspace:packages/ngw-maplibre-gl/examples/ngw-mvt":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/ngw-maplibre-gl-ngw-mvt@workspace:packages/ngw-maplibre-gl/examples/ngw-mvt"
+  dependencies:
+    "@nextgis/ngw-maplibre-gl": "workspace:*"
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/ngw-maplibre-gl-pin-paint@workspace:packages/ngw-maplibre-gl/examples/pin-paint":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/ngw-maplibre-gl-pin-paint@workspace:packages/ngw-maplibre-gl/examples/pin-paint"
+  dependencies:
+    "@nextgis/ngw-maplibre-gl": "workspace:*"
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/ngw-ol-ngw-cog-layer@workspace:packages/ngw-ol/examples/ngw-cog-layer":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/ngw-ol-ngw-cog-layer@workspace:packages/ngw-ol/examples/ngw-cog-layer"
+  dependencies:
+    "@nextgis/ngw-ol": "workspace:*"
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/ngw-ol-ngw-srs-layer@workspace:packages/ngw-ol/examples/ngw-srs-layer":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/ngw-ol-ngw-srs-layer@workspace:packages/ngw-ol/examples/ngw-srs-layer"
+  dependencies:
+    "@nextgis/ngw-ol": "workspace:*"
+    "@types/geojson": ^7946.0.16
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/ngw-ol-on-first-show-adapter-layer-control@workspace:packages/ngw-ol/examples/on-first-show-adapter-layer-control":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/ngw-ol-on-first-show-adapter-layer-control@workspace:packages/ngw-ol/examples/on-first-show-adapter-layer-control"
+  dependencies:
+    "@nextgis/ngw-ol": "workspace:*"
+    "@nextgis/webmap": "workspace:*"
+    ol: ^10.10.0
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/ngw-ol-toggle-control-legacy@workspace:packages/ngw-ol/examples/toggle control":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/ngw-ol-toggle-control-legacy@workspace:packages/ngw-ol/examples/toggle control"
+  dependencies:
+    "@nextgis/ngw-ol": "workspace:*"
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/ngw-ol-vector-native-options@workspace:packages/ngw-ol/examples/vector-native-options":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/ngw-ol-vector-native-options@workspace:packages/ngw-ol/examples/vector-native-options"
+  dependencies:
+    "@nextgis/ngw-ol": "workspace:*"
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/ngw-uploader-custom_input@workspace:packages/ngw-uploader/examples/custom_input":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/ngw-uploader-custom_input@workspace:packages/ngw-uploader/examples/custom_input"
+  dependencies:
+    "@nextgis/ngw-leaflet": "workspace:*"
+    "@nextgis/ngw-uploader": "workspace:*"
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/ngw-uploader-input-create_wms@workspace:packages/ngw-uploader-input/examples/create_wms":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/ngw-uploader-input-create_wms@workspace:packages/ngw-uploader-input/examples/create_wms"
+  dependencies:
+    "@nextgis/ngw-uploader-input": "workspace:*"
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/ngw-uploader-input-make_auth@workspace:packages/ngw-uploader-input/examples/make_auth":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/ngw-uploader-input-make_auth@workspace:packages/ngw-uploader-input/examples/make_auth"
+  dependencies:
+    "@nextgis/ngw-uploader-input": "workspace:*"
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/ngw-uploader-input-make_auth_dialog@workspace:packages/ngw-uploader-input/examples/make_auth_dialog":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/ngw-uploader-input-make_auth_dialog@workspace:packages/ngw-uploader-input/examples/make_auth_dialog"
+  dependencies:
+    "@nextgis/ngw-uploader-input": "workspace:*"
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/ngw-uploader-input-simple_input@workspace:packages/ngw-uploader-input/examples/simple_input":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/ngw-uploader-input-simple_input@workspace:packages/ngw-uploader-input/examples/simple_input"
+  dependencies:
+    "@nextgis/ngw-uploader-input": "workspace:*"
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/ngw-uploader-proxy-wms-2@workspace:packages/ngw-uploader/examples/proxy-wms-2":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/ngw-uploader-proxy-wms-2@workspace:packages/ngw-uploader/examples/proxy-wms-2"
+  dependencies:
+    "@nextgis/ngw-uploader": "workspace:*"
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/ngw-uploader-proxy-wms@workspace:packages/ngw-uploader/examples/proxy-wms":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/ngw-uploader-proxy-wms@workspace:packages/ngw-uploader/examples/proxy-wms"
+  dependencies:
+    "@nextgis/ngw-connector": "workspace:*"
+    "@nextgis/ngw-uploader": "workspace:*"
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/qms-kit-create-adapter@workspace:packages/qms-kit/examples/create-adapter":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/qms-kit-create-adapter@workspace:packages/qms-kit/examples/create-adapter"
+  dependencies:
+    "@nextgis/leaflet-map-adapter": "workspace:*"
+    "@nextgis/qms-kit": "workspace:*"
+    "@nextgis/webmap": "workspace:*"
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/qms-kit-webmap-starter-kit@workspace:packages/qms-kit/examples/webmap-starter-kit":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/qms-kit-webmap-starter-kit@workspace:packages/qms-kit/examples/webmap-starter-kit"
+  dependencies:
+    "@nextgis/leaflet-map-adapter": "workspace:*"
+    "@nextgis/qms-kit": "workspace:*"
+    "@nextgis/webmap": "workspace:*"
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/qms-leaflet-fit-service@workspace:packages/qms-leaflet/examples/fit-service":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/qms-leaflet-fit-service@workspace:packages/qms-leaflet/examples/fit-service"
+  dependencies:
+    "@nextgis/qms-leaflet": "workspace:*"
+    leaflet: 1.7.1
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/qms-leaflet-qms-services@workspace:packages/qms-leaflet/examples/qms-services":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/qms-leaflet-qms-services@workspace:packages/qms-leaflet/examples/qms-services"
+  dependencies:
+    "@nextgis/qms-leaflet": "workspace:*"
+    leaflet: 1.7.1
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/qms-leaflet-search-control@workspace:packages/qms-leaflet/examples/search-control":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/qms-leaflet-search-control@workspace:packages/qms-leaflet/examples/search-control"
+  dependencies:
+    "@nextgis/qms-leaflet": "workspace:*"
+    leaflet: 1.7.1
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/qms-maplibre-gl-fit-service@workspace:packages/qms-maplibre-gl/examples/fit-service":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/qms-maplibre-gl-fit-service@workspace:packages/qms-maplibre-gl/examples/fit-service"
+  dependencies:
+    "@nextgis/qms-maplibre-gl": "workspace:*"
+    maplibre-gl: ^6.5.0
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/qms-maplibre-gl-qms-services@workspace:packages/qms-maplibre-gl/examples/qms-services":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/qms-maplibre-gl-qms-services@workspace:packages/qms-maplibre-gl/examples/qms-services"
+  dependencies:
+    "@nextgis/qms-maplibre-gl": "workspace:*"
+    maplibre-gl: ^6.5.0
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/qms-maplibre-gl-search-control@workspace:packages/qms-maplibre-gl/examples/search-control":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/qms-maplibre-gl-search-control@workspace:packages/qms-maplibre-gl/examples/search-control"
+  dependencies:
+    "@nextgis/qms-maplibre-gl": "workspace:*"
+    maplibre-gl: ^6.5.0
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/qms-ol-fit-service@workspace:packages/qms-ol/examples/fit-service":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/qms-ol-fit-service@workspace:packages/qms-ol/examples/fit-service"
+  dependencies:
+    "@nextgis/qms-ol": "workspace:*"
+    ol: ^10.10.0
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/qms-ol-qms-services@workspace:packages/qms-ol/examples/qms-services":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/qms-ol-qms-services@workspace:packages/qms-ol/examples/qms-services"
+  dependencies:
+    "@nextgis/qms-ol": "workspace:*"
+    ol: ^10.10.0
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/qms-ol-search-control@workspace:packages/qms-ol/examples/search-control":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/qms-ol-search-control@workspace:packages/qms-ol/examples/search-control"
+  dependencies:
+    "@nextgis/qms-ol": "workspace:*"
+    ol: ^10.10.0
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/utils-clipboard-esm@workspace:packages/utils/examples/clipboard-esm":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/utils-clipboard-esm@workspace:packages/utils/examples/clipboard-esm"
+  dependencies:
+    "@nextgis/utils": "workspace:*"
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/utils-clipboard@workspace:packages/utils/examples/clipboard":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/utils-clipboard@workspace:packages/utils/examples/clipboard"
+  dependencies:
+    "@nextgis/utils": "workspace:*"
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
+"@nextgis-example/webmap-basic_initialization@workspace:packages/webmap/examples/basic_initialization":
+  version: 0.0.0-use.local
+  resolution: "@nextgis-example/webmap-basic_initialization@workspace:packages/webmap/examples/basic_initialization"
+  dependencies:
+    "@nextgis/leaflet-map-adapter": "workspace:*"
+    "@nextgis/qms-kit": "workspace:*"
+    "@nextgis/webmap": "workspace:*"
+    vite: ^6.3.5
+  languageName: unknown
+  linkType: soft
+
 "@nextgis/area@workspace:packages/area":
   version: 0.0.0-use.local
   resolution: "@nextgis/area@workspace:packages/area"
@@ -885,7 +1541,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/geocoder@workspace:packages/geocoder":
+"@nextgis/geocoder@workspace:*, @nextgis/geocoder@workspace:packages/geocoder":
   version: 0.0.0-use.local
   resolution: "@nextgis/geocoder@workspace:packages/geocoder"
   dependencies:
@@ -900,7 +1556,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/icons@4.0.0-rc.0, @nextgis/icons@workspace:packages/icons":
+"@nextgis/icons@4.0.0-rc.0, @nextgis/icons@workspace:*, @nextgis/icons@workspace:packages/icons":
   version: 0.0.0-use.local
   resolution: "@nextgis/icons@workspace:packages/icons"
   dependencies:
@@ -917,6 +1573,7 @@ __metadata:
     "@nextgis/tree": 4.0.0-rc.0
     "@types/events": ^3.0.0
     events: "*"
+    strict-event-emitter-types: ^2.0.0
   languageName: unknown
   linkType: soft
 
@@ -933,7 +1590,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/leaflet-map-adapter@4.0.0-rc.0, @nextgis/leaflet-map-adapter@workspace:packages/leaflet-map-adapter":
+"@nextgis/leaflet-map-adapter@4.0.0-rc.0, @nextgis/leaflet-map-adapter@workspace:*, @nextgis/leaflet-map-adapter@workspace:packages/leaflet-map-adapter":
   version: 0.0.0-use.local
   resolution: "@nextgis/leaflet-map-adapter@workspace:packages/leaflet-map-adapter"
   dependencies:
@@ -1008,7 +1665,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/ngw-connector@4.0.0-rc.0, @nextgis/ngw-connector@workspace:packages/ngw-connector":
+"@nextgis/ngw-connector@4.0.0-rc.0, @nextgis/ngw-connector@workspace:*, @nextgis/ngw-connector@workspace:packages/ngw-connector":
   version: 0.0.0-use.local
   resolution: "@nextgis/ngw-connector@workspace:packages/ngw-connector"
   dependencies:
@@ -1022,7 +1679,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/ngw-kit@4.0.0-rc.0, @nextgis/ngw-kit@workspace:packages/ngw-kit":
+"@nextgis/ngw-kit@4.0.0-rc.0, @nextgis/ngw-kit@workspace:*, @nextgis/ngw-kit@workspace:packages/ngw-kit":
   version: 0.0.0-use.local
   resolution: "@nextgis/ngw-kit@workspace:packages/ngw-kit"
   dependencies:
@@ -1040,7 +1697,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/ngw-leaflet@workspace:packages/ngw-leaflet":
+"@nextgis/ngw-leaflet@workspace:*, @nextgis/ngw-leaflet@workspace:packages/ngw-leaflet":
   version: 0.0.0-use.local
   resolution: "@nextgis/ngw-leaflet@workspace:packages/ngw-leaflet"
   dependencies:
@@ -1068,7 +1725,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/ngw-maplibre-gl@workspace:packages/ngw-maplibre-gl":
+"@nextgis/ngw-maplibre-gl@workspace:*, @nextgis/ngw-maplibre-gl@workspace:packages/ngw-maplibre-gl":
   version: 0.0.0-use.local
   resolution: "@nextgis/ngw-maplibre-gl@workspace:packages/ngw-maplibre-gl"
   dependencies:
@@ -1078,7 +1735,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/ngw-ol@workspace:packages/ngw-ol":
+"@nextgis/ngw-ol@workspace:*, @nextgis/ngw-ol@workspace:packages/ngw-ol":
   version: 0.0.0-use.local
   resolution: "@nextgis/ngw-ol@workspace:packages/ngw-ol"
   dependencies:
@@ -1115,7 +1772,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/ngw-uploader-input@workspace:packages/ngw-uploader-input":
+"@nextgis/ngw-uploader-input@workspace:*, @nextgis/ngw-uploader-input@workspace:packages/ngw-uploader-input":
   version: 0.0.0-use.local
   resolution: "@nextgis/ngw-uploader-input@workspace:packages/ngw-uploader-input"
   dependencies:
@@ -1128,7 +1785,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/ngw-uploader@4.0.0-rc.0, @nextgis/ngw-uploader@workspace:packages/ngw-uploader":
+"@nextgis/ngw-uploader@4.0.0-rc.0, @nextgis/ngw-uploader@workspace:*, @nextgis/ngw-uploader@workspace:packages/ngw-uploader":
   version: 0.0.0-use.local
   resolution: "@nextgis/ngw-uploader@workspace:packages/ngw-uploader"
   dependencies:
@@ -1221,7 +1878,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/qms-kit@4.0.0-rc.0, @nextgis/qms-kit@workspace:packages/qms-kit":
+"@nextgis/qms-kit@4.0.0-rc.0, @nextgis/qms-kit@workspace:*, @nextgis/qms-kit@workspace:packages/qms-kit":
   version: 0.0.0-use.local
   resolution: "@nextgis/qms-kit@workspace:packages/qms-kit"
   dependencies:
@@ -1232,7 +1889,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/qms-leaflet@workspace:packages/qms-leaflet":
+"@nextgis/qms-leaflet@workspace:*, @nextgis/qms-leaflet@workspace:packages/qms-leaflet":
   version: 0.0.0-use.local
   resolution: "@nextgis/qms-leaflet@workspace:packages/qms-leaflet"
   dependencies:
@@ -1245,7 +1902,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/qms-maplibre-gl@workspace:packages/qms-maplibre-gl":
+"@nextgis/qms-maplibre-gl@workspace:*, @nextgis/qms-maplibre-gl@workspace:packages/qms-maplibre-gl":
   version: 0.0.0-use.local
   resolution: "@nextgis/qms-maplibre-gl@workspace:packages/qms-maplibre-gl"
   dependencies:
@@ -1257,7 +1914,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/qms-ol@workspace:packages/qms-ol":
+"@nextgis/qms-ol@workspace:*, @nextgis/qms-ol@workspace:packages/qms-ol":
   version: 0.0.0-use.local
   resolution: "@nextgis/qms-ol@workspace:packages/qms-ol"
   dependencies:
@@ -1284,6 +1941,9 @@ __metadata:
     "@nextgis/build-tools": 4.0.0-rc.0
     "@nextgis/leaflet-map-adapter": 4.0.0-rc.0
     "@nextgis/react-ngw-map": 4.0.0-rc.0
+  peerDependencies:
+    react: "*"
+    react-dom: "*"
   languageName: unknown
   linkType: soft
 
@@ -1309,6 +1969,9 @@ __metadata:
     "@nextgis/build-tools": 4.0.0-rc.0
     "@nextgis/maplibre-gl-map-adapter": 4.0.0-rc.0
     "@nextgis/react-ngw-map": 4.0.0-rc.0
+  peerDependencies:
+    react: "*"
+    react-dom: "*"
   languageName: unknown
   linkType: soft
 
@@ -1319,6 +1982,9 @@ __metadata:
     "@nextgis/build-tools": 4.0.0-rc.0
     "@nextgis/ol-map-adapter": 4.0.0-rc.0
     "@nextgis/react-ngw-map": 4.0.0-rc.0
+  peerDependencies:
+    react: "*"
+    react-dom: "*"
   languageName: unknown
   linkType: soft
 
@@ -1341,7 +2007,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/utils@4.0.0-rc.0, @nextgis/utils@workspace:packages/utils":
+"@nextgis/utils@4.0.0-rc.0, @nextgis/utils@workspace:*, @nextgis/utils@workspace:packages/utils":
   version: 0.0.0-use.local
   resolution: "@nextgis/utils@workspace:packages/utils"
   dependencies:
@@ -1350,7 +2016,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@nextgis/webmap@4.0.0-rc.0, @nextgis/webmap@workspace:packages/webmap":
+"@nextgis/webmap@4.0.0-rc.0, @nextgis/webmap@workspace:*, @nextgis/webmap@workspace:packages/webmap":
   version: 0.0.0-use.local
   resolution: "@nextgis/webmap@workspace:packages/webmap"
   dependencies:
@@ -2041,9 +2707,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rollup/rollup-android-arm-eabi@npm:4.63.0":
+  version: 4.63.0
+  resolution: "@rollup/rollup-android-arm-eabi@npm:4.63.0"
+  conditions: os=android & cpu=arm
+  languageName: node
+  linkType: hard
+
 "@rollup/rollup-android-arm64@npm:4.62.5":
   version: 4.62.5
   resolution: "@rollup/rollup-android-arm64@npm:4.62.5"
+  conditions: os=android & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@rollup/rollup-android-arm64@npm:4.63.0":
+  version: 4.63.0
+  resolution: "@rollup/rollup-android-arm64@npm:4.63.0"
   conditions: os=android & cpu=arm64
   languageName: node
   linkType: hard
@@ -2055,9 +2735,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rollup/rollup-darwin-arm64@npm:4.63.0":
+  version: 4.63.0
+  resolution: "@rollup/rollup-darwin-arm64@npm:4.63.0"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
 "@rollup/rollup-darwin-x64@npm:4.62.5":
   version: 4.62.5
   resolution: "@rollup/rollup-darwin-x64@npm:4.62.5"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@rollup/rollup-darwin-x64@npm:4.63.0":
+  version: 4.63.0
+  resolution: "@rollup/rollup-darwin-x64@npm:4.63.0"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
@@ -2069,9 +2763,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rollup/rollup-freebsd-arm64@npm:4.63.0":
+  version: 4.63.0
+  resolution: "@rollup/rollup-freebsd-arm64@npm:4.63.0"
+  conditions: os=freebsd & cpu=arm64
+  languageName: node
+  linkType: hard
+
 "@rollup/rollup-freebsd-x64@npm:4.62.5":
   version: 4.62.5
   resolution: "@rollup/rollup-freebsd-x64@npm:4.62.5"
+  conditions: os=freebsd & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@rollup/rollup-freebsd-x64@npm:4.63.0":
+  version: 4.63.0
+  resolution: "@rollup/rollup-freebsd-x64@npm:4.63.0"
   conditions: os=freebsd & cpu=x64
   languageName: node
   linkType: hard
@@ -2083,9 +2791,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rollup/rollup-linux-arm-gnueabihf@npm:4.63.0":
+  version: 4.63.0
+  resolution: "@rollup/rollup-linux-arm-gnueabihf@npm:4.63.0"
+  conditions: os=linux & cpu=arm & libc=glibc
+  languageName: node
+  linkType: hard
+
 "@rollup/rollup-linux-arm-musleabihf@npm:4.62.5":
   version: 4.62.5
   resolution: "@rollup/rollup-linux-arm-musleabihf@npm:4.62.5"
+  conditions: os=linux & cpu=arm & libc=musl
+  languageName: node
+  linkType: hard
+
+"@rollup/rollup-linux-arm-musleabihf@npm:4.63.0":
+  version: 4.63.0
+  resolution: "@rollup/rollup-linux-arm-musleabihf@npm:4.63.0"
   conditions: os=linux & cpu=arm & libc=musl
   languageName: node
   linkType: hard
@@ -2097,9 +2819,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rollup/rollup-linux-arm64-gnu@npm:4.63.0":
+  version: 4.63.0
+  resolution: "@rollup/rollup-linux-arm64-gnu@npm:4.63.0"
+  conditions: os=linux & cpu=arm64 & libc=glibc
+  languageName: node
+  linkType: hard
+
 "@rollup/rollup-linux-arm64-musl@npm:4.62.5":
   version: 4.62.5
   resolution: "@rollup/rollup-linux-arm64-musl@npm:4.62.5"
+  conditions: os=linux & cpu=arm64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@rollup/rollup-linux-arm64-musl@npm:4.63.0":
+  version: 4.63.0
+  resolution: "@rollup/rollup-linux-arm64-musl@npm:4.63.0"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
@@ -2111,9 +2847,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rollup/rollup-linux-loong64-gnu@npm:4.63.0":
+  version: 4.63.0
+  resolution: "@rollup/rollup-linux-loong64-gnu@npm:4.63.0"
+  conditions: os=linux & cpu=loong64 & libc=glibc
+  languageName: node
+  linkType: hard
+
 "@rollup/rollup-linux-loong64-musl@npm:4.62.5":
   version: 4.62.5
   resolution: "@rollup/rollup-linux-loong64-musl@npm:4.62.5"
+  conditions: os=linux & cpu=loong64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@rollup/rollup-linux-loong64-musl@npm:4.63.0":
+  version: 4.63.0
+  resolution: "@rollup/rollup-linux-loong64-musl@npm:4.63.0"
   conditions: os=linux & cpu=loong64 & libc=musl
   languageName: node
   linkType: hard
@@ -2125,9 +2875,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rollup/rollup-linux-ppc64-gnu@npm:4.63.0":
+  version: 4.63.0
+  resolution: "@rollup/rollup-linux-ppc64-gnu@npm:4.63.0"
+  conditions: os=linux & cpu=ppc64 & libc=glibc
+  languageName: node
+  linkType: hard
+
 "@rollup/rollup-linux-ppc64-musl@npm:4.62.5":
   version: 4.62.5
   resolution: "@rollup/rollup-linux-ppc64-musl@npm:4.62.5"
+  conditions: os=linux & cpu=ppc64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@rollup/rollup-linux-ppc64-musl@npm:4.63.0":
+  version: 4.63.0
+  resolution: "@rollup/rollup-linux-ppc64-musl@npm:4.63.0"
   conditions: os=linux & cpu=ppc64 & libc=musl
   languageName: node
   linkType: hard
@@ -2139,9 +2903,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rollup/rollup-linux-riscv64-gnu@npm:4.63.0":
+  version: 4.63.0
+  resolution: "@rollup/rollup-linux-riscv64-gnu@npm:4.63.0"
+  conditions: os=linux & cpu=riscv64 & libc=glibc
+  languageName: node
+  linkType: hard
+
 "@rollup/rollup-linux-riscv64-musl@npm:4.62.5":
   version: 4.62.5
   resolution: "@rollup/rollup-linux-riscv64-musl@npm:4.62.5"
+  conditions: os=linux & cpu=riscv64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@rollup/rollup-linux-riscv64-musl@npm:4.63.0":
+  version: 4.63.0
+  resolution: "@rollup/rollup-linux-riscv64-musl@npm:4.63.0"
   conditions: os=linux & cpu=riscv64 & libc=musl
   languageName: node
   linkType: hard
@@ -2153,9 +2931,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rollup/rollup-linux-s390x-gnu@npm:4.63.0":
+  version: 4.63.0
+  resolution: "@rollup/rollup-linux-s390x-gnu@npm:4.63.0"
+  conditions: os=linux & cpu=s390x & libc=glibc
+  languageName: node
+  linkType: hard
+
 "@rollup/rollup-linux-x64-gnu@npm:4.62.5":
   version: 4.62.5
   resolution: "@rollup/rollup-linux-x64-gnu@npm:4.62.5"
+  conditions: os=linux & cpu=x64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@rollup/rollup-linux-x64-gnu@npm:4.63.0":
+  version: 4.63.0
+  resolution: "@rollup/rollup-linux-x64-gnu@npm:4.63.0"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
@@ -2167,9 +2959,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rollup/rollup-linux-x64-musl@npm:4.63.0":
+  version: 4.63.0
+  resolution: "@rollup/rollup-linux-x64-musl@npm:4.63.0"
+  conditions: os=linux & cpu=x64 & libc=musl
+  languageName: node
+  linkType: hard
+
 "@rollup/rollup-openbsd-x64@npm:4.62.5":
   version: 4.62.5
   resolution: "@rollup/rollup-openbsd-x64@npm:4.62.5"
+  conditions: os=openbsd & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@rollup/rollup-openbsd-x64@npm:4.63.0":
+  version: 4.63.0
+  resolution: "@rollup/rollup-openbsd-x64@npm:4.63.0"
   conditions: os=openbsd & cpu=x64
   languageName: node
   linkType: hard
@@ -2181,9 +2987,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rollup/rollup-openharmony-arm64@npm:4.63.0":
+  version: 4.63.0
+  resolution: "@rollup/rollup-openharmony-arm64@npm:4.63.0"
+  conditions: os=openharmony & cpu=arm64
+  languageName: node
+  linkType: hard
+
 "@rollup/rollup-win32-arm64-msvc@npm:4.62.5":
   version: 4.62.5
   resolution: "@rollup/rollup-win32-arm64-msvc@npm:4.62.5"
+  conditions: os=win32 & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@rollup/rollup-win32-arm64-msvc@npm:4.63.0":
+  version: 4.63.0
+  resolution: "@rollup/rollup-win32-arm64-msvc@npm:4.63.0"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
@@ -2195,6 +3015,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rollup/rollup-win32-ia32-msvc@npm:4.63.0":
+  version: 4.63.0
+  resolution: "@rollup/rollup-win32-ia32-msvc@npm:4.63.0"
+  conditions: os=win32 & cpu=ia32
+  languageName: node
+  linkType: hard
+
 "@rollup/rollup-win32-x64-gnu@npm:4.62.5":
   version: 4.62.5
   resolution: "@rollup/rollup-win32-x64-gnu@npm:4.62.5"
@@ -2202,9 +3029,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rollup/rollup-win32-x64-gnu@npm:4.63.0":
+  version: 4.63.0
+  resolution: "@rollup/rollup-win32-x64-gnu@npm:4.63.0"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
 "@rollup/rollup-win32-x64-msvc@npm:4.62.5":
   version: 4.62.5
   resolution: "@rollup/rollup-win32-x64-msvc@npm:4.62.5"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@rollup/rollup-win32-x64-msvc@npm:4.63.0":
+  version: 4.63.0
+  resolution: "@rollup/rollup-win32-x64-msvc@npm:4.63.0"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
@@ -2312,6 +3153,199 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@turf/bbox@npm:7.4.0":
+  version: 7.4.0
+  resolution: "@turf/bbox@npm:7.4.0"
+  dependencies:
+    "@turf/helpers": 7.4.0
+    "@turf/meta": 7.4.0
+    "@types/geojson": ^7946.0.10
+    tslib: ^2.8.1
+  checksum: 0fc589386fb247e647568607c553e9e30ae03ba862c261c183c2bdda5ecb4517df38dc3aae3868149061e9494d9da091520adc705d24f3ecf8b58d86937c510a
+  languageName: node
+  linkType: hard
+
+"@turf/boolean-contains@npm:^7.3.5":
+  version: 7.4.0
+  resolution: "@turf/boolean-contains@npm:7.4.0"
+  dependencies:
+    "@turf/bbox": 7.4.0
+    "@turf/boolean-point-in-polygon": 7.4.0
+    "@turf/boolean-point-on-line": 7.4.0
+    "@turf/helpers": 7.4.0
+    "@turf/invariant": 7.4.0
+    "@turf/line-split": 7.4.0
+    "@types/geojson": ^7946.0.10
+    tslib: ^2.8.1
+  checksum: f1f0ae4d6f6a5b10c9a9e140f9ae27d540fc72cf241ecb3f6f1fef28f8b18fd2e47b312a04112feab8df57cf1c89ae40f97791470025bf481b0ed6ef6777e6c5
+  languageName: node
+  linkType: hard
+
+"@turf/boolean-point-in-polygon@npm:7.4.0":
+  version: 7.4.0
+  resolution: "@turf/boolean-point-in-polygon@npm:7.4.0"
+  dependencies:
+    "@turf/helpers": 7.4.0
+    "@turf/invariant": 7.4.0
+    "@types/geojson": ^7946.0.10
+    point-in-polygon-hao: ^1.1.0
+    tslib: ^2.8.1
+  checksum: 59d65ac87350eeb0f73b54e0bf4748c72deec03e3694f0e5e2d0a8a56a0dfc8005f84c75fa3776c196a9748d41b0f1d70d54726750ca7d5b80e5b8e301ca3728
+  languageName: node
+  linkType: hard
+
+"@turf/boolean-point-on-line@npm:7.4.0":
+  version: 7.4.0
+  resolution: "@turf/boolean-point-on-line@npm:7.4.0"
+  dependencies:
+    "@turf/helpers": 7.4.0
+    "@turf/invariant": 7.4.0
+    "@types/geojson": ^7946.0.10
+    tslib: ^2.8.1
+  checksum: 5bc34c9b4d03d4ab35ab5c9709191f350f14dc1c55a479bec03b06b6a864336a95a6dca03e81b213622aeab75800b99461838bfbcfad5b0468dc2ddfed09b490
+  languageName: node
+  linkType: hard
+
+"@turf/distance@npm:7.4.0":
+  version: 7.4.0
+  resolution: "@turf/distance@npm:7.4.0"
+  dependencies:
+    "@turf/helpers": 7.4.0
+    "@turf/invariant": 7.4.0
+    "@types/geojson": ^7946.0.10
+    tslib: ^2.8.1
+  checksum: f4e3aae40eecf524f8745a3b101a230ad6a04ca21bd2d828ca443f75538613e326e1e3393ab9e39f23b7785b3f91af249a6803a125fabdf276d3450490d066ce
+  languageName: node
+  linkType: hard
+
+"@turf/geojson-rbush@npm:7.4.0":
+  version: 7.4.0
+  resolution: "@turf/geojson-rbush@npm:7.4.0"
+  dependencies:
+    "@turf/bbox": 7.4.0
+    "@turf/helpers": 7.4.0
+    "@turf/meta": 7.4.0
+    "@types/geojson": ^7946.0.10
+    rbush: ^3.0.1
+    tslib: ^2.8.1
+  checksum: 4a44dadedcf1cbfb053a023044f9a5176d083185a1fd2ef654eddc877c246c57e148ed6bfb3d933763358e3b7cb2292364ac2d20fba0c9ab895ba3d988ac2b79
+  languageName: node
+  linkType: hard
+
+"@turf/helpers@npm:7.4.0":
+  version: 7.4.0
+  resolution: "@turf/helpers@npm:7.4.0"
+  dependencies:
+    "@types/geojson": ^7946.0.10
+    tslib: ^2.8.1
+  checksum: 2b54ff49baf53df4ab669a876782e0fe812d8aa96309d138a08252bf6bf73aa777b41abb1bd1af65d276b4146966605ea66548057a8277fc34d4678a7a76eced
+  languageName: node
+  linkType: hard
+
+"@turf/invariant@npm:7.4.0":
+  version: 7.4.0
+  resolution: "@turf/invariant@npm:7.4.0"
+  dependencies:
+    "@turf/helpers": 7.4.0
+    "@types/geojson": ^7946.0.10
+    tslib: ^2.8.1
+  checksum: e77fb722dc89aaafa04974f705e0b69e00245ee9c06a114c3d821890afa22d36483c3387153547d37680cb55aa74dd7ced4457737135ff5859408d895417783d
+  languageName: node
+  linkType: hard
+
+"@turf/kinks@npm:^7.3.5":
+  version: 7.4.0
+  resolution: "@turf/kinks@npm:7.4.0"
+  dependencies:
+    "@turf/helpers": 7.4.0
+    "@types/geojson": ^7946.0.10
+    tslib: ^2.8.1
+  checksum: ebcdaea509b719c3b2504478082f900f84810514a09f7c1e0deb5c8edbd8d55cdd25983f2b2aa94aeeb93c304e24cc2daa656e2f73e7ba5a46bc0ca1eda3a1ad
+  languageName: node
+  linkType: hard
+
+"@turf/line-intersect@npm:7.4.0, @turf/line-intersect@npm:^7.3.5":
+  version: 7.4.0
+  resolution: "@turf/line-intersect@npm:7.4.0"
+  dependencies:
+    "@turf/helpers": 7.4.0
+    "@types/geojson": ^7946.0.10
+    robust-predicates: ^2.0.4
+    tinyqueue: ^2.0.3
+    tslib: ^2.8.1
+  checksum: b97dd4eb53606a106ff85fb0dbaf73c5a7e2fae64230047a823c11575e5a8ffdb7440e6c5ea41aa744a225374e4f83e81817848137fa515daf77853b71786227
+  languageName: node
+  linkType: hard
+
+"@turf/line-segment@npm:7.4.0":
+  version: 7.4.0
+  resolution: "@turf/line-segment@npm:7.4.0"
+  dependencies:
+    "@turf/helpers": 7.4.0
+    "@turf/invariant": 7.4.0
+    "@turf/meta": 7.4.0
+    "@types/geojson": ^7946.0.10
+    tslib: ^2.8.1
+  checksum: 09899cf4bbac197cd345fb4d44d05712d9d535e2142483b2781700fbc578d71accdeae3e61b1cf01475cddf2ea96dbbe456202a5e49eed3ce44902677d56ce76
+  languageName: node
+  linkType: hard
+
+"@turf/line-split@npm:7.4.0, @turf/line-split@npm:^7.3.5":
+  version: 7.4.0
+  resolution: "@turf/line-split@npm:7.4.0"
+  dependencies:
+    "@turf/bbox": 7.4.0
+    "@turf/geojson-rbush": 7.4.0
+    "@turf/helpers": 7.4.0
+    "@turf/invariant": 7.4.0
+    "@turf/line-intersect": 7.4.0
+    "@turf/line-segment": 7.4.0
+    "@turf/meta": 7.4.0
+    "@turf/nearest-point-on-line": 7.4.0
+    "@turf/truncate": 7.4.0
+    "@types/geojson": ^7946.0.10
+    tslib: ^2.8.1
+  checksum: f3524058ad62702aaea4042558fb0c4856e77e5f44c0793a4375f9da6271b22dca656740992540314b26d9e1fdfcc1fa592ec870bc48666ff6d09cdbd509f276
+  languageName: node
+  linkType: hard
+
+"@turf/meta@npm:7.4.0":
+  version: 7.4.0
+  resolution: "@turf/meta@npm:7.4.0"
+  dependencies:
+    "@turf/helpers": 7.4.0
+    "@types/geojson": ^7946.0.10
+    tslib: ^2.8.1
+  checksum: c7df8ce3f848d333387b91e12b3fdc360eab8d79093e83b1c024bfbdc4b41286c8ba0441223a01761b0597731b46e2e1b2d696e63aab5fdca16254bb3d1e722f
+  languageName: node
+  linkType: hard
+
+"@turf/nearest-point-on-line@npm:7.4.0":
+  version: 7.4.0
+  resolution: "@turf/nearest-point-on-line@npm:7.4.0"
+  dependencies:
+    "@turf/distance": 7.4.0
+    "@turf/helpers": 7.4.0
+    "@turf/invariant": 7.4.0
+    "@turf/meta": 7.4.0
+    "@types/geojson": ^7946.0.10
+    tslib: ^2.8.1
+  checksum: 83cd61711902e3b754b0ad7dfbcbba29b008a7f791bde04b89608b33250a044ea8d46d6b0a3f828f56b12540d1c9705c5974bd04643f715b860b7395df5ecee1
+  languageName: node
+  linkType: hard
+
+"@turf/truncate@npm:7.4.0":
+  version: 7.4.0
+  resolution: "@turf/truncate@npm:7.4.0"
+  dependencies:
+    "@turf/helpers": 7.4.0
+    "@turf/meta": 7.4.0
+    "@types/geojson": ^7946.0.10
+    tslib: ^2.8.1
+  checksum: 1da3b34ccdea7ca58ef2172a6d180d6b2e07af3f6229febfa281c9d3d59ddf5115e1cc14466608e6d372c67b220fe3ed9e10caf29db6a51e4f229a5625832a0d
+  languageName: node
+  linkType: hard
+
 "@tweenjs/tween.js@npm:^25.0.0":
   version: 25.0.0
   resolution: "@tweenjs/tween.js@npm:25.0.0"
@@ -2381,7 +3415,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/geojson@npm:*, @types/geojson@npm:^7946.0.14, @types/geojson@npm:^7946.0.16":
+"@types/geojson@npm:*, @types/geojson@npm:^7946.0.10, @types/geojson@npm:^7946.0.14, @types/geojson@npm:^7946.0.16":
   version: 7946.0.16
   resolution: "@types/geojson@npm:7946.0.16"
   checksum: d66e5e023f43b3e7121448117af1930af7d06410a32a585a8bc9c6bb5d97e0d656cd93d99e31fa432976c32e98d4b780f82bf1fd1acd20ccf952eb6b8e39edf2
@@ -2981,6 +4015,13 @@ __metadata:
   version: 2.2.3
   resolution: "before-after-hook@npm:2.2.3"
   checksum: a1a2430976d9bdab4cd89cb50d27fa86b19e2b41812bf1315923b0cba03371ebca99449809226425dd3bcef20e010db61abdaff549278e111d6480034bebae87
+  languageName: node
+  linkType: hard
+
+"bignumber.js@npm:^9.1.0":
+  version: 9.3.1
+  resolution: "bignumber.js@npm:9.3.1"
+  checksum: 6ab100271a23a75bb8b99a4b1a34a1a94967ac0b9a52a198147607bd91064e72c6f356380d7a09cd687bf50d81ad2ed1a0a8edfaa90369c9003ed8bb2440d7f0
   languageName: node
   linkType: hard
 
@@ -4392,6 +5433,95 @@ __metadata:
   languageName: node
   linkType: hard
 
+"esbuild@npm:^0.25.0":
+  version: 0.25.12
+  resolution: "esbuild@npm:0.25.12"
+  dependencies:
+    "@esbuild/aix-ppc64": 0.25.12
+    "@esbuild/android-arm": 0.25.12
+    "@esbuild/android-arm64": 0.25.12
+    "@esbuild/android-x64": 0.25.12
+    "@esbuild/darwin-arm64": 0.25.12
+    "@esbuild/darwin-x64": 0.25.12
+    "@esbuild/freebsd-arm64": 0.25.12
+    "@esbuild/freebsd-x64": 0.25.12
+    "@esbuild/linux-arm": 0.25.12
+    "@esbuild/linux-arm64": 0.25.12
+    "@esbuild/linux-ia32": 0.25.12
+    "@esbuild/linux-loong64": 0.25.12
+    "@esbuild/linux-mips64el": 0.25.12
+    "@esbuild/linux-ppc64": 0.25.12
+    "@esbuild/linux-riscv64": 0.25.12
+    "@esbuild/linux-s390x": 0.25.12
+    "@esbuild/linux-x64": 0.25.12
+    "@esbuild/netbsd-arm64": 0.25.12
+    "@esbuild/netbsd-x64": 0.25.12
+    "@esbuild/openbsd-arm64": 0.25.12
+    "@esbuild/openbsd-x64": 0.25.12
+    "@esbuild/openharmony-arm64": 0.25.12
+    "@esbuild/sunos-x64": 0.25.12
+    "@esbuild/win32-arm64": 0.25.12
+    "@esbuild/win32-ia32": 0.25.12
+    "@esbuild/win32-x64": 0.25.12
+  dependenciesMeta:
+    "@esbuild/aix-ppc64":
+      optional: true
+    "@esbuild/android-arm":
+      optional: true
+    "@esbuild/android-arm64":
+      optional: true
+    "@esbuild/android-x64":
+      optional: true
+    "@esbuild/darwin-arm64":
+      optional: true
+    "@esbuild/darwin-x64":
+      optional: true
+    "@esbuild/freebsd-arm64":
+      optional: true
+    "@esbuild/freebsd-x64":
+      optional: true
+    "@esbuild/linux-arm":
+      optional: true
+    "@esbuild/linux-arm64":
+      optional: true
+    "@esbuild/linux-ia32":
+      optional: true
+    "@esbuild/linux-loong64":
+      optional: true
+    "@esbuild/linux-mips64el":
+      optional: true
+    "@esbuild/linux-ppc64":
+      optional: true
+    "@esbuild/linux-riscv64":
+      optional: true
+    "@esbuild/linux-s390x":
+      optional: true
+    "@esbuild/linux-x64":
+      optional: true
+    "@esbuild/netbsd-arm64":
+      optional: true
+    "@esbuild/netbsd-x64":
+      optional: true
+    "@esbuild/openbsd-arm64":
+      optional: true
+    "@esbuild/openbsd-x64":
+      optional: true
+    "@esbuild/openharmony-arm64":
+      optional: true
+    "@esbuild/sunos-x64":
+      optional: true
+    "@esbuild/win32-arm64":
+      optional: true
+    "@esbuild/win32-ia32":
+      optional: true
+    "@esbuild/win32-x64":
+      optional: true
+  bin:
+    esbuild: bin/esbuild
+  checksum: 3d1dc181338e2c44f4374508e9d0da3e7ae90f65d7f3f5d8076ff401a1726c5c9ecc86cfc825249349f1652e12d5ae13f02bcaa4d9487c88c7a11167f52ba353
+  languageName: node
+  linkType: hard
+
 "esbuild@npm:^0.28.2":
   version: 0.28.2
   resolution: "esbuild@npm:0.28.2"
@@ -5004,7 +6134,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fsevents@npm:~2.3.2":
+"fsevents@npm:~2.3.2, fsevents@npm:~2.3.3":
   version: 2.3.3
   resolution: "fsevents@npm:2.3.3"
   dependencies:
@@ -5014,7 +6144,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fsevents@patch:fsevents@~2.3.2#~builtin<compat/fsevents>":
+"fsevents@patch:fsevents@~2.3.2#~builtin<compat/fsevents>, fsevents@patch:fsevents@~2.3.3#~builtin<compat/fsevents>":
   version: 2.3.3
   resolution: "fsevents@patch:fsevents@npm%3A2.3.3#~builtin<compat/fsevents>::version=2.3.3&hash=df0bf1"
   dependencies:
@@ -6470,6 +7600,13 @@ __metadata:
     lodash._baseiteratee: ~4.7.0
     lodash._baseuniq: ~4.6.0
   checksum: 40a4fdd4c31323fcb6db91ec3124020333212ca1f13e75cc9939decdd33e8b176d204fb277be36a51a855c2c90e14d67932b3b130b2f0eedc729e4cb9cdcaed1
+  languageName: node
+  linkType: hard
+
+"lodash@npm:4.18.1":
+  version: 4.18.1
+  resolution: "lodash@npm:4.18.1"
+  checksum: bb5f5b49aad29614e709af02b64c56b0f8b78c6a81434a3c1ae527d2f0f78ca08f9d9fb22aa825a053876c9d2166e9c01f31c356014b5e2bdc0556c057433102
   languageName: node
   linkType: hard
 
@@ -7948,6 +9085,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"point-in-polygon-hao@npm:^1.1.0":
+  version: 1.2.4
+  resolution: "point-in-polygon-hao@npm:1.2.4"
+  dependencies:
+    robust-predicates: ^3.0.2
+  checksum: c010727ca2fb1b98b80f10ab597ad39a2a80f78a6b4ba80c7f5bb34962a5ec0c39098b16c71d0fe99530a196335e12bb92ec36d2c74ccc8a9d24e9fcb2a97847
+  languageName: node
+  linkType: hard
+
+"polyclip-ts@npm:^0.16.8":
+  version: 0.16.8
+  resolution: "polyclip-ts@npm:0.16.8"
+  dependencies:
+    bignumber.js: ^9.1.0
+    splaytree-ts: ^1.0.2
+  checksum: caee1ebd5dcbee3c489a95447cb9c65d5dbc8903dd368d6a3ac493b68dfe388994061336993217f6b81c085736b5f68e9ace7b5e65eca0e83afc22c5263745c5
+  languageName: node
+  linkType: hard
+
 "polylabel@npm:^2.1.0":
   version: 2.1.0
   resolution: "polylabel@npm:2.1.0"
@@ -8702,7 +9858,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.5.26":
+"postcss@npm:^8.5.26, postcss@npm:^8.5.3":
   version: 8.5.26
   resolution: "postcss@npm:8.5.26"
   dependencies:
@@ -9242,6 +10398,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"robust-predicates@npm:^2.0.4":
+  version: 2.0.4
+  resolution: "robust-predicates@npm:2.0.4"
+  checksum: fe93852a6ff823180b1953bd431c8053a7ffbd370e6a381257845d950ea23aba1c62d05a3b21f1231d5611c90d7cb37108bf18c165950a06e7e48936be03efff
+  languageName: node
+  linkType: hard
+
+"robust-predicates@npm:^3.0.2":
+  version: 3.0.3
+  resolution: "robust-predicates@npm:3.0.3"
+  checksum: 23692b9451e296bf8f98bdd681d4950a27045cdee5df3fadb9c150c7df0889b5fcf658ab2f82a41675bf14b1e32c4c6b7a4591f8adbee056b845f0eb9d3ad69c
+  languageName: node
+  linkType: hard
+
 "rollup-plugin-dts@npm:^6.5.1":
   version: 6.5.1
   resolution: "rollup-plugin-dts@npm:6.5.1"
@@ -9320,6 +10490,99 @@ __metadata:
   dependencies:
     estree-walker: ^0.6.1
   checksum: 339fdf866d8f4ff6e408fa274c0525412f7edb01dc46b5ccda51f575b7e0d20ad72965773376fb5db95a77a7fcfcab97bf841ec08dbadf5d6b08af02b7a2cf5e
+  languageName: node
+  linkType: hard
+
+"rollup@npm:^4.34.9":
+  version: 4.63.0
+  resolution: "rollup@npm:4.63.0"
+  dependencies:
+    "@napi-rs/lzma-linux-x64-gnu": 1.5.1
+    "@rollup/rollup-android-arm-eabi": 4.63.0
+    "@rollup/rollup-android-arm64": 4.63.0
+    "@rollup/rollup-darwin-arm64": 4.63.0
+    "@rollup/rollup-darwin-x64": 4.63.0
+    "@rollup/rollup-freebsd-arm64": 4.63.0
+    "@rollup/rollup-freebsd-x64": 4.63.0
+    "@rollup/rollup-linux-arm-gnueabihf": 4.63.0
+    "@rollup/rollup-linux-arm-musleabihf": 4.63.0
+    "@rollup/rollup-linux-arm64-gnu": 4.63.0
+    "@rollup/rollup-linux-arm64-musl": 4.63.0
+    "@rollup/rollup-linux-loong64-gnu": 4.63.0
+    "@rollup/rollup-linux-loong64-musl": 4.63.0
+    "@rollup/rollup-linux-ppc64-gnu": 4.63.0
+    "@rollup/rollup-linux-ppc64-musl": 4.63.0
+    "@rollup/rollup-linux-riscv64-gnu": 4.63.0
+    "@rollup/rollup-linux-riscv64-musl": 4.63.0
+    "@rollup/rollup-linux-s390x-gnu": 4.63.0
+    "@rollup/rollup-linux-x64-gnu": 4.63.0
+    "@rollup/rollup-linux-x64-musl": 4.63.0
+    "@rollup/rollup-openbsd-x64": 4.63.0
+    "@rollup/rollup-openharmony-arm64": 4.63.0
+    "@rollup/rollup-win32-arm64-msvc": 4.63.0
+    "@rollup/rollup-win32-ia32-msvc": 4.63.0
+    "@rollup/rollup-win32-x64-gnu": 4.63.0
+    "@rollup/rollup-win32-x64-msvc": 4.63.0
+    "@types/estree": 1.0.9
+    fsevents: ~2.3.2
+  dependenciesMeta:
+    "@napi-rs/lzma-linux-x64-gnu":
+      optional: true
+    "@rollup/rollup-android-arm-eabi":
+      optional: true
+    "@rollup/rollup-android-arm64":
+      optional: true
+    "@rollup/rollup-darwin-arm64":
+      optional: true
+    "@rollup/rollup-darwin-x64":
+      optional: true
+    "@rollup/rollup-freebsd-arm64":
+      optional: true
+    "@rollup/rollup-freebsd-x64":
+      optional: true
+    "@rollup/rollup-linux-arm-gnueabihf":
+      optional: true
+    "@rollup/rollup-linux-arm-musleabihf":
+      optional: true
+    "@rollup/rollup-linux-arm64-gnu":
+      optional: true
+    "@rollup/rollup-linux-arm64-musl":
+      optional: true
+    "@rollup/rollup-linux-loong64-gnu":
+      optional: true
+    "@rollup/rollup-linux-loong64-musl":
+      optional: true
+    "@rollup/rollup-linux-ppc64-gnu":
+      optional: true
+    "@rollup/rollup-linux-ppc64-musl":
+      optional: true
+    "@rollup/rollup-linux-riscv64-gnu":
+      optional: true
+    "@rollup/rollup-linux-riscv64-musl":
+      optional: true
+    "@rollup/rollup-linux-s390x-gnu":
+      optional: true
+    "@rollup/rollup-linux-x64-gnu":
+      optional: true
+    "@rollup/rollup-linux-x64-musl":
+      optional: true
+    "@rollup/rollup-openbsd-x64":
+      optional: true
+    "@rollup/rollup-openharmony-arm64":
+      optional: true
+    "@rollup/rollup-win32-arm64-msvc":
+      optional: true
+    "@rollup/rollup-win32-ia32-msvc":
+      optional: true
+    "@rollup/rollup-win32-x64-gnu":
+      optional: true
+    "@rollup/rollup-win32-x64-msvc":
+      optional: true
+    fsevents:
+      optional: true
+  bin:
+    rollup: dist/bin/rollup
+  checksum: b055a811b4530fc9bf9043ece52a2215deebe4e7636634509db3ed257e3c3ae9c534ee7d74ff025b8eafab27f223f752964dd4420af3b2646095dd45af576f40
   languageName: node
   linkType: hard
 
@@ -9423,6 +10686,7 @@ __metadata:
     "@types/node": ^24.13.3
     lerna: ^8.2.4
     rimraf: ^6.1.3
+    vite: ^6.3.5
   languageName: unknown
   linkType: soft
 
@@ -9702,6 +10966,13 @@ __metadata:
   version: 3.0.21
   resolution: "spdx-license-ids@npm:3.0.21"
   checksum: 681dfe26d250f48cc725c9118adf1eb0a175e3c298cd8553c039bfae37ed21bea30a27bc02dbb99b4a0d3a25c644c5dda952090e11ef4b3093f6ec7db4b93b58
+  languageName: node
+  linkType: hard
+
+"splaytree-ts@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "splaytree-ts@npm:1.0.2"
+  checksum: 7f679ea82d73b81a2784e34bd883eaccf4fcfb479038cf49e5a7cd4b790a24ea753d6139608586d5b75a7266a3918b548cd07426ae695fd3cc1214b6050c8fca
   languageName: node
   linkType: hard
 
@@ -10067,13 +11338,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tinyglobby@npm:^0.2.15":
+"tinyglobby@npm:^0.2.13, tinyglobby@npm:^0.2.15":
   version: 0.2.17
   resolution: "tinyglobby@npm:0.2.17"
   dependencies:
     fdir: ^6.5.0
     picomatch: ^4.0.4
   checksum: 041e73eae568152c376551b21b8a27909d474166a8f405cdb0345991c50cf6afd0f878d7a387645d9c05d8ea2c9a55cc2fd2cfe6c5d5a5264770972b1adcad86
+  languageName: node
+  linkType: hard
+
+"tinyqueue@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "tinyqueue@npm:2.0.3"
+  checksum: 0b6bda46b680dca072f84aef1acd22a7085a2ff2aa8e222bb41045c61a056943805056d77d7f976587ed6a0597872beb5c416043f65f0314304432d6c178dd20
   languageName: node
   linkType: hard
 
@@ -10511,6 +11789,61 @@ __metadata:
   version: 5.0.1
   resolution: "validate-npm-package-name@npm:5.0.1"
   checksum: 0d583a1af23aeffea7748742cf22b6802458736fb8b60323ba5949763824d46f796474b0e1b9206beb716f9d75269e19dbd7795d6b038b29d561be95dd827381
+  languageName: node
+  linkType: hard
+
+"vite@npm:^6.3.5":
+  version: 6.4.3
+  resolution: "vite@npm:6.4.3"
+  dependencies:
+    esbuild: ^0.25.0
+    fdir: ^6.4.4
+    fsevents: ~2.3.3
+    picomatch: ^4.0.2
+    postcss: ^8.5.3
+    rollup: ^4.34.9
+    tinyglobby: ^0.2.13
+  peerDependencies:
+    "@types/node": ^18.0.0 || ^20.0.0 || >=22.0.0
+    jiti: ">=1.21.0"
+    less: "*"
+    lightningcss: ^1.21.0
+    sass: "*"
+    sass-embedded: "*"
+    stylus: "*"
+    sugarss: "*"
+    terser: ^5.16.0
+    tsx: ^4.8.1
+    yaml: ^2.4.2
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
+    jiti:
+      optional: true
+    less:
+      optional: true
+    lightningcss:
+      optional: true
+    sass:
+      optional: true
+    sass-embedded:
+      optional: true
+    stylus:
+      optional: true
+    sugarss:
+      optional: true
+    terser:
+      optional: true
+    tsx:
+      optional: true
+    yaml:
+      optional: true
+  bin:
+    vite: bin/vite.js
+  checksum: 349e2cc44efa3fad3f89f415f45c5a94ee08d710b87b3e8b3f2556494c34b0f56af9f92c42316ff2117e442bbda617aa2ee502772f2301fcb687020b6be96f7e
   languageName: node
   linkType: hard
 

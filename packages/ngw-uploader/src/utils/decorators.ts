@@ -69,7 +69,7 @@ export function onLoad(originalMethod: any) {
       if (this.isLoaded) {
         originalMethod.apply(this, args).then(resolve).catch(reject);
       } else {
-        this.emitter.once('loaded', () => {
+        this.emitter.once('load', () => {
           originalMethod.apply(this, args).then(resolve).catch(reject);
         });
       }

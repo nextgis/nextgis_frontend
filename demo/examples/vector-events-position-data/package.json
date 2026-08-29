@@ -1,0 +1,37 @@
+{
+  "name": "@nextgis-example/demo-vector-events-position-data",
+  "private": true,
+  "displayName": "Vector events with bounds and center",
+  "description": "Capture bounds and center coordinates from vector layer events. Allows zooming to the feature on select.",
+  "tags": [
+    "vector",
+    "events",
+    "bounds",
+    "center",
+    "zoom",
+    "popup"
+  ],
+  "ngwMaps": [
+    "ngw-leaflet",
+    "ngw-ol",
+    "ngw-maplibre-gl"
+  ],
+  "scripts": {
+    "start": "yarn run start:leaflet",
+    "start:leaflet": "yarn run -T example --adapter=ngw-leaflet",
+    "start:ol": "yarn run -T example --adapter=ngw-ol",
+    "start:maplibre-gl": "yarn run -T example --adapter=ngw-maplibre-gl",
+    "build": "yarn run -T example:build",
+    "build:leaflet": "yarn run -T example:build --adapter=ngw-leaflet",
+    "build:ol": "yarn run -T example:build --adapter=ngw-ol",
+    "build:maplibre-gl": "yarn run -T example:build --adapter=ngw-maplibre-gl"
+  },
+  "dependencies": {
+    "@nextgis/ngw-leaflet": "*"
+  },
+  "devDependencies": {
+    "@nextgis/ngw-maplibre-gl": "*",
+    "@nextgis/ngw-ol": "*",
+    "vite": "^6.3.5"
+  }
+}

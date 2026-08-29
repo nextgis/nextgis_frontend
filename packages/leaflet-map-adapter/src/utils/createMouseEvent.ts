@@ -1,7 +1,7 @@
 import { convertMapClickEvent } from './convertMapClickEvent';
 import { createFeaturePositionOptions } from './geometries';
 
-import type { LayerAdapter, OnLayerMouseOptions } from '@nextgis/webmap';
+import type { LayerAdapter, OnLayerClickOptions } from '@nextgis/webmap';
 import type { LeafletMouseEvent } from 'leaflet';
 
 import type { LayerDef } from '../layer-adapters/GeoJsonAdapter/GeoJsonAdapter';
@@ -14,10 +14,10 @@ export interface CreateMouseEventOptions {
 export function createMouseEvent({
   layer,
   source,
-}: CreateMouseEventOptions): OnLayerMouseOptions {
+}: CreateMouseEventOptions): OnLayerClickOptions {
   const layer_ = source.target as LayerDef;
   const feature = layer_.feature;
-  const opt: OnLayerMouseOptions = {
+  const opt: OnLayerClickOptions = {
     layer,
     feature,
     event: convertMapClickEvent(source),

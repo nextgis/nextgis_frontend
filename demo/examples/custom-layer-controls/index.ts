@@ -1,0 +1,102 @@
+import NgwMap from '@nextgis/ngw-leaflet';
+
+import type { NgwWebmapLayerAdapter } from '@nextgis/ngw-kit';
+
+// Define the names of the web map and base layer for easier reference
+const webMapName = 'webmap';
+const qmsBaseLayerName = 'qmsbasemap';
+
+// Initialize the NextGIS web map
+const ngwMap = new NgwMap({
+  baseUrl: 'https://demo.nextgis.com',
+  target: 'map',
+  qmsId: [448, qmsBaseLayerName],
+  resources: [
+    {
+      resource: 6245,
+      id: webMapName,
+      adapterOptions: { useBasemap: false },
+      fit: true,
+    },
+  ],
+  controls: ['ZOOM', 'ATTRIBUTION', 'ToggleBaseMap'],
+  controlsOptions: {
+    ToggleBaseMap: {
+      control: 'BUTTON',
+      position: 'top-right',
+      html: '🌐',
+      title: 'Toggle base map',
+      onClick: function () {
+        ngwMap.toggleLayer(qmsBaseLayerName);
+      },
+    },
+  },
+});
+
+// After map load, add custom controls
+ngwMap.onLoad().then(() => {
+  // Control to toggle DEM (Digital Elevation Model)
+  const toggleHeatMapControl = ngwMap.createButtonControl({
+    html: '⛰️',
+    title: 'Toggle DEM',
+    onClick: () => {
+      // Toggle visibility of the 'Land area' layer
+      const ngwLayer = ngwMap.getLayer<NgwWebmapLayerAdapter>(webMapName);
+      if (!ngwLayer) return;
+      const mapLayer = ngwLayer.layer?.tree.getDescendants(
+        (x) => x.item.display_name === 'Land area',
+      )[0];
+      mapLayer?.properties.set(
+        'visibility',
+        !mapLayer.properties.get('visibility'),
+      );
+    },
+  });
+  ngwMap.addControl(toggleHeatMapControl, 'top-right');
+
+  // Add a custom layer control to manage layer visibility
+  ngwMap.addControl('CONTROL', 'bottom-right', {
+    control: {
+      onAdd: () => {
+        const list = document.createElement('div');
+        list.className = 'ngw-layers';
+        const webmap = ngwMap.getLayer<NgwWebmapLayerAdapter>(webMapName);
+        webmap?.layer?.tree
+          .getDescendants()
+          .reverse()
+          .forEach((node) => {
+            if (node.item.item_type === 'layer' && node.layer) {
+              // Create a checkbox for each layer
+              const layerElement = document.createElement('div');
+              const checkbox = document.createElement('input');
+              checkbox.id = 'layer-' + node.layer.id;
+              checkbox.checked = node.item.layer_enabled;
+              checkbox.setAttribute('type', 'checkbox');
+              checkbox.addEventListener('click', () => {
+                node.properties.set('visibility', checkbox.checked);
+              });
+              const name = document.createElement('span');
+              name.innerHTML = node.item.display_name;
+              layerElement.appendChild(checkbox);
+              layerElement.appendChild(name);
+              list.appendChild(layerElement);
+            }
+          });
+        // Update checkboxes on visibility change
+        webmap?.layer?.properties
+          .property('visibility')
+          .emitter.on('change-tree', (data) => {
+            if (!data.item.layer) return;
+            const itemId = data.item.layer.id;
+            const checkbox = list.querySelector<HTMLInputElement>(
+              '#layer-' + itemId,
+            );
+            if (!checkbox) return;
+            checkbox.checked = data.value;
+          });
+        return list;
+      },
+    },
+    options: { bar: true },
+  });
+});

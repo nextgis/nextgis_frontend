@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import * as https from 'node:https';
+import { get } from 'node:https';
 
 import { installDeclarationModules } from './install.cjs';
 
@@ -26,26 +26,24 @@ function downloadDeclarationFile(domain: string): Promise<string> {
   );
 
   return new Promise((resolve, reject) => {
-    https
-      .get(url, (response) => {
-        if (response.statusCode !== 200) {
-          response.resume();
-          reject(
-            new Error(
-              `Unable to download declarations: HTTP ${response.statusCode}`,
-            ),
-          );
-          return;
-        }
+    get(url, (response) => {
+      if (response.statusCode !== 200) {
+        response.resume();
+        reject(
+          new Error(
+            `Unable to download declarations: HTTP ${response.statusCode}`,
+          ),
+        );
+        return;
+      }
 
-        response.setEncoding('utf8');
-        let content = '';
-        response.on('data', (chunk: string) => {
-          content += chunk;
-        });
-        response.on('end', () => resolve(content));
-      })
-      .on('error', reject);
+      response.setEncoding('utf8');
+      let content = '';
+      response.on('data', (chunk: string) => {
+        content += chunk;
+      });
+      response.on('end', () => resolve(content));
+    }).on('error', reject);
   });
 }
 

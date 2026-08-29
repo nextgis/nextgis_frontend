@@ -1,6 +1,0 @@
-{
-  "name": "Vector events with bounds and center",
-  "description": "Capture bounds and center coordinates from vector layer events. Allows zooming to the feature on select.",
-  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"],
-  "tags": ["vector", "events", "bounds", "center", "zoom", "popup"]
-}

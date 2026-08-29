@@ -2,11 +2,21 @@ import MaplibreGLMapAdapter from '@nextgis/maplibre-gl-map-adapter';
 import { NgwMap } from '@nextgis/ngw-map';
 
 import type { MaplibreGLMapAdapterOptions } from '@nextgis/maplibre-gl-map-adapter';
-import type { NgwLayerOptions, ResourceAdapter } from '@nextgis/ngw-kit';
+import type {
+  NgwGeoJsonLayerAdapter,
+  NgwGeoJsonLayerOptions,
+  NgwLayerOptions,
+  NgwWebmapLayerAdapter,
+  ResourceAdapter,
+} from '@nextgis/ngw-kit';
 import type { NgwMapOptions } from '@nextgis/ngw-map';
+import type { FeatureProperties } from '@nextgis/utils';
 import type { Map } from 'maplibre-gl';
 
 import 'maplibre-gl/dist/maplibre-gl.css';
+import '@nextgis/maplibre-gl-map-adapter/lib/maplibre-gl-map-adapter.css';
+
+export type * from '@nextgis/ngw-map';
 
 class NgwMaplibreGL extends NgwMap<
   Map,
@@ -23,6 +33,13 @@ class NgwMaplibreGL extends NgwMap<
     return ngwMap.onLoad();
   }
 
+  addNgwLayer<P extends FeatureProperties = FeatureProperties>(
+    options: NgwGeoJsonLayerOptions<NoInfer<P>>,
+  ): Promise<NgwGeoJsonLayerAdapter<P, Map, string[]> | undefined>;
+  addNgwLayer(
+    options: NgwLayerOptions<'NGW:WEBMAP'> & { adapter: 'NGW:WEBMAP' },
+  ): Promise<NgwWebmapLayerAdapter<Map> | undefined>;
+  addNgwLayer(options: NgwLayerOptions): Promise<ResourceAdapter | undefined>;
   addNgwLayer(options: NgwLayerOptions): Promise<ResourceAdapter | undefined> {
     // TODO: still no way to add NGW IMAGE to maplibre-gl
     // always use tile adapter

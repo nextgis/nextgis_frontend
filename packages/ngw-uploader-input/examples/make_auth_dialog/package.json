@@ -1,0 +1,16 @@
+{
+  "name": "@nextgis-example/ngw-uploader-input-make_auth_dialog",
+  "private": true,
+  "displayName": "Raster upload after login (dialog)",
+  "description": "",
+  "scripts": {
+    "start": "vite --host 0.0.0.0 --port 8080 --strictPort --open",
+    "build": "vite build --base=./"
+  },
+  "dependencies": {
+    "@nextgis/ngw-uploader-input": "workspace:*"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}

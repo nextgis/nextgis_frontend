@@ -1,6 +1,0 @@
-{
-  "name": "Zoom to NGW Layer Feature",
-  "description": "Demonstrates how to zoom and fit the map to a selected feature from an NGW layer. The example also shows how to paginate through a list of features and interactively zoom to the feature’s extent when clicked.",
-  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"],
-  "tags": ["zoom to", "go to", "fit", "paginate", "table", "list"]
-}

@@ -1,6 +1,0 @@
-{
-  "name": "Vector label callback",
-  "description": "Demonstrates how to use a callback function in the 'label' option for vector layers. The callback dynamically generates labels using feature properties, bounding box, and center coordinates.",
-  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-maplibre-gl"],
-  "tags": ["label", "tooltip", "vector", "callback", "dynamic label", "feature"]
-}

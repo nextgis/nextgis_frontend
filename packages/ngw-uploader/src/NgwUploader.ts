@@ -29,6 +29,7 @@ import type {
   EmitterStatus,
   FileUploadOptions,
   GroupOptions,
+  NgwUploaderEmitter,
   NgwUploadOptions,
   RasterUploadOptions,
   VectorUploadOptions,
@@ -44,7 +45,7 @@ export class NgwUploader {
     useTus: true,
   };
 
-  emitter = new EventEmitter();
+  emitter: NgwUploaderEmitter = new EventEmitter();
   isLoaded = false;
   connector!: NgwConnector;
 
@@ -185,15 +186,15 @@ export class NgwUploader {
     status: 'create-wms',
     template: 'wms creation for resource ID {parentId}',
   })
-  createWms(
-    opt: CreateWmsOptions,
-    name?: string,
-  ): Promise<CreatedResource> | undefined {
+  createWms(opt: CreateWmsOptions, name?: string): Promise<CreatedResource> {
+    if (!this.connector) {
+      throw new Error('Connector is not set yet');
+    }
     let layers: WmsServerServiceLayer[] = opt.layers || [
       {
         keyname: [opt.keyname, 'image1'].filter(Boolean).join('-'),
-        display_name: name,
-        resource_id: opt.resourceId ?? opt.id,
+        display_name: name ?? opt.displayName ?? opt.name ?? 'image1',
+        resource_id: (opt.resourceId ?? opt.id)!,
       },
     ];
     layers = layers.map((x: any) => {
@@ -217,10 +218,7 @@ export class NgwUploader {
         layers,
       },
     };
-    return (
-      this.connector &&
-      this.connector.post('resource.collection', { data: wmsData })
-    );
+    return this.connector.post('resource.collection', { data: wmsData });
   }
 
   @evented({
@@ -230,7 +228,10 @@ export class NgwUploader {
   createWmsConnection(
     opt: CreateWmsConnectionOptions,
     name?: string,
-  ): Promise<CreatedResource> | undefined {
+  ): Promise<CreatedResource> {
+    if (!this.connector) {
+      throw new Error('Connector is not set yet');
+    }
     const { url, password, username, version, capcache } = opt;
 
     const wmsclient_connection: WmsClientConnection = {
@@ -250,10 +251,7 @@ export class NgwUploader {
       },
       wmsclient_connection,
     };
-    return (
-      this.connector &&
-      this.connector.post('resource.collection', { data: wmsData })
-    );
+    return this.connector.post('resource.collection', { data: wmsData });
   }
 
   @evented({
@@ -263,7 +261,10 @@ export class NgwUploader {
   createWmsConnectedLayer(
     opt: CreateWmsConnectedLayerOptions,
     name?: string,
-  ): Promise<CreatedResource> | undefined {
+  ): Promise<CreatedResource> {
+    if (!this.connector) {
+      throw new Error('Connector is not set yet');
+    }
     const { id, vendor_params, imgformat, srs, connection } = opt;
     const wmslayers =
       opt.wmslayers && Array.isArray(opt.wmslayers)
@@ -272,14 +273,14 @@ export class NgwUploader {
 
     const wmsClientLayer: WmsClientLayer = {
       connection: connection || {
-        id,
+        id: id!,
       },
       srs: srs || {
         id: 3857,
       },
       wmslayers,
       imgformat: imgformat || 'image/png',
-      vendor_params,
+      vendor_params: vendor_params || {},
     };
     const wmsData = {
       resource: {
@@ -290,10 +291,7 @@ export class NgwUploader {
       },
       wmsclient_layer: wmsClientLayer,
     };
-    return (
-      this.connector &&
-      this.connector.post('resource.collection', { data: wmsData })
-    );
+    return this.connector.post('resource.collection', { data: wmsData });
   }
 
   @evented({ status: 'upload', template: 'file upload' })
@@ -417,8 +415,11 @@ export class NgwUploader {
   getResource(
     id: number,
     requestOptions?: GetRequestOptions,
-  ): Promise<CompositeRead | undefined> | undefined {
-    return this.connector && this.connector.getResource(id, requestOptions);
+  ): Promise<CompositeRead | undefined> {
+    if (!this.connector) {
+      throw new Error('Connector is not set yet');
+    }
+    return this.connector.getResource(id, requestOptions);
   }
 
   protected async _initialize() {

@@ -20,6 +20,7 @@ import * as errors from './errors';
 import type { RouteName, RouteParameters } from './route/type';
 import type {
   Credentials,
+  NgwConnectorEmitter,
   NgwConnectorOptions,
   Params,
   PyramidRoute,
@@ -35,7 +36,7 @@ let REQUEST_ID = 0;
 export class NgwConnector {
   static errors = errors;
   id = ID++;
-  emitter = new EventEmitter();
+  emitter: NgwConnectorEmitter = new EventEmitter();
   user?: UserInfo;
 
   cache: Cache;

@@ -1,0 +1,18 @@
+{
+  "name": "@nextgis-example/ngw-ol-on-first-show-adapter-layer-control",
+  "private": true,
+  "displayName": "Take layer control in the OnFirstShowAdapter",
+  "description": "The ability to access the layer in the OnFirstShowAdapter",
+  "scripts": {
+    "start": "vite --host 0.0.0.0 --port 8080 --strictPort --open",
+    "build": "vite build --base=./"
+  },
+  "dependencies": {
+    "@nextgis/ngw-ol": "workspace:*",
+    "@nextgis/webmap": "workspace:*"
+  },
+  "devDependencies": {
+    "ol": "^10.10.0",
+    "vite": "^6.3.5"
+  }
+}

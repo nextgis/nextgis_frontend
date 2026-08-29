@@ -1,0 +1,17 @@
+{
+  "name": "@nextgis-example/ngw-uploader-proxy-wms",
+  "private": true,
+  "displayName": "Proxy external WMS service",
+  "description": "This example create NextGIS Web WMS service which proxies external WMS service with selected layers",
+  "scripts": {
+    "start": "vite --host 0.0.0.0 --port 8080 --strictPort --open",
+    "build": "vite build --base=./"
+  },
+  "dependencies": {
+    "@nextgis/ngw-connector": "workspace:*",
+    "@nextgis/ngw-uploader": "workspace:*"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}

@@ -6,6 +6,7 @@ import type { MapContainerProps } from '@nextgis/react-ngw-map';
 import type { Map } from 'maplibre-gl';
 
 import 'maplibre-gl/dist/maplibre-gl.css';
+import '@nextgis/maplibre-gl-map-adapter/lib/maplibre-gl-map-adapter.css';
 
 export function ReactNgwMaplibreGL<
   Props extends MapContainerProps = MapContainerProps<Map>,

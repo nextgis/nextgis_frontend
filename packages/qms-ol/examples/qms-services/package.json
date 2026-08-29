@@ -1,0 +1,17 @@
+{
+  "name": "@nextgis-example/qms-ol-qms-services",
+  "private": true,
+  "displayName": "QMS services with OpenLayers",
+  "description": "Add TMS and WMS services from NextGIS QMS to an OpenLayers map",
+  "scripts": {
+    "start": "vite --host 0.0.0.0 --port 8080 --strictPort --open",
+    "build": "vite build --base=./"
+  },
+  "dependencies": {
+    "@nextgis/qms-ol": "workspace:*",
+    "ol": "^10.10.0"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}

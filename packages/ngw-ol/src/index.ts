@@ -7,6 +7,8 @@ import type Map from 'ol/Map';
 import 'ol/ol.css';
 import '@nextgis/ol-map-adapter/lib/ol-map-adapter.css';
 
+export type * from '@nextgis/ngw-map';
+
 class NgwOl extends NgwMap<Map> {
   constructor(options: NgwMapOptions) {
     super({ ...options, mapAdapter: new OlMapAdapter() });

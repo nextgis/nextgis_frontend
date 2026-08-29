@@ -16,7 +16,7 @@ import type { BaseProviderOptions } from './BaseProviderOptions';
 /**
  * Extends the basic search item with NGW-specific properties.
  */
-interface NgwSearchItem extends SearchItem {
+export interface NgwSearchItem extends SearchItem {
   /** ID of the NGW resource */
   resourceId: number;
   /** ID of the feature in the NGW resource */
@@ -30,7 +30,7 @@ interface NgwSearchItem extends SearchItem {
 /**
  * Defines the structure for a rendered search item.
  */
-interface RenderSearchItem {
+export interface RenderSearchItem {
   /** The specific feature item */
   item: FeatureItem;
   /** The NGW resource item */
@@ -40,7 +40,10 @@ interface RenderSearchItem {
 /**
  * Options for searching within a NGW resource.
  */
-interface SearchResource extends FetchNgwItemsOptions {
+export interface SearchResource extends Omit<
+  FetchNgwItemsOptions,
+  'connector'
+> {
   /** The search method used ('ilike' is case-insensitive) */
   searchMethod?: 'ilike' | 'like';
   /** Custom rendering function for search results */
@@ -50,7 +53,7 @@ interface SearchResource extends FetchNgwItemsOptions {
 /**
  * Options required to initialize an NGW provider.
  */
-interface NgwProviderOptions extends BaseProviderOptions {
+export interface NgwProviderOptions extends BaseProviderOptions {
   /** Connector instance for NGW. If not provided, will be created internally */
   connector?: NgwConnector;
   /** List of NGW resources to search within */

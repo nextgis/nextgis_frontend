@@ -5,23 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Example</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="../../lib/ngw-connector.global.js"></script>
-  </head>
+</head>
   <body>
-    <script>
-      const element = document.getElementById('results');
-      const connector = new NgwConnector({
-        baseUrl: 'https://demo.nextgis.com',
-      });
-
-      connector
-        .route('resource.item', { id: 5248 })
-        .get()
-        .then(function (data) {
-          console.log(data);
-          document.body.appendChild(document.createElement('pre')).innerHTML =
-            JSON.stringify(data, null, 2);
-        });
-    </script>
+    <script type="module" src="./index.ts"></script>
   </body>
 </html>

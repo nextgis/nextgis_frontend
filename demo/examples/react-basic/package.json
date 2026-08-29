@@ -1,0 +1,32 @@
+{
+  "name": "@nextgis-example/demo-react-basic",
+  "private": true,
+  "displayName": "React NGW map",
+  "description": "Create a NextGIS Web map in a React application.",
+  "skipDemo": true,
+  "ngwMaps": [
+    "react-ngw-leaflet",
+    "react-ngw-ol",
+    "react-ngw-maplibre-gl"
+  ],
+  "scripts": {
+    "start": "yarn run start:leaflet",
+    "start:leaflet": "yarn run -T example --adapter=react-ngw-leaflet",
+    "start:ol": "yarn run -T example --adapter=react-ngw-ol",
+    "start:maplibre-gl": "yarn run -T example --adapter=react-ngw-maplibre-gl",
+    "build": "yarn run -T example:build",
+    "build:leaflet": "yarn run -T example:build --adapter=react-ngw-leaflet",
+    "build:ol": "yarn run -T example:build --adapter=react-ngw-ol",
+    "build:maplibre-gl": "yarn run -T example:build --adapter=react-ngw-maplibre-gl"
+  },
+  "dependencies": {
+    "@nextgis/react-ngw-leaflet": "*",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@nextgis/react-ngw-maplibre-gl": "*",
+    "@nextgis/react-ngw-ol": "*",
+    "vite": "^6.3.5"
+  }
+}

@@ -10,9 +10,11 @@
     "prod-each": "lerna run prod && npm run test-build",
     "build-dts": "npx tsc -p tsconfig.build.json && rollup -c ./packages/build-tools/lib/rollup.dts.config.js",
     "watch-dts": "npx tsc -p tsconfig.build.json --watch",
-    "lint": "eslint --fix \"packages/**/src/**/*.{ts,cts}\"",
+    "lint": "eslint --fix \"packages/**/src/**/*.{ts,cts}\" \"demo/examples/**/*.{ts,tsx}\" \"packages/*/examples/**/*.{ts,tsx}\"",
     "demo": "yarn run examples && cd ./demo/ && yarn run build && yarn run docker",
-    "examples": "npm run build-dts && node ./scripts/updateExamples.mjs && npm run examples:check",
+    "examples": "npm run build-dts && npm run examples:check",
+    "example": "node ./scripts/startExample.mjs",
+    "example:build": "node ./scripts/buildExamples.mjs",
     "examples:check": "node ./scripts/checkExamples.mjs",
     "test": "cd tests && yarn test",
     "test-build": "node ./scripts/testBuildCmd.mjs",
@@ -33,11 +35,13 @@
   "devDependencies": {
     "@types/node": "^24.13.3",
     "lerna": "^8.2.4",
-    "rimraf": "^6.1.3"
+    "rimraf": "^6.1.3",
+    "vite": "^6.3.5"
   },
   "license": "MIT",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "packages/*/examples/*"
   ],
   "packageManager": "yarn@3.6.3+sha256.08ead1821a257416e6f217e89365425bf4b6d2430c3279318bedcec1a245fff5"
 }

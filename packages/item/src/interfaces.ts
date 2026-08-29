@@ -35,7 +35,7 @@ export interface ItemPropertyBaseConfig<
 export interface ItemPropertyConfig<
   K extends keyof ItemPropertyTypes,
 > extends ItemPropertyBaseConfig<K> {
-  handler?: Type<BaseProperty<ItemPropertyTypes[K]>>;
+  handler?: Type<BaseProperty<ItemPropertyTypes[K], any, any>>;
 }
 
 export interface ItemPropertyConfig<
@@ -77,6 +77,23 @@ export interface ChangeEvent<
   V = any,
   O extends ItemBasePropertyOptions<V> = ItemBasePropertyOptions<V>,
 > {
-  value: V;
-  options: O;
+  value: V | undefined;
+  options: O | undefined;
+}
+
+export interface ChangeTreeEvent<
+  V = any,
+  O extends ItemBasePropertyOptions<V> = ItemBasePropertyOptions<V>,
+  I extends Item = Item,
+> extends ChangeEvent<V, O> {
+  item: I;
+}
+
+export interface ItemPropertyEvents<
+  V = any,
+  O extends ItemBasePropertyOptions<V> = ItemBasePropertyOptions<V>,
+  I extends Item = Item,
+> {
+  change: (event: ChangeEvent<V, O>) => void;
+  'change-tree': (event: ChangeTreeEvent<V, O, I>) => void;
 }

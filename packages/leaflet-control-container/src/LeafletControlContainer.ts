@@ -11,6 +11,8 @@ import type {
   Map as LeafletMap,
 } from 'leaflet';
 
+import './LeafletControlContainer.css';
+
 export type LeafletControlContainerOptions = Omit<
   ControlContainerOptions<LeafletMap>,
   'container' | 'positionContainers' | 'map'

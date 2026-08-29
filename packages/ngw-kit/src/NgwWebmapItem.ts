@@ -6,7 +6,7 @@ import { setScaleRatio } from './utils/utils';
 import { WebmapLayerOpacityPropertyHandler } from './utils/WebmapLayerOpacityPropertyHandler';
 import { Legend } from './Legend';
 
-import type { ItemOptions } from '@nextgis/item';
+import type { ItemOptions, ItemProperties } from '@nextgis/item';
 import type NgwConnector from '@nextgis/ngw-connector';
 import type { LayerLegend } from '@nextgis/ngw-connector';
 import type {
@@ -31,6 +31,8 @@ export interface NgwWebmapItemOptions {
 }
 
 export class NgwWebmapItem extends Item<ItemOptions> {
+  declare properties: ItemProperties<NgwWebmapItem>;
+
   static GetAdapterFromLayerType: {
     [layerType: string]: (
       item: TreeItem,

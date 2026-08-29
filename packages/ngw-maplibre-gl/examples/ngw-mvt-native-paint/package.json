@@ -1,0 +1,17 @@
+{
+  "name": "@nextgis-example/ngw-maplibre-gl-ngw-mvt-native-paint",
+  "private": true,
+  "displayName": "Native paint for NGW MVT Layer",
+  "description": "Use maplibre-gl native style to paint MVT resource layer and its selection",
+  "scripts": {
+    "start": "yarn run -T example",
+    "build": "yarn run -T example:build"
+  },
+  "dependencies": {
+    "@nextgis/ngw-maplibre-gl": "workspace:*",
+    "@nextgis/webmap": "workspace:*"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}

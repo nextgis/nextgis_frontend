@@ -1,0 +1,40 @@
+{
+  "name": "@nextgis-example/demo-vector-line-arrow",
+  "private": true,
+  "displayName": "Line with arrows",
+  "description": "This example demonstrates how to connect points with a line that includes arrows at both ends. One arrow is rendered as part of the line, while the other is an SVG marker.",
+  "tags": [
+    "arrows",
+    "lines",
+    "vector",
+    "svg marker",
+    "geometry",
+    "map"
+  ],
+  "ngwMaps": [
+    "ngw-leaflet",
+    "ngw-ol",
+    "ngw-maplibre-gl"
+  ],
+  "scripts": {
+    "start": "yarn run start:leaflet",
+    "start:leaflet": "yarn run -T example --adapter=ngw-leaflet",
+    "start:ol": "yarn run -T example --adapter=ngw-ol",
+    "start:maplibre-gl": "yarn run -T example --adapter=ngw-maplibre-gl",
+    "build": "yarn run -T example:build",
+    "build:leaflet": "yarn run -T example:build --adapter=ngw-leaflet",
+    "build:ol": "yarn run -T example:build --adapter=ngw-ol",
+    "build:maplibre-gl": "yarn run -T example:build --adapter=ngw-maplibre-gl"
+  },
+  "dependencies": {
+    "@nextgis/icons": "*",
+    "@nextgis/ngw-leaflet": "*",
+    "@nextgis/webmap": "*"
+  },
+  "devDependencies": {
+    "@nextgis/ngw-maplibre-gl": "*",
+    "@nextgis/ngw-ol": "*",
+    "@types/geojson": "^7946.0.16",
+    "vite": "^6.3.5"
+  }
+}

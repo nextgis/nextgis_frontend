@@ -9,6 +9,10 @@
     "@nextgis/leaflet-map-adapter": "4.0.0-rc.0",
     "@nextgis/react-ngw-map": "4.0.0-rc.0"
   },
+  "peerDependencies": {
+    "react": "*",
+    "react-dom": "*"
+  },
   "devDependencies": {
     "@nextgis/build-tools": "4.0.0-rc.0"
   },

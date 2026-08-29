@@ -5,6 +5,7 @@ import type {
   ResourceRead,
   SearchResponse,
 } from '@nextgisweb/resource/type/api';
+import type { EventEmitter } from 'events';
 
 import type { FeatureItem, FeatureLayersIdentify } from './types/FeatureLayer';
 import type { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
@@ -306,6 +307,12 @@ export interface UserInfo {
   /** @defaultValue 'guest' */
   keyname: 'guest' | string;
   clientId?: string;
+}
+
+export interface NgwConnectorEmitter extends EventEmitter {
+  on(eventName: 'login', listener: (data: UserInfo) => void): this;
+  on(eventName: 'login:error', listener: (error: unknown) => void): this;
+  on(eventName: 'logout', listener: () => void): this;
 }
 
 export interface GetChildrenOfOptions extends Pick<RequestOptions, 'cache'> {

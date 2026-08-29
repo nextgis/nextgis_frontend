@@ -6,9 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Example</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <script src="../../lib/ngw-connector.global.js"></script>
-  <style>
+<style>
     .mb {
       display: block;
       margin: 10px 0;
@@ -55,54 +53,7 @@
     <p>Resources:</p>
     <div id="results"></div>
   </div>
-
-  <script>
-    var login = document.getElementById('login');
-    var password = document.getElementById('password');
-    var ngwUrl = document.getElementById('ngw-url');
-    var classSelect = document.getElementById('select-class')
-    var fullSerialization = document.getElementById('full-serialization');
-    var submit = document.getElementById('submit');
-    var resultWrap = document.getElementById('result-wrap');
-    var resultElement = document.getElementById('results');
-    var loginStatusElement = document.getElementById('login-status');
-    // helper function for updating DOM from json
-    var appendResponce = function (toElement, resp) {
-      toElement.innerHTML = '';
-      toElement.appendChild(document.createElement('pre')).innerHTML = JSON.stringify(resp, null, 2);
-    }
-    var connector = new NgwConnector({
-      baseUrl: ngwUrl.value,
-    });
-
-    submit.onclick = function () {
-      submit.disabled = true;
-      resultWrap.style.display = 'block';
-      loginStatusElement.innerHTML = 'Loading...';
-      resultElement.innerHTML = '';
-      // make authorization and get user info first
-      connector.getUserInfo({ login: login.value, password: password.value }).then(function (userInfo) {
-        appendResponce(loginStatusElement, userInfo);
-        resultElement.innerHTML = 'Loading...';
-        connector.get('resource.search', null, {
-            cls: classSelect.value,
-            owner_user__id: userInfo.id,
-            // optional parameter to to control the number of parameters in the response
-            // may be full and resource, resource is default value
-            serialization: fullSerialization.checked ? 'full' : 'resource'
-        }).then(function (data) {
-          // update the DOM from the search result
-          appendResponce(resultElement, data);
-          // make button activa again
-          submit.disabled = false;
-        });
-      }).catch(function (er) {
-        appendResponce(loginStatusElement, er);
-      });
-
-    }
-  </script>
-
-</body>
+    <script type="module" src="./index.ts"></script>
+  </body>
 
 </html>

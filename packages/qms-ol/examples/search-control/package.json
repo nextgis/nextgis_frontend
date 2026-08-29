@@ -1,0 +1,17 @@
+{
+  "name": "@nextgis-example/qms-ol-search-control",
+  "private": true,
+  "displayName": "QMS control with OpenLayers",
+  "description": "Search the QMS API or browse the catalog and add a service",
+  "scripts": {
+    "start": "vite --host 0.0.0.0 --port 8080 --strictPort --open",
+    "build": "vite build --base=./"
+  },
+  "dependencies": {
+    "@nextgis/qms-ol": "workspace:*",
+    "ol": "^10.10.0"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}

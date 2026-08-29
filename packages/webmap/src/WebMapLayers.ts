@@ -24,7 +24,9 @@ import type {
   DataLayerFilter,
   FeatureLayerAdapter,
   FilterOptions,
+  GeoJsonAdapterFeature,
   GeoJsonAdapterOptions,
+  GeoJsonLayerAdapter,
   GetLegendOptions,
   ImageAdapterOptions,
   LayerAdapter,
@@ -37,6 +39,7 @@ import type {
   OnLayerMouseOptions,
   OnLayerSelectOptions,
   TileAdapterOptions,
+  VectorAdapterOptions,
   VectorLayerAdapter,
 } from './interfaces/LayerAdapter';
 import type { FitOptions } from './interfaces/MapAdapter';
@@ -478,7 +481,7 @@ export class WebMapLayers<
   >(
     opt: O = {} as O,
     adapter?: LayerAdapterDefinition<K>,
-  ): Promise<VectorLayerAdapter<any, any, any>> {
+  ): Promise<GeoJsonLayerAdapter<any, any, O, GeoJsonAdapterFeature<O>>> {
     opt = opt || ({} as O);
     opt.multiselect = opt.multiselect !== undefined ? opt.multiselect : false;
     opt.unselectOnSecondClick =
@@ -489,7 +492,9 @@ export class WebMapLayers<
       opt = updateGeoJsonAdapterOptions(opt);
     }
     opt.paint = opt.paint || {};
-    return this.addLayer(adapter || 'GEOJSON', opt);
+    return this.addLayer(adapter || 'GEOJSON', opt) as Promise<
+      GeoJsonLayerAdapter<any, any, O, GeoJsonAdapterFeature<O>>
+    >;
   }
 
   /** Shortcut for {@link WebMapLayers.addGeoJsonLayer} to create GeoJson adapter with generic types for working in typescript */
@@ -777,12 +782,12 @@ export class WebMapLayers<
    * ```
    *
    */
-  filterLayer(
+  filterLayer<F extends Feature = Feature>(
     layerDef: LayerDef,
-    filter: DataLayerFilter<Feature, L>,
-  ): LayerDefinition<Feature, L>[] {
+    filter: DataLayerFilter<F, L>,
+  ): LayerDefinition<F, L>[] {
     const layer = this.getLayer(layerDef);
-    const adapter = layer as VectorLayerAdapter;
+    const adapter = layer as VectorLayerAdapter<M, L, VectorAdapterOptions, F>;
     if (adapter.filter) {
       return adapter.filter(filter);
     }
@@ -791,7 +796,7 @@ export class WebMapLayers<
 
   propertiesFilter(
     layerDef: LayerDef,
-    filters: PropertiesFilter,
+    filters?: PropertiesFilter | null,
     options?: FilterOptions,
   ): Promise<void> {
     const layer = this.getLayer(layerDef);
@@ -801,6 +806,9 @@ export class WebMapLayers<
         return adapter.propertiesFilter(filters, options);
       } else if (adapter.filter) {
         this.filterLayer(adapter, (e) => {
+          if (!filters) {
+            return true;
+          }
           if (e.feature && e.feature.properties) {
             return propertiesFilter(e.feature.properties, filters);
           }

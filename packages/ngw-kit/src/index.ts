@@ -4,6 +4,7 @@ export * from './adapters/createGeoJsonAdapter';
 export * from './adapters/createOnFirstShowAdapter';
 export * from './adapters/createOnFirstShowNgwAdapter';
 export * from './adapters/createRasterAdapter';
+export * from './BookmarkItem';
 export * from './constants';
 export * from './IdentifyItem';
 export * from './Legend';

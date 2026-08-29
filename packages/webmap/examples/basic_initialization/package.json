@@ -1,0 +1,18 @@
+{
+  "name": "@nextgis-example/webmap-basic_initialization",
+  "private": true,
+  "displayName": "Basic initialization",
+  "description": "Webmap with adapter",
+  "scripts": {
+    "start": "vite --host 0.0.0.0 --port 8080 --strictPort --open",
+    "build": "vite build --base=./"
+  },
+  "dependencies": {
+    "@nextgis/leaflet-map-adapter": "workspace:*",
+    "@nextgis/qms-kit": "workspace:*",
+    "@nextgis/webmap": "workspace:*"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "@nextgis-example/demo-ngw-webmap-zoom-range",
+  "private": true,
+  "displayName": "Toggle WebMap by Zoom Levels",
+  "description": "Demonstrates how to display a NextGIS WebMap layer only within a specified zoom range. The layer will be visible between the defined minimum and maximum zoom levels, and a control shows the current zoom level, turning red when outside the allowed range.",
+  "ngwMaps": [
+    "ngw-leaflet",
+    "ngw-ol",
+    "ngw-maplibre-gl"
+  ],
+  "scripts": {
+    "start": "yarn run start:leaflet",
+    "start:leaflet": "yarn run -T example --adapter=ngw-leaflet",
+    "start:ol": "yarn run -T example --adapter=ngw-ol",
+    "start:maplibre-gl": "yarn run -T example --adapter=ngw-maplibre-gl",
+    "build": "yarn run -T example:build",
+    "build:leaflet": "yarn run -T example:build --adapter=ngw-leaflet",
+    "build:ol": "yarn run -T example:build --adapter=ngw-ol",
+    "build:maplibre-gl": "yarn run -T example:build --adapter=ngw-maplibre-gl"
+  },
+  "dependencies": {
+    "@nextgis/ngw-leaflet": "*"
+  },
+  "devDependencies": {
+    "@nextgis/ngw-maplibre-gl": "*",
+    "@nextgis/ngw-ol": "*",
+    "vite": "^6.3.5"
+  }
+}

@@ -21,10 +21,12 @@ import type {
   VectorLayerAdapter,
 } from '@nextgis/webmap';
 import type { FeatureCollection } from 'geojson';
+import type StrictEventEmitter from 'strict-event-emitter-types';
 
 import type {
   GetClassAdapterOptions,
   NgwFeatureRequestOptions,
+  NgwGeoJsonAdapterEvents,
   NgwLayerOptions,
 } from '../interfaces';
 
@@ -90,7 +92,8 @@ export async function createGeoJsonAdapter(
   };
 
   class NgwGeoJsonAdapter extends GeoJsonAdapter {
-    emitter = new EventEmitter();
+    emitter: StrictEventEmitter<EventEmitter, NgwGeoJsonAdapterEvents> =
+      new EventEmitter();
     __onMapMove?: () => void;
     __onMapMoveStart?: () => void;
     __enableMapMoveListener?: (e: LayerAdapter) => void;
@@ -248,12 +251,15 @@ export async function createGeoJsonAdapter(
     }
 
     async propertiesFilter(
-      filters: PropertiesFilter,
+      filters?: PropertiesFilter | null,
       opt?: FilterOptions,
     ): Promise<void> {
       abort();
       if (this.filter && _fullDataLoad) {
         this.filter((e) => {
+          if (!filters) {
+            return true;
+          }
           const props_ =
             e.feature &&
             e.feature.properties &&
@@ -267,7 +273,7 @@ export async function createGeoJsonAdapter(
         if (this.clearLayer) {
           this.clearLayer();
         }
-        const data = await getData(filters, {
+        const data = await getData(filters ?? undefined, {
           ...opt,
           srs: this.options.srs,
         });

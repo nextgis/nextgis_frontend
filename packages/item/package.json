@@ -10,7 +10,8 @@
   "dependencies": {
     "@nextgis/tree": "4.0.0-rc.0",
     "@types/events": "^3.0.0",
-    "events": "*"
+    "events": "*",
+    "strict-event-emitter-types": "^2.0.0"
   },
   "devDependencies": {
     "@nextgis/build-tools": "4.0.0-rc.0"

@@ -5,6 +5,12 @@ import type { GeocoderOptions } from './GeocoderOptions';
 export { Geocoder, GeocoderOptions };
 export { BaseProvider } from './providers/BaseProvider';
 export * from './providers/BaseProviderOptions';
+export type {
+  NgwProviderOptions,
+  NgwSearchItem,
+  RenderSearchItem,
+  SearchResource,
+} from './providers/NgwProvider';
 export { NgwProvider } from './providers/NgwProvider';
 export { NominatimProvider } from './providers/NominatimProvider';
 export * from './types/ResultItem';

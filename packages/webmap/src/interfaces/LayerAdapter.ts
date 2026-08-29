@@ -7,7 +7,7 @@ import type {
   LngLatBoundsArray,
   Type,
 } from '@nextgis/utils';
-import type { Feature, GeoJsonObject, Geometry } from 'geojson';
+import type { Feature, GeoJSON, GeoJsonObject, Geometry } from 'geojson';
 
 import type { LayerLegend } from '../../../ngw-connector/src/types/LegendItem';
 
@@ -31,11 +31,12 @@ export interface OnLayerSelectOptions<
   type: OnLayerSelectType;
 }
 
-/** @deprecated use {@link OnLayerMouseOptions} instead */
-export type OnLayerClickOptions<
+export interface OnLayerClickOptions<
   F extends Feature = Feature,
   L = LayerAdapter,
-> = OnLayerMouseOptions<F, L>;
+> extends OnLayerMouseOptions<F, L> {
+  feature: F;
+}
 
 export interface OnLayerMouseOptions<
   F extends Feature = Feature,
@@ -407,8 +408,8 @@ export interface VectorAdapterOptions<
 
   heightOffset?: number;
 
-  onClick?(opt: OnLayerMouseOptions<F, L>): void;
-  onDoubleClick?(opt: OnLayerMouseOptions<F, L>): void;
+  onClick?(opt: OnLayerClickOptions<F, L>): void;
+  onDoubleClick?(opt: OnLayerClickOptions<F, L>): void;
   onSelect?(opt: OnLayerSelectOptions<F, L>): void;
 
   /** Fired when the mouse enters the layer. */
@@ -431,8 +432,11 @@ export interface GeoJsonAdapterOptions<
   N extends FeatureProperties = Record<string, any>,
 > extends VectorAdapterOptions<F, L, A, N> {
   /** Geojson data */
-  data?: GeoJsonObject;
+  data?: GeoJSON<F['geometry'], F['properties']>;
 }
+
+export type GeoJsonAdapterFeature<O extends GeoJsonAdapterOptions> =
+  O extends GeoJsonAdapterOptions<infer F, any, any, any> ? F : Feature;
 
 export interface RasterAdapterOptions extends AdapterOptions {
   url: string;
@@ -623,7 +627,7 @@ export type FeatureLayerAdapter<
   O extends VectorAdapterOptions = VectorAdapterOptions,
   M = any,
   L = any,
-> = VectorLayerAdapter<M, L, O, Feature<G, P>>;
+> = GeoJsonLayerAdapter<M, L, O, Feature<G, P>>;
 
 /**
  * Adapter for vector data display control.
@@ -686,7 +690,7 @@ export interface VectorLayerAdapter<
    * layer.propertiesFilter([['id', 'eq', 2011]])
    * ```
    */
-  filter?(cb: DataLayerFilter<F, L>): Array<LayerDefinition<Feature, L>>;
+  filter?(cb: DataLayerFilter<F, L>): Array<LayerDefinition<F, L>>;
   /**
    * The way to filter layer objects through serializable expressions.
    * To clear the filter, pass `null` or `undefined` as the second parameter.
@@ -705,7 +709,7 @@ export interface VectorLayerAdapter<
    * ```
    */
   propertiesFilter?(
-    filters: PropertiesFilter<P>,
+    filters?: PropertiesFilter<P> | null,
     options?: FilterOptions<P>,
   ): Promise<void>;
   /**
@@ -745,4 +749,21 @@ export interface VectorLayerAdapter<
   hideLabel?(): void;
   showLabel?(): void;
   isLabelVisible?(): boolean;
+}
+
+/** Adapter for vector data stored as GeoJSON. */
+export interface GeoJsonLayerAdapter<
+  M = any,
+  L = any,
+  O extends VectorAdapterOptions<any, any, any, any, any> =
+    GeoJsonAdapterOptions,
+  F extends Feature = Feature,
+> extends VectorLayerAdapter<M, L, O, F> {
+  getLayers(): LayerDefinition<F, L>[];
+  getSelected(): LayerDefinition<F, L>[];
+  select(findFeatureCb?: DataLayerFilter<F, L> | PropertiesFilter): void;
+  unselect(findFeatureCb?: DataLayerFilter<F, L> | PropertiesFilter): void;
+  addData(geojson: GeoJsonObject): void | Promise<void>;
+  setData(geojson: GeoJsonObject): void | Promise<void>;
+  clearLayer(cb?: (feature: F) => boolean): void | Promise<void>;
 }

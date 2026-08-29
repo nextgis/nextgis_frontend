@@ -1,0 +1,38 @@
+{
+  "name": "@nextgis-example/demo-webmap-identification-multiply",
+  "private": true,
+  "displayName": "Web map feature identification",
+  "description": "Identify and highlight multiple features on a Web map. A panel on the side allows users to view details of each identified feature and switch between them. Click on the map to trigger identification and display details in the panel.",
+  "tags": [
+    "identify",
+    "highlight",
+    "web map",
+    "feature",
+    "panel",
+    "click"
+  ],
+  "ngwMaps": [
+    "ngw-leaflet",
+    "ngw-ol",
+    "ngw-maplibre-gl"
+  ],
+  "scripts": {
+    "start": "yarn run start:leaflet",
+    "start:leaflet": "yarn run -T example --adapter=ngw-leaflet",
+    "start:ol": "yarn run -T example --adapter=ngw-ol",
+    "start:maplibre-gl": "yarn run -T example --adapter=ngw-maplibre-gl",
+    "build": "yarn run -T example:build",
+    "build:leaflet": "yarn run -T example:build --adapter=ngw-leaflet",
+    "build:ol": "yarn run -T example:build --adapter=ngw-ol",
+    "build:maplibre-gl": "yarn run -T example:build --adapter=ngw-maplibre-gl"
+  },
+  "dependencies": {
+    "@nextgis/ngw-kit": "*",
+    "@nextgis/ngw-leaflet": "*"
+  },
+  "devDependencies": {
+    "@nextgis/ngw-maplibre-gl": "*",
+    "@nextgis/ngw-ol": "*",
+    "vite": "^6.3.5"
+  }
+}

@@ -13,14 +13,7 @@
     <input id='copy-input' value="Click button to copy this text to clipboard"/>
     <button id='copy-btn'>Copy</button>
   </div>
-  <script type="module">
-    import { Clipboard } from 'https://unpkg.com/@nextgis/utils/lib/utils.esm-browser.prod.js';
-
-    document.getElementById('copy-btn').addEventListener('click', () => {
-      const text = document.getElementById('copy-input').value;
-      Clipboard.copy(text);
-    });
-  </script>
-</body>
+    <script type="module" src="./index.ts"></script>
+  </body>
 
 </html>

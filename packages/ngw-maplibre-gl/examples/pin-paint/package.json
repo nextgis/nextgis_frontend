@@ -1,0 +1,16 @@
+{
+  "name": "@nextgis-example/ngw-maplibre-gl-pin-paint",
+  "private": true,
+  "displayName": "Properties paint",
+  "description": "Use properties filter to set paint",
+  "scripts": {
+    "start": "yarn run -T example",
+    "build": "yarn run -T example:build"
+  },
+  "dependencies": {
+    "@nextgis/ngw-maplibre-gl": "workspace:*"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}

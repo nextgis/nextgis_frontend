@@ -1,5 +1,11 @@
-import * as fs from 'node:fs';
-import * as path from 'node:path';
+import {
+  existsSync,
+  mkdirSync,
+  readdirSync,
+  rmSync,
+  writeFileSync,
+} from 'node:fs';
+import { dirname, join, sep } from 'node:path';
 
 import ts from 'typescript';
 
@@ -53,7 +59,7 @@ function parseDeclarationModules(content: string): GeneratedModule[] {
 
     modules.push({
       content: `${statements.join('\n\n')}\n`,
-      modulePath: path.join(packageName, `${modulePath}.d.ts`),
+      modulePath: join(packageName, `${modulePath}.d.ts`),
     });
   }
 
@@ -65,16 +71,15 @@ function parseDeclarationModules(content: string): GeneratedModule[] {
 }
 
 function getGeneratedPackages(scopePath: string): string[] {
-  if (!fs.existsSync(scopePath)) {
+  if (!existsSync(scopePath)) {
     return [];
   }
 
-  return fs
-    .readdirSync(scopePath, { withFileTypes: true })
+  return readdirSync(scopePath, { withFileTypes: true })
     .filter(
       (entry) =>
         entry.isDirectory() &&
-        fs.existsSync(path.join(scopePath, entry.name, MARKER_FILE_NAME)),
+        existsSync(join(scopePath, entry.name, MARKER_FILE_NAME)),
     )
     .map((entry) => entry.name);
 }
@@ -84,18 +89,15 @@ export function installDeclarationModules(
   projectPath: string = process.cwd(),
 ) {
   const modules = parseDeclarationModules(content);
-  const scopePath = path.join(projectPath, 'node_modules', GENERATED_SCOPE);
+  const scopePath = join(projectPath, 'node_modules', GENERATED_SCOPE);
   const packageNames = new Set(
-    modules.map(({ modulePath }) => modulePath.split(path.sep)[0]),
+    modules.map(({ modulePath }) => modulePath.split(sep)[0]),
   );
   const generatedPackages = getGeneratedPackages(scopePath);
 
   for (const packageName of packageNames) {
-    const packagePath = path.join(scopePath, packageName);
-    if (
-      fs.existsSync(packagePath) &&
-      !generatedPackages.includes(packageName)
-    ) {
+    const packagePath = join(scopePath, packageName);
+    if (existsSync(packagePath) && !generatedPackages.includes(packageName)) {
       throw new Error(
         `Refusing to overwrite package ${GENERATED_SCOPE}/${packageName}`,
       );
@@ -103,18 +105,18 @@ export function installDeclarationModules(
   }
 
   for (const packageName of generatedPackages) {
-    fs.rmSync(path.join(scopePath, packageName), {
+    rmSync(join(scopePath, packageName), {
       force: true,
       recursive: true,
     });
   }
 
   for (const packageName of packageNames) {
-    const packagePath = path.join(scopePath, packageName);
-    fs.mkdirSync(packagePath, { recursive: true });
-    fs.writeFileSync(path.join(packagePath, MARKER_FILE_NAME), '');
-    fs.writeFileSync(
-      path.join(packagePath, 'package.json'),
+    const packagePath = join(scopePath, packageName);
+    mkdirSync(packagePath, { recursive: true });
+    writeFileSync(join(packagePath, MARKER_FILE_NAME), '');
+    writeFileSync(
+      join(packagePath, 'package.json'),
       `${JSON.stringify(
         {
           name: `${GENERATED_SCOPE}/${packageName}`,
@@ -128,9 +130,9 @@ export function installDeclarationModules(
   }
 
   for (const module of modules) {
-    const declarationPath = path.join(scopePath, module.modulePath);
-    fs.mkdirSync(path.dirname(declarationPath), { recursive: true });
-    fs.writeFileSync(declarationPath, module.content);
+    const declarationPath = join(scopePath, module.modulePath);
+    mkdirSync(dirname(declarationPath), { recursive: true });
+    writeFileSync(declarationPath, module.content);
   }
 
   return {

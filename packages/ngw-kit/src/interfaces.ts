@@ -16,6 +16,7 @@ import type {
   AdapterOptions,
   FilterOptions,
   GeoJsonAdapterOptions,
+  GeoJsonLayerAdapter,
   LayerAdapter,
   LayerAdaptersOptions,
   MainLayerAdapter,
@@ -23,6 +24,7 @@ import type {
   OnLayerMouseOptions,
   PopupOptions,
   RasterAdapterOptions,
+  UpdateLayerAdapterOptions,
   VectorLayerAdapter,
   WebMap,
   WebMapEvents,
@@ -34,7 +36,15 @@ import type {
   WebMapItemLayerRead,
   WebMapItemRootRead,
 } from '@nextgisweb/webmap/type/api';
-import type { Feature, Geometry, Polygon, Position } from 'geojson';
+import type { EventEmitter } from 'events';
+import type {
+  Feature,
+  FeatureCollection,
+  Geometry,
+  Polygon,
+  Position,
+} from 'geojson';
+import type StrictEventEmitter from 'strict-event-emitter-types';
 
 declare module '@nextgis/webmap' {
   interface LayerAdaptersOptions {
@@ -200,7 +210,7 @@ export interface NgwWebmapLayerAdapterEvents extends WebMapEvents {
 export interface ResourceAdapter<
   M = any,
   L = any,
-  O extends GeoJsonAdapterOptions = GeoJsonAdapterOptions,
+  O extends GeoJsonAdapterOptions<any, any, any, any> = GeoJsonAdapterOptions,
   F extends Feature = Feature,
 > extends VectorLayerAdapter<M, L, O, F> {
   resourceId: number;
@@ -219,10 +229,44 @@ export interface ResourceAdapter<
   getIdentificationIds(): Promise<number[] | undefined>;
 }
 
+export interface NgwGeoJsonAdapterEvents {
+  preupdate: UpdateLayerAdapterOptions;
+  updated: FeatureCollection;
+}
+
+export type NgwGeoJsonLayerAdapter<
+  P extends FeatureProperties = FeatureProperties,
+  M = any,
+  L = any,
+> = Omit<
+  ResourceAdapter<
+    M,
+    L,
+    GeoJsonAdapterOptions<Feature<Geometry, P>>,
+    Feature<Geometry, P>
+  >,
+  keyof GeoJsonLayerAdapter
+> &
+  GeoJsonLayerAdapter<
+    M,
+    L,
+    GeoJsonAdapterOptions<Feature<Geometry, P>>,
+    Feature<Geometry, P>
+  > & {
+    emitter: StrictEventEmitter<EventEmitter, NgwGeoJsonAdapterEvents>;
+  };
+
+export type NgwGeoJsonLayerOptions<
+  P extends FeatureProperties = FeatureProperties,
+> = Omit<NgwLayerOptions<'GEOJSON', P>, 'adapter' | 'adapterOptions'> & {
+  adapter: 'GEOJSON';
+  adapterOptions?: Partial<GeoJsonAdapterOptions<Feature<Geometry, P>>>;
+};
+
 export type VectorResourceAdapter<
   M = any,
   L = any,
-  O extends GeoJsonAdapterOptions = GeoJsonAdapterOptions,
+  O extends GeoJsonAdapterOptions<any, any, any, any> = GeoJsonAdapterOptions,
   F extends Feature = Feature,
 > = ResourceAdapter<M, L, O, F> & VectorLayerAdapter<M, L, O, F>;
 

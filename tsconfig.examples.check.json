@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.examples.json",
+  "compilerOptions": {
+    "types": ["node"]
+  },
+  "include": [
+    "./demo/examples/**/*.ts",
+    "./demo/examples/**/*.tsx",
+    "./packages/*/examples/**/*.ts",
+    "./packages/*/examples/**/*.tsx",
+    "./packages/global.d.ts",
+    "./packages/*/src/**/*.d.ts"
+  ],
+  "exclude": [
+    "./packages/ngw-ol/examples/ngw-cog-layer/**"
+  ]
+}

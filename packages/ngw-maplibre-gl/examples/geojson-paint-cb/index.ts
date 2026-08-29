@@ -1,0 +1,39 @@
+import NgwMap from '@nextgis/ngw-maplibre-gl';
+
+import type { FeatureCollection, Point } from 'geojson';
+
+const generatePoints = () => {
+  const points: FeatureCollection<Point> = {
+    type: 'FeatureCollection',
+    features: [],
+  };
+  for (let fry = 0; fry < 5000; fry++) {
+    points.features.push({
+      type: 'Feature',
+      properties: {},
+      geometry: {
+        type: 'Point',
+        coordinates: [
+          Math.ceil(Math.random() * 170),
+          Math.ceil(Math.random() * 80),
+        ],
+      },
+    });
+  }
+  return points;
+};
+
+NgwMap.create({
+  baseUrl: 'https://demo.nextgis.com',
+  target: 'map',
+  osm: true,
+  bounds: [0, 80, 170, 0],
+}).then((ngwMap) => {
+  const colors = ['red', 'green', 'blue', 'purple', 'yellow', 'white'];
+  ngwMap.addGeoJsonLayer({
+    data: generatePoints(),
+    paint: function (feature) {
+      return { color: colors[Math.floor(Math.random() * colors.length)] };
+    },
+  });
+});

@@ -1,0 +1,30 @@
+{
+  "name": "@nextgis-example/demo-geojson-layer",
+  "private": true,
+  "displayName": "GeoJSON data",
+  "description": "Shows how to load and style GeoJSON data on a map from both NextGIS Web and plain sources, with consistent styling options for both.",
+  "ngwMaps": [
+    "ngw-leaflet",
+    "ngw-ol",
+    "ngw-maplibre-gl"
+  ],
+  "scripts": {
+    "start": "yarn run start:leaflet",
+    "start:leaflet": "yarn run -T example --adapter=ngw-leaflet",
+    "start:ol": "yarn run -T example --adapter=ngw-ol",
+    "start:maplibre-gl": "yarn run -T example --adapter=ngw-maplibre-gl",
+    "build": "yarn run -T example:build",
+    "build:leaflet": "yarn run -T example:build --adapter=ngw-leaflet",
+    "build:ol": "yarn run -T example:build --adapter=ngw-ol",
+    "build:maplibre-gl": "yarn run -T example:build --adapter=ngw-maplibre-gl"
+  },
+  "dependencies": {
+    "@nextgis/ngw-leaflet": "*"
+  },
+  "devDependencies": {
+    "@nextgis/ngw-maplibre-gl": "*",
+    "@nextgis/ngw-ol": "*",
+    "@types/geojson": "^7946.0.16",
+    "vite": "^6.3.5"
+  }
+}

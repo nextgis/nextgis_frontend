@@ -1,0 +1,11 @@
+{
+  "name": "@nextgis/examples",
+  "private": true,
+  "scripts": {
+    "example": "node ../../scripts/startExample.mjs",
+    "example:build": "node ../../scripts/buildExamples.mjs"
+  },
+  "workspaces": [
+    "*"
+  ]
+}

@@ -1,4 +1,4 @@
-import { QmsKit } from '@nextgis/qms-kit';
+import { createQmsAdapter } from '@nextgis/qms-kit';
 
 import type { Type } from '@nextgis/utils';
 import type { MainLayerAdapter, TileAdapterOptions } from '@nextgis/webmap';
@@ -15,7 +15,7 @@ export async function createBasemapLayerAdapter({
     if (qms) {
       const qms_ = JSON.parse(qms);
       const adapter = Promise.resolve(
-        QmsKit.utils.createQmsAdapter(webMap, {
+        createQmsAdapter(webMap, {
           qms: qms_,
           baselayer: true,
         }),

@@ -1,0 +1,17 @@
+{
+  "name": "@nextgis-example/qms-maplibre-gl-qms-services",
+  "private": true,
+  "displayName": "QMS services with MapLibre GL",
+  "description": "Add TMS and WMS services from NextGIS QMS to a MapLibre GL map",
+  "scripts": {
+    "start": "yarn run -T example",
+    "build": "yarn run -T example:build"
+  },
+  "dependencies": {
+    "@nextgis/qms-maplibre-gl": "workspace:*",
+    "maplibre-gl": "^6.5.0"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}

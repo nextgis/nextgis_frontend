@@ -1,6 +1,12 @@
 import { EventEmitter } from 'events';
 
-import type { ItemBasePropertyOptions, ItemOptions } from '../interfaces';
+import type StrictEventEmitter from 'strict-event-emitter-types';
+
+import type {
+  ItemBasePropertyOptions,
+  ItemOptions,
+  ItemPropertyEvents,
+} from '../interfaces';
 import type { Item } from '../Item';
 
 export abstract class BaseProperty<
@@ -10,7 +16,10 @@ export abstract class BaseProperty<
 > {
   options: O;
 
-  emitter = new EventEmitter();
+  readonly emitter: StrictEventEmitter<
+    EventEmitter,
+    ItemPropertyEvents<V, O, I>
+  > = new EventEmitter();
   name: string;
 
   item: I;

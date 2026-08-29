@@ -221,10 +221,10 @@ export abstract class VectorAdapter<
   }
 
   async propertiesFilter(
-    filters: PropertiesFilter,
+    filters?: PropertiesFilter | null,
     options?: FilterOptions,
   ): Promise<void> {
-    this._filterProperties = filters;
+    this._filterProperties = filters ?? undefined;
     this._updatePropertiesFilter();
   }
 

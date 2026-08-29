@@ -1,12 +1,33 @@
+import { spawnSync } from 'node:child_process';
 import { existsSync, lstatSync, readdirSync, readFileSync } from 'node:fs';
+import { createRequire } from 'node:module';
 import path from 'node:path';
+import process from 'node:process';
 import { fileURLToPath, URL } from 'node:url';
+
+import ts from 'typescript';
+
+import {
+  getExampleEntryPath,
+  getExampleManifestPath,
+} from './examplePackage.mjs';
 
 const pkgRoot = path.join(
   fileURLToPath(new URL(import.meta.url)),
   '..',
   '..',
   '..',
+);
+const rootPackagePath = path.join(pkgRoot, 'package.json');
+const require = createRequire(
+  existsSync(rootPackagePath) ? rootPackagePath : import.meta.url,
+);
+const viteBin = path.resolve(
+  path.dirname(require.resolve('vite')),
+  '..',
+  '..',
+  'bin',
+  'vite.js',
 );
 
 const isDirectory = (source) => lstatSync(source).isDirectory();
@@ -82,23 +103,120 @@ function replaceAbsolutePathToCdn(line, packages) {
   return line;
 }
 
-function prepareHtml(html, examplePath, packages) {
-  const modulePath = path.join(examplePath, 'index.js');
-  const moduleTag =
-    /^([ \t]*)<script type="module" src="\.\/index\.js"><\/script>/m;
-  const hasModule = existsSync(modulePath);
-  const hasModuleTag = moduleTag.test(html);
+function getExampleImportMap(meta, packages) {
+  const imports = { ...(meta.browserImports || {}) };
+  for (const dependency of Object.keys(meta.dependencies || {})) {
+    const pkg = packages.find((item) => item.package.name === dependency);
+    if (pkg?.package.module) {
+      const modulePath = pkg.package.buildOptions?.formats?.includes(
+        'esm-browser',
+      )
+        ? pkg.package.module.replace('.esm-bundler.js', '.esm-browser.js')
+        : pkg.package.module;
+      imports[dependency] =
+        `https://cdn.jsdelivr.net/npm/${dependency}@${pkg.package.version}/` +
+        modulePath;
+    }
+  }
+  return imports;
+}
+
+function inlineViteAssets(html, distPath) {
+  html = html.replace(
+    /<script([^>]*?)src=["']([^"']+)["']([^>]*)><\/script>/g,
+    (_match, before, src, after) => {
+      const script = readFileSync(
+        path.join(distPath, src.replace(/^\//, '')),
+        'utf8',
+      ).replace(/<\/script/gi, '<\\/script');
+      return `<script${before}${after}>${script}</script>`;
+    },
+  );
+  return html.replace(
+    /<link([^>]*?)rel=["']stylesheet["']([^>]*?)href=["']([^"']+)["']([^>]*)>/g,
+    (_match, _before, _middle, href) => {
+      const css = readFileSync(
+        path.join(distPath, href.replace(/^\//, '')),
+        'utf8',
+      );
+      return `<style>${css}</style>`;
+    },
+  );
+}
+
+function buildExampleHtml(examplePath) {
+  const distPath = path.join(
+    pkgRoot,
+    'temp',
+    'demo-examples',
+    getIdFromPath(examplePath),
+  );
+  const result = spawnSync(
+    process.execPath,
+    [
+      viteBin,
+      'build',
+      examplePath,
+      '--outDir',
+      distPath,
+      '--emptyOutDir',
+      '--base',
+      './',
+      '--logLevel',
+      'error',
+    ],
+    { cwd: pkgRoot, encoding: 'utf8' },
+  );
+  if (result.status !== 0) {
+    throw new Error(result.stderr || result.stdout);
+  }
+  return inlineViteAssets(
+    readFileSync(path.join(distPath, 'index.html'), 'utf8'),
+    distPath,
+  );
+}
+
+function prepareHtml(html, examplePath, packages, meta) {
+  const modulePath = getExampleEntryPath(examplePath);
+  const moduleName = modulePath && path.basename(modulePath);
+  const moduleTag = moduleName
+    ? new RegExp(
+        `^([ \\t]*)<script type="module" src="\\./${moduleName.replace('.', '\\.')}\\"><\\/script>`,
+        'm',
+      )
+    : undefined;
+  const hasModule = Boolean(modulePath);
+  const hasModuleTag = moduleTag ? moduleTag.test(html) : false;
   if (hasModule !== hasModuleTag) {
     throw new Error(`External module script not found in ${examplePath}`);
   }
   if (hasModule) {
     html = html.replace(moduleTag, (_match, indent) => {
-      const moduleScript = readFileSync(modulePath, 'utf8')
+      const source = readFileSync(modulePath, 'utf8');
+      const moduleScript = (/\.tsx?$/.test(moduleName)
+        ? ts.transpileModule(source, {
+            compilerOptions: {
+              jsx: ts.JsxEmit.ReactJSX,
+              module: ts.ModuleKind.ESNext,
+              target: ts.ScriptTarget.ES2022,
+            },
+            fileName: moduleName,
+          }).outputText
+        : source
+      )
         .trimEnd()
         .split('\n')
         .map((line) => `${indent}  ${line}`)
         .join('\n');
-      return `${indent}<script type="module">\n${moduleScript}\n${indent}</script>`;
+      const imports = getExampleImportMap(meta, packages);
+      const importMapJson = JSON.stringify({ imports }, null, 2)
+        .split('\n')
+        .map((line) => `${indent}  ${line}`)
+        .join('\n');
+      const importMap = Object.keys(imports).length
+        ? `${indent}<script type="importmap">\n${importMapJson}\n${indent}</script>\n\n`
+        : '';
+      return `${importMap}${indent}<script type="module">\n${moduleScript}\n${indent}</script>`;
     });
   }
 
@@ -140,14 +258,18 @@ function getExamples(libPath, pkg, packages) {
         const id = getIdFromPath(examplePath);
         if (existsSync(examplePath) && isDirectory(examplePath)) {
           const htmlPath = path.join(examplePath, 'index.html');
-          const metaPath = path.join(examplePath, 'index.json');
-          if (existsSync(htmlPath) && existsSync(metaPath)) {
+          const metaPath = getExampleManifestPath(examplePath);
+          if (existsSync(htmlPath) && metaPath) {
             const meta = JSON.parse(readFileSync(metaPath, 'utf8'));
-            const html = prepareHtml(
-              readFileSync(htmlPath, 'utf8'),
-              examplePath,
-              packages,
-            );
+            if (meta.skipDemo) return;
+            const html = meta.bundleForDemo
+              ? buildExampleHtml(examplePath)
+              : prepareHtml(
+                  readFileSync(htmlPath, 'utf8'),
+                  examplePath,
+                  packages,
+                  meta,
+                );
 
             const filteredPackages = !meta.ngwMaps
               ? []
@@ -167,7 +289,7 @@ function getExamples(libPath, pkg, packages) {
               id,
               html,
               page: 'example',
-              name: meta.name,
+              name: meta.displayName || meta.name,
               description: meta.description,
               tags: meta.tags || [],
               ngwMaps,

@@ -7,51 +7,11 @@
   <title>Ngw Uploader Input Example</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-  <script type="text/javascript" src="../../lib/ngw-uploader-input.global.js"></script>
-
 <body>
 
   <div id='uploader'></div>
   <p id='status'></p>
-
-  <script>
-    const uploader = document.getElementById('uploader');
-    const statusUpload = document.getElementById('status');
-
-    const ngwUploader = new NgwUploaderInput({
-      baseUrl: 'https://sandbox.nextgis.com'
-    });
-
-    ngwUploader.emitter.on('status:change', function (evt) {
-      statusUpload.innerHTML = evt.message;
-    });
-
-    const createInput = function () {
-      const input = ngwUploader.createInput({
-        parentId: 0,
-        // Way to change resource name
-        createName: function (name) {
-          return name + '-' + new Date().getTime();
-        },
-        success: function (newStyle) {
-          // Refresh input
-          createInput();
-          ngwUploader.createWms({...newStyle, parentId: 0});
-        },
-        error: function (er) {
-          // Refresh input
-          createInput();
-          console.log(er);
-        },
-      });
-      uploader.innerHTML = '';
-      uploader.appendChild(input);
-    }
-    createInput();
-  </script>
-
-</body>
+    <script type="module" src="./index.ts"></script>
+  </body>
 
 </html>

@@ -1,0 +1,40 @@
+{
+  "name": "@nextgis-example/demo-ngw-zoom-to-feature",
+  "private": true,
+  "displayName": "Zoom to NGW Layer Feature",
+  "description": "Demonstrates how to zoom and fit the map to a selected feature from an NGW layer. The example also shows how to paginate through a list of features and interactively zoom to the feature’s extent when clicked.",
+  "tags": [
+    "zoom to",
+    "go to",
+    "fit",
+    "paginate",
+    "table",
+    "list"
+  ],
+  "ngwMaps": [
+    "ngw-leaflet",
+    "ngw-ol",
+    "ngw-maplibre-gl"
+  ],
+  "scripts": {
+    "start": "yarn run start:leaflet",
+    "start:leaflet": "yarn run -T example --adapter=ngw-leaflet",
+    "start:ol": "yarn run -T example --adapter=ngw-ol",
+    "start:maplibre-gl": "yarn run -T example --adapter=ngw-maplibre-gl",
+    "build": "yarn run -T example:build",
+    "build:leaflet": "yarn run -T example:build --adapter=ngw-leaflet",
+    "build:ol": "yarn run -T example:build --adapter=ngw-ol",
+    "build:maplibre-gl": "yarn run -T example:build --adapter=ngw-maplibre-gl"
+  },
+  "dependencies": {
+    "@nextgis/ngw-connector": "*",
+    "@nextgis/ngw-kit": "*",
+    "@nextgis/ngw-leaflet": "*"
+  },
+  "devDependencies": {
+    "@nextgis/ngw-maplibre-gl": "*",
+    "@nextgis/ngw-ol": "*",
+    "@types/geojson": "^7946.0.16",
+    "vite": "^6.3.5"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "@nextgis-example/geocoder-ngw-geocoder",
+  "private": true,
+  "displayName": "Geocoding by NGW vector layer",
+  "description": "Show a list of unique values by fields from the resource of the NGV vector layer",
+  "scripts": {
+    "start": "vite --host 0.0.0.0 --port 8080 --strictPort --open",
+    "build": "vite build --base=./"
+  },
+  "dependencies": {
+    "@nextgis/geocoder": "workspace:*",
+    "@nextgis/ngw-leaflet": "workspace:*",
+    "@nextgis/utils": "workspace:*"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}

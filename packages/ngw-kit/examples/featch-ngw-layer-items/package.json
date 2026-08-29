@@ -1,0 +1,17 @@
+{
+  "name": "@nextgis-example/ngw-kit-featch-ngw-layer-items",
+  "private": true,
+  "displayName": "Fetch NGW Layer items",
+  "description": "Use NgwKit to load items from NGW vector layer",
+  "scripts": {
+    "start": "vite --host 0.0.0.0 --port 8080 --strictPort --open",
+    "build": "vite build --base=./"
+  },
+  "dependencies": {
+    "@nextgis/ngw-connector": "workspace:*",
+    "@nextgis/ngw-kit": "workspace:*"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}

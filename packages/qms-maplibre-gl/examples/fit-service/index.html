@@ -24,26 +24,11 @@
         padding: 6px;
       }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
-    <script src="../../lib/qms-maplibre-gl.global.js"></script>
-  </head>
+
+</head>
   <body>
     <button id="fit">Fit to service extent</button>
     <div id="map"></div>
-    <script>
-      const qmsId = 4646;
-      const map = new maplibregl.Map({
-        container: 'map',
-        style: { version: 8, sources: {}, layers: [] },
-      });
-      map.addControl(new maplibregl.NavigationControl(), 'top-left');
-
-      map.on('load', () =>
-        QmsMaplibreGL.addQmsLayer(map, qmsId, { fit: true }),
-      );
-      document.getElementById('fit').addEventListener('click', () => {
-        QmsMaplibreGL.fitQmsService(map, qmsId);
-      });
-    </script>
+    <script type="module" src="./index.ts"></script>
   </body>
 </html>

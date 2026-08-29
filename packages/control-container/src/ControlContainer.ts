@@ -1,4 +1,4 @@
-import * as dom from '@nextgis/dom';
+import { getElement } from '@nextgis/dom';
 
 import { getControlOptions } from './controlOptions';
 
@@ -81,7 +81,7 @@ export class ControlContainer {
     if (!this.ownsContainer) {
       return this;
     }
-    const el_ = dom.getElement(el);
+    const el_ = getElement(el);
     if (el_) {
       el_.appendChild(this._container);
     }

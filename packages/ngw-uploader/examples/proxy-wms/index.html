@@ -4,8 +4,7 @@
     <meta charset="utf-8" />
     <title>Ngw Uploader Example</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="../../lib/ngw-uploader.global.js"></script>
-    <style>
+<style>
       #connect-wms {
         display: block;
       }
@@ -40,134 +39,6 @@
       <p>Result:</p>
       <div id="wms-data-block">Loading...</div>
     </div>
-
-    <script>
-      const input = document.getElementById('wms-url');
-      const button = document.getElementById('connect-wms');
-      const resultBlock = document.getElementById('result-block');
-      const statusUpload = document.getElementById('status');
-      const wmsDataBlock = document.getElementById('wms-data-block');
-      const wmsConnectBlock = document.getElementById('wms-connect-block');
-
-      const wmsLayersBlock = document.getElementById('wms-layers-block');
-      const createWmsLayersBtn = document.getElementById('create-wms-layers');
-      const layersSelect = document.getElementById('layers-select');
-
-      const ngwUploader = new NgwUploader({
-        baseUrl: 'https://sandbox.nextgis.com',
-      });
-
-      ngwUploader.emitter.on('status:change', (evt) => {
-        statusUpload.innerHTML = evt.message;
-      });
-
-      let parentId = 0;
-
-      button.onclick = () => {
-        // Create group for all new resources
-        ngwUploader
-          .createGroup({
-            displayName: 'wms_proxy_example_' + new Date().toISOString(),
-            parentId: 0,
-          })
-          .then((group) => {
-            parentId = group.id;
-            ngwUploader
-              .createWmsConnection({
-                name: 'custom',
-                parentId,
-                url: input.value,
-                version: '1.1.1',
-              })
-              .then(onWmsConectionCreated);
-          });
-      };
-
-      function onWmsConectionCreated(newWmsConnection) {
-        resultBlock.style.display = 'block';
-        ngwUploader.getResource(newWmsConnection.id).then((wmsData) => {
-          wmsConnectBlock.style.display = 'none';
-          wmsDataBlock.innerHTML = '';
-          wmsLayersBlock.style.display = 'block';
-          wmsDataBlock.appendChild(document.createElement('pre')).innerHTML =
-            JSON.stringify(wmsData, null, 2);
-
-          const layers = wmsData.wmsclient_connection.capcache.layers;
-          const layersToCreate = {};
-
-          const onCheckBoxChange = function (l) {
-            layersToCreate[l.id] = this.checked ? l.title : false;
-          };
-
-          const createPromise = (id, title) => {
-            return ngwUploader
-              .createWmsConnectedLayer({
-                id: wmsData.resource.id,
-                parentId: wmsData.resource.parent.id,
-                name: layersToCreate[id],
-                wmslayers: [id],
-              })
-              .then((newLayer) => {
-                newLayer.name = title;
-                return newLayer;
-              });
-          };
-
-          for (let fry = 0; fry < layers.length; fry++) {
-            const layer = layers[fry];
-            const label = document.createElement('checkbox');
-            const checkbox = document.createElement('input');
-            checkbox.setAttribute('type', 'checkbox');
-            label.appendChild(checkbox);
-            label.appendChild(document.createTextNode(layer.title));
-            checkbox.onchange = onCheckBoxChange.bind(checkbox, layer);
-            layersSelect.appendChild(label);
-          }
-          createWmsLayersBtn.onclick = () => {
-            const promises = [];
-            for (const l in layersToCreate) {
-              if (layersToCreate[l]) {
-                const promise = createPromise(Number(l), layersToCreate[l]);
-                promises.push(promise);
-              }
-            }
-            if (promises.length) {
-              createWmsLayersBtn.disabled = true;
-              window.Promise.all(promises).then((values) => {
-                const layers = [];
-                for (let fry = 0; fry < values.length; fry++) {
-                  const layer = values[fry];
-                  layers.push({
-                    keyname: 'image' + fry,
-                    display_name: layer.name,
-                    parentId: parentId,
-                    resource_id: layer.id,
-                  });
-                }
-                ngwUploader
-                  .createWms({
-                    name: 'proxy',
-                    parentId: parentId,
-                    layers: layers,
-                  })
-                  .then((newWmsService) => {
-                    ngwUploader
-                      .getResource(newWmsService.id)
-                      .then((wmsService) => {
-                        wmsLayersBlock.style.display = 'none';
-                        wmsDataBlock.innerHTML = '';
-                        wmsDataBlock.appendChild(
-                          document.createElement('pre'),
-                        ).innerHTML = JSON.stringify(wmsService, null, 2);
-                      });
-                  });
-              });
-            } else {
-              statusUpload.innerHTML = 'no one layer selected';
-            }
-          };
-        });
-      }
-    </script>
+    <script type="module" src="./index.ts"></script>
   </body>
 </html>
