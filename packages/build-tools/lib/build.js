@@ -57,6 +57,7 @@ export default async function run() {
   } else {
     allTargets = fuzzyMatchTarget(targets, buildAllMatching);
   }
+
   await runPrebuilds(allTargets);
   await buildAll(allTargets);
 
@@ -115,31 +116,87 @@ function collectPackages(target, packages, visited) {
   if (!directory) {
     return;
   }
+
   const pkg = require(path.join(directory, 'package.json'));
   const dependencies = {
     ...pkg.dependencies,
     ...pkg.peerDependencies,
     ...pkg.optionalDependencies,
   };
+
   for (const dependency of Object.keys(dependencies)) {
     if (dependency.startsWith('@nextgis/')) {
       collectPackages(dependency.replace('@nextgis/', ''), packages, visited);
     }
   }
+
   packages.push({ directory, pkg });
 }
 
 /**
- * Builds all the targets in parallel.
+ * Returns local @nextgis dependencies required by the target.
+ *
+ * @param {string} target
+ * @returns {string[]}
+ */
+function getBuildDependencies(target) {
+  const name = target.replace(/^packages[\\/]/, '');
+  const directory = findPackageDir(name);
+
+  if (!directory) {
+    return [];
+  }
+
+  const pkg = require(path.join(directory, 'package.json'));
+  const dependencies = {
+    ...pkg.dependencies,
+    ...pkg.peerDependencies,
+    ...pkg.optionalDependencies,
+  };
+
+  return Object.keys(dependencies)
+    .filter((dependency) => dependency.startsWith('@nextgis/'))
+    .map((dependency) => dependency.replace('@nextgis/', ''));
+}
+
+/**
+ * Builds all targets respecting package dependencies.
+ * Independent packages are still built in parallel.
+ *
  * @param {Array<string>} targets - An array of targets to build.
  * @returns {Promise<void>} - A promise representing the build process.
  */
 async function buildAll(targets) {
-  await runParallel(cpus().length, targets, build);
+  const pending = new Set(targets);
+
+  while (pending.size) {
+    const pendingNames = new Set(
+      [...pending].map((target) => target.replace(/^packages[\\/]/, '')),
+    );
+
+    const ready = [...pending].filter((target) => {
+      const dependencies = getBuildDependencies(target);
+
+      return dependencies.every((dependency) => !pendingNames.has(dependency));
+    });
+
+    if (!ready.length) {
+      throw new Error(
+        `Circular package dependencies: ${[...pending].join(', ')}`,
+      );
+    }
+
+    await runParallel(cpus().length, ready, build);
+
+    for (const target of ready) {
+      pending.delete(target);
+    }
+  }
 }
 
 /**
  * Runs iterator function in parallel.
+ *
  * @template T - The type of items in the data source
  * @param {number} maxConcurrency - The maximum concurrency.
  * @param {Array<T>} source - The data source
@@ -147,9 +204,9 @@ async function buildAll(targets) {
  * @returns {Promise<void[]>} - A Promise array containing all iteration results.
  */
 async function runParallel(maxConcurrency, source, iteratorFn) {
-  /**@type {Promise<void>[]} */
+  /** @type {Promise<void>[]} */
   const ret = [];
-  /**@type {Promise<void>[]} */
+  /** @type {Promise<void>[]} */
   const executing = [];
 
   for (const item of source) {
