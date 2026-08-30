@@ -13,12 +13,26 @@ export class BaseAdapter<
     public options: O,
   ) {
     if (options.order !== undefined) {
-      const pane = 'order-' + options.order;
+      const order = options.order;
+      const pane = 'order-' + order;
       let exist = map.getPane(pane);
       if (!exist) {
         exist = map.createPane(pane);
+
+        const nextPane = Object.entries(map.getPanes())
+          .filter(([name]) => name.startsWith('order-'))
+          .map(([name, element]) => ({
+            element,
+            order: Number(name.slice('order-'.length)),
+          }))
+          .filter((candidate) => candidate.order > order)
+          .sort((a, b) => a.order - b.order)[0]?.element;
+
+        if (nextPane) {
+          exist.parentElement?.insertBefore(exist, nextPane);
+        }
       }
-      exist.style.zIndex = String(Math.round(options.order * 100));
+      exist.style.zIndex = String(Math.round(order * 100));
       this.pane = pane;
     }
   }
