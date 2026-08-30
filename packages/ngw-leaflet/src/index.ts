@@ -9,7 +9,7 @@ import type { NgwMapOptions } from '@nextgis/ngw-map';
 import type { Map } from 'leaflet';
 
 import 'leaflet/dist/leaflet.css';
-import '@nextgis/leaflet-map-adapter/lib/leaflet-map-adapter.css';
+import '@nextgis/leaflet-map-adapter/src/style';
 import './leaflet-style-override.css';
 
 export type * from '@nextgis/ngw-map';

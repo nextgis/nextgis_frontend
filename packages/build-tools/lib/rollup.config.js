@@ -259,6 +259,10 @@ function createConfig(format, output, plugins = []) {
         })
         .flatMap((/** @type {string} */ baseDir) => [
           {
+            find: new RegExp(`^${e}/src/style$`),
+            replacement: path.join(baseDir, packageName, 'src', 'style.ts'),
+          },
+          {
             find: new RegExp(`^${e}/lib/(.*)`),
             replacement: path.join(baseDir, packageName, 'lib', '$1'),
           },

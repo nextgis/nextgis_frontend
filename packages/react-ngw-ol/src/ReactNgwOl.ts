@@ -6,7 +6,7 @@ import type { MapContainerProps } from '@nextgis/react-ngw-map';
 import type Map from 'ol/Map';
 
 import 'ol/ol.css';
-import '@nextgis/ol-map-adapter/lib/ol-map-adapter.css';
+import '@nextgis/ol-map-adapter/src/style';
 
 export function ReactNgwOl<
   Props extends MapContainerProps = MapContainerProps<Map>,

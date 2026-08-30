@@ -31,20 +31,6 @@ setWorkerUrl(workerUrl);
   },
 };
 
-const localPackageCssPlugin = {
-  name: 'local-package-css',
-  resolveId(id) {
-    // The adapter source imports its original CSS files. Its generated lib
-    // stylesheet is only needed when consuming the published bundle.
-    if (/^@nextgis\/([^/]+)\/lib\/\1\.css$/.test(id)) {
-      return '\0nextgis-local-package.css';
-    }
-  },
-  load(id) {
-    if (id === '\0nextgis-local-package.css') return '';
-  },
-};
-
 export function createExampleViteConfig(root, adapter) {
   const pkg = readExamplePackage(root) || {};
   const variants = pkg.ngwMaps || [];
@@ -70,9 +56,6 @@ export function createExampleViteConfig(root, adapter) {
     define: { __BROWSER__: 'true' },
     resolve: { alias: aliases, dedupe: ['react', 'react-dom'] },
     optimizeDeps: maplibre ? { exclude: ['maplibre-gl'] } : undefined,
-    plugins: [
-      localPackageCssPlugin,
-      ...(maplibre ? [maplibreWorkerPlugin] : []),
-    ],
+    plugins: maplibre ? [maplibreWorkerPlugin] : [],
   };
 }

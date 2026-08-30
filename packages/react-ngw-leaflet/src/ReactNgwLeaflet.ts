@@ -8,7 +8,7 @@ import type { MapContainerProps } from '@nextgis/react-ngw-map';
 import type { Map } from 'leaflet';
 
 import 'leaflet/dist/leaflet.css';
-import '@nextgis/leaflet-map-adapter/lib/leaflet-map-adapter.css';
+import '@nextgis/leaflet-map-adapter/src/style';
 import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
 import iconUrl from 'leaflet/dist/images/marker-icon.png';
 import shadowUrl from 'leaflet/dist/images/marker-shadow.png';

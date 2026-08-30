@@ -14,7 +14,7 @@ import type { FeatureProperties } from '@nextgis/utils';
 import type { Map } from 'maplibre-gl';
 
 import 'maplibre-gl/dist/maplibre-gl.css';
-import '@nextgis/maplibre-gl-map-adapter/lib/maplibre-gl-map-adapter.css';
+import '@nextgis/maplibre-gl-map-adapter/src/style';
 
 export type * from '@nextgis/ngw-map';
 
