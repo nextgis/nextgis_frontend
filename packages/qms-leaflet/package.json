@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/qms-leaflet",
-  "version": "4.0.0-rc.1",
+  "version": "4.0.0-rc.2",
   "description": "QuickMapServices layers for Leaflet",
   "main": "lib/qms-leaflet.global.prod.js",
   "module": "lib/qms-leaflet.esm-bundler.js",
@@ -8,13 +8,13 @@
   "jsdelivr": "lib/qms-leaflet.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/qms-core": "4.0.0-rc.1"
+    "@nextgis/qms-core": "4.0.0-rc.2"
   },
   "peerDependencies": {
     "leaflet": ">=1.5.0"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "4.0.0-rc.1",
+    "@nextgis/build-tools": "4.0.0-rc.2",
     "@types/leaflet": "^1.7.5",
     "leaflet": "1.7.1"
   },

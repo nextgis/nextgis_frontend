@@ -185,6 +185,7 @@ watch(route, (newRoute) => {
           v-model:expanded="expanded"
           :nodes="items"
           :selected="selected"
+          :selected-color="$q.dark.isActive ? 'light-blue-3' : 'primary'"
           :filter="search"
           :filter-method="filterMethod"
           loading

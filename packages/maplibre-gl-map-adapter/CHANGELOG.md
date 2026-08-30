@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0-rc.2](https://github.com/nextgis/nextgis_frontend/compare/v4.0.0-rc.1...v4.0.0-rc.2) (2026-08-30)
+
+
+### Bug Fixes
+
+* **maplibre-gl-map-adapter:** select full polygon instead of rendered tile fragment ([b3a2570](https://github.com/nextgis/nextgis_frontend/commit/b3a2570c9c7d9d6ca384b56bfa6511791a3f636a))
+
+
+
+
+
 # [4.0.0-rc.1](https://github.com/nextgis/nextgis_frontend/compare/v4.0.0-rc.0...v4.0.0-rc.1) (2026-08-29)
 
 **Note:** Version bump only for package @nextgis/maplibre-gl-map-adapter
