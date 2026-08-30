@@ -96,7 +96,7 @@ function createFieldInput(resourceId: number, field?: FeatureLayerFieldRead) {
     displayName.value = field.display_name;
     dataType.value = field.datatype;
     const removeBtn = document.createElement('button');
-    removeBtn.innerHTML = 'удалить';
+    removeBtn.innerHTML = 'delete';
     element.appendChild(removeBtn);
     removeBtn.onclick = () => {
       connector
@@ -113,7 +113,7 @@ function createFieldInput(resourceId: number, field?: FeatureLayerFieldRead) {
         });
     };
     const updateBtn = document.createElement('button');
-    updateBtn.innerHTML = 'обновить';
+    updateBtn.innerHTML = 'update';
     element.appendChild(updateBtn);
     updateBtn.onclick = () => {
       connector
@@ -131,7 +131,7 @@ function createFieldInput(resourceId: number, field?: FeatureLayerFieldRead) {
     };
   } else {
     const addBtn = document.createElement('button');
-    addBtn.innerHTML = 'добавить';
+    addBtn.innerHTML = 'add';
     element.appendChild(addBtn);
     addBtn.onclick = () => {
       connector

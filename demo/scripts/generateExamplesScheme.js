@@ -103,8 +103,25 @@ function replaceAbsolutePathToCdn(line, packages) {
   return line;
 }
 
-function getExampleImportMap(meta, packages) {
-  const imports = { ...(meta.browserImports || {}) };
+function addExternalImport(imports, dependency, bundle = false) {
+  const packagePath = path.join(
+    pkgRoot,
+    'node_modules',
+    dependency,
+    'package.json',
+  );
+  if (!existsSync(packagePath)) return;
+
+  const externalPackage = JSON.parse(readFileSync(packagePath, 'utf8'));
+  const baseUrl = `https://cdn.jsdelivr.net/npm/${dependency}@${externalPackage.version}/`;
+  imports[dependency] =
+    baseUrl +
+    (bundle ? '+esm' : externalPackage.module?.replace(/^\.\//, '') || '+esm');
+  return { baseUrl, package: externalPackage };
+}
+
+function getExampleImportMap(meta, packages, moduleSpecifiers) {
+  const imports = {};
   for (const dependency of Object.keys(meta.dependencies || {})) {
     const pkg = packages.find((item) => item.package.name === dependency);
     if (pkg?.package.module) {
@@ -116,9 +133,27 @@ function getExampleImportMap(meta, packages) {
       imports[dependency] =
         `https://cdn.jsdelivr.net/npm/${dependency}@${pkg.package.version}/` +
         modulePath;
+      continue;
+    }
+
+    if (dependency.startsWith('@types/')) continue;
+
+    const external = addExternalImport(imports, dependency);
+    const hasSubpathImports = moduleSpecifiers.some((specifier) =>
+      specifier.startsWith(`${dependency}/`),
+    );
+    if (external && hasSubpathImports) {
+      imports[`${dependency}/`] = external.baseUrl;
+      for (const childDependency of Object.keys(
+        external.package.dependencies || {},
+      )) {
+        if (!childDependency.startsWith('@types/')) {
+          addExternalImport(imports, childDependency, true);
+        }
+      }
     }
   }
-  return imports;
+  return { ...imports, ...(meta.browserImports || {}) };
 }
 
 function inlineViteAssets(html, distPath) {
@@ -195,23 +230,25 @@ function prepareHtml(html, examplePath, packages, meta) {
       const bodyIndent = html.match(/^([ \t]*)<body(?:\s|>)/m)?.[1] || '';
       const indent = `${bodyIndent}  `;
       const source = readFileSync(modulePath, 'utf8');
-      const moduleScript = (
-        /\.tsx?$/.test(moduleName)
-          ? ts.transpileModule(source, {
-              compilerOptions: {
-                jsx: ts.JsxEmit.ReactJSX,
-                module: ts.ModuleKind.ESNext,
-                target: ts.ScriptTarget.ES2022,
-              },
-              fileName: moduleName,
-            }).outputText
-          : source
-      )
+      const compiledSource = /\.tsx?$/.test(moduleName)
+        ? ts.transpileModule(source, {
+            compilerOptions: {
+              jsx: ts.JsxEmit.ReactJSX,
+              module: ts.ModuleKind.ESNext,
+              target: ts.ScriptTarget.ES2022,
+            },
+            fileName: moduleName,
+          }).outputText
+        : source;
+      const moduleSpecifiers = ts
+        .preProcessFile(compiledSource)
+        .importedFiles.map(({ fileName }) => fileName);
+      const moduleScript = compiledSource
         .trimEnd()
         .split('\n')
         .map((line) => `${indent}  ${line}`)
         .join('\n');
-      const imports = getExampleImportMap(meta, packages);
+      const imports = getExampleImportMap(meta, packages, moduleSpecifiers);
       const importMapJson = JSON.stringify({ imports }, null, 2)
         .split('\n')
         .map((line) => `${indent}  ${line}`)
