@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0](https://github.com/nextgis/nextgis_frontend/compare/v4.0.0-rc.1...v4.0.0) (2026-08-30)
+
+
+### Bug Fixes
+
+* **demo:** resolve external dependencies in example import maps ([a90c00d](https://github.com/nextgis/nextgis_frontend/commit/a90c00d12eb01eb4675681a5f871b263f8b36577))
+* **leaflet-map-adapter:** preserve pane order for webmap layers ([bc5b471](https://github.com/nextgis/nextgis_frontend/commit/bc5b471c5011c83cdfeae8b0429e2291bd5c8b3a))
+* **maplibre-gl-map-adapter:** select full polygon instead of rendered tile fragment ([b3a2570](https://github.com/nextgis/nextgis_frontend/commit/b3a2570c9c7d9d6ca384b56bfa6511791a3f636a))
+* **maplibre-gl-map-adapter:** stabilize popup lifecycle ([3250d8c](https://github.com/nextgis/nextgis_frontend/commit/3250d8cc4febe197f46a6d489622f98dce06c23c))
+
+
+
+
+
 # [4.0.0-rc.2](https://github.com/nextgis/nextgis_frontend/compare/v4.0.0-rc.1...v4.0.0-rc.2) (2026-08-30)
 
 

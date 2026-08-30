@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0](https://github.com/nextgis/nextgis_frontend/compare/v4.0.0-rc.1...v4.0.0) (2026-08-30)
+
+
+### Bug Fixes
+
+* **leaflet-map-adapter:** preserve pane order for webmap layers ([bc5b471](https://github.com/nextgis/nextgis_frontend/commit/bc5b471c5011c83cdfeae8b0429e2291bd5c8b3a))
+
+
+
+
+
 # [4.0.0-rc.2](https://github.com/nextgis/nextgis_frontend/compare/v4.0.0-rc.1...v4.0.0-rc.2) (2026-08-30)
 
 **Note:** Version bump only for package @nextgis/leaflet-map-adapter
