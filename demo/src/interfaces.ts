@@ -23,6 +23,7 @@ export interface ExampleItem {
   ngwMaps?: Package[];
   tags?: string[];
   description?: string;
+  sourceUrl?: string;
   priority?: number;
   children?: ExampleItem[];
 }

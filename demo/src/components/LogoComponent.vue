@@ -1,5 +1,5 @@
 <template>
-    <a href="/">
+    <a href="/" class="text-white">
         <!-- Conditions for small screen sizes ("X-logo") -->
     <svg v-if="$q.screen.lt.sm" class="logo-pic-mini" version="1.1" xmlns="http://www.w3.org/2000/svg"
              xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="3.2 1.9 20.1 20.5" 
@@ -60,15 +60,18 @@
     }
     
     .logo-pic-mini .logo-pic-mini__item--dark , .logo-pic-mini .logo-pic-mini__item--light {
-        fill: #aec8e0;
+        fill: currentColor;
+        opacity: 0.72;
         transition: fill .3s;
     }
     .logo-pic-mini:hover .logo-pic-mini__item--dark {
-        fill: #231f20
+        fill: currentColor;
+        opacity: 1;
     }
     
     .logo-pic-mini:hover .logo-pic-mini__item--light {
-        fill: #176fc1
+        fill: currentColor;
+        opacity: 1;
     }
     
     /* For screens of other sizes ("NEXTGIS-logo") */
@@ -81,15 +84,18 @@
     }
     
     .logo-pic .logo-pic__item--dark , .logo-pic .logo-pic__item--light {
-        fill: #aec8e0;
+        fill: currentColor;
+        opacity: 0.72;
         transition: fill .3s;
     }
     .logo-pic:hover .logo-pic__item--dark {
-        fill: #231f20
+        fill: currentColor;
+        opacity: 1;
     }
     
     .logo-pic:hover .logo-pic__item--light {
-        fill: #176fc1
+        fill: currentColor;
+        opacity: 1;
     }
     
     /* Divider */
@@ -98,7 +104,8 @@
       display: inline-block;
       height: 20px; 
       width: 2px; 
-      background-color: #aec8e0; /* Divider's color */
+      background-color: currentColor;
+      opacity: 0.5;
       margin: 0 10px; /* Divider's margins */
       vertical-align: text-top;
     }
@@ -108,7 +115,7 @@
         display: inline-block;
         font-size: 16px;
         margin: 0;
-        color: #004D88;
+        color: currentColor;
         font-weight: 500;
         font-family: Ubuntu, Roboto, sans-serif;
         line-height: 1.2;
@@ -122,4 +129,4 @@
         color: rgba(0, 0, 0, .6);
     }
     
-    </style>    
+    </style>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { getHtmlSearchTags } from 'src/utils/searchTags';
+import { useQuasar } from 'quasar';
 import { computed, onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
@@ -15,6 +16,7 @@ const props = defineProps({
 
 const router = useRouter();
 const route = useRoute();
+const $q = useQuasar();
 
 const search = ref<string>('');
 const drawer = ref(true);
@@ -137,7 +139,10 @@ watch(route, (newRoute) => {
 
 <template>
   <q-layout>
-    <q-header elevated class="text-black">
+    <q-header
+      bordered
+      :class="$q.dark.isActive ? 'bg-dark text-white' : 'bg-primary text-white'"
+    >
       <q-toolbar>
         <q-btn flat round dense @click="drawer = !drawer" aria-label="Menu">
           <q-icon name="mdi-menu" />

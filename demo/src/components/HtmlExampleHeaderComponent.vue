@@ -112,6 +112,17 @@ onMounted(async () => {
             title="Copy code"
             @click="() => emit('copy')"
           />
+          <q-btn
+            v-if="item.sourceUrl"
+            padding="xs"
+            class="col"
+            icon="mdi-github"
+            flat
+            round
+            title="View TypeScript source on GitHub"
+            :href="item.sourceUrl"
+            target="_blank"
+          />
           <SendToCodepen class="col" :item="item" :html="html" />
         </div>
       </div>

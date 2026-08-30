@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import CodeEditor from 'simple-code-editor/CodeEditor.vue';
+import { useQuasar } from 'quasar';
 import { computed } from 'vue';
 
 const props = defineProps({
@@ -8,6 +9,9 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['update:modelValue']);
+const $q = useQuasar();
+
+const theme = computed(() => ($q.dark.isActive ? 'github-dark' : 'github'));
 
 const html = computed({
   get() {
@@ -26,7 +30,7 @@ const html = computed({
     :header="false"
     :languages="[['html', 'HTML']]"
     :font-size="fontSize"
-    theme="github"
+    :theme="theme"
     width="100%"
   ></CodeEditor>
 </template>

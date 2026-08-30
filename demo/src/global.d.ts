@@ -15,6 +15,7 @@ interface ExampleItem {
   ngwMaps?: Package[];
   tags?: string[];
   description?: string;
+  sourceUrl?: string;
   children?: ExampleItem[];
 }
 

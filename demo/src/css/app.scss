@@ -1,1 +1,13 @@
 // app global css in SCSS form
+
+.content a {
+  color: $primary;
+}
+
+.body--dark .content a {
+  color: #79bcf5;
+}
+
+.body--dark .content a:hover {
+  color: #9bd0fb;
+}

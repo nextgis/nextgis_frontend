@@ -1,5 +1,3 @@
-/* eslint-env node */
-
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js
 
@@ -7,7 +5,6 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { defineConfig } from '#q-app/wrappers';
-
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -108,7 +105,9 @@ export default defineConfig((/* ctx */) => {
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#framework
     framework: {
-      config: {},
+      config: {
+        dark: 'auto',
+      },
 
       // iconSet: 'material-icons', // Quasar icon set
       // lang: 'en-US', // Quasar language pack

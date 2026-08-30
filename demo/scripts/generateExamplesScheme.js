@@ -191,18 +191,21 @@ function prepareHtml(html, examplePath, packages, meta) {
     throw new Error(`External module script not found in ${examplePath}`);
   }
   if (hasModule) {
-    html = html.replace(moduleTag, (_match, indent) => {
+    html = html.replace(moduleTag, () => {
+      const bodyIndent = html.match(/^([ \t]*)<body(?:\s|>)/m)?.[1] || '';
+      const indent = `${bodyIndent}  `;
       const source = readFileSync(modulePath, 'utf8');
-      const moduleScript = (/\.tsx?$/.test(moduleName)
-        ? ts.transpileModule(source, {
-            compilerOptions: {
-              jsx: ts.JsxEmit.ReactJSX,
-              module: ts.ModuleKind.ESNext,
-              target: ts.ScriptTarget.ES2022,
-            },
-            fileName: moduleName,
-          }).outputText
-        : source
+      const moduleScript = (
+        /\.tsx?$/.test(moduleName)
+          ? ts.transpileModule(source, {
+              compilerOptions: {
+                jsx: ts.JsxEmit.ReactJSX,
+                module: ts.ModuleKind.ESNext,
+                target: ts.ScriptTarget.ES2022,
+              },
+              fileName: moduleName,
+            }).outputText
+          : source
       )
         .trimEnd()
         .split('\n')
@@ -262,6 +265,7 @@ function getExamples(libPath, pkg, packages) {
           if (existsSync(htmlPath) && metaPath) {
             const meta = JSON.parse(readFileSync(metaPath, 'utf8'));
             if (meta.skipDemo) return;
+            const sourcePath = getExampleEntryPath(examplePath);
             const html = meta.bundleForDemo
               ? buildExampleHtml(examplePath)
               : prepareHtml(
@@ -288,6 +292,12 @@ function getExamples(libPath, pkg, packages) {
             const example = {
               id,
               html,
+              ...(sourcePath && {
+                sourceUrl: `https://github.com/nextgis/nextgis_frontend/blob/master/${path
+                  .relative(pkgRoot, sourcePath)
+                  .split(path.sep)
+                  .join('/')}`,
+              }),
               page: 'example',
               name: meta.displayName || meta.name,
               description: meta.description,
