@@ -59,6 +59,17 @@ import type { TLayer } from '../MaplibreGLMapAdapter';
 type Layer = VectorLayerSpecification;
 type Layout = FillLayerSpecification['layout'];
 
+interface OpenedPopup {
+  feature: Feature;
+  popup: Popup;
+  closeHandlers: PopupOnCloseFunction[];
+}
+
+interface OpenedLabel {
+  feature: Feature;
+  popup: Popup;
+}
+
 export const operationsAliases: { [key in Operation]: string } = {
   gt: '>',
   lt: '<',
@@ -129,7 +140,8 @@ export abstract class VectorAdapter<
 
   protected _selectProperties?: PropertiesFilter;
   protected _filterProperties?: PropertiesFilter;
-  protected _openedPopup: [Feature, Popup, PopupOnCloseFunction[]][] = [];
+  protected _openedPopups: OpenedPopup[] = [];
+  private _openedLabels: OpenedLabel[] = [];
   private _popupGeneration = 0;
 
   private $onLayerMouseMove?: (e: MapLayerMouseEvent) => void;
@@ -267,7 +279,8 @@ export abstract class VectorAdapter<
         ...createFeaturePositionOptions([]),
       });
     }
-    this._removeAllPopup();
+    this._removeAllPopups();
+    this._removeAllLabels();
   }
 
   beforeRemove(): void {
@@ -283,7 +296,8 @@ export abstract class VectorAdapter<
         map._onMapClickLayers.splice(index, 1);
       }
     }
-    this._removeAllPopup();
+    this._removeAllPopups();
+    this._removeAllLabels();
     this._removeEventListeners();
     this.$onLayerMouseLeave = undefined;
     this.$onLayerMouseMove = undefined;
@@ -915,12 +929,12 @@ export abstract class VectorAdapter<
     return false;
   }
 
-  protected _removeAllPopup(): void {
+  protected _removeAllPopups(): void {
     this._popupGeneration++;
-    for (const p of this._openedPopup) {
-      p[1].remove();
+    const popups = this._openedPopups.map(({ popup }) => popup);
+    for (const popup of popups) {
+      this._removePopup(popup, true);
     }
-    this._openedPopup.length = 0;
   }
 
   protected async _openPopup({
@@ -937,16 +951,16 @@ export abstract class VectorAdapter<
     refresh?: boolean;
   }): Promise<void> {
     if (refresh) {
-      const openedPopup = this._openedPopup.find((x) => x[0].id === feature.id);
+      const openedPopup = this._findOpenedPopup(feature);
       if (openedPopup) {
         if (coordinates) {
-          openedPopup[1].setLngLat(coordinates);
+          openedPopup.popup.setLngLat(coordinates);
         }
         return;
       }
     }
     if (!this.options.multiselect) {
-      this._removeAllPopup();
+      this._removeAllPopups();
     }
     const popupGeneration = this._popupGeneration;
     const map = this.map;
@@ -981,10 +995,10 @@ export abstract class VectorAdapter<
       return;
     }
     if (refresh) {
-      const openedPopup = this._openedPopup.find((x) => x[0].id === feature.id);
+      const openedPopup = this._findOpenedPopup(feature);
       if (openedPopup) {
         if (coordinates) {
-          openedPopup[1].setLngLat(coordinates);
+          openedPopup.popup.setLngLat(coordinates);
         }
         return;
       }
@@ -1002,17 +1016,13 @@ export abstract class VectorAdapter<
         popupOpt.maxWidth = typeof maxWidth === 'number' ? maxWidth + 'px' : '';
       }
       popup = new Popup(popupOpt);
+      this._openedPopups.push({
+        feature,
+        popup,
+        closeHandlers: _closeHandlers,
+      });
+      popup.once('close', () => this._removePopup(popup, false, false));
       popup.setLngLat(coordinates).setDOMContent(html).addTo(map);
-
-      const unselectOnClose =
-        this.options.popupOptions?.unselectOnClose ?? true;
-      if (unselectOnClose) {
-        popup.once('close', () => {
-          close();
-        });
-      }
-
-      this._openedPopup.push([feature, popup, _closeHandlers]);
     }
   }
 
@@ -1032,25 +1042,37 @@ export abstract class VectorAdapter<
         text = label(this._createLayerOptions(f));
       }
       if (text) {
-        const isOpened = this._openedPopup.find((x) => x[0].id === f.id);
+        const isOpened = this._openedLabels.some(({ feature }) =>
+          this._isSameFeature(feature, f),
+        );
         if (!isOpened) {
           const popup = new Popup(popupOpt);
+          const openedLabel = { feature: f, popup };
+          this._openedLabels.push(openedLabel);
+          popup.once('close', () => {
+            const index = this._openedLabels.indexOf(openedLabel);
+            if (index !== -1) {
+              this._openedLabels.splice(index, 1);
+            }
+          });
           lngLat = lngLat ?? (getCentroid(f) as [number, number]);
           popup.setLngLat(lngLat).setText(text).addTo(map);
-          this._openedPopup.push([f, popup, []]);
         }
       }
     }
   }
 
-  protected _closeLabel(): void {
-    this._removeAllPopup();
+  protected _removeAllLabels(): void {
+    const labels = this._openedLabels.splice(0);
+    for (const { popup } of labels) {
+      popup.remove();
+    }
   }
 
   protected _removeFeaturePopup(feature: Feature, doNotUnselect = false): void {
-    const openedPopup = this._openedPopup.find((x) => x[0].id === feature.id);
+    const openedPopup = this._findOpenedPopup(feature);
     if (openedPopup) {
-      this._removePopup(openedPopup[1], doNotUnselect);
+      this._removePopup(openedPopup.popup, doNotUnselect);
     }
   }
 
@@ -1062,30 +1084,42 @@ export abstract class VectorAdapter<
     };
   }
 
-  private _removeAllPopups() {
-    for (const o of this._openedPopup) {
-      this._removePopup(o[1], true);
-    }
+  private _isSameFeature(a: Feature, b: Feature): boolean {
+    const aId = this._getFeatureFilterId(a);
+    const bId = this._getFeatureFilterId(b);
+    return aId !== undefined && bId !== undefined ? aId === bId : a === b;
   }
 
-  private _removePopup(popup: Popup, doNotUnselect = false) {
-    const map = this.map;
-    if (map) {
+  private _findOpenedPopup(feature: Feature): OpenedPopup | undefined {
+    return this._openedPopups.find((opened) =>
+      this._isSameFeature(opened.feature, feature),
+    );
+  }
+
+  private _removePopup(
+    popup: Popup,
+    doNotUnselect = false,
+    removeNative = true,
+  ): void {
+    const index = this._openedPopups.findIndex(
+      (opened) => opened.popup === popup,
+    );
+    if (index === -1) {
+      return;
+    }
+
+    const [opened] = this._openedPopups.splice(index, 1);
+    if (removeNative) {
       popup.remove();
-      const index = this._openedPopup.findIndex((x) => x[1] === popup);
-      if (index !== -1) {
-        const unselectOnClose =
-          this.options.popupOptions?.unselectOnClose ?? true;
-        const [feature, , closeHandlers] = this._openedPopup[index];
-        for (const h of closeHandlers) {
-          h(this._createLayerOptions(feature));
-        }
-        closeHandlers.length = 0;
-        if (unselectOnClose && !doNotUnselect) {
-          this._unselectFeature(feature);
-        }
-        this._openedPopup.splice(index, 1);
-      }
+    }
+    for (const handler of opened.closeHandlers) {
+      handler(this._createLayerOptions(opened.feature));
+    }
+    if (
+      (this.options.popupOptions?.unselectOnClose ?? true) &&
+      !doNotUnselect
+    ) {
+      this._unselectFeature(opened.feature);
     }
   }
 
@@ -1134,17 +1168,16 @@ export abstract class VectorAdapter<
           if (selectOnHover) {
             this._featureSelect(feature);
           }
-          if (labelOnHover || popupOnHover) {
+          if (labelOnHover) {
+            this._removeAllLabels();
+            this._openLabel(feature, event.lngLat as [number, number]);
+          } else if (popupOnHover) {
             this._removeAllPopups();
-            if (labelOnHover) {
-              this._openLabel(feature, event.lngLat as [number, number]);
-            } else if (popupOnHover) {
-              this._openPopup({
-                feature,
-                type: 'api',
-                options: this.options.popupOptions,
-              });
-            }
+            this._openPopup({
+              feature,
+              type: 'api',
+              options: this.options.popupOptions,
+            });
           }
         }
       }
@@ -1171,7 +1204,7 @@ export abstract class VectorAdapter<
       this.unselect();
     }
     if (labelOnHover) {
-      this._closeLabel();
+      this._removeAllLabels();
     }
     if (popupOnHover) {
       this._removeAllPopups();

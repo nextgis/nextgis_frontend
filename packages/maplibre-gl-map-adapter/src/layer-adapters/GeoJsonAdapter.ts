@@ -128,13 +128,6 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
         if (x.properties) {
           x.properties[this.featureIdName] = fid;
         }
-        if (this.options.popup) {
-          this._openPopup({
-            feature: x,
-            type: 'api',
-            options: this.options.popupOptions,
-          });
-        }
       }
       if (this._filterFun) {
         this._filter(this._filterFun);
@@ -146,6 +139,15 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
         features: this._features,
       });
       this._updateLabels();
+      if (this.options.popup) {
+        for (const feature of features) {
+          this._openPopup({
+            feature,
+            type: 'api',
+            options: this.options.popupOptions,
+          });
+        }
+      }
     }
   }
 
@@ -239,7 +241,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
       this.selected = false;
       this._unselectFeature();
     }
-    this._removeAllPopup();
+    this._removeAllPopups();
   }
 
   /** @deprecated use {@link GeoJsonAdapter.getBounds} instead */
@@ -606,7 +608,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   // Workaround for displaying labels.
   // It is necessary to achieve that the labels are shown through vector layer symbols
   private _updateLabels() {
-    this._removeAllPopup();
+    this._removeAllLabels();
     const filtered = this._filteredFeatureIds || [];
     const features = this._features;
     const { labelField, label, labelOnHover } = this.options;
