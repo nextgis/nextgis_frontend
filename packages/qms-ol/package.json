@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/qms-ol",
-  "version": "4.0.0-rc.1",
+  "version": "4.0.0-rc.2",
   "description": "QuickMapServices layers for OpenLayers",
   "main": "lib/qms-ol.global.prod.js",
   "module": "lib/qms-ol.esm-bundler.js",
@@ -8,13 +8,13 @@
   "jsdelivr": "lib/qms-ol.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/qms-core": "4.0.0-rc.1"
+    "@nextgis/qms-core": "4.0.0-rc.2"
   },
   "peerDependencies": {
     "ol": ">=6.0.0"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "4.0.0-rc.1",
+    "@nextgis/build-tools": "4.0.0-rc.2",
     "ol": "^10.10.0"
   },
   "buildOptions": {
