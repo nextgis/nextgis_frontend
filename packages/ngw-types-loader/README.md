@@ -1,6 +1,6 @@
 # NGW Types Loader
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/ngw-types-loader) ![version](https://img.shields.io/npm/v/@nextgis/ngw-types-loader)
+![version](https://img.shields.io/npm/v/@nextgis/ngw-types-loader)
 
 A CLI tool that downloads TypeScript declarations from a NextGIS Web
 deployment and installs them as resolvable packages. Use it when consuming the

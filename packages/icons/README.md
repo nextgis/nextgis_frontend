@@ -1,6 +1,6 @@
 # Icons
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/icons) ![version](https://img.shields.io/npm/v/@nextgis/icons)
+![version](https://img.shields.io/npm/v/@nextgis/icons)
 
 A collection of common SVG icons designed for modern web applications.
 

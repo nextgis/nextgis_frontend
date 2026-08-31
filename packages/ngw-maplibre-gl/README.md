@@ -1,6 +1,6 @@
 # NgwMaplibreGL
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/ngw-maplibre-gl) ![version](https://img.shields.io/npm/v/@nextgis/ngw-maplibre-gl)
+![version](https://img.shields.io/npm/v/@nextgis/ngw-maplibre-gl)
 
 Browser bundle for rapid deployment of [Maplibre GL JS](https://maplibre.org/maplibre-gl-js/docs/) based web-gis applications with NextGIS services.
 

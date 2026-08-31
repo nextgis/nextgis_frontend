@@ -1,6 +1,6 @@
 # Leaflet Map Adapter
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/leaflet-map-adapter) ![version](https://img.shields.io/npm/v/@nextgis/leaflet-map-adapter)
+![version](https://img.shields.io/npm/v/@nextgis/leaflet-map-adapter)
 
 WebMap adapter to use [Leaflet](https://leafletjs.com/) GIS framework.
 

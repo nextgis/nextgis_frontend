@@ -1,6 +1,6 @@
 # Progress
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/progress) ![version](https://img.shields.io/npm/v/@nextgis/progress)
+![version](https://img.shields.io/npm/v/@nextgis/progress)
 
 Tracking the progress of asynchronous operations.
 

@@ -1,6 +1,6 @@
 # QMS OpenLayers
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/qms-ol) ![version](https://img.shields.io/npm/v/@nextgis/qms-ol)
+![version](https://img.shields.io/npm/v/@nextgis/qms-ol)
 
 Add [NextGIS QMS](https://qms.nextgis.com/) TMS and WMS services directly to an OpenLayers map.
 Use this package when the application owns the native OpenLayers map instance.

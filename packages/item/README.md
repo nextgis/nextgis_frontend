@@ -1,6 +1,6 @@
 # Item
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/item) ![version](https://img.shields.io/npm/v/@nextgis/item)
+![version](https://img.shields.io/npm/v/@nextgis/item)
 
 Hierarchical layers control
 

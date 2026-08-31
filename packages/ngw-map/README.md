@@ -1,6 +1,6 @@
 # NgwMap
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/ngw-map) ![version](https://img.shields.io/npm/v/@nextgis/ngw-map)
+![version](https://img.shields.io/npm/v/@nextgis/ngw-map)
 
 Framework-independent NextGIS Web map class used by `ngw-leaflet`, `ngw-ol`,
 and `ngw-maplibre-gl`.

@@ -1,6 +1,6 @@
 # Ngw Uploader
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/ngw-uploader) ![version](https://img.shields.io/npm/v/@nextgis/ngw-uploader)
+![version](https://img.shields.io/npm/v/@nextgis/ngw-uploader)
 
 Library providing tools for uploading data to the NextGIS Web
 

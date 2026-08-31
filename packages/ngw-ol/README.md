@@ -1,6 +1,6 @@
 # NgwOl
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/ngw-ol) ![version](https://img.shields.io/npm/v/@nextgis/ngw-ol)
+![version](https://img.shields.io/npm/v/@nextgis/ngw-ol)
 
 Ready-to-use [OpenLayers](https://openlayers.org/)-based map for NextGIS Web.
 

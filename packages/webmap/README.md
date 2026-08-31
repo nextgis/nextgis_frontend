@@ -1,6 +1,6 @@
 # WebMap
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/webmap) ![version](https://img.shields.io/npm/v/@nextgis/webmap)
+![version](https://img.shields.io/npm/v/@nextgis/webmap)
 
 Framework-independent map engine and adapter contract.
 

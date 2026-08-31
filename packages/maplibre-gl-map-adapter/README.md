@@ -1,6 +1,6 @@
 # Maplibre GL JS map adapter
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/maplibre-gl-map-adapter) ![version](https://img.shields.io/npm/v/@nextgis/maplibre-gl-map-adapter)
+![version](https://img.shields.io/npm/v/@nextgis/maplibre-gl-map-adapter)
 
 Webmap adapter to use [Maplibre GL JS](https://maplibre.org/maplibre-gl-js/docs/) framework.
 

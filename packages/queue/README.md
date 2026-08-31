@@ -1,6 +1,6 @@
 # Cache
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/queue) ![version](https://img.shields.io/npm/v/@nextgis/queue)
+![version](https://img.shields.io/npm/v/@nextgis/queue)
 
 An advanced promise queue management library for JavaScript.
 This library is designed to handle the concurrency of any asynchronous tasks encapsulated in promises, providing optional debouncing to manage the flow of promise execution.

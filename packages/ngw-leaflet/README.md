@@ -1,6 +1,6 @@
 # NgwLeaflet
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/ngw-leaflet) ![version](https://img.shields.io/npm/v/@nextgis/ngw-leaflet)
+![version](https://img.shields.io/npm/v/@nextgis/ngw-leaflet)
 
 Ready-to-use [Leaflet](https://leafletjs.com)-based map for NextGIS Web.
 

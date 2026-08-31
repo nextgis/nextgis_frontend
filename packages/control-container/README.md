@@ -1,6 +1,6 @@
 # Control Container
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/control-container) ![version](https://img.shields.io/npm/v/@nextgis/control-container)
+![version](https://img.shields.io/npm/v/@nextgis/control-container)
 
 `@nextgis/control-container` is a universal library for creating and managing map controls layout.
 

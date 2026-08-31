@@ -1,6 +1,6 @@
 # OpenLayers Control Container
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/ol-control-container) ![version](https://img.shields.io/npm/v/@nextgis/ol-control-container)
+![version](https://img.shields.io/npm/v/@nextgis/ol-control-container)
 
 OpenLayers integration for `@nextgis/control-container`.
 

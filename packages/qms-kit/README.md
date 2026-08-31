@@ -1,6 +1,6 @@
 # Qms kit
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/qms-kit) ![version](https://img.shields.io/npm/v/@nextgis/qms-kit)
+![version](https://img.shields.io/npm/v/@nextgis/qms-kit)
 
 Register [NextGIS QMS](https://qms.nextgis.com/) TMS and WMS services as
 baselayers in [`@nextgis/webmap`](../webmap/README.md).

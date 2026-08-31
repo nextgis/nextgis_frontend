@@ -1,6 +1,6 @@
 # OpenLayers map adapter
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/ol-map-adapter) ![version](https://img.shields.io/npm/v/@nextgis/ol-map-adapter)
+![version](https://img.shields.io/npm/v/@nextgis/ol-map-adapter)
 
 Webmap adapter to use [OpenLayers](https://openlayers.org/) GIS framework
 

@@ -1,6 +1,6 @@
 # Cache
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/cache) ![version](https://img.shields.io/npm/v/@nextgis/cache)
+![version](https://img.shields.io/npm/v/@nextgis/cache)
 
 Caching for asynchronous functions
 

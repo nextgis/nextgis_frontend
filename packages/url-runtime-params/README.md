@@ -1,6 +1,6 @@
 # UrlRuntimeParams
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/url-runtime-params) ![version](https://img.shields.io/npm/v/@nextgis/url-runtime-params)
+![version](https://img.shields.io/npm/v/@nextgis/url-runtime-params)
 
 Control of writing and reading URL parameters
 

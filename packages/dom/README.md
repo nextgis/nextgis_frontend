@@ -1,6 +1,6 @@
 # Dom
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/dom) ![version](https://img.shields.io/npm/v/@nextgis/dom)
+![version](https://img.shields.io/npm/v/@nextgis/dom)
 
 Collection of libraries for working with the DOM.
 

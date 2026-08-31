@@ -1,6 +1,6 @@
 # React NGW Map
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/react-ngw-map) ![version](https://img.shields.io/npm/v/@nextgis/react-ngw-map)
+![version](https://img.shields.io/npm/v/@nextgis/react-ngw-map)
 
 React integration for [`@nextgis/ngw-map`](../ngw-map/README.md). It provides
 the common map component, context, hooks, layer components, and controls used by

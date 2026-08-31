@@ -1,6 +1,6 @@
 # ReactNgwLeaflet
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/react-ngw-leaflet) ![version](https://img.shields.io/npm/v/@nextgis/react-ngw-leaflet)
+![version](https://img.shields.io/npm/v/@nextgis/react-ngw-leaflet)
 
 Ready-to-use React component for a Leaflet-based NextGIS Web map. It configures
 the Leaflet adapter for the common component from `@nextgis/react-ngw-map`.

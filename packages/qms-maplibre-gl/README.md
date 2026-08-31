@@ -1,6 +1,6 @@
 # QMS MapLibre GL
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/qms-maplibre-gl) ![version](https://img.shields.io/npm/v/@nextgis/qms-maplibre-gl)
+![version](https://img.shields.io/npm/v/@nextgis/qms-maplibre-gl)
 
 Add [NextGIS QMS](https://qms.nextgis.com/) TMS and WMS services directly to a MapLibre GL JS map.
 Use this package when the application owns the native MapLibre GL JS map

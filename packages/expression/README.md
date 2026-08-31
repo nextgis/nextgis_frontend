@@ -1,6 +1,6 @@
 # Expression
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/expression) ![version](https://img.shields.io/npm/v/@nextgis/expression)
+![version](https://img.shields.io/npm/v/@nextgis/expression)
 
 @nextgis/expression is a versatile library designed for executing actions on objects based on expressions inspired by the syntax of [Maplibre Style expressions](https://maplibre.org/maplibre-style-spec/expressions/). These expressions are JSON-serializable, making them perfect for configurations, data processing, or any other kind of object manipulation.
 

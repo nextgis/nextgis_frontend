@@ -1,6 +1,6 @@
 # CancelablePromise
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/cancelable-promise) ![version](https://img.shields.io/npm/v/@nextgis/cancelable-promise)
+![version](https://img.shields.io/npm/v/@nextgis/cancelable-promise)
 
 A promise you can stop.
 

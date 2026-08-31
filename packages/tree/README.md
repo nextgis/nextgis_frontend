@@ -1,6 +1,6 @@
 # Tree
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/tree) ![version](https://img.shields.io/npm/v/@nextgis/tree)
+![version](https://img.shields.io/npm/v/@nextgis/tree)
 
 Utilities to simplify interaction with tree data structures
 

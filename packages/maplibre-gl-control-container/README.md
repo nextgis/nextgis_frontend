@@ -1,6 +1,6 @@
 # MapLibre GL Control Container
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/maplibre-gl-control-container) ![version](https://img.shields.io/npm/v/@nextgis/maplibre-gl-control-container)
+![version](https://img.shields.io/npm/v/@nextgis/maplibre-gl-control-container)
 
 MapLibre GL JS integration for `@nextgis/control-container`.
 

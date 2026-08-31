@@ -1,6 +1,6 @@
 # ReactNgwMaplibreGL
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/react-ngw-maplibre-gl) ![version](https://img.shields.io/npm/v/@nextgis/react-ngw-maplibre-gl)
+![version](https://img.shields.io/npm/v/@nextgis/react-ngw-maplibre-gl)
 
 Ready-to-use React component for a [MapLibre GL JS](https://maplibre.org/maplibre-gl-js/docs/)-based
 NextGIS Web map. It configures the MapLibre adapter for the common component

@@ -1,6 +1,6 @@
 # NgwConnector
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/ngw-connector) ![version](https://img.shields.io/npm/v/@nextgis/ngw-connector)
+![version](https://img.shields.io/npm/v/@nextgis/ngw-connector)
 
 A lightweight HTTP client optimized for use with [NextGIS Web](http://docs.nextgis.com/docs_ngweb_dev/doc/developer/toc.html) API.
 

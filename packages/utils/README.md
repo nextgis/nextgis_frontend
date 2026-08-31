@@ -1,6 +1,6 @@
 # Utils
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/utils) ![version](https://img.shields.io/npm/v/@nextgis/utils)
+![version](https://img.shields.io/npm/v/@nextgis/utils)
 
 Common development tools
 

@@ -1,6 +1,6 @@
 # QMS Leaflet
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/qms-leaflet) ![version](https://img.shields.io/npm/v/@nextgis/qms-leaflet)
+![version](https://img.shields.io/npm/v/@nextgis/qms-leaflet)
 
 Add [NextGIS QMS](https://qms.nextgis.com/) TMS and WMS services directly to a Leaflet map.
 Use this package when the application owns the native Leaflet map instance.

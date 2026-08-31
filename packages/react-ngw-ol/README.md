@@ -1,6 +1,6 @@
 # ReactNgwOl
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/react-ngw-ol) ![version](https://img.shields.io/npm/v/@nextgis/react-ngw-ol)
+![version](https://img.shields.io/npm/v/@nextgis/react-ngw-ol)
 
 Ready-to-use React component for an OpenLayers-based NextGIS Web map. It
 configures the OpenLayers adapter for the common component from

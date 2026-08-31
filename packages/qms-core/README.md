@@ -1,6 +1,6 @@
 # QMS Core
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/qms-core) ![version](https://img.shields.io/npm/v/@nextgis/qms-core)
+![version](https://img.shields.io/npm/v/@nextgis/qms-core)
 
 Map-independent client, catalog, and shared control UI for
 [NextGIS QMS](https://qms.nextgis.com/). Use an engine-specific package instead

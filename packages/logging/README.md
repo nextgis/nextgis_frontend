@@ -1,6 +1,6 @@
 # Logging
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/logging) ![version](https://img.shields.io/npm/v/@nextgis/logging)
+![version](https://img.shields.io/npm/v/@nextgis/logging)
 
 Logging control
 

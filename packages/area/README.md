@@ -1,6 +1,6 @@
 # Area
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/area) ![version](https://img.shields.io/npm/v/@nextgis/area)
+![version](https://img.shields.io/npm/v/@nextgis/area)
 
 Dependencies free QGIS ellipsoidal area calculation reproduced in JavaScript.
 

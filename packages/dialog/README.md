@@ -1,6 +1,6 @@
 # Dialog
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/cdialog) ![version](https://img.shields.io/npm/v/@nextgis/dialog)
+![version](https://img.shields.io/npm/v/@nextgis/dialog)
 
 Modal window management
 

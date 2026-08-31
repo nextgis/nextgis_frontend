@@ -1,6 +1,6 @@
 # Geocoder
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/geocoder) ![version](https://img.shields.io/npm/v/@nextgis/geocoder)
+![version](https://img.shields.io/npm/v/@nextgis/geocoder)
 
 Geocoder is a versatile library designed for intuitive geocoding functionalities.
 With an emphasis on ease-of-use, it supports multiple providers to cater to diverse requirements, allowing developers to seamlessly integrate geocoding into their applications.

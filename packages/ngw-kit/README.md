@@ -1,6 +1,6 @@
 # NgwKit
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/ngw-kit) ![version](https://img.shields.io/npm/v/@nextgis/ngw-kit)
+![version](https://img.shields.io/npm/v/@nextgis/ngw-kit)
 
 NextGIS Web integration for [`@nextgis/webmap`](../webmap/README.md), including
 resource adapters, feature requests, identification, extents, legends, and

@@ -1,6 +1,6 @@
 # Leaflet Control Container
 
-![size](https://img.shields.io/bundlephobia/minzip/@nextgis/leaflet-control-container) ![version](https://img.shields.io/npm/v/@nextgis/leaflet-control-container)
+![version](https://img.shields.io/npm/v/@nextgis/leaflet-control-container)
 
 Leaflet integration for `@nextgis/control-container`.
 
