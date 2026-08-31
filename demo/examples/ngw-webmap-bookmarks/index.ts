@@ -1,6 +1,6 @@
 import NgwMap from '@nextgis/ngw-leaflet';
 
-import type { BookmarkItem, NgwWebmapLayerAdapter } from '@nextgis/ngw-kit';
+import type { BookmarkItem } from '@nextgis/ngw-kit';
 
 NgwMap.create({
   baseUrl: 'https://demo.nextgis.com',
@@ -33,10 +33,11 @@ NgwMap.create({
   };
 
   // Add Webmap resource with bookmarks
-  ngwMap.addNgwLayer({ resource: 4226, fit: true }).then((layer) => {
-    const webmapLayer = layer as unknown as NgwWebmapLayerAdapter;
-    webmapLayer.fetchBookmarks({}).then((bookmarks) => {
-      bookmarks.forEach(appendBookmarkItem);
+  ngwMap
+    .addNgwLayer({ resource: 4226, fit: true, adapter: 'NGW:WEBMAP' })
+    .then((webmapLayer) => {
+      webmapLayer?.fetchBookmarks({}).then((bookmarks) => {
+        bookmarks.forEach(appendBookmarkItem);
+      });
     });
-  });
 });

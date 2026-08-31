@@ -8,10 +8,10 @@
     "build": "yarn run -T example:build"
   },
   "dependencies": {
-    "@nextgis/ngw-maplibre-gl": "workspace:*",
-    "@nextgis/webmap": "workspace:*"
+    "@nextgis/ngw-maplibre-gl": "workspace:*"
   },
   "devDependencies": {
+    "@nextgis/webmap": "workspace:*",
     "vite": "^6.3.5"
   }
 }

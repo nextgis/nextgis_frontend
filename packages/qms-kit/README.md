@@ -19,7 +19,7 @@ npm install @nextgis/qms-kit @nextgis/webmap
 
 ### Use as a WebMap starter kit
 
-```ts
+```javascript
 import { createWebMap } from '@nextgis/webmap';
 import { QmsKit } from '@nextgis/qms-kit';
 import LeafletMapAdapter from '@nextgis/leaflet-map-adapter';
@@ -36,7 +36,7 @@ await webMap.addBaseLayer('QMS', { qmsId: 448 });
 
 ### Register the adapter directly
 
-```ts
+```javascript
 import { createWebMap } from '@nextgis/webmap';
 import { createQmsAdapter } from '@nextgis/qms-kit';
 import LeafletMapAdapter from '@nextgis/leaflet-map-adapter';

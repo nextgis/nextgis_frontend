@@ -16,7 +16,7 @@ npm install maplibre-gl @nextgis/qms-maplibre-gl
 
 Create a MapLibre GL JS map and add a QMS service after the map style is loaded:
 
-```ts
+```javascript
 import { Map, NavigationControl } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import '@nextgis/qms-maplibre-gl/lib/qms-maplibre-gl.css';
@@ -38,7 +38,7 @@ map.once('load', () => {
 
 Set `fit` to move the map to the QMS service extent after adding the layer:
 
-```ts
+```javascript
 const layer = await addQmsLayer(map, 4646, {
   fit: { padding: 24, maxZoom: 14 },
 });
@@ -46,7 +46,7 @@ const layer = await addQmsLayer(map, 4646, {
 
 You can also fit the map by a QMS service ID:
 
-```ts
+```javascript
 import { fitQmsService } from '@nextgis/qms-maplibre-gl';
 
 await fitQmsService(map, 4646, { maxZoom: 14 });
@@ -54,7 +54,7 @@ await fitQmsService(map, 4646, { maxZoom: 14 });
 
 Add the QMS search and catalog control to the map:
 
-```ts
+```javascript
 import { createQmsControl } from '@nextgis/qms-maplibre-gl';
 
 map.addControl(createQmsControl({ initialLayer: 448 }), 'top-left');

@@ -24,12 +24,12 @@
   },
   "dependencies": {
     "@nextgis/icons": "*",
-    "@nextgis/ngw-leaflet": "*",
-    "@nextgis/webmap": "*"
+    "@nextgis/ngw-leaflet": "*"
   },
   "devDependencies": {
     "@nextgis/ngw-maplibre-gl": "*",
     "@nextgis/ngw-ol": "*",
+    "@nextgis/webmap": "*",
     "@types/geojson": "^7946.0.16",
     "vite": "^6.3.5"
   }

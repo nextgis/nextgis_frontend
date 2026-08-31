@@ -50,6 +50,25 @@ watch(() => route.hash, scrollToHash);
   max-width: 1000px;
 }
 
+.readme table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+}
+
+.readme th,
+.readme td {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  border: 1px solid rgba(127, 127, 127, 0.35);
+}
+
+.readme th,
+.readme tbody tr:nth-child(even) {
+  background-color: rgba(127, 127, 127, 0.1);
+}
+
 .readme h1,
 .readme h2,
 .readme h3,

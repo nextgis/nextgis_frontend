@@ -8,10 +8,10 @@
     "build": "vite build --base=./"
   },
   "dependencies": {
-    "@nextgis/ngw-ol": "workspace:*",
-    "@nextgis/webmap": "workspace:*"
+    "@nextgis/ngw-ol": "workspace:*"
   },
   "devDependencies": {
+    "@nextgis/webmap": "workspace:*",
     "ol": "^10.10.0",
     "vite": "^6.3.5"
   }

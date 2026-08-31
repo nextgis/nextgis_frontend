@@ -15,10 +15,10 @@
     "start:maplibre-gl": "yarn run -T example --adapter=ngw-maplibre-gl"
   },
   "dependencies": {
-    "@nextgis/ngw-kit": "*",
     "@nextgis/ngw-leaflet": "*"
   },
   "devDependencies": {
+    "@nextgis/ngw-kit": "*",
     "@nextgis/ngw-maplibre-gl": "*",
     "@nextgis/ngw-ol": "*",
     "vite": "^6.3.5"

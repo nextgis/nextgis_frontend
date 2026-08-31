@@ -120,9 +120,20 @@ function addExternalImport(imports, dependency, bundle = false) {
   return { baseUrl, package: externalPackage };
 }
 
-function getExampleImportMap(meta, packages, moduleSpecifiers) {
+function getExampleImportMap(
+  meta,
+  packages,
+  sourceModuleSpecifiers,
+  moduleSpecifiers,
+) {
   const imports = {};
   for (const dependency of Object.keys(meta.dependencies || {})) {
+    const matchesDependency = (specifier) =>
+      specifier === dependency || specifier.startsWith(`${dependency}/`);
+    const usedBySource = sourceModuleSpecifiers.some(matchesDependency);
+    const usedAtRuntime = moduleSpecifiers.some(matchesDependency);
+    if (usedBySource && !usedAtRuntime) continue;
+
     const pkg = packages.find((item) => item.package.name === dependency);
     if (pkg?.package.module) {
       const modulePath = pkg.package.buildOptions?.formats?.includes(
@@ -211,6 +222,22 @@ function buildExampleHtml(examplePath) {
   );
 }
 
+function formatModuleSource(source, fileName) {
+  const sourceFile = ts.createSourceFile(
+    fileName,
+    source,
+    ts.ScriptTarget.ES2022,
+  );
+  const imports = sourceFile.statements.filter(ts.isImportDeclaration);
+  const lastImport = imports.at(-1);
+  if (!lastImport) return source.trimEnd();
+
+  const body = source.slice(lastImport.end).trim();
+  return body
+    ? `${source.slice(0, lastImport.end).trimEnd()}\n\n${body}`
+    : source.slice(0, lastImport.end).trimEnd();
+}
+
 function prepareHtml(html, examplePath, packages, meta) {
   const modulePath = getExampleEntryPath(examplePath);
   const moduleName = modulePath && path.basename(modulePath);
@@ -230,6 +257,9 @@ function prepareHtml(html, examplePath, packages, meta) {
       const bodyIndent = html.match(/^([ \t]*)<body(?:\s|>)/m)?.[1] || '';
       const indent = `${bodyIndent}  `;
       const source = readFileSync(modulePath, 'utf8');
+      const sourceModuleSpecifiers = ts
+        .preProcessFile(source)
+        .importedFiles.map(({ fileName }) => fileName);
       const compiledSource = /\.tsx?$/.test(moduleName)
         ? ts.transpileModule(source, {
             compilerOptions: {
@@ -243,12 +273,16 @@ function prepareHtml(html, examplePath, packages, meta) {
       const moduleSpecifiers = ts
         .preProcessFile(compiledSource)
         .importedFiles.map(({ fileName }) => fileName);
-      const moduleScript = compiledSource
-        .trimEnd()
+      const moduleScript = formatModuleSource(compiledSource, moduleName)
         .split('\n')
-        .map((line) => `${indent}  ${line}`)
+        .map((line) => (line ? `${indent}  ${line}` : ''))
         .join('\n');
-      const imports = getExampleImportMap(meta, packages, moduleSpecifiers);
+      const imports = getExampleImportMap(
+        meta,
+        packages,
+        sourceModuleSpecifiers,
+        moduleSpecifiers,
+      );
       const importMapJson = JSON.stringify({ imports }, null, 2)
         .split('\n')
         .map((line) => `${indent}  ${line}`)

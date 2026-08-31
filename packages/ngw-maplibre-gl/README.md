@@ -76,7 +76,7 @@ application bundler must provide the worker URL before creating a map.
 For Vite, use its worker pipeline so the worker and its shared module are emitted
 together:
 
-```ts
+```javascript
 import { setWorkerUrl } from 'maplibre-gl';
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
 
@@ -87,7 +87,7 @@ For other bundlers, copy both `maplibre-gl-worker.mjs` and
 `maplibre-gl-shared.mjs` from `maplibre-gl/dist` to the same public directory,
 then configure the URL:
 
-```ts
+```javascript
 import { setWorkerUrl } from 'maplibre-gl';
 
 setWorkerUrl('/maplibre/maplibre-gl-worker.mjs');

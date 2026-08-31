@@ -20,7 +20,7 @@ The three `ngw-*` map packages expose the same common map API. Choose between
 them according to the rendering engine and its ecosystem. They configure the
 corresponding map adapter and include the styles needed by that adapter.
 
-```ts
+```javascript
 import NgwMap from '@nextgis/ngw-leaflet';
 // Or import NgwMap from '@nextgis/ngw-ol';
 // Or import NgwMap from '@nextgis/ngw-maplibre-gl';
@@ -48,7 +48,7 @@ The three engine-specific components configure their adapter and render the
 common `ReactNgwMap` component. Map options are passed as component props. Use
 `whenCreated` when application code needs the initialized `NgwMap` instance.
 
-```tsx
+```javascript
 import ReactNgwMap from '@nextgis/react-ngw-leaflet';
 
 export function Map() {

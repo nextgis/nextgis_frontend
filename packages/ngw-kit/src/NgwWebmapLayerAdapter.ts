@@ -151,7 +151,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
     }
   }
 
-  fetchBookmarks(options: BaseRequestOptions): Promise<BookmarkItem[]> {
+  fetchBookmarks(options: BaseRequestOptions = {}): Promise<BookmarkItem[]> {
     const bookmarkResId = this.getBookmarksResourceId();
     const connector = this.options.connector;
     if (bookmarkResId) {

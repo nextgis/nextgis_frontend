@@ -21,7 +21,7 @@ npm install @nextgis/ngw-kit
 
 ## Add a NextGIS Web map to WebMap
 
-```ts
+```javascript
 import { NgwKit } from '@nextgis/ngw-kit';
 import { createWebMap } from '@nextgis/webmap';
 import LeafletMapAdapter from '@nextgis/leaflet-map-adapter';
@@ -45,7 +45,7 @@ of assembling this stack manually.
 
 ## Request vector features
 
-```ts
+```javascript
 import { fetchNgwLayerItems } from '@nextgis/ngw-kit';
 import NgwConnector from '@nextgis/ngw-connector';
 

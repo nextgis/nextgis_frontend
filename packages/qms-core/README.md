@@ -13,7 +13,7 @@ map.
 npm install @nextgis/qms-core
 ```
 
-```ts
+```javascript
 import { QmsClient } from '@nextgis/qms-core';
 
 const qms = new QmsClient();
@@ -22,13 +22,13 @@ const layer = await qms.getLayer(448);
 
 To use a custom QMS server, set the global URL before creating a client:
 
-```ts
+```javascript
 QmsClient.url = 'http://localhost:8000';
 ```
 
 Get a service extent as `[west, south, east, north]` in EPSG:4326:
 
-```ts
+```javascript
 import { getQmsServiceExtent } from '@nextgis/qms-core';
 
 const extent = await getQmsServiceExtent(4646);
@@ -36,7 +36,7 @@ const extent = await getQmsServiceExtent(4646);
 
 Search for services by name or description:
 
-```ts
+```javascript
 const services = await qms.searchServices('OpenStreetMap', { type: 'tms' });
 ```
 
@@ -57,7 +57,7 @@ the host interface.
 Built-in control languages are `en`, `de`, `es`, `fr`, `it`, `pt`, and `ru`.
 Select one with `lang` (`en` by default):
 
-```ts
+```javascript
 import { QmsControlElement } from '@nextgis/qms-core';
 
 const control = new QmsControlElement({

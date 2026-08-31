@@ -8,10 +8,10 @@
     "build": "vite build --base=./"
   },
   "dependencies": {
-    "@nextgis/ngw-connector": "workspace:*",
     "@nextgis/ngw-uploader": "workspace:*"
   },
   "devDependencies": {
+    "@nextgis/ngw-connector": "workspace:*",
     "vite": "^6.3.5"
   }
 }

@@ -21,7 +21,7 @@ npm install @nextgis/ngw-map @nextgis/leaflet-map-adapter leaflet
 
 ## Usage
 
-```ts
+```javascript
 import { NgwMap } from '@nextgis/ngw-map';
 import MapAdapter from '@nextgis/leaflet-map-adapter';
 import 'leaflet/dist/leaflet.css';

@@ -13,7 +13,7 @@ npm install leaflet @nextgis/react-ngw-leaflet
 
 ## Usage
 
-```tsx
+```javascript
 import { createRoot } from 'react-dom/client';
 import ReactNgwMap from '@nextgis/react-ngw-leaflet';
 

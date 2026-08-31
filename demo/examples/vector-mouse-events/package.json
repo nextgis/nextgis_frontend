@@ -28,6 +28,7 @@
   "devDependencies": {
     "@nextgis/ngw-maplibre-gl": "*",
     "@nextgis/ngw-ol": "*",
+    "@types/node": "^24.13.3",
     "vite": "^6.3.5"
   }
 }

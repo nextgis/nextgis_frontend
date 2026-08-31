@@ -14,7 +14,7 @@ npm install ol @nextgis/react-ngw-ol
 
 ## Usage
 
-```tsx
+```javascript
 import { createRoot } from 'react-dom/client';
 import ReactNgwMap from '@nextgis/react-ngw-ol';
 

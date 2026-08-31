@@ -14,7 +14,7 @@ npm install maplibre-gl @nextgis/react-ngw-maplibre-gl
 
 ## Usage
 
-```tsx
+```javascript
 import { createRoot } from 'react-dom/client';
 import ReactNgwMap from '@nextgis/react-ngw-maplibre-gl';
 

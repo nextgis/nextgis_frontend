@@ -15,7 +15,7 @@ npm install leaflet @nextgis/qms-leaflet
 
 Create a Leaflet map and add a QMS service by its ID:
 
-```ts
+```javascript
 import { map as createMap } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import '@nextgis/qms-leaflet/lib/qms-leaflet.css';
@@ -28,7 +28,7 @@ const layer = await addQmsLayer(map, 448);
 
 Set `fit` to move the map to the QMS service extent after adding the layer:
 
-```ts
+```javascript
 const layer = await addQmsLayer(map, 4646, {
   fit: { padding: [24, 24], maxZoom: 14 },
 });
@@ -36,7 +36,7 @@ const layer = await addQmsLayer(map, 4646, {
 
 You can also fit the map by a QMS service ID:
 
-```ts
+```javascript
 import { fitQmsService } from '@nextgis/qms-leaflet';
 
 await fitQmsService(map, 4646, { maxZoom: 14 });
@@ -44,7 +44,7 @@ await fitQmsService(map, 4646, { maxZoom: 14 });
 
 Add the QMS search and catalog control to the map:
 
-```ts
+```javascript
 import { createQmsControl } from '@nextgis/qms-leaflet';
 
 createQmsControl({ initialLayer: 448, position: 'topleft' }).addTo(map);

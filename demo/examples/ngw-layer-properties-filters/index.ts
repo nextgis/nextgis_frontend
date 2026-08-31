@@ -3,6 +3,7 @@ import NgwMap from '@nextgis/ngw-leaflet';
 import type { NgwLayerAdapterType, ResourceAdapter } from '@nextgis/ngw-kit';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type { FeatureLayerFieldDatatype } from '@nextgisweb/feature-layer/type/api';
+
 const BASE_URL = 'https://demo.nextgis.com';
 const RESOURCE_ID = 10048;
 

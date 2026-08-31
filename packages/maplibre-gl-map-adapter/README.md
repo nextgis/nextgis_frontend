@@ -35,7 +35,7 @@ map.
 
 For Vite:
 
-```ts
+```javascript
 import { setWorkerUrl } from 'maplibre-gl';
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
 
@@ -45,7 +45,7 @@ setWorkerUrl(workerUrl);
 For a manually deployed worker, copy both `maplibre-gl-worker.mjs` and
 `maplibre-gl-shared.mjs` from `maplibre-gl/dist` to the same public directory:
 
-```ts
+```javascript
 import { setWorkerUrl } from 'maplibre-gl';
 
 setWorkerUrl('/maplibre/maplibre-gl-worker.mjs');

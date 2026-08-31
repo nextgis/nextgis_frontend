@@ -22,13 +22,13 @@
     "start:maplibre-gl": "yarn run -T example --adapter=ngw-maplibre-gl"
   },
   "dependencies": {
-    "@nextgis/ngw-leaflet": "*",
-    "@nextgis/paint": "*",
-    "@nextgis/webmap": "*"
+    "@nextgis/ngw-leaflet": "*"
   },
   "devDependencies": {
     "@nextgis/ngw-maplibre-gl": "*",
     "@nextgis/ngw-ol": "*",
+    "@nextgis/paint": "*",
+    "@nextgis/webmap": "*",
     "@types/geojson": "^7946.0.16",
     "vite": "^6.3.5"
   }

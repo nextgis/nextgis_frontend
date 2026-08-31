@@ -15,7 +15,7 @@ npm install ol @nextgis/qms-ol
 
 Create an OpenLayers map and add a QMS service by its numeric ID:
 
-```ts
+```javascript
 import Map from 'ol/Map';
 import View from 'ol/View';
 import { fromLonLat } from 'ol/proj';
@@ -34,7 +34,7 @@ const layer = await addQmsLayer(map, 448);
 
 Set `fit` to move the map to the QMS service extent after adding the layer:
 
-```ts
+```javascript
 const layer = await addQmsLayer(map, 4646, {
   fit: { padding: [24, 24, 24, 24], maxZoom: 14 },
 });
@@ -42,7 +42,7 @@ const layer = await addQmsLayer(map, 4646, {
 
 You can also fit the map by a QMS service ID:
 
-```ts
+```javascript
 import { fitQmsService } from '@nextgis/qms-ol';
 
 await fitQmsService(map, 4646, { maxZoom: 14 });
@@ -50,7 +50,7 @@ await fitQmsService(map, 4646, { maxZoom: 14 });
 
 Add the QMS search and catalog control to the map:
 
-```ts
+```javascript
 import { createQmsControl } from '@nextgis/qms-ol';
 
 map.addControl(createQmsControl({ initialLayer: 448 }));

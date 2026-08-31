@@ -20,7 +20,7 @@ npm install @nextgis/webmap @nextgis/leaflet-map-adapter leaflet
 
 ## Usage
 
-```ts
+```javascript
 import { createWebMap } from '@nextgis/webmap';
 import MapAdapter from '@nextgis/leaflet-map-adapter';
 import 'leaflet/dist/leaflet.css';
