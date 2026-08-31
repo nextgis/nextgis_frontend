@@ -77,7 +77,11 @@ const copy = async () => {
 </script>
 
 <template>
-  <div v-if="$q.screen.lt.md" class="q-pa-md" style="height: 100%; width: 100%">
+  <div
+    v-if="$q.screen.lt.md"
+    class="example-page q-pa-md"
+    style="height: 100%; width: 100vw"
+  >
     <HtmlExampleHeaderComponent
       v-model="ngwMapAdapter"
       v-model:scrollAreaHeight="scrollAreaHeight"
@@ -93,11 +97,11 @@ const copy = async () => {
       style="height: 400px; width: 100%"
     />
 
-    <CodeComponent v-model="html" style="overflow-x: auto" fontSize="12px" />
+    <CodeComponent v-model="html" class="example-code" fontSize="12px" />
   </div>
   <div
     v-else
-    class="row q-pa-md"
+    class="example-page row q-pa-md"
     style="height: 100%; width: 100%; position: absolute"
   >
     <div class="col">
@@ -122,9 +126,20 @@ const copy = async () => {
 </template>
 
 <style>
-.example-iframe {
+.example-page {
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.example-page > .col,
+.example-code {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.example-code {
   width: 100%;
-  height: 100%;
-  border: 1px solid rgba(0, 0, 0, 0.3);
+  overflow-x: auto;
 }
 </style>

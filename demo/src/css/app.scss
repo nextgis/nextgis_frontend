@@ -1,5 +1,12 @@
 // app global css in SCSS form
 
+html,
+body,
+#q-app {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 .content a {
   color: $primary;
 }
@@ -10,4 +17,9 @@
 
 .body--dark .content a:hover {
   color: #9bd0fb;
+}
+
+.content pre {
+  max-width: 100%;
+  overflow-x: auto;
 }

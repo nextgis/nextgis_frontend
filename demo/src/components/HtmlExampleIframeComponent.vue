@@ -86,7 +86,10 @@ watch(content, writeIFrame, { immediate: true });
 
 <style>
 .example-iframe {
+  display: block;
+  box-sizing: border-box;
   width: 100%;
+  max-width: 100%;
   height: 100%;
   background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.3);

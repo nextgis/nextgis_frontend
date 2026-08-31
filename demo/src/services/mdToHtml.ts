@@ -1,4 +1,4 @@
-import { Marked } from 'marked';
+import { Marked, Renderer } from 'marked';
 import { markedHighlight } from 'marked-highlight';
 
 import { hljs } from '../plugins/highlight';
@@ -14,5 +14,22 @@ const marked = new Marked(
 );
 
 export async function mdToHtml(md: string): Promise<string> {
-  return marked.parse(md);
+  const headings = new Map<string, number>();
+  const renderer = new Renderer();
+
+  renderer.heading = (text, level) => {
+    const base = text
+      .replace(/<[^>]+>/g, '')
+      .toLowerCase()
+      .trim()
+      .replace(/[^\p{L}\p{M}\p{N}_\s-]/gu, '')
+      .replace(/\s+/g, '-');
+    const count = headings.get(base) ?? 0;
+    headings.set(base, count + 1);
+    const id = count ? `${base}-${count}` : base;
+
+    return `<h${level} id="${id}">${text}</h${level}>`;
+  };
+
+  return marked.parse(md, { renderer });
 }

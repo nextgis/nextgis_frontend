@@ -1,42 +1,32 @@
-# demo-app (@nextgis/demo-app)
+# NextGIS Frontend examples
 
-Demo site for NextGIS Frontend libraries
+This section contains interactive examples for the NextGIS Frontend libraries.
+They demonstrate how to create web maps, add resources from NextGIS Web, work
+with vector layers, filters, selection, popups, controls, and
+QuickMapServices.
 
-## Install the dependencies
+## Using the examples
 
-```bash
-yarn
-```
+Choose an example in the navigation tree. The example page contains a live map
+and the complete code needed to run it. You can edit the code and update the
+preview, copy the example, open it in CodePen, or follow the GitHub link to its
+TypeScript source.
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
+Examples that use the common `NgwMap` API can be switched between Leaflet,
+OpenLayers, and MapLibre GL JS using the adapter selector above the code.
 
-```bash
-yarn start
-```
+## Where to start
 
-### Lint the files
+- [Add a layer from NextGIS Web](https://code.nextgis.com/demo-examples-ngw-layer)
+- [Add a NextGIS Web web map](https://code.nextgis.com/demo-examples-ngw-webmap)
+- [Filter layer features](https://code.nextgis.com/demo-examples-ngw-layer-properties-filters)
+- [Select vector features](https://code.nextgis.com/demo-examples-vector-selection)
+- [Create custom map controls](https://code.nextgis.com/demo-examples-control-panel)
 
-```bash
-yarn lint
-```
+See the [NextGIS Frontend overview](https://github.com/nextgis/nextgis_frontend)
+for package selection and installation, or open the
+[API reference](https://code-api.nextgis.com) for detailed type and method
+documentation.
 
-### Format the files
-
-```bash
-yarn format
-```
-
-### Build the app for production
-
-```bash
-yarn build
-```
-
-### Docker
-
-```bash
-yarn docker
-
-docker build -t nextgis-demo-app -f .\docker\Dockerfile .
-docker run -p 8080:80 nextgis-demo-app
-```
+Instructions for running and building this site are in the
+[demo development guide](https://github.com/nextgis/nextgis_frontend/blob/master/demo/DEVELOPMENT.md).
