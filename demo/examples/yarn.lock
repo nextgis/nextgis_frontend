@@ -220,6 +220,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis-example/demo-custom-layer-controls@workspace:custom-layer-controls"
   dependencies:
+    "@nextgis/ngw-kit": "*"
     "@nextgis/ngw-leaflet": "*"
     "@nextgis/ngw-maplibre-gl": "*"
     "@nextgis/ngw-ol": "*"
@@ -364,6 +365,7 @@ __metadata:
     "@nextgis/ngw-leaflet": "*"
     "@nextgis/ngw-maplibre-gl": "*"
     "@nextgis/ngw-ol": "*"
+    "@nextgis/webmap": "*"
     vite: ^6.3.5
   languageName: unknown
   linkType: soft
@@ -372,9 +374,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis-example/demo-layers-update@workspace:layers-update"
   dependencies:
+    "@nextgis/ngw-connector": "*"
     "@nextgis/ngw-leaflet": "*"
     "@nextgis/ngw-maplibre-gl": "*"
     "@nextgis/ngw-ol": "*"
+    "@nextgis/utils": "*"
     vite: ^6.3.5
   languageName: unknown
   linkType: soft
@@ -451,6 +455,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis-example/demo-ngw-layer-legend@workspace:ngw-layer-legend"
   dependencies:
+    "@nextgis/ngw-connector": "*"
     "@nextgis/ngw-leaflet": "*"
     "@nextgis/ngw-maplibre-gl": "*"
     "@nextgis/ngw-ol": "*"
@@ -462,6 +467,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis-example/demo-ngw-layer-popup@workspace:ngw-layer-popup"
   dependencies:
+    "@nextgis/ngw-kit": "*"
     "@nextgis/ngw-leaflet": "*"
     "@nextgis/ngw-maplibre-gl": "*"
     "@nextgis/ngw-ol": "*"
@@ -484,6 +490,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis-example/demo-ngw-layer-properties-filters@workspace:ngw-layer-properties-filters"
   dependencies:
+    "@nextgis/ngw-kit": "*"
     "@nextgis/ngw-leaflet": "*"
     "@nextgis/ngw-maplibre-gl": "*"
     "@nextgis/ngw-ol": "*"
@@ -496,6 +503,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis-example/demo-ngw-layer-select@workspace:ngw-layer-select"
   dependencies:
+    "@nextgis/ngw-kit": "*"
     "@nextgis/ngw-leaflet": "*"
     "@nextgis/ngw-maplibre-gl": "*"
     "@nextgis/ngw-ol": "*"
@@ -507,6 +515,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis-example/demo-ngw-layers@workspace:ngw-layers"
   dependencies:
+    "@nextgis/ngw-kit": "*"
     "@nextgis/ngw-leaflet": "*"
     "@nextgis/ngw-maplibre-gl": "*"
     "@nextgis/ngw-ol": "*"
@@ -518,6 +527,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis-example/demo-ngw-legend-symbols@workspace:ngw-legend-symbols"
   dependencies:
+    "@nextgis/ngw-connector": "*"
     "@nextgis/ngw-leaflet": "*"
     "@nextgis/ngw-maplibre-gl": "*"
     "@nextgis/ngw-ol": "*"
@@ -540,6 +550,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis-example/demo-ngw-resources@workspace:ngw-resources"
   dependencies:
+    "@nextgis/ngw-kit": "*"
     "@nextgis/ngw-leaflet": "*"
     "@nextgis/ngw-maplibre-gl": "*"
     "@nextgis/ngw-ol": "*"
@@ -619,6 +630,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis-example/demo-ngw-webmap-legend@workspace:ngw-webmap-legend"
   dependencies:
+    "@nextgis/ngw-connector": "*"
     "@nextgis/ngw-leaflet": "*"
     "@nextgis/ngw-maplibre-gl": "*"
     "@nextgis/ngw-ol": "*"
@@ -668,6 +680,7 @@ __metadata:
     "@nextgis/ngw-leaflet": "*"
     "@nextgis/ngw-maplibre-gl": "*"
     "@nextgis/ngw-ol": "*"
+    "@types/geojson": ^7946.0.16
     vite: ^6.3.5
   languageName: unknown
   linkType: soft
@@ -722,10 +735,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis-example/demo-vector-adapter-select@workspace:vector-adapter-select"
   dependencies:
+    "@nextgis/ngw-kit": "*"
     "@nextgis/ngw-leaflet": "*"
     "@nextgis/ngw-maplibre-gl": "*"
     "@nextgis/ngw-ol": "*"
-    "@nextgis/webmap": "*"
     vite: ^6.3.5
   languageName: unknown
   linkType: soft
@@ -737,6 +750,7 @@ __metadata:
     "@nextgis/ngw-leaflet": "*"
     "@nextgis/ngw-maplibre-gl": "*"
     "@nextgis/ngw-ol": "*"
+    "@nextgis/webmap": "*"
     "@types/geojson": ^7946.0.16
     vite: ^6.3.5
   languageName: unknown
@@ -761,6 +775,8 @@ __metadata:
     "@nextgis/ngw-leaflet": "*"
     "@nextgis/ngw-maplibre-gl": "*"
     "@nextgis/ngw-ol": "*"
+    "@nextgis/webmap": "*"
+    "@types/geojson": ^7946.0.16
     vite: ^6.3.5
   languageName: unknown
   linkType: soft
@@ -769,10 +785,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis-example/demo-vector-hover-selection@workspace:vector-hover-selection"
   dependencies:
+    "@nextgis/ngw-kit": "*"
     "@nextgis/ngw-leaflet": "*"
     "@nextgis/ngw-maplibre-gl": "*"
     "@nextgis/ngw-ol": "*"
-    "@nextgis/webmap": "*"
     vite: ^6.3.5
   languageName: unknown
   linkType: soft
@@ -831,6 +847,9 @@ __metadata:
     "@nextgis/ngw-leaflet": "*"
     "@nextgis/ngw-maplibre-gl": "*"
     "@nextgis/ngw-ol": "*"
+    "@nextgis/paint": "*"
+    "@nextgis/webmap": "*"
+    "@types/geojson": ^7946.0.16
     vite: ^6.3.5
   languageName: unknown
   linkType: soft
@@ -842,6 +861,9 @@ __metadata:
     "@nextgis/ngw-leaflet": "*"
     "@nextgis/ngw-maplibre-gl": "*"
     "@nextgis/ngw-ol": "*"
+    "@nextgis/utils": "*"
+    "@nextgis/webmap": "*"
+    "@types/geojson": ^7946.0.16
     vite: ^6.3.5
   languageName: unknown
   linkType: soft
@@ -850,10 +872,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis-example/demo-vector-selection@workspace:vector-selection"
   dependencies:
+    "@nextgis/ngw-kit": "*"
     "@nextgis/ngw-leaflet": "*"
     "@nextgis/ngw-maplibre-gl": "*"
     "@nextgis/ngw-ol": "*"
-    "@nextgis/webmap": "*"
     vite: ^6.3.5
   languageName: unknown
   linkType: soft
@@ -874,6 +896,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis-example/demo-webmap-identification-disabled@workspace:webmap-identification-disabled"
   dependencies:
+    "@nextgis/ngw-kit": "*"
     "@nextgis/ngw-leaflet": "*"
     "@nextgis/ngw-maplibre-gl": "*"
     "@nextgis/ngw-ol": "*"
@@ -885,6 +908,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis-example/demo-webmap-identification-multiply@workspace:webmap-identification-multiply"
   dependencies:
+    "@nextgis/ngw-kit": "*"
     "@nextgis/ngw-leaflet": "*"
     "@nextgis/ngw-maplibre-gl": "*"
     "@nextgis/ngw-ol": "*"
@@ -907,6 +931,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@nextgis-example/demo-webmap-layer-tree@workspace:webmap-layer-tree"
   dependencies:
+    "@nextgis/ngw-kit": "*"
     "@nextgis/ngw-leaflet": "*"
     "@nextgis/ngw-maplibre-gl": "*"
     "@nextgis/ngw-ol": "*"
@@ -960,6 +985,13 @@ __metadata:
   version: 3.0.0
   resolution: "@nextgis/expression@npm:3.0.0"
   checksum: 2f0e2dc4f96c7ec0823a86df8075d7bfb575294a7d2eddbcf25e3617572ab6c05795bf237451aff02f394b2306cf323f493372980a0ab9d9c34e4d11fb7fea6a
+  languageName: node
+  linkType: hard
+
+"@nextgis/expression@npm:4.0.0":
+  version: 4.0.0
+  resolution: "@nextgis/expression@npm:4.0.0"
+  checksum: 3a58c26508b9c58fb2de92ff0372796928d5d33d2ed8968a9b9e79fd8148440226ad9642ff5d147f3905e430f493cf26a33c5a7b94b05e066ef08fb348186c9b
   languageName: node
   linkType: hard
 
@@ -1122,6 +1154,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@nextgis/paint@npm:*":
+  version: 4.0.0
+  resolution: "@nextgis/paint@npm:4.0.0"
+  dependencies:
+    "@nextgis/expression": 4.0.0
+    "@nextgis/properties-filter": 4.0.0
+    "@types/geojson": ^7946.0.14
+  checksum: 87357347b77de51670798cf30d0a2d0fad35f7635be0604da505206fddf2fc7a6376454c862ab643c3447b08e655221aa5c593923bd057ff09c5c63c4fb2636e
+  languageName: node
+  linkType: hard
+
 "@nextgis/paint@npm:3.0.0":
   version: 3.0.0
   resolution: "@nextgis/paint@npm:3.0.0"
@@ -1140,6 +1183,16 @@ __metadata:
     "@nextgis/utils": 3.0.0
     "@types/geojson": ^7946.0.14
   checksum: 8ffd886c7b672ade4fe7b639c9cde573460051e09a926970f1e8d37b6429ff069fb999fd7578ce16d3177157f5f7c1af4ac7ca5c42e60657a7b44691095ca6fc
+  languageName: node
+  linkType: hard
+
+"@nextgis/properties-filter@npm:4.0.0":
+  version: 4.0.0
+  resolution: "@nextgis/properties-filter@npm:4.0.0"
+  dependencies:
+    "@nextgis/utils": 4.0.0
+    "@types/geojson": ^7946.0.14
+  checksum: cf1c72a9c692faba64f72e663fabbf916a15f6ffd14d465cbaead033ab7e0ff5aebe2d7ec7846b9b029eb7f74fad8f891b02f87867b2857d61d4d74a4f029fcd
   languageName: node
   linkType: hard
 
@@ -1217,6 +1270,13 @@ __metadata:
   version: 3.0.0
   resolution: "@nextgis/utils@npm:3.0.0"
   checksum: a4d7cba5d9a30be8cecbbe6c908844c85994be12f757ccc5e0f7a8889eea6ee19047e5704432a30e0a1f0fa0fc8128499321371d06e3ba99e2ee8558b7e3ce08
+  languageName: node
+  linkType: hard
+
+"@nextgis/utils@npm:4.0.0":
+  version: 4.0.0
+  resolution: "@nextgis/utils@npm:4.0.0"
+  checksum: 197c0935a676996ded6d5211fb257bba3d27630df96967af531ecd22d2c503d7fe5af49959de5adc82f84dedc0a93ccc6ef8b9c17d3d10e0d05cc0950c993333
   languageName: node
   linkType: hard
 
@@ -2214,9 +2274,9 @@ __metadata:
   linkType: hard
 
 "undici@npm:^8.4.1":
-  version: 8.10.0
-  resolution: "undici@npm:8.10.0"
-  checksum: 6b7c5442ec67fb4048a07aba719890904be54fbcff83c58b7133011fead67877c970f8b974f5e05aa0c7f5603c726888d8b3648e891af1493e7e362d848d7e9c
+  version: 8.11.2
+  resolution: "undici@npm:8.11.2"
+  checksum: 12a3fbd6690cb6d9229a4e66d3d1b267cd5fd4864f911f784c66e5403b04884931a4ced5c68ed7cba21c4ed8126aae7a00ee896cb3ed7ecd8763f9fa3db24d1b
   languageName: node
   linkType: hard
 
