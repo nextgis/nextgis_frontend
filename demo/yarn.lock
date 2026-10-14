@@ -527,7 +527,7 @@ __metadata:
     marked: ^12.0.1
     marked-highlight: 2.0.6
     prettier: ^3.3.3
-    quasar: ^2.16.5
+    quasar: ^2.32.2
     simple-code-editor: ^2.0.9
     typescript: ~6.0.3
     vite-plugin-checker: ^0.9.0
@@ -5894,10 +5894,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"quasar@npm:^2.16.5":
-  version: 2.16.6
-  resolution: "quasar@npm:2.16.6"
-  checksum: 550db1cf06c0a155f02f6be20bbb1a6db283cc20c22bc26ee083055a9711e60c12fcb8677e731e0e885db746ea470a311de35e15ace951c6d0f5eccc0a49d9df
+"quasar@npm:^2.32.2":
+  version: 2.32.2
+  resolution: "quasar@npm:2.32.2"
+  checksum: c265c50415da688e163942658a0d3fe048ccee587461f33100a97a509d11e028510f6fc104f5446ca26806528e65714401e778b84c688770f39ba23b11cc4252
   languageName: node
   linkType: hard
 
