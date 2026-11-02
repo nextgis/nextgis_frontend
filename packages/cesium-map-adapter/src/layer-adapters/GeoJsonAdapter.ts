@@ -17,6 +17,7 @@ import { whenSampleTerrainMostDetailed } from '../utils/whenSampleTerrainMostDet
 
 import { BaseAdapter } from './BaseAdapter';
 
+import type { Map } from './BaseAdapter';
 import type {
   Ellipsoid3DPaint,
   GeometryPaint,
@@ -42,8 +43,6 @@ import type {
   GeoJsonProperties,
   Geometry,
 } from 'geojson';
-
-import type { Map } from './BaseAdapter';
 
 type Layer = GeoJsonDataSource;
 
@@ -354,7 +353,7 @@ export class GeoJsonAdapter
       const position = Cartesian3.fromDegrees(
         lonLat[0],
         lonLat[1],
-        lonLat[2] + this._heightOffset,
+        (lonLat[2] ?? 0) + this._heightOffset,
       );
 
       // const orientation = Transforms.headingPitchRollQuaternion(
