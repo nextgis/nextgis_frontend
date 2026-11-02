@@ -113,6 +113,9 @@ export class NgwUploader {
           if (!v.vector_layer) {
             throw new Error('Vector resource creation error');
           }
+          if (v.vector_layer.geometry_type === 'NONE') {
+            return newRes;
+          }
           const styleOptions = options.style || {};
           if (!styleOptions.style) {
             const geometryType = v.vector_layer.geometry_type;

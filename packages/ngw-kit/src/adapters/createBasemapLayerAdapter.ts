@@ -9,9 +9,9 @@ export async function createBasemapLayerAdapter({
   item,
 }: GetClassAdapterOptions): Promise<Type<MainLayerAdapter> | undefined> {
   if (item.basemap_layer) {
-    const qms = item.basemap_layer.qms;
-    const url = item.basemap_layer.url;
-    if (qms) {
+    const basemap = item.basemap_layer;
+    const { qms, url } = basemap;
+    if (qms && typeof qms === 'string') {
       const qms_ = JSON.parse(qms);
       const adapter = Promise.resolve(
         QmsKit.utils.createQmsAdapter(webMap, undefined, {
@@ -26,8 +26,18 @@ export async function createBasemapLayerAdapter({
       >;
       if (TileAdapter) {
         class BasemapTileAdapter extends TileAdapter {
+          constructor(map: any, options: TileAdapterOptions) {
+            super(map, { ...options, baselayer: true, order: 0 });
+          }
+
           async addLayer(opt: TileAdapterOptions) {
-            return super.addLayer({ ...opt, url });
+            return super.addLayer({
+              ...opt,
+              url,
+              minZoom: basemap.z_min ?? opt.minZoom,
+              maxZoom: basemap.z_max ?? opt.maxZoom,
+              attribution: basemap.copyright_text ?? opt.attribution,
+            });
           }
         }
         return BasemapTileAdapter;

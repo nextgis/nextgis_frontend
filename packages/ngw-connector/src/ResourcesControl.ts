@@ -160,7 +160,10 @@ export class ResourcesControl {
             serialization: 'full',
             ...query,
           })
-          .then((resources) => {
+          .then((response) => {
+            const resources = Array.isArray(response)
+              ? response
+              : response.items;
             if (resources) {
               for (const x of resources) {
                 this.cache.add('resource.item', CancelablePromise.resolve(x), {

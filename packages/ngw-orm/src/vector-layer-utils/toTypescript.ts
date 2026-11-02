@@ -22,6 +22,7 @@ const dataTypeAlias: Record<VectorFieldDatatype, string> = {
   BIGINT: 'number',
   INTEGER: 'number',
   BOOLEAN: 'boolean',
+  JSON: 'unknown',
 };
 
 const layerAlias: Partial<Record<GeometryType, string>> = {

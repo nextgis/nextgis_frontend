@@ -129,9 +129,12 @@ export interface WebmapResource {
 export interface BasemapResource {
   url: string;
   /**
-   * Parse to qms-kit.BasemapQms
+   * Legacy QMS service JSON or a QMS reference.
    */
-  qms: string;
+  qms?: string | { id: number; name: string } | null;
+  z_min?: number | null;
+  z_max?: number | null;
+  copyright_text?: string | null;
 }
 
 export interface BasemapWebmapItem {
@@ -158,7 +161,8 @@ export type VectorFieldDatatype =
   | 'DATETIME'
   | 'BIGINT'
   | 'INTEGER'
-  | 'BOOLEAN';
+  | 'BOOLEAN'
+  | 'JSON';
 
 /** @deprecated - use {@link VectorFieldDatatype} instead */
 export type ResourceItemDatatype = VectorFieldDatatype;
@@ -189,7 +193,8 @@ export type GeometryType =
   | 'POLYGONZ'
   | 'MULTIPOINTZ'
   | 'MULTILINESTRINGZ'
-  | 'MULTIPOLYGONZ';
+  | 'MULTIPOLYGONZ'
+  | 'NONE';
 
 export interface VectorLayer {
   srs: { id: number };

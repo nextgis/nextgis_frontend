@@ -94,7 +94,7 @@ export interface GetRequestItemsResponseMap extends RequestItemKeys {
   'pyramid.route': PyramidRoute;
   'pyramid.settings': PyramidSettings;
   'resource.item': ResourceItem;
-  'resource.search': ResourceItem[];
+  'resource.search': ResourceItem[] | { items: ResourceItem[] };
   'resource.child': any;
   'resource.collection': ResourceItem[];
   'file_upload.upload': FileUploadResp;
