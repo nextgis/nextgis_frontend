@@ -1,0 +1,528 @@
+{
+  "revision": "1576eeb162a10dcdc163931d5cc68a20a667d12a",
+  "groups": [
+    {
+      "id": "autonavi",
+      "name": "AutoNavi",
+      "services": [
+        {
+          "id": "autonavi_annotation",
+          "type": "tms",
+          "name": "AutoNavi Annotation",
+          "group": "autonavi",
+          "url": "https://webst01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}",
+          "maxZoom": 18,
+          "yOriginTop": true
+        },
+        {
+          "id": "autonavi_basemap",
+          "type": "tms",
+          "name": "AutoNavi BaseMap",
+          "group": "autonavi",
+          "url": "https://{switch:webrd01,webrd02,webrd03,webrd04}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}",
+          "maxZoom": 18,
+          "yOriginTop": true
+        },
+        {
+          "id": "autonavi_satellite",
+          "type": "tms",
+          "name": "AutoNavi Satellite",
+          "group": "autonavi",
+          "url": "https://webst01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=6&x={x}&y={y}&z={z}",
+          "maxZoom": 18,
+          "yOriginTop": true
+        }
+      ]
+    },
+    {
+      "id": "basemapat",
+      "name": "BasemapAT",
+      "services": [
+        {
+          "id": "basemapat_gelaende",
+          "type": "tms",
+          "name": "GELAENDE",
+          "group": "basemapat",
+          "copyrightText": "Data source: <a href=\"https://www.basemap.at/\">www.basemap.at</a>",
+          "copyrightUrl": "https://basemap.at/",
+          "termsOfUseUrl": "https://basemap.at/en/",
+          "url": "https://mapsneu.wien.gv.at/basemap/bmapgelaende/grau/google3857/{z}/{y}/{x}.jpeg",
+          "minZoom": 0,
+          "maxZoom": 19,
+          "yOriginTop": true
+        },
+        {
+          "id": "basemapat_gray",
+          "type": "tms",
+          "name": "GRAY",
+          "group": "basemapat",
+          "copyrightText": "Data source: <a href=\"https://www.basemap.at/\">www.basemap.at</a>",
+          "copyrightUrl": "https://basemap.at/",
+          "termsOfUseUrl": "https://basemap.at/en/",
+          "url": "https://mapsneu.wien.gv.at/basemap/bmapgrau/normal/google3857/{z}/{y}/{x}.png",
+          "minZoom": 0,
+          "maxZoom": 19,
+          "yOriginTop": true
+        },
+        {
+          "id": "basemapat_high_dpi",
+          "type": "tms",
+          "name": "HIGH DPI",
+          "group": "basemapat",
+          "copyrightText": "Data source: <a href=\"https://www.basemap.at/\">www.basemap.at</a>",
+          "copyrightUrl": "https://basemap.at/",
+          "termsOfUseUrl": "https://basemap.at/en/",
+          "url": "https://mapsneu.wien.gv.at/basemap/bmaphidpi/normal/google3857/{z}/{y}/{x}.jpeg",
+          "minZoom": 0,
+          "maxZoom": 19,
+          "yOriginTop": true
+        },
+        {
+          "id": "basemapat_oberflaeche",
+          "type": "tms",
+          "name": "OBERFLAECHE",
+          "group": "basemapat",
+          "copyrightText": "Data source: <a href=\"https://www.basemap.at/\">www.basemap.at</a>",
+          "copyrightUrl": "https://basemap.at/",
+          "termsOfUseUrl": "https://basemap.at/en/",
+          "url": "https://mapsneu.wien.gv.at/basemap/bmapoberflaeche/grau/google3857/{z}/{y}/{x}.jpeg",
+          "minZoom": 0,
+          "maxZoom": 19,
+          "yOriginTop": true
+        },
+        {
+          "id": "basemapat_orthofoto",
+          "type": "tms",
+          "name": "ORTHOFOTO",
+          "group": "basemapat",
+          "copyrightText": "Data source: <a href=\"https://www.basemap.at/\">www.basemap.at</a>",
+          "copyrightUrl": "https://basemap.at/",
+          "termsOfUseUrl": "https://basemap.at/en/",
+          "url": "https://mapsneu.wien.gv.at/basemap/bmaporthofoto30cm/normal/google3857/{z}/{y}/{x}.jpeg",
+          "minZoom": 0,
+          "maxZoom": 19,
+          "yOriginTop": true
+        },
+        {
+          "id": "basemapat_overlay",
+          "type": "tms",
+          "name": "OVERLAY",
+          "group": "basemapat",
+          "copyrightText": "Data source: <a href=\"https://www.basemap.at/\">www.basemap.at</a>",
+          "copyrightUrl": "https://basemap.at/",
+          "termsOfUseUrl": "https://basemap.at/en/",
+          "url": "https://mapsneu.wien.gv.at/basemap/bmapoverlay/normal/google3857/{z}/{y}/{x}.png",
+          "minZoom": 0,
+          "maxZoom": 19,
+          "yOriginTop": true
+        },
+        {
+          "id": "basemapat_standard",
+          "type": "tms",
+          "name": "STANDARD",
+          "group": "basemapat",
+          "copyrightText": "Data source: <a href=\"https://www.basemap.at/\">www.basemap.at</a>",
+          "copyrightUrl": "https://basemap.at/",
+          "termsOfUseUrl": "https://basemap.at/en/",
+          "url": "https://mapsneu.wien.gv.at/basemap/geolandbasemap/normal/google3857/{z}/{y}/{x}.png",
+          "minZoom": 0,
+          "maxZoom": 19,
+          "yOriginTop": true
+        }
+      ]
+    },
+    {
+      "id": "bing",
+      "name": "Bing",
+      "services": [
+        {
+          "id": "bing_map",
+          "type": "tms",
+          "name": "Bing Map",
+          "group": "bing",
+          "url": "https://ecn.dynamic.t0.tiles.virtualearth.net/comp/CompositionHandler/{q}?mkt=en-us&it=G,VE,BX,L,LA&shading=hill",
+          "minZoom": 1,
+          "maxZoom": 19,
+          "yOriginTop": true
+        },
+        {
+          "id": "bing_map_ru",
+          "type": "tms",
+          "name": "Bing Map Ru",
+          "group": "bing",
+          "url": "https://ecn.dynamic.t0.tiles.virtualearth.net/comp/CompositionHandler/{q}?mkt=ru-ru&it=G,VE,BX,L,LA&shading=hill",
+          "minZoom": 1,
+          "maxZoom": 19,
+          "yOriginTop": true
+        },
+        {
+          "id": "bing_sat",
+          "type": "tms",
+          "name": "Bing Satellite",
+          "group": "bing",
+          "url": "https://ecn.t3.tiles.virtualearth.net/tiles/a{q}.jpeg?g=0&dir=dir_n'",
+          "minZoom": 1,
+          "maxZoom": 18,
+          "yOriginTop": true
+        }
+      ]
+    },
+    {
+      "id": "esri",
+      "name": "ESRI",
+      "services": [
+        {
+          "id": "esri_artificial_sky_brightness",
+          "type": "tms",
+          "name": "ESRI Artificial Sky Brightness",
+          "group": "esri",
+          "url": "https://tiles4.arcgis.com/tiles/b3fMqPOmotX6SV4k/arcgis/rest/services/ArtificialSkyBrightness/MapServer/tile/{z}/{y}/{x}",
+          "minZoom": 2,
+          "maxZoom": 9,
+          "yOriginTop": true
+        },
+        {
+          "id": "esri_boundaries_places",
+          "type": "tms",
+          "name": "ESRI Boundaries&Places",
+          "group": "esri",
+          "url": "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}",
+          "maxZoom": 20,
+          "yOriginTop": true
+        },
+        {
+          "id": "esri_gray_dark",
+          "type": "tms",
+          "name": "ESRI Gray (dark)",
+          "group": "esri",
+          "url": "https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}",
+          "maxZoom": 20,
+          "yOriginTop": true
+        },
+        {
+          "id": "esri_gray_light",
+          "type": "tms",
+          "name": "ESRI Gray (light)",
+          "group": "esri",
+          "url": "https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}",
+          "maxZoom": 20,
+          "yOriginTop": true
+        },
+        {
+          "id": "esri_jersey_base",
+          "type": "tms",
+          "name": "ESRI JerseyBase",
+          "group": "esri",
+          "url": "https://gis.digimap.je/ArcGIS/rest/services/JsyBase/MapServer/tile/{z}/{y}/{x}",
+          "maxZoom": 8,
+          "yOriginTop": true
+        },
+        {
+          "id": "esri_national_geographic",
+          "type": "tms",
+          "name": "ESRI National Geographic",
+          "group": "esri",
+          "url": "https://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}",
+          "maxZoom": 20,
+          "yOriginTop": true
+        },
+        {
+          "id": "esri_ocean",
+          "type": "tms",
+          "name": "ESRI Ocean",
+          "group": "esri",
+          "url": "https://services.arcgisonline.com/ArcGIS/rest/services/Ocean/World_Ocean_Base/MapServer/tile/{z}/{y}/{x}",
+          "maxZoom": 20,
+          "yOriginTop": true
+        },
+        {
+          "id": "esri_physical",
+          "type": "tms",
+          "name": "ESRI Physical",
+          "group": "esri",
+          "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}",
+          "maxZoom": 20,
+          "yOriginTop": true
+        },
+        {
+          "id": "esri_reference_overlay",
+          "type": "tms",
+          "name": "ESRI Reference Overlay",
+          "group": "esri",
+          "url": "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Reference_Overlay/MapServer/tile/{z}/{y}/{x}",
+          "maxZoom": 20,
+          "yOriginTop": true
+        },
+        {
+          "id": "esri_satellite",
+          "type": "tms",
+          "name": "ESRI Satellite",
+          "group": "esri",
+          "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          "maxZoom": 20,
+          "yOriginTop": true
+        },
+        {
+          "id": "esri_shaded_relief",
+          "type": "tms",
+          "name": "ESRI Shaded Relief",
+          "group": "esri",
+          "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile/{z}/{y}/{x}",
+          "maxZoom": 20,
+          "yOriginTop": true
+        },
+        {
+          "id": "esri_standard",
+          "type": "tms",
+          "name": "ESRI Standard",
+          "group": "esri",
+          "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",
+          "maxZoom": 20,
+          "yOriginTop": true
+        },
+        {
+          "id": "esri_terrain",
+          "type": "tms",
+          "name": "ESRI Terrain",
+          "group": "esri",
+          "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer/tile/{z}/{y}/{x}",
+          "maxZoom": 20,
+          "yOriginTop": true
+        },
+        {
+          "id": "esri_topo",
+          "type": "tms",
+          "name": "ESRI Topo",
+          "group": "esri",
+          "url": "https://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}",
+          "maxZoom": 20,
+          "yOriginTop": true
+        },
+        {
+          "id": "esri_transportation",
+          "type": "tms",
+          "name": "ESRI Transportation",
+          "group": "esri",
+          "url": "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}",
+          "maxZoom": 20,
+          "yOriginTop": true
+        }
+      ]
+    },
+    {
+      "id": "google",
+      "name": "Google",
+      "services": [
+        {
+          "id": "google_hybrid",
+          "type": "tms",
+          "name": "Google Hybrid",
+          "group": "google",
+          "copyrightText": "Map data ©2015 Google",
+          "copyrightUrl": "https://www.google.at/permissions/geoguidelines/attr-guide.html",
+          "termsOfUseUrl": "https://www.google.com/help/terms_maps.html",
+          "url": "https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}",
+          "maxZoom": 20,
+          "yOriginTop": true
+        },
+        {
+          "id": "google_overlay",
+          "type": "tms",
+          "name": "Google Labels",
+          "group": "google",
+          "copyrightText": "Map data ©2015 Google",
+          "copyrightUrl": "https://www.google.at/permissions/geoguidelines/attr-guide.html",
+          "termsOfUseUrl": "https://www.google.com/help/terms_maps.html",
+          "url": "https://mt1.google.com/vt/lyrs=h&x={x}&y={y}&z={z}",
+          "maxZoom": 20,
+          "yOriginTop": true
+        },
+        {
+          "id": "google_road",
+          "type": "tms",
+          "name": "Google Road",
+          "group": "google",
+          "copyrightText": "Map data ©2015 Google",
+          "copyrightUrl": "https://www.google.at/permissions/geoguidelines/attr-guide.html",
+          "termsOfUseUrl": "https://www.google.com/help/terms_maps.html",
+          "url": "https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}",
+          "maxZoom": 20,
+          "yOriginTop": true
+        },
+        {
+          "id": "google_sat",
+          "type": "tms",
+          "name": "Google Satellite",
+          "group": "google",
+          "copyrightText": "Map data ©2015 Google",
+          "copyrightUrl": "https://www.google.at/permissions/geoguidelines/attr-guide.html",
+          "termsOfUseUrl": "https://www.google.com/help/terms_maps.html",
+          "url": "https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
+          "maxZoom": 20,
+          "yOriginTop": true
+        },
+        {
+          "id": "google_terrain",
+          "type": "tms",
+          "name": "Google Terrain",
+          "group": "google",
+          "copyrightText": "Map data ©2015 Google",
+          "copyrightUrl": "https://www.google.at/permissions/geoguidelines/attr-guide.html",
+          "termsOfUseUrl": "https://www.google.com/help/terms_maps.html",
+          "url": "https://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}",
+          "maxZoom": 20,
+          "yOriginTop": true
+        },
+        {
+          "id": "google_traff",
+          "type": "tms",
+          "name": "Google Traffic",
+          "group": "google",
+          "copyrightText": "Map data ©2015 Google",
+          "copyrightUrl": "https://www.google.at/permissions/geoguidelines/attr-guide.html",
+          "termsOfUseUrl": "https://www.google.com/help/terms_maps.html",
+          "url": "https://mt1.google.com/vt?lyrs=h@159000000,traffic|seconds_into_week:-1&style=3&x={x}&y={y}&z={z}",
+          "maxZoom": 20,
+          "yOriginTop": true
+        }
+      ]
+    },
+    {
+      "id": "OpenStreetMap",
+      "name": "OpenStreetMap",
+      "services": [
+        {
+          "id": "osm_tracks",
+          "type": "tms",
+          "name": "Openstreetmap tracks",
+          "group": "OpenStreetMap",
+          "url": "https://gps-a.tile.openstreetmap.org/lines/{z}/{x}/{y}.png",
+          "maxZoom": 20,
+          "yOriginTop": true
+        },
+        {
+          "id": "opentopomap",
+          "type": "tms",
+          "name": "OpenTopoMap",
+          "group": "OpenStreetMap",
+          "copyrightText": "Kartendaten: © OpenStreetMap-Mitwirkende, SRTM | Kartendarstellung: © OpenTopoMap (CC-BY-SA)",
+          "copyrightUrl": "https://www.openstreetmap.org/copyright",
+          "termsOfUseUrl": "https://wiki.openstreetmap.org/wiki/Tile_usage_policy",
+          "url": "https://a.tile.opentopomap.org/{z}/{x}/{y}.png",
+          "yOriginTop": true
+        },
+        {
+          "id": "opnvkarte",
+          "type": "tms",
+          "name": "Öpnvkarte",
+          "group": "OpenStreetMap",
+          "copyrightText": "© Öpnvkarte, CC-BY-SA",
+          "copyrightUrl": "https://www.xn--pnvkarte-m4a.de/",
+          "termsOfUseUrl": "https://www.xn--pnvkarte-m4a.de/",
+          "url": "https://tileserver.memomaps.de/tilegen/{z}/{x}/{y}.png",
+          "yOriginTop": true
+        },
+        {
+          "id": "osm_mapnik",
+          "type": "tms",
+          "name": "OSM Standard",
+          "group": "OpenStreetMap",
+          "copyrightText": "© OpenStreetMap contributors, CC-BY-SA",
+          "copyrightUrl": "https://www.openstreetmap.org/copyright",
+          "termsOfUseUrl": "https://operations.osmfoundation.org/policies/tiles/",
+          "url": "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+          "minZoom": 0,
+          "maxZoom": 19,
+          "yOriginTop": true
+        },
+        {
+          "id": "waymarkedtrails_cycling",
+          "type": "tms",
+          "name": "Waymarked Trails: Cycling",
+          "group": "OpenStreetMap",
+          "copyrightUrl": "https://cycling.waymarkedtrails.org/",
+          "termsOfUseUrl": "https://cycling.waymarkedtrails.org/",
+          "url": "https://tile.waymarkedtrails.org/cycling/{z}/{x}/{y}.png",
+          "yOriginTop": true
+        },
+        {
+          "id": "waymarkedtrails_hiking",
+          "type": "tms",
+          "name": "Waymarked Trails: Hiking",
+          "group": "OpenStreetMap",
+          "copyrightUrl": "https://hiking.waymarkedtrails.org/",
+          "termsOfUseUrl": "https://hiking.waymarkedtrails.org/",
+          "url": "https://tile.waymarkedtrails.org/hiking/{z}/{x}/{y}.png",
+          "yOriginTop": true
+        },
+        {
+          "id": "waymarkedtrails_slopes",
+          "type": "tms",
+          "name": "Waymarked Trails: Winter Sport Slopes",
+          "group": "OpenStreetMap",
+          "copyrightUrl": "https://slopes.waymarkedtrails.org/",
+          "termsOfUseUrl": "https://slopes.waymarkedtrails.org/",
+          "url": "https://tile.waymarkedtrails.org/slopes/{z}/{x}/{y}.png",
+          "yOriginTop": true
+        },
+        {
+          "id": "wikimedia_osm",
+          "type": "tms",
+          "name": "Wikimedia Map",
+          "group": "OpenStreetMap",
+          "url": "https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png",
+          "yOriginTop": true
+        }
+      ]
+    },
+    {
+      "id": "usgs",
+      "name": "USGS",
+      "services": [
+        {
+          "id": "usgs_plates",
+          "type": "tms",
+          "name": "Tectonic Plates",
+          "group": "usgs",
+          "url": "https://earthquake.usgs.gov/basemap/tiles/plates/{z}/{x}/{y}.png",
+          "minZoom": 0,
+          "maxZoom": 20,
+          "yOriginTop": true
+        }
+      ]
+    },
+    {
+      "id": "waze",
+      "name": "Waze",
+      "services": [
+        {
+          "id": "waze_israel",
+          "type": "tms",
+          "name": "Waze (Israel)",
+          "group": "waze",
+          "url": "https://il-livemap-tiles3.waze.com/tiles/{z}/{x}/{y}.png",
+          "maxZoom": 20,
+          "yOriginTop": true
+        },
+        {
+          "id": "waze_us",
+          "type": "tms",
+          "name": "Waze (US)",
+          "group": "waze",
+          "url": "https://livemap-tiles3.waze.com/tiles/{z}/{x}/{y}.png",
+          "maxZoom": 20,
+          "yOriginTop": true
+        },
+        {
+          "id": "waze_world",
+          "type": "tms",
+          "name": "Waze (World)",
+          "group": "waze",
+          "url": "https://worldtiles3.waze.com/tiles/{z}/{x}/{y}.png",
+          "maxZoom": 20,
+          "yOriginTop": true
+        }
+      ]
+    }
+  ]
+}
