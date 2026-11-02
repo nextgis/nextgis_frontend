@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.5](https://github.com/nextgis/nextgis_frontend/compare/v2.5.4...v2.5.5) (2026-11-02)
+
+
+### Bug Fixes
+
+* update NGW API compatibility ([7468dab](https://github.com/nextgis/nextgis_frontend/commit/7468dab3fff33040fe4bae1081a0e55c5d47482f))
+
+
+
+
+
 ## [2.5.2](https://github.com/nextgis/nextgis_frontend/compare/v2.5.1...v2.5.2) (2024-07-30)
 
 **Note:** Version bump only for package @nextgis/ngw-uploader
