@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.1](https://github.com/nextgis/nextgis_frontend/compare/v3.1.0...v3.1.1) (2026-11-02)
+
+
+### Bug Fixes
+
+* update NGW API compatibility ([78b7150](https://github.com/nextgis/nextgis_frontend/commit/78b715090869f2ce2184914a01ad0a1c90e6c9db))
+
+
+
+
+
 ## [3.0.1](https://github.com/nextgis/nextgis_frontend/compare/v3.0.0...v3.0.1) (2025-07-28)
 
 

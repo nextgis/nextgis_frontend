@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.1](https://github.com/nextgis/nextgis_frontend/compare/v3.1.0...v3.1.1) (2026-11-02)
+
+
+### Bug Fixes
+
+* **ngw-kit:** support updated NGW basemap QMS API ([5f32e9a](https://github.com/nextgis/nextgis_frontend/commit/5f32e9a828ce3e812d7c04730c6e5c1753172260))
+* update NGW API compatibility ([78b7150](https://github.com/nextgis/nextgis_frontend/commit/78b715090869f2ce2184914a01ad0a1c90e6c9db))
+
+
+
+
+
 # [3.1.0](https://github.com/nextgis/nextgis_frontend/compare/v3.0.1...v3.1.0) (2026-03-22)
 
 
