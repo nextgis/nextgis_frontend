@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.1](https://github.com/nextgis/nextgis_frontend/compare/v4.0.0...v4.0.1) (2026-11-02)
+
+
+### Bug Fixes
+
+* **demo:** improve example imports and README rendering ([a101bb0](https://github.com/nextgis/nextgis_frontend/commit/a101bb02ece66440fa750ff9d24fb68f43c08b19))
+
+
+
+
+
 # [4.0.0](https://github.com/nextgis/nextgis_frontend/compare/v4.0.0-rc.1...v4.0.0) (2026-08-30)
 
 **Note:** Version bump only for package @nextgis/qms-leaflet

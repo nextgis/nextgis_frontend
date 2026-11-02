@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.1](https://github.com/nextgis/nextgis_frontend/compare/v4.0.0...v4.0.1) (2026-11-02)
+
+
+### Bug Fixes
+
+* **demo:** improve example imports and README rendering ([a101bb0](https://github.com/nextgis/nextgis_frontend/commit/a101bb02ece66440fa750ff9d24fb68f43c08b19))
+* **demo:** improve responsive layout and README pages ([782d308](https://github.com/nextgis/nextgis_frontend/commit/782d308c0d0989b9e1e5d874f0c0ee3bbe426909))
+* **ngw-kit:** support updated NGW basemap QMS API ([4757ea0](https://github.com/nextgis/nextgis_frontend/commit/4757ea0308c1a5541dd3d3979a1bcc171846884f))
+
+
+
+
+
 # [4.0.0](https://github.com/nextgis/nextgis_frontend/compare/v4.0.0-rc.1...v4.0.0) (2026-08-30)
 
 

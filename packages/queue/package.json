@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/queue",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Manage concurrent asynchronous tasks with abort capabilities",
   "main": "index.js",
   "module": "lib/queue.esm-bundler.js",

@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/expression",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Flexible object operations with expressions inspired by Mapbox Style",
   "main": "index.js",
   "module": "lib/expression.esm-bundler.js",

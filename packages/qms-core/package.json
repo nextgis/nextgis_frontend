@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/qms-core",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "NextGIS QMS client for TMS and WMS services",
   "main": "index.js",
   "module": "lib/qms-core.esm-bundler.js",
