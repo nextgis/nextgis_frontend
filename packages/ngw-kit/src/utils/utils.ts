@@ -27,9 +27,8 @@ export function updateImageParams(
   };
 }
 
-export const vectorLayerGeomToPaintTypeAlias: Record<
-  GeometryType,
-  VectorAdapterLayerType
+export const vectorLayerGeomToPaintTypeAlias: Partial<
+  Record<GeometryType, VectorAdapterLayerType>
 > = {
   POINT: 'point',
   LINESTRING: 'line',

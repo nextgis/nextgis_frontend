@@ -155,8 +155,11 @@ export class ResourcesControl {
               ...query,
             },
           })
-          .then((resources) => {
-            if (requestOptions?.cache && resources) {
+          .then((response) => {
+            const resources = Array.isArray(response)
+              ? response
+              : response.items;
+            if (requestOptions?.cache) {
               for (const x of resources) {
                 this.cache.add('resource.item', Promise.resolve(x), {
                   id: x.resource.id,

@@ -707,7 +707,7 @@ __metadata:
 
 "@nextgis/build-tools@file:../build-tools::locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter":
   version: 3.0.0
-  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=e32bd6&locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter"
+  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=72612f&locator=%40nextgis%2Fcesium-map-adapter%40workspace%3Apackages%2Fcesium-map-adapter"
   dependencies:
     "@nextgis/eslint-config": 3.0.0
     "@rollup/plugin-alias": ^5.1.1
@@ -733,13 +733,13 @@ __metadata:
     rollup-plugin-postcss: ^4.0.2
     rollup-plugin-terser: ^7.0.2
     typescript: ~5.8.3
-  checksum: 847f1b5ec64d8889f585628393cdacbc12a7cd8f6adb2ee25f550d2361092c81f417b2ca9f15f56c34bee307033512507991cca374c56ba7e56e2d1ef891927d
+  checksum: 83280b9c93cc787f798f7210c086d7ea47a26ae432ceba361226cbbf68da9c8bb9a2f4fa0e96e06c45291cef9a90f62d72de4d66ab4e8671c60d96bcbf85e727
   languageName: node
   linkType: hard
 
 "@nextgis/build-tools@file:../build-tools::locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium":
   version: 3.0.0
-  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=e32bd6&locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium"
+  resolution: "@nextgis/build-tools@file:../build-tools#../build-tools::hash=72612f&locator=%40nextgis%2Fngw-cesium%40workspace%3Apackages%2Fngw-cesium"
   dependencies:
     "@nextgis/eslint-config": 3.0.0
     "@rollup/plugin-alias": ^5.1.1
@@ -765,7 +765,7 @@ __metadata:
     rollup-plugin-postcss: ^4.0.2
     rollup-plugin-terser: ^7.0.2
     typescript: ~5.8.3
-  checksum: 847f1b5ec64d8889f585628393cdacbc12a7cd8f6adb2ee25f550d2361092c81f417b2ca9f15f56c34bee307033512507991cca374c56ba7e56e2d1ef891927d
+  checksum: 83280b9c93cc787f798f7210c086d7ea47a26ae432ceba361226cbbf68da9c8bb9a2f4fa0e96e06c45291cef9a90f62d72de4d66ab4e8671c60d96bcbf85e727
   languageName: node
   linkType: hard
 

@@ -163,7 +163,8 @@ export type VectorFieldDatatype =
   | 'DATETIME'
   | 'BIGINT'
   | 'INTEGER'
-  | 'BOOLEAN';
+  | 'BOOLEAN'
+  | 'JSON';
 
 /** @deprecated - use {@link VectorFieldDatatype} instead */
 export type ResourceItemDatatype = VectorFieldDatatype;
@@ -195,7 +196,8 @@ export type GeometryType =
   | 'POLYGONZ'
   | 'MULTIPOINTZ'
   | 'MULTILINESTRINGZ'
-  | 'MULTIPOLYGONZ';
+  | 'MULTIPOLYGONZ'
+  | 'NONE';
 
 /** @deprecated use  VectorLayerRead from '@nextgisweb/resource/type/api' instead */
 export interface VectorLayer {

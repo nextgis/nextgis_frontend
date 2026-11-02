@@ -27,8 +27,10 @@ export function prepareFieldsToNgw<
           } else if (x.datatype === 'BOOLEAN') {
             value =
               typeof prop === 'boolean' || typeof prop === 'number'
-                ? Number(!!prop)
+                ? !!prop
                 : null;
+          } else if (x.datatype === 'JSON') {
+            value = prop;
           } else if (x.datatype === 'DATE' || x.datatype === 'DATETIME') {
             let dt: Date | undefined;
             if (typeof prop === 'object' && !((prop as any) instanceof Date)) {
