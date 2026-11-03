@@ -7,8 +7,14 @@ export function updateUrlParams(
   urlStr: string,
   params: Record<string, string | undefined>,
 ) {
-  const url = new URL(urlStr);
-  const searchParams = new URLSearchParams(url.search);
+  const hashIndex = urlStr.indexOf('#');
+  const hash = hashIndex === -1 ? '' : urlStr.slice(hashIndex);
+  const url = hashIndex === -1 ? urlStr : urlStr.slice(0, hashIndex);
+  const queryIndex = url.indexOf('?');
+  const baseUrl = queryIndex === -1 ? url : url.slice(0, queryIndex);
+  const searchParams = new URLSearchParams(
+    queryIndex === -1 ? '' : url.slice(queryIndex + 1),
+  );
 
   Object.entries(params).forEach(([key, value]) => {
     if (value === undefined) {
@@ -24,5 +30,5 @@ export function updateUrlParams(
     .map(([key, value]) => `${key}=${value}`)
     .join('&');
 
-  return `${url.origin}${url.pathname}?${newSearch}`;
+  return `${baseUrl}?${newSearch}${hash}`;
 }
