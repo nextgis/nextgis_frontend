@@ -7,7 +7,7 @@ export default function checkBuild() {
   const libs = findPackages();
   const notValid = {};
   libs.forEach((x) => {
-    if (x.buildOptions) {
+    if (x.package.buildOptions) {
       const errors = checkLib(x);
       errors.forEach((er) => {
         if (er) {
@@ -48,8 +48,11 @@ function checkBundle(lib) {
       const formatPath = uniqueArray[fry];
       const modulePath = path.join(lib.path, formatPath);
       if (fs.existsSync(modulePath)) {
+        const module = fs.readFileSync(modulePath, 'utf8');
+        if (/(?:from\s*|import\s*)['"]@nextgis\/[^'"]+\/src\//.test(module)) {
+          return formatPath + ' imports unpublished source';
+        }
         if (!modulePath.endsWith('prod.js')) {
-          const module = fs.readFileSync(modulePath, 'utf8');
           const exec = re.exec(module);
           if (exec) {
             const [, name, version] = exec;

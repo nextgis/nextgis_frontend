@@ -293,6 +293,10 @@ function createConfig(format, output, plugins = []) {
     // Global and Browser ESM builds inlines everything so that they can be
     // used alone.
     external: (id) => {
+      // Bundle internal style entries; their source paths are not published.
+      if (/^@nextgis\/[^/]+\/src\/style$/.test(id)) {
+        return false;
+      }
       if (!id.startsWith('.')) {
         const isExt = external.some((x) => id.startsWith(x));
 
