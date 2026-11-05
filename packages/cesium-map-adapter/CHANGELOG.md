@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.2](https://github.com/nextgis/nextgis_frontend/compare/v4.0.1...v4.0.2) (2026-11-05)
+
+
+### Bug Fixes
+
+* **cesium-map-adapter:** handle points without Z coordinates ([626c2f9](https://github.com/nextgis/nextgis_frontend/commit/626c2f9b446e47719445c0356265928ff88f7d03))
+
+
+
+
+
 ## [4.0.1](https://github.com/nextgis/nextgis_frontend/compare/v4.0.0...v4.0.1) (2026-11-02)
 
 **Note:** Version bump only for package @nextgis/cesium-map-adapter

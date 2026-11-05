@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.2](https://github.com/nextgis/nextgis_frontend/compare/v4.0.1...v4.0.2) (2026-11-05)
+
+
+### Bug Fixes
+
+* **utils:** updating query params for relative URL ([8368608](https://github.com/nextgis/nextgis_frontend/commit/836860836babe15817245459d8a1a4b3e5d42b85))
+
+
+
+
+
 ## [4.0.1](https://github.com/nextgis/nextgis_frontend/compare/v4.0.0...v4.0.1) (2026-11-02)
 
 **Note:** Version bump only for package @nextgis/utils

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.2](https://github.com/nextgis/nextgis_frontend/compare/v4.0.1...v4.0.2) (2026-11-05)
+
+
+### Bug Fixes
+
+* **build:** bundle map adapter styles in published packages ([11d4fc8](https://github.com/nextgis/nextgis_frontend/commit/11d4fc8be45e6649d1cc31c4ddc793a8a1d94a62))
+
+
+
+
+
 # [4.0.0](https://github.com/nextgis/nextgis_frontend/compare/v4.0.0-rc.1...v4.0.0) (2026-08-30)
 
 **Note:** Version bump only for package @nextgis/build-tools
