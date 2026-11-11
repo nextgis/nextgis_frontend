@@ -512,7 +512,9 @@ export abstract class VectorAdapter<
       map.addLayer(opt as LayerSpecification);
       if (filter) {
         const filter_ = (filter || []) as FilterSpecification[];
-        const filters = ['all', ...filter_].filter(Boolean);
+        const filters = ['all', ...filter_].filter(
+          (x) => Boolean(x) && (!Array.isArray(x) || x.length > 0),
+        );
         map.setFilter(opt.id, filters as FilterSpecification);
       }
     }
