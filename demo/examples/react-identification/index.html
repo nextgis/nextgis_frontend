@@ -5,60 +5,28 @@
     <title>React feature identification</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-      html,
-      body,
-      #root,
-      .app {
+      html, body, #root, .map {
         margin: 0;
         width: 100%;
         height: 100%;
       }
-
-      body {
-        font: 14px/1.5 sans-serif;
+      body { font: 14px/1.5 sans-serif; }
+      .identify-panel {
+        width: min(260px, calc(100vw - 64px));
+        max-height: 80vh;
+        overflow-y: auto;
+        box-sizing: border-box;
+        padding: 12px;
+        background: rgba(255, 255, 255, 0.93);
+        box-shadow: 0 1px 8px rgba(0, 0, 0, 0.15);
+        border-radius: 4px;
+        text-align: left;
       }
-
-      .app {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) 320px;
-      }
-
-      .map {
-        height: 100%;
-        min-width: 0;
-      }
-
-      aside {
-        overflow: auto;
-        padding: 16px;
-        border-left: 1px solid #ddd;
-      }
-
-      h1 {
-        margin-top: 0;
-        font-size: 20px;
-      }
-
-      h2 {
-        font-size: 16px;
-      }
-
-      article + article {
-        margin-top: 16px;
-        border-top: 1px solid #ddd;
-      }
-
-      pre {
-        white-space: pre-wrap;
-        overflow-wrap: anywhere;
-      }
-
-      @media (max-width: 700px) {
-        .app {
-          grid-template-columns: minmax(0, 1fr);
-          grid-template-rows: 55% 45%;
-        }
-      }
+      .identify-panel h1 { margin: 0 0 8px; font-size: 18px; }
+      .identify-panel select { width: 100%; padding: 5px; }
+      .identify-panel dl { margin: 12px 0 0; }
+      .identify-panel dt { font-weight: bold; overflow-wrap: anywhere; }
+      .identify-panel dd { margin: 0 0 8px; overflow-wrap: anywhere; }
     </style>
   </head>
   <body>

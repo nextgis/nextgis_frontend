@@ -2,7 +2,7 @@
   "name": "@nextgis-example/demo-react-identification",
   "private": true,
   "displayName": "React feature identification",
-  "description": "Keep identified features, loading and errors in React state using map callbacks.",
+  "description": "Identify features and highlight them with a reactive GeoJSON layer.",
   "skipDemo": true,
   "ngwMaps": [
     "react-ngw-leaflet",
@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@nextgis/react-ngw-leaflet": "*",
+    "@nextgis/react-ngw-map": "*",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   },

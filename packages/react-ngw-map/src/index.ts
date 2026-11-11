@@ -2,6 +2,8 @@ export { ButtonControl } from './ButtonControl';
 export { useNgwMapContext } from './context';
 export { MapControlContext, useMapControlContext } from './controlContext';
 export * from './interfaces';
+export type { ReactGeojsonLayerProps } from './layers/ReactGeojsonLayer';
+export { ReactGeojsonLayer } from './layers/ReactGeojsonLayer';
 export { ReactNgwLayer } from './layers/ReactNgwLayer';
 export { MapControl } from './MapControl';
 export { ReactNgwMap } from './ReactNgwMap';

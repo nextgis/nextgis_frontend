@@ -1,6 +1,7 @@
-import { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { useNgwMapContext } from '../context';
+import { useShallowMemo } from '../hooks/useShallowMemo';
 
 import type {
   NgwLayerAdapterType,
@@ -19,6 +20,8 @@ export interface ReactNgwLayerProps<
   adapter?: T;
   fit?: boolean;
   opacity?: number;
+  order?: number;
+  baselayer?: boolean;
 
   filters?: PropertiesFilter;
 
@@ -37,10 +40,12 @@ export function ReactNgwLayer<
 >({
   id,
   fit,
+  order,
   adapter,
   opacity,
   filters,
   resource,
+  baselayer,
   visibility = true,
   adapterOptions,
   onError,
@@ -50,23 +55,42 @@ export function ReactNgwLayer<
 
   const layerRef = useRef<ResourceAdapter | undefined>(undefined);
   const mountedRef = useRef(false);
+  const [createdLayer, setCreatedLayer] = useState<
+    ResourceAdapter | undefined
+  >();
+  const onLoadRef = useRef(onLoad);
+  const onErrorRef = useRef(onError);
+  onLoadRef.current = onLoad;
+  onErrorRef.current = onError;
+  const stableAdapterOptions = useShallowMemo({ ...adapterOptions });
+
+  const isLayerReady = (
+    layer: ResourceAdapter | undefined,
+  ): layer is ResourceAdapter =>
+    Boolean(layer && layer === createdLayer && mountedRef.current);
 
   const visibilityRef = useRef<boolean | undefined>(visibility);
   const opacityRef = useRef<number | undefined>(opacity);
   const filterRef = useRef<PropertiesFilter | undefined>(filters);
 
   const initialOptions = useMemo<NgwLayerOptions<T, A>>(() => {
-    const nextAdapterOptions: Partial<
-      LayerAdaptersOptions[T] & AdapterOptions<A, Record<string, any>>
-    > = adapterOptions || {};
+    const nextAdapterOptions = { ...stableAdapterOptions } as Partial<
+      LayerAdaptersOptions[T] & AdapterOptions<A>
+    >;
 
     nextAdapterOptions.visibility = visibilityRef.current;
 
     if (opacityRef.current !== undefined) {
       nextAdapterOptions.opacity = opacityRef.current;
     }
-    if (filters) {
-      nextAdapterOptions.propertiesFilter = filters;
+    if (filterRef.current) {
+      nextAdapterOptions.propertiesFilter = filterRef.current;
+    }
+    if (order !== undefined) {
+      nextAdapterOptions.order = order;
+    }
+    if (baselayer !== undefined) {
+      nextAdapterOptions.baselayer = baselayer;
     }
 
     const layerOptions: NgwLayerOptions<T, A> = {
@@ -78,7 +102,7 @@ export function ReactNgwLayer<
     };
 
     return layerOptions;
-  }, [adapterOptions, filters, id, fit, adapter, resource]);
+  }, [stableAdapterOptions, id, fit, adapter, resource]);
 
   useEffect(() => {
     let cancelled = false;
@@ -96,12 +120,16 @@ export function ReactNgwLayer<
           return;
         }
 
+        if (!layer) {
+          throw new Error(`Could not add NGW layer ${resource}`);
+        }
         layerRef.current = layer;
+        setCreatedLayer(layer);
 
-        onLoad?.();
+        onLoadRef.current?.();
       } catch (error) {
         if (!cancelled) {
-          onError?.(error as Error);
+          onErrorRef.current?.(error as Error);
         }
       }
     }
@@ -116,33 +144,35 @@ export function ReactNgwLayer<
       }
       layerRef.current = undefined;
     };
-  }, [ngwMap, initialOptions, onLoad, onError]);
+  }, [ngwMap, initialOptions]);
 
   useEffect(() => {
     const layer = layerRef.current;
-    if (!layer || !mountedRef.current) {
+    if (!isLayerReady(layer) || visibilityRef.current === visibility) {
       return;
     }
 
-    ngwMap.toggleLayer(layer, visibility);
+    ngwMap.toggleLayer(layer, visibility).catch((error) => {
+      if (layerRef.current === layer) onErrorRef.current?.(error as Error);
+    });
 
     visibilityRef.current = visibility;
-  }, [ngwMap, visibility]);
+  }, [ngwMap, visibility, createdLayer]);
 
   useEffect(() => {
     const layer = layerRef.current;
-    if (!layer || !mountedRef.current) {
+    if (!isLayerReady(layer) || opacityRef.current === opacity) {
       return;
     }
 
-    ngwMap.setLayerOpacity(layer, opacity ?? 0);
+    ngwMap.setLayerOpacity(layer, opacity ?? stableAdapterOptions.opacity ?? 1);
 
     opacityRef.current = opacity;
-  }, [ngwMap, opacity]);
+  }, [ngwMap, opacity, createdLayer, stableAdapterOptions]);
 
   useEffect(() => {
     const layer = layerRef.current;
-    if (!layer || !mountedRef.current) {
+    if (!isLayerReady(layer)) {
       return;
     }
 
@@ -152,10 +182,12 @@ export function ReactNgwLayer<
       return;
     }
 
-    ngwMap.propertiesFilter(layer, filters ?? []);
+    ngwMap.propertiesFilter(layer, filters ?? null).catch((error) => {
+      if (layerRef.current === layer) onErrorRef.current?.(error as Error);
+    });
 
     filterRef.current = filters;
-  }, [filters, ngwMap]);
+  }, [filters, ngwMap, createdLayer, stableAdapterOptions]);
 
   return null;
 }

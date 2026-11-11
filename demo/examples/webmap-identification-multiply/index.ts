@@ -7,7 +7,7 @@ const ngwMap = new NgwMap({
   target: 'map',
   qmsId: 448,
   resources: [
-    { resource: 7003, fit: true, adapterOptions: { selectable: true } },
+    { resource: 6245, fit: true, adapterOptions: { selectable: true } },
   ],
 });
 // Stop all current identification requests on each click before making new requests
