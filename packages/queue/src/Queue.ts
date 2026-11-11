@@ -1,9 +1,14 @@
-type PromiseFunc = () => Promise<any>;
+type PromiseFunc = (options: { signal: AbortSignal }) => Promise<any>;
 type Abort = () => void;
-type PromiseFuncOrPromiseWithAbortArray =
-  | PromiseFunc
-  | (() => [Promise<any>, Abort]);
+type PromiseFuncOrPromiseWithAbortArray = (options: {
+  signal: AbortSignal;
+}) => ReturnType<PromiseFunc> | [ReturnType<PromiseFunc>, Abort];
 type AbatablePromise = {
+  id: string | number;
+  timeout?: number;
+  timeoutId?: ReturnType<typeof setTimeout>;
+  completed?: boolean;
+  abortController: AbortController;
   promise: PromiseFuncOrPromiseWithAbortArray;
   abort?: Abort;
 };
@@ -13,6 +18,15 @@ interface PromiseQueueOptions {
   concurrency?: number;
   /** Time in ms */
   delay?: number;
+  limit?: number;
+  timeout?: number;
+  debounce?: number;
+}
+
+interface QueueAddOptions {
+  id?: string | number;
+  timeout?: number;
+  abort?: Abort;
 }
 
 /**
@@ -38,18 +52,35 @@ interface PromiseQueueOptions {
  */
 export class Queue {
   private queue: AbatablePromise[] = [];
+  private activeRequests: AbatablePromise[] = [];
   private concurrency: number;
-  private activeCount: number = 0;
   private timeoutId?: ReturnType<typeof setTimeout>;
+  private resumeTimer?: ReturnType<typeof setTimeout>;
   private delay: number;
-  private toAbort: Abort[] = [];
+  private timeout?: number;
+  private paused = false;
+  private idleResolvers: Array<() => void> = [];
+  readonly debounce: number;
 
   /**
    * @param {PromiseQueueOptions} options - Configuration options for the queue.
    */
-  constructor({ concurrency = 1, delay = 0 }: PromiseQueueOptions = {}) {
-    this.concurrency = concurrency;
-    this.delay = delay;
+  constructor({
+    delay = 0,
+    limit,
+    timeout,
+    debounce,
+    concurrency = 1,
+  }: PromiseQueueOptions = {}) {
+    this.concurrency = limit ?? concurrency;
+    this.delay = debounce ?? delay;
+    this.debounce = this.delay;
+    this.timeout = timeout;
+  }
+
+  setLimit(limit: number): void {
+    this.concurrency = limit;
+    this._next();
   }
 
   /**
@@ -68,8 +99,21 @@ export class Queue {
    * queue.add(() => fetch('https://example.com', { signal: controller.signal }), controller.abort);
    * ```
    */
-  add(promise: PromiseFuncOrPromiseWithAbortArray, abort?: () => void): void {
-    this.queue.push({ promise, abort });
+  add(
+    promise: PromiseFuncOrPromiseWithAbortArray,
+    abort?: Abort | QueueAddOptions,
+  ): void {
+    const options = typeof abort === 'function' ? { abort } : abort;
+    if (options?.id !== undefined) {
+      this.removeById(options.id);
+    }
+    this.queue.push({
+      id: options?.id ?? Math.random().toString(36).slice(2),
+      promise,
+      abort: options?.abort,
+      abortController: new AbortController(),
+      timeout: options?.timeout ?? this.timeout,
+    });
     this.debouncedNext();
   }
 
@@ -79,51 +123,169 @@ export class Queue {
    * @example
    * queue.abort(); // Aborts all abortable tasks in the queue.
    */
-  abort() {
-    for (const abort of this.toAbort) {
-      abort();
+  abort(): void {
+    for (const item of [...this.queue, ...this.activeRequests]) {
+      this.abortRequest(item);
+      this.clearRequestTimeout(item);
+      item.completed = true;
     }
-    this.toAbort = [];
-    this.queue = [];
+    this.queue.length = 0;
+    this.activeRequests.length = 0;
     this._clearTimeout();
+    this.checkIdle();
   }
 
-  private debouncedNext() {
+  remove(id: string | number): void {
+    this.removeById(id);
+  }
+
+  clearQueue(): void {
+    for (const item of this.queue) {
+      this.abortRequest(item);
+      item.completed = true;
+    }
+    this.queue.length = 0;
+    this._clearTimeout();
+    this.checkIdle();
+  }
+
+  waitAll(): Promise<void> {
+    return new Promise((resolve) => {
+      if (this.isIdle()) {
+        resolve();
+      } else {
+        this.idleResolvers.push(resolve);
+      }
+    });
+  }
+
+  pause(pauseDuration?: number): void {
+    this.paused = true;
+    this._clearTimeout();
+    this._clearResumeTimer();
+    if (pauseDuration) {
+      this.resumeTimer = setTimeout(() => this.resume(), pauseDuration);
+    }
+  }
+
+  resume(): void {
+    if (!this.paused) return;
+    this.paused = false;
+    this._clearResumeTimer();
+    this._next();
+  }
+
+  private debouncedNext(): void {
+    if (this.paused) return;
+    if (this.activeRequests.length) {
+      this._next();
+      return;
+    }
     this._clearTimeout();
     this.timeoutId = setTimeout(() => this._next(), this.delay);
   }
 
-  private _clearTimeout() {
+  private _clearTimeout(): void {
     if (this.timeoutId) {
       clearTimeout(this.timeoutId);
+      this.timeoutId = undefined;
     }
   }
 
-  private _next() {
-    while (this.activeCount < this.concurrency && this.queue.length > 0) {
-      const { promise, abort } = this.queue.shift()!;
-      this.activeCount++;
-      let toAbort = abort;
-      let request: Promise<any>;
-      const execute = promise();
-      if (Array.isArray(execute)) {
-        request = execute[0];
-        toAbort = execute[1];
-      } else {
-        request = execute;
+  private _clearResumeTimer(): void {
+    if (this.resumeTimer) {
+      clearTimeout(this.resumeTimer);
+      this.resumeTimer = undefined;
+    }
+  }
+
+  private _next(): void {
+    if (this.paused) return;
+    while (this.activeRequests.length < this.concurrency && this.queue.length) {
+      const item = this.queue.shift()!;
+      if (item.abortController.signal.aborted) continue;
+      this.activeRequests.push(item);
+      if (item.timeout && item.timeout > 0) {
+        item.timeoutId = setTimeout(() => {
+          this.abortRequest(
+            item,
+            new DOMException('Request timed out', 'TimeoutError'),
+          );
+          this.finishRequest(item);
+        }, item.timeout);
       }
 
-      if (toAbort) {
-        this.toAbort.push(toAbort);
-      }
-
-      request.finally(() => {
-        this.activeCount--;
-        if (toAbort) {
-          this.toAbort = this.toAbort.filter((a) => a !== toAbort);
+      try {
+        const execute = item.promise({ signal: item.abortController.signal });
+        const request = Array.isArray(execute) ? execute[0] : execute;
+        if (Array.isArray(execute)) {
+          const abort = item.abort;
+          item.abort = abort
+            ? () => {
+                abort();
+                execute[1]();
+              }
+            : execute[1];
         }
-        this.debouncedNext();
-      });
+        // Handle both outcomes without creating an unhandled rejection.
+        Promise.resolve(request).then(
+          () => this.finishRequest(item),
+          () => this.finishRequest(item),
+        );
+      } catch (error) {
+        this.finishRequest(item);
+        console.error(error);
+      }
+    }
+    this.checkIdle();
+  }
+
+  private removeById(id: string | number): void {
+    this.queue = this.queue.filter((item) => {
+      if (item.id !== id) return true;
+      this.abortRequest(item);
+      item.completed = true;
+      return false;
+    });
+    for (const item of [...this.activeRequests]) {
+      if (item.id === id) {
+        this.abortRequest(item);
+        this.finishRequest(item);
+      }
+    }
+    this.checkIdle();
+  }
+
+  private abortRequest(item: AbatablePromise, reason?: unknown): void {
+    if (!item.abortController.signal.aborted) {
+      item.abortController.abort(reason);
+    }
+    item.abort?.();
+  }
+
+  private clearRequestTimeout(item: AbatablePromise): void {
+    if (item.timeoutId) {
+      clearTimeout(item.timeoutId);
+      item.timeoutId = undefined;
+    }
+  }
+
+  private finishRequest(item: AbatablePromise): void {
+    if (item.completed) return;
+    item.completed = true;
+    this.clearRequestTimeout(item);
+    this.activeRequests = this.activeRequests.filter((x) => x !== item);
+    this.checkIdle();
+    this._next();
+  }
+
+  private isIdle(): boolean {
+    return this.queue.length === 0 && this.activeRequests.length === 0;
+  }
+
+  private checkIdle(): void {
+    if (this.isIdle()) {
+      this.idleResolvers.splice(0).forEach((resolve) => resolve());
     }
   }
 }

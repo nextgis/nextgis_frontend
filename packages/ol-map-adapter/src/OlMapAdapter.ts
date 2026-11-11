@@ -448,8 +448,20 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
       }
 
       map.once('movestart', () => {
+        let lastSize = map.getSize();
         map.on('movestart', () => {
-          ImageAdapter.queue.abort();
+          const size = map.getSize();
+          if (
+            lastSize &&
+            size &&
+            size[0] === lastSize[0] &&
+            size[1] === lastSize[1]
+          ) {
+            ImageAdapter.queue.abort();
+          } else {
+            ImageAdapter.queue.pause(ImageAdapter.queue.debounce);
+          }
+          lastSize = size;
         });
       });
     }

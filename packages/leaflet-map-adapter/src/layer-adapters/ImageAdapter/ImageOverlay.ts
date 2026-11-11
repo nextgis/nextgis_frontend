@@ -1,4 +1,4 @@
-import { ImageOverlay as LImageOverlay } from 'leaflet';
+import { ImageOverlay as LImageOverlay, Util } from 'leaflet';
 
 import { callAjax } from '../../utils/callAjax';
 
@@ -6,6 +6,9 @@ import imageQueue from './imageQueue';
 
 import type { LayerRequestOptions } from '@nextgis/webmap';
 import type { ImageOverlayOptions, LatLngBoundsExpression } from 'leaflet';
+
+const transparentImage =
+  'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEAAAAALAAAAAABAAEAAAIBAAA=';
 
 type IOptions = ImageOverlayOptions & {
   /** @deprecated use request.headers instead. */
@@ -27,6 +30,7 @@ export class ImageOverlay extends LImageOverlay {
   }
 
   cancelLoad(): void {
+    imageQueue.remove(Util.stamp(this));
     if (this._aborter) {
       this._aborter();
       this._aborter = undefined;
@@ -43,18 +47,28 @@ export class ImageOverlay extends LImageOverlay {
     const src = img.src;
     img.src = '';
     // The queue is cleared in LeafletMapAdapter at each movestart and zoomstart event
-    imageQueue.add(() => {
-      const [promise, abortFunc] = callAjax({
-        src,
-        headers,
-        request,
-        withCredentials,
-      });
-      promise.then((imgUrl) => {
-        img.src = imgUrl;
-      });
-      this._aborter = abortFunc;
-      return promise;
-    });
+    imageQueue.add(
+      ({ signal }) => {
+        const [promise, abortFunc] = callAjax({
+          src,
+          headers,
+          request,
+          withCredentials,
+        });
+        void promise
+          .then((imgUrl) => {
+            if (!signal.aborted) img.src = imgUrl || transparentImage;
+          })
+          .catch((error) => {
+            if (!signal.aborted) {
+              console.error(error);
+              img.src = transparentImage;
+            }
+          });
+        this._aborter = abortFunc;
+        return [promise, abortFunc];
+      },
+      { id: Util.stamp(this) },
+    );
   }
 }

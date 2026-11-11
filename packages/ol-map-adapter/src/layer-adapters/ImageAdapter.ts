@@ -3,6 +3,7 @@ import { getLayerRequestOptions } from '@nextgis/webmap';
 import ImageLayer from 'ol/layer/Image';
 import CanvasImageLayerRenderer from 'ol/renderer/canvas/ImageLayer';
 import ImageWMS from 'ol/source/ImageWMS';
+import { getUid } from 'ol/util';
 
 import { resolutionOptions } from '../utils/gerResolution';
 import { setTileLoadFunction } from '../utils/setTileLoadFunction';
@@ -19,6 +20,9 @@ import type { Extent } from 'ol/extent';
 import type { Options as BaseImageOptions } from 'ol/layer/BaseImage';
 import type Map from 'ol/Map';
 import type { Options as ImageWMSOptions } from 'ol/source/ImageWMS';
+
+const transparentImage =
+  'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEAAAAALAAAAAABAAEAAAIBAAA=';
 
 class ImageLayerExtended extends ImageLayer<ImageWMS> {
   constructor(
@@ -68,7 +72,7 @@ export class ImageAdapter
   extends BaseAdapter<ImageLayer<ImageWMS>>
   implements MainLayerAdapter
 {
-  static queue = new Queue({ concurrency: 6, delay: 200 });
+  static queue = new Queue({ limit: 6, debounce: 150 });
   layer?: ImageLayer<ImageWMS>;
 
   constructor(
@@ -156,18 +160,34 @@ export class ImageAdapter
       const request = getLayerRequestOptions(options);
 
       const _src = url + '?' + queryString;
+      const img = image.getImage() as HTMLImageElement;
 
       // Use a timeout to prevent the queue from aborting right after adding,
       // especially in cases with zoomToExtent.
       setTimeout(() => {
         // The queue is cleared in OlMapAdapter at each movestart event
-        ImageAdapter.queue.add(() => {
-          return setTileLoadFunction({
-            tile: image,
-            src: _src,
-            request,
-          });
-        });
+        ImageAdapter.queue.add(
+          ({ signal }) => {
+            const [promise, abort] = setTileLoadFunction({
+              tile: image,
+              src: _src,
+              request,
+            });
+            void promise.catch((error) => {
+              if (!signal.aborted) {
+                console.error(error);
+                img.src = transparentImage;
+              }
+            });
+            return [promise, abort];
+          },
+          {
+            id: getUid(this),
+            abort: () => {
+              img.src = transparentImage;
+            },
+          },
+        );
       });
     };
   }
