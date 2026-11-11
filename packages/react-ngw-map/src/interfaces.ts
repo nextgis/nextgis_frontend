@@ -1,6 +1,7 @@
 import type {
   ControlOptions,
   LayerAdapter,
+  NgwIdentifyEvent,
   NgwMap,
   NgwMapOptions,
 } from '@nextgis/ngw-map';
@@ -35,12 +36,24 @@ export interface ReactElementAttributes {
   style?: Partial<CSSStyleDeclaration>;
 }
 
+export interface IdentifyHandlers {
+  /** Receives identified features. An empty click returns an empty array. */
+  onIdentify?: (
+    items: ReturnType<NgwIdentifyEvent['getIdentifyItems']>,
+    event: NgwIdentifyEvent | null,
+  ) => void;
+  /** Called before an identification request starts. */
+  onIdentifyStart?: () => void;
+  /** Called when the current identification request fails. */
+  onIdentifyError?: (error: unknown) => void;
+}
+
 export interface MapContainerProps<
   M = any,
   L = any,
   C extends object = any,
   O extends NgwMapOptions<M, C> = NgwMapOptions<M, C>,
 >
-  extends ReactElementAttributes, NgwMapOptions {
+  extends ReactElementAttributes, NgwMapOptions, IdentifyHandlers {
   whenCreated?: (map: NgwMap<M, L, C, O>) => void;
 }

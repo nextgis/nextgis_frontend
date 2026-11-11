@@ -52,6 +52,64 @@ Components rendered as children can access the map through
 `useNgwMapContext()`. The package also exports `ReactNgwLayer`, `MapControl`,
 `ButtonControl`, and `ToggleControl`.
 
+## Identification
+
+Use `onIdentify` to keep identified features in React state.
+Enable selection on the source layers with `adapterOptions.selectable: true`.
+
+```tsx
+import ReactNgwLeaflet from '@nextgis/react-ngw-leaflet';
+import { useState } from 'react';
+
+import type { IdentifyItem } from '@nextgis/ngw-kit';
+
+const resources = [
+  { resource: 7003, fit: true, adapterOptions: { selectable: true } },
+];
+
+function App() {
+  const [items, setItems] = useState<IdentifyItem[]>([]);
+
+  return (
+    <>
+      <ReactNgwLeaflet
+        baseUrl="https://demo.nextgis.com"
+        resources={resources}
+        style={{ width: '100%', height: '70vh' }}
+        onIdentify={setItems}
+      />
+      <pre>{JSON.stringify(items.map((item) => item.fields), null, 2)}</pre>
+    </>
+  );
+}
+```
+
+| Prop | Called when |
+| --- | --- |
+| `onIdentify(items, event)` | Identification finishes. The first argument is an `IdentifyItem[]`; the second is the original `NgwIdentifyEvent` result or `null`. A click without matches reports an empty array. |
+| `onIdentifyStart()` | A new identification starts. Use it to show a loading indicator and clear previous errors. |
+| `onIdentifyError(error)` | Identification fails. The error has type `unknown`. |
+
+For a loading/error UI, pass the callbacks together:
+
+```tsx
+onIdentifyStart={() => {
+  setLoading(true);
+  setError(undefined);
+}}
+onIdentify={(items) => {
+  setItems(items);
+  setLoading(false);
+}}
+onIdentifyError={() => {
+  setItems([]);
+  setLoading(false);
+  setError('Could not identify features. Please try again.');
+}}
+```
+
+See the complete [React identification example](../../demo/examples/react-identification).
+
 See the [API Documentation](https://code-api.nextgis.com/modules/_nextgis_react-ngw-map.html)
 and the [package architecture guide](../../docs/PACKAGES.md).
 

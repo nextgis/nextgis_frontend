@@ -33,7 +33,9 @@
     "typescript": "~6.0.3",
     "util": "^0.12.5",
     "webpack": "^5.95.0",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^5.1.4",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
   },
   "license": "MIT",
   "dependencies": {

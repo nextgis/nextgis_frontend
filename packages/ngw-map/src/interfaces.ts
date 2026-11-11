@@ -129,6 +129,7 @@ export interface NgwMapEvents extends WebMapEvents {
   'ngw-map:create': NgwMap;
   'ngw:select': NgwIdentifyEvent | null;
   'ngw:preselect': void;
+  'ngw:selecterror': unknown;
 }
 
 export interface NgwLayersMem {

@@ -1,12 +1,16 @@
 import { createElement, useEffect, useMemo, useRef } from 'react';
 
+import { useIdentifyEvents } from './hooks/useIdentifyEvents';
 import { useMapElement } from './hooks/useMapElement';
 import { NgwMapProvider } from './context';
 
 import type { ReactNgwMapProps } from './interfaces';
 
 export function ReactNgwMap<Props extends ReactNgwMapProps = ReactNgwMapProps>({
+  onIdentify,
   whenCreated,
+  onIdentifyStart,
+  onIdentifyError,
   placeholder,
   className,
   children,
@@ -16,6 +20,7 @@ export function ReactNgwMap<Props extends ReactNgwMapProps = ReactNgwMapProps>({
 }: Props) {
   const mapRef = useRef<HTMLDivElement>(null);
   const ngwMap = useMapElement(mapRef, options);
+  useIdentifyEvents(ngwMap, { onIdentify, onIdentifyStart, onIdentifyError });
 
   const createdRef = useRef<boolean>(false);
   useEffect(() => {

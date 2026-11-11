@@ -108,6 +108,8 @@ export class NgwMap<
   protected _ngwLayers: NgwLayers = {};
   private $$selectFromNgwRaster?: (ev: MapClickEvent) => void;
   private $$selectFromNgwVector?: (ev: OnLayerMouseOptions) => void;
+  private $$resetSelection?: () => void;
+  private _selectionRequest = 0;
   private _promises: Record<
     PromiseGroup,
     [Promise<unknown>, AbortController][]
@@ -489,24 +491,36 @@ export class NgwMap<
 
   enableSelection(): void {
     if (!this.$$selectFromNgwRaster) {
+      let vectorSelected = false;
+      this.$$resetSelection = () => {
+        vectorSelected = false;
+      };
       this.$$selectFromNgwRaster = (ev: MapClickEvent) => {
-        const count = this._getSelectListenersCount();
-        if (count) {
-          this.selectFromNgwRaster(ev);
+        const skipRaster = vectorSelected;
+        vectorSelected = false;
+        if (!skipRaster && this._getSelectListenersCount()) {
+          // Errors are reported through ngw:selecterror. Direct callers still
+          // receive a rejected promise from selectFromNgwRaster().
+          void this.selectFromNgwRaster(ev).catch(() => undefined);
         }
       };
       this.$$selectFromNgwVector = (ev: OnLayerMouseOptions) => {
-        const count = this._getSelectListenersCount();
-        if (count) {
-          this._selectFromNgwVector(ev);
+        if (this._getSelectListenersCount()) {
+          vectorSelected =
+            Boolean(this._selectFromNgwVector(ev)) || vectorSelected;
         }
       };
+      this.emitter.on('preclick', this.$$resetSelection);
       this.emitter.on('click', this.$$selectFromNgwRaster);
       this.emitter.on('layer:click', this.$$selectFromNgwVector);
     }
   }
 
   disableSelection(): void {
+    if (this.$$resetSelection) {
+      this.emitter.removeListener('preclick', this.$$resetSelection);
+      this.$$resetSelection = undefined;
+    }
     if (this.$$selectFromNgwRaster) {
       this.emitter.removeListener('click', this.$$selectFromNgwRaster);
       this.$$selectFromNgwRaster = undefined;
@@ -571,6 +585,9 @@ export class NgwMap<
     if (!args.length) {
       args = Object.keys(this._promises) as PromiseGroup[];
     }
+    if (args.indexOf('select') !== -1) {
+      ++this._selectionRequest;
+    }
     args.forEach((name) => {
       const group = this._promises[name];
       if (group) {
@@ -583,8 +600,22 @@ export class NgwMap<
   async selectFromNgwRaster(
     ev: MapClickEvent,
   ): Promise<NgwIdentifyEvent | undefined> {
+    this.cancelPromises('select');
+    const request = this._selectionRequest;
     this._emitStatusEvent('ngw:preselect');
+    try {
+      return await this._identifyFromNgwRaster(ev, request);
+    } catch (error) {
+      if (request !== this._selectionRequest) return undefined;
+      this._emitStatusEvent('ngw:selecterror', error);
+      throw error;
+    }
+  }
 
+  private async _identifyFromNgwRaster(
+    ev: MapClickEvent,
+    request: number,
+  ): Promise<NgwIdentifyEvent | undefined> {
     const promises: Promise<number[] | undefined>[] = [];
     const layers = Object.values(this._ngwLayers);
     layers.sort((a, b) => {
@@ -612,6 +643,7 @@ export class NgwMap<
     }
     const getIdsPromise = Promise.all(promises);
     const getIds = await getIdsPromise;
+    if (request !== this._selectionRequest) return undefined;
     const ids: number[] = [];
     for (const x of getIds) {
       if (x) {
@@ -651,6 +683,10 @@ export class NgwMap<
           geometry: geom,
         },
       });
+      if (request !== this._selectionRequest) {
+        this.removeLayer(highlightIdentificationLayer);
+        return undefined;
+      }
       if (highlightDuration !== Infinity) {
         setTimeout(() => {
           this.removeLayer(highlightIdentificationLayer);
@@ -665,6 +701,7 @@ export class NgwMap<
       geom,
       signal: abortController.signal,
     }).then((resp) => {
+      if (request !== this._selectionRequest) return undefined;
       const identify: NgwIdentify = {
         ...resp,
         resources: ids,
@@ -779,7 +816,9 @@ export class NgwMap<
 
     if (id !== undefined && feature) {
       const featureId = feature.id;
-      if (featureId) {
+      if (featureId !== undefined && featureId !== null) {
+        this.cancelPromises('select');
+        this._emitStatusEvent('ngw:preselect');
         const identifyFeature: LayerFeature = {
           id: Number(featureId),
           fields: feature.properties || {},

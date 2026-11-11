@@ -1,3 +1,4 @@
+const path = require('path');
 const webpack = require('webpack');
 
 let alias = {};
@@ -51,9 +52,13 @@ module.exports = (opt = { coverage: false }) => {
     mode: 'development',
     devtool: 'inline-source-map',
     resolve: {
+      modules: [path.resolve(__dirname, 'node_modules'), 'node_modules'],
       extensions: ['.js', '.ts', '.json'],
       alias,
       fallback: { util: require.resolve('util/') },
+    },
+    resolveLoader: {
+      modules: [path.resolve(__dirname, 'node_modules'), 'node_modules'],
     },
     module: {
       rules,
