@@ -111,6 +111,7 @@ export class ImageAdapter
         );
         this.layer = layer;
       } else {
+        imageOptions.ratio = ratio;
         const source = new ImageWMS(imageOptions);
         const layer = new ImageLayer({
           source,
