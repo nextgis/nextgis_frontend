@@ -51,6 +51,8 @@ import type {
 
 type AddedLayers<M = any, L = any> = { [id: string]: LayerAdapter<M, L> };
 
+const TOP_LAYER_ORDER = 10000;
+
 export class WebMapLayers<
   M = any,
   L = any,
@@ -258,8 +260,13 @@ export class WebMapLayers<
     const visibility = options.visibility ?? true;
     options.visibility = false;
 
+    if (options.baselayer && options.toplayer) {
+      throw new Error('Layer cannot be both baselayer and toplayer');
+    }
     if (options.baselayer) {
       options.order = 0;
+    } else if (options.toplayer) {
+      options.order = TOP_LAYER_ORDER;
     }
     if (this.options.onBeforeAddLayer) {
       const modified = this.options.onBeforeAddLayer({
@@ -283,10 +290,17 @@ export class WebMapLayers<
       const _adapter = new adapterEngine(this.mapAdapter.map, options);
       _adapter.options = { ...options, ..._adapter.options };
 
+      if (_adapter.options.baselayer && _adapter.options.toplayer) {
+        throw new Error('Layer cannot be both baselayer and toplayer');
+      }
       if (_adapter.options.baselayer) {
         options.baselayer = true;
         options.order = 0;
         _adapter.options.order = 0;
+      } else if (_adapter.options.toplayer) {
+        options.toplayer = true;
+        options.order = TOP_LAYER_ORDER;
+        _adapter.options.order = TOP_LAYER_ORDER;
       }
 
       let layerId: string | undefined;

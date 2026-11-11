@@ -100,6 +100,8 @@ export interface AdapterOptions<
    * Indicate on a cartographic base layer.
    */
   baselayer?: boolean;
+  /** Display above regular layers. */
+  toplayer?: boolean;
   /**
    * Indicates the map layers display sequence.
    * A layer with a larger order value overlaps smaller ones.

@@ -22,6 +22,7 @@ export interface ReactNgwLayerProps<
   opacity?: number;
   order?: number;
   baselayer?: boolean;
+  toplayer?: boolean;
 
   filters?: PropertiesFilter;
 
@@ -45,6 +46,7 @@ export function ReactNgwLayer<
   opacity,
   filters,
   resource,
+  toplayer,
   baselayer,
   visibility = true,
   adapterOptions,
@@ -92,6 +94,9 @@ export function ReactNgwLayer<
     if (baselayer !== undefined) {
       nextAdapterOptions.baselayer = baselayer;
     }
+    if (toplayer !== undefined) {
+      nextAdapterOptions.toplayer = toplayer;
+    }
 
     const layerOptions: NgwLayerOptions<T, A> = {
       id,
@@ -102,7 +107,16 @@ export function ReactNgwLayer<
     };
 
     return layerOptions;
-  }, [stableAdapterOptions, id, fit, adapter, resource]);
+  }, [
+    stableAdapterOptions,
+    id,
+    fit,
+    order,
+    adapter,
+    resource,
+    toplayer,
+    baselayer,
+  ]);
 
   useEffect(() => {
     let cancelled = false;

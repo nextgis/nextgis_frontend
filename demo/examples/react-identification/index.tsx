@@ -45,10 +45,12 @@ function App() {
         if (controller.signal.aborted) return;
         setFeature(geojson);
         setAttributes(
-          resource.fields.map((field) => ({
-            label: field.display_name || field.keyname,
-            value: geojson.properties?.[field.keyname],
-          })),
+          resource.fields
+            .filter((field) => field.grid_visibility)
+            .map((field) => ({
+              label: field.display_name || field.keyname,
+              value: geojson.properties?.[field.keyname],
+            })),
         );
       })
       .catch(() => {
@@ -93,7 +95,7 @@ function App() {
         paint={highlightPaint}
         selectable={false}
         interactive={false}
-        order={999}
+        toplayer
       />
 
       <MapControl position="top-right">
