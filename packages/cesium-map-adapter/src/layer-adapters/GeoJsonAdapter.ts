@@ -17,7 +17,6 @@ import { whenSampleTerrainMostDetailed } from '../utils/whenSampleTerrainMostDet
 
 import { BaseAdapter } from './BaseAdapter';
 
-import type { Map } from './BaseAdapter';
 import type {
   Ellipsoid3DPaint,
   GeometryPaint,
@@ -43,6 +42,8 @@ import type {
   GeoJsonProperties,
   Geometry,
 } from 'geojson';
+
+import type { Map } from './BaseAdapter';
 
 type Layer = GeoJsonDataSource;
 

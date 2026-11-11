@@ -26,6 +26,7 @@ import { EventEmitter } from 'events';
 
 import { appendNgwResources } from './utils/appendNgwResources';
 import { prepareWebMapOptions } from './utils/prepareWebMapOptions';
+import { NgwImageLayerGrouping } from './NgwImageLayerGrouping';
 
 import type {
   FeatureItem,
@@ -106,6 +107,7 @@ export class NgwMap<
   connector!: NgwConnector;
 
   protected _ngwLayers: NgwLayers = {};
+  private _imageGrouping?: NgwImageLayerGrouping;
   private $$selectFromNgwRaster?: (ev: MapClickEvent) => void;
   private $$selectFromNgwVector?: (ev: OnLayerMouseOptions) => void;
   private $$resetSelection?: () => void;
@@ -120,6 +122,16 @@ export class NgwMap<
 
   constructor(options: O) {
     super(prepareWebMapOptions(options) as O);
+    if (
+      Number.isFinite(options.imageGroupSize) &&
+      (options.imageGroupSize ?? 0) >= 2
+    ) {
+      this._imageGrouping = new NgwImageLayerGrouping(
+        this,
+        Math.floor(options.imageGroupSize!),
+      );
+      this._imageGrouping.start();
+    }
     if (options.connector) {
       this.connector = options.connector;
     }
@@ -132,6 +144,12 @@ export class NgwMap<
         this._whiteLabel();
       }
     });
+  }
+
+  destroy(): void {
+    this._imageGrouping?.destroy();
+    this._imageGrouping = undefined;
+    super.destroy();
   }
 
   /**

@@ -111,6 +111,12 @@ export interface WebMapEvents extends MainMapEvents {
    */
   'controls:create': any;
 
+  'event-symbol-render:change': {
+    layerId: string;
+    resourceId: number;
+    indexes: number[];
+  };
+
   /**
    * @eventProperty
    */

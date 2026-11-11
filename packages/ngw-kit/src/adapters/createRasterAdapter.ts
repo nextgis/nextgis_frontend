@@ -61,6 +61,10 @@ export async function createRasterAdapter({
     return class RasterAdapter extends AdapterClass implements ResourceAdapter {
       item?: CompositeRead = item;
       resourceId = resourceId;
+      // Only standard NGW IMAGE render requests can be safely combined.
+      ngwImageGroupingSafe =
+        adapter === 'IMAGE' &&
+        !('updateWmsParams' in (layerOptions.adapterOptions || {}));
 
       blocked = false;
       layerVisibility?: boolean;

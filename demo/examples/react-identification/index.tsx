@@ -10,7 +10,11 @@ type SelectedFeature = Awaited<ReturnType<IdentifyItem['geojson']>>;
 type Attribute = { label: string; value: unknown };
 
 const resources = [
-  { resource: 6245, fit: true, adapterOptions: { selectable: true } },
+  {
+    resource: 7003,
+    fit: true,
+    adapterOptions: { selectable: true },
+  },
 ];
 const highlightPaint: GeometryPaint = {
   color: 'orange',
@@ -70,6 +74,7 @@ function App() {
       className="map"
       baseUrl="https://demo.nextgis.com"
       qmsId={448}
+      imageGroupSize={10}
       resources={resources}
       onIdentifyStart={() => {
         setItems(null);

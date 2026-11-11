@@ -122,6 +122,12 @@ export interface NgwMapOptions<M = any, C = any> extends MapOptions<M, C> {
 
   setViewDelay?: number;
 
+  /**
+   * Combine consecutive compatible NGW IMAGE layers into render/image requests.
+   * Disabled by default. Applies to webmap resources and addNgwLayer().
+   */
+  imageGroupSize?: number;
+
   highlightIdentification?: boolean | number;
 }
 

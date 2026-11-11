@@ -377,6 +377,10 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
 
     if (typeof this.options.nativeOptions?.beforeItemCreated === 'function') {
       item = this.options.nativeOptions.beforeItemCreated(item);
+      // A custom item factory can change rendering parameters unexpectedly.
+      if (item?.item_type === 'layer') {
+        (item as TreeLayer).__ngwImageGroupingExclude = true;
+      }
     }
 
     return item;

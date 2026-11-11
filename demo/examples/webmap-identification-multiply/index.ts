@@ -6,8 +6,9 @@ const ngwMap = new NgwMap({
   baseUrl: 'https://demo.nextgis.com',
   target: 'map',
   qmsId: 448,
+  imageGroupSize: 6,
   resources: [
-    { resource: 6245, fit: true, adapterOptions: { selectable: true } },
+    { resource: 7003, fit: true, adapterOptions: { selectable: true } },
   ],
 });
 // Stop all current identification requests on each click before making new requests

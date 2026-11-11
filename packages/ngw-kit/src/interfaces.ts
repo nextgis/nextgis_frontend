@@ -92,6 +92,8 @@ export interface TreeGroup extends Omit<WebMapItemGroupRead, 'children'> {
 }
 
 export interface TreeLayer extends WebMapItemLayerRead {
+  /** @internal A custom webmap item factory must not be grouped automatically. */
+  __ngwImageGroupingExclude?: boolean;
   layer_url?: string;
 
   resourceId?: number | [number, string];

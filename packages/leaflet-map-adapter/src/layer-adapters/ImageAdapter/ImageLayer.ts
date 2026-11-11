@@ -212,6 +212,7 @@ export class ImageLayer extends Layer {
     if (this._currentOverlay) {
       this._currentOverlay.setOpacity(opacity);
     }
+    this.fire('opacitychange', { opacity });
   }
 
   bringToBack(): void {

@@ -47,7 +47,9 @@ export class WebmapLayerOpacityPropertyHandler<
         return s * multiplier;
       }, 1);
       const val = value * coef;
-      this.item.webMap.setLayerOpacity(layer, this._prepareValue(val));
+      const opacity = this._prepareValue(val);
+      this.item.webMap.setLayerOpacity(layer, opacity);
+      layer.options.opacity = opacity;
     }
   }
 
