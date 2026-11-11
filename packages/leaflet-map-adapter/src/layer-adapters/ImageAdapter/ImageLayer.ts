@@ -116,6 +116,12 @@ export class ImageLayer extends Layer {
       map.removeLayer(this._currentOverlay);
       delete this._currentOverlay;
     }
+    if (this._loadedOverlay) {
+      this._loadedOverlay.cancelLoad();
+      this._loadedOverlay.off('load');
+      map.removeLayer(this._loadedOverlay);
+      this._loadedOverlay = undefined;
+    }
     if (this._currentUrl) {
       delete this._currentUrl;
     }
@@ -147,6 +153,7 @@ export class ImageLayer extends Layer {
     if (this._loadedOverlay) {
       this._loadedOverlay.cancelLoad();
       this._loadedOverlay.off('load');
+      this._map.removeLayer(this._loadedOverlay);
       this._loadedOverlay = undefined;
     }
     const overlay = new ImageOverlay(url, bounds, {
