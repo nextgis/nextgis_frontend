@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.1.0](https://github.com/nextgis/nextgis_frontend/compare/v4.0.2...v4.1.0) (2026-11-11)
+
+
+### Bug Fixes
+
+* **mapblibre-gl-map-adapter:** vector layer style ([644597c](https://github.com/nextgis/nextgis_frontend/commit/644597c202da8f5e9a7e0bace404a4b2f1979dc9))
+
+
+
+
+
 ## [4.0.2](https://github.com/nextgis/nextgis_frontend/compare/v4.0.1...v4.0.2) (2026-11-05)
 
 **Note:** Version bump only for package @nextgis/maplibre-gl-map-adapter

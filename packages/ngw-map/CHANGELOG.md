@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.1.0](https://github.com/nextgis/nextgis_frontend/compare/v4.0.2...v4.1.0) (2026-11-11)
+
+
+### Features
+
+* **ngw-map:** increase pixel radius ([b9f62a8](https://github.com/nextgis/nextgis_frontend/commit/b9f62a8c3e57d6bacec156d254222ab6b0d918a5))
+* **ngw-map:** optimize IMAGE rendering by grouping NGW layers ([0810d58](https://github.com/nextgis/nextgis_frontend/commit/0810d583cb7ce837ef8b33696908b52a329b429b))
+* **react-ngw-map:** add identification props ([5ba91c9](https://github.com/nextgis/nextgis_frontend/commit/5ba91c96998b088b709e7e2a13228ab4379ef21a))
+
+
+
+
+
 ## [4.0.2](https://github.com/nextgis/nextgis_frontend/compare/v4.0.1...v4.0.2) (2026-11-05)
 
 **Note:** Version bump only for package @nextgis/ngw-map

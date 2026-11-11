@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.1.0](https://github.com/nextgis/nextgis_frontend/compare/v4.0.2...v4.1.0) (2026-11-11)
+
+
+### Features
+
+* **ngw-map:** optimize IMAGE rendering by grouping NGW layers ([0810d58](https://github.com/nextgis/nextgis_frontend/commit/0810d583cb7ce837ef8b33696908b52a329b429b))
+
+
+
+
+
 ## [4.0.2](https://github.com/nextgis/nextgis_frontend/compare/v4.0.1...v4.0.2) (2026-11-05)
 
 **Note:** Version bump only for package @nextgis/ngw-kit

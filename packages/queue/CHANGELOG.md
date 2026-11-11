@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.1.0](https://github.com/nextgis/nextgis_frontend/compare/v4.0.2...v4.1.0) (2026-11-11)
+
+
+### Features
+
+* **queue:** align request queue with NextGIS Web ([67c9223](https://github.com/nextgis/nextgis_frontend/commit/67c92236af62de44281771ae8eaf8bffe0e365fc))
+
+
+
+
+
 ## [4.0.2](https://github.com/nextgis/nextgis_frontend/compare/v4.0.1...v4.0.2) (2026-11-05)
 
 **Note:** Version bump only for package @nextgis/queue

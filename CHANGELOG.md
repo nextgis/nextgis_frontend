@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.1.0](https://github.com/nextgis/nextgis_frontend/compare/v4.0.2...v4.1.0) (2026-11-11)
+
+
+### Bug Fixes
+
+* **leaflet-map-adapter:** layer image cleanup ([1d21d99](https://github.com/nextgis/nextgis_frontend/commit/1d21d999f659667a57fd16d8b54ca1496e1773d3))
+* **mapblibre-gl-map-adapter:** vector layer style ([644597c](https://github.com/nextgis/nextgis_frontend/commit/644597c202da8f5e9a7e0bace404a4b2f1979dc9))
+* **ol-map-adapter:** set correct ratio in image options ([57100e5](https://github.com/nextgis/nextgis_frontend/commit/57100e5881a7fcaf84f7ffd0d069b06f86d494be))
+
+
+### Features
+
+* **ngw-map:** increase pixel radius ([b9f62a8](https://github.com/nextgis/nextgis_frontend/commit/b9f62a8c3e57d6bacec156d254222ab6b0d918a5))
+* **ngw-map:** optimize IMAGE rendering by grouping NGW layers ([0810d58](https://github.com/nextgis/nextgis_frontend/commit/0810d583cb7ce837ef8b33696908b52a329b429b))
+* **queue:** align request queue with NextGIS Web ([67c9223](https://github.com/nextgis/nextgis_frontend/commit/67c92236af62de44281771ae8eaf8bffe0e365fc))
+* **react-ngw-map:** add geojson layer map component ([17599fb](https://github.com/nextgis/nextgis_frontend/commit/17599fb72b04be56d925636abfc62f1c564d4a97))
+* **react-ngw-map:** add identification props ([5ba91c9](https://github.com/nextgis/nextgis_frontend/commit/5ba91c96998b088b709e7e2a13228ab4379ef21a))
+* **webmap:** add toplayer option ([cdd871d](https://github.com/nextgis/nextgis_frontend/commit/cdd871d37e99490292a9805537174c8d6f7f58ca))
+
+
+
+
+
 ## [4.0.2](https://github.com/nextgis/nextgis_frontend/compare/v4.0.1...v4.0.2) (2026-11-05)
 
 

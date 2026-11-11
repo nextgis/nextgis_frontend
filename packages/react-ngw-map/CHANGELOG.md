@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.1.0](https://github.com/nextgis/nextgis_frontend/compare/v4.0.2...v4.1.0) (2026-11-11)
+
+
+### Features
+
+* **react-ngw-map:** add geojson layer map component ([17599fb](https://github.com/nextgis/nextgis_frontend/commit/17599fb72b04be56d925636abfc62f1c564d4a97))
+* **react-ngw-map:** add identification props ([5ba91c9](https://github.com/nextgis/nextgis_frontend/commit/5ba91c96998b088b709e7e2a13228ab4379ef21a))
+* **webmap:** add toplayer option ([cdd871d](https://github.com/nextgis/nextgis_frontend/commit/cdd871d37e99490292a9805537174c8d6f7f58ca))
+
+
+
+
+
 ## [4.0.2](https://github.com/nextgis/nextgis_frontend/compare/v4.0.1...v4.0.2) (2026-11-05)
 
 **Note:** Version bump only for package @nextgis/react-ngw-map
