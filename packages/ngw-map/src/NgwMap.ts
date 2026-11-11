@@ -656,7 +656,7 @@ export class NgwMap<
       return;
     }
 
-    const pixelRadius = this.options.pixelRadius || 10;
+    const pixelRadius = this.options.pixelRadius || 20;
     const center = this.getCenter();
     let zoom = this.getZoom();
     zoom = zoom !== undefined ? zoom : 20;
