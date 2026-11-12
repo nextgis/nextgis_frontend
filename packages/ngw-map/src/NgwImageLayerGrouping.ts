@@ -72,6 +72,7 @@ export class NgwImageLayerGrouping {
   private timer?: ReturnType<typeof setTimeout>;
   private pending: Promise<void> = Promise.resolve();
   private disposed = false;
+  private revision = 0;
 
   constructor(
     private readonly webMap: WebMap,
@@ -131,6 +132,7 @@ export class NgwImageLayerGrouping {
   /** Re-evaluate grouping after any observed layer state change. */
   schedule(): void {
     if (this.disposed) return;
+    this.revision++;
     if (this.timer) clearTimeout(this.timer);
     this.timer = setTimeout(() => {
       this.timer = undefined;
@@ -143,6 +145,10 @@ export class NgwImageLayerGrouping {
   }
 
   private readonly onLayerChange = (layer: LayerAdapter) => {
+    if (!this.isVisible(layer)) {
+      // A composite must not keep rendering a hidden or removed member.
+      this.invalidateGroupsContaining(layer, true);
+    }
     if (this.webMap.allLayers()[String(layer.id)] === layer) {
       this.observe(layer);
     } else {
@@ -165,6 +171,7 @@ export class NgwImageLayerGrouping {
   };
 
   private readonly onBeforeLayerRemove = (layer: LayerAdapter) => {
+    this.invalidateGroupsContaining(layer, true);
     // Removing NGW:WEBMAP removes its native child layers, but those children
     // can remain registered in WebMap. Never regroup or restore them.
     const container = layer as LayerAdapter & {
@@ -175,6 +182,7 @@ export class NgwImageLayerGrouping {
       const child = item.layer;
       if (!child) continue;
       this.detached.add(child);
+      this.invalidateGroupsContaining(child, true);
       const update = this.originalUpdates.get(child);
       if (update) child.updateLayer = update;
       this.originalUpdates.delete(child);
@@ -187,6 +195,7 @@ export class NgwImageLayerGrouping {
     for (const layer of this.webMap.orderedLayers()) {
       if (layer.id === event?.layerId) {
         this.excluded.add(layer);
+        this.invalidateGroupsContaining(layer);
         this.schedule();
         break;
       }
@@ -203,7 +212,12 @@ export class NgwImageLayerGrouping {
     const native = layer.layer as OpacityLayer | undefined;
     if (!native?.on || (!native.off && !native.un)) return;
 
-    const listener = () => this.schedule();
+    const listener = () => {
+      if (this.getOpacity(layer) !== 1) {
+        this.invalidateGroupsContaining(layer);
+      }
+      this.schedule();
+    };
     // OpenLayers emits change:opacity; the NextGIS Leaflet ImageLayer emits opacitychange.
     native.on('change:opacity', listener);
     native.on('opacitychange', listener);
@@ -260,6 +274,7 @@ export class NgwImageLayerGrouping {
       // Symbols, filters and other runtime WMS parameters cannot be assumed
       // equivalent to rendering this resource with default settings.
       this.excluded.add(layer);
+      this.invalidateGroupsContaining(layer);
       this.schedule();
       return original.call(layer, options);
     };
@@ -360,13 +375,6 @@ export class NgwImageLayerGrouping {
     if (native === undefined)
       throw new Error('IMAGE adapter returned no layer');
     adapter.layer = native;
-    try {
-      this.webMap.mapAdapter.showLayer(native);
-      this.webMap.mapAdapter.setLayerOrder(native, options.order ?? 0);
-    } catch (error) {
-      this.webMap.mapAdapter.removeLayer(native);
-      throw error;
-    }
     return adapter;
   }
 
@@ -381,8 +389,29 @@ export class NgwImageLayerGrouping {
     }
   }
 
+  /** Remove obsolete composites and restore remaining native members immediately. */
+  private invalidateGroupsContaining(
+    layer: LayerAdapter,
+    skipRestore = false,
+  ): void {
+    for (const [key, group] of this.groups) {
+      if (!group.members.includes(layer)) continue;
+      this.removeGroup(group);
+      this.groups.delete(key);
+      for (const member of group.members) {
+        if (!this.suppressed.delete(member)) continue;
+        if (member === layer && skipRestore) continue;
+        if (this.isVisible(member) && member.layer !== undefined) {
+          this.webMap.mapAdapter.showLayer(member.layer);
+          this.webMap.mapAdapter.setLayerOrder(member.layer, member.order!);
+        }
+      }
+    }
+  }
+
   private async reconcile(): Promise<void> {
     if (this.disposed) return;
+    const revision = this.revision;
     const chunks = this.plan();
     const desired = new Map(
       chunks.map((chunk) => [
@@ -443,10 +472,23 @@ export class NgwImageLayerGrouping {
         visibility: true,
         updateWmsParams: (params) => updateImageParams(params, resources),
       };
-      let layer: LayerAdapter;
+      let layer: LayerAdapter | undefined = undefined;
       try {
         layer = await this.createNativeGroup(options);
+        if (this.disposed || this.revision !== revision) {
+          // A hide/remove/update happened while creating this composite.
+          // Do not expose an image containing obsolete resources.
+          this.removeGroup({ layer, members: [] });
+          return;
+        }
+        if (layer.layer !== undefined) {
+          this.webMap.mapAdapter.showLayer(layer.layer);
+          this.webMap.mapAdapter.setLayerOrder(layer.layer, options.order ?? 0);
+        }
       } catch (error) {
+        if (layer) {
+          this.removeGroup({ layer, members: [] });
+        }
         for (const { layer: member } of chunk) {
           this.excluded.add(member);
           if (this.suppressed.has(member)) {
