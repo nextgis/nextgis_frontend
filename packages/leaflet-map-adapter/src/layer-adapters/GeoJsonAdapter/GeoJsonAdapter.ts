@@ -224,6 +224,9 @@ export class GeoJsonAdapter
 
   setData(data: GeoJsonObject): void {
     this.clearLayer();
+    if (!this.options.type) {
+      this.type = undefined;
+    }
     this.addData(data);
   }
 
@@ -239,6 +242,9 @@ export class GeoJsonAdapter
           type = typeAlias[detectedType];
         } else {
           type = options.type;
+        }
+        if (!type) {
+          return;
         }
         if (this.type && this.type !== type) {
           console.warn('no other data type than layer can be added');
