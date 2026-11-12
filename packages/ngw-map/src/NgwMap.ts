@@ -325,59 +325,54 @@ export class NgwMap<
     });
   }
 
-  fetchIdentifyItem<
+  async fetchIdentifyItem<
     G extends Geometry = Geometry,
     P extends FeatureProperties = FeatureProperties,
   >(
     identify: NgwIdentify,
     requestOptions?: NgwFeatureRequestOptions,
-    // multiple = false
   ): Promise<NgwFeatureItemResponse<P, G> | undefined> {
+    const abortSignal = requestOptions?.signal;
+    if (abortSignal?.aborted) throw new NgwConnector.errors.AbortError();
+
     const abortController = new AbortController();
-    const abortSignal = abortController.signal;
+    const onAbort = () => abortController.abort();
+    abortSignal?.addEventListener('abort', onAbort, { once: true });
 
-    if (requestOptions?.signal) {
-      requestOptions.signal.addEventListener('abort', abortController.abort);
+    try {
+      const promise = fetchIdentifyItem<G, P>({
+        identify,
+        connector: this.connector,
+        requestOptions: { ...requestOptions, signal: abortController.signal },
+      });
+      this._addPromise('identify', promise, abortController);
+      return await promise;
+    } finally {
+      abortSignal?.removeEventListener('abort', onAbort);
     }
-    requestOptions = requestOptions || {};
-    requestOptions.signal = abortSignal;
-
-    const promise = fetchIdentifyItem<G, P>({
-      identify,
-      connector: this.connector,
-      requestOptions,
-      // multiple,
-    });
-    this._addPromise('identify', promise, abortController);
-    return promise;
   }
 
-  fetchIdentifyGeoJson(
+  async fetchIdentifyGeoJson(
     identify: NgwIdentify,
     { multiple, signal }: { multiple?: boolean; signal?: AbortSignal } = {},
   ): Promise<Feature | undefined> {
+    if (signal?.aborted) throw new NgwConnector.errors.AbortError();
+
     const abortController = new AbortController();
+    const onAbort = () => abortController.abort();
+    signal?.addEventListener('abort', onAbort, { once: true });
 
-    if (signal) {
-      if (signal.aborted) {
-        return Promise.reject(new NgwConnector.errors.AbortError());
-      }
-      signal.addEventListener('abort', () => {
-        abortController.abort('AbortError');
+    try {
+      const promise = fetchIdentifyGeoJson({
+        identify,
+        connector: this.connector,
+        multiple,
+        requestOptions: { signal: abortController.signal },
       });
-    }
-
-    const promise = fetchIdentifyGeoJson({
-      identify,
-      connector: this.connector,
-      multiple,
-      requestOptions: { signal: abortController.signal },
-    });
-    if (promise && 'then' in promise) {
       this._addPromise('identify', promise, abortController);
-      return promise;
-    } else {
-      return Promise.resolve(promise);
+      return await promise;
+    } finally {
+      signal?.removeEventListener('abort', onAbort);
     }
   }
 
