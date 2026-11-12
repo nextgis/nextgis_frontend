@@ -440,7 +440,7 @@ export class NgwMap<
   ): Promise<void> {
     let id: string | undefined;
     if (typeof layerDef === 'string' || typeof layerDef === 'number') {
-      id = String(id);
+      id = String(layerDef);
     } else {
       id = layerDef.id;
     }
@@ -460,11 +460,11 @@ export class NgwMap<
           item = await this.connector.getResource(resourceId);
         }
         if (item) {
-          this.fitResource(item.resource.id);
+          await this.fitResource(item.resource.id);
         }
       }
     } else {
-      super.fitLayer(
+      await super.fitLayer(
         typeof layerDef === 'number' ? String(layerDef) : layerDef,
         options,
       );
