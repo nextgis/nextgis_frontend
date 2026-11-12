@@ -253,27 +253,36 @@ export class NgwConnector {
       withCredentials,
     } = options;
 
-    const internalAbortController = new AbortController();
-    const internalSignal = internalAbortController.signal;
-
-    // If the external signal aborts, also abort the internal signal
-    if (externalSignal) {
-      if (externalSignal.aborted) {
-        throw new AbortError();
-      }
-      externalSignal.addEventListener('abort', () => {
-        internalAbortController.abort();
-      });
+    if (externalSignal?.aborted) {
+      throw new AbortError();
     }
 
-    options.signal = internalSignal;
+    // Create a controller only for an actual request, not for cache hits.
+    const createPromise = async (): Promise<R> => {
+      const internalAbortController = new AbortController();
+      const onExternalAbort = () => internalAbortController.abort();
+      if (externalSignal) {
+        externalSignal.addEventListener('abort', onExternalAbort, {
+          once: true,
+        });
+        // Cover an abort occurring while the listener was installed.
+        if (externalSignal.aborted) {
+          internalAbortController.abort();
+        }
+      }
 
-    const createPromise = async () => {
       const id = REQUEST_ID++;
       this.activeRequests[id] = internalAbortController;
       try {
-        return this._loadData<R>(url, options);
+        if (internalAbortController.signal.aborted) {
+          throw new AbortError();
+        }
+        return await this._loadData<R>(url, {
+          ...options,
+          signal: internalAbortController.signal,
+        });
       } finally {
+        externalSignal?.removeEventListener('abort', onExternalAbort);
         this._cleanActiveRequest(id);
       }
     };
