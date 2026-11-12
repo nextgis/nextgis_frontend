@@ -448,7 +448,7 @@ export class WebMapLayers<
       }
       if (layer.options && layer.options.baselayer) {
         const index = this._baselayers.indexOf(layerId);
-        if (index) {
+        if (index !== -1) {
           this._baselayers.splice(index, 1);
         }
       }

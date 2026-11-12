@@ -29,6 +29,7 @@ module.exports = (config) => {
       // { pattern: 'tests/specs/cache.spec.ts', type: 'ts' },
       // { pattern: 'tests/specs/area.spec.ts', type: 'ts' },
       // { pattern: 'tests/specs/expression.spec.ts', type: 'ts' },
+      // { pattern: 'tests/specs/webmap.spec.ts', type: 'ts' },
       { pattern: 'tests/specs/*.spec.ts', type: 'ts' },
       // { pattern: 'tests/internet-specs/**/ngw-kit.ngw-webmap.spec.ts', type: 'ts' },
       { pattern: 'tests/internet-specs/**/*.spec.ts', type: 'ts' },
