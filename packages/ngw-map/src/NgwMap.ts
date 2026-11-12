@@ -241,7 +241,7 @@ export class NgwMap<
           adapterOpts,
         )) as ResourceAdapter<M, L, AdapterOptions>;
         const id = layer && this.getLayerId(layer);
-        if (layer && id) {
+        if (layer && id && this.getLayer(id) === layer) {
           this._ngwLayers[id] = { layer, resourceId: layer.resourceId };
           layer.options.name =
             layer.options.name ||
@@ -500,7 +500,7 @@ export class NgwMap<
     const layer = this.getLayer(layerDef);
     if (layer) {
       const layerId = this.getLayerId(layer);
-      if (layerId) {
+      if (layerId && this._ngwLayers[layerId]?.layer === layer) {
         delete this._ngwLayers[layerId];
       }
       super.removeLayer(layer);

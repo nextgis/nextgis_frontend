@@ -64,6 +64,11 @@ export class WebMapLayers<
   private readonly _baselayers: string[] = [];
   private readonly _layers: AddedLayers<M, L> = {};
   private readonly _selectedLayers: string[] = [];
+  // true means a layer was removed before its addLayer() completed.
+  private readonly _pendingLayerAdds = new WeakMap<
+    LayerAdapter<M, L>,
+    boolean
+  >();
 
   constructor(mapOptions: O) {
     super(mapOptions);
@@ -306,61 +311,99 @@ export class WebMapLayers<
       let layerId: string | undefined;
       if (_adapter.options.id) {
         layerId = String(_adapter.options.id);
-
-        this._layers[layerId] = _adapter;
-      }
-      this._emitLayerEvent('layer:preadd', layerId || '', _adapter);
-      await this.onMapLoad();
-      _adapter.map = this.mapAdapter.map;
-      const layer = await _adapter.addLayer(_adapter.options);
-      // checking that the original layer was inserted into the adapter anyway
-      _adapter.layer = layer;
-      // think about how to move `id` to the adapter's constructor,
-      // but that it is not required in the options
-      _adapter.id = _adapter.options.id || String(id);
-      _adapter.options.id = _adapter.id;
-      if (options.baselayer) {
-        _adapter.options.order = 0;
-      }
-      _adapter.order = _adapter.options.order ?? _order;
-      if (layerId) {
-        delete this._layers[layerId];
-      }
-      layerId = String(_adapter.id);
-      if (this._layers[layerId]) {
-        throw Error(`layer with id '${layerId}' already exist`);
-      }
-      if (layerId) {
-        this._layers[layerId] = _adapter;
-
-        if (geoJsonOptions.filter) {
-          this.filterLayer(_adapter, geoJsonOptions.filter);
+        if (layerId && this._layers[layerId]) {
+          throw new Error(`layer with id '${layerId}' already exist`);
         }
+        this._layers[layerId] = _adapter;
+      }
+      this._pendingLayerAdds.set(_adapter, false);
+      let nativeStarted = false;
+      const cancelled = () => this._pendingLayerAdds.get(_adapter) === true;
+      try {
+        this._emitLayerEvent('layer:preadd', layerId || '', _adapter);
+        await this.onMapLoad();
+        if (cancelled()) {
+          return _adapter;
+        }
+        _adapter.map = this.mapAdapter.map;
+        nativeStarted = true;
+        const layer = await _adapter.addLayer(_adapter.options);
+        // checking that the original layer was inserted into the adapter anyway
+        _adapter.layer = layer;
+        if (cancelled()) {
+          return _adapter;
+        }
+        // think about how to move `id` to the adapter's constructor,
+        // but that it is not required in the options
+        _adapter.id = _adapter.options.id || String(id);
+        _adapter.options.id = _adapter.id;
         if (options.baselayer) {
-          this._baselayers.push(layerId);
+          _adapter.options.order = 0;
         }
+        _adapter.order = _adapter.options.order ?? _order;
+        if (layerId && this._layers[layerId] === _adapter) {
+          delete this._layers[layerId];
+        }
+        layerId = String(_adapter.id);
+        if (this._layers[layerId]) {
+          throw Error(`layer with id '${layerId}' already exist`);
+        }
+        if (layerId) {
+          this._layers[layerId] = _adapter;
 
-        if (visibility) {
-          await this.showLayer(layerId);
+          if (geoJsonOptions.filter) {
+            this.filterLayer(_adapter, geoJsonOptions.filter);
+          }
+          if (options.baselayer) {
+            this._baselayers.push(layerId);
+          }
+
+          if (visibility) {
+            await this.showLayer(layerId);
+            if (cancelled()) return _adapter;
+          }
+        }
+        const opacity = options.opacity;
+        if (opacity !== undefined && opacity !== null && opacity <= 1) {
+          this.setLayerOpacity(_adapter, opacity);
+        }
+        // TODO: remove backward compatibility for `getExtent`
+        const getBounds = layer && (_adapter.getBounds || _adapter.getExtent);
+        if (options.fit && getBounds) {
+          const extent = await getBounds.call(_adapter);
+          if (cancelled()) {
+            return _adapter;
+          }
+          if (extent) {
+            await this.fitBounds(extent);
+          }
+        }
+        if (cancelled()) {
+          return _adapter;
+        }
+        if (options.onAdded) {
+          options.onAdded(_adapter);
+        }
+        if (!cancelled()) {
+          this._emitLayerEvent('layer:add', layerId, _adapter);
+        }
+        return _adapter;
+      } catch (error) {
+        if (cancelled()) {
+          return _adapter;
+        }
+        this.removeLayer(_adapter);
+        throw error;
+      } finally {
+        const removed = cancelled();
+        this._pendingLayerAdds.delete(_adapter);
+        if (removed && nativeStarted) {
+          if (_adapter.removeLayer) {
+            _adapter.removeLayer();
+          } else if (_adapter.layer !== undefined)
+            this.mapAdapter.removeLayer(_adapter.layer);
         }
       }
-      const opacity = options.opacity;
-      if (opacity !== undefined && opacity !== null && opacity <= 1) {
-        this.setLayerOpacity(_adapter, opacity);
-      }
-      // TODO: remove backward compatibility for `getExtent`
-      const getBounds = layer && (_adapter.getBounds || _adapter.getExtent);
-      if (options.fit && getBounds) {
-        const extent = await getBounds.call(_adapter);
-        if (extent) {
-          await this.fitBounds(extent);
-        }
-      }
-      if (options.onAdded) {
-        options.onAdded(_adapter);
-      }
-      this._emitLayerEvent('layer:add', layerId, _adapter);
-      return _adapter;
     }
     return Promise.reject('No adapter');
   }
@@ -436,15 +479,17 @@ export class WebMapLayers<
   removeLayer(layerDef: LayerDef): void {
     const layer = this.getLayer(layerDef);
     const layerId = layer && this.getLayerId(layer);
-    if (layer && layerId) {
+    if (layer && layerId && this._layers[layerId] === layer) {
       this.emitter.emit('layer:preremove', layer);
-      if (layer.beforeRemove) {
-        layer.beforeRemove();
-      }
-      if (layer.removeLayer) {
-        layer.removeLayer();
+      layer.beforeRemove?.();
+      if (this._pendingLayerAdds.has(layer)) {
+        // Native cleanup waits until the asynchronous add has settled.
+        this._pendingLayerAdds.set(layer, true);
       } else {
-        this.mapAdapter.removeLayer(layer.layer);
+        if (layer.removeLayer) {
+          layer.removeLayer();
+        } else if (layer.layer !== undefined)
+          this.mapAdapter.removeLayer(layer.layer);
       }
       if (layer.options && layer.options.baselayer) {
         const index = this._baselayers.indexOf(layerId);
@@ -644,7 +689,10 @@ export class WebMapLayers<
       }
     };
     if (layer) {
-      return this.onMapLoad().then(() => action(layer));
+      return this.onMapLoad().then(() => {
+        if (this._layers[String(layer.id)] !== layer) return;
+        return action(layer);
+      });
     }
     return Promise.resolve();
   }

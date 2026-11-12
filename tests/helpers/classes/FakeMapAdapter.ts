@@ -1,29 +1,33 @@
-import {
+import { EventEmitter } from 'events';
+
+import type {
   MapAdapter as MA,
+  MapAdapterEvents,
   FitOptions,
   ControlPositions,
   LocateOptions,
   Locate,
   LocationEvents,
-} from '../../../packages/webmap/src/interfaces/MapAdapter';
-
-import { LayerAdapter } from '../../../packages/webmap/src/interfaces/LayerAdapter';
-import { EventEmitter } from 'events';
-import {
+  LayerAdapter,
   MapControls,
   MapControl,
   CreateControlOptions,
   ButtonControlOptions,
   ToggleControlOptions,
-} from '../../../packages/webmap/src/interfaces/MapControl';
-import {
   MapOptions,
   ViewOptions,
-} from '../../../packages/webmap/src/interfaces/MapOptions';
+} from '@nextgis/webmap';
+
+import type StrictEventEmitter from 'strict-event-emitter-types';
+
+import type {
+  LngLatArray,
+  LngLatBoundsArray,
+  Type,
+} from '@nextgis/utils';
 
 import { FakeGeoJsonLayerAdapter } from './FakeGeojsonLayerAdapter';
 import { FakeLayerAdapter } from './FakeLayerAdapter';
-import { LngLatArray, LngLatBoundsArray, Type } from '@nextgis/utils';
 
 export class FakeMapAdapter<M = any, L = any, C = any> implements MA {
   static layerAdapters = {
@@ -37,7 +41,8 @@ export class FakeMapAdapter<M = any, L = any, C = any> implements MA {
   layerAdapters = FakeMapAdapter.layerAdapters;
 
   map?: M;
-  emitter = new EventEmitter();
+  emitter: StrictEventEmitter<EventEmitter, MapAdapterEvents> =
+    new EventEmitter() as StrictEventEmitter<EventEmitter, MapAdapterEvents>;
 
   controlAdapters: { [name: string]: Type<C> } = {};
 
@@ -59,7 +64,7 @@ export class FakeMapAdapter<M = any, L = any, C = any> implements MA {
       this._container.innerHTML = '<div></div>';
     }
     this.map = {} as any;
-    this.emitter.emit('create');
+    this.emitter.emit('create', this);
   }
 
   destroy(): void {
@@ -94,9 +99,9 @@ export class FakeMapAdapter<M = any, L = any, C = any> implements MA {
   fitBounds(e: LngLatBoundsArray, options?: FitOptions): void {
     this.options.center = [e[2] - (e[2] - e[0]) / 2, e[3] - (e[3] - e[1]) / 2];
     this.options.zoom = 8; // for [102, 51, 104, 53]
-    this.emitter.emit('zoomstart');
-    this.emitter.emit('zoom');
-    this.emitter.emit('zoomend');
+    this.emitter.emit('zoomstart', this);
+    this.emitter.emit('zoom', this);
+    this.emitter.emit('zoomend', this);
   }
 
   setView(lngLat: LngLatArray, zoom?: number): void;
