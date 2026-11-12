@@ -33,6 +33,30 @@ type LoadData = (
   onCancel: (cancelHandler: () => void) => void,
 ) => void;
 
+function createHttpError(
+  status: number,
+  statusText: string,
+  response: unknown,
+): NgwError {
+  const details = isObject(response) ? response : {};
+  const message =
+    typeof details.message === 'string' && details.message
+      ? details.message
+      : typeof response === 'string' && response.trim()
+        ? response
+        : statusText || `HTTP ${status}`;
+
+  return new NgwError({
+    ...details,
+    status_code: status,
+    title:
+      typeof details.title === 'string' && details.title
+        ? details.title
+        : `HTTP ${status}`,
+    message,
+  });
+}
+
 let loadData: LoadData;
 
 if (__BROWSER__) {
@@ -58,23 +82,26 @@ if (__BROWSER__) {
         return xhr.responseText;
       }
     };
-    const processingResponse = (forError = false) => {
-      const cb = forError ? error : callback;
-      if (options.responseType === 'blob') {
-        cb(xhr.response);
-      } else {
-        if (xhr.responseText) {
-          cb(getResponseText());
-        } else {
-          error({ message: '' });
-        }
-      }
-    };
     xhr.onload = () => {
-      if ([401, 403, 404, 422, 500].indexOf(xhr.status) !== -1) {
-        error(new NgwError(getResponseText()));
+      if (xhr.status < 200 || xhr.status >= 300) {
+        const response =
+          options.responseType === 'blob' || !xhr.responseText
+            ? undefined
+            : getResponseText();
+        error(createHttpError(xhr.status, xhr.statusText, response));
+        return;
       }
-      processingResponse();
+      if (xhr.status === 204 || xhr.status === 205) {
+        callback(undefined);
+        return;
+      }
+
+      if (options.responseType === 'blob') {
+        callback(xhr.response);
+      } else {
+        // 204/205 and other empty successful responses have no JSON body.
+        callback(xhr.responseText ? getResponseText() : undefined);
+      }
     };
 
     xhr.onerror = (er) => {
@@ -213,29 +240,50 @@ if (__BROWSER__) {
             data += chunk;
           });
           resp.on('end', () => {
-            if (data) {
-              if (responseType === 'blob') {
-                resolve(data);
-              } else {
-                let json: Record<string, any> | undefined;
+            const status = resp.statusCode ?? 0;
+            const statusText = resp.statusMessage ?? '';
+            if (status < 200 || status >= 300) {
+              let response: unknown = data || undefined;
+              if (data) {
                 try {
-                  json = JSON.parse(data);
-                  if (json && json.status_code && json.status_code) {
-                    reject(json.message);
-                  }
-                } catch (er) {
-                  reject(er);
-                }
-                if (json !== undefined) {
-                  if (isError(json)) {
-                    reject('extractError(json)');
-                  } else {
-                    resolve(json);
-                  }
+                  response = JSON.parse(data);
+                } catch {
+                  // Non-JSON error bodies still carry the HTTP status.
                 }
               }
+              reject(createHttpError(status, statusText, response));
+              return;
             }
-            reject('no data');
+
+            if (!data) {
+              resolve(undefined);
+              return;
+            }
+            if (responseType === 'blob') {
+              resolve(data);
+              return;
+            }
+            try {
+              const json: unknown = JSON.parse(data);
+              if (
+                isError(json) ||
+                (isObject(json) &&
+                  typeof json.status_code === 'number' &&
+                  json.status_code >= 400)
+              ) {
+                reject(
+                  createHttpError(
+                    isObject(json) ? json.status_code : status,
+                    statusText,
+                    json,
+                  ),
+                );
+              } else {
+                resolve(json);
+              }
+            } catch (er) {
+              reject(er);
+            }
           });
         });
         if (form) {

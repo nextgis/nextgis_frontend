@@ -224,6 +224,46 @@ export async function request<
       response = await lunkwillFetch(lwRespUrl);
     }
 
+    if (!response.ok) {
+      let responseText: string;
+      try {
+        responseText = await response.text();
+      } catch (e) {
+        if ((e as Error).name === 'AbortError') throw e;
+        throw new InvalidResponseError();
+      }
+      let errorBody: unknown = responseText;
+      if (responseText) {
+        try {
+          errorBody = JSON.parse(responseText);
+        } catch {
+          // Keep the original text as the error message.
+        }
+      }
+      const fallback = response.statusText || `HTTP ${response.status}`;
+      const data: ServerResponseErrorData =
+        errorBody && typeof errorBody === 'object' && !Array.isArray(errorBody)
+          ? {
+              ...(errorBody as Partial<ServerResponseErrorData>),
+              message:
+                typeof (errorBody as ServerResponseErrorData).message ===
+                  'string' && (errorBody as ServerResponseErrorData).message
+                  ? (errorBody as ServerResponseErrorData).message
+                  : fallback,
+            }
+          : {
+              message:
+                typeof errorBody === 'string' && errorBody.trim()
+                  ? errorBody
+                  : fallback,
+            };
+      throw new ServerResponseError(data);
+    }
+
+    if (response.status === 204 || response.status === 205) {
+      return undefined as ToReturn<T, RT, ReturnUrl>;
+    }
+
     const respCType = response.headers.get('content-type');
     const respJSON =
       respCType &&
@@ -253,9 +293,6 @@ export async function request<
       throw new InvalidResponseError();
     }
 
-    if (400 <= response.status && response.status <= 599) {
-      throw new ServerResponseError(body as ServerResponseErrorData);
-    }
     return body as ToReturn<T, RT, ReturnUrl>;
   };
   if (cacheEngine) {
