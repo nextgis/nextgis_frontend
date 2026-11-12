@@ -84,6 +84,7 @@ export class NgwConnector {
     requestTransform: RequestTransformFunction | undefined | null,
   ) {
     this.requestTransform = requestTransform;
+    this.options.requestTransform = requestTransform ?? undefined;
   }
 
   /**

@@ -12,17 +12,22 @@ export function addConnector(connector: NgwConnector): void {
 export function findConnector(
   options: NgwConnectorOptions,
 ): NgwConnector | undefined {
-  return CONNECTORS.find((x) => {
-    if (x.options.baseUrl === options.baseUrl) {
-      if (options.auth) {
-        if (x.options.auth) {
-          return objectDeepEqual(x.options.auth, options.auth);
-        }
-      } else {
-        // if auth not in find options; use first connector with same url
-        return true;
-      }
+  return CONNECTORS.find((connector) => {
+    const existing = connector.options;
+    if (
+      existing.baseUrl !== options.baseUrl ||
+      existing.route !== options.route ||
+      existing.cacheId !== options.cacheId ||
+      connector.withCredentials !== options.withCredentials ||
+      existing.requestTransform !== options.requestTransform
+    ) {
+      return false;
     }
+
+    if (!existing.auth || !options.auth) {
+      return !existing.auth && !options.auth;
+    }
+    return objectDeepEqual(existing.auth, options.auth);
   });
 }
 
