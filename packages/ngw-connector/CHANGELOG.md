@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.1](https://github.com/nextgis/nextgis_frontend/compare/v4.1.0...v4.1.1) (2026-11-13)
+
+
+### Bug Fixes
+
+* **ngw-connector:** handle HTTP errors and empty responses ([ceecd48](https://github.com/nextgis/nextgis_frontend/commit/ceecd4812bc7af76cee01c19312ef15fcc1e2a89))
+* **ngw-connector:** isolate connector instances by request context ([4771677](https://github.com/nextgis/nextgis_frontend/commit/47716773ee931e0037e6f273d805b121eeaeebc8))
+* **ngw-connector:** track requests and clean up abort listeners ([8627a00](https://github.com/nextgis/nextgis_frontend/commit/8627a00a3999478cbf31ff46968cc3645bbe8cb1))
+* **ngw-connector:** use NGW origin and abort Lunkwill polling ([4db8c1a](https://github.com/nextgis/nextgis_frontend/commit/4db8c1afa7748ecdf4baeb8adadeab5232994185))
+
+
+
+
+
 ## [4.0.2](https://github.com/nextgis/nextgis_frontend/compare/v4.0.1...v4.0.2) (2026-11-05)
 
 **Note:** Version bump only for package @nextgis/ngw-connector

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.1](https://github.com/nextgis/nextgis_frontend/compare/v4.1.0...v4.1.1) (2026-11-13)
+
+
+### Bug Fixes
+
+* **leaflet-map-adapter:** handle dynamic GeoJSON data replacement ([a5c0e12](https://github.com/nextgis/nextgis_frontend/commit/a5c0e12a5435e18eee8d33836205f66053627ec0))
+
+
+
+
+
 # [4.1.0](https://github.com/nextgis/nextgis_frontend/compare/v4.0.2...v4.1.0) (2026-11-11)
 
 

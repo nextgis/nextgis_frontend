@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.1](https://github.com/nextgis/nextgis_frontend/compare/v4.1.0...v4.1.1) (2026-11-13)
+
+
+### Bug Fixes
+
+* **webmap:** maintain base layer IDs on removal ([6700df2](https://github.com/nextgis/nextgis_frontend/commit/6700df26b9c490434064040ee4cd900f61ddc5fc))
+* **webmap:** prevent re-registering removed pending layers ([3630945](https://github.com/nextgis/nextgis_frontend/commit/3630945445a7ad07c3baf31f0c2a6683baaf6c65))
+
+
+
+
+
 # [4.1.0](https://github.com/nextgis/nextgis_frontend/compare/v4.0.2...v4.1.0) (2026-11-11)
 
 

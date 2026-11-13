@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.1](https://github.com/nextgis/nextgis_frontend/compare/v4.1.0...v4.1.1) (2026-11-13)
+
+
+### Bug Fixes
+
+* **react-ngw-map:** coalesce GeoJSON updates ([18707ea](https://github.com/nextgis/nextgis_frontend/commit/18707eaf60f901df3350f2483b20b13624fb47c3))
+
+
+
+
+
 # [4.1.0](https://github.com/nextgis/nextgis_frontend/compare/v4.0.2...v4.1.0) (2026-11-11)
 
 

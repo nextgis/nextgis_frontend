@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.1](https://github.com/nextgis/nextgis_frontend/compare/v4.1.0...v4.1.1) (2026-11-13)
+
+
+### Bug Fixes
+
+* **leaflet-map-adapter:** handle dynamic GeoJSON data replacement ([a5c0e12](https://github.com/nextgis/nextgis_frontend/commit/a5c0e12a5435e18eee8d33836205f66053627ec0))
+* **ngw-connector:** handle HTTP errors and empty responses ([ceecd48](https://github.com/nextgis/nextgis_frontend/commit/ceecd4812bc7af76cee01c19312ef15fcc1e2a89))
+* **ngw-connector:** isolate connector instances by request context ([4771677](https://github.com/nextgis/nextgis_frontend/commit/47716773ee931e0037e6f273d805b121eeaeebc8))
+* **ngw-connector:** track requests and clean up abort listeners ([8627a00](https://github.com/nextgis/nextgis_frontend/commit/8627a00a3999478cbf31ff46968cc3645bbe8cb1))
+* **ngw-connector:** use NGW origin and abort Lunkwill polling ([4db8c1a](https://github.com/nextgis/nextgis_frontend/commit/4db8c1afa7748ecdf4baeb8adadeab5232994185))
+* **ngw-map:** cleanup identify abort listeners ([0056e38](https://github.com/nextgis/nextgis_frontend/commit/0056e38a84247fc3acc50f29b0ae53025ccd4460))
+* **ngw-map:** invalidate stale IMAGE groups on layer changes ([7908f63](https://github.com/nextgis/nextgis_frontend/commit/7908f6307d1b7a4c6e895b7463dbec87f133e9b3))
+* **ngw-map:** resolve layer IDs and await fit operations ([d3102e1](https://github.com/nextgis/nextgis_frontend/commit/d3102e15ff35a71bcd3f1072a076148ffaab99d0))
+* **react-ngw-map:** coalesce GeoJSON updates ([18707ea](https://github.com/nextgis/nextgis_frontend/commit/18707eaf60f901df3350f2483b20b13624fb47c3))
+* **webmap:** maintain base layer IDs on removal ([6700df2](https://github.com/nextgis/nextgis_frontend/commit/6700df26b9c490434064040ee4cd900f61ddc5fc))
+* **webmap:** prevent re-registering removed pending layers ([3630945](https://github.com/nextgis/nextgis_frontend/commit/3630945445a7ad07c3baf31f0c2a6683baaf6c65))
+
+
+
+
+
 # [4.1.0](https://github.com/nextgis/nextgis_frontend/compare/v4.0.2...v4.1.0) (2026-11-11)
 
 
