@@ -30,44 +30,73 @@ function lunkwillCheckResponse(lwResp: Response) {
 
 async function responseJson(response: Response) {
   try {
-    return response.json();
+    return await response.json();
   } catch {
-    throw new Error();
+    throw new InvalidResponseError();
   }
 }
 
-async function lunkwillResponseUrl(lwResp: Response) {
+async function lunkwillResponseUrl(lwResp: Response, opt: RequestInit) {
   const lwData = await responseJson(lwResp);
-  let delay = lwData.delay_ms;
-  const retry = lwData.retry_ms !== undefined ? lwData.retry_ms : 2000;
+  if (lwData.id == null) {
+    throw new LunkwillError(undefined, lwData);
+  }
+
+  let delay = lwData.delay_ms ?? 0;
+  const retry = lwData.retry_ms ?? 2000;
   const sum = `/api/lunkwill/${lwData.id}/summary`;
   const res = `/api/lunkwill/${lwData.id}/response`;
 
   const sleep = (msec: number) =>
-    new Promise((resolve) => setTimeout(resolve, msec));
+    new Promise<void>((resolve, reject) => {
+      const signal = opt.signal;
+      const aborted = () =>
+        signal?.reason instanceof Error
+          ? signal.reason
+          : new DOMException('Aborted', 'AbortError');
 
-  let failed = false;
-  let ready = false;
-  while (!ready) {
-    await sleep(failed ? retry : delay);
-    failed = false;
+      if (signal?.aborted) return reject(aborted());
 
-    let lwResp: Response;
+      const onAbort = () => {
+        clearTimeout(timer);
+        reject(aborted());
+      };
+      const timer = setTimeout(() => {
+        signal?.removeEventListener('abort', onAbort);
+        resolve();
+      }, msec);
+
+      signal?.addEventListener('abort', onAbort, { once: true });
+    });
+
+  let failures = 0;
+
+  while (true) {
+    await sleep(failures ? retry : delay);
+
     let lwData: LunkwillData;
     try {
-      lwResp = await fetch(sum, { credentials: 'same-origin' });
-      lwData = await lwResp.json();
-    } catch {
-      failed = true;
+      const response = await fetch(sum, {
+        credentials: opt.credentials,
+        headers: opt.headers,
+        signal: opt.signal,
+      });
+
+      if (!response.ok) {
+        throw new Error(`Lunkwill HTTP ${response.status}`);
+      }
+
+      lwData = await responseJson(response);
+      failures = 0;
+    } catch (error) {
+      if (opt.signal?.aborted) throw error;
+      if (++failures >= 5) throw new NetworksResponseError();
       continue;
     }
 
     switch (lwData.status) {
-      case undefined:
-        throw new LunkwillError(undefined, lwData);
       case 'ready':
-        ready = true;
-        break;
+        return res;
       case 'cancelled':
         throw new LunkwillRequestCancelled(lwData);
       case 'failed':
@@ -75,20 +104,23 @@ async function lunkwillResponseUrl(lwResp: Response) {
       case 'spooled':
       case 'processing':
       case 'buffering':
-        delay = lwData.delay_ms;
+        delay = lwData.delay_ms ?? 2000;
         break;
       default:
         throw new LunkwillError(undefined, lwData);
     }
   }
-
-  return res;
 }
 
-async function lunkwillFetch(lwRespUrl: string) {
+async function lunkwillFetch(url: string, opt: RequestInit) {
   try {
-    return await window.fetch(lwRespUrl, { credentials: 'same-origin' });
-  } catch {
+    return await fetch(url, {
+      credentials: opt.credentials,
+      headers: opt.headers,
+      signal: opt.signal,
+    });
+  } catch (error) {
+    if (opt.signal?.aborted) throw error;
     throw new NetworksResponseError();
   }
 }
@@ -183,7 +215,7 @@ export async function request<
   };
   opt.method = opt.method?.toUpperCase();
 
-  if (withCredentials) {
+  if (withCredentials && options?.credentials === undefined) {
     opt.credentials = 'include';
   }
 
@@ -217,11 +249,11 @@ export async function request<
     }
 
     if (useLunkwill && lunkwillCheckResponse(response)) {
-      const lwRespUrl = await lunkwillResponseUrl(response);
+      const lwRespUrl = await lunkwillResponseUrl(response, opt);
       if (lunkwillReturnUrl) {
         return lwRespUrl as ToReturn<T, RT, ReturnUrl>;
       }
-      response = await lunkwillFetch(lwRespUrl);
+      response = await lunkwillFetch(lwRespUrl, opt);
     }
 
     if (!response.ok) {
