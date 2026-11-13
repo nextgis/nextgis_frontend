@@ -1,5 +1,6 @@
 import { fetchNgwLayerItems } from '@nextgis/ngw-kit';
-import { expect } from 'chai';
+
+import { describe, expect, it } from 'vitest';
 
 import { Connection } from '../../../packages/ngw-orm/src';
 import { SandboxGroupNgwKit } from '../../helpers/ngw-orm/SandboxGroupNgwKit';
@@ -19,7 +20,7 @@ async function getConnection(): Promise<Connection> {
   }
 
   const connection = await Connection.connect({
-    baseUrl: 'https://sandbox.nextgis.com',
+    baseUrl: `${window.location.origin}/__ngw_sandbox`,
     auth: {
       login: 'administrator',
       password: 'demodemo',
@@ -174,17 +175,15 @@ async function newSpecialLayerId(name: string) {
   return Point.item?.resource.id;
 }
 
-describe('NgwKit', function () {
-  this.timeout(15000);
-
-  before(async () => {
+describe('NgwKit', () => {
+  beforeAll(async () => {
     const connection = await getConnection();
     await connection.getOrCreateResource(SandboxGroupNgwKit, {
       parent: TESTS_GROUP_ID,
     });
   });
 
-  after(async () => {
+  afterAll(async () => {
     const connection = await getConnection();
     await connection.deleteResource(SandboxGroupNgwKit);
   });

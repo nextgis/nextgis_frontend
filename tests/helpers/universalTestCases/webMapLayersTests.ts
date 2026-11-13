@@ -1,9 +1,10 @@
-import { expect } from 'chai';
-import sinon from 'sinon';
+import { expect, it, vi } from 'vitest';
+
 import { mapHtml } from '../mapHtml';
-import { MapOptions, LayerAdapters, Type } from '../../../packages/webmap/src';
+import { MapOptions, LayerAdapters } from '../../../packages/webmap/src';
 import { WebMap } from '../../../packages/webmap/src/WebMap';
 import { MapAdapterCreateOptions } from './baseMapTests';
+import type { Type } from '@nextgis/utils';
 
 export const webMapLayersTests = <
   K extends keyof LayerAdapters,
@@ -20,10 +21,18 @@ export const webMapLayersTests = <
 ): any => {
   const layerAdapterName =
     typeof layerAdapter === 'string' ? layerAdapter : 'Layer';
+  // These tests verify layer registration, not downloading map tiles.
+  const layerOptions =
+    layerAdapter === 'TILE'
+      ? {
+          url: 'https://example.invalid/tiles/{z}/{x}/{y}.png',
+          visibility: false,
+        }
+      : { visibility: false };
 
   describe(`${layerAdapterName}.`, () => {
     beforeEach(() => {
-      document.documentElement.innerHTML = mapHtml;
+      document.body.innerHTML = mapHtml;
     });
 
     afterEach(() => {
@@ -33,35 +42,36 @@ export const webMapLayersTests = <
     describe('#addLayer', () => {
       it('Fires a layer:preadd event after adapter received', async () => {
         const map = await buildWebMap({ target: 'map' });
-        const spy = sinon.spy();
+        const spy = vi.fn();
         map.emitter.on('layer:preadd', (adapter) => {
           // expect(adapter.layer).to.be.undefined;
           spy();
         });
-        await map.addLayer(layerAdapter);
-        expect(spy.called).to.be.ok;
+        await map.addLayer(layerAdapter, layerOptions);
+        expect(spy).toHaveBeenCalled();
       });
 
       it('Fires a layer:add event immediately if the map is ready', async () => {
         const map = await buildWebMap({ target: 'map' });
-        const spy = sinon.spy();
+        const spy = vi.fn();
         map.emitter.on('layer:add', spy);
         map.setView([0, 0], 0);
-        await map.addLayer(layerAdapter);
-        expect(spy.called).to.be.ok;
+        await map.addLayer(layerAdapter, layerOptions);
+        expect(spy).toHaveBeenCalled();
       });
 
       it('Start ordering from 1 level', async () => {
         const map = await buildWebMap({ target: 'map' });
-        const layer = await map.addLayer(layerAdapter);
+        const layer = await map.addLayer(layerAdapter, layerOptions);
         expect(layer.options.order).to.be.eq(1);
       });
 
       it('Reserve layer order position immediately after function call', async () => {
         const map = await buildWebMap({ target: 'map' });
-        map.addLayer(layerAdapter);
-        map.addLayer(layerAdapter);
-        const layer = await map.addLayer(layerAdapter);
+        const first = map.addLayer(layerAdapter, layerOptions);
+        const second = map.addLayer(layerAdapter, layerOptions);
+        const third = map.addLayer(layerAdapter, layerOptions);
+        const [, , layer] = await Promise.all([first, second, third]);
         expect(layer.options.order).to.be.eq(3);
       });
 
@@ -69,7 +79,7 @@ export const webMapLayersTests = <
 
       // it('fires a layeradd event when the map becomes ready', function() {
       //   let layer = layerSpy(),
-      //     spy = sinon.spy();
+      //     spy = vi.fn();
       //   map.on('layeradd', spy);
       //   map.addLayer(layer);
       //   expect(spy.called).not.to.be.ok();
@@ -79,7 +89,7 @@ export const webMapLayersTests = <
 
       // it('does not fire a layeradd event if the layer is removed before the map becomes ready', function() {
       //   let layer = layerSpy(),
-      //     spy = sinon.spy();
+      //     spy = vi.fn();
       //   map.on('layeradd', spy);
       //   map.addLayer(layer);
       //   map.removeLayer(layer);
@@ -106,7 +116,7 @@ export const webMapLayersTests = <
 
       // describe('When the first layer is added to a map', function() {
       //   it('fires a zoomlevelschange event', function() {
-      //     let spy = sinon.spy();
+      //     let spy = vi.fn();
       //     map.on('zoomlevelschange', spy);
       //     expect(spy.called).not.to.be.ok();
       //     L.tileLayer('{z}{x}{y}', { minZoom: 0, maxZoom: 10 }).addTo(map);
@@ -116,7 +126,7 @@ export const webMapLayersTests = <
 
       // describe('when a new layer with greater zoomlevel coverage than the current layer is added to a map', function() {
       //   it('fires a zoomlevelschange event', function() {
-      //     let spy = sinon.spy();
+      //     let spy = vi.fn();
       //     L.tileLayer('{z}{x}{y}', { minZoom: 0, maxZoom: 10 }).addTo(map);
       //     map.on('zoomlevelschange', spy);
       //     expect(spy.called).not.to.be.ok();
@@ -127,7 +137,7 @@ export const webMapLayersTests = <
 
       // describe('when a new layer with the same or lower zoomlevel coverage as the current layer is added to a map', function() {
       //   it('fires no zoomlevelschange event', function() {
-      //     let spy = sinon.spy();
+      //     let spy = vi.fn();
       //     L.tileLayer('{z}{x}{y}', { minZoom: 0, maxZoom: 10 }).addTo(map);
       //     map.on('zoomlevelschange', spy);
       //     expect(spy.called).not.to.be.ok();
@@ -142,14 +152,14 @@ export const webMapLayersTests = <
     describe('#removeLayer', () => {
       it('Fires a layer:preremove event before layer object is destroyed', async () => {
         const map = await buildWebMap({ target: 'map' });
-        const spy = sinon.spy();
-        const layer = await map.addLayer(layerAdapter, {});
+        const spy = vi.fn();
+        const layer = await map.addLayer(layerAdapter, layerOptions);
         map.emitter.on('layer:preremove', (adapter) => {
           expect(adapter.options).to.be.ok;
           spy();
         });
         map.removeLayer(layer);
-        expect(spy.called).to.be.ok;
+        expect(spy).toHaveBeenCalled();
       });
     });
   });

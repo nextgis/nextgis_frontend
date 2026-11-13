@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+import { describe, expect, it } from 'vitest';
 
 import { createLayerFilterParam } from '../../packages/ngw-kit/src/utils/createLayerFilterParam';
 import { fetchNgwLayerItems } from '../../packages/ngw-kit/src/utils/fetchNgwLayerItems';

@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { act, createElement } from 'react';
 import { createRoot } from 'react-dom/client';
 
@@ -11,10 +11,13 @@ import type { GeoJsonAdapterOptions } from '../../packages/webmap/src';
 type Data = NonNullable<GeoJsonAdapterOptions['data']>;
 const data = (id: number): Data => ({
   type: 'FeatureCollection',
-  features: [{
-    type: 'Feature', properties: { id },
-    geometry: { type: 'Point', coordinates: [id, id] },
-  }],
+  features: [
+    {
+      type: 'Feature',
+      properties: { id },
+      geometry: { type: 'Point', coordinates: [id, id] },
+    },
+  ],
 });
 
 describe('ReactGeojsonLayer data updates', () => {
@@ -28,11 +31,13 @@ describe('ReactGeojsonLayer data updates', () => {
     IS_REACT_ACT_ENVIRONMENT?: boolean;
   };
 
-  before(() => {
+  beforeAll(() => {
     previousActEnvironment = environment.IS_REACT_ACT_ENVIRONMENT;
     environment.IS_REACT_ACT_ENVIRONMENT = true;
   });
-  after(() => { environment.IS_REACT_ACT_ENVIRONMENT = previousActEnvironment; });
+  afterAll(() => {
+    environment.IS_REACT_ACT_ENVIRONMENT = previousActEnvironment;
+  });
 
   beforeEach(() => {
     container = document.createElement('div');
@@ -47,7 +52,9 @@ describe('ReactGeojsonLayer data updates', () => {
         added.push(options.data);
         return layer;
       },
-      setLayerData: async (_layer: unknown, value: Data) => { updates.push(value); },
+      setLayerData: async (_layer: unknown, value: Data) => {
+        updates.push(value);
+      },
       removeLayer: () => undefined,
       setLayerPaint: () => undefined,
       setLayerSelectedPaint: () => undefined,
@@ -62,14 +69,19 @@ describe('ReactGeojsonLayer data updates', () => {
 
   async function render(value: Data | null) {
     await act(async () => {
-      root.render(createElement(
-        NgwMapProvider,
-        { value: { ngwMap: map } },
-        createElement(ReactGeojsonLayer, { data: value }),
-      ));
+      root.render(
+        createElement(
+          NgwMapProvider,
+          { value: { ngwMap: map } },
+          createElement(ReactGeojsonLayer, { data: value }),
+        ),
+      );
     });
     // Drain Promise chains used by the GeoJSON data queue.
-    await act(async () => { await Promise.resolve(); await Promise.resolve(); });
+    await act(async () => {
+      await Promise.resolve();
+      await Promise.resolve();
+    });
   }
 
   it('does not apply the initial GeoJSON twice', async () => {
@@ -92,6 +104,9 @@ describe('ReactGeojsonLayer data updates', () => {
     await render(data(1));
     await render(null);
     expect(updates).to.have.length(1);
-    expect(updates[0]).to.deep.equal({ type: 'FeatureCollection', features: [] });
+    expect(updates[0]).to.deep.equal({
+      type: 'FeatureCollection',
+      features: [],
+    });
   });
 });

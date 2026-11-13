@@ -1,5 +1,4 @@
-import { expect } from 'chai';
-import sinon from 'sinon';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { request } from '../../packages/ngw-connector/src/route/request';
 import { NetworksResponseError } from '../../packages/ngw-connector/src/route/error';
@@ -26,12 +25,12 @@ function json(data: unknown, type = 'application/json'): Response {
 }
 
 describe('Lunkwill requests', () => {
-  afterEach(() => sinon.restore());
+  afterEach(() => vi.restoreAllMocks());
 
   it('uses fixed Lunkwill paths and retains authorization', async () => {
     const calls: Array<{ url: string; auth?: string }> = [];
 
-    sinon.stub(globalThis, 'fetch').callsFake(async (url, init) => {
+    vi.spyOn(globalThis, 'fetch').mockImplementation(async (url, init) => {
       const address = String(url);
 
       calls.push({
@@ -65,9 +64,9 @@ describe('Lunkwill requests', () => {
   it('aborts during the polling delay', async () => {
     const controller = new AbortController();
 
-    const fetchStub = sinon
-      .stub(globalThis, 'fetch')
-      .resolves(json({ id: 'job-42', delay_ms: 60000 }, mediaType));
+    const fetchStub = vi
+      .spyOn(globalThis, 'fetch')
+      .mockResolvedValue(json({ id: 'job-42', delay_ms: 60000 }, mediaType));
 
     const promise = request(initial, {
       ...opts,
@@ -77,34 +76,24 @@ describe('Lunkwill requests', () => {
     await Promise.resolve();
     controller.abort();
 
-    let error: unknown;
-    try {
-      await promise;
-    } catch (caught) {
-      error = caught;
-    }
-
-    expect((error as Error)?.name).to.equal('AbortError');
-    expect(fetchStub.calledOnce).to.equal(true);
+    await expect(promise).rejects.toMatchObject({ name: 'AbortError' });
+    expect(fetchStub).toHaveBeenCalledOnce();
   });
 
   it('stops after five consecutive polling failures', async () => {
-    const fetchStub = sinon.stub(globalThis, 'fetch').callsFake(async (url) => {
-      if (String(url) === initial) {
-        return json({ id: 'job-42', delay_ms: 0, retry_ms: 0 }, mediaType);
-      }
+    const fetchStub = vi
+      .spyOn(globalThis, 'fetch')
+      .mockImplementation(async (url) => {
+        if (String(url) === initial) {
+          return json({ id: 'job-42', delay_ms: 0, retry_ms: 0 }, mediaType);
+        }
 
-      return new Response('error', { status: 503 });
-    });
+        return new Response('error', { status: 503 });
+      });
 
-    let error: unknown;
-    try {
-      await request(initial, opts as any);
-    } catch (caught) {
-      error = caught;
-    }
-
-    expect(error).to.be.instanceOf(NetworksResponseError);
-    expect(fetchStub.callCount).to.equal(6);
+    await expect(request(initial, opts as any)).rejects.toBeInstanceOf(
+      NetworksResponseError,
+    );
+    expect(fetchStub).toHaveBeenCalledTimes(6);
   });
 });

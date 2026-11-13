@@ -1,6 +1,7 @@
-import { expect } from 'chai';
+import { expect } from 'vitest';
 import { mapHtml } from '../mapHtml';
-import { MapAdapter, Type, MapOptions } from '../../../packages/webmap/src';
+import { MapAdapter, MapOptions } from '../../../packages/webmap/src';
+import type { Type } from '@nextgis/utils';
 import { WebMap } from '../../../packages/webmap/src/WebMap';
 import { baseMapTests, MapAdapterCreateOptions } from './baseMapTests';
 import { webMapLayersTests } from './webMapLayersTests';
@@ -30,27 +31,32 @@ export const webMapTests = <W extends WebMap = WebMap>(
   createWebMap_?: (MA: Type<MapAdapter>, options?: MapOptions) => W,
 ): any => {
   const adapterName = MA.name;
+  const maps: W[] = [];
 
   const _buildWebMap = async (
     mapOptions: MapOptions,
     opt?: MapAdapterCreateOptions,
   ): Promise<W> => {
-    return buildWebMap(MA, mapOptions, opt, createWebMap_);
+    const map = await buildWebMap<W>(MA, mapOptions, opt, createWebMap_);
+    maps.push(map);
+    return map;
   };
 
   describe(`${webMapName} with ${adapterName}.`, () => {
     beforeEach(() => {
-      document.documentElement.innerHTML = mapHtml;
+      document.body.innerHTML = mapHtml;
     });
 
     afterEach(() => {
-      // restore the original func after test
+      for (const map of maps.splice(0)) {
+        map.destroy();
+      }
     });
 
     describe('Constructor', () => {
       it(`Apply adapter ${adapterName}.`, () => {
         const mapAdapter = new MA();
-        const webMap = new WebMap({ mapAdapter: mapAdapter });
+        const webMap = new WebMap({ mapAdapter, create: false });
         expect(webMap.mapAdapter).eq(mapAdapter);
       });
     });
@@ -63,8 +69,13 @@ export const webMapTests = <W extends WebMap = WebMap>(
       });
     });
 
-    baseMapTests(MA, (MA: Type<MapAdapter>, opt: MapOptions = {}) =>
-      _buildWebMap(opt),
+    baseMapTests(
+      MA,
+      (
+        MA: Type<MapAdapter>,
+        opt: MapOptions = {},
+        param?: MapAdapterCreateOptions,
+      ) => _buildWebMap(opt, param),
     );
 
     const layerAdapters: string[] =
@@ -78,8 +89,14 @@ export const webMapTests = <W extends WebMap = WebMap>(
 
     it('Returns undefined if map not initialized but layers added', async () => {
       const map = await _buildWebMap({}, { noCreate: true });
-      map.addLayer('TILE', { url: 'file:///dev/null' });
+      // Register before create, but finish the pending operation before teardown.
+      // A fake layer avoids constructing a native adapter without a map.
+      const pendingLayer = map.addLayer(FakeLayerAdapter, {
+        visibility: false,
+      });
       expect(map.getZoom()).to.be.undefined;
+      await map.create();
+      await pendingLayer;
     });
   });
 };

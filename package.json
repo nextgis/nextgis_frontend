@@ -17,8 +17,9 @@
     "example:build": "node ./scripts/buildExamples.mjs",
     "examples:check": "node ./scripts/checkExamples.mjs",
     "test": "cd tests && yarn test",
+    "test:watch": "cd tests && yarn test:watch",
+    "test:internet": "cd tests && yarn test:internet",
     "test-build": "node ./scripts/testBuildCmd.mjs",
-    "karma": "cd tests && yarn karma",
     "doc": "cd ./docs && yarn doc",
     "docker-demo": "cd ./demo/ && yarn run docker",
     "docker-docs": "cd ./docs/ && yarn run docker",
@@ -36,10 +37,11 @@
     "@types/node": "^24.13.3",
     "lerna": "^8.2.4",
     "rimraf": "^6.1.3",
-    "vite": "^6.3.5"
+    "vite": "^8.3.8"
   },
   "license": "MIT",
   "workspaces": [
+    "tests",
     "packages/*",
     "packages/*/examples/*"
   ],

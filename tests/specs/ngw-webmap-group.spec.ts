@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+import { describe, expect, it } from 'vitest';
 
 import { NgwWebmapItem } from '../../packages/ngw-kit/src/NgwWebmapItem';
 
@@ -49,7 +49,7 @@ describe('NGW webmap groups', () => {
     const item = new NgwWebmapItem({
       webMap: {
         addLayer: () => new Promise(() => undefined),
-      } as NgwWebmapItemOptions['webMap'],
+      } as unknown as NgwWebmapItemOptions['webMap'],
       item: group,
     });
 

@@ -241,5 +241,7 @@ stats.html
 **/.yarn
 input
 
+.vitest/
+
 demo/src/examples.json
 nextgisweb.d.ts

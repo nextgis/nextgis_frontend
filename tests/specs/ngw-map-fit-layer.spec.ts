@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+import { describe, expect, it } from 'vitest';
 
 import { NgwMap } from '../../packages/ngw-map/src/NgwMap';
 

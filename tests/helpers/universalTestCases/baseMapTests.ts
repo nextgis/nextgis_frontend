@@ -3,7 +3,7 @@
  */
 
 import { LngLatArray, Type } from '@nextgis/utils';
-import { expect } from 'chai';
+import { expect } from 'vitest';
 import { MapAdapter, MapOptions, WebMap } from '../../../packages/webmap/src';
 import { mapHtml } from '../mapHtml';
 import sleep from '../utils/asyncTimeout';
@@ -22,7 +22,7 @@ export const baseMapTests = (
 ) => {
   // let map: MapAdapter;
   beforeEach(() => {
-    document.documentElement.innerHTML = mapHtml;
+    document.body.innerHTML = mapHtml;
     // map = await mapAdapterCreate(MA);
   });
 
@@ -99,15 +99,24 @@ export const baseMapTests = (
         expect(Math.floor(zoom)).to.eql(8);
       });
 
-      it('Snaps zoom level to integer by default', (done) => {
-        mapAdapterCreate(MA, { zoom: 21 }).then((map) => {
+      it('Snaps zoom level to integer by default', async () => {
+        const map = await mapAdapterCreate(MA, { zoom: 21 });
+        await new Promise<void>((resolve, reject) => {
           (map as WebMap).emitter.once('zoomend', () => {
-            expect(Math.floor(map.getZoom() as number)).to.eql(8);
-            const center = map.getCenter() as LngLatArray;
-            expect(center.map(Math.round)).to.eql(boundsCenter);
-            done();
+            try {
+              expect(Math.floor(map.getZoom() as number)).to.eql(8);
+              const center = map.getCenter() as LngLatArray;
+              expect(center.map(Math.round)).to.eql(boundsCenter);
+              resolve();
+            } catch (error) {
+              reject(error);
+            }
           });
-          map.fitBounds(bounds);
+          try {
+            map.fitBounds(bounds);
+          } catch (error) {
+            reject(error);
+          }
         });
       });
     });

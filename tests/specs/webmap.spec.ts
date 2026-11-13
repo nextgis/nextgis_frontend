@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 import { FakeLayerAdapter } from '../helpers/classes/FakeLayerAdapter';
 import { FakeMapAdapter } from '../helpers/classes/FakeMapAdapter';
@@ -14,7 +14,7 @@ mapAdapterTests(FakeMapAdapter);
 
 describe('WebMap base layer registration', () => {
   beforeEach(() => {
-    document.documentElement.innerHTML = mapHtml;
+    document.body.innerHTML = mapHtml;
   });
 
   it('removes the first base layer ID without removing later base layers', async () => {

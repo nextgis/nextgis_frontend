@@ -1,5 +1,5 @@
-import { expect } from 'chai';
-import sinon from 'sinon';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+
 import Cache from '../../packages/cache/src';
 import CancelablePromise from '../../packages/cancelable-promise/src';
 import sleep from '../helpers/utils/asyncTimeout';
@@ -54,25 +54,22 @@ describe(`Cache`, () => {
     const onAdd = await cache.add('test', cb);
     expect(onAdd).to.be.equal('test');
   });
-  it(`add options with promise`, (done) => {
+  it(`add options with promise`, async () => {
     const cache = new Cache();
-    const spy = sinon.spy();
+    const spy = vi.fn();
     const cb = () => {
       return sleep(10).then(() => {
         spy();
       });
     };
-    Promise.all([
+    await Promise.all([
       cache.add('test', cb),
       cache.add('test', cb, { id: 1 }),
       cache.add('test', cb, { id: 1 }),
       cache.add('test', cb, { id: 2 }),
       cache.add('test', cb, { id: 2 }),
-    ]).then(() => {
-      if (spy.callCount === 3) {
-        done();
-      }
-    });
+    ]);
+    expect(spy).toHaveBeenCalledTimes(3);
   });
   it(`match promise immediately`, () => {
     const cache = new Cache();
@@ -117,28 +114,24 @@ describe(`Cache`, () => {
     expect(fromCache2).to.be.undefined;
   });
 
-  it(`add promise error`, async () => {
+  it('add promise error', async () => {
     const cache = new Cache();
-    const cb = () => {
-      return sleep(20).then(() => {
+
+    const cb = () =>
+      sleep(20).then(() => {
         throw new Error('error');
       });
-    };
+
     const onAdd = cache.add('test', cb);
     const fromCache = cache.match('test');
-    try {
-      await onAdd;
-    } catch (er) {
-      expect(er.message).to.be.equal('error');
-    }
-    try {
-      await fromCache;
-    } catch (er) {
-      expect(er.message).to.be.equal('error');
-    }
+
+    await Promise.all([
+      expect(onAdd).rejects.toThrow('error'),
+      expect(fromCache).rejects.toThrow('error'),
+    ]);
   });
 
-  it(`add cancelable promise`, (done) => {
+  it(`add cancelable promise`, async () => {
     const cache = new Cache();
     const cb = () => {
       return new CancelablePromise((resolve) =>
@@ -149,17 +142,22 @@ describe(`Cache`, () => {
     const fromCache = cache.match('test');
     expect(onAdd instanceof CancelablePromise).to.be.true;
     expect(fromCache instanceof CancelablePromise).to.be.true;
-    onAdd.catch((er) => {
-      if (er.name === 'CancelError') {
-        const fromCacheOnCancel = cache.match('test');
-        expect(fromCacheOnCancel).to.be.undefined;
-        done();
-      }
+    const canceled = new Promise<void>((resolve, reject) => {
+      onAdd.catch((er) => {
+        try {
+          expect(er.name).to.equal('CancelError');
+          expect(cache.match('test')).to.be.undefined;
+          resolve();
+        } catch (error) {
+          reject(error);
+        }
+      });
     });
     onAdd.cancel();
+    await canceled;
   });
 
-  it(`add callback`, (done) => {
+  it(`add callback`, async () => {
     const cache = new Cache();
     let callCount = 0;
     const makePromise = function () {
@@ -167,19 +165,16 @@ describe(`Cache`, () => {
         sleep(20).then(() => resolve(callCount++));
       });
     };
-    Promise.all([
+    const responses = await Promise.all([
       cache.add('key', makePromise),
       cache.add('key', makePromise, { id: 1 }),
       cache.add('key', makePromise, { id: 1 }),
       cache.add('key', makePromise, { id: 2 }),
       cache.add('key', makePromise, { id: 2 }),
-    ])
-      .then((resp) => {
-        return expect(resp).deep.equal([0, 1, 1, 2, 2]);
-      })
-      .then(() => done(), done);
+    ]);
+    expect(responses).to.deep.equal([0, 1, 1, 2, 2]);
   });
-  it(`match all`, (done) => {
+  it(`match all`, async () => {
     const cache = new Cache();
     let callCount = 0;
     const makePromise = function () {
@@ -192,10 +187,7 @@ describe(`Cache`, () => {
     cache.add('key', makePromise, { id: 1 }); // NOT added to the cache
     cache.add('key', makePromise, { id: 2 }); // added to the cache
     cache.add('key', makePromise, { id: 2 }); // NOT added to the cache
-    Promise.all(cache.matchAll('key'))
-      .then((resp) => {
-        return expect(resp).deep.equal([0, 1, 2]);
-      })
-      .then(() => done(), done);
+    const responses = await Promise.all(cache.matchAll('key'));
+    expect(responses).to.deep.equal([0, 1, 2]);
   });
 });

@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+import { describe, expect, it } from 'vitest';
 import { propertiesFilter as pf } from '../../packages/properties-filter/src';
 
 type OBJ = Record<string, any>;

@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { mapHtml } from '../../helpers/mapHtml';
 
 import NgwMap from '../../../packages/ngw-leaflet';
@@ -6,15 +6,13 @@ import { NgwWebmapLayerAdapter } from '@nextgis/ngw-kit';
 
 let ngwMap!: NgwMap;
 
-describe('NgwKit', function () {
-  this.timeout(15000);
-
+describe('NgwKit', () => {
   beforeEach(async () => {
-    document.documentElement.innerHTML = mapHtml;
+    document.body.innerHTML = mapHtml;
 
     ngwMap = await NgwMap.create({
       target: 'map',
-      baseUrl: 'https://demo.nextgis.com',
+      baseUrl: `${window.location.origin}/__ngw_demo`,
       resources: [{ resource: 6278, id: 'webmap', fit: true }],
     });
   });
@@ -48,8 +46,8 @@ describe('NgwKit', function () {
     });
 
     it('setsLayerOpacity', async () => {
-      const layer = webMapLayer.layer!.tree
-        .getDescendants()
+      const layer = webMapLayer
+        .layer!.tree.getDescendants()
         .find((x) => x.item.item_type === 'layer');
       expect(layer).to.exist;
       layer!.properties.set('opacity', 0.5);

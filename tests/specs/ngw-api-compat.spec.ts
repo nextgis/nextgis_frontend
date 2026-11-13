@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+import {  describe, expect, it } from 'vitest';
 
 import { ResourcesControl } from '../../packages/ngw-connector/src/ResourcesControl';
 import { prepareFieldsToNgw } from '../../packages/ngw-kit/src/utils/prepareFieldsToNgw';

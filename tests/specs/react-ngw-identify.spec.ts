@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { act, createElement, StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
@@ -76,12 +76,12 @@ describe('React identification callbacks', () => {
   let root: Root | undefined;
   let map: FakeMap;
 
-  before(() => {
+  beforeAll(() => {
     previousActEnvironment = environment.IS_REACT_ACT_ENVIRONMENT;
     environment.IS_REACT_ACT_ENVIRONMENT = true;
   });
 
-  after(() => {
+  afterAll(() => {
     if (previousActEnvironment === undefined) {
       delete environment.IS_REACT_ACT_ENVIRONMENT;
     } else {

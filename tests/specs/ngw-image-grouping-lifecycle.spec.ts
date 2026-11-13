@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+import { afterEach,  describe, expect, it } from 'vitest';
 import { EventEmitter } from 'events';
 
 import { NgwImageLayerGrouping } from '../../packages/ngw-map/src/NgwImageLayerGrouping';

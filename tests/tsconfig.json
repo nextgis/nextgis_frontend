@@ -1,9 +1,21 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "types": ["node", "mocha"],
+    "types": [
+      "node",
+      "vitest/globals",
+      "vite/client"
+    ],
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true
   },
-  "exclude": ["node_modules"]
+  "include": [
+    "specs/**/*.ts",
+    "internet-specs/**/*.ts",
+    "helpers/**/*.ts",
+    "vitest.config.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

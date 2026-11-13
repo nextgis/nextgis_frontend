@@ -386,7 +386,7 @@ This repository includes a comprehensive test suite. Tests cover all packages an
 
 ```bash
 npm t # run all test with coverage
-npm run karma # run karma test in watch mode for development
+npm run test:watch # run test in watch mode for development
 ```
 
 ## Commercial support

@@ -1,5 +1,4 @@
-import { expect } from 'chai';
-import sinon from 'sinon';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { NgwMap } from '../../packages/ngw-map/src/NgwMap';
 
@@ -21,8 +20,11 @@ function harness() {
       get: (options: { signal?: AbortSignal }) => {
         receivedSignal = options.signal;
         return new Promise((_, reject) => {
-          options.signal?.addEventListener('abort', () =>
-            reject(new DOMException('Aborted', 'AbortError')), { once: true });
+          options.signal?.addEventListener(
+            'abort',
+            () => reject(new DOMException('Aborted', 'AbortError')),
+            { once: true },
+          );
         });
       },
     }),
@@ -31,20 +33,21 @@ function harness() {
 }
 
 describe('NGW identify AbortSignal lifecycle', () => {
-  afterEach(() => sinon.restore());
+  afterEach(() => vi.restoreAllMocks());
 
   it('aborts the pending identify item request and removes listener', async () => {
     const h = harness();
     const controller = new AbortController();
-    const add = sinon.spy(controller.signal, 'addEventListener');
-    const remove = sinon.spy(controller.signal, 'removeEventListener');
-    const promise = h.map.fetchIdentifyItem(identify, { signal: controller.signal });
+    const add = vi.spyOn(controller.signal, 'addEventListener');
+    const remove = vi.spyOn(controller.signal, 'removeEventListener');
+    const promise = h.map.fetchIdentifyItem(identify, {
+      signal: controller.signal,
+    });
     controller.abort();
-    try { await promise; throw new Error('Expected rejection'); }
-    catch (error) { expect((error as Error).name).to.equal('AbortError'); }
+    await expect(promise).rejects.toMatchObject({ name: 'AbortError' });
     expect(h.signal()?.aborted).to.equal(true);
-    expect(add.calledWith('abort')).to.equal(true);
-    expect(remove.calledWith('abort')).to.equal(true);
+    expect(add.mock.calls.some(([type]) => type === 'abort')).toBe(true);
+    expect(remove.mock.calls.some(([type]) => type === 'abort')).toBe(true);
   });
 
   it('does not change the caller requestOptions object', async () => {
@@ -54,7 +57,7 @@ describe('NGW identify AbortSignal lifecycle', () => {
     const promise = h.map.fetchIdentifyItem(identify, options);
     expect(options.signal).to.equal(controller.signal);
     controller.abort();
-    try { await promise; } catch { /* expected */ }
+    await expect(promise).rejects.toMatchObject({ name: 'AbortError' });
     expect(options.signal).to.equal(controller.signal);
   });
 
@@ -62,22 +65,27 @@ describe('NGW identify AbortSignal lifecycle', () => {
     const h = harness();
     const controller = new AbortController();
     controller.abort();
-    let failed = false;
-    try { await h.map.fetchIdentifyItem(identify, { signal: controller.signal }); }
-    catch (error) { failed = (error as Error).name === 'AbortError'; }
-    expect(failed).to.equal(true);
+    await expect(
+      h.map.fetchIdentifyItem(identify, { signal: controller.signal }),
+    ).rejects.toMatchObject({ name: 'AbortError' });
     expect(h.signal()).to.be.undefined;
   });
 
   it('unsubscribes after a GeoJSON identify with an immediate feature', async () => {
     const h = harness();
     const controller = new AbortController();
-    const remove = sinon.spy(controller.signal, 'removeEventListener');
+    const remove = vi.spyOn(controller.signal, 'removeEventListener');
     const directFeature = {
-      1: { features: [{ id: 12, geom: { type: 'Point', coordinates: [0, 0] }, fields: {} }] },
+      1: {
+        features: [
+          { id: 12, geom: { type: 'Point', coordinates: [0, 0] }, fields: {} },
+        ],
+      },
       featureCount: 1,
     } as unknown as NgwIdentify;
-    await h.map.fetchIdentifyGeoJson(directFeature, { signal: controller.signal });
-    expect(remove.calledWith('abort')).to.equal(true);
+    await h.map.fetchIdentifyGeoJson(directFeature, {
+      signal: controller.signal,
+    });
+    expect(remove.mock.calls.some(([type]) => type === 'abort')).toBe(true);
   });
 });

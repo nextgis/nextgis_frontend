@@ -1,5 +1,4 @@
-import { expect } from 'chai';
-import sinon from 'sinon';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { NgwError } from '../../packages/ngw-connector/src/errors/NgwError';
 import { ServerResponseError } from '../../packages/ngw-connector/src/route/error';
@@ -35,9 +34,9 @@ function legacyResponse(
       queueMicrotask(() => xhr.onload?.());
     },
   };
-  sinon
-    .stub(globalThis, 'XMLHttpRequest')
-    .returns(xhr as unknown as XMLHttpRequest);
+  vi.spyOn(globalThis, 'XMLHttpRequest').mockImplementation(function () {
+    return xhr as unknown as XMLHttpRequest;
+  });
 
   return new Promise((resolve) => {
     loadData(
@@ -59,7 +58,7 @@ function legacyResponse(
 }
 
 describe('NGW HTTP responses', () => {
-  afterEach(() => sinon.restore());
+  afterEach(() => vi.restoreAllMocks());
 
   describe('legacy XMLHttpRequest transport', () => {
     it('accepts a successful empty 204 response', async () => {
@@ -93,7 +92,7 @@ describe('NGW HTTP responses', () => {
         }
         expect(successes).to.equal(0);
         expect(failures).to.equal(1);
-        sinon.restore();
+        vi.restoreAllMocks();
       }
     });
 
@@ -115,18 +114,18 @@ describe('NGW HTTP responses', () => {
   describe('typed route transport', () => {
     it('accepts empty 204 and 205 responses', async () => {
       for (const status of [204, 205]) {
-        sinon
-          .stub(globalThis, 'fetch')
-          .resolves(new Response(null, { status }));
+        vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+          new Response(null, { status }),
+        );
         expect(await request('/api/test', { method: 'DELETE' })).to.equal(
           undefined,
         );
-        sinon.restore();
+        vi.restoreAllMocks();
       }
     });
 
     it('preserves a structured JSON error', async () => {
-      sinon.stub(globalThis, 'fetch').resolves(
+      vi.spyOn(globalThis, 'fetch').mockResolvedValue(
         new Response('{"message":"Access denied","title":"Forbidden"}', {
           status: 403,
           headers: { 'Content-Type': 'application/json' },
@@ -146,7 +145,7 @@ describe('NGW HTTP responses', () => {
         [429, 'Rate limited'],
         [503, ''],
       ] as const) {
-        sinon.stub(globalThis, 'fetch').resolves(
+        vi.spyOn(globalThis, 'fetch').mockResolvedValue(
           new Response(body, {
             status,
             statusText: 'Service unavailable',
@@ -161,12 +160,12 @@ describe('NGW HTTP responses', () => {
         expect((error as Error).message).to.equal(
           body || 'Service unavailable',
         );
-        sinon.restore();
+        vi.restoreAllMocks();
       }
     });
 
     it('continues parsing successful JSON responses', async () => {
-      sinon.stub(globalThis, 'fetch').resolves(
+      vi.spyOn(globalThis, 'fetch').mockResolvedValue(
         new Response('{"id":42}', {
           status: 200,
           headers: { 'Content-Type': 'application/json' },

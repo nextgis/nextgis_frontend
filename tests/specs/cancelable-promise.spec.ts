@@ -1,5 +1,4 @@
-import { expect } from 'chai';
-import sinon from 'sinon';
+import { describe, expect, it, vi } from 'vitest';
 import CancelablePromise from '../../packages/cancelable-promise/src';
 
 const getPromise = (delay = 0) =>
@@ -12,31 +11,40 @@ const getCatchPromise = () =>
     setTimeout(() => reject());
   });
 
+// Vitest waits for returned promises, not Mocha-style `done` callbacks.
+function waitForCancel(run: (onCanceled: (error: Error) => void) => void) {
+  return new Promise<void>((resolve, reject) => {
+    run((error) => {
+      if (error?.name === 'CancelError') {
+        resolve();
+      } else {
+        reject(error ?? new Error('Expected CancelError'));
+      }
+    });
+  });
+}
+
 describe('CancelablePromise', () => {
-  it(`then`, (done) => {
-    getPromise().then((e) => {
-      done();
+  it('then', async () => {
+    const spy = vi.fn();
+    await getPromise().then(spy);
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('catch', async () => {
+    const spy = vi.fn();
+    await getCatchPromise().catch(spy);
+    expect(spy).toHaveBeenCalledOnce();
+  });
+
+  it('catch canceled', async () => {
+    await waitForCancel((onCanceled) => {
+      getCatchPromise().catch(onCanceled).cancel();
     });
   });
 
-  it(`catch`, (done) => {
-    getCatchPromise().catch(() => {
-      done();
-    });
-  });
-
-  it(`catch canceled`, (done) => {
-    getCatchPromise()
-      .catch((er) => {
-        if (er.name === 'CancelError') {
-          done();
-        }
-      })
-      .cancel();
-  });
-
-  it(`finally`, async () => {
-    const spy = sinon.spy();
+  it('finally', async () => {
+    const spy = vi.fn();
     await getPromise()
       .then(() => {
         spy();
@@ -47,11 +55,11 @@ describe('CancelablePromise', () => {
       .finally(() => {
         spy();
       });
-    expect(spy.callCount).to.eq(2);
+    expect(spy).toHaveBeenCalledTimes(2);
   });
 
-  it(`finally after catch`, async () => {
-    const spy = sinon.spy();
+  it('finally after catch', async () => {
+    const spy = vi.fn();
     await getCatchPromise()
       .then(() => {
         spy();
@@ -62,105 +70,83 @@ describe('CancelablePromise', () => {
       .finally(() => {
         spy();
       });
-    expect(spy.callCount).to.eq(2);
+    expect(spy).toHaveBeenCalledTimes(2);
   });
 
-  it(`canceled`, (done) => {
-    const promise = getPromise().catch((er) => {
-      if (er.name === 'CancelError') {
-        done();
-      }
+  it('canceled', async () => {
+    await waitForCancel((onCanceled) => {
+      const promise = getPromise().catch(onCanceled);
+      promise.cancel();
     });
-    promise.cancel();
   });
 
-  it(`canceled after then`, (done) => {
+  it('canceled after then', async () => {
+    const thenSpy = vi.fn();
+    await waitForCancel((onCanceled) => {
+      const promise = getPromise().then(thenSpy).catch(onCanceled);
+      promise.cancel();
+    });
+    expect(thenSpy).not.toHaveBeenCalled();
+  });
+
+  it('catch after cancel', () => {
     const promise = getPromise()
-      .then((data) => {
-        return true;
-      })
-      .catch((er) => {
-        if (er.name === 'CancelError') {
-          done();
+      .then(() => true)
+      .then(() => true);
+    promise.cancel();
+
+    const spy = vi.fn();
+    promise.catch(spy);
+    expect(spy).toHaveBeenCalledOnce();
+    expect(spy).toHaveBeenCalledWith(expect.any(CancelablePromise.CancelError));
+  });
+
+  it('throw CancelError immediately', async () => {
+    const start = performance.now();
+    await waitForCancel((onCanceled) => {
+      getPromise(300).catch(onCanceled).cancel();
+    });
+    expect(performance.now() - start).to.be.lessThan(100);
+  });
+
+  it('canceled after chain', async () => {
+    const spy = vi.fn();
+    const thenSpy = vi.fn();
+
+    await new Promise<void>((resolve, reject) => {
+      const onCanceled = (error: Error) => {
+        if (error?.name !== 'CancelError') {
+          reject(error);
+          return;
         }
-      });
-    promise.cancel();
-  });
-
-  it(`catch after cancel`, (done) => {
-    const promise = getPromise()
-      .then((data) => {
-        return true;
-      })
-      .then((data) => {
-        return true;
-      });
-
-    promise.cancel();
-
-    promise.catch((er) => {
-      if (er.name === 'CancelError') {
-        done();
-      }
-    });
-  });
-
-  it(`throw CancelError immediately`, (done) => {
-    const t1 = performance.now();
-    const promise = getPromise(300).catch(() => {
-      const t2 = performance.now();
-      const dt = t2 - t1;
-      if (dt < 100) {
-        done();
-      }
-    });
-    promise.cancel();
-  });
-
-  it(`canceled after chain`, (done) => {
-    const spy = sinon.spy();
-    const thenSpy = sinon.spy();
-    const promise = getPromise().catch((er) => {
-      if (er.name === 'CancelError') {
         spy();
-      }
-      if (spy.callCount === 2 && !thenSpy.called) {
-        done();
-      }
+        if (spy.mock.calls.length === 2) {
+          resolve();
+        }
+      };
+      const promise = getPromise().catch(onCanceled);
+      const promise2 = promise.then(thenSpy).catch(onCanceled);
+      promise2.cancel();
     });
-    const promise2 = promise
-      .then(() => thenSpy())
-      .catch((er) => {
-        if (er.name === 'CancelError') {
-          spy();
-        }
-        if (spy.callCount === 2 && !thenSpy.called) {
-          done();
-        }
-      });
-    promise2.cancel();
+    expect(spy).toHaveBeenCalledTimes(2);
+    expect(thenSpy).not.toHaveBeenCalled();
   });
 
-  it(`attach cancelable promise`, (done) => {
-    const promise = new CancelablePromise((resolve, reject) => {
-      resolve(
-        getPromise().catch((er) => {
-          if (er.name === 'CancelError') {
-            done();
-          }
-        }),
-      );
+  it('attach cancelable promise', async () => {
+    await waitForCancel((onCanceled) => {
+      const promise = new CancelablePromise((resolve) => {
+        resolve(getPromise().catch(onCanceled));
+      });
+      promise.cancel();
     });
-
-    promise.cancel();
   });
 
-  it(`handle onCancel`, (done) => {
-    const promise = new CancelablePromise((resolve, reject, onCancel) => {
-      onCancel(() => {
-        done();
-      });
+  it('handle onCancel', () => {
+    const spy = vi.fn();
+    const promise = new CancelablePromise((_resolve, _reject, onCancel) => {
+      onCancel(spy);
     });
     promise.cancel();
+    expect(spy).toHaveBeenCalledOnce();
   });
 });

@@ -1,4 +1,4 @@
-// import { expect } from 'chai';
+// import { expect } from 'vitest';
 // import { Connection } from '../../packages/ngw-orm/src';
 // import { SandboxGroup } from '../helpers/ngw-orm/SandboxGroup';
 // import { SandboxPointLayer } from '../helpers/ngw-orm/SandboxPointLayer';

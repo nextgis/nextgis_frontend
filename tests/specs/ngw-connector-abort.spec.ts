@@ -1,5 +1,4 @@
-import { expect } from 'chai';
-import sinon from 'sinon';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { NgwConnector } from '../../packages/ngw-connector/src/NgwConnector';
 import { removeConnector } from '../../packages/ngw-connector/src/activeConnectors';
@@ -57,6 +56,7 @@ describe('NgwConnector request cancellation', () => {
     connector.abort();
     connector.clearCache();
     removeConnector(connector);
+    vi.restoreAllMocks();
   });
 
   it('tracks requests until their promises settle', async () => {
@@ -74,48 +74,53 @@ describe('NgwConnector request cancellation', () => {
 
     connector.abort();
     expect(signal.aborted).to.equal(true);
-    try {
-      await request;
-      throw new Error('Request was expected to abort');
-    } catch (error) {
-      expect((error as Error).name).to.equal('AbortError');
-    }
+    await expect(request).rejects.toMatchObject({
+      name: 'AbortError',
+    });
+
     expect(Object.keys(connector.getActiveApiRequests())).to.have.length(0);
   });
 
   it('removes external abort listeners after a successful request', async () => {
     const external = new AbortController();
-    const add = sinon.spy(external.signal, 'addEventListener');
-    const remove = sinon.spy(external.signal, 'removeEventListener');
+    const add = vi.spyOn(external.signal, 'addEventListener');
+    const remove = vi.spyOn(external.signal, 'removeEventListener');
 
     const request = connector.makeQuery('/slow', null, {
       cache: false,
       signal: external.signal,
     });
-    expect(add.calledWith('abort')).to.equal(true);
+    const abortListener = add.mock.calls.find(
+      ([event]) => event === 'abort',
+    )?.[1];
+
+    expect(abortListener).toBeDefined();
 
     connector.pending[0].resolve('ok');
     await request;
-    expect(remove.calledWith('abort', add.firstCall.args[1])).to.equal(true);
+
+    expect(
+      remove.mock.calls.some(
+        ([event, listener]) => event === 'abort' && listener === abortListener,
+      ),
+    ).toBe(true);
+
     expect(Object.keys(connector.getActiveApiRequests())).to.have.length(0);
   });
 
   it('cleans up abort listeners after rejection', async () => {
     const external = new AbortController();
-    const remove = sinon.spy(external.signal, 'removeEventListener');
+    const remove = vi.spyOn(external.signal, 'removeEventListener');
     const request = connector.makeQuery('/fail', null, {
       cache: false,
       signal: external.signal,
     });
 
     connector.pending[0].reject(new Error('failed'));
-    try {
-      await request;
-      throw new Error('Request was expected to fail');
-    } catch (error) {
-      expect((error as Error).message).to.equal('failed');
-    }
-    expect(remove.calledWith('abort')).to.equal(true);
+
+    await expect(request).rejects.toThrow('failed');
+
+    expect(remove.mock.calls.some(([event]) => event === 'abort')).toBe(true);
     expect(Object.keys(connector.getActiveApiRequests())).to.have.length(0);
   });
 
@@ -126,13 +131,12 @@ describe('NgwConnector request cancellation', () => {
       signal: external.signal,
     });
     external.abort();
-    expect(connector.pending[0].signal.aborted).to.equal(true);
-    try {
-      await request;
-      throw new Error('Request was expected to abort');
-    } catch (error) {
-      expect((error as Error).name).to.equal('AbortError');
-    }
+    expect(connector.pending[0].signal.aborted).toBe(true);
+
+    await expect(request).rejects.toMatchObject({
+      name: 'AbortError',
+    });
+
     expect(Object.keys(connector.getActiveApiRequests())).to.have.length(0);
   });
 
@@ -142,7 +146,7 @@ describe('NgwConnector request cancellation', () => {
     await first;
 
     const external = new AbortController();
-    const add = sinon.spy(external.signal, 'addEventListener');
+    const add = vi.spyOn(external.signal, 'addEventListener');
     const cached = await connector.makeQuery('/cached', null, {
       cache: true,
       signal: external.signal,
@@ -150,21 +154,21 @@ describe('NgwConnector request cancellation', () => {
 
     expect(cached).to.deep.equal({ ok: true });
     expect(connector.pending).to.have.length(1);
-    expect(add.called).to.equal(false);
+    expect(add).not.toHaveBeenCalled();
   });
 
   it('rejects an already-aborted caller signal without starting a request', async () => {
     const external = new AbortController();
     external.abort();
-    try {
-      await connector.makeQuery('/aborted', null, {
+
+    await expect(
+      connector.makeQuery('/aborted', null, {
         cache: false,
         signal: external.signal,
-      });
-      throw new Error('Request was expected to abort');
-    } catch (error) {
-      expect((error as Error).name).to.equal('AbortError');
-    }
+      }),
+    ).rejects.toMatchObject({
+      name: 'AbortError',
+    });
     expect(connector.pending).to.have.length(0);
     expect(Object.keys(connector.getActiveApiRequests())).to.have.length(0);
   });

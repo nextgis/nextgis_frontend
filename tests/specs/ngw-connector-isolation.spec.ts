@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+import { afterEach, describe, expect, it } from 'vitest';
 
 import { removeConnector } from '../../packages/ngw-connector/src/activeConnectors';
 import { NgwConnector } from '../../packages/ngw-connector/src/NgwConnector';
