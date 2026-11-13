@@ -141,7 +141,7 @@ if (__BROWSER__) {
       data.append('file', options.file);
       if (options.data) {
         for (const d in options.data) {
-          data.append(d, data[d]);
+          data.append(d, options.data[d]);
         }
       }
     } else {
@@ -265,19 +265,16 @@ if (__BROWSER__) {
             }
             try {
               const json: unknown = JSON.parse(data);
-              if (
-                isError(json) ||
-                (isObject(json) &&
-                  typeof json.status_code === 'number' &&
-                  json.status_code >= 400)
-              ) {
-                reject(
-                  createHttpError(
-                    isObject(json) ? json.status_code : status,
-                    statusText,
-                    json,
-                  ),
-                );
+
+              const responseStatus =
+                isObject(json) &&
+                'status_code' in json &&
+                typeof json.status_code === 'number'
+                  ? json.status_code
+                  : status;
+
+              if (isError(json) || responseStatus >= 400) {
+                reject(createHttpError(responseStatus, statusText, json));
               } else {
                 resolve(json);
               }

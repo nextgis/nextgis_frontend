@@ -47,18 +47,18 @@ export class Tree<T extends DefaultTreeItem | undefined = any> {
   }
 
   every(filter?: PropertyFilter | SelfFilter): boolean {
-    return !!treeEvery(this, filter, this.relation, (t) => t.item);
+    return !!treeEvery(this, filter, 'children', (t) => t.item);
   }
 
   some(filter?: PropertyFilter | SelfFilter): boolean {
-    return !!treeSome(this, filter, this.relation, (t) => t.item);
+    return !!treeSome(this, filter, 'children', (t) => t.item);
   }
 
   find(filter?: PropertyFilter | SelfFilter<T>): Tree {
-    return treeFind<any>(this, filter, this.relation, (t) => t.item);
+    return treeFind<any>(this, filter, 'children', (t) => t.item);
   }
 
   filter(filter?: PropertyFilter | SelfFilter<T>): Tree[] {
-    return treeFilter<any>(this, filter, this.relation, (t) => t.item);
+    return treeFilter<any>(this, filter, 'children', (t) => t.item);
   }
 }

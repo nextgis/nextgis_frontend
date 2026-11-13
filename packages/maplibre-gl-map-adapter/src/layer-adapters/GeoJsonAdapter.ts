@@ -85,13 +85,13 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   }
 
   beforeRemove(): void {
-    if (this.map) {
-      const source = this.map.getSource(this._sourceId);
-      if (source) {
-        this.map.removeSource(this._sourceId);
-      }
-    }
+    const map = this.map;
+    // A GeoJSON source cannot be removed while native layers still use it.
+    // VectorAdapter removes those layers and clears its map reference.
     super.beforeRemove();
+    if (map?.getSource(this._sourceId)) {
+      map.removeSource(this._sourceId);
+    }
   }
 
   clearLayer(cb?: (feature: Feature) => boolean): void {
@@ -174,9 +174,9 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     });
   }
 
-  filter(fun: DataLayerFilter<Feature, TLayer>): void {
+  filter(fun: DataLayerFilter<Feature, TLayer>): Layers {
     this._filterFun = fun;
-    this._filter(fun);
+    return this._filter(fun);
   }
 
   removeFilter(): void {
@@ -475,18 +475,23 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     return this._features;
   }
 
-  private _filter(fun: DataLayerFilter<Feature, TLayer>) {
+  private _filter(fun: DataLayerFilter<Feature, TLayer>): Layers {
     const filtered: (string | number)[] = [];
+    const matched: Layers = [];
     this._getFeatures().forEach((feature) => {
-      const ok = fun(this._createLayerOptions(feature));
-      const id = this._getFeatureFilterId(feature);
-      if (ok && id) {
-        filtered.push(id);
+      const layer = this._createLayerOptions(feature);
+      if (fun(layer)) {
+        matched.push(layer);
+        const id = this._getFeatureFilterId(feature);
+        if (id !== undefined) {
+          filtered.push(id);
+        }
       }
     });
     this._filteredFeatureIds = filtered;
     this._updateFilter();
     this._updateLabels();
+    return matched;
   }
 
   private filterGeometries(

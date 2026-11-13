@@ -37,11 +37,12 @@ export function fetchNgwLayerExtent({
     .route('layer.extent', { id: Number(resourceId) })
     .get({ cache, signal })
     .then((resp) => {
-      if (resp) {
-        const { maxLat, maxLon, minLat, minLon } = resp.extent;
-        const extentArray: LngLatBoundsArray = [minLon, minLat, maxLon, maxLat];
-        return extentArray;
+      if (!resp?.extent) {
+        return undefined;
       }
+      const { maxLat, maxLon, minLat, minLon } = resp.extent;
+      const extentArray: LngLatBoundsArray = [minLon, minLat, maxLon, maxLat];
+      return extentArray;
     });
 }
 

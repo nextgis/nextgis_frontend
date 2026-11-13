@@ -56,8 +56,7 @@ export class CheckProperty<
     return (
       this.get() &&
       this.getParents().every((x) => {
-        const property = x.properties && x.properties.get(this.name);
-        return property && property.get();
+        return Boolean(x.properties?.get(this.name));
       })
     );
   }

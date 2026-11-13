@@ -1,13 +1,18 @@
 import { StateItem } from './StateItem';
 
+import type { WebMap } from '@nextgis/ngw-map';
 import type { LngLatBoundsArray } from '@nextgis/utils';
 
-import type { WebMapEvents } from '../../interfaces/Events';
-import type { MapOptions } from '../../interfaces/MapOptions';
+import type { StateItemOptions } from '../../interfaces/StateItemOptions';
 
 export class BoundState extends StateItem<LngLatBoundsArray> {
-  name: keyof MapOptions = 'bounds';
-  event: (keyof WebMapEvents)[] = ['moveend'];
+  constructor(webMap: WebMap, opt?: StateItemOptions<LngLatBoundsArray>) {
+    super(webMap, {
+      name: 'bounds',
+      event: 'moveend',
+      ...opt,
+    });
+  }
 
   getValue(): LngLatBoundsArray | undefined {
     return this.webMap.getBounds();

@@ -32,10 +32,11 @@ export function isJsonArray(val: unknown): val is JsonArray {
 export function isJsonMap(val: unknown): val is JsonMap {
   if (isObject(val)) {
     for (const i in val) {
-      if (!isAnyJson(i)) {
+      if (!isAnyJson(val[i])) {
         return false;
       }
     }
+    return true;
   }
   return false;
 }

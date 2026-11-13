@@ -1,6 +1,7 @@
 import type { WebMapEvents } from '../../interfaces/Events';
 import type { MapOptions } from '../../interfaces/MapOptions';
 import type { MapStateItem } from '../../interfaces/MapState';
+import type { StateItemOptions } from '../../interfaces/StateItemOptions';
 import type { WebMap } from '../../WebMap';
 
 export abstract class StateItem<
@@ -12,25 +13,17 @@ export abstract class StateItem<
 
   constructor(
     protected webMap: WebMap,
-    opt?: {
-      name?: keyof MapOptions;
-      event?: (keyof WebMapEvents)[] | keyof WebMapEvents;
-      value?: V;
-    },
+    opt?: StateItemOptions<V>,
   ) {
     if (opt) {
-      if (opt.value) {
+      if (opt.value !== undefined) {
         this.setValue(opt.value);
       }
       if (opt.name) {
         this.name = opt.name;
       }
       if (opt.event) {
-        if (typeof opt.event === 'string') {
-          this.event = [opt.event];
-        } else {
-          this.event = opt.event;
-        }
+        this.event = Array.isArray(opt.event) ? opt.event : [opt.event];
       }
     }
   }

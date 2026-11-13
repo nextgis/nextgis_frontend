@@ -145,18 +145,15 @@ export class GeoJsonAdapter
 
   clearLayer(cb?: (feature: Feature) => boolean): void {
     this.unselect();
+    // _features is the complete dataset, including features excluded by filter().
+    // Keep it in sync with the native source when clearing or replacing data.
     if (cb) {
-      const features = this.vectorSource.getFeatures().values();
-      let entry;
-      while (!(entry = features.next()).done) {
-        const feature = getFeature(entry.value);
-        if (cb(feature)) {
-          this.vectorSource.removeFeature(entry.value);
-        }
-      }
+      this._features = this._features.filter((f) => !cb(getFeature(f)));
     } else {
-      this.vectorSource.clear();
+      this._features = [];
     }
+    // Restore only the features allowed by the active filter.
+    this.filter(this._filterFun);
   }
 
   setData(data: GeoJsonObject): void {
@@ -626,10 +623,8 @@ export class GeoJsonAdapter
   }
 
   private _removeAllPopup(): void {
-    const _openedPopup = [...this._openedPopup];
-    this._openedPopup = [];
-    for (const p of _openedPopup) {
-      this._removePopup(p[1]);
+    for (const [, popup] of [...this._openedPopup]) {
+      this._removePopup(popup);
     }
   }
 
@@ -639,7 +634,10 @@ export class GeoJsonAdapter
       map.removeOverlay(popup);
       const index = this._openedPopup.findIndex((x) => x[1] === popup);
       if (index !== -1) {
-        const [feature, , closeHandlers] = this._openedPopup[index];
+        const [feature, , closeHandlers] = this._openedPopup.splice(
+          index,
+          1,
+        )[0];
         const unselectOnClose =
           this.options.popupOptions?.unselectOnClose ?? true;
 
@@ -650,7 +648,6 @@ export class GeoJsonAdapter
         if (unselectOnClose) {
           this._unselectFeature(feature);
         }
-        this._openedPopup.splice(index, 1);
       }
     }
   }

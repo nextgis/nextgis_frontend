@@ -68,6 +68,9 @@ export function filterGeometries(
     _data.geometries = _data.geometries.filter((g) =>
       geometryFilter(g.type, type),
     );
+  } else if (!geometryFilter(data.type, type)) {
+    // Bare GeoJSON geometries must obey the same type constraint as Features.
+    return false;
   }
   return data;
 }

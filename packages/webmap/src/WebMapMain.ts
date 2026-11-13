@@ -193,9 +193,11 @@ export class WebMapMain<
    * @returns The map's container
    */
   getContainer(): HTMLElement | undefined {
-    if (this.mapAdapter.getContainer) {
-      return this.mapAdapter.getContainer();
-    } else if (this.options.target) {
+    const nativeContainer = this.mapAdapter.getContainer?.();
+    if (nativeContainer) {
+      return nativeContainer;
+    }
+    if (this.options.target) {
       if (this.options.target instanceof HTMLElement) {
         return this.options.target;
       } else if (typeof this.options.target === 'string') {

@@ -51,7 +51,7 @@ export class FakeMapAdapter<M = any, L = any, C = any> implements MA {
   private _container?: HTMLElement;
 
   create(options: MapOptions = {}): void {
-    this.options = options;
+    this.options = { ...options };
     if (typeof options.target === 'string') {
       const elem = document.getElementById(options.target) as HTMLElement;
       if (elem) {

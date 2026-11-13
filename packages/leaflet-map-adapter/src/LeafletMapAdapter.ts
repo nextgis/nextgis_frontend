@@ -350,10 +350,10 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
         }
         const stop = () => {
           if (locationfound !== undefined) {
-            map.off('locationfound', locationFound);
+            map.off('locationfound', locationFound, this);
           }
           if (locationerror) {
-            map.off('locationerror', locationerror);
+            map.off('locationerror', locationerror, this);
           }
         };
         return { stop };

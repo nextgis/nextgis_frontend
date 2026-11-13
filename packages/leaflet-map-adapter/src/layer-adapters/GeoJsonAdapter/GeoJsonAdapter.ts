@@ -253,9 +253,11 @@ export class GeoJsonAdapter
         this.type = type;
 
         data = filterGeometries(data, type);
-        if (data) {
-          geoJsonOptions = this._getGeoJsonOptions(options, type);
+        if (!data) {
+          console.warn('no other data type than layer can be added');
+          return;
         }
+        geoJsonOptions = this._getGeoJsonOptions(options, type);
       }
       new GeoJSON(data || undefined, geoJsonOptions);
     }

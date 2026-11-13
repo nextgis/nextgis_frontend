@@ -104,7 +104,11 @@ export class MaplibreGLMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   ];
   private _unselectCb: UnselectCb[] = [];
   private _sourceDataLoading: { [name: string]: any[] } = {};
-  private __setLayerOrder: (layers: { [x: string]: TLayerAdapter }) => void;
+  private __setLayerOrder: ((layers: {
+    [x: string]: TLayerAdapter;
+  }) => void) & {
+    clear(): void;
+  };
 
   constructor() {
     this.__setLayerOrder = debounce((layers) => this._setLayerOrder(layers));
@@ -215,6 +219,9 @@ export class MaplibreGLMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   }
 
   destroy(): void {
+    // Cancel queued layer reordering before MapLibre disposes its style.
+    this.__setLayerOrder.clear();
+    this.isLoaded = false;
     if (this.map) {
       this.map.remove();
     }
@@ -354,7 +361,9 @@ export class MaplibreGLMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     const _map = this.map;
     if (_map && layerIds && Array.isArray(layerIds)) {
       layerIds.forEach((layerId) => {
-        _map.removeLayer(layerId);
+        if (_map.getLayer(layerId)) {
+          _map.removeLayer(layerId);
+        }
         const source = _map.getSource(layerId);
         if (source) {
           _map.removeSource(layerId);
@@ -507,7 +516,7 @@ export class MaplibreGLMapAdapter implements MapAdapter<Map, TLayer, IControl> {
 
   private _setLayerOrder(layers: { [x: string]: TLayerAdapter }): void {
     const _map = this.map;
-    if (_map) {
+    if (_map && this.isLoaded) {
       const baseLayers: TLayerAdapter[] = [];
       let orderedLayers: TLayerAdapter[] = [];
       for (const l in layers) {
@@ -523,7 +532,9 @@ export class MaplibreGLMapAdapter implements MapAdapter<Map, TLayer, IControl> {
       baseLayers.forEach((x) => {
         if (x.layer) {
           x.layer.forEach((y) => {
-            _map.moveLayer(y);
+            if (_map.getLayer(y)) {
+              _map.moveLayer(y);
+            }
           });
         }
       });
@@ -538,7 +549,9 @@ export class MaplibreGLMapAdapter implements MapAdapter<Map, TLayer, IControl> {
         const mem = orderedLayers[fry];
         const _layers = this._getLayerIds(mem);
         _layers.forEach((x) => {
-          _map.moveLayer(x);
+          if (_map.getLayer(x)) {
+            _map.moveLayer(x);
+          }
         });
       }
     }

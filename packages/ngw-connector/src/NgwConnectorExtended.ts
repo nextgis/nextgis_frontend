@@ -47,7 +47,9 @@ export class NgwConnectorExtended extends NgwConnector {
    */
   clearCache(): void {
     super.clearCache();
-    this.resources.cache.clean();
+    if (this.resources.cache !== this.cache) {
+      this.resources.cache.clean();
+    }
   }
 
   /**

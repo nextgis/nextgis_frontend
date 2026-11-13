@@ -1,13 +1,18 @@
 import { StateItem } from './StateItem';
 
+import type { WebMap } from '@nextgis/ngw-map';
 import type { LngLatArray } from '@nextgis/utils';
 
-import type { WebMapEvents } from '../../interfaces/Events';
-import type { MapOptions } from '../../interfaces/MapOptions';
+import type { StateItemOptions } from '../../interfaces/StateItemOptions';
 
 export class CenterState extends StateItem<LngLatArray> {
-  name: keyof MapOptions = 'center';
-  event: (keyof WebMapEvents)[] = ['moveend'];
+  constructor(webMap: WebMap, opt?: StateItemOptions<LngLatArray>) {
+    super(webMap, {
+      name: 'center',
+      event: 'moveend',
+      ...opt,
+    });
+  }
 
   getValue(): LngLatArray | undefined {
     return this.webMap.getCenter();
