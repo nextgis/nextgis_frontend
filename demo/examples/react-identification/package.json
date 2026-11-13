@@ -22,6 +22,7 @@
   "dependencies": {
     "@nextgis/react-ngw-leaflet": "*",
     "@nextgis/react-ngw-map": "*",
+    "@nextgis/paint": "*",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   },
