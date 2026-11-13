@@ -48,6 +48,12 @@ export function ReactGeojsonLayer({
   handlers.current = { onLoad, onError };
 
   const layerRef = useRef<GeoJsonLayerAdapter | null>(null);
+  const appliedDataRef = useRef<{
+    layer: GeoJsonLayerAdapter;
+    data: GeojsonData;
+  } | null>(null);
+  const latestDataRef = useRef<GeojsonData>(data ?? EMPTY_GEOJSON);
+  latestDataRef.current = data ?? EMPTY_GEOJSON;
   const dataQueueRef = useRef<Promise<void>>(Promise.resolve());
   const [created, setCreated] = useState<{
     options: typeof initialOptions;
@@ -66,9 +72,10 @@ export function ReactGeojsonLayer({
         if (disposed) return;
 
         const initial = current.current;
+        const initialData = initial.data ?? EMPTY_GEOJSON;
         const nextLayer = await ngwMap.addGeoJsonLayer({
           ...initialOptions,
-          data: initial.data ?? EMPTY_GEOJSON,
+          data: initialData,
           paint: initial.paint,
           selectedPaint: initial.selectedPaint,
           opacity: initial.opacity ?? 1,
@@ -82,6 +89,7 @@ export function ReactGeojsonLayer({
         }
 
         layerRef.current = nextLayer;
+        appliedDataRef.current = { layer: nextLayer, data: initialData };
         setCreated({ options: initialOptions, layer: nextLayer });
         handlers.current.onLoad?.(nextLayer);
       } catch (error) {
@@ -95,6 +103,9 @@ export function ReactGeojsonLayer({
       disposed = true;
       if (addedLayer) {
         if (layerRef.current === addedLayer) layerRef.current = null;
+        if (appliedDataRef.current?.layer === addedLayer) {
+          appliedDataRef.current = null;
+        }
         ngwMap.removeLayer(addedLayer);
       }
     };
@@ -104,12 +115,30 @@ export function ReactGeojsonLayer({
     if (!layer) return;
 
     const nextData = data ?? EMPTY_GEOJSON;
+    // addGeoJsonLayer already received this data; do not clear/re-add it.
+    const applied = appliedDataRef.current;
+    if (applied?.layer === layer && applied.data === nextData) return;
 
     dataQueueRef.current = dataQueueRef.current
       .catch(() => undefined)
       .then(async () => {
+        if (layerRef.current !== layer) return;
+        if (latestDataRef.current !== nextData) return;
+
+        const applied = appliedDataRef.current;
+        if (applied?.layer === layer && applied.data === nextData) {
+          return;
+        }
+
+        await ngwMap.setLayerData(layer, nextData);
+
         if (layerRef.current === layer) {
-          await ngwMap.setLayerData(layer, nextData);
+          appliedDataRef.current = { layer, data: nextData };
+        }
+      })
+      .catch((error) => {
+        if (layerRef.current === layer) {
+          handlers.current.onError?.(asError(error));
         }
       })
       .catch((error) => {

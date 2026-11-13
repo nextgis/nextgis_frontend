@@ -4,5 +4,6 @@
     "types": ["node", "mocha"],
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true
-  }
+  },
+  "exclude": ["node_modules"]
 }
