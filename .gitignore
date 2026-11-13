@@ -240,7 +240,7 @@ stats.html
 *.tgz
 **/.yarn
 input
-
+.quasar/
 .vitest/
 
 demo/src/examples.json
