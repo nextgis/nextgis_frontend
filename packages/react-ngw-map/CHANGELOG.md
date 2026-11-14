@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.2](https://github.com/nextgis/nextgis_frontend/compare/v4.1.1...v4.1.2) (2026-11-14)
+
+
+### Features
+
+* **react-ngw-map:** add layer option in onLoad ([b70d1e0](https://github.com/nextgis/nextgis_frontend/commit/b70d1e0eb5aea87f0dd8292e14d50a46e24f716e))
+
+
+
+
+
 ## [4.1.1](https://github.com/nextgis/nextgis_frontend/compare/v4.1.0...v4.1.1) (2026-11-13)
 
 

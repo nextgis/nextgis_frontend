@@ -2064,14 +2064,14 @@ __metadata:
   dependencies:
     "@nextgis/build-tools": 4.0.2
     "@nextgis/leaflet-map-adapter": 4.1.1
-    "@nextgis/react-ngw-map": 4.1.1
+    "@nextgis/react-ngw-map": 4.1.2
   peerDependencies:
     react: "*"
     react-dom: "*"
   languageName: unknown
   linkType: soft
 
-"@nextgis/react-ngw-map@4.1.1, @nextgis/react-ngw-map@workspace:packages/react-ngw-map":
+"@nextgis/react-ngw-map@4.1.2, @nextgis/react-ngw-map@workspace:packages/react-ngw-map":
   version: 0.0.0-use.local
   resolution: "@nextgis/react-ngw-map@workspace:packages/react-ngw-map"
   dependencies:
@@ -2092,7 +2092,7 @@ __metadata:
   dependencies:
     "@nextgis/build-tools": 4.0.2
     "@nextgis/maplibre-gl-map-adapter": 4.1.1
-    "@nextgis/react-ngw-map": 4.1.1
+    "@nextgis/react-ngw-map": 4.1.2
   peerDependencies:
     react: "*"
     react-dom: "*"
@@ -2105,7 +2105,7 @@ __metadata:
   dependencies:
     "@nextgis/build-tools": 4.0.2
     "@nextgis/ol-map-adapter": 4.1.1
-    "@nextgis/react-ngw-map": 4.1.1
+    "@nextgis/react-ngw-map": 4.1.2
   peerDependencies:
     react: "*"
     react-dom: "*"
