@@ -6,7 +6,7 @@
     "postinstall": "npx @nextgis/ngw-types-loader",
     "clean": "lerna run clean",
     "dev": "lerna run dev",
-    "prod": "npm run lint && node ./packages/build-tools/lib/build.js --release",
+    "prod": "npm run lint && npm run test && node ./packages/build-tools/lib/build.js --release",
     "prod-each": "lerna run prod && npm run test-build",
     "build-dts": "npx tsc -p tsconfig.build.json && rollup -c ./packages/build-tools/lib/rollup.dts.config.js",
     "watch-dts": "npx tsc -p tsconfig.build.json --watch",
