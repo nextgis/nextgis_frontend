@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.3](https://github.com/nextgis/nextgis_frontend/compare/v4.1.2...v4.1.3) (2026-11-14)
+
+
+### Bug Fixes
+
+* **leaflet-map-adapter:** invalidate map size on container resize ([87e0024](https://github.com/nextgis/nextgis_frontend/commit/87e002456aaf11b3b4929ca01ae8899e40b4f27b))
+
+
+
+
+
 ## [4.1.1](https://github.com/nextgis/nextgis_frontend/compare/v4.1.0...v4.1.1) (2026-11-13)
 
 
