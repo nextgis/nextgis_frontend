@@ -4,20 +4,36 @@ import { useNgwMapContext } from '../context';
 import { useShallowMemo } from '../hooks/useShallowMemo';
 
 import type {
+  NgwGeoJsonLayerAdapter,
   NgwLayerAdapterType,
   NgwLayerOptions,
+  NgwWebmapLayerAdapter,
   ResourceAdapter,
 } from '@nextgis/ngw-kit';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type { AdapterOptions, LayerAdaptersOptions } from '@nextgis/webmap';
 
+type NgwLayerType = NgwLayerAdapterType | ResourceAdapter;
+
+type AdapterName<T extends NgwLayerType> = T extends NgwLayerAdapterType
+  ? T
+  : NgwLayerAdapterType;
+
+type LoadedLayer<T extends NgwLayerType> = T extends ResourceAdapter
+  ? T
+  : T extends 'NGW:WEBMAP'
+    ? NgwWebmapLayerAdapter
+    : T extends 'GEOJSON'
+      ? NgwGeoJsonLayerAdapter
+      : ResourceAdapter;
+
 export interface ReactNgwLayerProps<
-  T extends NgwLayerAdapterType = NgwLayerAdapterType,
+  T extends NgwLayerType = NgwLayerAdapterType,
   A extends Record<string, any> = Record<string, any>,
 > {
   id?: string;
   resource: number;
-  adapter?: T;
+  adapter?: AdapterName<T>;
   fit?: boolean;
   opacity?: number;
   order?: number;
@@ -29,14 +45,17 @@ export interface ReactNgwLayerProps<
   params?: Record<string, string | undefined>;
 
   visibility?: boolean;
-  adapterOptions?: Partial<LayerAdaptersOptions[T] & AdapterOptions<A>>;
 
-  onLoad?: () => void;
+  adapterOptions?: Partial<
+    LayerAdaptersOptions[AdapterName<T>] & AdapterOptions<A>
+  >;
+
+  onLoad?: (layer: LoadedLayer<T>) => void;
   onError?: (error: Error) => void;
 }
 
 export function ReactNgwLayer<
-  T extends NgwLayerAdapterType = NgwLayerAdapterType,
+  T extends NgwLayerType = NgwLayerAdapterType,
   A extends Record<string, any> = Record<string, any>,
 >({
   id,
@@ -75,9 +94,9 @@ export function ReactNgwLayer<
   const opacityRef = useRef<number | undefined>(opacity);
   const filterRef = useRef<PropertiesFilter | undefined>(filters);
 
-  const initialOptions = useMemo<NgwLayerOptions<T, A>>(() => {
+  const initialOptions = useMemo<NgwLayerOptions<AdapterName<T>, A>>(() => {
     const nextAdapterOptions = { ...stableAdapterOptions } as Partial<
-      LayerAdaptersOptions[T] & AdapterOptions<A>
+      LayerAdaptersOptions[AdapterName<T>] & AdapterOptions<A>
     >;
 
     nextAdapterOptions.visibility = visibilityRef.current;
@@ -98,7 +117,7 @@ export function ReactNgwLayer<
       nextAdapterOptions.toplayer = toplayer;
     }
 
-    const layerOptions: NgwLayerOptions<T, A> = {
+    const layerOptions: NgwLayerOptions<AdapterName<T>, A> = {
       id,
       fit,
       adapter,
@@ -140,7 +159,7 @@ export function ReactNgwLayer<
         layerRef.current = layer;
         setCreatedLayer(layer);
 
-        onLoadRef.current?.();
+        onLoadRef.current?.(layer as LoadedLayer<T>);
       } catch (error) {
         if (!cancelled) {
           onErrorRef.current?.(error as Error);
