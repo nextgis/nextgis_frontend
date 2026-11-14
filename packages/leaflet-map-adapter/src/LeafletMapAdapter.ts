@@ -377,6 +377,11 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     const map = this.map;
     if (container && map && window.ResizeObserver) {
       this._resizeObserver = new ResizeObserver(() => {
+        map.invalidateSize({
+          pan: false,
+          debounceMoveend: true,
+        });
+
         this._updateMinZoomForBounds();
       });
       this._resizeObserver.observe(container);
